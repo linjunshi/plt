@@ -1,7 +1,4 @@
-// 全局初始化
-function init() {
-}
-// index模块初始化
+// Index模块初始化
 function IndexClass() {
 };
 

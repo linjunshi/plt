@@ -3,20 +3,6 @@
 
 <configuration>
     <mappers>
-        <!-- 四种方式 -->
-        
-        <!-- <mapper resource="com/santrong/demo/persistence/demo-sqlmap.xml"/> -->
-        <!-- <mapper namespace="com.santrong.demo.persistence.DemoMapper" /> -->
-        
-        
-        <mapper class="com.santrong.plt.webpage.home.mapper.MenuMapper"/>
-        <mapper class="com.santrong.plt.webpage.user.mapper.UserMapper"/>
-        
-        <!-- <mapper resource="com/santrong/demo/mapper/demo-sqlmap.xml"/> -->
-        
-        
-        <!-- <mapper url="file:///E:/UserMapper.xml"/> -->
-        <!-- <package name="com.santrong.demo.mapper"/> -->
-
+        <package name="com.santrong.plt.webpage"/>
     </mappers>
 </configuration>
