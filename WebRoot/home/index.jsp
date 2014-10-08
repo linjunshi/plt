@@ -1,5 +1,4 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ page import="com.santrong.plt.webpage.user.entry.UserItem"%>
 <%@ include file="inc/common.jsp"%>
 <c:set var="title" value="123" ></c:set>
 <c:set var="keywords" value="456" ></c:set>
@@ -16,12 +15,12 @@ Globals.page = "Index_index";
 	<ul>
 		<c:forEach items="${navigator}" var="item"><li><a href='${ctx}/${item.pageUrl}'><fmt:message key="menu_${item.menuName}" /></a></li></c:forEach>
 	</ul>
-	<% if(request.getSession().getAttribute(Global.SessionKey_LoginUser) != null){%>
-		<% UserItem user = (UserItem)request.getSession().getAttribute(Global.SessionKey_LoginUser); %>
-		welcome(<%=user.getShowName() %>)---
+	<c:if test="${user != null}">
+		welcome(${user.showName})---
 		<a href="javascript:void(0);" class="logout" ><fmt:message key="index_user_userlogout"/></a>
-	<%}else{%>
+	</c:if>
+	<c:if test="${user == null}">
 		<a href="${ctx }/login.action" ><fmt:message key="index_user_userlogin"/></a>
-	<%} %>
+	</c:if>
 </body>
 </html>

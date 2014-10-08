@@ -1,8 +1,5 @@
 package com.santrong.plt.webpage.home;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
@@ -15,8 +12,6 @@ import com.santrong.plt.log.Log;
 import com.santrong.plt.system.Global;
 import com.santrong.plt.util.MyUtils;
 import com.santrong.plt.webpage.BaseAction;
-import com.santrong.plt.webpage.home.dao.MenuDao;
-import com.santrong.plt.webpage.home.entry.MenuItem;
 import com.santrong.plt.webpage.user.dao.UserDao;
 import com.santrong.plt.webpage.user.entry.UserItem;
 
@@ -30,16 +25,11 @@ public class HomeAction extends BaseAction{
 	
 	@RequestMapping("/index")
 	public String index(){
-			// 获取菜单
-			List<MenuItem> navigator = null;
-			MenuDao menuDao = new MenuDao();
-			navigator = menuDao.selectByParentId("0");
-			
-			if(navigator == null) {
-				navigator = new ArrayList<MenuItem>();
+			Object u = getRequest().getSession().getAttribute(Global.SessionKey_LoginUser);
+			if(u != null) {
+				UserItem user = (UserItem)u;
+				getRequest().setAttribute("user", user);
 			}
-			
-			getRequest().setAttribute("navigator", navigator);
 
 			return "index";
 	}
