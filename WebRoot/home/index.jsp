@@ -11,7 +11,7 @@ Globals.lang = "${lang}";
 Globals.page = "Index_index";
 </script>
 </head>
-<body>
+<body> 
 	<ul>
 		<c:forEach items="${navigator}" var="item"><li><a href='${ctx}/${item.pageUrl}'><fmt:message key="menu_${item.menuName}" /></a></li></c:forEach>
 	</ul>
