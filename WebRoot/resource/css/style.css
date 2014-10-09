@@ -1,1 +1,22 @@
 @charset "utf-8";
+.wrap {width:1024px; margin:0 auto;}
+.header {width:100%; height:150px; border:solid 1px red;}
+.navigator {display:inline-block; margin-top:10px; width:100%; height:30px; background-color:#ccc;}
+.navigator li {float:left; width:96px; height:100%; border:solid 1px blue;}
+.main {margin-top:10px;}
+.main .main_top {display:inline-block; width:100%;}
+
+.hide {display:none;}
+
+.category_grade {width:168px; float:left;}
+.category_grade li {width:100%; height:30px; border:solid 1px red; position:relative;}
+.category_subject {display:none; width:200px; border:solid 1px blue; position:absolute; left:168px; top:0;}
+.category_subject a {margin:0 6px;}
+
+.subject_flash {width:633px; height:255px; border:solid 1px red; float:left; margin-left:10px;}
+
+.school_recommend {float:right; width:200px; border:solid 1px red;}
+
+.teacher_recommend {float:left; margin-top:10px; width:810px; border:solid 1px red;}
+
+.course_group_block {margin-top:10px; width:100%; border:solid 1px red;}

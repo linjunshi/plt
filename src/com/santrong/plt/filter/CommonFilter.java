@@ -11,9 +11,12 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.gson.Gson;
 import com.santrong.plt.log.Log;
+import com.santrong.plt.opt.TaobaoAreaEntry;
 import com.santrong.plt.opt.ThreadUtils;
 import com.santrong.plt.system.Global;
+import com.santrong.plt.util.MyUtils;
 import com.santrong.plt.webpage.user.entry.UserItem;
 
 /**
@@ -80,6 +83,28 @@ public class CommonFilter implements Filter{
 					response.sendRedirect("/login.action");
 				}
 			}
+		}
+		
+		// 获取用户地理信息
+		if(request.getSession().getAttribute(Global.SessionKey_AreaCode) == null) {
+			String clientIp = "183.17.255.255";//MyUtils.getRequestAddrIp(request, null);
+			String areaCode = Global.AreaCode;
+			String city = Global.City;
+			if(clientIp != null) {
+				String areaServerAddr = "http://ip.taobao.com/service/getIpInfo.php";
+				String json = MyUtils.getRemoteContent(areaServerAddr + "?ip=" + clientIp);
+				if(MyUtils.isNotNull(json)) {
+					Gson gson = new Gson();
+					TaobaoAreaEntry entry = gson.fromJson(json, TaobaoAreaEntry.class);
+					if(entry.getCode() == 0) {
+						areaCode = entry.getData().getCity_id();
+						city = entry.getData().getCity();
+					}
+				}
+				
+			}
+			request.getSession().setAttribute(Global.SessionKey_AreaCode, areaCode);
+			request.getSession().setAttribute(Global.SessionKey_City, city);
 		}
 		
 		chain.doFilter(req, resp);

@@ -9,6 +9,8 @@ public class Global {
 	 */
 	public static final String Default_Encoding = "UTF-8";
 	public static final String SessionKey_LoginUser = "loginUser";
+	public static final String SessionKey_AreaCode = "areaCode";
+	public static final String SessionKey_City = "city";
     
 	
     /*
@@ -23,6 +25,11 @@ public class Global {
      */
     public static int FTPConnectMode = 0;								// 0主动模式，1被动模式
     
+    /*
+     * [User]
+     */
+    public static String AreaCode = "110000";						// 默认北京市
+    public static String City = "北京";									// 默认北京市
 
     static {
         String configFile = Global.class.getClassLoader().getResource("") + "Config.ini";

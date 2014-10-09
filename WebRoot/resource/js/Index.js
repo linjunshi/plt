@@ -1,5 +1,13 @@
 // Index模块初始化
 function IndexClass() {
+	$(".category_grade li").mouseover(function(){
+		$(".category_subject").hide();
+		$(this).find(".category_subject").show();
+	});
+	
+	$(".category_grade li").mouseout(function(){
+		$(".category_subject").hide();
+	});
 };
 
 //index模块的具体页面初始化

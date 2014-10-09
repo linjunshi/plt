@@ -1,34 +1,11 @@
 -- 2014-09-25 weinianjie
-create database plt;
 
 use plt;
 	
 --- 用户表 ---
-drop table if exists web_user;
-create table web_user(
-	id varchar(32) not null comment 'UUID',
-	showName varchar(128) not null comment '显示名',
-	username varchar(64) not null comment '用户名',
-	password varchar(64) not null comment '密码',
-	role int(10) not null default 1 comment '角色',
-	cts datetime comment '创建时间',
-	uts datetime comment '修改时间',
-	primary key (id)
-) engine=InnoDB default charset=utf8 collate=utf8_bin comment '用户表';
-
 insert into web_user values('10000', 'admin', 'admin', md5('admin'), now(), now());
 
 --- 年级表 ---
-drop table if exists web_grade;
-create table web_grade(
-	id varchar(32) not null comment 'UUID',
-	gradeName varchar(64) not null comment '年级名称',
-	levelName varchar(64) not null comment '年级级别',
-	gradeGroup int(10) comment '年级类型',
-	priority int(10) comment '优先级',
-	primary key (id)
-) engine=InnoDB default charset=utf8 collate=utf8_bin comment '年级表';
-
 insert into web_grade values('10000', '小学', '一年级', 1, 0);
 insert into web_grade values('10001', '小学', '二年级', 1, 1);
 insert into web_grade values('10002', '小学', '三年级', 1, 2);
@@ -43,14 +20,6 @@ insert into web_grade values('10010', '高中', '二年级', 4, 10);
 insert into web_grade values('10011', '高中', '三年级', 4, 11);
 
 --- 科目表 ---
-drop table if exists web_subject;
-create table web_subject(
-	id varchar(32) not null comment 'UUID',
-	subName varchar(64) not null comment '科目名称',
-	priority int(10) comment '优先级',
-	primary key (id)
-) engine=InnoDB default charset=utf8 collate=utf8_bin comment '科目表';
-
 insert into web_subject values('10000', '语文', 0);
 insert into web_subject values('10001', '数学', 1);
 insert into web_subject values('10002', '英语', 2);
@@ -61,13 +30,6 @@ insert into web_subject values('10006', '地理', 6);
 insert into web_subject values('10007', '政治', 7);
 
 --- 年级-科目表 ---
-drop table if exists web_grade_subject;
-create table web_grade_subject(
-	gradeId varchar(32) comment '年级ID',
-	subjectId varchar(32) comment '科目ID',
-	primary key (gradeId, subjectId)
-) engine=InnoDB default charset=utf8 collate=utf8_bin comment '年级-科目表';
-
 insert into web_grade_subject values('10000', '10000');
 insert into web_grade_subject values('10000', '10001');
 insert into web_grade_subject values('10001', '10000');
@@ -124,35 +86,5 @@ insert into web_grade_subject values('10011', '10006');
 insert into web_grade_subject values('10011', '10007');
 
 --- 学校表 ---
-drop table if exists web_school;
-create table web_school(
-	id varchar(32) not null comment 'UUID',
-	schoolName varchar(32) not null comment '学校名称',
-	areaCode varchar(32) not null comment '地区编码',
-	schoolType int(10) unsigned not null default 1 comment '学校类型',
-	primary key (id)
-) engine=InnoDB default charset=utf8 collate=utf8_bin comment '学校表';
-
-insert into web_school values('10000', '实验1小', '440300', 1);
-insert into web_school values('10001', '实验2小', '440300', 1);
-insert into web_school values('10002', '实验3小', '440300', 1);
-insert into web_school values('10003', '实验4小', '440300', 1);
-insert into web_school values('10004', '实验5小', '440300', 1);
-insert into web_school values('10005', '实验6小', '440300', 1);
-insert into web_school values('10006', '深圳1中', '440300', 2);
-insert into web_school values('10007', '深圳2中', '440300', 2);
-insert into web_school values('10008', '深圳3中', '440300', 2);
-insert into web_school values('10009', '深圳4中', '440300', 2);
-insert into web_school values('10010', '深圳5中', '440300', 6);
-insert into web_school values('10011', '高级1中', '440300', 4);
-insert into web_school values('10012', '高级2中', '440300', 4);
-insert into web_school values('10013', '高级3中', '440300', 4);
 
 --- 行政区划表 ---
-drop table if exists web_area;
-create table web_area(
-	id varchar(32) not null comment 'UUID',
-	areaName varchar(32) not null comment '区域名称',
-	areaCode varchar(32) not null comment '地区编码',
-	primary key (id)
-) engine=InnoDB default charset=utf8 collate=utf8_bin comment '行政区划表';

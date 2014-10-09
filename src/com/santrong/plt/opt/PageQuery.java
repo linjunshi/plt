@@ -11,8 +11,8 @@ public class PageQuery {
 	private int pageSize = 16;
 	private int prevInsert = 0; //前置插入混淆数据量
 	
-	private String orderBy = "cts";
-	private String orderRule = "desc";	
+	private String orderBy;
+	private String orderRule;
 	
 	/*
 	 * 获取limit的开头

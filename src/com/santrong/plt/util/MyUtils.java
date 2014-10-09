@@ -1,5 +1,9 @@
 package com.santrong.plt.util;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.net.URL;
+import java.net.URLConnection;
 import java.security.MessageDigest;
 import java.text.DecimalFormat;
 import java.text.ParseException;
@@ -8,6 +12,8 @@ import java.util.Date;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
+
+import com.santrong.plt.log.Log;
 
 /**
  * @author weinianjie
@@ -195,5 +201,65 @@ public class MyUtils {
 			ip = localIp;
 		}
 		return ip;
+	}
+	
+	/**
+	 * 获取远程内容
+	 */
+	public static String getRemoteContent(String remoteUrl) {
+		BufferedReader in = null;
+		String result = "";
+		try{
+			
+			Log.info("getRemoteContent-url: " + remoteUrl);
+			URL url = new URL(remoteUrl);
+			URLConnection conn = url.openConnection();
+	        // 设置通用的请求属性
+	        conn.setRequestProperty("accept", "*/*");
+	        conn.setRequestProperty("connection", "Keep-Alive");
+	        conn.setRequestProperty("user-agent", "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1;SV1)");
+	        conn.connect();
+	        
+            in = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+            String line;
+            while ((line = in.readLine()) != null) {
+            	result += line;
+            }
+            
+            Log.info("getRemoteContent-content:" + result);
+        	
+            return result;
+	        
+		}catch(Exception e) {
+			Log.printStackTrace(e);
+		}finally {
+            try {
+                if (in != null) {
+                    in.close();
+                }
+            } catch (Exception e2) {
+            	Log.printStackTrace(e2);
+            }
+		}
+		
+		return result;
+	}
+	
+	/**
+	 * 组装ids
+	 * @param ids
+	 * @return
+	 */
+	public static String consistIds(String[] ids) {
+		StringBuilder sb = new StringBuilder();
+		for(String id:ids) {
+				sb.append(",'").append(id).append("'");
+		}
+		if(sb.length() > 0) {
+			sb.deleteCharAt(0);
+			return sb.toString();
+		}
+
+		return null;
 	}
 }
