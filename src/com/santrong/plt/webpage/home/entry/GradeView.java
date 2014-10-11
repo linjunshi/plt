@@ -9,12 +9,19 @@ import java.util.List;
  * @date 2014年10月8日
  * @time 下午4:45:35
  */
-public class SubjectView {
+public class GradeView {
 	private String gradeName;
 	private int gradeGroup;
+	private String gradeEnName;
 	
 	private List<SubjectItem> subjectList;
 
+	public String getGradeEnName() {
+		return gradeEnName;
+	}
+	public void setGradeEnName(String gradeEnName) {
+		this.gradeEnName = gradeEnName;
+	}
 	public int getGradeGroup() {
 		return gradeGroup;
 	}

@@ -41,18 +41,20 @@ Globals.page = "Index_index";
 		<div class="main">
 			<div class="main_top">
 			
-				<ul class="category_grade">
-					<c:forEach items="${subjectView}" var="grade">
-						<li>
-							<a href="${ctx}/123">${grade.gradeName}</a>
-							<div class="category_subject">
-							<c:forEach items="${grade.subjectList}" var="subject">
-								<a href="${ctx}/123">${subject.subName}</a>
-							</c:forEach>
-							</div>
-						</li>
-					</c:forEach>
-				</ul>
+				<div class="category_block">
+					<ul class="category_grade">
+						<c:forEach items="${gradeList_category}" var="grade">
+							<li>
+								<a href="${ctx}/course/${grade.gradeEnName}">${grade.gradeName}</a>
+								<div class="category_subject">
+								<c:forEach items="${grade.gradeSubjectList}" var="subject">
+									<a href="${ctx}/course/${grade.gradeEnName}/${subject.subjectEnName}">${subject.subjectName}</a>
+								</c:forEach>
+								</div>
+							</li>
+						</c:forEach>
+					</ul>
+				</div>
 				
 				<div class="subject_flash"></div>
 				
@@ -69,15 +71,53 @@ Globals.page = "Index_index";
 					</c:forEach>
 				</div>
 				
-				<div class="teacher_recommend"></div>
+				<div class="teacher_recommend">
+					<c:forEach items="${teacherList}" var="item">
+						<div class="teacher_index_wrap">
+							<img src="http://fanyi.baidu.com/static/i18n/zh/widget/translate/head/logo/logo_2802ebcf.png" width="150" height="130" />
+							<p>title:${item.showName}</p>
+							<p>xxx</p>
+						</div>
+					</c:forEach>
+				</div>
 				
 			</div>
 			
 			<div class="course_group_block"></div>
-			<div class="course_group_block"></div>
-			<div class="course_group_block"></div>
+			<div class="course_group_block">
+				<c:forEach items="${gaozhong_vodList}" var="item">
+					<div class="course_index_wrap">
+						<img src="http://fanyi.baidu.com/static/i18n/zh/widget/translate/head/logo/logo_2802ebcf.png" width="220" height="185" />
+						<p>title:${item.courseName}</p>
+						<p>price:${item.price}</p>
+					</div>
+				</c:forEach>
+			</div>
+
+			<div class="course_group_block">
+				<c:forEach items="${chuzhong_vodList}" var="item">
+					<div class="course_index_wrap">
+						<img src="http://fanyi.baidu.com/static/i18n/zh/widget/translate/head/logo/logo_2802ebcf.png" width="220" height="185" />
+						<p>title:${item.courseName}</p>
+						<p>price:${item.price}</p>
+					</div>
+				</c:forEach>
+			</div>
+			
+			<div class="course_group_block">
+				<c:forEach items="${xiaoxue_vodList}" var="item">
+					<div class="course_index_wrap">
+						<img src="http://fanyi.baidu.com/static/i18n/zh/widget/translate/head/logo/logo_2802ebcf.png" width="220" height="185" />
+						<p>title:${item.courseName}</p>
+						<p>price:${item.price}</p>
+					</div>
+				</c:forEach>
+			</div>
 			
 		</div>
+		
+		<%@ include file="inc/friendlylink.jsp"%>
+		<%@ include file="inc/copyright.jsp"%>
 	</div>
 </body>
 </html>

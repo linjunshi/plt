@@ -1,8 +1,9 @@
 package com.santrong.plt.webpage.user.dao;
 
+import java.util.List;
+
 import com.santrong.plt.webpage.BaseDao;
 import com.santrong.plt.webpage.user.entry.UserItem;
-import com.santrong.plt.webpage.user.mapper.UserMapper;
 
 /**
  * @author weinianjie
@@ -29,5 +30,14 @@ public class UserDao extends BaseDao{
 			return mapper.update(user);
 		}
 		return 0;
+	}
+	
+	public List<UserItem> selectAll() {
+		
+		UserMapper mapper = this.getMapper(UserMapper.class);
+		if(mapper != null) {
+			return mapper.selectAll();
+		}
+		return null;
 	}
 }

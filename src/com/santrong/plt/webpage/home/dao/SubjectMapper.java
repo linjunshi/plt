@@ -1,4 +1,4 @@
-package com.santrong.plt.webpage.home.mapper;
+package com.santrong.plt.webpage.home.dao;
 
 import java.util.List;
 

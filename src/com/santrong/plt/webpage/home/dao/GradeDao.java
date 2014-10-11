@@ -4,8 +4,7 @@ import java.util.List;
 
 import com.santrong.plt.webpage.BaseDao;
 import com.santrong.plt.webpage.home.entry.GradeItem;
-import com.santrong.plt.webpage.home.entry.SubjectView;
-import com.santrong.plt.webpage.home.mapper.GradeMapper;
+import com.santrong.plt.webpage.home.entry.GradeView;
 
 /**
  * @author weinianjie
@@ -30,7 +29,7 @@ public class GradeDao extends BaseDao{
 		return null;
 	}
 	
-	public List<SubjectView> selectGrade() {
+	public List<GradeView> selectGrade() {
 		GradeMapper mapper = this.getMapper(GradeMapper.class);
 		if(mapper != null) {
 			return mapper.selectGrade();

@@ -14,13 +14,11 @@ public class GradeItem {
 	private String gradeName;
 	private String levelName;
 	private int gradeGroup;
+	private String gradeEnName;
+	private String levelEnName;
 	private int priority;
 	
 	private List<SubjectItem> subjectList;
-	
-	public static final int Grade_Primary_School = 1;
-	public static final int Grade_Junior_Middle_School = 2;
-	public static final int Grade_Senior_Middle_School = 4;
 	
 	public List<SubjectItem> getSubjectList() {
 		return subjectList;
@@ -45,6 +43,18 @@ public class GradeItem {
 	}
 	public void setId(String id) {
 		this.id = id;
+	}
+	public String getGradeEnName() {
+		return gradeEnName;
+	}
+	public void setGradeEnName(String gradeEnName) {
+		this.gradeEnName = gradeEnName;
+	}
+	public String getLevelEnName() {
+		return levelEnName;
+	}
+	public void setLevelEnName(String levelEnName) {
+		this.levelEnName = levelEnName;
 	}
 	public String getGradeName() {
 		return gradeName;

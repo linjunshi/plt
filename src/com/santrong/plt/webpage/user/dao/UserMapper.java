@@ -1,4 +1,6 @@
-package com.santrong.plt.webpage.user.mapper;
+package com.santrong.plt.webpage.user.dao;
+
+import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
@@ -18,5 +20,8 @@ public interface UserMapper {
     
     @Update("update web_user set showName=#{showName}, username=#{username}, password=#{password}, role=#{role}, cts=#{cts} where id=#{id}")
     int update(UserItem user);
+    
+    @Select("select * from web_user")
+    List<UserItem> selectAll();
     
 }

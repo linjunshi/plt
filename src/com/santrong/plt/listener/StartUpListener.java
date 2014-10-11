@@ -1,5 +1,7 @@
 package com.santrong.plt.listener;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Properties;
 
 import javax.servlet.ServletContextEvent;
@@ -12,8 +14,17 @@ import org.quartz.impl.StdSchedulerFactory;
 
 import com.santrong.plt.log.Log;
 import com.santrong.plt.opt.ThreadUtils;
+import com.santrong.plt.opt.grade.GradeDefine;
+import com.santrong.plt.opt.grade.GradeDefineEntry;
+import com.santrong.plt.opt.grade.GradeLevelEntry;
+import com.santrong.plt.opt.grade.GradeSubjectEntry;
 import com.santrong.plt.schedule.LogClearJob;
 import com.santrong.plt.schedule.ScheduleManager;
+import com.santrong.plt.webpage.home.dao.GradeDao;
+import com.santrong.plt.webpage.home.dao.SubjectDao;
+import com.santrong.plt.webpage.home.entry.GradeItem;
+import com.santrong.plt.webpage.home.entry.GradeView;
+import com.santrong.plt.webpage.home.entry.SubjectItem;
 
 /**
  * @Author weinianjie
@@ -36,6 +47,47 @@ public class StartUpListener implements ServletContextListener {
 			}catch(Exception e) {
 				Log.printStackTrace(e);
 			}
+			
+			// 把年级班级科目装载一份到静态数据里
+			try{
+				GradeDefine.gradeList = new ArrayList<GradeDefineEntry>();
+				GradeDao gradeDao = new GradeDao();
+				SubjectDao subjectDao = new SubjectDao();
+				List<GradeView> gradeList = gradeDao.selectGrade();
+				for(GradeView g : gradeList) {
+					GradeDefineEntry entry = new GradeDefineEntry();
+					entry.setGradeName(g.getGradeName());
+					entry.setGradeGroup(g.getGradeGroup());
+					entry.setGradeEnName(g.getGradeEnName());
+					
+					List<GradeLevelEntry> levelList = new ArrayList<GradeLevelEntry>();
+					List<GradeItem> levelList2 = gradeDao.selectByGradeGroup(g.getGradeGroup());
+					for(GradeItem item : levelList2) {
+						GradeLevelEntry e = new GradeLevelEntry();
+						e.setLevelId(item.getId());
+						e.setLevelName(item.getLevelName());
+						e.setLevelEnName(item.getGradeEnName());
+						levelList.add(e);
+					}
+					entry.setGradeLevelList(levelList);
+					
+					List<GradeSubjectEntry> subjectList = new ArrayList<GradeSubjectEntry>();
+					List<SubjectItem> subjectList2 = subjectDao.selectByGradeGroup(g.getGradeGroup());
+					for(SubjectItem item : subjectList2) {
+						GradeSubjectEntry e = new GradeSubjectEntry();
+						e.setSubjectId(item.getId());
+						e.setSubjectName(item.getSubjectName());
+						e.setSubjectEnName(item.getSubjectEnName());
+						subjectList.add(e);
+					}
+					entry.setGradeSubjectList(subjectList);
+					
+					GradeDefine.gradeList.add(entry);
+				}
+			}catch(Exception e) {
+				Log.printStackTrace(e);
+			}
+			
 			
 			// 给shell目录添加权限
 //			try {

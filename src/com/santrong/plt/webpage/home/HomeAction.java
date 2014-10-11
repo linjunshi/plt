@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,16 +13,16 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.mysql.jdbc.StringUtils;
 import com.santrong.plt.log.Log;
+import com.santrong.plt.opt.grade.GradeDefine;
+import com.santrong.plt.opt.grade.GradeDefineEntry;
 import com.santrong.plt.system.Global;
 import com.santrong.plt.util.MyUtils;
 import com.santrong.plt.webpage.BaseAction;
-import com.santrong.plt.webpage.home.dao.GradeDao;
+import com.santrong.plt.webpage.course.dao.CourseVodDao;
+import com.santrong.plt.webpage.course.entry.CourseVodView;
 import com.santrong.plt.webpage.home.dao.SchoolDao;
-import com.santrong.plt.webpage.home.dao.SubjectDao;
 import com.santrong.plt.webpage.home.entry.SchoolQuery;
 import com.santrong.plt.webpage.home.entry.SchoolView;
-import com.santrong.plt.webpage.home.entry.SubjectItem;
-import com.santrong.plt.webpage.home.entry.SubjectView;
 import com.santrong.plt.webpage.user.dao.UserDao;
 import com.santrong.plt.webpage.user.entry.UserItem;
 
@@ -33,42 +34,57 @@ import com.santrong.plt.webpage.user.entry.UserItem;
 @Controller
 public class HomeAction extends BaseAction{
 	
+	@RequestMapping("/")
+	public String home(HttpServletRequest request, HttpServletResponse response){
+		return this.index(request, response);
+	}
+	
 	@RequestMapping("/index")
-	public String index(){
+	public String index(HttpServletRequest request, HttpServletResponse response){
+			String areaCode = (String)(request.getSession().getAttribute(Global.SessionKey_AreaCode));
 		
-			Object u = getRequest().getSession().getAttribute(Global.SessionKey_LoginUser);
+			Object u = request.getSession().getAttribute(Global.SessionKey_LoginUser);
 			if(u != null) {
 				UserItem user = (UserItem)u;
-				getRequest().setAttribute("user", user);
+				request.setAttribute("user", user);
 			}
-
 			
-			GradeDao gradeDao = new GradeDao();
-			List<SubjectView> subjectView = gradeDao.selectGrade();
+			// 年级科目导航
+			request.setAttribute("gradeList_category", GradeDefine.gradeList);
 			
-			// 获取科目
-			SubjectDao subjectDao = new SubjectDao();
-			for(int i=0;i<subjectView.size();i++) {
-				List<SubjectItem> subjectList = subjectDao.selectByGradeGroup(subjectView.get(i).getGradeGroup());
-				subjectView.get(i).setSubjectList(subjectList);
-			}
-			getRequest().setAttribute("subjectView", subjectView);
-			
-			// 获取学校
+			// 推荐学校
 			SchoolDao schoolDao = new SchoolDao();
 			SchoolQuery schoolQuery = new SchoolQuery();
-			schoolQuery.setAreaCode((String)(getRequest().getSession().getAttribute(Global.SessionKey_AreaCode)));
+			schoolQuery.setAreaCode(areaCode);
 			List<SchoolView> schoolView = new ArrayList<SchoolView>();
-			for(int i=0;i<subjectView.size();i++) {
+			for(GradeDefineEntry grade : GradeDefine.gradeList) {
 				SchoolView view = new SchoolView();
-				view.setGradeGroup(subjectView.get(i).getGradeGroup());
-				view.setGradeName(subjectView.get(i).getGradeName());
+				view.setGradeGroup(grade.getGradeGroup());
+				view.setGradeName(grade.getGradeName());
 				
 				schoolQuery.setSchoolGrade(view.getGradeGroup());
 				view.setSchoolList(schoolDao.selectByQuery(schoolQuery));
 				schoolView.add(view);
 			}
-			getRequest().setAttribute("schoolView", schoolView);
+			request.setAttribute("schoolView", schoolView);
+			
+			// 推荐老师
+			UserDao userDao = new UserDao();
+			List<UserItem> teacherList = userDao.selectAll();
+			request.setAttribute("teacherList", teacherList);
+			
+			// 直播课程
+			
+			// 点播课程
+			CourseVodDao vodDao = new CourseVodDao();
+			for(GradeDefineEntry entry : GradeDefine.gradeList) {
+				int gradeGroup = entry.getGradeGroup();
+				String prefix = entry.getGradeEnName();
+				List<CourseVodView> vodList = vodDao.selectForIndexList(gradeGroup, areaCode);
+				
+				request.setAttribute(prefix  + "_vodList", vodList);
+				request.setAttribute(prefix + "_subjectList", entry.getGradeSubjectList());
+			}
 
 			return "index";
 	}
@@ -106,8 +122,7 @@ public class HomeAction extends BaseAction{
 	
 	@RequestMapping(value="/logout", method=RequestMethod.POST)
 	@ResponseBody
-	public String logout() {
-		HttpServletRequest request = getRequest();
+	public String logout(HttpServletRequest request) {
 
 		UserItem user = (UserItem)request.getSession().getAttribute(Global.SessionKey_LoginUser);
 		if(user == null) {

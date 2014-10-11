@@ -37,4 +37,9 @@
         <property name="viewClass" value="org.springframework.web.servlet.view.JstlView" />
     </bean>
   
+   <!-- 全局拦截器 -->
+  	<mvc:interceptors>
+  		<bean class="com.santrong.plt.interceptor.CommonInterceptor"/>
+  	</mvc:interceptors>
+  
 </beans>

@@ -1,15 +1,15 @@
-package com.santrong.plt.webpage.home.entry;
+package com.santrong.plt.opt.grade;
+
 
 /**
  * @author weinianjie
- * @date 2014年10月8日
- * @time 下午4:45:55
+ * @date 2014年10月10日
+ * @time 下午4:38:05
  */
-public class SubjectItem {
-	private String id;
+public class GradeSubjectEntry {
+	private String subjectId;
 	private String subjectName;
 	private String subjectEnName;
-	private int priority;
 	
 	public String getSubjectEnName() {
 		return subjectEnName;
@@ -17,17 +17,11 @@ public class SubjectItem {
 	public void setSubjectEnName(String subjectEnName) {
 		this.subjectEnName = subjectEnName;
 	}
-	public int getPriority() {
-		return priority;
+	public String getSubjectId() {
+		return subjectId;
 	}
-	public void setPriority(int priority) {
-		this.priority = priority;
-	}
-	public String getId() {
-		return id;
-	}
-	public void setId(String id) {
-		this.id = id;
+	public void setSubjectId(String subjectId) {
+		this.subjectId = subjectId;
 	}
 	public String getSubjectName() {
 		return subjectName;
