@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
+import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 
@@ -37,7 +38,7 @@ public class StartUpListener implements ServletContextListener {
 	
 	// 启动执行
 	@Override
-	public void contextInitialized(ServletContextEvent arg0) {
+	public void contextInitialized(ServletContextEvent sct) {
 		try{
 			// 把proxool配置载入环境
 			try{
@@ -47,6 +48,8 @@ public class StartUpListener implements ServletContextListener {
 			}catch(Exception e) {
 				Log.printStackTrace(e);
 			}
+			
+			ServletContext application = sct.getServletContext();		
 			
 			// 把年级班级科目装载一份到静态数据里
 			try{
@@ -83,6 +86,7 @@ public class StartUpListener implements ServletContextListener {
 					entry.setGradeSubjectList(subjectList);
 					
 					GradeDefine.gradeList.add(entry);
+					application.setAttribute("gradeList", GradeDefine.gradeList);
 				}
 			}catch(Exception e) {
 				Log.printStackTrace(e);

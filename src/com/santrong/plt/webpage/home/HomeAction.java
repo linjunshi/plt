@@ -18,8 +18,8 @@ import com.santrong.plt.opt.grade.GradeDefineEntry;
 import com.santrong.plt.system.Global;
 import com.santrong.plt.util.MyUtils;
 import com.santrong.plt.webpage.BaseAction;
-import com.santrong.plt.webpage.course.dao.CourseVodDao;
-import com.santrong.plt.webpage.course.entry.CourseVodView;
+import com.santrong.plt.webpage.course.dao.CourseDao;
+import com.santrong.plt.webpage.course.entry.CourseView;
 import com.santrong.plt.webpage.home.dao.SchoolDao;
 import com.santrong.plt.webpage.home.entry.SchoolQuery;
 import com.santrong.plt.webpage.home.entry.SchoolView;
@@ -34,23 +34,9 @@ import com.santrong.plt.webpage.user.entry.UserItem;
 @Controller
 public class HomeAction extends BaseAction{
 	
-	@RequestMapping("/")
-	public String home(HttpServletRequest request, HttpServletResponse response){
-		return this.index(request, response);
-	}
-	
-	@RequestMapping("/index")
+	@RequestMapping("")
 	public String index(HttpServletRequest request, HttpServletResponse response){
 			String areaCode = (String)(request.getSession().getAttribute(Global.SessionKey_AreaCode));
-		
-			Object u = request.getSession().getAttribute(Global.SessionKey_LoginUser);
-			if(u != null) {
-				UserItem user = (UserItem)u;
-				request.setAttribute("user", user);
-			}
-			
-			// 年级科目导航
-			request.setAttribute("gradeList_category", GradeDefine.gradeList);
 			
 			// 推荐学校
 			SchoolDao schoolDao = new SchoolDao();
@@ -61,6 +47,7 @@ public class HomeAction extends BaseAction{
 				SchoolView view = new SchoolView();
 				view.setGradeGroup(grade.getGradeGroup());
 				view.setGradeName(grade.getGradeName());
+				view.setGradeEnName(grade.getGradeEnName());
 				
 				schoolQuery.setSchoolGrade(view.getGradeGroup());
 				view.setSchoolList(schoolDao.selectByQuery(schoolQuery));
@@ -76,11 +63,11 @@ public class HomeAction extends BaseAction{
 			// 直播课程
 			
 			// 点播课程
-			CourseVodDao vodDao = new CourseVodDao();
+			CourseDao vodDao = new CourseDao();
 			for(GradeDefineEntry entry : GradeDefine.gradeList) {
 				int gradeGroup = entry.getGradeGroup();
 				String prefix = entry.getGradeEnName();
-				List<CourseVodView> vodList = vodDao.selectForIndexList(gradeGroup, areaCode);
+				List<CourseView> vodList = vodDao.selectForIndexList(gradeGroup, areaCode);
 				
 				request.setAttribute(prefix  + "_vodList", vodList);
 				request.setAttribute(prefix + "_subjectList", entry.getGradeSubjectList());
@@ -150,6 +137,6 @@ public class HomeAction extends BaseAction{
 	
 	@RequestMapping("/500")
 	public String page500() {
-		return "404";
+		return "500";
 	}
 }

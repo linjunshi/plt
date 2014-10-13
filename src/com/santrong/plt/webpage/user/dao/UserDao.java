@@ -14,7 +14,6 @@ public class UserDao extends BaseDao{
 	
 	
 	public UserItem selectByUserName(String username) {
-		
 		UserMapper mapper = this.getMapper(UserMapper.class);
 		if(mapper != null) {
 			return mapper.selectByUserName(username);
@@ -22,9 +21,16 @@ public class UserDao extends BaseDao{
 		return null;
 	}
 	
+	public UserItem selectById(String id) {
+		UserMapper mapper = this.getMapper(UserMapper.class);
+		if(mapper != null) {
+			return mapper.selectById(id);
+		}
+		return null;
+	}
+	
 	
 	public int update(UserItem user) {
-		
 		UserMapper mapper = this.getMapper(UserMapper.class);
 		if(mapper != null) {
 			return mapper.update(user);
@@ -33,7 +39,6 @@ public class UserDao extends BaseDao{
 	}
 	
 	public List<UserItem> selectAll() {
-		
 		UserMapper mapper = this.getMapper(UserMapper.class);
 		if(mapper != null) {
 			return mapper.selectAll();

@@ -13,40 +13,18 @@ Globals.page = "Index_index";
 </head>
 <body>
 	<div class="wrap">
-		<div class="header">
-			<img src="${ctx}/resource/photo/logo.png" />
-			
-			<c:if test="${user != null}">
-				<p>welcome(${user.showName})---
-				<a href="javascript:void(0);" class="logout" ><fmt:message key="index_user_userlogout"/></a>
-				---you city is ${sessionScope.city}
-				</p>
-			</c:if>
-			<c:if test="${user == null}">
-				<p><a href="${ctx }/login.action" ><fmt:message key="index_user_userlogin"/></a></p>---you city is ${sessionScope.city}
-			</c:if>
-			
-			<input type="text" name="keywords" />
-			<input type="submit" />
-		</div>
-		
-		<ul class="navigator">
-			<li><a href='${ctx}/'><fmt:message key="menu_index" /></a></li>
-			<li><a href='${ctx}/live'><fmt:message key="menu_live" /></a></li>
-			<li><a href='${ctx}/vod'><fmt:message key="menu_vod" /></a></li>
-			<li><a href='${ctx}/school'><fmt:message key="menu_school" /></a></li>
-			<li><a href='${ctx}/teacher'><fmt:message key="menu_teacher" /></a></li>
-		</ul>
+
+		<%@ include file="inc/top.jsp"%>
 		
 		<div class="main">
 			<div class="main_top">
 			
 				<div class="category_block">
 					<ul class="category_grade">
-						<c:forEach items="${gradeList_category}" var="grade">
+						<c:forEach items="${applicationScope.gradeList}" var="grade">
 							<li>
 								<a href="${ctx}/course/${grade.gradeEnName}">${grade.gradeName}</a>
-								<div class="category_subject">
+								<div class="category_subject hide">
 								<c:forEach items="${grade.gradeSubjectList}" var="subject">
 									<a href="${ctx}/course/${grade.gradeEnName}/${subject.subjectEnName}">${subject.subjectName}</a>
 								</c:forEach>
@@ -56,15 +34,17 @@ Globals.page = "Index_index";
 					</ul>
 				</div>
 				
-				<div class="subject_flash"></div>
+				<div class="subject_flash"><img src="${ctx}/resource/photo/flash1.jpg" /></div>
 				
 				<div class="school_recommend">
 					<c:forEach items="${schoolView}" var="grade">
 						<div>
-							<a href="${ctx}/123">${grade.gradeName}</a>
+							<div class="school_grade">
+								<a href="${ctx}/school/${grade.gradeEnName}" target="_blank">${grade.gradeName}</a>
+							</div>
 							<ul>
 							<c:forEach items="${grade.schoolList}" var="school">
-								<li><a href="${ctx}/123">${school.schoolName}</a></li>
+								<li><a href="${ctx}/school/${school.id}.html" target="_blank">${school.schoolName}</a></li>
 							</c:forEach>
 							</ul>
 						</div>
@@ -74,7 +54,7 @@ Globals.page = "Index_index";
 				<div class="teacher_recommend">
 					<c:forEach items="${teacherList}" var="item">
 						<div class="teacher_index_wrap">
-							<img src="http://fanyi.baidu.com/static/i18n/zh/widget/translate/head/logo/logo_2802ebcf.png" width="150" height="130" />
+							<a href="${ctx}/teacher/${item.id}.html" target="_blank"><img src="${ctx}/resource/photo/T136.jpg" width="150" height="130" /></a>
 							<p>title:${item.showName}</p>
 							<p>xxx</p>
 						</div>
@@ -87,7 +67,7 @@ Globals.page = "Index_index";
 			<div class="course_group_block">
 				<c:forEach items="${gaozhong_vodList}" var="item">
 					<div class="course_index_wrap">
-						<img src="http://fanyi.baidu.com/static/i18n/zh/widget/translate/head/logo/logo_2802ebcf.png" width="220" height="185" />
+						<a href="${ctx}/course/${item.id}.html" target="_blank"><img src="${ctx}/resource/photo/df_course.jpg" width="220" height="185" /></a>
 						<p>title:${item.courseName}</p>
 						<p>price:${item.price}</p>
 					</div>
@@ -97,7 +77,7 @@ Globals.page = "Index_index";
 			<div class="course_group_block">
 				<c:forEach items="${chuzhong_vodList}" var="item">
 					<div class="course_index_wrap">
-						<img src="http://fanyi.baidu.com/static/i18n/zh/widget/translate/head/logo/logo_2802ebcf.png" width="220" height="185" />
+						<a href="${ctx}/course/${item.id}.html" target="_blank"><img src="${ctx}/resource/photo/df_course.jpg" width="220" height="185" /></a>
 						<p>title:${item.courseName}</p>
 						<p>price:${item.price}</p>
 					</div>
@@ -107,7 +87,7 @@ Globals.page = "Index_index";
 			<div class="course_group_block">
 				<c:forEach items="${xiaoxue_vodList}" var="item">
 					<div class="course_index_wrap">
-						<img src="http://fanyi.baidu.com/static/i18n/zh/widget/translate/head/logo/logo_2802ebcf.png" width="220" height="185" />
+						<a href="${ctx}/course/${item.id}.html" target="_blank"><img src="${ctx}/resource/photo/df_course.jpg" width="220" height="185" /></a>
 						<p>title:${item.courseName}</p>
 						<p>price:${item.price}</p>
 					</div>

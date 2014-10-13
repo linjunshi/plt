@@ -10,8 +10,15 @@ import java.util.List;
 public class SchoolView {
 	private String gradeName;
 	private int gradeGroup;
+	private String gradeEnName;
 	private List<SchoolItem> schoolList;
 	
+	public String getGradeEnName() {
+		return gradeEnName;
+	}
+	public void setGradeEnName(String gradeEnName) {
+		this.gradeEnName = gradeEnName;
+	}
 	public String getGradeName() {
 		return gradeName;
 	}

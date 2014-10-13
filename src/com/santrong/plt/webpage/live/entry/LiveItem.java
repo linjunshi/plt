@@ -1,4 +1,4 @@
-package com.santrong.plt.webpage.course.entry;
+package com.santrong.plt.webpage.live.entry;
 
 import java.util.Date;
 
@@ -7,7 +7,7 @@ import java.util.Date;
  * @date 2014年10月10日
  * @time 上午10:16:39
  */
-public class CourseVodItem {
+public class LiveItem {
 	private String id;
 	private String courseName;
 	private String ownerId;

@@ -1,26 +1,83 @@
 @charset "utf-8";
+/* ------框架------ */
 .wrap {width:1024px; margin:0 auto;}
 .header {width:100%; height:150px; border:solid 1px red;}
-.navigator {display:inline-block; margin-top:10px; width:100%; height:30px; background-color:#ccc;}
-.navigator li {float:left; width:96px; height:100%; border:solid 1px blue;}
-.main {margin-top:10px;}
+.main {display:inline-block; width:100%; margin-top:10px;}
 .main .main_top {display:inline-block; width:100%;}
 
+/* ------公用元素------ */
 .hide {display:none;}
+.ul_flat {display:inline-block;}
+.ul_flat li {float:left; text-align:center; border:solid 1px blue;}
 
-.category_block {width:168px; height:255px; border:solid 1px yellow; float:left;}
+/* ------旁边关联（前台）------ */
+.side_interest {width:164px; float:right; margin-top:10px; border:solid 1px red;}
+.side_interest {width:164px; float:right; margin-top:10px; border:solid 1px red;}
+
+/* ------内容页搜索条件（前台）------ */
+.main .condition {width:100%; border:solid 1px red;}
+.main .condition ul {width:100%; line-height:26px;}
+.main .condition ul .current {font-weight:bold; color:red;}
+.main .filter {width:100%; margin-top:10px; border:solid 1px red;}
+.main .filter ul {width:100%; line-height:26px;}
+.main .filter ul .current {font-weight:bold; color:red;}
+
+/* ------顶部（前台）------ */
+.site_mast {margin-top:20px;  width:300px; display:inline-block;}
+.site_mast img {float:left;}
+.site_mast .h2 {float:left;}
+.site_component {float:right;}
+.site_component .component_search { margin-top:20px;}
+
+/* ------导航（前台）------ */
+.navigator {margin-top:10px; width:100%; height:30px; background-color:#ccc;}
+.navigator li {width:96px; height:100%;}
+.navigator li a {width:100%; height:100%; line-height:100%; display:block; border:solid 1px red;}
+.navigator li a:hover {background-color:#f42;}
+
+/* ------分类（首页）------ */
+.category_block {width:168px; height:255px; border:solid 1px #aaa; float:left;}
 .category_grade {width:100%;}
-.category_grade li {width:100%; height:30px; border:solid 1px red; position:relative;}
-.category_subject {display:none; width:200px; border:solid 1px blue; position:absolute; left:168px; top:0;}
+.category_grade li {width:100%; line-height:40px; border:solid 1px red; text-align:center; position:relative;}
+.category_subject {width:200px; border:solid 1px blue;  background-color:#ccc; position:absolute; left:168px; top:0;}
 .category_subject a {margin:0 6px;}
 
+/* ------专题（首页）------ */
 .subject_flash {width:633px; height:255px; border:solid 1px red; float:left; margin-left:10px;}
+.subject_flash img {width:100%; height:100%;}
 
+/* ------推荐学校（首页）------ */
 .school_recommend {float:right; width:200px; border:solid 1px red;}
+.school_recommend .school_grade {line-height:30px; width:100%; border-top:dashed 1px #ccc;}
 .school_recommend li {line-height:26px;}
 
+/* ------推荐老师（首页）------ */
 .teacher_recommend {float:left; margin-top:10px; width:810px; border:solid 1px red; display:inline-block;}
-.teacher_recommend .teacher_index_wrap {width:160px; height:160px; float:left; margin-right:10px; border:solid 1px blue;}
+.teacher_recommend .teacher_index_wrap {width:160px; height:160px; float:left; margin-left:18px; border:solid 1px blue;}
 
+/* ------课程列表（首页）------ */
 .course_group_block {margin-top:10px; width:100%; border:solid 1px red; display:inline-block;}
-.course_group_block .course_index_wrap {width:230px; height:220px; float:left; margin-right:10px; border:solid 1px blue;}
+.course_group_block .course_index_wrap {width:230px; height:220px; float:left; margin-left:18px; border:solid 1px blue;}
+
+/* ------课程图片（课程详细）------ */
+.course_view_info {width:314px; height:222px; float:left; border:solid 1px red;}
+.course_view_info img {width:100%; height:100%;}
+
+/* ------课程基本信息（课程详细）------ */
+.course_text_info {width:522px; height:222px; float:left; margin-left:10px; border:solid 1px red;}
+.course_text_info p {line-height:36px;}
+.course_owner_info {width:164px; height:222px; float:right; border:solid 1px red; text-align:center;}
+.course_owner_info img {width:120px; height:120px; margin-top:10px;}
+
+/* ------课程详细（课程详细）------ */
+.course_detail_info {width:850px; float:left; margin-top:10px; border:solid 1px red;}
+.course_detail_info .course_intro_menu li {width:96px; height:26px;}
+
+/* ------课程条件搜索主体（课程列表）------ */
+.main_left_major {width:850px; float:left; margin-top:10px;}
+.course_list {display:inline-block;}
+.course_list .course_group_block {float:left; width:200px;}
+.course_list .course_group_block img{width:160px; height:160px;}
+
+
+.test_content {width:100%; height:640px;}

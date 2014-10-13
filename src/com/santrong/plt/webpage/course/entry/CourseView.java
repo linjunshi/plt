@@ -6,7 +6,7 @@ package com.santrong.plt.webpage.course.entry;
  * @date 2014年10月10日
  * @time 上午10:16:39
  */
-public class CourseVodView {
+public class CourseView {
 	private String id;
 	private String courseName;
 	private int price;

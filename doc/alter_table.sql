@@ -18,6 +18,13 @@ create table web_user(
 ) engine=InnoDB default charset=utf8 collate=utf8_bin comment '用户表';
 
 insert into web_user values('10000', 'admin', 'admin', md5('admin'), 71, 10000, now(), now());
+insert into web_user values('10001', 'teacher1', 'teacher1', md5('admin'), 3, 10000, now(), now());
+insert into web_user values('10002', 'teacher2', 'teacher2', md5('admin'), 3, 10000, now(), now());
+insert into web_user values('10003', 'teacher3', 'teacher3', md5('admin'), 3, 10000, now(), now());
+insert into web_user values('10004', 'teacher4', 'teacher4', md5('admin'), 3, 10000, now(), now());
+insert into web_user values('10005', 'teacher5', 'teacher5', md5('admin'), 3, 10000, now(), now());
+insert into web_user values('10006', 'student1', 'student1', md5('admin'), 1, 10000, now(), now());
+insert into web_user values('10007', 'student2', 'student2', md5('admin'), 1, 10000, now(), now());
 
 --- 年级表 ---
 drop table if exists web_grade;
@@ -141,8 +148,6 @@ insert into web_school values('10000', '实验1小', '440300', 1);
 insert into web_school values('10001', '实验2小', '440300', 1);
 insert into web_school values('10002', '实验3小', '440300', 1);
 insert into web_school values('10003', '实验4小', '440300', 1);
-insert into web_school values('10004', '实验5小', '440300', 1);
-insert into web_school values('10005', '实验6小', '440300', 1);
 insert into web_school values('10006', '深圳1中', '440300', 2);
 insert into web_school values('10007', '深圳2中', '440300', 2);
 insert into web_school values('10008', '深圳3中', '440300', 2);
@@ -179,10 +184,18 @@ create table web_course_vod(
 	primary key (id)
 ) engine=InnoDB default charset=utf8 collate=utf8_bin comment '点播课表';
 
-insert into web_course_vod values('10000', '马克思主义1', '10000', '10000', '10000', 1111, null, 1, 2, 3, now(), now());
-insert into web_course_vod values('10001', '马克思主义2', '10000', '10008', '10000', 1111, null, 1, 2, 3, now(), now());
-insert into web_course_vod values('10002', '马克思主义3', '10000', '10009', '10000', 1111, null, 1, 2, 3, now(), now());
-insert into web_course_vod values('10003', '马克思主义4', '10000', '10010', '10000', 1111, null, 1, 2, 3, now(), now());
+insert into web_course_vod values('10000', '马克思主义0', '10000', '10000', '10000', 1111, null, 1, 2, 3, now(), now());
+insert into web_course_vod values('10001', '马克思主义1', '10000', '10008', '10000', 1111, null, 1, 2, 3, now(), now());
+insert into web_course_vod values('10002', '马克思主义2', '10000', '10009', '10000', 1111, null, 1, 2, 3, now(), now());
+insert into web_course_vod values('10003', '马克思主义3', '10000', '10010', '10000', 1111, null, 1, 2, 3, now(), now());
+insert into web_course_vod values('10004', '马克思主义4', '10000', '10010', '10000', 1111, null, 1, 2, 3, now(), now());
+insert into web_course_vod values('10005', '马克思主义5', '10000', '10010', '10000', 1111, null, 1, 2, 3, now(), now());
+insert into web_course_vod values('10006', '马克思主义6', '10000', '10000', '10000', 1111, null, 1, 2, 3, now(), now());
+insert into web_course_vod values('10007', '马克思主义7', '10000', '10000', '10000', 1111, null, 1, 2, 3, now(), now());
+insert into web_course_vod values('10008', '马克思主义8', '10000', '10000', '10000', 1111, null, 1, 2, 3, now(), now());
+insert into web_course_vod values('10009', '马克思主义9', '10000', '10007', '10000', 1111, null, 1, 2, 3, now(), now());
+insert into web_course_vod values('10010', '马克思主义10', '10000', '10007', '10000', 1111, null, 1, 2, 3, now(), now());
+insert into web_course_vod values('10011', '马克思主义11', '10000', '10007', '10000', 1111, null, 1, 2, 3, now(), now());
 
 --- 直播课表 ---
 drop table if exists web_course_live;

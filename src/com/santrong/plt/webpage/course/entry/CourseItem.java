@@ -7,7 +7,7 @@ import java.util.Date;
  * @date 2014年10月10日
  * @time 上午10:16:39
  */
-public class CourseLiveItem {
+public class CourseItem {
 	private String id;
 	private String courseName;
 	private String ownerId;

@@ -8,7 +8,31 @@ String.prototype.trim=function(){
 	$在$上扩展
  */
 jQuery(function($){
-
+	
+	/**
+	 * 同步显示和隐藏
+	 */
+	$.fn.toggleShow = function(el, opt) {
+		opt = $.extend({
+			event : "mouseover",
+			hide : true
+		}, opt || {});
+		
+		var watcher = $(this);
+		watcher.bind(opt.event, function() {
+			var index = watcher.index($(this));
+			$(el).hide();
+			$(el).eq(index).show();
+		});
+		
+		if(opt.hide) {
+			watcher.bind("mouseout", function() {
+				$(el).hide();
+			});
+		}
+	};
+	
+	
 });
 
 $(function() {
