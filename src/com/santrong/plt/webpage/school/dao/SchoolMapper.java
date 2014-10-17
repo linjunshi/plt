@@ -1,4 +1,4 @@
-package com.santrong.plt.webpage.home.dao;
+package com.santrong.plt.webpage.school.dao;
 
 
 /**

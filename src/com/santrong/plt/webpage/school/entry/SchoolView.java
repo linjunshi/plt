@@ -1,4 +1,4 @@
-package com.santrong.plt.webpage.home.entry;
+package com.santrong.plt.webpage.school.entry;
 
 import java.util.List;
 

@@ -79,5 +79,15 @@
 .course_list .course_group_block {float:left; width:200px;}
 .course_list .course_group_block img{width:160px; height:160px;}
 
+/* ------后台菜单------ */
+.manage_left_side {width:200px; float:left; border:solid 1px red;}
+.manage_left_side .user_tip {width:100%; height:200px; border:solid 1px red;}
+.manage_left_side .user_tip img {width:160px; height:160px;}
+.manage_left_side .manage_menu {line-height:26px; margin-left:60px;}
+.manage_left_side .manage_menu dt {font-weight:bold;}
+
+/* ------xxxx------ */
+.maanage_right_major {width:810px; float:right; border:solid 1px red;}
+
 
 .test_content {width:100%; height:640px;}

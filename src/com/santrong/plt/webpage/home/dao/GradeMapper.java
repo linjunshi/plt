@@ -14,12 +14,12 @@ import com.santrong.plt.webpage.home.entry.GradeView;
  */
 public interface GradeMapper {
 	
-	@Select("select * from web_grade order by priority desc")
+	@Select("select * from grade order by priority desc")
 	List<GradeItem> selectAll();
 	
-	@Select("select * from web_grade where gradeGroup=#{gradeGroup} order by priority desc")
+	@Select("select * from grade where gradeGroup=#{gradeGroup} order by priority desc")
 	List<GradeItem> selectByGradeGroup(int gradeGroup);
 	
-	@Select("select distinct gradeName, gradeGroup, gradeEnName from web_grade order by priority desc")
+	@Select("select distinct gradeName, gradeGroup, gradeEnName from grade order by priority desc")
 	List<GradeView> selectGrade();
 }

@@ -10,7 +10,6 @@ public class CourseView {
 	private String id;
 	private String courseName;
 	private int price;
-	private String preview;
 	private int saleCount;
 
 	
@@ -31,12 +30,6 @@ public class CourseView {
 	}
 	public void setPrice(int price) {
 		this.price = price;
-	}
-	public String getPreview() {
-		return preview;
-	}
-	public void setPreview(String preview) {
-		this.preview = preview;
 	}
 	public int getSaleCount() {
 		return saleCount;

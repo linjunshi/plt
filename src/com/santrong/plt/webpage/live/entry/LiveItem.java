@@ -9,15 +9,13 @@ import java.util.Date;
  */
 public class LiveItem {
 	private String id;
-	private String courseName;
+	private String liveName;
+	private String url;
+	private Date beginTime;
+	private Date endTime;
+	private int duration;
+	private String groupId;
 	private String ownerId;
-	private String gradeId;
-	private String subjectId;
-	private int price;
-	private String preview;
-	private int collectCount;
-	private int saleCount;
-	private int playCount;
 	private Date cts;
 	private Date uts;
 	
@@ -27,59 +25,47 @@ public class LiveItem {
 	public void setId(String id) {
 		this.id = id;
 	}
-	public String getCourseName() {
-		return courseName;
+	public String getLiveName() {
+		return liveName;
 	}
-	public void setCourseName(String courseName) {
-		this.courseName = courseName;
+	public void setLiveName(String liveName) {
+		this.liveName = liveName;
+	}
+	public String getUrl() {
+		return url;
+	}
+	public void setUrl(String url) {
+		this.url = url;
+	}
+	public Date getBeginTime() {
+		return beginTime;
+	}
+	public void setBeginTime(Date beginTime) {
+		this.beginTime = beginTime;
+	}
+	public Date getEndTime() {
+		return endTime;
+	}
+	public void setEndTime(Date endTime) {
+		this.endTime = endTime;
+	}
+	public int getDuration() {
+		return duration;
+	}
+	public void setDuration(int duration) {
+		this.duration = duration;
+	}
+	public String getGroupId() {
+		return groupId;
+	}
+	public void setGroupId(String groupId) {
+		this.groupId = groupId;
 	}
 	public String getOwnerId() {
 		return ownerId;
 	}
 	public void setOwnerId(String ownerId) {
 		this.ownerId = ownerId;
-	}
-	public String getGradeId() {
-		return gradeId;
-	}
-	public void setGradeId(String gradeId) {
-		this.gradeId = gradeId;
-	}
-	public String getSubjectId() {
-		return subjectId;
-	}
-	public void setSubjectId(String subjectId) {
-		this.subjectId = subjectId;
-	}
-	public int getPrice() {
-		return price;
-	}
-	public void setPrice(int price) {
-		this.price = price;
-	}
-	public String getPreview() {
-		return preview;
-	}
-	public void setPreview(String preview) {
-		this.preview = preview;
-	}
-	public int getCollectCount() {
-		return collectCount;
-	}
-	public void setCollectCount(int collectCount) {
-		this.collectCount = collectCount;
-	}
-	public int getSaleCount() {
-		return saleCount;
-	}
-	public void setSaleCount(int saleCount) {
-		this.saleCount = saleCount;
-	}
-	public int getPlayCount() {
-		return playCount;
-	}
-	public void setPlayCount(int playCount) {
-		this.playCount = playCount;
 	}
 	public Date getCts() {
 		return cts;

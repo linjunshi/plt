@@ -1,4 +1,4 @@
-package com.santrong.plt.webpage.home.entry;
+package com.santrong.plt.webpage.school.entry;
 
 import com.santrong.plt.opt.PageQuery;
 
@@ -10,7 +10,7 @@ import com.santrong.plt.opt.PageQuery;
 public class SchoolQuery extends PageQuery{
 	private String keywords;
 	private String areaCode;
-	private int schoolType;
+	private int schoolAbsoluteGrade;
 	private int schoolGrade;
 
 	public String getAreaCode() {
@@ -29,12 +29,12 @@ public class SchoolQuery extends PageQuery{
 		this.keywords = keywords;
 	}
 
-	public int getSchoolType() {
-		return schoolType;
+	public int getSchoolAbsoluteGrade() {
+		return schoolAbsoluteGrade;
 	}
 
-	public void setSchoolType(int schoolType) {
-		this.schoolType = schoolType;
+	public void setSchoolAbsoluteGrade(int schoolAbsoluteGrade) {
+		this.schoolAbsoluteGrade = schoolAbsoluteGrade;
 	}
 
 	public int getSchoolGrade() {

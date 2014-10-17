@@ -13,12 +13,12 @@ import com.santrong.plt.webpage.home.entry.SubjectItem;
  */
 public interface SubjectMapper {
 	
-	@Select("select * from web_subject order by priority desc")
+	@Select("select * from subject order by priority desc")
 	List<SubjectItem> selectAll();
 	
-	@Select("select distinct a.* from web_subject a "
-			+ "left join web_grade_subject b on a.id=b.subjectId "
-			+ "left join web_grade c on b.gradeId=c.id "
+	@Select("select distinct a.* from subject a "
+			+ "left join grade_to_subject b on a.id=b.subjectId "
+			+ "left join grade c on b.gradeId=c.id "
 			+ "where c.gradeGroup=#{gradeGroup} order by priority desc")
 	List<SubjectItem> selectByGradeGroup(int gradeGroup);
 }

@@ -15,16 +15,30 @@ import com.santrong.plt.webpage.user.entry.UserItem;
  */
 public interface UserMapper {
 	
-    @Select("select * from web_user where username=#{username}")
+    @Select("select * from user where username=#{username}")
     UserItem selectByUserName(@Param("username") String username);
     
-    @Select("select * from web_user where id=#{id}")
+    @Select("select * from user where id=#{id}")
     UserItem selectById(String id);
     
-    @Update("update web_user set showName=#{showName}, username=#{username}, password=#{password}, role=#{role}, cts=#{cts} where id=#{id}")
+    @Update("update user set "
+    		+ "showName=#{showName}, "
+    		+ "username=#{username}, "
+    		+ "password=#{password}, "
+    		+ "url=#{url}, gender=#{gender}, "
+    		+ "role=#{role}, "
+    		+ "schoolId=#{schoolId}, "
+    		+ "subjectId=#{subjectId}, "
+    		+ "registIp=#{registIp}, "
+    		+ "registTime=#{registTime}, "
+    		+ "lastLoginIp=#{lastLoginIp}, "
+    		+ "lastLoginTime=#{lastLoginTime}, "
+    		+ "remark=#{remark}, "
+    		+ "cts=#{cts} "
+    		+ "where id=#{id}")
     int update(UserItem user);
     
-    @Select("select * from web_user limit 4;")
+    @Select("select * from user limit 4;")
     List<UserItem> selectAll();
     
 }

@@ -2,7 +2,7 @@
 create database plt;
 
 use plt;
-	
+
 --- 用户表 ---
 drop table if exists web_user;
 create table web_user(

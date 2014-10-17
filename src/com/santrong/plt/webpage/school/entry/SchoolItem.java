@@ -1,4 +1,4 @@
-package com.santrong.plt.webpage.home.entry;
+package com.santrong.plt.webpage.school.entry;
 
 /**
  * @author weinianjie
@@ -8,8 +8,22 @@ package com.santrong.plt.webpage.home.entry;
 public class SchoolItem {
 	private String id;
 	private String schoolName;
+	private String schoolEnName;
 	private String areaCode;
-	private int schoolType;
+	private int schoolGrade;
+	
+	public String getSchoolEnName() {
+		return schoolEnName;
+	}
+	public void setSchoolEnName(String schoolEnName) {
+		this.schoolEnName = schoolEnName;
+	}
+	public int getSchoolGrade() {
+		return schoolGrade;
+	}
+	public void setSchoolGrade(int schoolGrade) {
+		this.schoolGrade = schoolGrade;
+	}
 	public String getId() {
 		return id;
 	}
@@ -27,11 +41,5 @@ public class SchoolItem {
 	}
 	public void setAreaCode(String areaCode) {
 		this.areaCode = areaCode;
-	}
-	public int getSchoolType() {
-		return schoolType;
-	}
-	public void setSchoolType(int schoolType) {
-		this.schoolType = schoolType;
 	}
 }

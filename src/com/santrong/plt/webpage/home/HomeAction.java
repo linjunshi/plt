@@ -20,9 +20,9 @@ import com.santrong.plt.util.MyUtils;
 import com.santrong.plt.webpage.BaseAction;
 import com.santrong.plt.webpage.course.dao.CourseDao;
 import com.santrong.plt.webpage.course.entry.CourseView;
-import com.santrong.plt.webpage.home.dao.SchoolDao;
-import com.santrong.plt.webpage.home.entry.SchoolQuery;
-import com.santrong.plt.webpage.home.entry.SchoolView;
+import com.santrong.plt.webpage.school.dao.SchoolDao;
+import com.santrong.plt.webpage.school.entry.SchoolQuery;
+import com.santrong.plt.webpage.school.entry.SchoolView;
 import com.santrong.plt.webpage.user.dao.UserDao;
 import com.santrong.plt.webpage.user.entry.UserItem;
 

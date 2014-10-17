@@ -19,6 +19,9 @@
 				<c:if test="${sessionScope.loginUser == null}">
 					<p><a href="${ctx }/login.action" ><fmt:message key="index_user_userlogin"/></a></p>
 				</c:if>
+				
+				<p><a href="${ctx }/study/course" >管理中心</a></p>
+				
 				<div class="component_search">
 					<input type="text" name="keywords" />
 					<input type="submit" />

@@ -15,10 +15,8 @@ public class CourseDetailView {
 	private String gradeId;
 	private String subjectId;
 	private int price;
-	private String preview;
 	private int collectCount;
 	private int saleCount;
-	private int playCount;
 	private Date cts;
 	private Date uts;
 	private String teacherName;
@@ -62,12 +60,6 @@ public class CourseDetailView {
 	public void setPrice(int price) {
 		this.price = price;
 	}
-	public String getPreview() {
-		return preview;
-	}
-	public void setPreview(String preview) {
-		this.preview = preview;
-	}
 	public int getCollectCount() {
 		return collectCount;
 	}
@@ -79,12 +71,6 @@ public class CourseDetailView {
 	}
 	public void setSaleCount(int saleCount) {
 		this.saleCount = saleCount;
-	}
-	public int getPlayCount() {
-		return playCount;
-	}
-	public void setPlayCount(int playCount) {
-		this.playCount = playCount;
 	}
 	public Date getCts() {
 		return cts;

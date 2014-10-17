@@ -16,22 +16,22 @@ import com.santrong.plt.webpage.course.entry.CourseView;
  */
 public interface CourseMapper {
 	
-	@Select("select a.id,a.courseName,a.price,a.saleCount,b.subjectName,d.showName from web_course_vod a "
-			+ "left join web_subject b on a.subjectId=b.id "
-			+ "left join web_grade c on a.gradeId=c.id "
-			+ "left join web_user d on a.ownerId=d.id "
-			+ "left join web_school e on d.schoolId=e.id "
+	@Select("select a.id,a.courseName,a.price,a.saleCount,b.subjectName,d.showName from course a "
+			+ "left join subject b on a.subjectId=b.id "
+			+ "left join grade c on a.gradeId=c.id "
+			+ "left join user d on a.ownerId=d.id "
+			+ "left join school e on d.schoolId=e.id "
 			+ "where c.gradeGroup=#{gradeGroup} and e.areaCode like #{areaCode} "
 			+ "order by a.cts limit 4")
 	List<CourseView> selectForIndexList(@Param("gradeGroup")int gradeGroup, @Param("areaCode")String areaCode);
 	
-	@Select("select a.*,b.subjectName,c.gradeName,c.levelName,d.showName as teacherName from web_course_vod a "
-			+ "left join web_subject b on a.subjectId=b.id "
-			+ "left join web_grade c on a.gradeId=c.id "
-			+ "left join web_user d on a.ownerId=d.id "
+	@Select("select a.*,b.subjectName,c.gradeName,c.levelName,d.showName as teacherName from course a "
+			+ "left join subject b on a.subjectId=b.id "
+			+ "left join grade c on a.gradeId=c.id "
+			+ "left join user d on a.ownerId=d.id "
 			+ "where a.id=#{id}")
 	CourseDetailView selectDetailById(String id);
 	
-	@Select("select * from web_course_vod limit 10")
+	@Select("select * from course_vod limit 10")
 	List<CourseItem> selectByQuery();
 }

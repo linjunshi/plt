@@ -12,7 +12,16 @@ public class UserItem {
 	private String showName;
 	private String username;
 	private String password;
+	private String url;
+	private int gender;
 	private int role;
+	private String schoolId;
+	private String subjectId;
+	private String registIp;
+	private Date registTime;
+	private String lastLoginIp;
+	private Date lastLoginTime;
+	private String remark;
 	private Date cts;
 	private Date uts;
 	
@@ -21,6 +30,61 @@ public class UserItem {
 	public final  static int Role_School = 4; // 100
 	public final  static int Role_Admin = 64; // 100000
 
+	
+	public String getUrl() {
+		return url;
+	}
+	public void setUrl(String url) {
+		this.url = url;
+	}
+	public int getGender() {
+		return gender;
+	}
+	public void setGender(int gender) {
+		this.gender = gender;
+	}
+	public String getSchoolId() {
+		return schoolId;
+	}
+	public void setSchoolId(String schoolId) {
+		this.schoolId = schoolId;
+	}
+	public String getSubjectId() {
+		return subjectId;
+	}
+	public void setSubjectId(String subjectId) {
+		this.subjectId = subjectId;
+	}
+	public String getRegistIp() {
+		return registIp;
+	}
+	public void setRegistIp(String registIp) {
+		this.registIp = registIp;
+	}
+	public Date getRegistTime() {
+		return registTime;
+	}
+	public void setRegistTime(Date registTime) {
+		this.registTime = registTime;
+	}
+	public String getLastLoginIp() {
+		return lastLoginIp;
+	}
+	public void setLastLoginIp(String lastLoginIp) {
+		this.lastLoginIp = lastLoginIp;
+	}
+	public Date getLastLoginTime() {
+		return lastLoginTime;
+	}
+	public void setLastLoginTime(Date lastLoginTime) {
+		this.lastLoginTime = lastLoginTime;
+	}
+	public String getRemark() {
+		return remark;
+	}
+	public void setRemark(String remark) {
+		this.remark = remark;
+	}
 	public Date getCts() {
 		return cts;
 	}

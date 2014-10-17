@@ -10,14 +10,15 @@ import java.util.Date;
 public class CourseItem {
 	private String id;
 	private String courseName;
+	private String teacher;
+	private int price;
+	private Date endTime;
 	private String ownerId;
 	private String gradeId;
 	private String subjectId;
-	private int price;
-	private String preview;
 	private int collectCount;
 	private int saleCount;
-	private int playCount;
+	private String remark;
 	private Date cts;
 	private Date uts;
 	
@@ -57,12 +58,6 @@ public class CourseItem {
 	public void setPrice(int price) {
 		this.price = price;
 	}
-	public String getPreview() {
-		return preview;
-	}
-	public void setPreview(String preview) {
-		this.preview = preview;
-	}
 	public int getCollectCount() {
 		return collectCount;
 	}
@@ -75,11 +70,23 @@ public class CourseItem {
 	public void setSaleCount(int saleCount) {
 		this.saleCount = saleCount;
 	}
-	public int getPlayCount() {
-		return playCount;
+	public String getTeacher() {
+		return teacher;
 	}
-	public void setPlayCount(int playCount) {
-		this.playCount = playCount;
+	public void setTeacher(String teacher) {
+		this.teacher = teacher;
+	}
+	public Date getEndTime() {
+		return endTime;
+	}
+	public void setEndTime(Date endTime) {
+		this.endTime = endTime;
+	}
+	public String getRemark() {
+		return remark;
+	}
+	public void setRemark(String remark) {
+		this.remark = remark;
 	}
 	public Date getCts() {
 		return cts;

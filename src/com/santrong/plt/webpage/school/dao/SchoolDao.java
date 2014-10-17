@@ -1,4 +1,4 @@
-package com.santrong.plt.webpage.home.dao;
+package com.santrong.plt.webpage.school.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -14,8 +14,8 @@ import com.santrong.plt.util.AreaUtils;
 import com.santrong.plt.util.BeanUtils;
 import com.santrong.plt.util.MyUtils;
 import com.santrong.plt.webpage.BaseDao;
-import com.santrong.plt.webpage.home.entry.SchoolItem;
-import com.santrong.plt.webpage.home.entry.SchoolQuery;
+import com.santrong.plt.webpage.school.entry.SchoolItem;
+import com.santrong.plt.webpage.school.entry.SchoolQuery;
 
 /**
  * @author weinianjie
@@ -28,7 +28,7 @@ public class SchoolDao extends BaseDao {
 		List<SchoolItem> list = new ArrayList<SchoolItem>();
 		
 		try{
-			Statement criteria = new Statement("web_school", "s");
+			Statement criteria = new Statement("school", "s");
 			// 关键词
 			if(!StringUtils.isNullOrEmpty(query.getKeywords())) {
 				criteria.where(or(
@@ -37,14 +37,14 @@ public class SchoolDao extends BaseDao {
 			}
 			// 类型包含
 			if(query.getSchoolGrade() > 0) {
-				criteria.where(eq("(s.schoolType & ?)", "?"));
+				criteria.where(eq("(s.schoolGrade & ?)", "?"));
 				criteria.setIntParam(query.getSchoolGrade());
 				criteria.setIntParam(query.getSchoolGrade());
 			}
 			// 类型绝对等
-			if(query.getSchoolType() > 0) {
-				criteria.where(eq("s.schoolType", "?"));
-				criteria.setIntParam(query.getSchoolType());
+			if(query.getSchoolAbsoluteGrade() > 0) {
+				criteria.where(eq("s.schoolGrade", "?"));
+				criteria.setIntParam(query.getSchoolAbsoluteGrade());
 			}
 			// 所属区域
 			if(MyUtils.isNotNull(query.getAreaCode())) {
