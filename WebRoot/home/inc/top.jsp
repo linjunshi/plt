@@ -12,7 +12,7 @@
 				<span class="city_info">${sessionScope.area.cityName}</span>
 				
 				<c:if test="${sessionScope.loginUser != null}">
-					<p>welcome(${sessionScope.loginUser.showName})---
+					<p>welcome(${sessionScope.loginUser.showName})------
 						<a href="javascript:void(0);" class="logout" ><fmt:message key="index_user_userlogout"/></a>
 					</p>
 				</c:if>
