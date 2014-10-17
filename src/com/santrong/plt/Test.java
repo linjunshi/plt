@@ -2,7 +2,7 @@ package com.santrong.plt;
 
 import com.google.gson.Gson;
 import com.santrong.plt.log.Log;
-import com.santrong.plt.opt.TaobaoAreaEntry;
+import com.santrong.plt.opt.area.TaobaoAreaEntry;
 import com.santrong.plt.system.Global;
 import com.santrong.plt.util.MyUtils;
 

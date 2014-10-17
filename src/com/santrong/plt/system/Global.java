@@ -9,8 +9,7 @@ public class Global {
 	 */
 	public static final String Default_Encoding = "UTF-8";
 	public static final String SessionKey_LoginUser = "loginUser";
-	public static final String SessionKey_AreaCode = "areaCode";
-	public static final String SessionKey_City = "city";
+	public static final String SessionKey_Area = "area";
     
 	
     /*

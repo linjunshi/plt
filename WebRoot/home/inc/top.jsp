@@ -9,7 +9,7 @@
 			</div>
 			
 			<div class="site_component">
-				<span class="city_info">${sessionScope.city}</span>
+				<span class="city_info">${sessionScope.area.cityName}</span>
 				
 				<c:if test="${sessionScope.loginUser != null}">
 					<p>welcome(${sessionScope.loginUser.showName})---

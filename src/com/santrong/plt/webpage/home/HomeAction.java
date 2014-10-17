@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.mysql.jdbc.StringUtils;
 import com.santrong.plt.log.Log;
+import com.santrong.plt.opt.area.AreaEntry;
 import com.santrong.plt.opt.grade.GradeDefine;
 import com.santrong.plt.opt.grade.GradeDefineEntry;
 import com.santrong.plt.system.Global;
@@ -36,12 +37,13 @@ public class HomeAction extends BaseAction{
 	
 	@RequestMapping("")
 	public String index(HttpServletRequest request, HttpServletResponse response){
-			String areaCode = (String)(request.getSession().getAttribute(Global.SessionKey_AreaCode));
+		AreaEntry area = (AreaEntry)(request.getSession().getAttribute(Global.SessionKey_Area));
+			
 			
 			// 推荐学校
 			SchoolDao schoolDao = new SchoolDao();
 			SchoolQuery schoolQuery = new SchoolQuery();
-			schoolQuery.setAreaCode(areaCode);
+			schoolQuery.setAreaCode(area.getCityCode());
 			List<SchoolView> schoolView = new ArrayList<SchoolView>();
 			for(GradeDefineEntry grade : GradeDefine.gradeList) {
 				SchoolView view = new SchoolView();
@@ -67,7 +69,7 @@ public class HomeAction extends BaseAction{
 			for(GradeDefineEntry entry : GradeDefine.gradeList) {
 				int gradeGroup = entry.getGradeGroup();
 				String prefix = entry.getGradeEnName();
-				List<CourseView> vodList = vodDao.selectForIndexList(gradeGroup, areaCode);
+				List<CourseView> vodList = vodDao.selectForIndexList(gradeGroup, area.getCityCode());
 				
 				request.setAttribute(prefix  + "_vodList", vodList);
 				request.setAttribute(prefix + "_subjectList", entry.getGradeSubjectList());
