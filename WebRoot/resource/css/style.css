@@ -85,9 +85,9 @@
 .manage_left_side .user_tip img {width:160px; height:160px;}
 .manage_left_side .manage_menu {line-height:26px; margin-left:60px;}
 .manage_left_side .manage_menu dt {font-weight:bold;}
+.manage_left_side .manage_menu dd {text-indent:20px;}
 
 /* ------xxxx------ */
-.maanage_right_major {width:810px; float:right; border:solid 1px red;}
-
+.maanage_right_major {width:810px; float:right; border:solid 1px red; line-height:26px;}
 
 .test_content {width:100%; height:640px;}

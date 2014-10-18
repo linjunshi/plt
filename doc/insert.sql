@@ -283,25 +283,27 @@ create table resource_file(
 	fileName varchar(128) not null comment '文件名称',
 	url varchar(255) comment '资源路径',
 	size bigint default 0 not null comment '资源大小',
+	duration int(10) default 0 not null comment '视频时长',
 	groupId varchar(32) comment '所属组ID',
 	ownerId varchar(32) not null comment '所有者ID',
+	remark varchar(1024) comment '备注',
 	cts datetime comment '创建时间',
 	uts datetime comment '修改时间',
 	primary key (id)
 ) engine=InnoDB default charset=utf8 collate=utf8_bin comment '点播文件表';
 
-insert into resource_file values('10000', '马克思主义0', '', 1024, '10000', '10000', now(), now());
-insert into resource_file values('10001', '马克思主义1', '', 1024, '10000', '10008', now(), now());
-insert into resource_file values('10002', '马克思主义2', '', 1024, '10000', '10009', now(), now());
-insert into resource_file values('10003', '马克思主义3', '', 1024, '10000', '10010', now(), now());
-insert into resource_file values('10004', '马克思主义4', '', 1024, '10000', '10010', now(), now());
-insert into resource_file values('10005', '马克思主义5', '', 1024, '10000', '10010', now(), now());
-insert into resource_file values('10006', '马克思主义6', '', 1024, '10000', '10000', now(), now());
-insert into resource_file values('10007', '马克思主义7', '', 1024, '10000', '10000', now(), now());
-insert into resource_file values('10008', '马克思主义8', '', 1024, '10000', '10000', now(), now());
-insert into resource_file values('10009', '马克思主义9', '', 1024, '10000', '10007', now(), now());
-insert into resource_file values('10010', '马克思主义10', '', 1024, '10000', '10007', now(), now());
-insert into resource_file values('10011', '马克思主义11', '', 1024, '10000', '10007', now(), now());
+insert into resource_file values('10000', '马克思主义0', '', 1024, 66, '10000', '10000', '', now(), now());
+insert into resource_file values('10001', '马克思主义1', '', 1024, 66, '10000', '10008', '', now(), now());
+insert into resource_file values('10002', '马克思主义2', '', 1024, 66, '10000', '10009', '', now(), now());
+insert into resource_file values('10003', '马克思主义3', '', 1024, 66, '10000', '10010', '', now(), now());
+insert into resource_file values('10004', '马克思主义4', '', 1024, 66, '10000', '10010', '', now(), now());
+insert into resource_file values('10005', '马克思主义5', '', 1024, 66, '10000', '10010', '', now(), now());
+insert into resource_file values('10006', '马克思主义6', '', 1024, 66, '10000', '10000', '', now(), now());
+insert into resource_file values('10007', '马克思主义7', '', 1024, 66, '10000', '10000', '', now(), now());
+insert into resource_file values('10008', '马克思主义8', '', 1024, 66, '10000', '10000', '', now(), now());
+insert into resource_file values('10009', '马克思主义9', '', 1024, 66, '10000', '10007', '', now(), now());
+insert into resource_file values('10010', '马克思主义10', '', 1024, 66, '10000', '10007', '', now(), now());
+insert into resource_file values('10011', '马克思主义11', '', 1024, 66, '10000', '10007', '', now(), now());
 
 --- 点播文件组表 ---
 drop table if exists resource_file_group;
@@ -353,10 +355,13 @@ create table resource_doc(
 	docType int(10) not null comment '资源类型',
 	groupId varchar(32) comment '所属组ID',
 	ownerId varchar(32) not null comment '所有者ID',
+	remark varchar(1024) comment '备注',
 	cts datetime comment '创建时间',
 	uts datetime comment '修改时间',
 	primary key (id)
 ) engine=InnoDB default charset=utf8 collate=utf8_bin comment '文档资源表';
+
+insert into resource_doc values('10000', '文档1', '', 1, '10000', '10000', '', now(), now());
 
 
 --- 文档资源组表 ---

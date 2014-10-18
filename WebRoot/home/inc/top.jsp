@@ -17,9 +17,10 @@
 					</p>
 				</c:if>
 				<c:if test="${sessionScope.loginUser == null}">
-					<p><a href="${ctx }/login.action" ><fmt:message key="index_user_userlogin"/></a></p>
+					<p><a href="${ctx }/login" ><fmt:message key="index_user_userlogin"/></a></p>
 				</c:if>
 				
+				<p><a href="${ctx }/regist" >注册</a></p>
 				<p><a href="${ctx }/study/course" >管理中心</a></p>
 				
 				<div class="component_search">

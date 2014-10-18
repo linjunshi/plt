@@ -13,9 +13,11 @@ import com.santrong.plt.webpage.user.entry.UserItem;
  * @Time 下午4:38:21
  */
 public abstract class BaseAction {
-	protected final String SUCCESS = "success";
-	protected final String FAIL = "fail";
-	protected final String ERROR_PARAM = "error_param";
+	protected final static String SUCCESS = "success";
+	protected final static String FAIL = "fail";
+	protected final static String ERROR_PARAM = "error_param";
+	
+	protected final static String Redirect = "redirect:";
 	
 	
 	public final UserItem currentUser() {
@@ -29,5 +31,13 @@ public abstract class BaseAction {
 	
 	public final HttpServletResponse getResponse() {
 		return ThreadUtils.currentHttpResponse();
+	}
+	
+	public final String getContext() {
+		return getRequest().getContextPath();
+	}
+	
+	public final String redirect(String url) {
+		return Redirect + getContext() + url;
 	}
 }

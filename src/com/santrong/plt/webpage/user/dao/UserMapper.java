@@ -2,6 +2,7 @@ package com.santrong.plt.webpage.user.dao;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
@@ -21,11 +22,18 @@ public interface UserMapper {
     @Select("select * from user where id=#{id}")
     UserItem selectById(String id);
     
+    @Select("select count(*) as cn from user where username=#{username}")
+    int existsByUserName(String username);
+    
+    @Insert("insert into user values(#{id}, #{showName}, #{username}, #{password}, #{url}, #{gender}, #{role}, #{schoolId}, #{subjectId}, #{registIp}, #{registTime}, #{lastLoginIp}, #{lastLoginTime}, #{remark}, #{cts}, #{uts})")
+    int insert(UserItem user);
+    
     @Update("update user set "
     		+ "showName=#{showName}, "
     		+ "username=#{username}, "
     		+ "password=#{password}, "
-    		+ "url=#{url}, gender=#{gender}, "
+    		+ "url=#{url}, "
+    		+ "gender=#{gender}, "
     		+ "role=#{role}, "
     		+ "schoolId=#{schoolId}, "
     		+ "subjectId=#{subjectId}, "

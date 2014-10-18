@@ -29,6 +29,21 @@ public class UserDao extends BaseDao{
 		return null;
 	}
 	
+	public boolean existsByUserName(String username) {
+		UserMapper mapper = this.getMapper(UserMapper.class);
+		if(mapper != null) {
+			return mapper.existsByUserName(username) > 0;
+		}
+		return false;
+	}	
+	
+	public int insert(UserItem user) {
+		UserMapper mapper = this.getMapper(UserMapper.class);
+		if(mapper != null) {
+			return mapper.insert(user);
+		}
+		return 0;
+	}
 	
 	public int update(UserItem user) {
 		UserMapper mapper = this.getMapper(UserMapper.class);
