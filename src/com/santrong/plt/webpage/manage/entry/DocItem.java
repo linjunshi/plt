@@ -8,26 +8,27 @@ import java.util.Date;
  * @time 上午10:33:12
  */
 public class DocItem {	  
-	   private String id;
-	   private String docName;
-	   private String url;
-	   private int docType;
-	   private String groupId;
-	   private String ownerId;
-	   private String remark;
-	   private Date cts;
-	   private Date uts;
+	private String id;
+	private String title;
+	private String url;
+	private int docType;
+	private String groupId;
+	private String ownerId;
+	private String remark;
+	private Date cts;
+	private Date uts;
+	   
+	public String getTitle() {
+		return title;
+	}
+	public void setTitle(String title) {
+		this.title = title;
+	}
 	public String getId() {
 		return id;
 	}
 	public void setId(String id) {
 		this.id = id;
-	}
-	public String getDocName() {
-		return docName;
-	}
-	public void setDocName(String docName) {
-		this.docName = docName;
 	}
 	public String getUrl() {
 		return url;

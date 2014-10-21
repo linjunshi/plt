@@ -72,6 +72,8 @@
 /* ------课程详细（课程详细）------ */
 .course_detail_info {width:850px; float:left; margin-top:10px; border:solid 1px red;}
 .course_detail_info .course_intro_menu li {width:96px; height:26px;}
+.course_detail_info .course_outline {line-height:26px;}
+.course_detail_info .course_outline dd {text-indent:20px;}
 
 /* ------课程条件搜索主体（课程列表）------ */
 .main_left_major {width:850px; float:left; margin-top:10px;}

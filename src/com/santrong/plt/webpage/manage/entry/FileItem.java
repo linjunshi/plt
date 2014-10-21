@@ -9,7 +9,7 @@ import java.util.Date;
  */
 public class FileItem {
 	private String id;
-	private String fileName;
+	private String title;
 	private String url;
 	private long size;
 	private int duration;
@@ -19,6 +19,12 @@ public class FileItem {
 	private Date cts;
 	private Date uts;
 	
+	public String getTitle() {
+		return title;
+	}
+	public void setTitle(String title) {
+		this.title = title;
+	}
 	public String getRemark() {
 		return remark;
 	}
@@ -36,12 +42,6 @@ public class FileItem {
 	}
 	public void setId(String id) {
 		this.id = id;
-	}
-	public String getFileName() {
-		return fileName;
-	}
-	public void setFileName(String fileName) {
-		this.fileName = fileName;
 	}
 	public String getUrl() {
 		return url;

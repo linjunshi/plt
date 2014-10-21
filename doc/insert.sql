@@ -222,6 +222,19 @@ create table course(
 	primary key (id)
 ) engine=InnoDB default charset=utf8 collate=utf8_bin comment '课程主表';
 
+insert into course values('10000', '马克思主义', '王老师', 10000, '2014-12-12', '10000', '10000', 'xxx', 1, 2, '10001', now(), now());
+insert into course values('10001', '相对论', '王老师', 10000, '2014-12-12', '10000', '10001', 'xxx', 1, 2, '10001', now(), now());
+insert into course values('10002', '微积分', '王老师', 10000, '2014-12-12', '10000', '10001', 'xxx', 1, 2, '10001', now(), now());
+insert into course values('10003', '高等数学', '王老师', 10000, '2014-12-12', '10000', '10001', 'xxx', 1, 2, '10001', now(), now());
+insert into course values('10004', '数字逻辑', '王老师', 10000, '2014-12-12', '10006', '10003', 'xxx', 1, 2, '10001', now(), now());
+insert into course values('10005', '线性代数', '王老师', 10000, '2014-12-12', '10006', '10003', 'xxx', 1, 2, '10001', now(), now());
+insert into course values('10006', '蛋白质', '王老师', 10000, '2014-12-12', '10006', '10003', 'xxx', 1, 2, '10001', now(), now());
+insert into course values('10007', '细胞核', '王老师', 10000, '2014-12-12', '10006', '10003', 'xxx', 1, 2, '10001', now(), now());
+insert into course values('10008', '世界历史', '王老师', 10000, '2014-12-12', '10009', '10003', 'xxx', 1, 2, '10001', now(), now());
+insert into course values('10009', '唯物主义', '王老师', 10000, '2014-12-12', '10009', '10004', 'xxx', 1, 2, '10001', now(), now());
+insert into course values('10010', '经济学入门', '王老师', 10000, '2014-12-12', '10009', '10004', 'xxx', 1, 2, '10001', now(), now());
+insert into course values('10011', '货币战争', '王老师', 10000, '2014-12-12', '10009', '10004', 'xxx', 1, 2, '10001', now(), now());
+
 --- 订单表 ---
 drop table if exists web_order;
 create table web_order(
@@ -239,10 +252,15 @@ create table course_comment(
 	id varchar(32) not null comment 'UUID',
 	userId varchar(32) not null comment '用户ID',
 	courseId varchar(32) not null comment '课程ID',
+	remark varchar(1024) not null comment '评论内容',
 	cts datetime comment '创建时间',
 	uts datetime comment '修改时间',	
 	primary key (id)
 ) engine=InnoDB default charset=utf8 collate=utf8_bin comment '课程评论表';
+
+insert into course_comment values('10000', '10000', '10000', '课程还可以', now(), now());
+insert into course_comment values('10001', '10001', '10000', '非常喜欢', now(), now());
+insert into course_comment values('10002', '10002', '10000', '还行', now(), now());
 
 --- 课程收藏表 ---
 drop table if exists course_collection;
@@ -265,10 +283,16 @@ create table course_chapter(
 	primary key (id)
 ) engine=InnoDB default charset=utf8 collate=utf8_bin comment '章节表';
 
+insert into course_chapter values('10000', '10000', 'remark1', 0, now(), now());
+insert into course_chapter values('10001', '10000', 'remark2', 1, now(), now());
+insert into course_chapter values('10002', '10000', 'remark3', 2, now(), now());
+insert into course_chapter values('10003', '10000', 'remark4', 3, now(), now());
+
 --- 章节关联资源表 ---
 drop table if exists course_chapter_to_resource;
 create table course_chapter_to_resource(
 	id varchar(32) not null comment 'UUID',
+	title varchar(1024) not null comment '标题',
 	chapterId varchar(32) not null comment '章节ID',
 	resourceId varchar(32) not null comment '资源ID',
 	resourceType int(10) not null comment '资源类型',
@@ -276,11 +300,16 @@ create table course_chapter_to_resource(
 	primary key (id)
 ) engine=InnoDB default charset=utf8 collate=utf8_bin comment '章节关联资源表';
 
+insert into course_chapter_to_resource values('10000', '马克思主义0', '10000', '10000', 1, 1);
+insert into course_chapter_to_resource values('10001', '张老师直播1', '10000', '10000', 2, 2);
+insert into course_chapter_to_resource values('10002', '文档1', '10000', '10000', 3, 3);
+insert into course_chapter_to_resource values('10003', '测验1', '10000', '10000', 4, 4);
+
 --- 点播文件表 ---
 drop table if exists resource_file;
 create table resource_file(
 	id varchar(32) not null comment 'UUID',
-	fileName varchar(128) not null comment '文件名称',
+	title varchar(128) not null comment '文件名称',
 	url varchar(255) comment '资源路径',
 	size bigint default 0 not null comment '资源大小',
 	duration int(10) default 0 not null comment '视频时长',
@@ -321,7 +350,7 @@ create table resource_file_group(
 drop table if exists resource_live;
 create table resource_live(
 	id varchar(32) not null comment 'UUID',
-	liveName varchar(128) not null comment '直播名称',
+	title varchar(128) not null comment '直播名称',
 	url varchar(255) comment '资源路径',
 	beginTime datetime comment '开始时间',
 	endTime datetime comment '结束时间',
@@ -332,6 +361,8 @@ create table resource_live(
 	uts datetime comment '修改时间',
 	primary key (id)
 ) engine=InnoDB default charset=utf8 collate=utf8_bin comment '直播资源表';
+
+insert into resource_live values('10000', '张老师直播1', null, '2014-12-12 13:00', '2014-12-12 15:00', 7200, null, '10000', now(), now());
 
 
 --- 直播资源组表 ---
@@ -350,7 +381,7 @@ create table resource_live_group(
 drop table if exists resource_doc;
 create table resource_doc(
 	id varchar(32) not null comment 'UUID',
-	docName varchar(128) not null comment '文档名',
+	title varchar(128) not null comment '文档名',
 	url varchar(255) not null comment '资源路径',
 	docType int(10) not null comment '资源类型',
 	groupId varchar(32) comment '所属组ID',
@@ -380,12 +411,13 @@ create table resource_doc_group(
 drop table if exists resource_train;
 create table resource_train(
 	id varchar(32) not null comment 'UUID',
-	trainName varchar(128) not null comment '测验名',
+	title varchar(128) not null comment '测验名',
 	cts datetime comment '创建时间',
 	uts datetime comment '修改时间',	
 	primary key (id)
 ) engine=InnoDB default charset=utf8 collate=utf8_bin comment '测验表';
 
+insert into resource_train values('10000', '模拟测验1', now(), now());
 
 --- 测验记录表 ---
 drop table if exists resource_train_history;

@@ -1,6 +1,7 @@
 package com.santrong.plt.webpage.course.entry;
 
 import java.util.Date;
+import java.util.List;
 
 
 /**
@@ -11,19 +12,41 @@ import java.util.Date;
 public class CourseDetailView {
 	private String id;
 	private String courseName;
+	private String teacher;
 	private String ownerId;
 	private String gradeId;
 	private String subjectId;
 	private int price;
 	private int collectCount;
 	private int saleCount;
+	private String remark;
 	private Date cts;
 	private Date uts;
-	private String teacherName;
 	private String subjectName;
 	private String gradeName;
 	private String levelName;
 	
+	private List<ChapterDetailView> chapterDetailList;
+	private List<CommentItem> commentList;
+	
+	public String getRemark() {
+		return remark;
+	}
+	public void setRemark(String remark) {
+		this.remark = remark;
+	}
+	public List<ChapterDetailView> getChapterDetailList() {
+		return chapterDetailList;
+	}
+	public void setChapterDetailList(List<ChapterDetailView> chapterDetailList) {
+		this.chapterDetailList = chapterDetailList;
+	}
+	public List<CommentItem> getCommentList() {
+		return commentList;
+	}
+	public void setCommentList(List<CommentItem> commentList) {
+		this.commentList = commentList;
+	}
 	public String getId() {
 		return id;
 	}
@@ -84,11 +107,11 @@ public class CourseDetailView {
 	public void setUts(Date uts) {
 		this.uts = uts;
 	}
-	public String getTeacherName() {
-		return teacherName;
+	public String getTeacher() {
+		return teacher;
 	}
-	public void setTeacherName(String teacherName) {
-		this.teacherName = teacherName;
+	public void setTeacher(String teacher) {
+		this.teacher = teacher;
 	}
 	public String getSubjectName() {
 		return subjectName;

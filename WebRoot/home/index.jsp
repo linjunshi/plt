@@ -64,6 +64,7 @@ Globals.page = "Index_index";
 			</div>
 			
 			<div class="course_group_block"></div>
+			
 			<div class="course_group_block">
 				<c:forEach items="${gaozhong_vodList}" var="item">
 					<div class="course_index_wrap">

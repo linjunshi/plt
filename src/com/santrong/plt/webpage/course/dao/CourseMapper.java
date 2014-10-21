@@ -25,13 +25,13 @@ public interface CourseMapper {
 			+ "order by a.cts limit 4")
 	List<CourseView> selectForIndexList(@Param("gradeGroup")int gradeGroup, @Param("areaCode")String areaCode);
 	
-	@Select("select a.*,b.subjectName,c.gradeName,c.levelName,d.showName as teacherName from course a "
+	@Select("select a.*,b.subjectName,c.gradeName,c.levelName from course a "
 			+ "left join subject b on a.subjectId=b.id "
 			+ "left join grade c on a.gradeId=c.id "
 			+ "left join user d on a.ownerId=d.id "
 			+ "where a.id=#{id}")
 	CourseDetailView selectDetailById(String id);
 	
-	@Select("select * from course_vod limit 10")
+	@Select("select * from course limit 10")
 	List<CourseItem> selectByQuery();
 }

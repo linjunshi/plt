@@ -23,7 +23,7 @@ Globals.page = "Index_course";
 			
 			<div class="course_text_info">
 				<p>title:${course.courseName}</p>
-				<p>teacher:${course.teacherName}</p>
+				<p>teacher:${course.teacher}</p>
 				<p>price:${course.price}</p>
 				<p><input type="button" value="buy" /></p>
 			</div>
@@ -41,22 +41,37 @@ Globals.page = "Index_course";
 					<li>评价</li>
 				</ul>
 				<div class="course_summary course_intro_detail">
-					<div style="height:400px">111</div>
+					<div style="height:400px">${course.remark}</div>
 				</div>
 				<div class="course_outline course_intro_detail hide">
-					<div style="height:400px">222</div>
+					<div>
+						<dl>
+						<c:forEach items="${course.chapterDetailList}" var="chapter" varStatus="st">
+							<dt>第${st.index+1}节：${chapter.remark}</dt>
+							<c:forEach items="${chapter.resourceList}" var="resource">
+								<dd>${resource.title}---type:${resource.type}</dd>
+							</c:forEach>
+						</c:forEach>
+						</dl>
+					</div>
 				</div>
 				<div class="course_comment course_intro_detail hide">
-					<div style="height:400px">333</div>
+					<div>
+						<ul>
+						<c:forEach items="${course.commentList}" var="comment" varStatus="st">
+							<li>${comment.showName}：${comment.remark}</li>
+						</c:forEach>
+						</ul>
+					</div>
 				</div>
 			</div>
 			
-			<div class="course_similar_other">
+			<div class="course_similar_other side_interest">
 				<h3>相似的课程</h3>
 				<p>.....</p>
 			</div>
 			
-			<div class="course_owner_other">
+			<div class="course_owner_other side_interest">
 				<h3>该老师其他课程</h3>
 				<p>.....</p>
 			</div>

@@ -1,6 +1,11 @@
 package com.santrong.plt.webpage.course;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -9,9 +14,15 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.santrong.plt.webpage.BaseAction;
+import com.santrong.plt.webpage.course.dao.ChapterDao;
+import com.santrong.plt.webpage.course.dao.CommentDao;
 import com.santrong.plt.webpage.course.dao.CourseDao;
+import com.santrong.plt.webpage.course.entry.ChapterAndResourceEntry;
+import com.santrong.plt.webpage.course.entry.ChapterDetailView;
+import com.santrong.plt.webpage.course.entry.CommentItem;
 import com.santrong.plt.webpage.course.entry.CourseDetailView;
 import com.santrong.plt.webpage.course.entry.CourseItem;
+import com.santrong.plt.webpage.course.entry.ResourceEntry;
 import com.santrong.plt.webpage.user.dao.UserDao;
 import com.santrong.plt.webpage.user.entry.UserItem;
 
@@ -75,12 +86,46 @@ public class CourseAction extends BaseAction {
 		if(course == null) {
 			return "404";
 		}
+
+		// 课程章节
+		ChapterDao chapterDao = new ChapterDao();
+		List<ChapterAndResourceEntry> resourceList = chapterDao.selectByCourseId(course.getId());
+		
+		Map<String, ChapterDetailView> chapterMap = new LinkedHashMap<String, ChapterDetailView>();
+		for(ChapterAndResourceEntry cr : resourceList) {
+			ChapterDetailView cdv = chapterMap.get(cr.getId());
+			if(cdv == null) {
+				cdv = new ChapterDetailView();
+				cdv.setRemark(cr.getRemark());
+			}
+			if(cdv.getResourceList() == null) {
+				cdv.setResourceList(new ArrayList<ResourceEntry>());
+			}
+			if(cr.getResourceType() > 0) {
+				ResourceEntry resource = new ResourceEntry();
+				resource.setTitle(cr.getTitle());
+				resource.setId(cr.getResourceId());
+				resource.setType(cr.getResourceType());
+				cdv.getResourceList().add(resource);
+			}
+			chapterMap.put(cr.getId(), cdv);
+		}
+		
+		List<ChapterDetailView> chapterList = new ArrayList<ChapterDetailView>();
+		for(Iterator<Map.Entry<String, ChapterDetailView>> it = chapterMap.entrySet().iterator();it.hasNext();){
+            Entry<String, ChapterDetailView> entry = (Entry<String, ChapterDetailView>)it.next();
+            chapterList.add(entry.getValue());
+        }  
+		course.setChapterDetailList(chapterList);
+		
+		// 课程评价
+		CommentDao commentDao = new CommentDao();
+		List<CommentItem> commentList = commentDao.selectByCourseId(course.getId());
+		course.setCommentList(commentList);
 		
 		// 课程老师
 		UserDao userDao = new UserDao();
 		UserItem teacher = userDao.selectById(course.getOwnerId());
-		
-		// 相关课程
 		
 		// 老师名下其他课程
 		

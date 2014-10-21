@@ -43,7 +43,7 @@ Globals.page = "Index_index";
 				<div class="course_list">
 					<c:forEach items="${courseList}" var="course">
 						<div class="course_group_block">
-							<img src="${ctx}/resource/photo/df_course.jpg">
+							<a href="${ctx}/course/${course.id}.html" target="_blank"><img src="${ctx}/resource/photo/df_course.jpg"></a>
 							<p>${course.courseName}</p>
 							<p>${course.price}</p>
 						</div>
