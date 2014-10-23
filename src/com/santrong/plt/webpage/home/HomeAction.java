@@ -60,13 +60,13 @@ public class HomeAction extends BaseAction{
 			// 直播课程
 			
 			// 点播课程
-			CourseDao vodDao = new CourseDao();
+			CourseDao courseDao = new CourseDao();
 			for(GradeDefineEntry entry : GradeDefine.gradeList) {
 				int gradeGroup = entry.getGradeGroup();
 				String prefix = entry.getGradeEnName();
-				List<CourseView> vodList = vodDao.selectForIndexList(gradeGroup, area.getCityCode());
+				List<CourseView> courseList = courseDao.selectForIndexList(gradeGroup, area.getCityCode());
 				
-				request.setAttribute(prefix  + "_vodList", vodList);
+				request.setAttribute(prefix  + "_courseList", courseList);
 				request.setAttribute(prefix + "_subjectList", entry.getGradeSubjectList());
 			}
 

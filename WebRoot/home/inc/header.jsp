@@ -6,13 +6,9 @@
 <title>${title}</title>
 <meta name="keywords" content="${keywords}" />
 <meta name="description" content="${description}" />
-<link rel="stylesheet" type="text/css" href="${ctx}/resource/css/reset.css" />
-<link rel="stylesheet" type="text/css" href="${ctx}/resource/css/boxy.css" />
-<link rel="stylesheet" type="text/css" href="${ctx}/resource/css/style.css" />
+<link rel="stylesheet" type="text/css" href="${ctx}/resource/css/test.css" />
+<link rel="stylesheet" type="text/css" href="${ctx}/resource/css/index.css" />
+<link rel="stylesheet" type="text/css" href="${ctx}/resource/css/cssImg.css" />
 <script type="text/javascript" src="${ctx}/resource/js/lang/message.${lang}.js"></script>
-<script type="text/javascript" src="${ctx}/resource/js/jquery.min.js"></script>
-<script type="text/javascript" src="${ctx}/resource/js/jquery.cookie.js"></script>
-<script type="text/javascript" src="${ctx}/resource/js/jquery.pagination.js"></script>
-<script type="text/javascript" src="${ctx}/resource/js/jquery.form.js"></script>
-<script type="text/javascript" src="${ctx}/resource/js/jquery.boxy.js"></script>
-<script type="text/javascript" src="${ctx}/resource/js/event.js"></script>
+<script type="text/javascript" src="${ctx}/resource/js/yu.js"></script>
+<script type="text/javascript" src="${ctx}/resource/js/tb.js"></script>

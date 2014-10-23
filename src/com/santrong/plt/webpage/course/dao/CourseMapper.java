@@ -22,7 +22,7 @@ public interface CourseMapper {
 			+ "left join user d on a.ownerId=d.id "
 			+ "left join school e on d.schoolId=e.id "
 			+ "where c.gradeGroup=#{gradeGroup} and e.areaCode like #{areaCode} "
-			+ "order by a.cts limit 4")
+			+ "order by a.cts limit 5")
 	List<CourseView> selectForIndexList(@Param("gradeGroup")int gradeGroup, @Param("areaCode")String areaCode);
 	
 	@Select("select a.*,b.subjectName,c.gradeName,c.levelName from course a "

@@ -2,7 +2,7 @@
 create database plt;
 use plt;
 
---- 用户表 ---
+-- 用户表 --
 drop table if exists user;
 create table user(
 	id varchar(32) not null comment 'UUID',
@@ -32,8 +32,17 @@ insert into user values('10004', 'teacher4', 'teacher4', md5('admin'), '', 2, 3,
 insert into user values('10005', 'teacher5', 'teacher5', md5('admin'), '', 2, 3, 10000, 10000, null, null, null, null, null, now(), now());
 insert into user values('10006', 'student1', 'student1', md5('admin'), '', 2, 1, 10000, 10000, null, null, null, null, null, now(), now());
 insert into user values('10007', 'student2', 'student2', md5('admin'), '', 0, 1, 10000, 10000, null, null, null, null, null, now(), now());
+insert into user values('10008', 'teacher6', 'teacher6', md5('admin'), '', 0, 3, 10000, 10000, null, null, null, null, null, now(), now());
+insert into user values('10009', 'teacher7', 'teacher7', md5('admin'), '', 0, 3, 10000, 10000, null, null, null, null, null, now(), now());
+insert into user values('10010', 'teacher8', 'teacher8', md5('admin'), '', 0, 3, 10000, 10000, null, null, null, null, null, now(), now());
+insert into user values('10011', 'teacher9', 'teacher9', md5('admin'), '', 0, 3, 10000, 10000, null, null, null, null, null, now(), now());
+insert into user values('10012', 'teacher10', 'teacher10', md5('admin'), '', 0, 3, 10000, 10000, null, null, null, null, null, now(), now());
+insert into user values('10013', 'teacher11', 'teacher11', md5('admin'), '', 0, 3, 10000, 10000, null, null, null, null, null, now(), now());
+insert into user values('10014', 'teacher12', 'teacher12', md5('admin'), '', 0, 3, 10000, 10000, null, null, null, null, null, now(), now());
+insert into user values('10015', 'teacher13', 'teacher13', md5('admin'), '', 0, 3, 10000, 10000, null, null, null, null, null, now(), now());
+insert into user values('10016', 'teacher14', 'teacher14', md5('admin'), '', 0, 3, 10000, 10000, null, null, null, null, null, now(), now());
 
---- 用户教育信息 ---
+-- 用户教育信息 --
 create table user_education(
 	userId varchar(32) not null comment '用户ID',
 	education int(10) default 0 not null comment '学历',
@@ -42,7 +51,7 @@ create table user_education(
 	primary key (userId)
 ) engine=InnoDB default charset=utf8 collate=utf8_bin comment '用户教育信息表';
 
---- 用户扩展信息 ---
+-- 用户扩展信息 --
 create table user_extends(
 	userId varchar(32) not null comment '用户ID',
 	birthday date comment '出生日期',
@@ -50,7 +59,7 @@ create table user_extends(
 	primary key (userId)
 ) engine=InnoDB default charset=utf8 collate=utf8_bin comment '用户扩展信息表';
 
---- 年级表 ---
+-- 年级表 --
 drop table if exists grade;
 create table grade(
 	id varchar(32) not null comment 'UUID',
@@ -76,7 +85,7 @@ insert into grade values('10009', '高中', '一年级', 4, 'gaozhong', 'level1'
 insert into grade values('10010', '高中', '二年级', 4, 'gaozhong', 'level2', 10);
 insert into grade values('10011', '高中', '三年级', 4, 'gaozhong', 'level3', 11);
 
---- 科目表 ---
+-- 科目表 --
 drop table if exists subject;
 create table subject(
 	id varchar(32) not null comment 'UUID',
@@ -95,7 +104,7 @@ insert into subject values('10005', '生物', 'shengwu', 5);
 insert into subject values('10006', '地理', 'dili', 6);
 insert into subject values('10007', '政治', 'zhengzhi', 7);
 
---- 年级-科目表 ---
+-- 年级-科目表 --
 drop table if exists grade_to_subject;
 create table grade_to_subject(
 	gradeId varchar(32) comment '年级ID',
@@ -158,7 +167,7 @@ insert into grade_to_subject values('10011', '10005');
 insert into grade_to_subject values('10011', '10006');
 insert into grade_to_subject values('10011', '10007');
 
---- 学校表 ---
+-- 学校表 --
 drop table if exists school;
 create table school(
 	id varchar(32) not null comment 'UUID',
@@ -182,7 +191,7 @@ insert into school values('10011', '高级1中', null, '440300', 4);
 insert into school values('10012', '高级2中', null, '440300', 4);
 insert into school values('10013', '高级3中', null, '440300', 4);
 
---- 行政区划表 ---
+-- 行政区划表 --
 drop table if exists web_area;
 create table web_area(
 	id varchar(32) not null comment 'UUID',
@@ -191,7 +200,7 @@ create table web_area(
 	primary key (id)
 ) engine=InnoDB default charset=utf8 collate=utf8_bin comment '行政区划表';
 
---- 一体机表 ---
+-- 一体机表 --
 drop table if exists machine;
 create table machine(
 	id varchar(32) not null comment 'UUID',
@@ -203,7 +212,7 @@ create table machine(
 	primary key (id)
 ) engine=InnoDB default charset=utf8 collate=utf8_bin comment '一体机表';
 
---- 课程主表 ---
+-- 课程主表 --
 drop table if exists course;
 create table course(
 	id varchar(32) not null comment 'UUID',
@@ -234,8 +243,11 @@ insert into course values('10008', '世界历史', '王老师', 10000, '2014-12-
 insert into course values('10009', '唯物主义', '王老师', 10000, '2014-12-12', '10009', '10004', 'xxx', 1, 2, '10001', now(), now());
 insert into course values('10010', '经济学入门', '王老师', 10000, '2014-12-12', '10009', '10004', 'xxx', 1, 2, '10001', now(), now());
 insert into course values('10011', '货币战争', '王老师', 10000, '2014-12-12', '10009', '10004', 'xxx', 1, 2, '10001', now(), now());
+insert into course values('10012', '论持久战', '王老师', 10000, '2014-12-12', '10000', '10004', 'xxx', 1, 2, '10001', now(), now());
+insert into course values('10013', '大头儿子小头爸爸', '王老师', 10000, '2014-12-12', '10006', '10004', 'xxx', 1, 2, '10001', now(), now());
+insert into course values('10014', '西游记', '王老师', 10000, '2014-12-12', '10009', '10004', 'xxx', 1, 2, '10001', now(), now());
 
---- 订单表 ---
+-- 订单表 --
 drop table if exists web_order;
 create table web_order(
 	id varchar(32) not null comment 'UUID',
@@ -246,7 +258,7 @@ create table web_order(
 	primary key (id)
 ) engine=InnoDB default charset=utf8 collate=utf8_bin comment '订单表';
 
---- 课程评论表 ---
+-- 课程评论表 --
 drop table if exists course_comment;
 create table course_comment(
 	id varchar(32) not null comment 'UUID',
@@ -262,7 +274,7 @@ insert into course_comment values('10000', '10000', '10000', '课程还可以', 
 insert into course_comment values('10001', '10001', '10000', '非常喜欢', now(), now());
 insert into course_comment values('10002', '10002', '10000', '还行', now(), now());
 
---- 课程收藏表 ---
+-- 课程收藏表 --
 drop table if exists course_collection;
 create table course_collection(
 	userId varchar(32) not null comment '用户ID',
@@ -271,7 +283,7 @@ create table course_collection(
 	primary key (userId, courseId)
 ) engine=InnoDB default charset=utf8 collate=utf8_bin comment '课程收藏表';
 
---- 章节表 ---
+-- 章节表 --
 drop table if exists course_chapter;
 create table course_chapter(
 	id varchar(32) not null comment 'UUID',
@@ -288,7 +300,7 @@ insert into course_chapter values('10001', '10000', 'remark2', 1, now(), now());
 insert into course_chapter values('10002', '10000', 'remark3', 2, now(), now());
 insert into course_chapter values('10003', '10000', 'remark4', 3, now(), now());
 
---- 章节关联资源表 ---
+-- 章节关联资源表 --
 drop table if exists course_chapter_to_resource;
 create table course_chapter_to_resource(
 	id varchar(32) not null comment 'UUID',
@@ -305,7 +317,7 @@ insert into course_chapter_to_resource values('10001', '张老师直播1', '1000
 insert into course_chapter_to_resource values('10002', '文档1', '10000', '10000', 3, 3);
 insert into course_chapter_to_resource values('10003', '测验1', '10000', '10000', 4, 4);
 
---- 点播文件表 ---
+-- 点播文件表 --
 drop table if exists resource_file;
 create table resource_file(
 	id varchar(32) not null comment 'UUID',
@@ -334,7 +346,7 @@ insert into resource_file values('10009', '马克思主义9', '', 1024, 66, '100
 insert into resource_file values('10010', '马克思主义10', '', 1024, 66, '10000', '10007', '', now(), now());
 insert into resource_file values('10011', '马克思主义11', '', 1024, 66, '10000', '10007', '', now(), now());
 
---- 点播文件组表 ---
+-- 点播文件组表 --
 drop table if exists resource_file_group;
 create table resource_file_group(
 	id varchar(32) not null comment 'UUID',
@@ -346,7 +358,7 @@ create table resource_file_group(
 ) engine=InnoDB default charset=utf8 collate=utf8_bin comment '点播文件组表';
 
 
---- 直播资源表 ---
+-- 直播资源表 --
 drop table if exists resource_live;
 create table resource_live(
 	id varchar(32) not null comment 'UUID',
@@ -365,7 +377,7 @@ create table resource_live(
 insert into resource_live values('10000', '张老师直播1', null, '2014-12-12 13:00', '2014-12-12 15:00', 7200, null, '10000', now(), now());
 
 
---- 直播资源组表 ---
+-- 直播资源组表 --
 drop table if exists resource_live_group;
 create table resource_live_group(
 	id varchar(32) not null comment 'UUID',
@@ -377,7 +389,7 @@ create table resource_live_group(
 ) engine=InnoDB default charset=utf8 collate=utf8_bin comment '直播资源组表';
 
 
---- 文档资源表 ---
+-- 文档资源表 --
 drop table if exists resource_doc;
 create table resource_doc(
 	id varchar(32) not null comment 'UUID',
@@ -395,7 +407,7 @@ create table resource_doc(
 insert into resource_doc values('10000', '文档1', '', 1, '10000', '10000', '', now(), now());
 
 
---- 文档资源组表 ---
+-- 文档资源组表 --
 drop table if exists resource_doc_group;
 create table resource_doc_group(
 	id varchar(32) not null comment 'UUID',
@@ -407,7 +419,7 @@ create table resource_doc_group(
 ) engine=InnoDB default charset=utf8 collate=utf8_bin comment '文档资源组表';
 
 
---- 测验表 ---
+-- 测验表 --
 drop table if exists resource_train;
 create table resource_train(
 	id varchar(32) not null comment 'UUID',
@@ -419,7 +431,7 @@ create table resource_train(
 
 insert into resource_train values('10000', '模拟测验1', now(), now());
 
---- 测验记录表 ---
+-- 测验记录表 --
 drop table if exists resource_train_history;
 create table resource_train_history(
 	id varchar(32) not null comment 'UUID',
@@ -432,7 +444,7 @@ create table resource_train_history(
 	primary key (id)
 ) engine=InnoDB default charset=utf8 collate=utf8_bin comment '测验记录表';
 
---- 习题表 ---
+-- 习题表 --
 drop table if exists resource_train_question;
 create table resource_train_question(
 	id varchar(32) not null comment 'UUID',
@@ -447,7 +459,7 @@ create table resource_train_question(
 	primary key (id)
 ) engine=InnoDB default charset=utf8 collate=utf8_bin comment '习题表';
 
---- 测验-习题关联表 ---
+-- 测验-习题关联表 --
 drop table if exists resource_train_to_question;
 create table resource_train_to_question(
 	trainId varchar(32) not null comment '测验ID',
@@ -455,7 +467,7 @@ create table resource_train_to_question(
 	primary key (trainId, questionId)
 ) engine=InnoDB default charset=utf8 collate=utf8_bin comment '测验-习题关联表';
 
------ 表 ---
+--- 表 --
 --drop table if exists course;
 --create table course(
 --	id varchar(32) not null comment 'UUID',

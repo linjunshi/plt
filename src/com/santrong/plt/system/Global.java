@@ -2,6 +2,7 @@ package com.santrong.plt.system;
 
 
 
+
 public class Global {
 	
 	/*

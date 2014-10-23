@@ -12,93 +12,176 @@ Globals.page = "Index_index";
 </script>
 </head>
 <body>
-	<div class="wrap">
 
-		<%@ include file="inc/top.jsp"%>
-		
-		<div class="main">
-			<div class="main_top">
-			
-				<div class="category_block">
-					<ul class="category_grade">
-						<c:forEach items="${applicationScope.gradeList}" var="grade">
-							<li>
-								<a href="${ctx}/course/${grade.gradeEnName}">${grade.gradeName}</a>
-								<div class="category_subject hide">
-								<c:forEach items="${grade.gradeSubjectList}" var="subject">
-									<a href="${ctx}/course/${grade.gradeEnName}/${subject.subjectEnName}">${subject.subjectName}</a>
-								</c:forEach>
-								</div>
-							</li>
+	<%@ include file="inc/top.jsp"%>
+	
+	<div id="container_box">
+	    <div id="main">
+	        <div class="column_left_a">
+	            <div id="hoverpage">
+	                <ul id="outer">
+	                	<c:forEach items="${applicationScope.gradeList}" var="grade" varStatus="st">
+	                    <li class="page p${st.index+1}">
+	                    	<a href="${ctx}/course/${grade.gradeEnName}" class="<c:if test="${st.index != 0}">menuitem</c:if>"><i class="<c:if test="${st.index == 0}">label_bg</c:if>">${grade.gradeName}</i></a>
+	                        <div> <em></em>
+	                            <ul>
+	                            	<c:forEach items="${grade.gradeSubjectList}" var="subject">
+	                            	<li><a href="${ctx}/course/${grade.gradeEnName}/${subject.subjectEnName}">${subject.subjectName}</a></li>
+	                            	</c:forEach>
+	                            </ul>
+	                        </div>
+	                    </li>
+	                    </c:forEach>
+	                </ul>
+	            </div>
+	        </div>
+	        <div class="column_left_b">
+	            <div id="MainPromotionBanner">
+	                <div id="SlidePlayer">
+	                    <ul class="Slides">
+	                        <li><a target="_blank" href="#"><img src="${ctx}/resource/images/01.jpg" width="728" height="300"></a></li>
+	                        <li><a target="_blank" href="#"><img src="${ctx}/resource/images/02.jpg" width="728" height="300"></a></li>
+	                        <li><a target="_blank" href="#"><img src="${ctx}/resource/images/03.jpg" width="728" height="300"></a></li>
+	                        <li><a target="_blank" href="#"><img src="${ctx}/resource/images/04.jpg" width="728" height="300"></a></li>
+	                        <li><a target="_blank" href="#"><img src="${ctx}/resource/images/05.jpg" width="728" height="300"></a></li>
+	                    </ul>
+	                </div>
+	                <script type="text/javascript">
+				TB.widget.SimpleSlide.decoration('SlidePlayer', {eventType:'mouse', effect:'scroll'});
+	</script> 
+	            </div>
+	        </div>
+	        <div class="column_left_bottom">
+	            <div class="column_left_header clearfix"> <a href="#" class="column_left_title">推荐老师</a>
+	                <ul class="column_left_nav">
+	                	<c:forEach items="${gaozhong_subjectList}" var="subject">
+	                	<li><a href="#">${subject.subjectName}</a></li>
+	                	</c:forEach>
+	                </ul>
+	                <a href="#" class="column_left_more">[换一换]</a> </div>
+	            <div class="column_img_item">
+	                <ul>
+						<c:forEach items="${teacherList}" var="item" varStatus="st">
+						<li class="<c:if test="${(st.index + 1) % 9 == 0}">img_list_margin</c:if>"><a href="${ctx}/teacher/${item.id}.html" target="_blank"><img src="${ctx}/resource/images/005.jpg" /></a><span>${item.showName}</span><span>XXX</span></li>
 						</c:forEach>
-					</ul>
-				</div>
-				
-				<div class="subject_flash"><img src="${ctx}/resource/photo/flash1.jpg" /></div>
-				
-				<div class="school_recommend">
-					<c:forEach items="${schoolView}" var="grade">
-						<div>
-							<div class="school_grade">
-								<a href="${ctx}/school/${grade.gradeEnName}" target="_blank">${grade.gradeName}</a>
-							</div>
-							<ul>
-							<c:forEach items="${grade.schoolList}" var="school">
-								<li><a href="${ctx}/school/${school.id}.html" target="_blank">${school.schoolName}</a></li>
-							</c:forEach>
-							</ul>
-						</div>
+	                </ul>
+	            </div>
+	        </div>
+	        <div class="column_right_school">
+	            <div class="column_school">
+	                <div class="column_school_header">
+	                    <h2 class="column_school_title">附近学校</h2>
+	                    <a href="#" class="school_box_more">更多</a> </div>
+	                <ul class="school_nav">
+	                	<c:forEach items="${schoolView}" var="grade">
+	                	<li><a href="${ctx}/school/${grade.gradeEnName}" target="_blank">${grade.gradeName}</a></li>
+	                	</c:forEach>
+	                </ul>
+	            </div>
+	            <div class="school_img_item">
+	            	<c:forEach items="${schoolView}" var="grade" varStatus="st">
+	                <ul<c:if test="${st.index > 0}"> style="display:none;"</c:if>>
+						<c:forEach items="${grade.schoolList}" var="school">
+	                    <li class="school_list">
+	                        <div class="school_pic"><a href="${ctx}/school/${school.id}.html" target="_blank"><img src="${ctx}/resource/images/003.jpg" border="0" /></a></div>
+	                        <div class="school_user">
+	                            <h2>${school.schoolName}</h2>
+	                        </div>
+	                        <div class="school_con">
+	                            <p>1000</p>
+	                        </div>
+	                    </li>								
+						</c:forEach>
+	                </ul>
+	                </c:forEach>
+	            </div>
+	        </div>
+	    </div>
+	    
+	    <div class="wrap_catalog_box">
+	        <div class="catalog_box_header"> <a href="#" class="catalog_box_title">高中</a>
+	            <ul class="catalog_box_nav">
+            	    <c:forEach items="${gaozhong_subjectList}" var="subject">
+                	<li><a href="#">${subject.subjectName}</a></li>
+                	</c:forEach>
+	            </ul>
+	            <a href="#" class="catalog_box_more">更多</a>
+			</div>
+	        <div class="img_item">
+	            <ul>
+					<c:forEach items="${gaozhong_courseList}" var="item" varStatus="st">
+	                <li class="img_list<c:if test="${(st.index+1)%5 == 0}"> img_list_margin</c:if>">
+	                    <div class="pic"><a href="${ctx}/course/${item.id}.html" target="_blank"><img src="${ctx}/resource/photo/01.jpg" border="0" /></a></div>
+	                    <div class="img_user">
+	                        <h2>${item.courseName}</h2>
+	                    </div>
+	                    <div class="img_counts"><span>价格:<b>${item.price}</b></span><span>xxx<strong>(123)</strong></span></div>
+	                </li>						
 					</c:forEach>
-				</div>
-				
-				<div class="teacher_recommend">
-					<c:forEach items="${teacherList}" var="item">
-						<div class="teacher_index_wrap">
-							<a href="${ctx}/teacher/${item.id}.html" target="_blank"><img src="${ctx}/resource/photo/T136.jpg" width="150" height="130" /></a>
-							<p>title:${item.showName}</p>
-							<p>xxx</p>
-						</div>
+	            </ul>
+	        </div>
+	    </div>
+	    
+	    <div class="clr"></div>
+	    <div class="wrap_catalog_box">
+	        <div class="catalog_box_header"> <a href="#" class="catalog_box_title">初中</a>
+	            <ul class="catalog_box_nav">
+            	    <c:forEach items="${chuzhong_subjectList}" var="subject">
+                	<li><a href="#">${subject.subjectName}</a></li>
+                	</c:forEach>
+	            </ul>
+	            <a href="#" class="catalog_box_more">更多</a>
+			</div>
+	        <div class="img_item">
+	            <ul>
+					<c:forEach items="${chuzhong_courseList}" var="item" varStatus="st">
+	                <li class="img_list<c:if test="${(st.index+1)%5 == 0}"> img_list_margin</c:if>">
+	                    <div class="pic"><a href="${ctx}/course/${item.id}.html" target="_blank"><img src="${ctx}/resource/photo/01.jpg" border="0" /></a></div>
+	                    <div class="img_user">
+	                        <h2>${item.courseName}</h2>
+	                    </div>
+	                    <div class="img_counts"><span>价格:<b>${item.price}</b></span><span>xxx<strong>(123)</strong></span></div>
+	                </li>						
 					</c:forEach>
-				</div>
-				
+	            </ul>
+	        </div>
+	    </div>
+	    
+	    <div class="clr"></div>
+	    <div class="wrap_catalog_box">
+	        <div class="catalog_box_header"> <a href="#" class="catalog_box_title">小学</a>
+	            <ul class="catalog_box_nav">
+            	    <c:forEach items="${xiaoxue_subjectList}" var="subject">
+                	<li><a href="#">${subject.subjectName}</a></li>
+                	</c:forEach>
+	            </ul>
+	            <a href="#" class="catalog_box_more">更多</a>
 			</div>
-			
-			<div class="course_group_block"></div>
-			
-			<div class="course_group_block">
-				<c:forEach items="${gaozhong_vodList}" var="item">
-					<div class="course_index_wrap">
-						<a href="${ctx}/course/${item.id}.html" target="_blank"><img src="${ctx}/resource/photo/df_course.jpg" width="220" height="185" /></a>
-						<p>title:${item.courseName}</p>
-						<p>price:${item.price}</p>
-					</div>
-				</c:forEach>
-			</div>
-
-			<div class="course_group_block">
-				<c:forEach items="${chuzhong_vodList}" var="item">
-					<div class="course_index_wrap">
-						<a href="${ctx}/course/${item.id}.html" target="_blank"><img src="${ctx}/resource/photo/df_course.jpg" width="220" height="185" /></a>
-						<p>title:${item.courseName}</p>
-						<p>price:${item.price}</p>
-					</div>
-				</c:forEach>
-			</div>
-			
-			<div class="course_group_block">
-				<c:forEach items="${xiaoxue_vodList}" var="item">
-					<div class="course_index_wrap">
-						<a href="${ctx}/course/${item.id}.html" target="_blank"><img src="${ctx}/resource/photo/df_course.jpg" width="220" height="185" /></a>
-						<p>title:${item.courseName}</p>
-						<p>price:${item.price}</p>
-					</div>
-				</c:forEach>
-			</div>
-			
-		</div>
-		
-		<%@ include file="inc/friendlylink.jsp"%>
-		<%@ include file="inc/copyright.jsp"%>
+	        <div class="img_item">
+	            <ul>
+					<c:forEach items="${xiaoxue_courseList}" var="item" varStatus="st">
+	                <li class="img_list<c:if test="${(st.index+1)%5 == 0}"> img_list_margin</c:if>">
+	                    <div class="pic"><a href="${ctx}/course/${item.id}.html" target="_blank"><img src="${ctx}/resource/photo/01.jpg" border="0" /></a></div>
+	                    <div class="img_user">
+	                        <h2>${item.courseName}</h2>
+	                    </div>
+	                    <div class="img_counts"><span>价格:<b>${item.price}</b></span><span>xxx<strong>(123)</strong></span></div>
+	                </li>						
+					</c:forEach>
+	            </ul>
+	        </div>
+	    </div>	    
+	    
+	</div>
+	<div class="clr"></div>
+	<div id="friend_link">
+	    <div class="friend_link_header">
+	        <h2>友情链接</h2>
+	        <a href="#">百度课堂</a> <a href="#">百度课堂</a> <a href="#">百度课堂</a> <a href="#">百度课堂</a> <a href="#">百度课堂</a> <a href="#">百度课堂</a> <a href="#">百度课堂</a> <a href="#">百度课堂</a> <a href="#">百度课堂</a> <a href="#">百度课堂</a> <a href="#">百度课堂</a> <a href="#">百度课堂</a> <a href="#">百度课堂</a> <a href="#">百度课堂</a> <a href="#">百度课堂</a> <a href="#">百度课堂</a> <a href="#">百度课堂</a> <a href="#">百度课堂</a> <a href="#">百度课堂</a> <a href="#">百度课堂</a> <a href="#">百度课堂</a> <a href="#">百度课堂</a> <a href="#">百度课堂</a> <a href="#">百度课堂</a> <a href="#">百度课堂</a> <a href="#">百度课堂</a> <a href="#">百度课堂</a> <a href="#">百度课堂</a> <a href="#">百度课堂</a> <a href="#">百度课堂</a> </div>
+	</div>
+	<div class="clr"></div>
+	<div id="footer">
+	    <p>版权所有:XXXXXXXXXX教育科技有限公司 www.vko.cn 京ICP备12002746号 </p>
 	</div>
 </body>
 </html>

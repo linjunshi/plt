@@ -1,10 +1,16 @@
 package com.santrong.plt.webpage.user;
 
+import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.santrong.plt.webpage.BaseAction;
+import com.santrong.plt.webpage.user.dao.UserDao;
+import com.santrong.plt.webpage.user.entry.UserItem;
 
 /**
  * @author weinianjie
@@ -43,6 +49,11 @@ public class TeacherAction extends BaseAction {
 	 */
 	@RequestMapping("/{grade}/{subject}")
 	public String catagory(@PathVariable String grade, @PathVariable String subject) {
+		UserDao userDao = new UserDao();
+		List<UserItem> teacherList = userDao.selectAll();
+		
+		HttpServletRequest request = getRequest();
+		request.setAttribute("teacherList", teacherList);
 		
 		return "teacher/index";
 	}	

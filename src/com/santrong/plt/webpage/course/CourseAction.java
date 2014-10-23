@@ -70,7 +70,7 @@ public class CourseAction extends BaseAction {
 		request.setAttribute("courseList", courseList);
 		
 		return "course/index";
-	}	
+	}
 	
 	/**
 	 * 点播课详细页面

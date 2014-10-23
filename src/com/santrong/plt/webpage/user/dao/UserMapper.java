@@ -46,7 +46,7 @@ public interface UserMapper {
     		+ "where id=#{id}")
     int update(UserItem user);
     
-    @Select("select * from user limit 4;")
+    @Select("select * from user limit 18;")
     List<UserItem> selectAll();
     
 }

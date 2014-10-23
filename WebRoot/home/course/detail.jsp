@@ -49,7 +49,7 @@ Globals.page = "Index_course";
 						<c:forEach items="${course.chapterDetailList}" var="chapter" varStatus="st">
 							<dt>第${st.index+1}节：${chapter.remark}</dt>
 							<c:forEach items="${chapter.resourceList}" var="resource">
-								<dd>${resource.title}---type:${resource.type}</dd>
+								<dd>${resource.title}---type:${resource.typeString}</dd>
 							</c:forEach>
 						</c:forEach>
 						</dl>

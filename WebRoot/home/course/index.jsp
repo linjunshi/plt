@@ -21,7 +21,6 @@ Globals.page = "Index_index";
 				<div class="condition">
 					<ul class="grade ul_flat">
 						<c:forEach items="${applicationScope.gradeList}" var="gradeItem">
-							
 								<li<c:if test="${gradeItem.gradeEnName == grade}"> class="current"</c:if>>${gradeItem.gradeName}</li>
 						</c:forEach>
 					</ul>

@@ -2,38 +2,32 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-		<div class="header">
-			<div class="site_mast">
-				<img class="logo" src="${ctx}/resource/photo/logo.png" />
-				<h2>三间在线补习班</h2>
-			</div>
-			
-			<div class="site_component">
-				<span class="city_info">${sessionScope.area.cityName}</span>
-				
-				<c:if test="${sessionScope.loginUser != null}">
-					<p>welcome(${sessionScope.loginUser.showName})------
-						<a href="javascript:void(0);" class="logout" ><fmt:message key="index_user_userlogout"/></a>
-					</p>
-				</c:if>
-				<c:if test="${sessionScope.loginUser == null}">
-					<p><a href="${ctx }/login" ><fmt:message key="index_user_userlogin"/></a></p>
-				</c:if>
-				
-				<p><a href="${ctx }/regist" >注册</a></p>
-				<p><a href="${ctx }/study/course" >管理中心</a></p>
-				
-				<div class="component_search">
-					<input type="text" name="keywords" />
-					<input type="submit" />
-				</div>
-			
-			</div>
+	<div  id="header">
+	    <div id="headerinside"> <a href="#" class="logo"><img src="${ctx}/resource/images/logo.png" width="148" height="70" /></a>
+	        <div class="city_info">
+	            <h2><a class="city_info_name" href="#">${sessionScope.area.cityName}</a></h2>
+	            <a class="city_info_toggle" href="#">切换城市</a></div>
+	        <form class="search_form">
+	            <div class="search_navigat">
+	                <div class="search">
+	                    <input name="search" type="text"  class="search_text" value="站内搜索"/>
+	                    <a href="#" class="search_txt">站内搜索</a></div>
+	                <div class="fast_navigat"><a href="#">首页</a><a href="#">首页</a><a href="#">首页</a><a href="#">首页</a></div>
+	            </div>
+	        </form>
+	        <a href="${ctx }/login" class="user_info_login">登录</a> <a href="${ctx }/regist" class="user_info_signup">注册</a>
+	        <a href="${ctx }/study/course" style="display:none;" >管理中心</a>
 		</div>
-		
-		<ul class="navigator ul_flat">
-			<li><a href='${ctx}/'><fmt:message key="menu_index" /></a></li>
-			<li><a href='${ctx}/live'><fmt:message key="menu_live" /></a></li>
-			<li><a href='${ctx}/school'><fmt:message key="menu_school" /></a></li>
-			<li><a href='${ctx}/teacher'><fmt:message key="menu_teacher" /></a></li>
-		</ul>
+	    <div id="wrapper_box">
+	        <div id="wrapper">
+	            <div>
+	                <ul>
+						<li><a href='${ctx}/'><fmt:message key="menu_index" /></a></li>
+						<li><a href='${ctx}/live'><fmt:message key="menu_live" /></a></li>
+						<li><a href='${ctx}/school'><fmt:message key="menu_school" /></a></li>
+						<li><a href='${ctx}/teacher'><fmt:message key="menu_teacher" /></a></li>
+	                </ul>
+	            </div>
+	        </div>
+	    </div>
+	</div>

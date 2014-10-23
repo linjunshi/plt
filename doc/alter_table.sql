@@ -3,7 +3,7 @@ create database plt;
 
 use plt;
 
---- 用户表 ---
+-- 用户表 --
 drop table if exists web_user;
 create table web_user(
 	id varchar(32) not null comment 'UUID',
@@ -26,7 +26,7 @@ insert into web_user values('10005', 'teacher5', 'teacher5', md5('admin'), 3, 10
 insert into web_user values('10006', 'student1', 'student1', md5('admin'), 1, 10000, now(), now());
 insert into web_user values('10007', 'student2', 'student2', md5('admin'), 1, 10000, now(), now());
 
---- 年级表 ---
+-- 年级表 --
 drop table if exists web_grade;
 create table web_grade(
 	id varchar(32) not null comment 'UUID',
@@ -52,7 +52,7 @@ insert into web_grade values('10009', '高中', '一年级', 4, 'gaozhong', 'lev
 insert into web_grade values('10010', '高中', '二年级', 4, 'gaozhong', 'level2', 10);
 insert into web_grade values('10011', '高中', '三年级', 4, 'gaozhong', 'level3', 11);
 
---- 科目表 ---
+-- 科目表 --
 drop table if exists web_subject;
 create table web_subject(
 	id varchar(32) not null comment 'UUID',
@@ -71,7 +71,7 @@ insert into web_subject values('10005', '生物', 'shengwu', 5);
 insert into web_subject values('10006', '地理', 'dili', 6);
 insert into web_subject values('10007', '政治', 'zhengzhi', 7);
 
---- 年级-科目表 ---
+-- 年级-科目表 --
 drop table if exists web_grade_subject;
 create table web_grade_subject(
 	gradeId varchar(32) comment '年级ID',
@@ -134,7 +134,7 @@ insert into web_grade_subject values('10011', '10005');
 insert into web_grade_subject values('10011', '10006');
 insert into web_grade_subject values('10011', '10007');
 
---- 学校表 ---
+-- 学校表 --
 drop table if exists web_school;
 create table web_school(
 	id varchar(32) not null comment 'UUID',
@@ -157,7 +157,7 @@ insert into web_school values('10011', '高级1中', '440300', 4);
 insert into web_school values('10012', '高级2中', '440300', 4);
 insert into web_school values('10013', '高级3中', '440300', 4);
 
---- 行政区划表 ---
+-- 行政区划表 --
 drop table if exists web_area;
 create table web_area(
 	id varchar(32) not null comment 'UUID',
@@ -166,7 +166,7 @@ create table web_area(
 	primary key (id)
 ) engine=InnoDB default charset=utf8 collate=utf8_bin comment '行政区划表';
 
---- 点播课表 ---
+-- 点播课表 --
 drop table if exists web_course_vod;
 create table web_course_vod(
 	id varchar(32) not null comment 'UUID',
@@ -197,7 +197,7 @@ insert into web_course_vod values('10009', '马克思主义9', '10000', '10007',
 insert into web_course_vod values('10010', '马克思主义10', '10000', '10007', '10000', 1111, null, 1, 2, 3, now(), now());
 insert into web_course_vod values('10011', '马克思主义11', '10000', '10007', '10000', 1111, null, 1, 2, 3, now(), now());
 
---- 直播课表 ---
+-- 直播课表 --
 drop table if exists web_course_live;
 create table web_course_live(
 	id varchar(32) not null comment 'UUID',
