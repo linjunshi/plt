@@ -25,12 +25,23 @@ import com.santrong.plt.webpage.user.entry.UserItem;
 @Controller
 public class UserAction extends BaseAction {
 
+	/**
+	 * 获取注册页面
+	 * @return
+	 */
 	@RequestMapping(value="/regist", method=RequestMethod.GET)
 	public String regist() {
 		
 		return "regist";
 	}
 	
+	/**
+	 * 注册页面提交
+	 * @param username
+	 * @param password
+	 * @param pwdagain
+	 * @return
+	 */
 	@RequestMapping(value="/regist", method=RequestMethod.POST)
 	public String registPost(String username, String password, String pwdagain) {
 		if(StringUtils.isNullOrEmpty(username) || StringUtils.isNullOrEmpty(password) || StringUtils.isNullOrEmpty(pwdagain)) {
@@ -72,16 +83,53 @@ public class UserAction extends BaseAction {
 		return this.redirect("/study/course");
 	}	
 	
+	/**
+	 * 获取登录页面
+	 * @return
+	 */
 	@RequestMapping(value="/login", method=RequestMethod.GET)
 	public String loginGet() {
 		
 		return "login";
 	}
 	
-	
+	/**
+	 * 登录页面提交
+	 * @param username
+	 * @param password
+	 * @return
+	 */
 	@RequestMapping(value="/login", method=RequestMethod.POST)
-	@ResponseBody
 	public String loginPOST(String username, String password) {
+		if(StringUtils.isNullOrEmpty(username) || StringUtils.isNullOrEmpty(password)) {
+			return "error_login_nullInput";
+		}
+		
+		UserDao userDao = new UserDao();
+		UserItem user = userDao.selectByUserName(username);
+		
+		if(user == null) {
+			return "error_login_user_not_exists";
+		}
+		
+		if(!user.getPassword().equals(MyUtils.getMD5(password))) {
+			return "error_login_password_wrong";
+		}
+		
+		getRequest().getSession().setAttribute(Global.SessionKey_LoginUser, user);
+		
+		return this.redirect("/");
+	}	
+	
+	/**
+	 * 登录页面提交（异步）
+	 * @param username
+	 * @param password
+	 * @return
+	 */
+	@RequestMapping(value="/login2", method=RequestMethod.POST)
+	@ResponseBody
+	public String login2(String username, String password) {
 		if(StringUtils.isNullOrEmpty(username) || StringUtils.isNullOrEmpty(password)) {
 			return "error_login_nullInput";
 		}
@@ -102,9 +150,39 @@ public class UserAction extends BaseAction {
 		return SUCCESS;
 	}
 	
-	@RequestMapping(value="/logout", method=RequestMethod.POST)
-	@ResponseBody
+	/**
+	 * 注销
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping(value="/logout", method=RequestMethod.GET)
 	public String logout(HttpServletRequest request) {
+
+		UserItem user = (UserItem)request.getSession().getAttribute(Global.SessionKey_LoginUser);
+		if(user == null) {
+			return SUCCESS;
+		}
+		
+		try{
+			request.getSession().removeAttribute(Global.SessionKey_LoginUser);
+		}catch(Exception e) {
+			Log.printStackTrace(e);
+			return FAIL;
+		}
+		
+		request.getSession().invalidate();
+		
+		return this.redirect("/");
+	}	
+	
+	/**
+	 * 注销（异步）
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping(value="/logout2", method=RequestMethod.POST)
+	@ResponseBody
+	public String logout2(HttpServletRequest request) {
 
 		UserItem user = (UserItem)request.getSession().getAttribute(Global.SessionKey_LoginUser);
 		if(user == null) {

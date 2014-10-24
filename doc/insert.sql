@@ -43,6 +43,7 @@ insert into user values('10015', 'teacher13', 'teacher13', md5('admin'), '', 0, 
 insert into user values('10016', 'teacher14', 'teacher14', md5('admin'), '', 0, 3, 10000, 10000, null, null, null, null, null, now(), now());
 
 -- 用户教育信息 --
+drop table if exists user_education;
 create table user_education(
 	userId varchar(32) not null comment '用户ID',
 	education int(10) default 0 not null comment '学历',
@@ -52,6 +53,7 @@ create table user_education(
 ) engine=InnoDB default charset=utf8 collate=utf8_bin comment '用户教育信息表';
 
 -- 用户扩展信息 --
+drop table if exists user_extends;
 create table user_extends(
 	userId varchar(32) not null comment '用户ID',
 	birthday date comment '出生日期',
@@ -246,6 +248,21 @@ insert into course values('10011', '货币战争', '王老师', 10000, '2014-12-
 insert into course values('10012', '论持久战', '王老师', 10000, '2014-12-12', '10000', '10004', 'xxx', 1, 2, '10001', now(), now());
 insert into course values('10013', '大头儿子小头爸爸', '王老师', 10000, '2014-12-12', '10006', '10004', 'xxx', 1, 2, '10001', now(), now());
 insert into course values('10014', '西游记', '王老师', 10000, '2014-12-12', '10009', '10004', 'xxx', 1, 2, '10001', now(), now());
+insert into course values(replace(uuid(),'-',''), '西游记2', '王老师', 10000, '2014-12-12', '10009', '10004', 'xxx', 1, 2, '10001', now(), now());
+insert into course values(replace(uuid(),'-',''), '西游记3', '王老师', 10000, '2014-12-12', '10009', '10004', 'xxx', 1, 2, '10001', now(), now());
+insert into course values(replace(uuid(),'-',''), '西游记4', '王老师', 10000, '2014-12-12', '10009', '10004', 'xxx', 1, 2, '10001', now(), now());
+insert into course values(replace(uuid(),'-',''), '西游记5', '王老师', 10000, '2014-12-12', '10009', '10004', 'xxx', 1, 2, '10001', now(), now());
+insert into course values(replace(uuid(),'-',''), '西游记6', '王老师', 10000, '2014-12-12', '10009', '10004', 'xxx', 1, 2, '10001', now(), now());
+insert into course values(replace(uuid(),'-',''), '大头儿子小头爸爸2', '王老师', 10000, '2014-12-12', '10006', '10004', 'xxx', 1, 2, '10001', now(), now());
+insert into course values(replace(uuid(),'-',''), '大头儿子小头爸爸3', '王老师', 10000, '2014-12-12', '10006', '10004', 'xxx', 1, 2, '10001', now(), now());
+insert into course values(replace(uuid(),'-',''), '大头儿子小头爸爸4', '王老师', 10000, '2014-12-12', '10006', '10004', 'xxx', 1, 2, '10001', now(), now());
+insert into course values(replace(uuid(),'-',''), '大头儿子小头爸爸5', '王老师', 10000, '2014-12-12', '10006', '10004', 'xxx', 1, 2, '10001', now(), now());
+insert into course values(replace(uuid(),'-',''), '大头儿子小头爸爸6', '王老师', 10000, '2014-12-12', '10006', '10004', 'xxx', 1, 2, '10001', now(), now());
+insert into course values(replace(uuid(),'-',''), '经济学入门2', '王老师', 10000, '2014-12-12', '10000', '10004', 'xxx', 1, 2, '10001', now(), now());
+insert into course values(replace(uuid(),'-',''), '经济学入门3', '王老师', 10000, '2014-12-12', '10000', '10004', 'xxx', 1, 2, '10001', now(), now());
+insert into course values(replace(uuid(),'-',''), '经济学入门4', '王老师', 10000, '2014-12-12', '10000', '10004', 'xxx', 1, 2, '10001', now(), now());
+insert into course values(replace(uuid(),'-',''), '经济学入门5', '王老师', 10000, '2014-12-12', '10000', '10004', 'xxx', 1, 2, '10001', now(), now());
+insert into course values(replace(uuid(),'-',''), '经济学入门6', '王老师', 10000, '2014-12-12', '10000', '10004', 'xxx', 1, 2, '10001', now(), now());
 
 -- 订单表 --
 drop table if exists web_order;
@@ -467,9 +484,9 @@ create table resource_train_to_question(
 	primary key (trainId, questionId)
 ) engine=InnoDB default charset=utf8 collate=utf8_bin comment '测验-习题关联表';
 
---- 表 --
---drop table if exists course;
---create table course(
+-- 表 --
+-- drop table if exists course;
+-- create table course(
 --	id varchar(32) not null comment 'UUID',
 --	primary key (id)
---) engine=InnoDB default charset=utf8 collate=utf8_bin comment '表';
+-- ) engine=InnoDB default charset=utf8 collate=utf8_bin comment '表';

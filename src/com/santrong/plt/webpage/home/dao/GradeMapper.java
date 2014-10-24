@@ -22,4 +22,11 @@ public interface GradeMapper {
 	
 	@Select("select distinct gradeName, gradeGroup, gradeEnName from grade order by priority desc")
 	List<GradeView> selectGrade();
+	
+	@Select("select distinct a.gradeName, a.gradeGroup, a.gradeEnName from grade a "
+			+ "left join grade_to_subject b on a.id=b.gradeId "
+			+ "left join subject c on b.subjectId=c.id "
+			+ "where c.subjectEnName=#{subjectName} "
+			+ "order by a.priority desc")
+	List<GradeView> selectGradeBySubjectEnName(String subjectName);	
 }

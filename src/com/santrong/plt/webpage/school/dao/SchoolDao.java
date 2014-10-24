@@ -24,6 +24,11 @@ import com.santrong.plt.webpage.school.entry.SchoolQuery;
  */
 public class SchoolDao extends BaseDao {
 	
+	/**
+	 * 根据具体搜索条件查询学校
+	 * @param query
+	 * @return
+	 */
 	public 	List<SchoolItem> selectByQuery(SchoolQuery query) {
 		List<SchoolItem> list = new ArrayList<SchoolItem>();
 		
@@ -78,4 +83,50 @@ public class SchoolDao extends BaseDao {
 		
 		return list;
 	}
+	
+	/**
+	 * 根据具体查询条件查询学校的总数
+	 * @param query
+	 * @return
+	 */
+	public 	int selectCountByQuery(SchoolQuery query) {
+		int count = 0;
+		
+		try{
+			Statement criteria = new Statement("school", "s");
+			criteria.setFields("count(*)  cn");
+			// 关键词
+			if(!StringUtils.isNullOrEmpty(query.getKeywords())) {
+				criteria.where(or(
+						like("s.schoolName", "?")));
+				criteria.setStringParam("%" + query.getKeywords() + "%");
+			}
+			// 类型包含
+			if(query.getSchoolGrade() > 0) {
+				criteria.where(eq("(s.schoolGrade & ?)", "?"));
+				criteria.setIntParam(query.getSchoolGrade());
+				criteria.setIntParam(query.getSchoolGrade());
+			}
+			// 类型绝对等
+			if(query.getSchoolAbsoluteGrade() > 0) {
+				criteria.where(eq("s.schoolGrade", "?"));
+				criteria.setIntParam(query.getSchoolAbsoluteGrade());
+			}
+			// 所属区域
+			if(MyUtils.isNotNull(query.getAreaCode())) {
+				criteria.where(like("s.areaCode", "?"));
+				criteria.setStringParam(AreaUtils.lostTail(query.getAreaCode()) + "%");
+			}
+			
+			Connection conn = ThreadUtils.currentConnection();
+			PreparedStatement stm = criteria.getRealStatement(conn);
+			ResultSet rs = stm.executeQuery();
+			rs.next();
+			count = rs.getInt("cn");
+		}catch(Exception e){
+			Log.printStackTrace(e);
+		}
+		
+		return count;
+	}	
 }

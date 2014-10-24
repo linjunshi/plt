@@ -1,5 +1,6 @@
 package com.santrong.plt.opt.grade;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -15,6 +16,11 @@ public class GradeDefine {
 	public static final int Grade_Junior_Middle_School = 2;
 	public static final int Grade_Senior_Middle_School = 4;
 	
+	/**
+	 * 根据gradeGroup获取年级数据
+	 * @param gradeGroup
+	 * @return
+	 */
 	public static GradeDefineEntry getByGradeGroup(int gradeGroup) {
 		for(GradeDefineEntry entry : gradeList) {
 			if(entry.getGradeGroup() == gradeGroup) {
@@ -22,5 +28,35 @@ public class GradeDefine {
 			}
 		}
 		return null;
+	}
+	
+	/**
+	 * 根据gradeName获取年级数据
+	 * @param gradeName
+	 * @return
+	 */
+	public static GradeDefineEntry getByGradeEnName(String gradeName) {
+		for(GradeDefineEntry entry : gradeList) {
+			if(entry.getGradeEnName().equals(gradeName)) {
+				return entry;
+			}
+		}
+		return null;
+	}
+	
+	/**
+	 * 获取全部科目
+	 * @return
+	 */
+	public static List<GradeSubjectEntry> getAllSubject() {
+		List<GradeSubjectEntry> list = new ArrayList<GradeSubjectEntry>();
+		for(GradeDefineEntry entry : gradeList) {
+			for(GradeSubjectEntry subject : entry.getGradeSubjectList()) {
+				if(!list.contains(subject)) {
+					list.add(subject);
+				}
+			}
+		}
+		return list;
 	}
 }

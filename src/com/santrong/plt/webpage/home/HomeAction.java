@@ -21,6 +21,7 @@ import com.santrong.plt.webpage.school.entry.SchoolQuery;
 import com.santrong.plt.webpage.school.entry.SchoolView;
 import com.santrong.plt.webpage.user.dao.UserDao;
 import com.santrong.plt.webpage.user.entry.UserItem;
+import com.santrong.plt.webpage.user.entry.UserQuery;
 
 /**
  * @Author weinianjie
@@ -33,44 +34,47 @@ public class HomeAction extends BaseAction{
 	@RequestMapping("")
 	public String index(HttpServletRequest request, HttpServletResponse response){
 		AreaEntry area = (AreaEntry)(request.getSession().getAttribute(Global.SessionKey_Area));
+		
+		
+		// 推荐学校
+		SchoolDao schoolDao = new SchoolDao();
+		SchoolQuery schoolQuery = new SchoolQuery();
+		schoolQuery.setAreaCode(area.getCityCode());
+		List<SchoolView> schoolView = new ArrayList<SchoolView>();
+		for(GradeDefineEntry grade : GradeDefine.gradeList) {
+			SchoolView view = new SchoolView();
+			view.setGradeGroup(grade.getGradeGroup());
+			view.setGradeName(grade.getGradeName());
+			view.setGradeEnName(grade.getGradeEnName());
 			
+			schoolQuery.setSchoolGrade(view.getGradeGroup());
+			view.setSchoolList(schoolDao.selectByQuery(schoolQuery));
+			schoolView.add(view);
+		}
+		request.setAttribute("schoolView", schoolView);
+		
+		// 推荐老师
+		UserDao userDao = new UserDao();
+		UserQuery userQuery = new UserQuery();
+		userQuery.setAreaCode(area.getCityCode());
+		userQuery.setPageSize(8);
+		List<UserItem> teacherList = userDao.selectByQuery(userQuery);
+		request.setAttribute("teacherList", teacherList);
+		
+		// 直播课程
+		
+		// 点播课程
+		CourseDao courseDao = new CourseDao();
+		for(GradeDefineEntry entry : GradeDefine.gradeList) {
+			int gradeGroup = entry.getGradeGroup();
+			String prefix = entry.getGradeEnName();
+			List<CourseView> courseList = courseDao.selectForIndexList(gradeGroup, area.getCityCode());
 			
-			// 推荐学校
-			SchoolDao schoolDao = new SchoolDao();
-			SchoolQuery schoolQuery = new SchoolQuery();
-			schoolQuery.setAreaCode(area.getCityCode());
-			List<SchoolView> schoolView = new ArrayList<SchoolView>();
-			for(GradeDefineEntry grade : GradeDefine.gradeList) {
-				SchoolView view = new SchoolView();
-				view.setGradeGroup(grade.getGradeGroup());
-				view.setGradeName(grade.getGradeName());
-				view.setGradeEnName(grade.getGradeEnName());
-				
-				schoolQuery.setSchoolGrade(view.getGradeGroup());
-				view.setSchoolList(schoolDao.selectByQuery(schoolQuery));
-				schoolView.add(view);
-			}
-			request.setAttribute("schoolView", schoolView);
-			
-			// 推荐老师
-			UserDao userDao = new UserDao();
-			List<UserItem> teacherList = userDao.selectAll();
-			request.setAttribute("teacherList", teacherList);
-			
-			// 直播课程
-			
-			// 点播课程
-			CourseDao courseDao = new CourseDao();
-			for(GradeDefineEntry entry : GradeDefine.gradeList) {
-				int gradeGroup = entry.getGradeGroup();
-				String prefix = entry.getGradeEnName();
-				List<CourseView> courseList = courseDao.selectForIndexList(gradeGroup, area.getCityCode());
-				
-				request.setAttribute(prefix  + "_courseList", courseList);
-				request.setAttribute(prefix + "_subjectList", entry.getGradeSubjectList());
-			}
+			request.setAttribute(prefix  + "_courseList", courseList);
+			request.setAttribute(prefix + "_subjectList", entry.getGradeSubjectList());
+		}
 
-			return "index";
+		return "index";
 	}
 	
 	

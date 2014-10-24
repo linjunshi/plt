@@ -1,10 +1,24 @@
 package com.santrong.plt.webpage.live;
 
+import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.santrong.plt.opt.area.AreaEntry;
+import com.santrong.plt.system.Global;
 import com.santrong.plt.webpage.BaseAction;
+import com.santrong.plt.webpage.course.dao.CourseDao;
+import com.santrong.plt.webpage.course.entry.CourseItem;
+import com.santrong.plt.webpage.school.dao.SchoolDao;
+import com.santrong.plt.webpage.school.entry.SchoolItem;
+import com.santrong.plt.webpage.school.entry.SchoolQuery;
+import com.santrong.plt.webpage.user.dao.UserDao;
+import com.santrong.plt.webpage.user.entry.UserItem;
+import com.santrong.plt.webpage.user.entry.UserQuery;
 
 /**
  * @author weinianjie
@@ -43,7 +57,32 @@ public class LiveAction extends BaseAction {
 	@RequestMapping("/{grade}/{subject}")
 	public String catagory(@PathVariable String grade, @PathVariable String subject) {
 		
-		return "teacher/index";
+		HttpServletRequest request = getRequest();
+		AreaEntry area = (AreaEntry)(request.getSession().getAttribute(Global.SessionKey_Area));
+		
+		// 课程列表
+		CourseDao courseDao = new CourseDao();
+		List<CourseItem> courseList = courseDao.selectByQuery();
+		
+		// 学校列表
+		SchoolDao schoolDao = new SchoolDao();
+		SchoolQuery schoolQuery = new SchoolQuery();
+		schoolQuery.setAreaCode(area.getCityCode());
+		schoolQuery.setPageSize(4);
+		List<SchoolItem> schoolList = schoolDao.selectByQuery(schoolQuery);
+		
+		// 老师列表
+		UserDao userDao = new UserDao();
+		UserQuery userQuery = new UserQuery();
+		userQuery.setAreaCode(area.getCityCode());
+		userQuery.setPageSize(4);
+		List<UserItem> teacherList = userDao.selectByQuery(userQuery);
+		
+		request.setAttribute("courseList", courseList);
+		request.setAttribute("schoolList", schoolList);
+		request.setAttribute("teacherList", teacherList);
+		
+		return "live/index";
 	}	
 	
 	/**
@@ -54,7 +93,7 @@ public class LiveAction extends BaseAction {
 	@RequestMapping("/{id}.html")
 	public String detail(@PathVariable String id) {
 		
-		return "teacher/detail";
+		return "live/detail";
 	}
 	
 }

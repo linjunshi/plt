@@ -1,6 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-		<div class="friendly_link">
-			<div style="width:100%; height:86px; border:solid 1px blue; margin-top:10px;">
-				<img src="${ctx}/resource/photo/rzjg.jpg" style="width:100%; height:100%;" />
-			</div>
-		</div>
+	<div id="friend_link">
+	    <div class="friend_link_header">
+	        <h2>友情链接</h2>
+	        <a href="#">百度课堂</a> <a href="#">百度课堂</a> <a href="#">百度课堂</a> <a href="#">百度课堂</a> <a href="#">百度课堂</a> <a href="#">百度课堂</a> <a href="#">百度课堂</a> <a href="#">百度课堂</a> <a href="#">百度课堂</a> <a href="#">百度课堂</a> <a href="#">百度课堂</a> <a href="#">百度课堂</a> <a href="#">百度课堂</a> <a href="#">百度课堂</a> <a href="#">百度课堂</a> <a href="#">百度课堂</a> <a href="#">百度课堂</a> <a href="#">百度课堂</a> <a href="#">百度课堂</a> <a href="#">百度课堂</a> <a href="#">百度课堂</a> <a href="#">百度课堂</a> <a href="#">百度课堂</a> <a href="#">百度课堂</a> <a href="#">百度课堂</a> <a href="#">百度课堂</a> <a href="#">百度课堂</a> <a href="#">百度课堂</a> <a href="#">百度课堂</a> <a href="#">百度课堂</a> </div>
+	</div>
+	<div class="clr"></div>
+	<div id="footer">
+	    <p>版权所有:XXXXXXXXXX教育科技有限公司 www.vko.cn 京ICP备12002746号 </p>
+	</div>

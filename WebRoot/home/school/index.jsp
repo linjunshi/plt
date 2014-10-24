@@ -12,16 +12,26 @@ Globals.page = "Index_index";
 </script>
 </head>
 <body>
-	<div class="wrap">
 		
-		<%@ include file="../inc/top.jsp"%>
-		
-		<div class="test_content">
-			<p>grade is : ${grade}</p>
-		</div>
-		
-		<%@ include file="../inc/friendlylink.jsp"%>
-		<%@ include file="../inc/copyright.jsp"%>
+	<%@ include file="../inc/top.jsp"%>
+	
+	<div id="container_box">
+	    <div class="tesch_box">
+	        <div class="teach_sea"><a href="#">全部</a><a href="#">人气排行</a></div>
+	        <div class="schoool_box_list clearfix">
+	            <ul>
+	            	<c:forEach items="${schoolList}" var="school">
+	                <li><a href="#"><img src="${ctx}/resource/photo/02.jpg" width="220" height="140"></a>
+	                    <h2>${school.schoolName}</h2>
+	                    <p><span>2136456</span>关注</p>
+	                </li>
+	            	</c:forEach>
+	            </ul>
+	        </div>
+	    </div>
 	</div>
+	<div class="clr"></div>
+	
+	<%@ include file="../inc/friendlylink.jsp"%>
 </body>
 </html>

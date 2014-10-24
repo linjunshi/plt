@@ -55,14 +55,14 @@ Globals.page = "Index_index";
 	            <div class="column_left_header clearfix"> <a href="#" class="column_left_title">推荐老师</a>
 	                <ul class="column_left_nav">
 	                	<c:forEach items="${gaozhong_subjectList}" var="subject">
-	                	<li><a href="#">${subject.subjectName}</a></li>
+	                	<li><a href="${ctx}/teacher/all/${subject.subjectEnName}">${subject.subjectName}</a></li>
 	                	</c:forEach>
 	                </ul>
-	                <a href="#" class="column_left_more">[换一换]</a> </div>
+	                <a href="${ctx}/teacher" class="column_left_more">更多</a> </div>
 	            <div class="column_img_item">
 	                <ul>
 						<c:forEach items="${teacherList}" var="item" varStatus="st">
-						<li class="<c:if test="${(st.index + 1) % 9 == 0}">img_list_margin</c:if>"><a href="${ctx}/teacher/${item.id}.html" target="_blank"><img src="${ctx}/resource/images/005.jpg" /></a><span>${item.showName}</span><span>XXX</span></li>
+						<li class="<c:if test="${(st.index + 1) % 8 == 0}">img_list_margin</c:if>"><a href="${ctx}/teacher/${item.id}.html" target="_blank"><img src="${ctx}/resource/images/005.jpg" /></a><span>${item.showName}</span><span>XXX</span></li>
 						</c:forEach>
 	                </ul>
 	            </div>
@@ -71,12 +71,12 @@ Globals.page = "Index_index";
 	            <div class="column_school">
 	                <div class="column_school_header">
 	                    <h2 class="column_school_title">附近学校</h2>
-	                    <a href="#" class="school_box_more">更多</a> </div>
-	                <ul class="school_nav">
-	                	<c:forEach items="${schoolView}" var="grade">
-	                	<li><a href="${ctx}/school/${grade.gradeEnName}" target="_blank">${grade.gradeName}</a></li>
-	                	</c:forEach>
-	                </ul>
+	                    <a href="${ctx}/school" class="school_box_more" target="_blank">更多</a> </div>
+		                <ul class="school_nav">
+		                	<c:forEach items="${schoolView}" var="grade">
+		                	<li><a href="${ctx}/school/${grade.gradeEnName}" target="_blank">${grade.gradeName}</a></li>
+		                	</c:forEach>
+		                </ul>
 	            </div>
 	            <div class="school_img_item">
 	            	<c:forEach items="${schoolView}" var="grade" varStatus="st">
@@ -102,10 +102,10 @@ Globals.page = "Index_index";
 	        <div class="catalog_box_header"> <a href="#" class="catalog_box_title">高中</a>
 	            <ul class="catalog_box_nav">
             	    <c:forEach items="${gaozhong_subjectList}" var="subject">
-                	<li><a href="#">${subject.subjectName}</a></li>
+                	<li><a href="${ctx}/course/gaozhong/${subject.subjectEnName}">${subject.subjectName}</a></li>
                 	</c:forEach>
 	            </ul>
-	            <a href="#" class="catalog_box_more">更多</a>
+	            <a href="${ctx}/course/gaozhong" class="catalog_box_more">更多</a>
 			</div>
 	        <div class="img_item">
 	            <ul>
@@ -127,10 +127,10 @@ Globals.page = "Index_index";
 	        <div class="catalog_box_header"> <a href="#" class="catalog_box_title">初中</a>
 	            <ul class="catalog_box_nav">
             	    <c:forEach items="${chuzhong_subjectList}" var="subject">
-                	<li><a href="#">${subject.subjectName}</a></li>
+                	<li><a href="${ctx}/course/xiaoxue/${subject.subjectEnName}">${subject.subjectName}</a></li>
                 	</c:forEach>
 	            </ul>
-	            <a href="#" class="catalog_box_more">更多</a>
+	            <a href="${ctx}/course/chuzhong" class="catalog_box_more">更多</a>
 			</div>
 	        <div class="img_item">
 	            <ul>
@@ -152,10 +152,10 @@ Globals.page = "Index_index";
 	        <div class="catalog_box_header"> <a href="#" class="catalog_box_title">小学</a>
 	            <ul class="catalog_box_nav">
             	    <c:forEach items="${xiaoxue_subjectList}" var="subject">
-                	<li><a href="#">${subject.subjectName}</a></li>
+                	<li><a href="${ctx}/course/xiaoxue/${subject.subjectEnName}">${subject.subjectName}</a></li>
                 	</c:forEach>
 	            </ul>
-	            <a href="#" class="catalog_box_more">更多</a>
+	            <a href="${ctx}/course/xiaoxue/${subject.subjectEnName}" class="catalog_box_more">更多</a>
 			</div>
 	        <div class="img_item">
 	            <ul>
@@ -173,15 +173,10 @@ Globals.page = "Index_index";
 	    </div>	    
 	    
 	</div>
+	
 	<div class="clr"></div>
-	<div id="friend_link">
-	    <div class="friend_link_header">
-	        <h2>友情链接</h2>
-	        <a href="#">百度课堂</a> <a href="#">百度课堂</a> <a href="#">百度课堂</a> <a href="#">百度课堂</a> <a href="#">百度课堂</a> <a href="#">百度课堂</a> <a href="#">百度课堂</a> <a href="#">百度课堂</a> <a href="#">百度课堂</a> <a href="#">百度课堂</a> <a href="#">百度课堂</a> <a href="#">百度课堂</a> <a href="#">百度课堂</a> <a href="#">百度课堂</a> <a href="#">百度课堂</a> <a href="#">百度课堂</a> <a href="#">百度课堂</a> <a href="#">百度课堂</a> <a href="#">百度课堂</a> <a href="#">百度课堂</a> <a href="#">百度课堂</a> <a href="#">百度课堂</a> <a href="#">百度课堂</a> <a href="#">百度课堂</a> <a href="#">百度课堂</a> <a href="#">百度课堂</a> <a href="#">百度课堂</a> <a href="#">百度课堂</a> <a href="#">百度课堂</a> <a href="#">百度课堂</a> </div>
-	</div>
-	<div class="clr"></div>
-	<div id="footer">
-	    <p>版权所有:XXXXXXXXXX教育科技有限公司 www.vko.cn 京ICP备12002746号 </p>
-	</div>
+	
+	<%@ include file="inc/friendlylink.jsp"%>
+	
 </body>
 </html>

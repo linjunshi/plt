@@ -13,7 +13,7 @@ Globals.page = "Index_login";
 </head>
 <body>
 
-	<form action="${ctx}/login.action" method="post">
+	<form action="${ctx}/login" method="post">
 		<p><fmt:message key="index_user_username"/>：<input type="text" name="username" /></p>
 		<p><fmt:message key="index_user_password"/>：<input type="text" name="password" /></p>
 		<p><input type="submit" /></p>
