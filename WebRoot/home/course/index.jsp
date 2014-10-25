@@ -21,14 +21,17 @@ Globals.page = "Index_index";
 	            <div class="live_title"><a href="#">首页></a> <span></span><span>所有分类</span> <span>共有10236个</span></div>
 	            <div class="cate_list">
 	            
+	            	<c:if test="${subjectList != null}">
 	                <ul>
 	                	<li>科目：</li>
-	                	<li<c:if test="${subject == 'all'}"> class="current"</c:if>><a href="${ctx}/course/${grade}/all">全部</a></li>
+	                	<li<c:if test="${subject == 'all'}"> class="current"</c:if>><a href="${ctx}/course/${grade}">全部</a></li>
 						<c:forEach items="${subjectList}" var="subjectItem">
 						<li<c:if test="${subjectItem.subjectEnName == subject}"> class="current"</c:if>><a href="${ctx}/course/${grade}/${subjectItem.subjectEnName}">${subjectItem.subjectName}</a></li>
 						</c:forEach>
 	                </ul>
-	                          
+	                </c:if>
+	                
+	                <c:if test="${gradeList != null}">
 	                <ul>
 	                	<li>类别：</li>
 	                	<li<c:if test="${grade == 'all'}"> class="current"</c:if>><a href="${ctx}/course/all/${subject}">全部</a></li>
@@ -36,13 +39,14 @@ Globals.page = "Index_index";
 						<li<c:if test="${gradeItem.gradeEnName == grade}"> class="current"</c:if>><a href="${ctx}/course/${gradeItem.gradeEnName}/${subject}">${gradeItem.gradeName}</a></li>
 						</c:forEach>
 	                </ul>
+	                </c:if>
 	                
 	                <c:if test="${levelList != null}">
 	                <ul>
 	                	<li>年级：</li>
-	                	<li<c:if test="${level == null}"> class="current"</c:if>><a href="${ctx}/course/all/${subject}">全部</a></li>
+	                	<li<c:if test="${level == null}"> class="current"</c:if>><a href="${ctx}/course/${grade}/${subject}">全部</a></li>
 						<c:forEach items="${levelList}" var="levelItem">
-						<li<c:if test="${levelItem.levelEnName == level}"> class="current"</c:if>><a href="${ctx}/course/${grade}/${subject}">${levelItem.levelName}</a></li>
+						<li<c:if test="${levelItem.levelEnName == level}"> class="current"</c:if>><a href="${ctx}/course/${grade}/${subject}?level=${levelItem.levelEnName}">${levelItem.levelName}</a></li>
 						</c:forEach>
 	                </ul>
 	                </c:if>

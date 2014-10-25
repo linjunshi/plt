@@ -27,6 +27,7 @@ import com.santrong.plt.webpage.course.entry.CommentItem;
 import com.santrong.plt.webpage.course.entry.CourseDetailView;
 import com.santrong.plt.webpage.course.entry.CourseItem;
 import com.santrong.plt.webpage.course.entry.ResourceEntry;
+import com.santrong.plt.webpage.course.service.CourseService;
 import com.santrong.plt.webpage.home.dao.GradeDao;
 import com.santrong.plt.webpage.home.dao.SubjectDao;
 import com.santrong.plt.webpage.home.entry.GradeView;
@@ -48,7 +49,7 @@ import com.santrong.plt.webpage.user.entry.UserQuery;
 public class CourseAction extends BaseAction {
 	
 	/**
-	 * 点播课首页
+	 * 课程首页
 	 * @return
 	 */
 	@RequestMapping(value="")
@@ -57,7 +58,7 @@ public class CourseAction extends BaseAction {
 	}
 	
 	/**
-	 * 按年级搜索的点播课
+	 * 按年级搜索的课程
 	 * @param grade
 	 * @return
 	 */
@@ -67,7 +68,7 @@ public class CourseAction extends BaseAction {
 	}
 	
 	/**
-	 * 按年级和科目搜索的点播课
+	 * 按年级和科目搜索的课程
 	 * @param grade
 	 * @param subject
 	 * @return
@@ -99,7 +100,7 @@ public class CourseAction extends BaseAction {
 		
 		// 分类-科目
 		SubjectDao subjectDao = new SubjectDao();
-		List<SubjectItem> subjectList;
+		List<SubjectItem> subjectList = null;
 		if(grade.equals("all")) {
 			subjectList = subjectDao.selectAll();
 		}else {
@@ -108,7 +109,7 @@ public class CourseAction extends BaseAction {
 		
 		// 分类-类别
 		GradeDao gradeDao = new GradeDao();
-		List<GradeView> gradeList;
+		List<GradeView> gradeList = null;
 		if(subject.equals("all")) {
 			gradeList = gradeDao.selectGrade();
 		}else {
@@ -127,7 +128,6 @@ public class CourseAction extends BaseAction {
 		request.setAttribute("subjectList", subjectList);
 		request.setAttribute("gradeList", gradeList);
 		request.setAttribute("levelList", levelList);
-		
 		request.setAttribute("grade", grade);
 		request.setAttribute("subject", subject);
 		request.setAttribute("level", level);
@@ -136,7 +136,7 @@ public class CourseAction extends BaseAction {
 	}
 	
 	/**
-	 * 点播课详细页面
+	 * 课程详细页面
 	 * @param id
 	 * @return
 	 */

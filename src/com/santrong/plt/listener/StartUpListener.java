@@ -69,7 +69,7 @@ public class StartUpListener implements ServletContextListener {
 						GradeLevelEntry e = new GradeLevelEntry();
 						e.setLevelId(item.getId());
 						e.setLevelName(item.getLevelName());
-						e.setLevelEnName(item.getGradeEnName());
+						e.setLevelEnName(item.getLevelEnName());
 						levelList.add(e);
 					}
 					entry.setGradeLevelList(levelList);
