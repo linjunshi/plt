@@ -110,6 +110,31 @@ public class ParamHelper {
 		return orderRule;
 	}
 	
+	public List<String> getParamList() {
+		return paramList;
+	}
+	public void setParamList(List<String> paramList) {
+		this.paramList = paramList;
+	}
+	public String getFilterName() {
+		return filterName;
+	}
+	public void setFilterName(String filterName) {
+		this.filterName = filterName;
+	}
+	public String getSortName() {
+		return sortName;
+	}
+	public void setSortName(String sortName) {
+		this.sortName = sortName;
+	}
+	public void setOrderBy(String orderBy) {
+		this.orderBy = orderBy;
+	}
+	public void setOrderRule(String orderRule) {
+		this.orderRule = orderRule;
+	}
+
 	//-----------------------------以下开始为页面输出-------------------------------
 	
 	/**

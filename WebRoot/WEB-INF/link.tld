@@ -7,8 +7,32 @@
 	<uri>http://www.santrong.com</uri>
 
 	<function>
-		<name>fkk</name>
-		<function-class>com.santrong.plt.opt.tag.SantrongTag</function-class>
-		<function-signature>java.lang.String fkk(java.lang.String)</function-signature>
+		<name>full</name>
+		<function-class>com.santrong.plt.opt.tag.LinkTag</function-class>
+		<function-signature>java.lang.String full(com.santrong.plt.opt.ParamHelper)</function-signature>
 	</function>
+	
+	<function>
+		<name>startRemove</name>
+		<function-class>com.santrong.plt.opt.tag.LinkTag</function-class>
+		<function-signature>java.lang.String startRemove(com.santrong.plt.opt.ParamHelper, java.lang.String)</function-signature>
+	</function>
+	
+	<function>
+		<name>startReplace</name>
+		<function-class>com.santrong.plt.opt.tag.LinkTag</function-class>
+		<function-signature>java.lang.String startReplace(com.santrong.plt.opt.ParamHelper, java.lang.String, java.lang.String)</function-signature>
+	</function>
+	
+	<function>
+		<name>containSwitch</name>
+		<function-class>com.santrong.plt.opt.tag.LinkTag</function-class>
+		<function-signature>java.lang.String containSwitch(com.santrong.plt.opt.ParamHelper, java.lang.String)</function-signature>
+	</function>
+	
+	<function>
+		<name>sort</name>
+		<function-class>com.santrong.plt.opt.tag.LinkTag</function-class>
+		<function-signature>java.lang.String sort(com.santrong.plt.opt.ParamHelper, java.lang.String)</function-signature>
+	</function>			
 </taglib> 

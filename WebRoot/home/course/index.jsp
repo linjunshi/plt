@@ -24,21 +24,30 @@ Globals.page = "Index_index";
 	            	<c:if test="${subjectList != null}">
 	                <ul>
 	                	<li>科目：</li>
-
+	                	<li class="${class : staticEq('all', subject)}"><a href="${ctx}/course/${grade}${link : full(param)}">全部</a></li>
+						<c:forEach items="${subjectList}" var="subjectItem">
+						<li class="${class : staticEq(subjectItem.subjectEnName, subject)}"><a href="${ctx}/course/${grade}/${subjectItem.subjectEnName}${link : full(param)}">${subjectItem.subjectName}</a></li>
+						</c:forEach>
 	                </ul>
 	                </c:if>
 	                
 	                <c:if test="${gradeList != null}">
 	                <ul>
 	                	<li>类别：</li>
-
+	                	<li class="${class : staticEq('all', grade)}"><a href="${ctx}/course/all/${subject}${link : full(param)}">全部</a></li>
+						<c:forEach items="${gradeList}" var="gradeItem">
+						<li class="${class : staticEq(gradeItem.gradeEnName, grade)}"><a href="${ctx}/course/${gradeItem.gradeEnName}/${subject}${link : full(param)}">${gradeItem.gradeName}</a></li>
+						</c:forEach>
 	                </ul>
 	                </c:if>
 	                
 	                <c:if test="${levelList != null}">
 	                <ul>
 	                	<li>年级：</li>
-
+	                	<li class="${class : startEq(param, 'level', null)}"><a href="${ctx}/course/${grade}/${subject}${link : startRemove(param, 'level')}">全部</a></li>
+						<c:forEach items="${levelList}" var="levelItem">
+						<li class="${class : startEq(param, 'level', levelItem.levelEnName)}"><a href="${ctx}/course/${grade}/${subject}${link : startReplace(param, levelItem.levelEnName)}">${levelItem.levelName}</a></li>
+						</c:forEach>
 	                </ul>
 	                </c:if>
 	                
@@ -46,8 +55,9 @@ Globals.page = "Index_index";
 	        </div>
 	        <div class="live_resul clearfix">
 	            <div class="result_sorting">
-	            <a class="${santrong:fkk('123')}" href="${ctx}/course/${grade}/${subject}">价格排序</a>
-
+				<a class="${class : sort(param, 'price')}" href="${ctx}/course/${grade}/${subject}${link : sort(param, 'price')}">价格排序</a>
+	            <a class="${class : sort(param, 'sale')}" href="${ctx}/course/${grade}/${subject}${link : sort(param, 'sale')}">销量排序</a>
+	            <a class="${class : select(param, 'live')}" href="${ctx}/course/${grade}/${subject}${link : containSwitch(param, 'live')}">直播课</a>
 	            </div>
 	            <div class="result_list">
 	                <ul>
