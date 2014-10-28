@@ -29,7 +29,7 @@
 	            <div>
 	                <ul>
 						<li><a href='${ctx}/'><fmt:message key="menu_index" /></a></li>
-						<li><a href='${ctx}/course?live=true'><fmt:message key="menu_live" /></a></li>
+						<li><a href='${ctx}/course?filter=live'><fmt:message key="menu_live" /></a></li>
 						<li><a href='${ctx}/school'><fmt:message key="menu_school" /></a></li>
 						<li><a href='${ctx}/teacher'><fmt:message key="menu_teacher" /></a></li>
 	                </ul>

@@ -74,4 +74,20 @@ public class ClassTag {
 		}
 		return "";
 	}
+	
+	/**
+	 * 输出默认排序按钮的class
+	 * @return
+	 */
+	public static String sortWithout() {
+		ParamHelper param = ThreadUtils.getParam();
+		if(param != null) {
+			if(MyUtils.isNull(param.getOrderBy())) {
+				return "current";
+			}else {
+				return "";
+			}
+		}
+		return "";
+	}
 }

@@ -35,4 +35,10 @@
 		<function-class>com.santrong.plt.opt.tag.LinkTag</function-class>
 		<function-signature>java.lang.String sort(java.lang.String)</function-signature>
 	</function>			
+	
+	<function>
+		<name>sortWithout</name>
+		<function-class>com.santrong.plt.opt.tag.LinkTag</function-class>
+		<function-signature>java.lang.String sortWithout()</function-signature>
+	</function>		
 </taglib> 

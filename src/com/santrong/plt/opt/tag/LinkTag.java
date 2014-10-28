@@ -42,13 +42,15 @@ public class LinkTag {
 		if(param != null) {
 			StringBuilder sb = new StringBuilder();
 			if(param.getParamList().size() != 0) {
-				sb.append(param.getFilterName()).append("=");
 				for(String t:param.getParamList()) {
 					if(!t.startsWith(key)) {
 						sb.append(t).append("_");
 					}
 				}
-				sb.deleteCharAt(sb.length() - 1);
+				if(sb.length() != 0) {
+					sb.insert(0, "=").insert(0, param.getFilterName());
+					sb.deleteCharAt(sb.length() - 1);
+				}
 			}
 			return linkAddSort(param, sb);
 			}
@@ -98,7 +100,6 @@ public class LinkTag {
 		ParamHelper param = ThreadUtils.getParam();
 		if(param != null) {
 			StringBuilder sb = new StringBuilder();
-			sb.append(param.getFilterName()).append("=");
 			boolean finded = false;
 			if(param.getParamList().size() != 0) {
 				for(String t:param.getParamList()) {
@@ -109,14 +110,17 @@ public class LinkTag {
 					}
 				}
 			}
-			if(sb.charAt(sb.length() - 1) == '_') {
+			if(sb.length() != 0 && sb.charAt(sb.length() - 1) == '_') {
 				sb.deleteCharAt(sb.length() - 1);
 			}
 			if(!finded) {
-				if(sb.charAt(sb.length() - 1) != '=') {
+				if(sb.length() != 0 && sb.charAt(sb.length() - 1) != '=') {
 					sb.append("_");
 				}
 				sb.append(key);
+			}
+			if(sb.length() != 0) {
+				sb.insert(0, "=").insert(0, param.getFilterName());
 			}
 			return linkAddSort(param, sb);
 		}
@@ -156,6 +160,29 @@ public class LinkTag {
 			if(sb.length() != 0) {
 				sb.insert(0, "?");
 			}
+			return sb.toString();
+		}
+		return "";
+	}
+	
+	/**
+	 * 取消排序（默认排序）的链接
+	 * @return
+	 */
+	public static String sortWithout() {
+		ParamHelper param = ThreadUtils.getParam();
+		if(param != null) {
+			StringBuilder sb = new StringBuilder();
+			if(param.getParamList().size() != 0) {
+				sb.append(param.getFilterName()).append("=");
+				for(String t:param.getParamList()) {
+					sb.append(t).append("_");
+				}
+				sb.deleteCharAt(sb.length() - 1);
+			}
+			if(sb.length() != 0) {
+				sb.insert(0, "?");
+			}			
 			return sb.toString();
 		}
 		return "";
