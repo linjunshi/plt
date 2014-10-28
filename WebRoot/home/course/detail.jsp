@@ -82,25 +82,22 @@ Globals.page = "Index_course";
 	    <div class="th_catalog clearfix">
 	        <h2>课程目录</h2>     
 	        <dl class="th_car_list">
-	        	<c:forEach items="${course.chapterDetailList}" var="chapter" varStatus="st">
-	            <dt>第${st.index+1}节：${chapter.remark}</dt>
-	            	<c:forEach items="${chapter.resourceList}" var="resource">
+	            <dt></dt>
+	            	<c:forEach items="${course.chapterDetailList}" var="chapter" varStatus="st">
 	            	<dd>
-	            		 <h3>${resource.title}---type:${resource.typeString}</h3>
-	            		<a href="#">观看</a>
+	            		<div class="course_list_tab"><p>${st.index+1}<b>${chapter.remark}</b></p> <a href="#">观看</a></div>
+	            		<div class="course_list_des">
+		            		<c:forEach items="${chapter.resourceList}" var="resource">
+		            		 <p>${resource.title}---type:${resource.typeString}</p>
+		            		</c:forEach>
+	            		</div>
 	            	</dd>
-					</c:forEach>
-	            </c:forEach>
+	            	</c:forEach>
 	        </dl>
 	    </div>
 	    <div class="th_evaluation">
 	        <h2>课程评价</h2>
 	        <div class="comm_pjxq clearfix">
-		        <ul>
-        			<c:forEach items="${course.commentList}" var="comment" varStatus="st">
-						<li>${comment.showName}：${comment.remark}</li>
-					</c:forEach>
-		        </ul>
 	            <div class="fl th_mr"><span class="pt4">学生满意度</span> <span class="pt5">0%</span> <span class="pt6">已有0人参与评价</span> </div>
 	            <div class="th_pt">
 	                <label class="fl " for="ricx1">
@@ -119,7 +116,28 @@ Globals.page = "Index_course";
 	                    <input id="ricx5" type="checkbox" value="1">
 	                    只看有内容的评论 </label>
 	            </div>
+	            
 	        </div>
+	        
+        <div class="th_lea clearfix">
+            <ul>
+                <c:forEach items="${course.commentList}" var="comment" varStatus="st">
+                    <div class="th_img_user"><img src="${ctx}/resource/images/003.jpg" width="80" height="80"></div>
+                    <div class="th_mr2">
+                        <p><b>用户名:${comment.showName}</b></p>
+                        <p>${comment.remark}</p>
+                    </div>
+                    <div class="th_time"><span>2014-07-03</span><a href="#">回复</a></div>
+                    <div class="th_text_i">
+                        <label>
+                            <textarea name="th" cols="2" rows="3" class="th_te"></textarea>
+                        </label>
+                        <a href="#" class="th_text_but">提交</a>
+                    </div>
+				</c:forEach>
+            </ul>
+        </div>
+	        
 	        <div class="th_con">
 	            <label>
 	            <textarea name="th" cols="2" rows="3" class="th_textarea"></textarea>

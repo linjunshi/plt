@@ -40,4 +40,18 @@ public abstract class BaseAction {
 	public final String redirect(String url) {
 		return Redirect + getContext() + url;
 	}
+	
+	public final boolean getBooleanParameter(String param) {
+		try{
+			return Boolean.parseBoolean(this.getRequest().getParameter(param));
+		}catch(Exception e) {}
+		return false;
+	}
+	
+	public final int getIntParameter(String param) {
+		try{
+			return Integer.parseInt(this.getRequest().getParameter(param));
+		}catch(Exception e) {}
+		return 0;
+	}
 }

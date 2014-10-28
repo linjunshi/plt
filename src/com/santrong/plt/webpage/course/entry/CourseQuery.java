@@ -1,0 +1,66 @@
+package com.santrong.plt.webpage.course.entry;
+
+import com.santrong.plt.opt.PageQuery;
+
+/**
+ * @author weinianjie
+ * @date 2014年10月9日
+ * @time 下午4:06:04
+ */
+public class CourseQuery extends PageQuery{
+	private String keywords;
+	private String areaCode;
+	private String levelEnName;
+	private String gradeEnName;
+	private String subjectEnName;
+	private boolean live;
+
+	
+	public boolean isLive() {
+		return live;
+	}
+
+	public void setLive(boolean live) {
+		this.live = live;
+	}
+
+	public String getSubjectEnName() {
+		return subjectEnName;
+	}
+
+	public void setSubjectEnName(String subjectEnName) {
+		this.subjectEnName = subjectEnName;
+	}
+
+	public String getAreaCode() {
+		return areaCode;
+	}
+
+	public void setAreaCode(String areaCode) {
+		this.areaCode = areaCode;
+	}
+
+	public String getKeywords() {
+		return keywords;
+	}
+
+	public void setKeywords(String keywords) {
+		this.keywords = keywords;
+	}
+
+	public String getLevelEnName() {
+		return levelEnName;
+	}
+
+	public void setLevelEnName(String levelEnName) {
+		this.levelEnName = levelEnName;
+	}
+
+	public String getGradeEnName() {
+		return gradeEnName;
+	}
+
+	public void setGradeEnName(String gradeEnName) {
+		this.gradeEnName = gradeEnName;
+	}
+}

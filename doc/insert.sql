@@ -57,7 +57,7 @@ drop table if exists user_extends;
 create table user_extends(
 	userId varchar(32) not null comment '用户ID',
 	birthday date comment '出生日期',
-	native varchar(128) comment '籍贯信息',
+	nativePlace varchar(128) comment '籍贯信息',
 	primary key (userId)
 ) engine=InnoDB default charset=utf8 collate=utf8_bin comment '用户扩展信息表';
 
@@ -226,7 +226,7 @@ create table course(
 	subjectId varchar(32) not null comment '所属科目',
 	remark varchar(10240) comment '具体描述',
 	saleCount int(10) default 0 not null comment '销售量',
-	collectionCount int(10) default 0 not null comment '收藏量',
+	collectCount int(10) default 0 not null comment '收藏量',
 	ownerId varchar(32) not null comment '所有者',
 	cts datetime comment '创建时间',
 	uts datetime comment '修改时间',
