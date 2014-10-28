@@ -9,6 +9,7 @@
 <link rel="stylesheet" type="text/css" href="${ctx}/resource/css/test.css" />
 <link rel="stylesheet" type="text/css" href="${ctx}/resource/css/index.css" />
 <link rel="stylesheet" type="text/css" href="${ctx}/resource/css/cssImg.css" />
+<link rel="stylesheet" type="text/css" href="${ctx}/resource/css/form.css" />
 <script type="text/javascript" src="${ctx}/resource/js/lang/message.${lang}.js"></script>
 <script type="text/javascript" src="${ctx}/resource/js/yu.js"></script>
 <script type="text/javascript" src="${ctx}/resource/js/tb.js"></script>

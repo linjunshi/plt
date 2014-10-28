@@ -60,6 +60,7 @@ public class CourseAction extends BaseAction {
 		return catagory("all", "all");
 	}
 	
+	
 	/**
 	 * 按年级搜索的课程
 	 * @param grade
@@ -230,5 +231,6 @@ public class CourseAction extends BaseAction {
 		
 		return "course/detail";
 	}
+	
 	
 }

@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
+import com.santrong.plt.webpage.user.entry.UserDetailView;
 import com.santrong.plt.webpage.user.entry.UserItem;
 
 /**
@@ -49,4 +50,10 @@ public interface UserMapper {
     @Select("select * from user limit 16;")
     List<UserItem> selectAll();
     
+    @Select("select a.*, b.education, b.positional, b.graduateSchool, c.birthday, c.nativePlace from user a "
+    		+ "LEFT JOIN user_education b on a.id = b.userId "
+    		+ "LEFT JOIN user_extends c on a.id = c.userId "
+    		+ "where a.id = #{id};")
+    UserDetailView selectDetailById(String id);
+
 }

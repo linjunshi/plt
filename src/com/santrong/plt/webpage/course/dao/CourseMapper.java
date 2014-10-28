@@ -34,4 +34,14 @@ public interface CourseMapper {
 	
 	@Select("select * from course limit 10")
 	List<CourseItem> selectByQuery();
+	
+	/**
+	 * 查询某位老师的所有课程信息
+	 * @author huangweihua
+	 * @param  ownerId
+	 * @return List<CourseItem>
+	 */
+	@Select("select * from course where ownerId = #{userid}")
+	List<CourseItem> selectByUserid(String userid);
+	
 }
