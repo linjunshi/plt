@@ -1,6 +1,7 @@
 package com.santrong.plt.opt.tag;
 
 import com.santrong.plt.opt.ParamHelper;
+import com.santrong.plt.opt.ThreadUtils;
 import com.santrong.plt.util.MyUtils;
 
 /**
@@ -15,7 +16,8 @@ public class LinkTag {
 	 * 获得过滤器和排序器组成的全链接
 	 * @return
 	 */
-	public static String full(ParamHelper param) {
+	public static String full() {
+		ParamHelper param = ThreadUtils.getParam();
 		if(param != null) {
 			StringBuilder sb = new StringBuilder();
 			if(param.getParamList().size() != 0) {
@@ -35,7 +37,8 @@ public class LinkTag {
 	 * @param key
 	 * @return
 	 */
-	public static String startRemove(ParamHelper param, String key) {
+	public static String startRemove(String key) {
+		ParamHelper param = ThreadUtils.getParam();
 		if(param != null) {
 			StringBuilder sb = new StringBuilder();
 			if(param.getParamList().size() != 0) {
@@ -58,7 +61,8 @@ public class LinkTag {
 	 * @param val
 	 * @return
 	 */	
-	public static String startReplace(ParamHelper param, String key, String val) {
+	public static String startReplace(String key, String val) {
+		ParamHelper param = ThreadUtils.getParam();
 		if(param != null) {
 			StringBuilder sb = new StringBuilder();
 			sb.append(param.getFilterName()).append("=");
@@ -90,7 +94,8 @@ public class LinkTag {
 	 * @param key
 	 * @return
 	 */
-	public static String containSwitch(ParamHelper param, String key) {
+	public static String containSwitch(String key) {
+		ParamHelper param = ThreadUtils.getParam();
 		if(param != null) {
 			StringBuilder sb = new StringBuilder();
 			sb.append(param.getFilterName()).append("=");
@@ -123,7 +128,8 @@ public class LinkTag {
 	 * @param key
 	 * @return
 	 */
-	public static String sort(ParamHelper param, String key) {
+	public static String sort(String key) {
+		ParamHelper param = ThreadUtils.getParam();
 		if(param != null) {
 			StringBuilder sb = new StringBuilder();
 			if(param.getParamList().size() != 0) {
