@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<taglib xmlns="http://java.sun.com/xml/ns/j2ee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-jsptaglibrary_2_0.xsd"
+	version="2.0">
+	<tlib-version>1.0</tlib-version>
+	<short-name>filter</short-name>
+	<uri>http://www.santrong.com</uri>
+
+	<function>
+		<name>full</name>
+		<function-class>com.santrong.plt.opt.tag.LinkTag</function-class>
+		<function-signature>java.lang.String full(com.santrong.plt.opt.ParamHelper)</function-signature>
+	</function>
+	
+	<function>
+		<name>startRemove</name>
+		<function-class>com.santrong.plt.opt.tag.LinkTag</function-class>
+		<function-signature>java.lang.String startRemove(com.santrong.plt.opt.ParamHelper, java.lang.String)</function-signature>
+	</function>
+	
+	<function>
+		<name>startReplace</name>
+		<function-class>com.santrong.plt.opt.tag.LinkTag</function-class>
+		<function-signature>java.lang.String startReplace(com.santrong.plt.opt.ParamHelper, java.lang.String, java.lang.String)</function-signature>
+	</function>
+	
+	<function>
+		<name>containSwitch</name>
+		<function-class>com.santrong.plt.opt.tag.LinkTag</function-class>
+		<function-signature>java.lang.String containSwitch(com.santrong.plt.opt.ParamHelper, java.lang.String)</function-signature>
+	</function>
+	
+	<function>
+		<name>sort</name>
+		<function-class>com.santrong.plt.opt.tag.LinkTag</function-class>
+		<function-signature>java.lang.String sort(com.santrong.plt.opt.ParamHelper, java.lang.String)</function-signature>
+	</function>			
+</taglib> 

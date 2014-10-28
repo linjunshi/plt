@@ -20,13 +20,13 @@ Globals.page = "Index_index";
 	        <div class="list_category">
 	            <div class="live_title"><a href="#">首页></a> <span></span><span>所有分类</span> <span>共有10236个</span></div>
 	            <div class="cate_list">
-	            
+	            	
 	            	<c:if test="${subjectList != null}">
 	                <ul>
 	                	<li>科目：</li>
-	                	<li<c:if test="${subject == 'all'}"> class="current"</c:if>><a href="${ctx}/course/${grade}">全部</a></li>
+	                	<li class="${class : staticEq('all', subject)}"><a href="${ctx}/course/${grade}${link : full(param.self)}">全部</a></li>
 						<c:forEach items="${subjectList}" var="subjectItem">
-						<li<c:if test="${subjectItem.subjectEnName == subject}"> class="current"</c:if>><a href="${ctx}/course/${grade}/${subjectItem.subjectEnName}">${subjectItem.subjectName}</a></li>
+						<li class="${class : staticEq(subjectItem.subjectEnName, subject)}"><a href="${ctx}/course/${grade}/${subjectItem.subjectEnName}${link : full(param.self)}">${subjectItem.subjectName}</a></li>
 						</c:forEach>
 	                </ul>
 	                </c:if>
@@ -34,9 +34,9 @@ Globals.page = "Index_index";
 	                <c:if test="${gradeList != null}">
 	                <ul>
 	                	<li>类别：</li>
-	                	<li<c:if test="${grade == 'all'}"> class="current"</c:if>><a href="${ctx}/course/all/${subject}">全部</a></li>
+	                	<li class="${class : staticEq('all', grade)}"><a href="${ctx}/course/all/${subject}${link : full(param.self)}">全部</a></li>
 						<c:forEach items="${gradeList}" var="gradeItem">
-						<li<c:if test="${gradeItem.gradeEnName == grade}"> class="current"</c:if>><a href="${ctx}/course/${gradeItem.gradeEnName}/${subject}">${gradeItem.gradeName}</a></li>
+						<li class="${class : staticEq(gradeItem.gradeEnName, grade)}"><a href="${ctx}/course/${gradeItem.gradeEnName}/${subject}${link : full(param.self)}">${gradeItem.gradeName}</a></li>
 						</c:forEach>
 	                </ul>
 	                </c:if>
@@ -44,9 +44,9 @@ Globals.page = "Index_index";
 	                <c:if test="${levelList != null}">
 	                <ul>
 	                	<li>年级：</li>
-	                	<li<c:if test="${level == null}"> class="current"</c:if>><a href="${ctx}/course/${grade}/${subject}">全部</a></li>
+	                	<li class="${class : startEq(param.self, 'level', null)}"><a href="${ctx}/course/${grade}/${subject}${link : startRemove(param.self, 'level')}">全部</a></li>
 						<c:forEach items="${levelList}" var="levelItem">
-						<li<c:if test="${levelItem.levelEnName == level}"> class="current"</c:if>><a href="${ctx}/course/${grade}/${subject}?level=${levelItem.levelEnName}">${levelItem.levelName}</a></li>
+						<li class="${class : startEq(param.self, 'level', levelItem.levelEnName)}"><a href="${ctx}/course/${grade}/${subject}${link : startReplace(param.self, levelItem.levelEnName)}">${levelItem.levelName}</a></li>
 						</c:forEach>
 	                </ul>
 	                </c:if>
@@ -54,7 +54,9 @@ Globals.page = "Index_index";
 	            </div>
 	        </div>
 	        <div class="live_resul clearfix">
-	            <div class="result_sorting"><a href="#">默认排序</a><a href="#">默认排序</a><a href="#">默认排序</a><a href="#">直播课</a></div>
+	            <div class="result_sorting">
+				<a class="${class : sort(param.self, 'price')}" href="${ctx}/course/${grade}/${subject}">价格排序</a>
+	            </div>
 	            <div class="result_list">
 	                <ul>
 						<c:forEach items="${courseList}" var="course">
@@ -66,7 +68,7 @@ Globals.page = "Index_index";
 	                            <p class="pt3">${course.price}</p>
 	                        </div>
 	                        <div class="result_price">
-	                            <h3 class="yuan">2365<span>元</span></h3>
+	                            <h3 class="yuan">${course.price}<span>元</span></h3>
 	                            <p class="pt2">${course.price}</p>
 	                            <p class="pt3">${course.price}</p>
 	                        </div>

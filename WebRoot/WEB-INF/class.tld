@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<taglib xmlns="http://java.sun.com/xml/ns/j2ee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-jsptaglibrary_2_0.xsd"
+	version="2.0">
+	<tlib-version>1.0</tlib-version>
+	<short-name>filter</short-name>
+	<uri>http://www.santrong.com</uri>
+
+	<function>
+		<name>sort</name>
+		<function-class>com.santrong.plt.opt.tag.ClassTag</function-class>
+		<function-signature>java.lang.String sort(com.santrong.plt.opt.ParamHelper, java.lang.String)</function-signature>
+	</function>
+	
+	<function>
+		<name>select</name>
+		<function-class>com.santrong.plt.opt.tag.ClassTag</function-class>
+		<function-signature>java.lang.String select(com.santrong.plt.opt.ParamHelper, java.lang.String)</function-signature>
+	</function>
+	
+	<function>
+		<name>staticEq</name>
+		<function-class>com.santrong.plt.opt.tag.ClassTag</function-class>
+		<function-signature>java.lang.String staticEq(java.lang.String, java.lang.String)</function-signature>
+	</function>
+	
+	<function>
+		<name>startEq</name>
+		<function-class>com.santrong.plt.opt.tag.ClassTag</function-class>
+		<function-signature>java.lang.String startEq(com.santrong.plt.opt.ParamHelper, java.lang.String, java.lang.String)</function-signature>
+	</function>			
+</taglib> 
