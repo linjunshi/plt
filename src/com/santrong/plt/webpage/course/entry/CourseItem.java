@@ -22,6 +22,7 @@ public class CourseItem {
 	private Date cts;
 	private Date uts;
 	
+	
 	public String getId() {
 		return id;
 	}

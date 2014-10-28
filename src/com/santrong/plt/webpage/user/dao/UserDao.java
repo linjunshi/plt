@@ -14,6 +14,7 @@ import com.santrong.plt.util.AreaUtils;
 import com.santrong.plt.util.BeanUtils;
 import com.santrong.plt.util.MyUtils;
 import com.santrong.plt.webpage.BaseDao;
+import com.santrong.plt.webpage.user.entry.UserDetailView;
 import com.santrong.plt.webpage.user.entry.UserItem;
 import com.santrong.plt.webpage.user.entry.UserQuery;
 
@@ -182,4 +183,15 @@ public class UserDao extends BaseDao{
 		}
 		return null;
 	}
+	
+	// 获取用户详细信息，包括扩展部分的详细信息
+	public UserDetailView selectDetailById(String id) {
+		UserMapper mapper = this.getMapper(UserMapper.class);
+		if(mapper != null) {
+			return mapper.selectDetailById(id);
+		}
+		return null;
+	}
+		
+		
 }

@@ -27,7 +27,6 @@ import com.santrong.plt.webpage.course.entry.CommentItem;
 import com.santrong.plt.webpage.course.entry.CourseDetailView;
 import com.santrong.plt.webpage.course.entry.CourseItem;
 import com.santrong.plt.webpage.course.entry.ResourceEntry;
-import com.santrong.plt.webpage.course.service.CourseService;
 import com.santrong.plt.webpage.home.dao.GradeDao;
 import com.santrong.plt.webpage.home.dao.SubjectDao;
 import com.santrong.plt.webpage.home.entry.GradeView;
@@ -56,6 +55,7 @@ public class CourseAction extends BaseAction {
 	public String index() {
 		return catagory("all", "all");
 	}
+	
 	
 	/**
 	 * 按年级搜索的课程
@@ -198,5 +198,6 @@ public class CourseAction extends BaseAction {
 		
 		return "course/detail";
 	}
+	
 	
 }

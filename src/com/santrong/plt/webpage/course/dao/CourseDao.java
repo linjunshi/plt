@@ -41,4 +41,18 @@ public class CourseDao extends BaseDao {
 		return null;
 	}
 	
+	/**
+	 * 查询某位老师的所有课程信息
+	 * @author huangweihua
+	 * @param  ownerId
+	 * @return List<CourseItem>
+	 */
+	public List<CourseItem> selectByUserid(String userid){
+		CourseMapper mapper = this.getMapper(CourseMapper.class);
+		if(mapper != null) {
+			return mapper.selectByUserid(userid);
+		}
+		return null;
+	}
+	
 }
