@@ -57,6 +57,10 @@ public class ParamHelper {
 		this.init(request, "filter", "sort");
 	}
 	
+	public ParamHelper getSelf() {
+		return this;
+	}
+	
 	/**
 	 * 根据参数开头名获取参数
 	 * @param key

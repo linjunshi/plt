@@ -10,10 +10,6 @@ import com.santrong.plt.util.MyUtils;
  */
 public class ClassTag {
 	
-	public static String fk(ParamHelper param) {
-		return "123";
-	}
-	
 	/**
 	 * 输出排序按钮的class，升序sortAsc，降序sortDesc，无
 	 * @param sortName

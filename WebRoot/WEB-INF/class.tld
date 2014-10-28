@@ -7,12 +7,6 @@
 	<uri>http://www.santrong.com</uri>
 
 	<function>
-		<name>fk</name>
-		<function-class>com.santrong.plt.opt.tag.ClassTag</function-class>
-		<function-signature>java.lang.String fk(com.santrong.plt.opt.ParamHelper)</function-signature>
-	</function>
-
-	<function>
 		<name>sort</name>
 		<function-class>com.santrong.plt.opt.tag.ClassTag</function-class>
 		<function-signature>java.lang.String sort(com.santrong.plt.opt.ParamHelper, java.lang.String)</function-signature>
@@ -21,18 +15,18 @@
 	<function>
 		<name>select</name>
 		<function-class>com.santrong.plt.opt.tag.ClassTag</function-class>
-		<function-signature>java.lang.String sort(com.santrong.plt.opt.ParamHelper, java.lang.String)</function-signature>
+		<function-signature>java.lang.String select(com.santrong.plt.opt.ParamHelper, java.lang.String)</function-signature>
 	</function>
 	
 	<function>
 		<name>staticEq</name>
 		<function-class>com.santrong.plt.opt.tag.ClassTag</function-class>
-		<function-signature>java.lang.String sort(java.lang.String, java.lang.String)</function-signature>
+		<function-signature>java.lang.String staticEq(java.lang.String, java.lang.String)</function-signature>
 	</function>
 	
 	<function>
 		<name>startEq</name>
 		<function-class>com.santrong.plt.opt.tag.ClassTag</function-class>
-		<function-signature>java.lang.String sort(com.santrong.plt.opt.ParamHelper, java.lang.String, java.lang.String)</function-signature>
+		<function-signature>java.lang.String startEq(com.santrong.plt.opt.ParamHelper, java.lang.String, java.lang.String)</function-signature>
 	</function>			
 </taglib> 
