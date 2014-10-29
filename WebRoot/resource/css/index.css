@@ -282,9 +282,9 @@
 .th_evaluation .pt4 { font-weight:700; color:#666; margin-top:5px}
 .th_evaluation .pt5 { font-size:20px; color:#f90;margin-top:-5px}
 .th_evaluation .pt6 {margin-top:5px}
-.th_evaluation .th_con{ height:160px;}
+.th_evaluation .th_con{ height:170px;}
 .th_evaluation .th_textarea { width:96%; margin:10px 20px; height:100px;border:1px #dbdbdb solid;}
-.th_evaluation .th_pt_but {	width:80px;	height: 30px;line-height: 30px;	position: absolute;	right: 30px;bottom: 13px;background: #009871;text-align:center;	color:#fff;font-size:18px;}
+.th_evaluation .th_pt_but {	width:80px;	height: 30px;line-height: 30px;	position: absolute;	right: 18px;bottom: 13px;background: #009871;text-align:center;	color:#fff;font-size:18px;border: 0}
 .th_evaluation .th_pt_but:hover, .th_text_but:hover{ background:#06654d;}
 
 .th_propaganda { margin-bottom:20px;}/*图片广告*/
@@ -293,23 +293,42 @@
 .th_lea ul li {border-bottom:1px #dbdbdb dashed;}
 .th_img_user { float:left; margin:15px;}
 .th_mr2 { float:left; display:block; width:880px; margin:10px 0 0 20px; overflow:hidden;}
-.th_time { float:right; display:block;margin:80px 30px 0 0px;}
-.th_time a{ margin-left:20px; }
-.th_text_i { margin-bottom:40px;}
+.th_mr2 .th_post_time { color: #999;}
+.th_text_i { margin-bottom:40px;margin-left: 110px;}
 .th_te { width:96%; height:30px; margin:0 20px; border:1px #dbdbdb solid;}
-.th_text_but{position: absolute;right: 30px;bottom:10px; width:60px; padding:2px 10px; background:#009871; color:#fff; text-align:center;}
+.th_text_but{position: absolute;right: 15px;bottom:10px; width:55px; padding:2px 10px; background:#009871; color:#fff; text-align:center;}
 
+/*-------------------2014.10.29 by huangweihua------------------------*/
+.th_post_content { float:left; display:block; width:880px; margin:10px 0 0 20px; overflow:hidden;}
+.th_post_footer { float:left; display:block;
+	margin:15px 50px 10px 0px;
+}
+.th_post_footer, .th_post_footer:link, .th_post_footer:visited, .th_post_footer:active {
+	color: #999;
+}
+.th_post_footer a{ margin-left:20px; color: #999;}
+.th_post_footer a:hover { color: black;}
+.th_btn_upvote, .th_btn_reply {
+	background-image: url(../images/icons1.gif);
+	background-repeat: no-repeat;
+}
+.th_btn_upvote {
+	padding-left: 15px;
+	background-position: -448px -84px;
+	margin-right: 6px;
+}
+.th_btn_upvote:hover {
+	background-position: -448px -104px;
+}
+.th_btn_reply {
+	padding-left: 19px;
+	background-position: -443px -124px;
+}
+.th_btn_reply:hover {
+	background-position: -443px -144px;
+}
 
 /*-------------------2014.10.28 by huangwh------------------------*/
-.th_lea { width:99%;  margin-bottom:5px; position:relative;}
-.th_lea ul li {border-bottom:1px #dbdbdb dashed;}
-.th_img_user { float:left; margin:15px;}
-.th_mr2 { float:left; display:block; width:880px; margin:10px 0 0 20px; overflow:hidden;}
-.th_time { float:right; display:block;margin:80px 30px 0 0px;}
-.th_time a{ margin-left:20px; }
-.th_text_i { margin-bottom:40px;}
-.th_te { width:96%; height:30px; margin:0 20px; border:1px #dbdbdb solid;}
-.th_text_but{position: absolute;right: 30px;bottom:10px; width:60px; padding:2px 10px; background:#009871; color:#fff; text-align:center;}
 
 
 /*--------------------老师详细-----------------------*/

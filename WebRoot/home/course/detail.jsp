@@ -118,32 +118,45 @@ Globals.page = "Index_course";
 	            </div>
 	            
 	        </div>
-	        
-        <div class="th_lea clearfix">
-            <ul>
-                <c:forEach items="${course.commentList}" var="comment" varStatus="st">
-                    <div class="th_img_user"><img src="${ctx}/resource/images/003.jpg" width="80" height="80"></div>
-                    <div class="th_mr2">
-                        <p><b>用户名:${comment.showName}</b></p>
-                        <p>${comment.remark}</p>
-                    </div>
-                    <div class="th_time"><span>2014-07-03</span><a href="#">回复</a></div>
-                    <div class="th_text_i">
-                        <label>
-                            <textarea name="th" cols="2" rows="3" class="th_te"></textarea>
-                        </label>
-                        <a href="#" class="th_text_but">提交</a>
-                    </div>
-				</c:forEach>
-            </ul>
-        </div>
-	        
-	        <div class="th_con">
-	            <label>
-	            <textarea name="th" cols="2" rows="3" class="th_textarea"></textarea>
-	            </label>
-	            <a href="#" class="th_pt_but">确定</a></div>
-	    </div>
+
+			<div class="th_lea clearfix">
+				<ul>
+					<c:forEach items="${course.commentList}" var="comment"
+						varStatus="st">
+						<li>
+							<div class="th_img_user">
+								<img src="${ctx}/resource/images/003.jpg" width="80" height="80">
+							</div>
+							<div class="th_mr2">
+								<p>
+									<b>${comment.showName}</b>
+									<span class="th_post_time">&nbsp;&nbsp;&nbsp;<fmt:formatDate value="${comment.cts}" type="both"/></span>
+								</p>
+							</div>
+							<div class="th_post_content">
+								<p>${comment.remark}</p>
+							</div>
+							<div class="th_post_footer">
+								<a href="javascript:void(0);" class="th_btn_upvote">(<em>2120</em>)</a>
+								<a href="javascript:void(0);" class="th_btn_reply">回复(<em>98</em>)</a>
+							</div>
+							<div class="th_text_i"	>
+								<label><textarea name="th" cols="2" rows="3" class="th_te"></textarea></label>
+								<a href="javascript:void(0);" class="th_text_but">提交</a>
+							</div>
+						</li>
+					</c:forEach>
+				</ul>
+			</div>
+
+			<div class="th_con">
+				<form action="${ctx}/course/comment" method="post" id="comment_form">
+					<label><textarea name="remark" cols="2" rows="3" class="th_textarea"></textarea></label> 
+					<input type="hidden" name="courseId" value="${course.id}"/>
+					<input class="th_pt_but" type="submit"  value="确定"/>
+				</form>
+			</div>
+		</div>
 	    
 	</div>		
 		
