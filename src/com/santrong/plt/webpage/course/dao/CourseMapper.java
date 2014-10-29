@@ -44,4 +44,14 @@ public interface CourseMapper {
 	@Select("select * from course where ownerId = #{userid}")
 	List<CourseItem> selectByUserid(String userid);
 	
+	/**
+	 * 查询某间学校的所有课程信息
+	 * @author huangweihua
+	 * @param  schoolId
+	 * @return List<CourseItem>
+	 */
+	@Select("select a.*,b.* from course a LEFT JOIN user b on a.ownerId = b.id where b.schoolId = #{schoolId} ORDER BY a.cts DESC;")
+	List<CourseItem> selectCourseBySchoolId(String schoolId);
+	
+
 }

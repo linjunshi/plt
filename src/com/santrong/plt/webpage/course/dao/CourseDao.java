@@ -201,4 +201,18 @@ public class CourseDao extends BaseDao {
 		return count;
 	}
 	
+	/**
+	 * 查询某间学校的所有课程信息
+	 * @author huangweihua
+	 * @param  schoolId
+	 * @return List<CourseItem>
+	 */
+	public List<CourseItem> selectCourseBySchoolId(String schoolId) {
+		CourseMapper mapper = this.getMapper(CourseMapper.class);
+		if(mapper != null){
+			return mapper.selectCourseBySchoolId(schoolId);
+		}
+		return null;
+	}
+	
 }

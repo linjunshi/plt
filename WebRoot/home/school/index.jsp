@@ -21,7 +21,7 @@ Globals.page = "Index_index";
 	        <div class="schoool_box_list clearfix">
 	            <ul>
 	            	<c:forEach items="${schoolList}" var="school">
-	                <li><a href="#"><img src="${ctx}/resource/photo/02.jpg" width="220" height="140"></a>
+	                <li><a href="${ctx}/school/${school.id}.html"><img src="${ctx}/resource/photo/02.jpg" width="220" height="140"></a>
 	                    <h2>${school.schoolName}</h2>
 	                    <p><span>2136456</span>关注</p>
 	                </li>

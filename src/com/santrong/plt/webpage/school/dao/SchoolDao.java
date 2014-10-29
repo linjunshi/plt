@@ -129,4 +129,5 @@ public class SchoolDao extends BaseDao {
 		
 		return count;
 	}	
+	
 }

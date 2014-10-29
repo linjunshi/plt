@@ -193,5 +193,17 @@ public class UserDao extends BaseDao{
 		return null;
 	}
 		
-		
+	/**
+	 * 查询学校里的老师 
+	 * @author huangweihua
+	 * @param  role shcoolId
+	 * @return 
+	 */
+	public List<UserItem> selectTeacherBySchoolId(String shcoolId){
+		UserMapper mapper = this.getMapper(UserMapper.class);
+		if(mapper != null){
+			return mapper.selectTeacherBySchoolId(shcoolId);
+		}
+		return null;
+	}
 }
