@@ -16,6 +16,7 @@ import com.santrong.plt.util.MyUtils;
 import com.santrong.plt.webpage.BaseDao;
 import com.santrong.plt.webpage.school.entry.SchoolItem;
 import com.santrong.plt.webpage.school.entry.SchoolQuery;
+import com.santrong.plt.webpage.school.entry.SchoolTotalView;
 
 /**
  * @author weinianjie
@@ -23,6 +24,19 @@ import com.santrong.plt.webpage.school.entry.SchoolQuery;
  * @time 下午4:00:31
  */
 public class SchoolDao extends BaseDao {
+	
+	/**
+	 * 获取首页统计后的学校
+	 * @param gradeGroup
+	 * @return
+	 */
+	public List<SchoolTotalView> selectTotalByGradeGroup(int gradeGroup, String areaCode, int limit) {
+		SchoolMapper mapper = this.getMapper(SchoolMapper.class);
+		if(mapper != null) {
+			return mapper.selectTotalByGradeGroup(gradeGroup, AreaUtils.lostTail(areaCode), limit);
+		}
+		return null;
+	}
 	
 	/**
 	 * 根据具体搜索条件查询学校

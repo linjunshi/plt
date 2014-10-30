@@ -17,8 +17,7 @@ import com.santrong.plt.webpage.BaseAction;
 import com.santrong.plt.webpage.course.dao.CourseDao;
 import com.santrong.plt.webpage.course.entry.CourseView;
 import com.santrong.plt.webpage.school.dao.SchoolDao;
-import com.santrong.plt.webpage.school.entry.SchoolQuery;
-import com.santrong.plt.webpage.school.entry.SchoolView;
+import com.santrong.plt.webpage.school.entry.GradeSchoolView;
 import com.santrong.plt.webpage.user.dao.UserDao;
 import com.santrong.plt.webpage.user.entry.UserItem;
 import com.santrong.plt.webpage.user.entry.UserQuery;
@@ -38,18 +37,13 @@ public class HomeAction extends BaseAction{
 		
 		// 推荐学校
 		SchoolDao schoolDao = new SchoolDao();
-		SchoolQuery schoolQuery = new SchoolQuery();
-		schoolQuery.setAreaCode(area.getCityCode());
-		schoolQuery.setPageSize(4);
-		List<SchoolView> schoolView = new ArrayList<SchoolView>();
+		List<GradeSchoolView> schoolView = new ArrayList<GradeSchoolView>();
 		for(GradeDefineEntry grade : GradeDefine.gradeList) {
-			SchoolView view = new SchoolView();
+			GradeSchoolView view = new GradeSchoolView();
 			view.setGradeGroup(grade.getGradeGroup());
 			view.setGradeName(grade.getGradeName());
 			view.setGradeEnName(grade.getGradeEnName());
-			
-			schoolQuery.setSchoolGrade(view.getGradeGroup());
-			view.setSchoolList(schoolDao.selectByQuery(schoolQuery));
+			view.setSchoolList(schoolDao.selectTotalByGradeGroup(view.getGradeGroup(), area.getCityCode(), 6));
 			schoolView.add(view);
 		}
 		request.setAttribute("schoolView", schoolView);
@@ -58,7 +52,8 @@ public class HomeAction extends BaseAction{
 		UserDao userDao = new UserDao();
 		UserQuery userQuery = new UserQuery();
 		userQuery.setAreaCode(area.getCityCode());
-		userQuery.setPageSize(8);
+		userQuery.setRole(UserItem.Role_Teacher);
+		userQuery.setPageSize(6);
 		List<UserItem> teacherList = userDao.selectByQuery(userQuery);
 		request.setAttribute("teacherList", teacherList);
 		

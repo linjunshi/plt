@@ -38,20 +38,23 @@ Globals.page = "Index_index";
 					<a target="_blank" href="${ctx}/"><img src="${ctx}/resource/images/01.jpg" width="648" height="300"></a>
 		        </div>
 		        <div class="column_left_bottom">
-		            <div class="column_left_header clearfix"> <a href="#" class="column_left_title">推荐老师</a>
+		            <div class="column_left_header clr">
+						<h2 class="column_left_title">推荐老师</h2>
 		                <ul class="column_left_nav">
 		                	<c:forEach items="${gaozhong_subjectList}" var="subject">
 		                	<li><a href="${ctx}/teacher/all/${subject.subjectEnName}">${subject.subjectName}</a></li>
 		                	</c:forEach>
 		                </ul>
-		                <a href="${ctx}/teacher" class="column_left_more">更多</a> </div>
-		            <div class="column_img_item">
-		                <ul>
-							<c:forEach items="${teacherList}" var="item" varStatus="st">
-							<li class="<c:if test="${(st.index + 1) % 8 == 0}">img_list_margin</c:if>"><a href="${ctx}/teacher/${item.id}.html" target="_blank"><img src="${ctx}/resource/images/005.jpg" /></a><span>${item.showName}</span><span>XXX</span></li>
-							</c:forEach>
-		                </ul>
-		            </div>
+		                <a href="${ctx}/teacher" class="column_left_more">更多</a>
+					</div>
+	                <ul class="column_img_item clr">
+						<c:forEach items="${teacherList}" var="item" varStatus="st">
+						<li class="<c:if test="${(st.index + 1) % 6 == 0}">margin_right_clear</c:if>">
+							<a href="${ctx}/teacher/${item.id}.html" target="_blank"><img src="${ctx}/resource/images/005.jpg" /></a>
+							<span>${item.showName}</span>
+						</li>
+						</c:forEach>
+	                </ul>
 		        </div>
 		        <div class="column_right_school">
 		            <div class="column_school">
@@ -68,14 +71,12 @@ Globals.page = "Index_index";
 		            	<c:forEach items="${schoolView}" var="grade" varStatus="st">
 		                <ul class="<c:if test="${st.index > 0}">hide</c:if>">
 							<c:forEach items="${grade.schoolList}" var="school">
-		                    <li class="school_list">
-		                        <div class="school_pic"><a href="${ctx}/school/${school.id}.html" target="_blank"><img src="${ctx}/resource/images/003.jpg" border="0" /></a></div>
-		                        <div class="school_user">
-		                            <h2>${school.schoolName}</h2>
+		                    <li class="school_list clr">
+		                        <div class="school_name">
+		                            <h2><a href="${ctx}/school/${school.id}.html">${school.schoolName}</a></h2>
 		                        </div>
-		                        <div class="school_con">
-		                            <p>1000</p>
-		                        </div>
+	                            <div class="teacher l">老师<b>${school.teacherCount}</b></div>
+	                            <div class="course l">课程<b>${school.courseCount}</b></div>
 		                    </li>								
 							</c:forEach>
 		                </ul>
@@ -85,7 +86,8 @@ Globals.page = "Index_index";
 		    </div>
 		    
 		    <div class="wrap_catalog_box">
-		        <div class="catalog_box_header"> <a href="#" class="catalog_box_title">高中</a>
+		        <div class="catalog_box_header">
+					<h2 class="catalog_box_title">高中</h2>
 		            <ul class="catalog_box_nav">
 	            	    <c:forEach items="${gaozhong_subjectList}" var="subject">
 	                	<li><a href="${ctx}/course/gaozhong/${subject.subjectEnName}">${subject.subjectName}</a></li>
@@ -96,12 +98,12 @@ Globals.page = "Index_index";
 		        <div class="img_item">
 		            <ul>
 						<c:forEach items="${gaozhong_courseList}" var="item" varStatus="st">
-		                <li class="img_list<c:if test="${(st.index+1)%5 == 0}"> img_list_margin</c:if>">
+		                <li class="img_list<c:if test="${(st.index+1)%5 == 0}"> margin_right_clear</c:if>">
 		                    <div class="pic"><a href="${ctx}/course/${item.id}.html" target="_blank"><img src="${ctx}/resource/photo/01.jpg" border="0" /></a></div>
 		                    <div class="img_user">
 		                        <h2>${item.courseName}</h2>
 		                    </div>
-		                    <div class="img_counts"><span>价格:<b>${item.price}</b></span><span>xxx<strong>(123)</strong></span></div>
+		                    <div class="img_counts"><span class="price"><b>${item.price}</b>元</span><span class="sales"><strong>${item.saleCount}</strong>人购买</span></div>
 		                </li>						
 						</c:forEach>
 		            </ul>
@@ -109,7 +111,8 @@ Globals.page = "Index_index";
 		    </div>
 		    
 		    <div class="wrap_catalog_box">
-		        <div class="catalog_box_header"> <a href="#" class="catalog_box_title">初中</a>
+		        <div class="catalog_box_header">
+					<h2 class="catalog_box_title">初中</h2>
 		            <ul class="catalog_box_nav">
 	            	    <c:forEach items="${chuzhong_subjectList}" var="subject">
 	                	<li><a href="${ctx}/course/xiaoxue/${subject.subjectEnName}">${subject.subjectName}</a></li>
@@ -120,12 +123,12 @@ Globals.page = "Index_index";
 		        <div class="img_item">
 		            <ul>
 						<c:forEach items="${chuzhong_courseList}" var="item" varStatus="st">
-		                <li class="img_list<c:if test="${(st.index+1)%5 == 0}"> img_list_margin</c:if>">
+		                <li class="img_list<c:if test="${(st.index+1)%5 == 0}"> margin_right_clear</c:if>">
 		                    <div class="pic"><a href="${ctx}/course/${item.id}.html" target="_blank"><img src="${ctx}/resource/photo/01.jpg" border="0" /></a></div>
 		                    <div class="img_user">
 		                        <h2>${item.courseName}</h2>
 		                    </div>
-		                    <div class="img_counts"><span>价格:<b>${item.price}</b></span><span>xxx<strong>(123)</strong></span></div>
+		                    <div class="img_counts"><span class="price"><b>${item.price}</b>元</span><span class="sales"><strong>${item.saleCount}</strong>人购买</span></div>
 		                </li>						
 						</c:forEach>
 		            </ul>
@@ -133,23 +136,24 @@ Globals.page = "Index_index";
 		    </div>
 		    
 		    <div class="wrap_catalog_box">
-		        <div class="catalog_box_header"> <a href="#" class="catalog_box_title">小学</a>
+		        <div class="catalog_box_header">
+					<h2 class="catalog_box_title">小学</h2>
 		            <ul class="catalog_box_nav">
 	            	    <c:forEach items="${xiaoxue_subjectList}" var="subject">
 	                	<li><a href="${ctx}/course/xiaoxue/${subject.subjectEnName}">${subject.subjectName}</a></li>
 	                	</c:forEach>
 		            </ul>
-		            <a href="${ctx}/course/xiaoxue/${subject.subjectEnName}" class="catalog_box_more">更多</a>
+		            <a href="${ctx}/course/xiaoxue" class="catalog_box_more">更多</a>
 				</div>
 		        <div class="img_item">
 		            <ul>
 						<c:forEach items="${xiaoxue_courseList}" var="item" varStatus="st">
-		                <li class="img_list<c:if test="${(st.index+1)%5 == 0}"> img_list_margin</c:if>">
+		                <li class="img_list<c:if test="${(st.index+1)%5 == 0}"> margin_right_clear</c:if>">
 		                    <div class="pic"><a href="${ctx}/course/${item.id}.html" target="_blank"><img src="${ctx}/resource/photo/01.jpg" border="0" /></a></div>
 		                    <div class="img_user">
 		                        <h2>${item.courseName}</h2>
 		                    </div>
-		                    <div class="img_counts"><span>价格:<b>${item.price}</b></span><span>xxx<strong>(123)</strong></span></div>
+		                    <div class="img_counts"><span class="price"><b>${item.price}</b>元</span><span class="sales"><strong>${item.saleCount}</strong>人购买</span></div>
 		                </li>						
 						</c:forEach>
 		            </ul>

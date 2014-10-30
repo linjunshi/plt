@@ -12,6 +12,24 @@ public class UserQuery extends PageQuery{
 	private String areaCode;
 	private int schoolAbsoluteGrade;
 	private int schoolGrade;
+	private int absoluteRole;
+	private int role;
+
+	public int getAbsoluteRole() {
+		return absoluteRole;
+	}
+
+	public void setAbsoluteRole(int absoluteRole) {
+		this.absoluteRole = absoluteRole;
+	}
+
+	public int getRole() {
+		return role;
+	}
+
+	public void setRole(int role) {
+		this.role = role;
+	}
 
 	public String getAreaCode() {
 		return areaCode;
