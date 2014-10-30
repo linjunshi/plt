@@ -13,9 +13,13 @@ import com.santrong.plt.opt.grade.GradeDefine;
 import com.santrong.plt.system.Global;
 import com.santrong.plt.util.MyUtils;
 import com.santrong.plt.webpage.BaseAction;
+import com.santrong.plt.webpage.course.dao.CourseDao;
+import com.santrong.plt.webpage.course.entry.CourseItem;
 import com.santrong.plt.webpage.school.dao.SchoolDao;
 import com.santrong.plt.webpage.school.entry.SchoolItem;
 import com.santrong.plt.webpage.school.entry.SchoolQuery;
+import com.santrong.plt.webpage.user.dao.UserDao;
+import com.santrong.plt.webpage.user.entry.UserItem;
 
 /**
  * @author weinianjie
@@ -77,6 +81,19 @@ public class SchoolAction extends BaseAction {
 	@RequestMapping("/{id}.html")
 	public String detail(@PathVariable String id) {
 		
+		// 查询学校里的老师和学生
+		UserDao userDao = new UserDao();
+		List<UserItem> teacher = userDao.selectTeacherBySchoolId(id);
+		
+		// 查询学校里所有开设的课程
+		CourseDao courseDao = new CourseDao();
+		List<CourseItem> course = courseDao.selectCourseBySchoolId(id);
+
+		HttpServletRequest request = getRequest();
+		request.setAttribute("teacher", teacher);
+		request.setAttribute("course", course);
+		
 		return "school/detail";
 	}
+	
 }

@@ -24,4 +24,17 @@ public class CommentDao extends BaseDao {
 		}
 		return null;
 	}
+	
+	/**
+	 * 新增一条课程评论
+	 * @param id，userId，courseId，remark，cts，uts
+	 * @return
+	 */
+	public int insert(CommentItem commentItem){
+		CommentMapper mapper = this.getMapper(CommentMapper.class);
+		if(mapper != null) {
+			return mapper.insert(commentItem);
+		}
+		return 0;
+	}
 }

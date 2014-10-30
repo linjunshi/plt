@@ -56,4 +56,7 @@ public interface UserMapper {
     		+ "where a.id = #{id};")
     UserDetailView selectDetailById(String id);
 
+    // 查询学校里的老师 role
+ 	@Select("select * from user where schoolId = #{schoolId}")
+ 	List<UserItem> selectTeacherBySchoolId(String schoolId);
 }

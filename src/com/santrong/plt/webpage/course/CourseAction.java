@@ -1,6 +1,7 @@
 package com.santrong.plt.webpage.course;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -12,7 +13,9 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.mysql.jdbc.StringUtils;
 import com.santrong.plt.opt.ParamHelper;
 import com.santrong.plt.opt.ThreadUtils;
 import com.santrong.plt.opt.area.AreaEntry;
@@ -219,6 +222,7 @@ public class CourseAction extends BaseAction {
 		List<CommentItem> commentList = commentDao.selectByCourseId(course.getId());
 		course.setCommentList(commentList);
 		
+		
 		// 课程老师
 		UserDao userDao = new UserDao();
 		UserItem teacher = userDao.selectById(course.getOwnerId());
@@ -232,5 +236,37 @@ public class CourseAction extends BaseAction {
 		return "course/detail";
 	}
 	
+	/**
+	 * 课程详细页面-课程评价回复功能
+	 * @param id
+	 * @return
+	 */
+	@RequestMapping(value="/comment", method=RequestMethod.POST)
+	public String postNewReply(String courseId ,String remark) {
+		
+		if(StringUtils.isNullOrEmpty(courseId) || StringUtils.isNullOrEmpty(remark) ) {
+			return this.redirect("/course/" + courseId + ".html");
+		}
+		
+		Object obj = getRequest().getSession().getAttribute(Global.SessionKey_LoginUser);
+		if(obj == null) {
+			// 没登陆
+			return this.redirect("/login");
+		}
+		UserItem currentUser = (UserItem)obj;
+		
+		CommentDao commentDao = new CommentDao();
+		CommentItem commentItem = new CommentItem();
+		
+		commentItem.setId(MyUtils.getGUID());
+		commentItem.setUserId(currentUser.getId());
+		commentItem.setCourseId(courseId);
+		commentItem.setRemark(remark);
+		commentItem.setCts(new Date());
+		commentItem.setUts(new Date());
+		commentDao.insert(commentItem);
+		
+		return this.redirect("/course/" + courseId + ".html");
+	}
 	
 }

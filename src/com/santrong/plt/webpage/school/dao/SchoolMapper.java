@@ -8,6 +8,7 @@ import org.apache.ibatis.annotations.Select;
 import com.santrong.plt.webpage.school.entry.SchoolTotalView;
 
 
+
 /**
  * @author weinianjie
  * @date 2014年10月8日

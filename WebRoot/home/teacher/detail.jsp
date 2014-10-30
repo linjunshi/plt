@@ -44,7 +44,7 @@ Globals.page = "Index_index";
 										<strong><a href="#">课程名字:</a></strong><a href="#">${course.courseName}</a>
 									</div>
 									<div class="infos">
-										主讲教师：<a href="${ctx}/teacher/"> ${course.teacher}</a> 课程数：171节 <em>（${course.endTime}分钟）</em> 
+										主讲教师：<a href="${ctx}/teacher/"> ${course.teacher}</a> 课程数：171节 <em>（1440分钟）</em> 
 										内容简介:<a href="${ctx}/course/detail?id=${course.id}"> [详细]</a>
 									</div>
 									<div class="course_operate">
