@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.mysql.jdbc.StringUtils;
 import com.santrong.plt.opt.ParamHelper;
+import com.santrong.plt.opt.ThreadUtils;
 import com.santrong.plt.opt.area.AreaEntry;
 import com.santrong.plt.opt.grade.GradeDefine;
 import com.santrong.plt.opt.grade.GradeLevelEntry;
@@ -154,7 +155,8 @@ public class CourseAction extends BaseAction {
 		// 参数组
 		request.setAttribute("grade", grade);
 		request.setAttribute("subject", subject);
-		request.setAttribute("param", param);
+//		request.setAttribute("param", param);
+		ThreadUtils.setParam(param);
 		
 		// 搜索条件
 		request.setAttribute("subjectList", subjectList);

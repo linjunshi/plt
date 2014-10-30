@@ -7,7 +7,6 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.mysql.jdbc.StringUtils;
 import com.santrong.plt.log.Log;
@@ -79,7 +78,6 @@ public class UserAction extends BaseAction {
 		}
 		
 		getRequest().getSession().setAttribute(Global.SessionKey_LoginUser, user);
-		
 		return this.redirect("/study/course");
 	}	
 	
@@ -102,7 +100,8 @@ public class UserAction extends BaseAction {
 	@RequestMapping(value="/login", method=RequestMethod.POST)
 	public String loginPOST(String username, String password) {
 		if(StringUtils.isNullOrEmpty(username) || StringUtils.isNullOrEmpty(password)) {
-			return "error_login_nullInput";
+			addError("请输入用户名和密码");
+			return "login";
 		}
 		
 		UserDao userDao = new UserDao();
@@ -115,40 +114,12 @@ public class UserAction extends BaseAction {
 		if(!user.getPassword().equals(MyUtils.getMD5(password))) {
 			return "error_login_password_wrong";
 		}
-		
+
 		getRequest().getSession().setAttribute(Global.SessionKey_LoginUser, user);
 		
 		return this.redirect("/");
 	}	
 	
-	/**
-	 * 登录页面提交（异步）
-	 * @param username
-	 * @param password
-	 * @return
-	 */
-	@RequestMapping(value="/login2", method=RequestMethod.POST)
-	@ResponseBody
-	public String login2(String username, String password) {
-		if(StringUtils.isNullOrEmpty(username) || StringUtils.isNullOrEmpty(password)) {
-			return "error_login_nullInput";
-		}
-		
-		UserDao userDao = new UserDao();
-		UserItem user = userDao.selectByUserName(username);
-		
-		if(user == null) {
-			return "error_login_user_not_exists";
-		}
-		
-		if(!user.getPassword().equals(MyUtils.getMD5(password))) {
-			return "error_login_password_wrong";
-		}
-		
-		getRequest().getSession().setAttribute(Global.SessionKey_LoginUser, user);
-		
-		return SUCCESS;
-	}
 	
 	/**
 	 * 注销
@@ -174,31 +145,5 @@ public class UserAction extends BaseAction {
 		
 		return this.redirect("/");
 	}	
-	
-	/**
-	 * 注销（异步）
-	 * @param request
-	 * @return
-	 */
-	@RequestMapping(value="/logout2", method=RequestMethod.POST)
-	@ResponseBody
-	public String logout2(HttpServletRequest request) {
-
-		UserItem user = (UserItem)request.getSession().getAttribute(Global.SessionKey_LoginUser);
-		if(user == null) {
-			return SUCCESS;
-		}
-		
-		try{
-			request.getSession().removeAttribute(Global.SessionKey_LoginUser);
-		}catch(Exception e) {
-			Log.printStackTrace(e);
-			return FAIL;
-		}
-		
-		request.getSession().invalidate();
-		
-		return SUCCESS;
-	}
 
 }

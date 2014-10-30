@@ -3,7 +3,7 @@
 <c:set var="title" value="三简在线教育平台-用户注册" ></c:set>
 <c:set var="keywords" value="456" ></c:set>
 <c:set var="description" value="789" ></c:set>
-<%@ include file="inc/header.jsp"%>
+<%@ include file="inc/header2.jsp"%>
 <script type="text/javascript">
 var Globals = {};
 Globals.ctx = "${ctx}";

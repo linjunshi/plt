@@ -151,7 +151,6 @@ insert into grade_to_subject values('10009', '10003');
 insert into grade_to_subject values('10009', '10004');
 insert into grade_to_subject values('10009', '10005');
 insert into grade_to_subject values('10009', '10006');
-insert into grade_to_subject values('10009', '10007');
 insert into grade_to_subject values('10010', '10000');
 insert into grade_to_subject values('10010', '10001');
 insert into grade_to_subject values('10010', '10002');
@@ -159,7 +158,6 @@ insert into grade_to_subject values('10010', '10003');
 insert into grade_to_subject values('10010', '10004');
 insert into grade_to_subject values('10010', '10005');
 insert into grade_to_subject values('10010', '10006');
-insert into grade_to_subject values('10010', '10007');
 insert into grade_to_subject values('10011', '10000');
 insert into grade_to_subject values('10011', '10001');
 insert into grade_to_subject values('10011', '10002');
@@ -167,7 +165,6 @@ insert into grade_to_subject values('10011', '10003');
 insert into grade_to_subject values('10011', '10004');
 insert into grade_to_subject values('10011', '10005');
 insert into grade_to_subject values('10011', '10006');
-insert into grade_to_subject values('10011', '10007');
 
 -- 学校表 --
 drop table if exists school;

@@ -40,6 +40,7 @@ public class HomeAction extends BaseAction{
 		SchoolDao schoolDao = new SchoolDao();
 		SchoolQuery schoolQuery = new SchoolQuery();
 		schoolQuery.setAreaCode(area.getCityCode());
+		schoolQuery.setPageSize(4);
 		List<SchoolView> schoolView = new ArrayList<SchoolView>();
 		for(GradeDefineEntry grade : GradeDefine.gradeList) {
 			SchoolView view = new SchoolView();

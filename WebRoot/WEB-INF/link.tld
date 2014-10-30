@@ -9,30 +9,36 @@
 	<function>
 		<name>full</name>
 		<function-class>com.santrong.plt.opt.tag.LinkTag</function-class>
-		<function-signature>java.lang.String full(com.santrong.plt.opt.ParamHelper)</function-signature>
+		<function-signature>java.lang.String full()</function-signature>
 	</function>
 	
 	<function>
 		<name>startRemove</name>
 		<function-class>com.santrong.plt.opt.tag.LinkTag</function-class>
-		<function-signature>java.lang.String startRemove(com.santrong.plt.opt.ParamHelper, java.lang.String)</function-signature>
+		<function-signature>java.lang.String startRemove(java.lang.String)</function-signature>
 	</function>
 	
 	<function>
 		<name>startReplace</name>
 		<function-class>com.santrong.plt.opt.tag.LinkTag</function-class>
-		<function-signature>java.lang.String startReplace(com.santrong.plt.opt.ParamHelper, java.lang.String, java.lang.String)</function-signature>
+		<function-signature>java.lang.String startReplace(java.lang.String, java.lang.String)</function-signature>
 	</function>
 	
 	<function>
 		<name>containSwitch</name>
 		<function-class>com.santrong.plt.opt.tag.LinkTag</function-class>
-		<function-signature>java.lang.String containSwitch(com.santrong.plt.opt.ParamHelper, java.lang.String)</function-signature>
+		<function-signature>java.lang.String containSwitch(java.lang.String)</function-signature>
 	</function>
 	
 	<function>
 		<name>sort</name>
 		<function-class>com.santrong.plt.opt.tag.LinkTag</function-class>
-		<function-signature>java.lang.String sort(com.santrong.plt.opt.ParamHelper, java.lang.String)</function-signature>
+		<function-signature>java.lang.String sort(java.lang.String)</function-signature>
 	</function>			
+	
+	<function>
+		<name>sortWithout</name>
+		<function-class>com.santrong.plt.opt.tag.LinkTag</function-class>
+		<function-signature>java.lang.String sortWithout()</function-signature>
+	</function>		
 </taglib> 

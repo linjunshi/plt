@@ -12,7 +12,7 @@
 	                <div class="search">
 	                    <input name="search" type="text"  class="search_text" value="站内搜索"/>
 	                    <a href="#" class="search_txt">站内搜索</a></div>
-	                <div class="fast_navigat"><a href="#">首页</a><a href="#">首页</a><a href="#">首页</a><a href="#">首页</a></div>
+	                <div class="fast_navigat"></div>
 	            </div>
 	        </form>
 	        <c:if test="${sessionScope.loginUser == null}">
@@ -29,7 +29,7 @@
 	            <div>
 	                <ul>
 						<li><a href='${ctx}/'><fmt:message key="menu_index" /></a></li>
-						<li><a href='${ctx}/course?live=true'><fmt:message key="menu_live" /></a></li>
+						<li><a href='${ctx}/course?filter=live'><fmt:message key="menu_live" /></a></li>
 						<li><a href='${ctx}/school'><fmt:message key="menu_school" /></a></li>
 						<li><a href='${ctx}/teacher'><fmt:message key="menu_teacher" /></a></li>
 	                </ul>

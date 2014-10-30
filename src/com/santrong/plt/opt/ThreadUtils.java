@@ -30,6 +30,20 @@ public class ThreadUtils{
     // 绑定线程的http的response
     private static final ThreadLocal<HttpServletResponse> _hresponse = new ThreadLocal<HttpServletResponse>();
     
+    // 绑定线程的查询条件
+    private static final ThreadLocal<ParamHelper> _param = new ThreadLocal<ParamHelper>();
+    
+    public static ParamHelper getParam() {
+    	return _param.get();
+    }
+    
+    public static void setParam(ParamHelper param) {
+    	_param.set(param);
+    }
+    
+    public static void clearParam() {
+    	_param.set(null);
+    }
 
 	public static Connection currentConnection() throws SQLException {
 		Connection conn = _connection.get();
@@ -106,6 +120,7 @@ public class ThreadUtils{
         clearHttpRequest();
         clearHttpResponse();
         closeConnection();
+        clearParam();
     }
     
     public static boolean beginTranx() {

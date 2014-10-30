@@ -40,6 +40,7 @@ body {color: #666;font: 12px/1.8em Arial, Helvetica, sans-serif;background:#FFF;
   -webkit-box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1), 0 0 8px rgba(82, 168, 236, 0.6);
   -moz-box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1), 0 0 8px rgba(82, 168, 236, 0.6);
   box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1), 0 0 8px rgba(82, 168, 236, 0.6);}
+  .system_tip {width:900px; line-height:26px; margin:10px auto; border:solid 1px #F5D8A7; border-radius:2px; background-color:#FFF6DB;}
 </style>
 </head>
 <!-- <body scroll="no"> -->
@@ -47,13 +48,20 @@ body {color: #666;font: 12px/1.8em Arial, Helvetica, sans-serif;background:#FFF;
 <div class="mr">
   <h2>用户登录</h2>
 </div>
+<c:if test="${tipError != null && fn:length(tipError)  > 0}">
+<div class="system_tip">
+	<c:forEach items="${tipError}" var="tip">
+	<p>${tip.msg}</p>
+	</c:forEach>
+</div>
+</c:if>
 <div class="border">
   <div class="center">
     <div class="user">
       <form class="formlogin" action="${ctx}/login" method="post">
         <div class="loginuser">
           <label class="login"><fmt:message key="index_user_username"/>：</label>
-          <input name="username" type="text" size="20" class="text2">
+          <input name="username" type="text" size="20" class="text2" value="${username}">
         </div>
         <div class="loginuser">
           <label class="login"><fmt:message key="index_user_password"/>：</label>

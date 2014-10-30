@@ -1,6 +1,7 @@
 package com.santrong.plt.opt.tag;
 
 import com.santrong.plt.opt.ParamHelper;
+import com.santrong.plt.opt.ThreadUtils;
 import com.santrong.plt.util.MyUtils;
 
 /**
@@ -15,7 +16,8 @@ public class LinkTag {
 	 * 获得过滤器和排序器组成的全链接
 	 * @return
 	 */
-	public static String full(ParamHelper param) {
+	public static String full() {
+		ParamHelper param = ThreadUtils.getParam();
 		if(param != null) {
 			StringBuilder sb = new StringBuilder();
 			if(param.getParamList().size() != 0) {
@@ -35,17 +37,20 @@ public class LinkTag {
 	 * @param key
 	 * @return
 	 */
-	public static String startRemove(ParamHelper param, String key) {
+	public static String startRemove(String key) {
+		ParamHelper param = ThreadUtils.getParam();
 		if(param != null) {
 			StringBuilder sb = new StringBuilder();
 			if(param.getParamList().size() != 0) {
-				sb.append(param.getFilterName()).append("=");
 				for(String t:param.getParamList()) {
 					if(!t.startsWith(key)) {
 						sb.append(t).append("_");
 					}
 				}
-				sb.deleteCharAt(sb.length() - 1);
+				if(sb.length() != 0) {
+					sb.insert(0, "=").insert(0, param.getFilterName());
+					sb.deleteCharAt(sb.length() - 1);
+				}
 			}
 			return linkAddSort(param, sb);
 			}
@@ -58,7 +63,8 @@ public class LinkTag {
 	 * @param val
 	 * @return
 	 */	
-	public static String startReplace(ParamHelper param, String key, String val) {
+	public static String startReplace(String key, String val) {
+		ParamHelper param = ThreadUtils.getParam();
 		if(param != null) {
 			StringBuilder sb = new StringBuilder();
 			sb.append(param.getFilterName()).append("=");
@@ -90,10 +96,10 @@ public class LinkTag {
 	 * @param key
 	 * @return
 	 */
-	public static String containSwitch(ParamHelper param, String key) {
+	public static String containSwitch(String key) {
+		ParamHelper param = ThreadUtils.getParam();
 		if(param != null) {
 			StringBuilder sb = new StringBuilder();
-			sb.append(param.getFilterName()).append("=");
 			boolean finded = false;
 			if(param.getParamList().size() != 0) {
 				for(String t:param.getParamList()) {
@@ -104,14 +110,17 @@ public class LinkTag {
 					}
 				}
 			}
-			if(sb.charAt(sb.length() - 1) == '_') {
+			if(sb.length() != 0 && sb.charAt(sb.length() - 1) == '_') {
 				sb.deleteCharAt(sb.length() - 1);
 			}
 			if(!finded) {
-				if(sb.charAt(sb.length() - 1) != '=') {
+				if(sb.length() != 0 && sb.charAt(sb.length() - 1) != '=') {
 					sb.append("_");
 				}
 				sb.append(key);
+			}
+			if(sb.length() != 0) {
+				sb.insert(0, "=").insert(0, param.getFilterName());
 			}
 			return linkAddSort(param, sb);
 		}
@@ -123,7 +132,8 @@ public class LinkTag {
 	 * @param key
 	 * @return
 	 */
-	public static String sort(ParamHelper param, String key) {
+	public static String sort(String key) {
+		ParamHelper param = ThreadUtils.getParam();
 		if(param != null) {
 			StringBuilder sb = new StringBuilder();
 			if(param.getParamList().size() != 0) {
@@ -150,6 +160,29 @@ public class LinkTag {
 			if(sb.length() != 0) {
 				sb.insert(0, "?");
 			}
+			return sb.toString();
+		}
+		return "";
+	}
+	
+	/**
+	 * 取消排序（默认排序）的链接
+	 * @return
+	 */
+	public static String sortWithout() {
+		ParamHelper param = ThreadUtils.getParam();
+		if(param != null) {
+			StringBuilder sb = new StringBuilder();
+			if(param.getParamList().size() != 0) {
+				sb.append(param.getFilterName()).append("=");
+				for(String t:param.getParamList()) {
+					sb.append(t).append("_");
+				}
+				sb.deleteCharAt(sb.length() - 1);
+			}
+			if(sb.length() != 0) {
+				sb.insert(0, "?");
+			}			
 			return sb.toString();
 		}
 		return "";
