@@ -35,9 +35,9 @@ public class GradeDefine {
 	 * @param gradeName
 	 * @return
 	 */
-	public static GradeDefineEntry getByGradeEnName(String gradeName) {
+	public static GradeDefineEntry getByGradeEnName(String gradeEnName) {
 		for(GradeDefineEntry entry : gradeList) {
-			if(entry.getGradeEnName().equals(gradeName)) {
+			if(entry.getGradeEnName().equals(gradeEnName)) {
 				return entry;
 			}
 		}

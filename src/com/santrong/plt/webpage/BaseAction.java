@@ -1,10 +1,15 @@
 package com.santrong.plt.webpage;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.santrong.plt.opt.SimpleTipItem;
 import com.santrong.plt.opt.ThreadUtils;
 import com.santrong.plt.system.Global;
+import com.santrong.plt.util.MyUtils;
 import com.santrong.plt.webpage.user.entry.UserItem;
 
 /**
@@ -39,6 +44,22 @@ public abstract class BaseAction {
 	
 	public final String redirect(String url) {
 		return Redirect + getContext() + url;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public final void addError(String msg) {
+		if(MyUtils.isNotNull(msg)) {
+			HttpServletRequest request = this.getRequest();
+			List<SimpleTipItem> list = (ArrayList<SimpleTipItem>)request.getAttribute(Global.RequestKey_TipError);
+			if(list == null) {
+				list = new ArrayList<SimpleTipItem>();
+			}
+			SimpleTipItem tip = new SimpleTipItem();
+			tip.setType(SimpleTipItem.Type_Error);
+			tip.setMsg(msg);
+			list.add(tip);
+			request.setAttribute(Global.RequestKey_TipError, list);
+		}
 	}
 	
 	public final boolean getBooleanParameter(String param) {

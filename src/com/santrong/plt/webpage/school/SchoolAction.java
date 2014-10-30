@@ -9,7 +9,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.santrong.plt.opt.area.AreaEntry;
+import com.santrong.plt.opt.grade.GradeDefine;
 import com.santrong.plt.system.Global;
+import com.santrong.plt.util.MyUtils;
 import com.santrong.plt.webpage.BaseAction;
 import com.santrong.plt.webpage.school.dao.SchoolDao;
 import com.santrong.plt.webpage.school.entry.SchoolItem;
@@ -43,12 +45,25 @@ public class SchoolAction extends BaseAction {
 		HttpServletRequest request = getRequest();
 		AreaEntry area = (AreaEntry)(request.getSession().getAttribute(Global.SessionKey_Area));		
 		
+		int pageNum = this.getIntParameter("page");
+		if(pageNum == 0) {
+			pageNum = 1;
+		}
+		
 		SchoolDao schoolDao = new SchoolDao();
 		SchoolQuery schoolQuery = new SchoolQuery();
 		schoolQuery.setAreaCode(area.getCityCode());
+		if(MyUtils.isNotNull(grade) && !grade.equals("all")) {
+			schoolQuery.setSchoolGrade(GradeDefine.getByGradeEnName(grade).getGradeGroup());
+		}
+		schoolQuery.setPageSize(32);
+		schoolQuery.setPageNum(pageNum);
+		schoolQuery.setCount(schoolDao.selectCountByQuery(schoolQuery));
 		List<SchoolItem> schoolList = schoolDao.selectByQuery(schoolQuery);
 		
 		request.setAttribute("schoolList", schoolList);
+		request.setAttribute("grade", grade);
+		request.setAttribute("query", schoolQuery);
 		
 		return "school/index";
 	}

@@ -11,16 +11,8 @@ IndexClass.prototype = {
 	// 首页
 	index:function() {
 		$(".category_grade li").toggleShow(".category_subject");
-		
-		$(".logout").click(function(){
-			$.post(Globals.ctx + '/logout.action', function(result) {
-				if(result == "success"){
-					window.location.href = Globals.ctx + "/";
-				}else{
-					alert(result);
-				}
-			});
-		});
+
+		$(".school_nav li").toggleShow(".school_img_item ul", {hide : false});
 	},
 	
 	// 登录页
@@ -44,5 +36,10 @@ IndexClass.prototype = {
 	// 课程详细页
 	course:function() {
 		$(".course_intro_menu li").toggleShow(".course_intro_detail", {event : "click", hide : false});
+	},
+	
+	// 学校列表页
+	school:function() {
+
 	}
 };

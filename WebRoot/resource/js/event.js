@@ -20,6 +20,8 @@ jQuery(function($){
 		
 		var watcher = $(this);
 		watcher.bind(opt.event, function() {
+			watcher.removeClass("current");
+			$(this).addClass("current");
 			var index = watcher.index($(this));
 			$(el).hide();
 			$(el).eq(index).show();

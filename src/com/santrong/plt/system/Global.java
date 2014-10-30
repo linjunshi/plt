@@ -11,6 +11,7 @@ public class Global {
 	public static final String Default_Encoding = "UTF-8";
 	public static final String SessionKey_LoginUser = "loginUser";
 	public static final String SessionKey_Area = "area";
+	public static final String RequestKey_TipError = "tipError";
     
 	
     /*

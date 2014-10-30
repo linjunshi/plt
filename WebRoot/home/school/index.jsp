@@ -8,7 +8,7 @@
 var Globals = {};
 Globals.ctx = "${ctx}";
 Globals.lang = "${lang}";
-Globals.page = "Index_index";
+Globals.page = "Index_school";
 </script>
 </head>
 <body>
@@ -17,7 +17,12 @@ Globals.page = "Index_index";
 	
 	<div id="container_box">
 	    <div class="tesch_box">
-	        <div class="teach_sea"><a href="#">全部</a><a href="#">人气排行</a></div>
+	        <div class="teach_sea">
+	        	<a class="${class : staticEq('all', grade)}" href="${ctx}/school">全部</a>
+		    	<c:forEach items="${applicationScope.gradeList}" var="grade">
+		    	<a class="${class : staticEq(grade.gradeEnName, grade)}" href="${ctx}/school/${grade.gradeEnName}">${grade.gradeName}</a>
+		    	</c:forEach>
+	        </div>
 	        <div class="schoool_box_list clearfix">
 	            <ul>
 	            	<c:forEach items="${schoolList}" var="school">
@@ -30,7 +35,18 @@ Globals.page = "Index_index";
 	        </div>
 	    </div>
 	</div>
-	<div class="clr"></div>
+	
+	<div class="pagination">
+		<c:if test="${query.pageNum > 1}">
+		<a href="${ctx}/school/${grade}?page=${query.pageNum - 1}" title="上一页">上一页</a>
+		</c:if>
+		<c:forEach items="${query.pageSequence}" var="p">
+		<a href="${ctx}/school/${grade}?page=${p}" title="第${p}页">${p}</a>
+		</c:forEach>
+		<c:if test="${query.pageNum < query.pageCount}">
+		<a href="${ctx}/school/${grade}?page=${query.pageNum + 1}" title="下一页">下一页</a>
+		</c:if>
+	</div>
 	
 	<%@ include file="../inc/friendlylink.jsp"%>
 </body>
