@@ -64,22 +64,17 @@ Globals.page = "Index_index";
 							<li class="clearfix"><a href="${ctx}/course/${course.id}.html" target="_blank" class="result_img"><img src="${ctx}/resource/images/005.jpg" width="130" height="110"></a>
 		                        <div class="result_con">
 		                            <h3 ><a href="${ctx}/course/${course.id}.html" target="_blank" class="result_con_ti">${course.courseName}</a></h3>
-		                            <p class="pt1">${course.price}</p>
-		                            <p class="pt2">${course.price}</p>
-		                            <p class="pt3">${course.price}</p>
+		                            <p class="pt1">${course.teacher}</p>
+		                            <p class="pt2">${course.chapterCount}<span>课时</span></p>
 		                        </div>
 		                        <div class="result_price">
 		                            <h3 class="yuan">${course.price}<span>元</span></h3>
-		                            <p class="pt2">${course.price}</p>
-		                            <p class="pt3">${course.price}</p>
+		                            <p class="pt2">${course.saleCount}<span>购买</span></p>
+		                            <p class="pt2">${course.commentCount}<span>评论</span></p>
 		                        </div>
-		                        <div class="result_price">
-		                            <p class="pt2">${course.price}</p>
-		                            <p class="pt2">${course.price}</p>
-		                            <p class="pt3">${course.price}</p>
-		                        </div>
-		                        <div class="result_price maigin_right">
-		                            <p class="pt3">${course.price}</p>
+		                        <div class="result_price margin_right_clear">
+		                            <p class="pt2">结束时间</p>
+		                            <p class="pt3">${course.endTime}</p>
 		                        </div>
 		                    </li>
 							</c:forEach>
