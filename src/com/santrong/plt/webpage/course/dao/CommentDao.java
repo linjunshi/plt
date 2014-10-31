@@ -26,7 +26,7 @@ public class CommentDao extends BaseDao {
 	}
 	
 	/**
-	 * 新增一条课程评论
+	 * 新增一条课程评论记录
 	 * @param id，userId，courseId，remark，cts，uts
 	 * @return
 	 */
@@ -34,6 +34,19 @@ public class CommentDao extends BaseDao {
 		CommentMapper mapper = this.getMapper(CommentMapper.class);
 		if(mapper != null) {
 			return mapper.insert(commentItem);
+		}
+		return 0;
+	}
+	
+	/**
+	 * 删除一条课程评论记录
+	 * @param id
+	 * @return
+	 */
+	public int delete(String id){
+		CommentMapper mapper = this.getMapper(CommentMapper.class);
+		if(mapper != null) {
+			return mapper.delete(id);
 		}
 		return 0;
 	}

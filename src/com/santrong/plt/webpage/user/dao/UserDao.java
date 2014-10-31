@@ -14,6 +14,7 @@ import com.santrong.plt.util.AreaUtils;
 import com.santrong.plt.util.BeanUtils;
 import com.santrong.plt.util.MyUtils;
 import com.santrong.plt.webpage.BaseDao;
+import com.santrong.plt.webpage.user.entry.UserCourseView;
 import com.santrong.plt.webpage.user.entry.UserDetailView;
 import com.santrong.plt.webpage.user.entry.UserItem;
 import com.santrong.plt.webpage.user.entry.UserQuery;
@@ -211,11 +212,26 @@ public class UserDao extends BaseDao{
 	 * @param  role shcoolId
 	 * @return 
 	 */
-	public List<UserItem> selectTeacherBySchoolId(String shcoolId){
+	public List<UserItem> selectTeacherBySchoolId(String shcoolId) {
 		UserMapper mapper = this.getMapper(UserMapper.class);
-		if(mapper != null){
+		if (mapper != null) {
 			return mapper.selectTeacherBySchoolId(shcoolId);
 		}
 		return null;
 	}
+	
+	/**
+ 	 * 查询课程所有者的信息，包含姓名，所属学校，教学科目，性别，课程数，注册时间
+ 	 * @author huangweihua
+ 	 * @param id
+ 	 * @return
+ 	 */
+	public UserCourseView selectTeacherByUserId(String id) {
+		UserMapper mapper = this.getMapper(UserMapper.class);
+		if (mapper != null) {
+			return mapper.selectTeacherByUserId(id);
+		}
+		return null;
+	}
+	
 }

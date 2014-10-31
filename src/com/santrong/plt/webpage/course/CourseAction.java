@@ -46,6 +46,7 @@ import com.santrong.plt.webpage.school.dao.SchoolDao;
 import com.santrong.plt.webpage.school.entry.SchoolItem;
 import com.santrong.plt.webpage.school.entry.SchoolQuery;
 import com.santrong.plt.webpage.user.dao.UserDao;
+import com.santrong.plt.webpage.user.entry.UserCourseView;
 import com.santrong.plt.webpage.user.entry.UserItem;
 import com.santrong.plt.webpage.user.entry.UserQuery;
 
@@ -235,11 +236,12 @@ public class CourseAction extends BaseAction {
 		course.setCommentList(commentList);
 		
 		
-		// 课程老师
+		// 课程所有者的信息
 		UserDao userDao = new UserDao();
-		UserItem teacher = userDao.selectById(course.getOwnerId());
+		UserCourseView teacher = userDao.selectTeacherByUserId(course.getOwnerId());
 		
 		// 老师名下其他课程
+		
 		
 		HttpServletRequest request = getRequest();
 		request.setAttribute("course", course);
@@ -268,8 +270,12 @@ public class CourseAction extends BaseAction {
 		}
 		
 		CommentDao commentDao = new CommentDao();
-		CommentItem commentItem = new CommentItem();
 		
+		//打开事务
+		ThreadUtils.beginTranx();
+		
+		// 往课程评论表插入一条记录
+		CommentItem commentItem = new CommentItem();
 		commentItem.setId(MyUtils.getGUID());
 		commentItem.setUserId(user.getId());
 		commentItem.setCourseId(courseId);
@@ -277,6 +283,13 @@ public class CourseAction extends BaseAction {
 		commentItem.setCts(new Date());
 		commentItem.setUts(new Date());
 		commentDao.insert(commentItem);
+		
+		// 往课程评论表插入一条记录成功后，修改课程主表course中的课程评论数量commentCount，自动加1
+		CourseDao courseDao = new CourseDao();
+		courseDao.addComment(courseId);
+		
+		//关闭事务
+		ThreadUtils.commitTranx();
 
 		return this.redirect("/course/" + courseId + ".html");
 	}

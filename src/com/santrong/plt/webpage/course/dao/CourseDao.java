@@ -254,4 +254,40 @@ public class CourseDao extends BaseDao {
 		}
 		return 0;
 	}
+	
+	/**
+	 * 新增一条评论时，修改该课程的评论数量,自动加1
+	 * @author huangweihua
+	 * @param  id
+	 * @return 
+	 */
+	public int addComment(String id){
+		try {
+			CourseMapper mapper = this.getMapper(CourseMapper.class);
+			if (mapper != null) {
+				return mapper.addComment(id);
+			}
+		} catch (Exception e) {
+			Log.printStackTrace(e);
+		}
+		return 0;
+	}
+	
+	/**
+	 * 删除一条评论时，修改该课程的评论数量,自动减1
+	 * @author huangweihua
+	 * @param  id
+	 * @return 
+	 */
+	public int removeComment(String id){
+		try {
+			CourseMapper mapper = this.getMapper(CourseMapper.class);
+			if (mapper != null) {
+				return mapper.removeComment(id);
+			}
+		} catch (Exception e) {
+			Log.printStackTrace(e);
+		}
+		return 0;
+	}
 }

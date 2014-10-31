@@ -46,21 +46,21 @@ Globals.page = "Index_courseDetail";
 	        </div>
 	        <div class="priSchool">
 	            <div>
-	                <h2><a href="#">学生满意度</a></h2>
+	                <h2><a href="${ctx}/teacher/${teacher.id}.html" target="_blank">课程所有者</a></h2>
 	            </div>
 	            <div>
 	                <ul class="schoolInfo">
-	                    <li>学校信用：<span><img src="${ctx}/resource/images/s21.gif" /><img src="${ctx}/resource/images/s21.gif" /><img src="${ctx}/resource/images/s21.gif" /></span></li>
-	                    <li>学生满意度：90.91%</li>
-	                    <li>学生数：236</li>
-	                    <li>课程数：37</li>
-	                    <li>收藏数：3</li>
-	                    <li>建校日期：2014-05-23</li>
-	                    <li>收藏数：3</li>
-	                    <li>校长：${teacher.showName}</li>
+	                    <li>姓名：${teacher.username}</li>
+	                    <li>性别：${teacher.gender}</li>
+	                    <li>职称：${teacher.positional}</li>
+	                    <li>毕业院校：${teacher.graduateSchool}</li>
+	                    <li>所属学校：${teacher.schoolName}</li>
+	                    <li>教学科目：${teacher.subjectName}</li>
+	                    <li>开设课程数：${teacher.courseCount}</li>
+	                    <li>注册时间：<fmt:formatDate value="${teacher.registTime}" type="date" dateStyle="default"/></li>
 	                </ul>
 	            </div>
-	            <div class="pri_bottom"><a href="#" class="bottom_c">收藏学校</a><a href="#" class="bottom_d">进入学校</a></div>
+	            <div class="pri_bottom"><a href="javascript:void(0)" class="bottom_c">收藏学校</a><a href="${ctx}/school/${teacher.schoolId}.html" target="_blank" class="bottom_d">进入学校</a></div>
 	        </div>
 	    </div>
 	    <div class="sectionMain clearfix">

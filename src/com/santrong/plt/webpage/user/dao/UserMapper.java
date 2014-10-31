@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
+import com.santrong.plt.webpage.user.entry.UserCourseView;
 import com.santrong.plt.webpage.user.entry.UserDetailView;
 import com.santrong.plt.webpage.user.entry.UserItem;
 
@@ -59,4 +60,19 @@ public interface UserMapper {
     // 查询学校里的老师 role
  	@Select("select * from user where schoolId = #{schoolId}")
  	List<UserItem> selectTeacherBySchoolId(String schoolId);
+ 	
+ 	/**
+ 	 * 查询课程所有者的信息，包含姓名，所属学校，教学科目，性别，课程数，注册时间
+ 	 * @author huangweihua
+ 	 * @param id
+ 	 * @return
+ 	 */
+ 	@Select("select a.*, b.schoolName, b.schoolEnName, b.schoolGrade, b.areaCode, d.courseCount, e.subjectName, e.subjectEnName, e.priority, f.education, f.positional, f.graduateSchool from user a "
+ 			+ "LEFT JOIN school b on a.schoolId = b.id "
+ 			+ "LEFT JOIN (select count(c.ownerId) courseCount ,c.ownerId from course c GROUP BY c.ownerId having c.ownerId = #{id}) d on d.ownerId = a.id "
+ 			+ "LEFT JOIN subject e on e.id = a.subjectId "
+ 			+ "LEFT JOIN user_education f on f.userId = a.id "
+ 			+ "where a.id = #{id};")
+ 	UserCourseView selectTeacherByUserId(String id);
+
 }
