@@ -22,12 +22,11 @@ Globals.page = "Index_school";
 			    	<a class="${class : staticEq(item.gradeEnName, grade)}" href="${ctx}/school/${item.gradeEnName}">${item.gradeName}</a>
 			    	</c:forEach>
 		        </div>
-		        <div class="schoool_box_list clearfix">
+		        <div class="schoool_box_list clr">
 		            <ul>
-		            	<c:forEach items="${schoolList}" var="school">
-		                <li><a href="${ctx}/school/${school.id}.html"><img src="${ctx}/resource/photo/02.jpg" width="220" height="140"></a>
+		            	<c:forEach items="${schoolList}" var="school" varStatus="st">
+		                <li class="<c:if test="${(st.index+1)%5==0}">margin_right_clear</c:if>"><a href="${ctx}/school/${school.id}.html"><img src="${ctx}/resource/photo/02.jpg" width="220" height="140"></a>
 		                    <h2>${school.schoolName}</h2>
-		                    <p><span>2136456</span>关注</p>
 		                </li>
 		            	</c:forEach>
 		            </ul>
@@ -35,18 +34,8 @@ Globals.page = "Index_school";
 		    </div>
 		</div>
 	</div>
-	
-	<div class="pagination">
-		<c:if test="${query.pageNum > 1}">
-		<a href="${ctx}/school/${grade}?page=${query.pageNum - 1}" title="上一页">上一页</a>
-		</c:if>
-		<c:forEach items="${query.pageSequence}" var="p">
-		<a href="${ctx}/school/${grade}?page=${p}" title="第${p}页">${p}</a>
-		</c:forEach>
-		<c:if test="${query.pageNum < query.pageCount}">
-		<a href="${ctx}/school/${grade}?page=${query.pageNum + 1}" title="下一页">下一页</a>
-		</c:if>
-	</div>
+    <c:set var="basicUrl" value="${ctx}/school/${grade}" />
+   	<%@ include file="../inc/pagination.jsp"%>
 	<%@ include file="../inc/friendlylink.jsp"%>
 </body>
 </html>

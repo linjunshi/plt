@@ -76,26 +76,26 @@ public class UserDao extends BaseDao{
 		
 		try{
 			Statement criteria = new Statement("user", "a");
-			criteria.setFields("a.*");
+			criteria.setFields("a.*,b.schoolName");
 			criteria.ljoin("school", "b", "a.schoolId", "b.id");
+			criteria.ljoin("subject", "c", "a.subjectId", "c.id");
 			// 关键词
 			if(!StringUtils.isNullOrEmpty(query.getKeywords())) {
 				criteria.where(or(
 						like("u.showName", "?")));
 				criteria.setStringParam("%" + query.getKeywords() + "%");
 			}
+			// 科目条件
+			if(MyUtils.isNotNull(query.getSubjectEnName())) {
+				criteria.where(eq("c.subjectEnName", "?"));
+				criteria.setStringParam(query.getSubjectEnName());
+			}			
 			// 类型包含
 			if(query.getSchoolGrade() > 0) {
 				criteria.where(eq("(b.schoolGrade & ?)", "?"));
 				criteria.setIntParam(query.getSchoolGrade());
 				criteria.setIntParam(query.getSchoolGrade());
 			}
-			// 角色包含
-			if(query.getSchoolGrade() > 0) {
-				criteria.where(eq("(a.role & ?)", "?"));
-				criteria.setIntParam(query.getRole());
-				criteria.setIntParam(query.getRole());
-			}			
 			// 类型绝对等
 			if(query.getSchoolAbsoluteGrade() > 0) {
 				criteria.where(eq("b.schoolGrade", "?"));
@@ -106,6 +106,12 @@ public class UserDao extends BaseDao{
 				criteria.where(like("b.areaCode", "?"));
 				criteria.setStringParam(AreaUtils.lostTail(query.getAreaCode()) + "%");
 			}
+			// 角色包含
+			if(query.getRole() > 0) {
+				criteria.where(eq("(a.role & ?)", "?"));
+				criteria.setIntParam(query.getRole());
+				criteria.setIntParam(query.getRole());
+			}		
 			// 排序
 			if(!StringUtils.isNullOrEmpty(query.getOrderBy())) {
 				if("desc".equalsIgnoreCase(query.getOrderRule())) {
@@ -146,29 +152,35 @@ public class UserDao extends BaseDao{
 			Statement criteria = new Statement("user", "a");
 			criteria.setFields("count(*) cn"); 
 			criteria.ljoin("school", "b", "a.schoolId", "b.id");
+			criteria.ljoin("subject", "c", "a.subjectId", "c.id");
 			// 关键词
 			if(!StringUtils.isNullOrEmpty(query.getKeywords())) {
 				criteria.where(or(
 						like("u.showName", "?")));
 				criteria.setStringParam("%" + query.getKeywords() + "%");
 			}
+			// 科目条件
+			if(MyUtils.isNotNull(query.getSubjectEnName())) {
+				criteria.where(eq("c.subjectEnName", "?"));
+				criteria.setStringParam(query.getSubjectEnName());
+			}			
 			// 类型包含
 			if(query.getSchoolGrade() > 0) {
 				criteria.where(eq("(b.schoolGrade & ?)", "?"));
 				criteria.setIntParam(query.getSchoolGrade());
 				criteria.setIntParam(query.getSchoolGrade());
 			}
-			// 角色包含
-			if(query.getSchoolGrade() > 0) {
-				criteria.where(eq("(a.role & ?)", "?"));
-				criteria.setIntParam(query.getRole());
-				criteria.setIntParam(query.getRole());
-			}				
 			// 类型绝对等
 			if(query.getSchoolAbsoluteGrade() > 0) {
 				criteria.where(eq("b.schoolGrade", "?"));
 				criteria.setIntParam(query.getSchoolAbsoluteGrade());
 			}
+			// 角色包含
+			if(query.getRole() > 0) {
+				criteria.where(eq("(a.role & ?)", "?"));
+				criteria.setIntParam(query.getRole());
+				criteria.setIntParam(query.getRole());
+			}					
 			// 所属区域
 			if(MyUtils.isNotNull(query.getAreaCode())) {
 				criteria.where(like("b.areaCode", "?"));
@@ -187,14 +199,6 @@ public class UserDao extends BaseDao{
 		
 		return count;
 	}		
-	
-	public List<UserItem> selectAll() {
-		UserMapper mapper = this.getMapper(UserMapper.class);
-		if(mapper != null) {
-			return mapper.selectAll();
-		}
-		return null;
-	}
 	
 	// 获取用户详细信息，包括扩展部分的详细信息
 	public UserDetailView selectDetailById(String id) {
