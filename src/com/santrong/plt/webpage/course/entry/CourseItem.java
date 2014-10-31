@@ -12,17 +12,38 @@ public class CourseItem {
 	private String courseName;
 	private String teacher;
 	private int price;
+	private int live;
 	private Date endTime;
 	private String ownerId;
 	private String gradeId;
 	private String subjectId;
 	private int collectCount;
 	private int saleCount;
+	private int commentCount;
+	private int chapterCount;
 	private String remark;
 	private Date cts;
 	private Date uts;
 	
 	
+	public int getLive() {
+		return live;
+	}
+	public void setLive(int live) {
+		this.live = live;
+	}
+	public int getCommentCount() {
+		return commentCount;
+	}
+	public void setCommentCount(int commentCount) {
+		this.commentCount = commentCount;
+	}
+	public int getChapterCount() {
+		return chapterCount;
+	}
+	public void setChapterCount(int chapterCount) {
+		this.chapterCount = chapterCount;
+	}
 	public String getId() {
 		return id;
 	}

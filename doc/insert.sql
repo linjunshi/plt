@@ -218,48 +218,51 @@ create table course(
 	courseName varchar(128) not null comment '课程名称',
 	teacher varchar(32) comment '主讲老师',
 	price int(10) not null comment '价格',
+	live int(10) default 0 not null comment '是否直播',
 	endTime datetime comment '结束时间',
 	gradeId varchar(32) not null comment '所属年级',
 	subjectId varchar(32) not null comment '所属科目',
 	remark varchar(10240) comment '具体描述',
 	saleCount int(10) default 0 not null comment '销售量',
 	collectCount int(10) default 0 not null comment '收藏量',
+	commentCount int(10) default 0 not null comment '评论数量',
+	chapterCount int(10) default 0 not null comment '课时数量',
 	ownerId varchar(32) not null comment '所有者',
 	cts datetime comment '创建时间',
 	uts datetime comment '修改时间',
 	primary key (id)
 ) engine=InnoDB default charset=utf8 collate=utf8_bin comment '课程主表';
 
-insert into course values('10000', '马克思主义', '王老师', 10000, '2014-12-12', '10000', '10000', 'xxx', 1, 2, '10001', now(), now());
-insert into course values('10001', '相对论', '王老师', 10000, '2014-12-12', '10000', '10001', 'xxx', 1, 2, '10001', now(), now());
-insert into course values('10002', '微积分', '王老师', 10000, '2014-12-12', '10000', '10001', 'xxx', 1, 2, '10001', now(), now());
-insert into course values('10003', '高等数学', '王老师', 10000, '2014-12-12', '10000', '10001', 'xxx', 1, 2, '10001', now(), now());
-insert into course values('10004', '数字逻辑', '王老师', 10000, '2014-12-12', '10006', '10003', 'xxx', 1, 2, '10001', now(), now());
-insert into course values('10005', '线性代数', '王老师', 10000, '2014-12-12', '10006', '10003', 'xxx', 1, 2, '10001', now(), now());
-insert into course values('10006', '蛋白质', '王老师', 10000, '2014-12-12', '10006', '10003', 'xxx', 1, 2, '10001', now(), now());
-insert into course values('10007', '细胞核', '王老师', 10000, '2014-12-12', '10006', '10003', 'xxx', 1, 2, '10001', now(), now());
-insert into course values('10008', '世界历史', '王老师', 10000, '2014-12-12', '10009', '10003', 'xxx', 1, 2, '10001', now(), now());
-insert into course values('10009', '唯物主义', '王老师', 10000, '2014-12-12', '10009', '10004', 'xxx', 1, 2, '10001', now(), now());
-insert into course values('10010', '经济学入门', '王老师', 10000, '2014-12-12', '10009', '10004', 'xxx', 1, 2, '10001', now(), now());
-insert into course values('10011', '货币战争', '王老师', 10000, '2014-12-12', '10009', '10004', 'xxx', 1, 2, '10001', now(), now());
-insert into course values('10012', '论持久战', '王老师', 10000, '2014-12-12', '10000', '10004', 'xxx', 1, 2, '10001', now(), now());
-insert into course values('10013', '大头儿子小头爸爸', '王老师', 10000, '2014-12-12', '10006', '10004', 'xxx', 1, 2, '10001', now(), now());
-insert into course values('10014', '西游记', '王老师', 10000, '2014-12-12', '10009', '10004', 'xxx', 1, 2, '10001', now(), now());
-insert into course values(replace(uuid(),'-',''), '西游记2', '王老师', 10000, '2014-12-12', '10009', '10004', 'xxx', 1, 2, '10001', now(), now());
-insert into course values(replace(uuid(),'-',''), '西游记3', '王老师', 10000, '2014-12-12', '10009', '10004', 'xxx', 1, 2, '10001', now(), now());
-insert into course values(replace(uuid(),'-',''), '西游记4', '王老师', 10000, '2014-12-12', '10009', '10004', 'xxx', 1, 2, '10001', now(), now());
-insert into course values(replace(uuid(),'-',''), '西游记5', '王老师', 10000, '2014-12-12', '10009', '10004', 'xxx', 1, 2, '10001', now(), now());
-insert into course values(replace(uuid(),'-',''), '西游记6', '王老师', 10000, '2014-12-12', '10009', '10004', 'xxx', 1, 2, '10001', now(), now());
-insert into course values(replace(uuid(),'-',''), '大头儿子小头爸爸2', '王老师', 10000, '2014-12-12', '10006', '10004', 'xxx', 1, 2, '10001', now(), now());
-insert into course values(replace(uuid(),'-',''), '大头儿子小头爸爸3', '王老师', 10000, '2014-12-12', '10006', '10004', 'xxx', 1, 2, '10001', now(), now());
-insert into course values(replace(uuid(),'-',''), '大头儿子小头爸爸4', '王老师', 10000, '2014-12-12', '10006', '10004', 'xxx', 1, 2, '10001', now(), now());
-insert into course values(replace(uuid(),'-',''), '大头儿子小头爸爸5', '王老师', 10000, '2014-12-12', '10006', '10004', 'xxx', 1, 2, '10001', now(), now());
-insert into course values(replace(uuid(),'-',''), '大头儿子小头爸爸6', '王老师', 10000, '2014-12-12', '10006', '10004', 'xxx', 1, 2, '10001', now(), now());
-insert into course values(replace(uuid(),'-',''), '经济学入门2', '王老师', 10000, '2014-12-12', '10000', '10004', 'xxx', 1, 2, '10001', now(), now());
-insert into course values(replace(uuid(),'-',''), '经济学入门3', '王老师', 10000, '2014-12-12', '10000', '10004', 'xxx', 1, 2, '10001', now(), now());
-insert into course values(replace(uuid(),'-',''), '经济学入门4', '王老师', 10000, '2014-12-12', '10000', '10004', 'xxx', 1, 2, '10001', now(), now());
-insert into course values(replace(uuid(),'-',''), '经济学入门5', '王老师', 10000, '2014-12-12', '10000', '10004', 'xxx', 1, 2, '10001', now(), now());
-insert into course values(replace(uuid(),'-',''), '经济学入门6', '王老师', 10000, '2014-12-12', '10000', '10004', 'xxx', 1, 2, '10001', now(), now());
+insert into course values('10000', '马克思主义', '王老师', 10000, 0, '2014-12-12', '10000', '10000', 'xxx', 1, 2, 3, 4, '10001', now(), now());
+insert into course values('10001', '相对论', '王老师', 10000, 0, '2014-12-12', '10000', '10001', 'xxx', 1, 2, 3, 4, '10001', now(), now());
+insert into course values('10002', '微积分', '王老师', 10000, 0, '2014-12-12', '10000', '10001', 'xxx', 1, 2, 3, 4, '10001', now(), now());
+insert into course values('10003', '高等数学', '王老师', 10000, 1, '2014-12-12', '10000', '10001', 'xxx', 1, 2, 3, 4, '10001', now(), now());
+insert into course values('10004', '数字逻辑', '王老师', 10000, 1, '2014-12-12', '10006', '10003', 'xxx', 1, 2, 3, 4, '10001', now(), now());
+insert into course values('10005', '线性代数', '王老师', 10000, 0, '2014-12-12', '10006', '10003', 'xxx', 1, 2, 3, 4, '10001', now(), now());
+insert into course values('10006', '蛋白质', '王老师', 10000, 1, '2014-12-12', '10006', '10003', 'xxx', 1, 2, 3, 4, '10001', now(), now());
+insert into course values('10007', '细胞核', '王老师', 10000, 1, '2014-12-12', '10006', '10003', 'xxx', 1, 2, 3, 4, '10001', now(), now());
+insert into course values('10008', '世界历史', '王老师', 10000, 0, '2014-12-12', '10009', '10003', 'xxx', 1, 2, 3, 4, '10001', now(), now());
+insert into course values('10009', '唯物主义', '王老师', 10000, 1, '2014-12-12', '10009', '10004', 'xxx', 1, 2, 3, 4, '10001', now(), now());
+insert into course values('10010', '经济学入门', '王老师', 10000, 1, '2014-12-12', '10009', '10004', 'xxx', 1, 2, 3, 4, '10001', now(), now());
+insert into course values('10011', '货币战争', '王老师', 10000, 1, '2014-12-12', '10009', '10004', 'xxx', 1, 2, 3, 4, '10001', now(), now());
+insert into course values('10012', '论持久战', '王老师', 10000, 1, '2014-12-12', '10000', '10004', 'xxx', 1, 2, 3, 4, '10001', now(), now());
+insert into course values('10013', '大头儿子小头爸爸', '王老师', 10000, 1, '2014-12-12', '10006', '10004', 'xxx', 1, 2, 3, 4, '10001', now(), now());
+insert into course values('10014', '西游记', '王老师', 10000, 0, '2014-12-12', '10009', '10004', 'xxx', 1, 2, 3, 4, '10001', now(), now());
+insert into course values(replace(uuid(),'-',''), '西游记2', '王老师', 10000, 0, '2014-12-12', '10009', '10004', 'xxx', 1, 2, 3, 4, '10001', now(), now());
+insert into course values(replace(uuid(),'-',''), '西游记3', '王老师', 10000, 0, '2014-12-12', '10009', '10004', 'xxx', 1, 2, 3, 4, '10001', now(), now());
+insert into course values(replace(uuid(),'-',''), '西游记4', '王老师', 10000, 0, '2014-12-12', '10009', '10004', 'xxx', 1, 2, 3, 4, '10001', now(), now());
+insert into course values(replace(uuid(),'-',''), '西游记5', '王老师', 10000, 0, '2014-12-12', '10009', '10004', 'xxx', 1, 2, 3, 4, '10001', now(), now());
+insert into course values(replace(uuid(),'-',''), '西游记6', '王老师', 10000, 0, '2014-12-12', '10009', '10004', 'xxx', 1, 2, 3, 4, '10001', now(), now());
+insert into course values(replace(uuid(),'-',''), '大头儿子小头爸爸2', '王老师', 10000, 0, '2014-12-12', '10006', '10004', 'xxx', 1, 2, 3, 4, '10001', now(), now());
+insert into course values(replace(uuid(),'-',''), '大头儿子小头爸爸3', '王老师', 10000, 0, '2014-12-12', '10006', '10004', 'xxx', 1, 2, 3, 4, '10001', now(), now());
+insert into course values(replace(uuid(),'-',''), '大头儿子小头爸爸4', '王老师', 10000, 0, '2014-12-12', '10006', '10004', 'xxx', 1, 2, 3, 4, '10001', now(), now());
+insert into course values(replace(uuid(),'-',''), '大头儿子小头爸爸5', '王老师', 10000, 0, '2014-12-12', '10006', '10004', 'xxx', 1, 2, 3, 4, '10001', now(), now());
+insert into course values(replace(uuid(),'-',''), '大头儿子小头爸爸6', '王老师', 10000, 0, '2014-12-12', '10006', '10004', 'xxx', 1, 2, 3, 4, '10001', now(), now());
+insert into course values(replace(uuid(),'-',''), '经济学入门2', '王老师', 10000, 0, '2014-12-12', '10000', '10004', 'xxx', 1, 2, 3, 4, '10001', now(), now());
+insert into course values(replace(uuid(),'-',''), '经济学入门3', '王老师', 10000, 0, '2014-12-12', '10000', '10004', 'xxx', 1, 2, 3, 4, '10001', now(), now());
+insert into course values(replace(uuid(),'-',''), '经济学入门4', '王老师', 10000, 0, '2014-12-12', '10000', '10004', 'xxx', 1, 2, 3, 4, '10001', now(), now());
+insert into course values(replace(uuid(),'-',''), '经济学入门5', '王老师', 10000, 0, '2014-12-12', '10000', '10004', 'xxx', 1, 2, 3, 4, '10001', now(), now());
+insert into course values(replace(uuid(),'-',''), '经济学入门6', '王老师', 10000, 0, '2014-12-12', '10000', '10004', 'xxx', 1, 2, 3, 4, '10001', now(), now());
 
 -- 订单表 --
 drop table if exists web_order;

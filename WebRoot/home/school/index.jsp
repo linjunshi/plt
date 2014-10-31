@@ -12,28 +12,28 @@ Globals.page = "Index_school";
 </script>
 </head>
 <body>
-		
 	<%@ include file="../inc/top.jsp"%>
-	
 	<div id="container_box">
-	    <div class="tesch_box">
-	        <div class="teach_sea">
-	        	<a class="${class : staticEq('all', grade)}" href="${ctx}/school">全部</a>
-		    	<c:forEach items="${applicationScope.gradeList}" var="grade">
-		    	<a class="${class : staticEq(grade.gradeEnName, grade)}" href="${ctx}/school/${grade.gradeEnName}">${grade.gradeName}</a>
-		    	</c:forEach>
-	        </div>
-	        <div class="schoool_box_list clearfix">
-	            <ul>
-	            	<c:forEach items="${schoolList}" var="school">
-	                <li><a href="${ctx}/school/${school.id}.html"><img src="${ctx}/resource/photo/02.jpg" width="220" height="140"></a>
-	                    <h2>${school.schoolName}</h2>
-	                    <p><span>2136456</span>关注</p>
-	                </li>
-	            	</c:forEach>
-	            </ul>
-	        </div>
-	    </div>
+		<div class="container_content">
+		    <div class="tesch_box">
+		        <div class="teach_sea">
+		        	<a class="${class : staticEq('all', grade)}" href="${ctx}/school">全部</a>
+			    	<c:forEach items="${applicationScope.gradeList}" var="item">
+			    	<a class="${class : staticEq(item.gradeEnName, grade)}" href="${ctx}/school/${item.gradeEnName}">${item.gradeName}</a>
+			    	</c:forEach>
+		        </div>
+		        <div class="schoool_box_list clearfix">
+		            <ul>
+		            	<c:forEach items="${schoolList}" var="school">
+		                <li><a href="${ctx}/school/${school.id}.html"><img src="${ctx}/resource/photo/02.jpg" width="220" height="140"></a>
+		                    <h2>${school.schoolName}</h2>
+		                    <p><span>2136456</span>关注</p>
+		                </li>
+		            	</c:forEach>
+		            </ul>
+		        </div>
+		    </div>
+		</div>
 	</div>
 	
 	<div class="pagination">
@@ -47,7 +47,6 @@ Globals.page = "Index_school";
 		<a href="${ctx}/school/${grade}?page=${query.pageNum + 1}" title="下一页">下一页</a>
 		</c:if>
 	</div>
-	
 	<%@ include file="../inc/friendlylink.jsp"%>
 </body>
 </html>

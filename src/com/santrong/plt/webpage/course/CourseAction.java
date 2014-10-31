@@ -118,9 +118,15 @@ public class CourseAction extends BaseAction {
 		// 获取参数
 		ParamHelper param = new ParamHelper();
 		param.init(request);
+		
+		int page = this.getIntParameter("page");
+		if(page == 0) {
+			page = 1;
+		}
 
 		// 构建查询条件
 		CourseQuery courseQuery = new CourseQuery();
+		courseQuery.setPageNum(page);
 		courseQuery.setAreaCode(area.getCityCode());
 		if(MyUtils.isNotNull(subject) && !subject.equals("all")) {
 			courseQuery.setSubjectEnName(subject);
@@ -138,6 +144,7 @@ public class CourseAction extends BaseAction {
 		
 		// 查询课程列表
 		CourseDao courseDao = new CourseDao();
+		courseQuery.setCount(courseDao.selectCountByQuery(courseQuery));
 		List<CourseItem> courseList = courseDao.selectByQuery(courseQuery);
 		
 		// 学校列表
@@ -151,10 +158,11 @@ public class CourseAction extends BaseAction {
 		UserDao userDao = new UserDao();
 		UserQuery userQuery = new UserQuery();
 		userQuery.setAreaCode(area.getCityCode());
+		userQuery.setRole(UserItem.Role_Teacher);
 		userQuery.setPageSize(4);
 		List<UserItem> teacherList = userDao.selectByQuery(userQuery);
 		
-		
+		request.setAttribute("query", courseQuery);
 		
 		// 参数组
 		request.setAttribute("grade", grade);

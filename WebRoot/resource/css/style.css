@@ -19,13 +19,14 @@ a:hover {text-decoration: none}
 a:active {outline: 0}
 a:focus {-moz-outline-style: none}
 div[contenteditable=true] {-webkit-line-break: after-white-space; -webkit-nbsp-mode: space;-webkit-user-modify: read-write; word-wrap: break-word}
-/*
-.clearfix:before, .clearfix:after {content: '.'; display: block; overflow: hidden; visibility: hidden; font-size: 0; line-height: 0; width: 0; height: 0}
-.clearfix:after {clear: both}*/
+.margin_right_clear {margin-right:0px !important;}
 .clr {display:inline-block;}
 .hide {display: none;}
 .l {float: left}
 .r {float: right}
+
+.pagination {text-align:center; width:100%; height:30px; line-height:30px; display:block;}
+.pagination a { width:16px; height:16px; margin-right:10px;}
 
 /*-----------------顶头部分---------------------*/
 #header{ width:100%;}
@@ -104,14 +105,14 @@ div[contenteditable=true] {-webkit-line-break: after-white-space; -webkit-nbsp-m
 /*flash*/
 .column_left_b { float:left;width:648px; height:300px;}
 /*老师*/
-.column_left_bottom { float:left;width:920px; display:inline-block; margin-top:10px; border-bottom:1px #dbdbdb solid;}
-.column_left_header {float:left; display:block; width:920px;height:40px;border-bottom:1px #dbdbdb solid;}
+.column_left_bottom { float:left; width:920px; margin-top:10px; border-bottom:1px #dbdbdb solid;}
+.column_left_header {width:100%; height:40px; border-bottom:1px #dbdbdb solid;}
 .column_left_title { float:left; display:block; width:160px; font-size:22px; color:#009871;height:40px; line-height:30px; }
-.column_left_nav { width:670px; float:left; display: block;}
+.column_left_nav { float:left; width:670px;}
 .column_left_nav li {float:left; display:block; height:30px; padding:0;}
-.column_left_nav li a{ float:left; display:block; height:30px;padding:12px 15px 0 15px; color:#666}
-.column_img_item ul { float:left; width:920px; margin-top:15px;}
-.column_img_item ul li{ float:left; display:block; width:100px; height:120px; text-align:center; overflow:hidden; margin:0 16px 10px 0;}
+.column_left_nav li a{display:block; height:30px;padding:12px 15px 0 15px; color:#666}
+.column_img_item {width:100%; margin-top:15px;}
+.column_img_item li{float:left; width:120px; height:140px; text-align:center; margin:0 40px 10px 0;}
 .column_left_more{ float:right; margin-right:20px; line-height:40px; color:#666;}
 .column_left_more:hover {color:#188EEE;}
 /*学校*/
@@ -122,13 +123,14 @@ div[contenteditable=true] {-webkit-line-break: after-white-space; -webkit-nbsp-m
 .school_nav li { float:left; display:block;}
 .school_nav li a {height:30px; line-height:30px; color:#333; font-family:"微软雅黑"; font-size:16px; padding:0 10px 6px 10px;}
 .school_nav li.current a {color:#188EEE; background:url(../images/user_hover.png) no-repeat left bottom;}
-.school_img_item { width:260px; overflow: inherit;}
-.school_list { float:left; display:block; width:255px; padding-bottom:10px; margin-left:4px; margin-bottom:10px; border-bottom:1px #ccc  dashed;}
-.school_list .school_user {float:left;display:block; font-size:16px; color:#09F;}
-.school_list .school_pic {float:left; display:block; margin-right:15px;}
-.school_list .school_con p{float:left; display:block; width:150px; height:60px; overflow: hidden;}
 .school_box_more { position:absolute;top:10px; right:10px; color:#fff;}
 .school_box_more:hover{ color:#0FF;}
+.school_img_item { width:96%; overflow: inherit; padding-left:5px;}
+.school_list {width:100%; padding-bottom:10px; margin-bottom:10px; border-bottom:1px #ccc  dashed;}
+.school_list .school_name {padding-bottom:2px;}
+.school_list .school_name a {font-size:16px; color:#09F;}
+.school_list  b {margin-left:5px;}
+.school_list .teacher {width:128px;}
 
 /*---------------首页--下部--------------------*/
 .wrap_catalog_box {float:left; display:block; width:1200px; height:auto; background:#fff; margin:10px 0; }
@@ -141,40 +143,42 @@ div[contenteditable=true] {-webkit-line-break: after-white-space; -webkit-nbsp-m
 .catalog_box_more:hover { color:#188EEE;}
 .catalog_box_nav li a:hover, .column_left_nav li a:hover{ background:url(../images/user_hover.png) no-repeat left bottom; color:#188EEE;}
 .img_item {float:left;display:block; overflow:hidden;}
-.img_list {float:left;display:block;width:220px; margin:20px 20px 0px 0px; padding-bottom:10px; border:1px #fff solid; overflow:hidden;}
+.img_list {float:left;display:block;width:220px; margin:20px 22px 0px 0px; padding-bottom:10px; border:1px #fff solid; overflow:hidden;}
 .img_user h2{ width:200px; height:40px; line-height:40px; overflow:hidden; font-size:18px; text-align:center; margin-top:6px;}
-.img_counts {float:left;display:block; margin-left:10px;}
-.img_counts span{ width:90px; height:40px; color:#666;}
-.img_counts span b{ color:#f00; font-size:16px;padding-left:5px; margin-right:25px;}
-.img_counts span strong { font-weight:100;padding-left:5px;}
+.img_counts {float:left;display:block; margin-left:10px; text-align:right;}
+.img_counts .price {float:left; width:80px;}
+.img_counts .price b{color:#f00; font-size:18px;padding-left:5px;}
+.img_counts .sales {float:left;  width:86; margin-left:30px; line-height:30px;}
+.img_counts .sales strong { font-weight:110; padding-right:5px;}
 .img_list:hover { background:#fff; box-shadow:0px 0px 5px #87cfff;border:1px #a7dcff solid;}
-.img_list_margin{ margin-right:4px !important;}
 
-/*-------------------------------------------*/
-
+/*---------------课程列表--搜索条件---------------*/
 .list_content { width:960px;float:left; margin-right:20px;}
 .list_category { width:960px;border:1px #CCC solid; margin-bottom:20px;}
-.live_title { border-bottom:1px #ccc solid; margin-bottom:10px; background:#f5f5f5;}
-.live_title a{ font-size:14px;height:30px; line-height:30px; padding-left:5px;}
-.live_title span {margin-right:10px;}
 .cate_list { width:960px; margin-bottom:10px;}
 .cate_list ul {width:955px; display:inline-block; padding-left:5px;}
-.cate_list ul li {float:left; display:block; width:80px; margin-right:10px; padding:5px 0;}
-.cate_list ul li.current {background-color:#ccc;}
+.cate_list ul li {float:left; display:block; width:80px; margin-right:10px; border:solid 1px #fff; border-radius:6px; padding:5px 0; text-align:center;}
+.cate_list ul li.current {border-color:#aaa;}
 .cate_list ul li a {color:blue;}
 
-.maigin_right{ margin-right:0px !important;}
-
+/*---------------课程列表--搜索结果---------------*/
 .live_resul {width:960px; border:1px #ccc solid;}
 .result_sorting { border-bottom:1px #ccc solid; background:#f5f5f5; height:30px;}
 .result_sorting a{ padding:0 10px;height:30px; line-height:30px; margin-left:10px; border:1px #ccc solid; background:#fff; color:#666;}
-.result_sorting a:hover { background:#009871; color:#fff; border:1px #009871 solid;}
-.result_list { width:960px; float:left;}
-.result_list ul{ width:960px;float:left;}
+.result_sorting a:hover { background:#009871; color:#fff;}
+.result_sorting a .ico {display:inline-block; width:7px; height:8px; margin-right:6px;}
+.result_sorting a.sort .ico {background:url('../photo/filter_ico.png') no-repeat;}
+.result_sorting a.select {background:url('../photo/filter_ico.png') no-repeat 0 -44px;}
+.result_sorting a.attrSelected {background:url('../photo/filter_ico.png') no-repeat 0 -25px;}
+.result_sorting a.sortAsc .ico {background:url('../photo/filter_ico.png') no-repeat 0 -9px;;}
+.result_sorting a.sortDesc .ico {background:url('../photo/filter_ico.png') no-repeat 0 -77px;}
+.result_sorting a.current,.result_sorting a.attrSelected,.result_sorting a.sortAsc,.result_sorting a.sortDesc {border-color:#009871;}
+.result_list { width:960px;}
+.result_list ul{ width:960px;}
 .result_list ul li{width:960px;float:left; display:block; padding:20px 0; border-bottom:1px #CCCCCC dashed; margin-bottom:10px;}
 .result_img { float:left; display:block; margin:0px 15px;}
-.result_con { float:left; display:block; width:260px; margin-right:30px;overflow:hidden}
-.result_price { float:left; display:block; width:140px; margin-left:20px;overflow:hidden}
+.result_con { float:left; display:block; width:260px; margin-right:30px; overflow:hidden}
+.result_price { float:left; display:block; width:140px; margin-right:160px;overflow:hidden}
 .result_con .result_con_ti, .result_price .result_con_ti {color:#333; font-size:18px;}
 .result_con .pt1, .result_price .pt1{ color:#f00; height:24px; line-height:24px;}
 .result_con .pt2, .result_price .pt2{color:#666; height:24px; line-height:24px;}
@@ -182,7 +186,7 @@ div[contenteditable=true] {-webkit-line-break: after-white-space; -webkit-nbsp-m
 .result_con .yuan,.result_price .yuan{ color:#F00; font-size:18px; }
 .result_con .yuan span,.result_price .yuan span { color:#666; font-size:14px;padding-left:5px;}
 
-
+/*---------------课程列表--右边---------------*/
 .list_hot { float:right; display:; width:210px; border:1px #ccc solid; margin-bottom:20px;}
 .list_hot_hd { width:210px; height:30px; line-height:30px;font-size:18px; color:#333; text-indent:5px; border-bottom:1px #ccc solid; background:#f5f5f5;}
 .list_hd_img{ padding:10px; border-bottom:#CCC 1px  dashed;}
@@ -190,16 +194,12 @@ div[contenteditable=true] {-webkit-line-break: after-white-space; -webkit-nbsp-m
 .list_hd_img p { height:24px; color:#666; text-align:center;}
 .list_hd_img p span { color:#f00;}
 
-.paging { float:left;width:960px; height:30px; line-height:30px; display:block;}
-.paging a { width:16px; height:16px; margin-right:10px;}
-
 /*------------------找老师和找学校-------------------------*/
-
-
 .tesch_box { width:1200px;}
 .teach_sea { width:1180px; height:36px; line-height:36px;padding-left:20px; background:#f5f5f5; margin-bottom:10px;border:1px #ccc solid;}
 .teach_sea a { padding:0 10px; border:1px #ccc solid; margin-right:10px; background:#fff; color:333;}
 .teach_sea a:hover { background:#009871;border:1px #009871 solid; color:#fff;}
+.teach_sea a.current {border-color:#009871;}
 
 .schoool_box_list { width:1200px; margin-bottom:20px;}
 .schoool_box_list ul { width:1200px; position:relative;}
@@ -368,3 +368,5 @@ div[contenteditable=true] {-webkit-line-break: after-white-space; -webkit-nbsp-m
 .sh_all .sh_all_tea li {float:left; display:block; margin:10px 15px 10px 20px;}
 .sh_all .sh_all_tea li p{text-align:center;  line-height:30px;}
 .sh_ke  .sh_sch_ke {border-top:1px solid #ccc; padding:20px 0 0 10px; display:inline-block;}
+
+

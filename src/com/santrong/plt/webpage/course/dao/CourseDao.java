@@ -106,7 +106,7 @@ public class CourseDao extends BaseDao {
 			}
 			// 是否含有直播
 			if(query.isLive()) {
-				
+				criteria.where(eq("a.live", "1"));
 			}
 			// 所属区域
 			if(MyUtils.isNotNull(query.getAreaCode())) {

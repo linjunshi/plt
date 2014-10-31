@@ -7,11 +7,11 @@ import java.util.List;
  * @date 2014年10月9日
  * @time 下午7:20:10
  */
-public class SchoolView {
+public class GradeSchoolView {
 	private String gradeName;
 	private int gradeGroup;
 	private String gradeEnName;
-	private List<SchoolItem> schoolList;
+	private List<SchoolTotalView> schoolList;
 	
 	public String getGradeEnName() {
 		return gradeEnName;
@@ -31,11 +31,10 @@ public class SchoolView {
 	public void setGradeGroup(int gradeGroup) {
 		this.gradeGroup = gradeGroup;
 	}
-	public List<SchoolItem> getSchoolList() {
+	public List<SchoolTotalView> getSchoolList() {
 		return schoolList;
 	}
-	public void setSchoolList(List<SchoolItem> schoolList) {
+	public void setSchoolList(List<SchoolTotalView> schoolList) {
 		this.schoolList = schoolList;
 	}
-	
 }
