@@ -19,14 +19,15 @@ a:hover {text-decoration: none}
 a:active {outline: 0}
 a:focus {-moz-outline-style: none}
 div[contenteditable=true] {-webkit-line-break: after-white-space; -webkit-nbsp-mode: space;-webkit-user-modify: read-write; word-wrap: break-word}
-/*
-.clearfix:before, .clearfix:after {content: '.'; display: block; overflow: hidden; visibility: hidden; font-size: 0; line-height: 0; width: 0; height: 0}
-.clearfix:after {clear: both}*/
 .margin_right_clear {margin-right:0px !important;}
 .clr {display:inline-block;}
 .hide {display: none;}
 .l {float: left}
 .r {float: right}
+
+.pagination {text-align:center; width:100%; height:30px; line-height:30px; display:block;}
+.pagination a { width:16px; height:16px; margin-right:10px;}
+
 /*-----------------顶头部分---------------------*/
 #header{ width:100%;}
 #headerinside{ width:1200px; min-width:1200px; height:100px; background:#fff; margin:0 auto; position:relative; overflow: hidden;}
@@ -151,26 +152,29 @@ div[contenteditable=true] {-webkit-line-break: after-white-space; -webkit-nbsp-m
 .img_counts .sales strong { font-weight:110; padding-right:5px;}
 .img_list:hover { background:#fff; box-shadow:0px 0px 5px #87cfff;border:1px #a7dcff solid;}
 
-/*---------------未知---------------*/
-
+/*---------------课程列表--搜索条件---------------*/
 .list_content { width:960px;float:left; margin-right:20px;}
 .list_category { width:960px;border:1px #CCC solid; margin-bottom:20px;}
-.live_title { border-bottom:1px #ccc solid; margin-bottom:10px; background:#f5f5f5;}
-.live_title a{ font-size:14px;height:30px; line-height:30px; padding-left:5px;}
-.live_title span {margin-right:10px;}
 .cate_list { width:960px; margin-bottom:10px;}
 .cate_list ul {width:955px; display:inline-block; padding-left:5px;}
-.cate_list ul li {float:left; display:block; width:80px; margin-right:10px; padding:5px 0;}
-.cate_list ul li.current {background-color:#ccc;}
+.cate_list ul li {float:left; display:block; width:80px; margin-right:10px; border:solid 1px #fff; border-radius:6px; padding:5px 0; text-align:center;}
+.cate_list ul li.current {border-color:#aaa;}
 .cate_list ul li a {color:blue;}
 
-
+/*---------------课程列表--搜索结果---------------*/
 .live_resul {width:960px; border:1px #ccc solid;}
 .result_sorting { border-bottom:1px #ccc solid; background:#f5f5f5; height:30px;}
 .result_sorting a{ padding:0 10px;height:30px; line-height:30px; margin-left:10px; border:1px #ccc solid; background:#fff; color:#666;}
-.result_sorting a:hover { background:#009871; color:#fff; border:1px #009871 solid;}
-.result_list { width:960px; float:left;}
-.result_list ul{ width:960px;float:left;}
+.result_sorting a:hover { background:#009871; color:#fff;}
+.result_sorting a .ico {display:inline-block; width:7px; height:8px; margin-right:6px;}
+.result_sorting a.sort .ico {background:url('../photo/filter_ico.png') no-repeat;}
+.result_sorting a.select {background:url('../photo/filter_ico.png') no-repeat 0 -44px;}
+.result_sorting a.attrSelected {background:url('../photo/filter_ico.png') no-repeat 0 -25px;}
+.result_sorting a.sortAsc .ico {background:url('../photo/filter_ico.png') no-repeat 0 -9px;;}
+.result_sorting a.sortDesc .ico {background:url('../photo/filter_ico.png') no-repeat 0 -77px;}
+.result_sorting a.current,.result_sorting a.attrSelected,.result_sorting a.sortAsc,.result_sorting a.sortDesc {border-color:#009871;}
+.result_list { width:960px;}
+.result_list ul{ width:960px;}
 .result_list ul li{width:960px;float:left; display:block; padding:20px 0; border-bottom:1px #CCCCCC dashed; margin-bottom:10px;}
 .result_img { float:left; display:block; margin:0px 15px;}
 .result_con { float:left; display:block; width:260px; margin-right:30px;overflow:hidden}
@@ -182,7 +186,7 @@ div[contenteditable=true] {-webkit-line-break: after-white-space; -webkit-nbsp-m
 .result_con .yuan,.result_price .yuan{ color:#F00; font-size:18px; }
 .result_con .yuan span,.result_price .yuan span { color:#666; font-size:14px;padding-left:5px;}
 
-
+/*---------------课程列表--右边---------------*/
 .list_hot { float:right; display:; width:210px; border:1px #ccc solid; margin-bottom:20px;}
 .list_hot_hd { width:210px; height:30px; line-height:30px;font-size:18px; color:#333; text-indent:5px; border-bottom:1px #ccc solid; background:#f5f5f5;}
 .list_hd_img{ padding:10px; border-bottom:#CCC 1px  dashed;}
@@ -190,16 +194,12 @@ div[contenteditable=true] {-webkit-line-break: after-white-space; -webkit-nbsp-m
 .list_hd_img p { height:24px; color:#666; text-align:center;}
 .list_hd_img p span { color:#f00;}
 
-.paging { float:left;width:960px; height:30px; line-height:30px; display:block;}
-.paging a { width:16px; height:16px; margin-right:10px;}
-
 /*------------------找老师和找学校-------------------------*/
-
-
 .tesch_box { width:1200px;}
 .teach_sea { width:1180px; height:36px; line-height:36px;padding-left:20px; background:#f5f5f5; margin-bottom:10px;border:1px #ccc solid;}
 .teach_sea a { padding:0 10px; border:1px #ccc solid; margin-right:10px; background:#fff; color:333;}
 .teach_sea a:hover { background:#009871;border:1px #009871 solid; color:#fff;}
+.teach_sea a.current {border-color:#009871;}
 
 .schoool_box_list { width:1200px; margin-bottom:20px;}
 .schoool_box_list ul { width:1200px; position:relative;}

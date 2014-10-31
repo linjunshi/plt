@@ -158,6 +158,12 @@ public class UserDao extends BaseDao{
 				criteria.setIntParam(query.getSchoolGrade());
 				criteria.setIntParam(query.getSchoolGrade());
 			}
+			// 角色包含
+			if(query.getSchoolGrade() > 0) {
+				criteria.where(eq("(a.role & ?)", "?"));
+				criteria.setIntParam(query.getRole());
+				criteria.setIntParam(query.getRole());
+			}				
 			// 类型绝对等
 			if(query.getSchoolAbsoluteGrade() > 0) {
 				criteria.where(eq("b.schoolGrade", "?"));
