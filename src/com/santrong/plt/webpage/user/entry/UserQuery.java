@@ -10,10 +10,19 @@ import com.santrong.plt.opt.PageQuery;
 public class UserQuery extends PageQuery{
 	private String keywords;
 	private String areaCode;
+	private String subjectEnName;
 	private int schoolAbsoluteGrade;
 	private int schoolGrade;
 	private int absoluteRole;
 	private int role;
+
+	public String getSubjectEnName() {
+		return subjectEnName;
+	}
+
+	public void setSubjectEnName(String subjectEnName) {
+		this.subjectEnName = subjectEnName;
+	}
 
 	public int getAbsoluteRole() {
 		return absoluteRole;

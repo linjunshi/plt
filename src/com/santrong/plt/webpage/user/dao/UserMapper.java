@@ -48,9 +48,6 @@ public interface UserMapper {
     		+ "where id=#{id}")
     int update(UserItem user);
     
-    @Select("select * from user limit 16;")
-    List<UserItem> selectAll();
-    
     @Select("select a.*, b.education, b.positional, b.graduateSchool, c.birthday, c.nativePlace from user a "
     		+ "LEFT JOIN user_education b on a.id = b.userId "
     		+ "LEFT JOIN user_extends c on a.id = c.userId "

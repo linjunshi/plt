@@ -25,12 +25,21 @@ public class UserItem {
 	private Date cts;
 	private Date uts;
 	
+	// 非表字段
+	private String schoolName;
+	
 	public final static int Role_Student = 1; // 1
 	public final  static int Role_Teacher = 2; // 10
 	public final  static int Role_School = 4; // 100
 	public final  static int Role_Admin = 64; // 100000
 
 	
+	public String getSchoolName() {
+		return schoolName;
+	}
+	public void setSchoolName(String schoolName) {
+		this.schoolName = schoolName;
+	}
 	public String getUrl() {
 		return url;
 	}

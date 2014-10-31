@@ -189,6 +189,11 @@ insert into school values('10010', '深圳5中', null, '440300', 6);
 insert into school values('10011', '高级1中', null, '440300', 4);
 insert into school values('10012', '高级2中', null, '440300', 4);
 insert into school values('10013', '高级3中', null, '440300', 4);
+insert into school values('10014', '高级4中', null, '440300', 4);
+insert into school values('10015', '高级5中', null, '440300', 4);
+insert into school values('10016', '高级6中', null, '440300', 4);
+insert into school values('10017', '高级7中', null, '440300', 4);
+insert into school values('10018', '高级8中', null, '440300', 4);
 
 -- 行政区划表 --
 drop table if exists web_area;

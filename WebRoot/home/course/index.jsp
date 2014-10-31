@@ -8,7 +8,7 @@
 var Globals = {};
 Globals.ctx = "${ctx}";
 Globals.lang = "${lang}";
-Globals.page = "Index_index";
+Globals.page = "Index_course";
 </script>
 </head>
 <body>

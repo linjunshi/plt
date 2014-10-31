@@ -60,7 +60,7 @@ public class SchoolAction extends BaseAction {
 		if(MyUtils.isNotNull(grade) && !grade.equals("all")) {
 			schoolQuery.setSchoolGrade(GradeDefine.getByGradeEnName(grade).getGradeGroup());
 		}
-		schoolQuery.setPageSize(32);
+		schoolQuery.setPageSize(15);
 		schoolQuery.setPageNum(pageNum);
 		schoolQuery.setCount(schoolDao.selectCountByQuery(schoolQuery));
 		List<SchoolItem> schoolList = schoolDao.selectByQuery(schoolQuery);
