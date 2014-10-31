@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import com.santrong.plt.webpage.course.entry.CourseDetailView;
 import com.santrong.plt.webpage.course.entry.CourseItem;
@@ -53,5 +54,21 @@ public interface CourseMapper {
 	@Select("select a.*,b.* from course a LEFT JOIN user b on a.ownerId = b.id where b.schoolId = #{schoolId} ORDER BY a.cts DESC;")
 	List<CourseItem> selectCourseBySchoolId(String schoolId);
 	
-
+	/**
+	 * 点击收藏，修改该课程的收藏数量,自动加1
+	 * @author huangweihua
+	 * @param  id
+	 * @return 
+	 */
+	@Update("update course set collectCount=(collectCount + 1) where id = #{id}")
+	int addCollection(String id);
+	
+	/**
+	 * 取消收藏，修改该课程的收藏数量,自动减1
+	 * @author huangweihua
+	 * @param  id
+	 * @return 
+	 */
+	@Update("update course set collectCount=(collectCount - 1) where id = #{id}")
+	int removeCollection(String id);	
 }

@@ -16,7 +16,7 @@ body {color: #666;font: 12px/1.8em Arial, Helvetica, sans-serif;background:#FFF;
 .mr h2 {text-align: center;font-size:26px;margin:30px 0 10px 0; padding-top:20px; height:30px; line-height:30px;color: #009871; font-weight:100;}
 .border {background: url(resource/images/banner_img_4.jpg) no-repeat center center;height:420px;clear: both;}
 .center {width: 1000px;	margin: 0 auto;	height: 420px;position: relative;}
-.user {	width: 300px;height: 360px;border:1px #fff solid;background: url(resource/images/007.png);	position: absolute;	top: 30px;	right: 20px;}
+.user {	width: 300px;height: 230px;border:1px #fff solid;background: url(resource/images/007.png);	position: absolute;	top: 100px;	right: 20px;}
 .formlogin {height:auto;width:300px;padding-top: 20px;}
 .loginuser {width: 300px;display: block;float: left;color: #FFF;margin:15px 0;height:30px;}
 .login {display: block;	width: 100px;text-align: right;float: left;font-size: 16px;color: #000;	height:30px;line-height:30px;}
@@ -40,7 +40,7 @@ body {color: #666;font: 12px/1.8em Arial, Helvetica, sans-serif;background:#FFF;
   -webkit-box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1), 0 0 8px rgba(82, 168, 236, 0.6);
   -moz-box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1), 0 0 8px rgba(82, 168, 236, 0.6);
   box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1), 0 0 8px rgba(82, 168, 236, 0.6);}
-  .system_tip {width:900px; line-height:26px; margin:10px auto; border:solid 1px #F5D8A7; border-radius:2px; background-color:#FFF6DB;}
+  .system_tip {width:300px; line-height:26px; margin:10px auto; border:solid 1px #F5D8A7; border-radius:2px; background-color:#FFF6DB;padding-left: 10px;text-align: center;}
 </style>
 </head>
 <!-- <body scroll="no"> -->
@@ -48,15 +48,17 @@ body {color: #666;font: 12px/1.8em Arial, Helvetica, sans-serif;background:#FFF;
 <div class="mr">
   <h2>用户登录</h2>
 </div>
+
 <c:if test="${tipError != null && fn:length(tipError)  > 0}">
-<div class="system_tip">
-	<c:forEach items="${tipError}" var="tip">
-	<p>${tip.msg}</p>
-	</c:forEach>
-</div>
+	<div class="system_tip">
+		<c:forEach items="${tipError}" var="tip">
+		<p>${tip.msg}</p>
+		</c:forEach>
+	</div>
 </c:if>
 <div class="border">
   <div class="center">
+  
     <div class="user">
       <form class="formlogin" action="${ctx}/login" method="post">
         <div class="loginuser">
@@ -67,21 +69,7 @@ body {color: #666;font: 12px/1.8em Arial, Helvetica, sans-serif;background:#FFF;
           <label class="login"><fmt:message key="index_user_password"/>：</label>
           <input name="password" type="password" size="20" class="text2">
         </div>
-        <div class="loginuser">
-          <label class="login">语言选择：</label>
-          <select name="select" size="1" class="text2" style="height:30px; width:160px;">
-            <option>中文</option>
-            <option>繁体中文</option>
-            <option>English</option>
-          </select>
-        </div>
-        <div class="loginuser">
-          <label class="login">验证码：</label>
-          <input name="validation" type="text" size="20" class="validation">
-          <label><a href="#">看不清？换一换！</a></label>
-        </div>
         <div class="loginbut">
-       <!--  <p ><a href="#" type="submit" >登录</a></p> -->
 		<input type="submit" value="登录" class="btn-login" name="commit" />
       </div>
       </form>
@@ -90,7 +78,6 @@ body {color: #666;font: 12px/1.8em Arial, Helvetica, sans-serif;background:#FFF;
   </div>
 </div>
 <p class="footer_p">Copyright © 2014-2014, <a href="http://www.santrong.com" target="_blank">深圳市三简智能科技有限公司</a>, All Rights Reserved</p>
-</div>
 </body>
 </html>
 

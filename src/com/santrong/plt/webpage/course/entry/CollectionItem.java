@@ -1,5 +1,7 @@
 package com.santrong.plt.webpage.course.entry;
 
+import java.util.Date;
+
 /**
  * @author weinianjie
  * @date 2014年10月20日
@@ -8,7 +10,7 @@ package com.santrong.plt.webpage.course.entry;
 public class CollectionItem {
 	private String userId;
 	private String courseId;
-	private String cts;
+	private Date cts;
 	public String getUserId() {
 		return userId;
 	}
@@ -21,10 +23,11 @@ public class CollectionItem {
 	public void setCourseId(String courseId) {
 		this.courseId = courseId;
 	}
-	public String getCts() {
+	public Date getCts() {
 		return cts;
 	}
-	public void setCts(String cts) {
+	public void setCts(Date cts) {
 		this.cts = cts;
 	}
+
 }

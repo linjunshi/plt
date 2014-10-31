@@ -34,7 +34,18 @@ IndexClass.prototype = {
 	},
 	
 	// 课程详细页
-	course:function() {
+	courseDetail:function() {
+		$("#coll_course").click(function(){
+			var courseId = $(".detai_img input[name=courseId]").val();
+			var url = Globals.ctx + "/course/coll_course"
+			$.post(url, {courseId : courseId}, function(result) {
+				if(result == "success") {
+					alert("收藏成功");
+				}else {
+					alert("收藏失败");
+				}
+			})
+		});
 		$(".course_intro_menu li").toggleShow(".course_intro_detail", {event : "click", hide : false});
 	},
 	

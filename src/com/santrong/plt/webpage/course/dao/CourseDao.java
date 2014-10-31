@@ -208,11 +208,50 @@ public class CourseDao extends BaseDao {
 	 * @return List<CourseItem>
 	 */
 	public List<CourseItem> selectCourseBySchoolId(String schoolId) {
-		CourseMapper mapper = this.getMapper(CourseMapper.class);
-		if(mapper != null){
-			return mapper.selectCourseBySchoolId(schoolId);
+		try {
+			CourseMapper mapper = this.getMapper(CourseMapper.class);
+			if (mapper != null) {
+				return mapper.selectCourseBySchoolId(schoolId);
+			}
+		} catch (Exception e) {
+			Log.printStackTrace(e);
 		}
 		return null;
 	}
 	
+	/**
+	 * 点击收藏，修改该课程的收藏数量,自动加1
+	 * @author huangweihua
+	 * @param  id
+	 * @return 
+	 */
+	public int addCollection(String id){
+		try {
+			CourseMapper mapper = this.getMapper(CourseMapper.class);
+			if (mapper != null) {
+				return mapper.addCollection(id);
+			}
+		} catch (Exception e) {
+			Log.printStackTrace(e);
+		}
+		return 0;
+	}
+	
+	/**
+	 * 取消收藏，修改该课程的收藏数量,自动减1
+	 * @author huangweihua
+	 * @param  id
+	 * @return 
+	 */
+	public int removeCollection(String id){
+		try {
+			CourseMapper mapper = this.getMapper(CourseMapper.class);
+			if (mapper != null) {
+				return mapper.removeCollection(id);
+			}
+		} catch (Exception e) {
+			Log.printStackTrace(e);
+		}
+		return 0;
+	}
 }

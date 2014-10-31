@@ -44,14 +44,17 @@ public class UserAction extends BaseAction {
 	@RequestMapping(value="/regist", method=RequestMethod.POST)
 	public String registPost(String username, String password, String pwdagain) {
 		if(StringUtils.isNullOrEmpty(username) || StringUtils.isNullOrEmpty(password) || StringUtils.isNullOrEmpty(pwdagain)) {
+			addError("请您输入的用户名、密码和确认密码！");
 			return "regist";
 		}
 		if(!password.equals(pwdagain)) {
+			addError("您输入的密码和确认密码不一致！");
 			return "regist";
 		}
 		
 		UserDao userDao = new UserDao();
 		if(userDao.existsByUserName(username)) {
+			addError("您输入的用户名已经存在！");
 			return "regist";
 		}
 		
@@ -100,7 +103,7 @@ public class UserAction extends BaseAction {
 	@RequestMapping(value="/login", method=RequestMethod.POST)
 	public String loginPOST(String username, String password) {
 		if(StringUtils.isNullOrEmpty(username) || StringUtils.isNullOrEmpty(password)) {
-			addError("请输入用户名和密码");
+			addError("请您输入用户名和密码");
 			return "login";
 		}
 		
@@ -108,11 +111,13 @@ public class UserAction extends BaseAction {
 		UserItem user = userDao.selectByUserName(username);
 		
 		if(user == null) {
-			return "error_login_user_not_exists";
+			addError("您输入的用户名不存在！");
+			return "login";
 		}
 		
 		if(!user.getPassword().equals(MyUtils.getMD5(password))) {
-			return "error_login_password_wrong";
+			addError("您输入的密码有误，请重新输入！");
+			return "login";
 		}
 
 		getRequest().getSession().setAttribute(Global.SessionKey_LoginUser, user);

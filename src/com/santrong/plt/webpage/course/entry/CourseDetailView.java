@@ -17,6 +17,7 @@ public class CourseDetailView {
 	private String gradeId;
 	private String subjectId;
 	private int price;
+	private Date endTime;
 	private int collectCount;
 	private int saleCount;
 	private String remark;
@@ -82,6 +83,12 @@ public class CourseDetailView {
 	}
 	public void setPrice(int price) {
 		this.price = price;
+	}
+	public Date getEndTime() {
+		return endTime;
+	}
+	public void setEndTime(Date endTime) {
+		this.endTime = endTime;
 	}
 	public int getCollectCount() {
 		return collectCount;

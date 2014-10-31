@@ -277,7 +277,9 @@ div[contenteditable=true] {-webkit-line-break: after-white-space; -webkit-nbsp-m
 .course_list_tab p{ float:left; width:90%; margin-left:20px; height:30px; line-height:30px;}
 .course_list_tab b { margin-left:20px;}
 .course_list_des { padding-left:86px;}
-.course_list_des p{ line-height:24px;}
+.course_list_des span{ line-height:24px;}
+.course_list_des a{float:right; color:#009871;background:green;}
+.course_list_des a:hover{ background:#ffffff; cursor:pointer;}
 
 .th_evaluation .comm_pjxq {padding: 13px 25px; border-bottom:1px #dbdbdb dashed;}
 .th_mr { width:300px;}

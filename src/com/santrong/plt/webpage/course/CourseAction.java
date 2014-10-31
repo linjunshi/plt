@@ -14,8 +14,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.mysql.jdbc.StringUtils;
+import com.santrong.plt.log.Log;
 import com.santrong.plt.opt.ParamHelper;
 import com.santrong.plt.opt.ThreadUtils;
 import com.santrong.plt.opt.area.AreaEntry;
@@ -25,10 +27,12 @@ import com.santrong.plt.system.Global;
 import com.santrong.plt.util.MyUtils;
 import com.santrong.plt.webpage.BaseAction;
 import com.santrong.plt.webpage.course.dao.ChapterDao;
+import com.santrong.plt.webpage.course.dao.CollectCourseDao;
 import com.santrong.plt.webpage.course.dao.CommentDao;
 import com.santrong.plt.webpage.course.dao.CourseDao;
 import com.santrong.plt.webpage.course.entry.ChapterAndResourceEntry;
 import com.santrong.plt.webpage.course.entry.ChapterDetailView;
+import com.santrong.plt.webpage.course.entry.CollectionItem;
 import com.santrong.plt.webpage.course.entry.CommentItem;
 import com.santrong.plt.webpage.course.entry.CourseDetailView;
 import com.santrong.plt.webpage.course.entry.CourseItem;
@@ -238,7 +242,8 @@ public class CourseAction extends BaseAction {
 	
 	/**
 	 * 课程详细页面-课程评价回复功能
-	 * @param id
+	 * @author huangweihua
+	 * @param courseId, remark
 	 * @return
 	 */
 	@RequestMapping(value="/comment", method=RequestMethod.POST)
@@ -247,26 +252,67 @@ public class CourseAction extends BaseAction {
 		if(StringUtils.isNullOrEmpty(courseId) || StringUtils.isNullOrEmpty(remark) ) {
 			return this.redirect("/course/" + courseId + ".html");
 		}
-		
-		Object obj = getRequest().getSession().getAttribute(Global.SessionKey_LoginUser);
-		if(obj == null) {
+		/*课程评论页面，判断用户是否登录改成使用BaseAction中的currentUser方法，拿到user后判断user是否为空来判断用户登录状态*/
+		UserItem user = this.currentUser();
+		if(user == null) {
 			// 没登陆
 			return this.redirect("/login");
 		}
-		UserItem currentUser = (UserItem)obj;
 		
 		CommentDao commentDao = new CommentDao();
 		CommentItem commentItem = new CommentItem();
 		
 		commentItem.setId(MyUtils.getGUID());
-		commentItem.setUserId(currentUser.getId());
+		commentItem.setUserId(user.getId());
 		commentItem.setCourseId(courseId);
 		commentItem.setRemark(remark);
 		commentItem.setCts(new Date());
 		commentItem.setUts(new Date());
 		commentDao.insert(commentItem);
-		
+
 		return this.redirect("/course/" + courseId + ".html");
 	}
 	
+	/**
+	 * 点击收藏弹出提示收藏成功，ajax异步，不判断重复收藏
+	 * @author huangweihua
+	 * @param courseId
+	 * @return
+	 */
+	@RequestMapping(value="/coll_course", method=RequestMethod.POST)
+	@ResponseBody
+	public String collectionCourse(String courseId) {
+		try {
+			// 获取当前用户对象信息
+			UserItem user = this.currentUser();
+			if (user == null) {
+				// 没登陆
+				return this.redirect("/login");
+			}
+			
+			
+			CollectCourseDao collectCourseDao = new CollectCourseDao();
+			// 如果没搜藏过
+			if(!collectCourseDao.exists(courseId, user.getId())) {
+				ThreadUtils.beginTranx();
+				// 往课程收藏表插入一条记录
+				CollectionItem collection = new CollectionItem();
+				collection.setUserId(user.getId());
+				collection.setCourseId(courseId);
+				collection.setCts(new Date());
+				collectCourseDao.insert(collection);
+
+				// 点击收藏，修改该课程的收藏数量,自动加1
+				CourseDao courseDao = new CourseDao();
+				courseDao.addCollection(courseId);
+				ThreadUtils.commitTranx();
+			}
+
+		} catch (Exception e) {
+			ThreadUtils.rollbackTranx();
+			Log.printStackTrace(e);
+			return FAIL;
+		}
+		return SUCCESS;
+	}
 }

@@ -3,12 +3,12 @@
 <c:set var="title" value="三简在线教育平台" ></c:set>
 <c:set var="keywords" value="456" ></c:set>
 <c:set var="description" value="789" ></c:set>
-<%@ include file="../inc/header.jsp"%>
+<%@ include file="../inc/header2.jsp"%>
 <script type="text/javascript">
 var Globals = {};
 Globals.ctx = "${ctx}";
 Globals.lang = "${lang}";
-Globals.page = "Index_course";
+Globals.page = "Index_courseDetail";
 </script>
 </head>
 <body>
@@ -18,12 +18,17 @@ Globals.page = "Index_course";
 		
 	<div id="container_box">
 	    <div class="detailPrimary clearfix">
-	        <div class="detai_img"> <img src="${ctx}/resource/images/356.jpg"  width="290" height="200"/> <a href="#" class="detai_coll">收藏课程</a> <a href="#" class="detai_share">分享给朋友</a> </div>
-	        <div class="priInfo">
+			<div class="detai_img">
+				<img src="${ctx}/resource/images/356.jpg" width="290" height="200" />
+				<a href="javascript:void(0)" id="coll_course" class="detai_coll">收藏课程</a>
+				<a href="javascript:void(0);" class="detai_share">分享给朋友</a>
+				<input type="hidden" name="courseId" value="${course.id}"/>
+			</div>
+			<div class="priInfo">
 	            <h2 class="mb15">${course.courseName}</h2>
 	            <div class="pri_m ">
 	                <p >价格<b>${course.price}</b>元</p>
-	                <p><span>总课时：<em>14课时</em></span><span> 结束时间：<em class="data_time">2014-12-12</em></span><span> 担保期：<em>15天</em> </span></p>
+	                <p><span>总课时：<em>14课时</em></span><span> 结束时间：<em class="data_time"><fmt:formatDate value="${course.endTime}" type="date" dateStyle="default"/></em></span><span> 担保期：<em>15天</em> </span></p>
 	            </div>
 	            <div class="detai_num clearfix">
 	                <p>已经购买人数<br/>
@@ -86,11 +91,12 @@ Globals.page = "Index_course";
 	            	<c:forEach items="${course.chapterDetailList}" var="chapter" varStatus="st">
 	            	<dd>
 	            		<div class="course_list_tab"><p>${st.index+1}<b>${chapter.remark}</b></p> <a href="#">观看</a></div>
-	            		<div class="course_list_des">
 		            		<c:forEach items="${chapter.resourceList}" var="resource">
-		            		 <p>${resource.title}---type:${resource.typeString}</p>
+			            		<div class="course_list_des">
+				            		 <span>${resource.title}---type:${resource.typeString}</span>
+				            		 <a href="${ctx}/course_res?resId=${resource.id}&resType=${resource.type}" target="_blank" >进入</a>
+			            		</div>
 		            		</c:forEach>
-	            		</div>
 	            	</dd>
 	            	</c:forEach>
 	        </dl>
