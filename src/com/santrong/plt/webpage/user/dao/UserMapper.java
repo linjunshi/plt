@@ -47,9 +47,11 @@ public interface UserMapper {
     		+ "where id=#{id}")
     int update(UserItem user);
     
-    @Select("select a.*, b.education, b.positional, b.graduateSchool, c.birthday, c.nativePlace from user a "
+    @Select("select a.*, b.education, b.positional, b.graduateSchool, c.birthday, c.nativePlace, d.subjectName, e.schoolName from user a "
     		+ "LEFT JOIN user_education b on a.id = b.userId "
     		+ "LEFT JOIN user_extends c on a.id = c.userId "
+    		+ "LEFT JOIN subject d on d.id = a.subjectId "
+    		+ "LEFT JOIN school e on e.id = a.schoolId "
     		+ "where a.id = #{id};")
     UserDetailView selectDetailById(String id);
 

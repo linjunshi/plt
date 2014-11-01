@@ -14,8 +14,17 @@ public class CourseQuery extends PageQuery{
 	private String gradeEnName;
 	private String subjectEnName;
 	private boolean live;
+	private String userId;
 
 	
+	public String getUserId() {
+		return userId;
+	}
+
+	public void setUserId(String userId) {
+		this.userId = userId;
+	}
+
 	public boolean isLive() {
 		return live;
 	}

@@ -15,6 +15,7 @@ import com.santrong.plt.util.MyUtils;
 import com.santrong.plt.webpage.BaseAction;
 import com.santrong.plt.webpage.course.dao.CourseDao;
 import com.santrong.plt.webpage.course.entry.CourseItem;
+import com.santrong.plt.webpage.course.entry.CourseQuery;
 import com.santrong.plt.webpage.home.dao.GradeDao;
 import com.santrong.plt.webpage.home.dao.SubjectDao;
 import com.santrong.plt.webpage.home.entry.GradeView;
@@ -124,21 +125,33 @@ public class TeacherAction extends BaseAction {
 	 */
 	@RequestMapping("/{id}.html")
 	public String detail(@PathVariable String id) {
+		HttpServletRequest request = getRequest();
+		String grade = request.getParameter("grade");
+		String level = request.getParameter("level");
+		int pageNum = this.getIntParameter("page");
+		if(pageNum == 0) {
+			pageNum = 1;
+		}
 		
 		/*获取某一位老师的详细信息*/
 		UserDao userDao = new UserDao();
 		UserDetailView teacher = userDao.selectDetailById(id);
 		
+		// 获取老师的课程
 		CourseDao courseDao = new CourseDao();
-		List<CourseItem> courseList = courseDao.selectByUserid(teacher.getId());
-		if(courseList == null) {
-			return "404";
-		}
+		CourseQuery query = new CourseQuery();
+		query.setUserId(teacher.getId());
+		query.setLevelEnName(level);
+		query.setGradeEnName(grade);
+		query.setPageSize(3);
+		query.setPageNum(pageNum);
+		query.setCount(courseDao.selectCountByQuery(query));
+		List<CourseItem> courseList = courseDao.selectByQuery(query);
 		
 		/*把老师的信息传到前端去*/
-		HttpServletRequest request = getRequest();
 		request.setAttribute("teacher", teacher);
 		request.setAttribute("courseList", courseList);
+		request.setAttribute("query", query);
 		
 		return "teacher/detail";
 	}

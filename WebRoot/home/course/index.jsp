@@ -88,20 +88,20 @@ Globals.page = "Index_course";
 		    </div>
 		    <div class="r" style="width:210px;">
 			    <div class="list_hot">
-			        <div class="list_hot_hd">推荐老师</div>
-			        <c:forEach items="${teacherList}" var="teacher">
+			        <div class="list_hot_hd">附近的学校</div>
+			        <c:forEach items="${schoolList}" var="school">
 			        <div class="list_hd_img">
-			        	<a href="${ctx}/teacher/${teacher.id}.html" target="_blank"><img src="${ctx}/resource/images/93.jpg" width="190" height="180" border="0"></a>
-			            <p>${teacher.showName}</p>
+			            <p><a href="${ctx}/school/${school.id}.html" target="_blank">${school.schoolName}</a></p>
 			        </div>
 			        </c:forEach>
 			    </div>
 			    
 			    <div class="list_hot">
-			        <div class="list_hot_hd">附近的学校</div>
-			        <c:forEach items="${schoolList}" var="school">
+			        <div class="list_hot_hd">推荐老师</div>
+			        <c:forEach items="${teacherList}" var="teacher">
 			        <div class="list_hd_img">
-			            <p><a href="${ctx}/school/${school.id}.html" target="_blank">${school.schoolName}</a></p>
+			        	<a href="${ctx}/teacher/${teacher.id}.html" target="_blank"><img src="${ctx}/resource/images/93.jpg" width="190" height="180" border="0"></a>
+			            <p>${teacher.showName}</p>
 			        </div>
 			        </c:forEach>
 			    </div>

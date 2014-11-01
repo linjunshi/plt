@@ -25,6 +25,7 @@ div[contenteditable=true] {-webkit-line-break: after-white-space; -webkit-nbsp-m
 .l {float: left}
 .r {float: right}
 
+/*------------------分页----------------*/
 .pagination {text-align:center; width:100%; height:30px; line-height:30px; display:block;}
 .pagination a { width:16px; height:16px; margin-right:10px;}
 
@@ -319,21 +320,16 @@ div[contenteditable=true] {-webkit-line-break: after-white-space; -webkit-nbsp-m
 
 
 /*--------------------老师详细-----------------------*/
-.th_box { width:1200px; background:#f5f5f5; padding-bottom:20px;}
+.th_box { width:1200px; background:#f5f5f5; padding-bottom:10px;}
 .th_box_left { float:left; display:block; width:190px;}
 .th_box_left img { margin:10px;}
-.th_left_sid li a{ width:190px; text-align:center; display:block; height:40px;line-height:40px; color:#333;}
-.th_left_sid li a:hover{ background:#009871; color:#fff;}
+.th_left_sid li a{ width:190px; text-align:center; display:block; height:40px;line-height:40px; color:#333; border:solid 1px #ccc;}
+.th_left_sid li a:hover, .th_left_sid li.current { background:#009871; color:#fff;}
 .th_box_right { width:1010px; float:right; display:block;}
-.profile_identity { width:1000px; min-height:100px; margin:10px 0;}
-.profile_identity .te_mi{ font-size:16px; color:#333;}
-.profile_identity h2{ font-size:18px; color:#009871; margin-right:15px; border-bottom:1px #009871 solid;}
-.profile_identity p{ line-height:24px; padding:10px 10px 0 0;}
-
-.teacher_intro{ width:980px; height:24px;line-height:24px; border:1px #ccc solid; margin:10px 0; padding:5px 0; background:#f5f5f5; text-indent:10px; font-size:16px; color:#044a38;}
-
-.th_box_con {width:980px;  background:#fff; padding:10px ; margin:10px 10px 0 0;}
-.th_items{ width:980px; margin-bottom:10px; float:left; display:block;position:relative;border:1px #ccc solid;}
+.profile_identity { width:100%; min-height:100px; text-indent:20px; line-height:34px; font-size:16px; color:#333;}
+.th_box_con h2{ font-size:18px; width:100%; color:#009871; line-height:32px;  margin:15px 0; border-bottom:1px #009871 solid; text-indent:10px;}
+.teacher_course{ width:100%; float:left; height:24px;line-height:24px; margin-bottom:10px; border:1px #ccc solid; padding:5px 0; background:#f5f5f5; text-indent:10px; font-size:16px; color:#044a38;}
+.th_items{ width:980px; margin-bottom:10px; float:right; display:block;position:relative;border:1px #ccc solid;}
 .th_items img { float:left; display:block; margin:10px;}
 .titi { float:left;display:block; width:500px; margin:10px 0; }
 .titi a{color:#009871;}
@@ -341,6 +337,7 @@ div[contenteditable=true] {-webkit-line-break: after-white-space; -webkit-nbsp-m
 .infos{ float:left; display:block; width:500px; margin:5px 0;}
 .course_operate{width: 180px;position: absolute;right: 10px;top: 9px;}
 .pt6, .pt7, .pt8, .pt9 { margin-bottom:15px;}
+.pt7 .right {margin-left:30px;}
 .pt7 a:hover,.pt9 a:hover{background:#044a38;}
 .pt8 a:hover { color:#044a38;} 
 .pt6 { color:#f00; font-size:20px;}

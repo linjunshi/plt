@@ -37,6 +37,27 @@ public class UserDetailView {
 	private Date birthday;
 	private String nativePlace;
 	
+	// 其他信息
+	private String subjectName;
+	private String schoolName;
+	
+	
+	public String getSubjectName() {
+		return subjectName;
+	}
+
+	public void setSubjectName(String subjectName) {
+		this.subjectName = subjectName;
+	}
+
+	public String getSchoolName() {
+		return schoolName;
+	}
+
+	public void setSchoolName(String schoolName) {
+		this.schoolName = schoolName;
+	}
+
 	public String getId() {
 		return id;
 	}

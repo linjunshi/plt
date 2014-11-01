@@ -43,15 +43,7 @@ public class CourseDao extends BaseDao {
 		}
 		return null;
 	}
-	
-	// 根据具体搜索条件查询
-	public List<CourseItem> selectByQuery() {
-		CourseMapper mapper = this.getMapper(CourseMapper.class);
-		if(mapper != null) {
-			return mapper.selectByQuery();
-		}
-		return null;
-	}
+
 	
 	/**
 	 * 查询某位老师的所有课程信息
@@ -59,10 +51,10 @@ public class CourseDao extends BaseDao {
 	 * @param  ownerId
 	 * @return List<CourseItem>
 	 */
-	public List<CourseItem> selectByUserid(String userid){
+	public List<CourseItem> selectByUserId(String userId){
 		CourseMapper mapper = this.getMapper(CourseMapper.class);
 		if(mapper != null) {
-			return mapper.selectByUserid(userid);
+			return mapper.selectByUserId(userId);
 		}
 		return null;
 	}
@@ -113,6 +105,11 @@ public class CourseDao extends BaseDao {
 				criteria.where(like("e.areaCode", "?"));
 				criteria.setStringParam(AreaUtils.lostTail(query.getAreaCode()) + "%");
 			}
+			// 所属用户
+			if(MyUtils.isNotNull(query.getUserId())) {
+				criteria.where(eq("a.ownerId", "?"));
+				criteria.setStringParam(query.getUserId());
+			}			
 			// 排序
 			if(!StringUtils.isNullOrEmpty(query.getOrderBy())) {
 				if("desc".equalsIgnoreCase(query.getOrderRule())) {
@@ -187,6 +184,11 @@ public class CourseDao extends BaseDao {
 				criteria.where(like("e.areaCode", "?"));
 				criteria.setStringParam(AreaUtils.lostTail(query.getAreaCode()) + "%");
 			}
+			// 所属用户
+			if(MyUtils.isNotNull(query.getUserId())) {
+				criteria.where(eq("a.ownerId", "?"));
+				criteria.setStringParam(query.getUserId());
+			}				
 			
 			Connection conn = ThreadUtils.currentConnection();
 			PreparedStatement stm = criteria.getRealStatement(conn);
