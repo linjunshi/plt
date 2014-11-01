@@ -31,7 +31,7 @@ public class StudyAction extends BaseAction {
 		}
 		
 		CourseDao courseDao = new CourseDao();
-		List<CourseItem> course = courseDao.selectByUserid(user.getId());
+		List<CourseItem> course = courseDao.selectByUserId(user.getId());
 		
 		HttpServletRequest request = getRequest();
 		request.setAttribute("course", course);
