@@ -46,7 +46,26 @@ IndexClass.prototype = {
 				}
 			})
 		});
-		$(".course_intro_menu li").toggleShow(".course_intro_detail", {event : "click", hide : false});
+		$("#content_nav li").click(function(){
+			if($(this).index() == 0){
+				$("#course_summary").show();
+				$("#course_struct").show();
+				$("#course_comment").show();
+				return;
+			}
+			if($(this).index() == 1){
+				$("#course_summary").hide();
+				$("#course_struct").show();
+				$("#course_comment").hide();
+				return;
+			}
+			if($(this).index() == 2){
+				$("#course_summary").hide();
+				$("#course_struct").hide();
+				$("#course_comment").show();				
+				return;
+			}
+		});
 	},
 	
 	// 学校列表页
