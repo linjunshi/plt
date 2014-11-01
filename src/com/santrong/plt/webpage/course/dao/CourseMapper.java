@@ -68,4 +68,22 @@ public interface CourseMapper {
 	 */
 	@Update("update course set collectCount=(collectCount - 1) where id = #{id}")
 	int removeCollection(String id);	
+	
+	/**
+	 * 新增一条评论时，修改该课程的评论数量,自动加1
+	 * @author huangweihua
+	 * @param  id
+	 * @return 
+	 */
+	@Update("update course set commentCount=(commentCount + 1) where id = #{id}")
+	int addComment(String id);
+	
+	/**
+	 * 删除一条评论时，修改该课程的评论数量,自动减1
+	 * @author huangweihua
+	 * @param  id
+	 * @return 
+	 */
+	@Update("update course set commentCount=(commentCount - 1) where id = #{id}")
+	int removeComment(String id);
 }

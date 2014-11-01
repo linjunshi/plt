@@ -6,23 +6,29 @@
 	    <div id="headerinside"> <a href="#" class="logo"><img src="${ctx}/resource/images/logo.png" width="148" height="70" /></a>
 	        <div class="city_info">
 	            <h2><a class="city_info_name" href="#">${sessionScope.area.cityName}</a></h2>
-	            <a class="city_info_toggle" href="#">切换城市</a></div>
-	        <form class="search_form">
-	            <div class="search_navigat">
-	                <div class="search">
-	                    <input name="search" type="text"  class="search_text" value="站内搜索"/>
-	                    <a href="#" class="search_txt">站内搜索</a></div>
-	                <div class="fast_navigat"></div>
-	            </div>
-	        </form>
-	        <c:if test="${sessionScope.loginUser == null}">
-	        <a href="${ctx }/login" class="user_info_login">登录</a> <a href="${ctx }/regist" class="user_info_signup">注册</a>
-	        </c:if>
-	        <c:if test="${sessionScope.loginUser != null}">
-	        <span>${sessionScope.loginUser.showName}</span>
-	        <a href="${ctx }/logout">注销</a>
-	        <a href="${ctx }/study/course">管理中心</a>
-	        </c:if>
+			            <a class="city_info_toggle" href="#">切换城市</a>
+			</div>
+			<form class="search_form" method="get">
+				<div class="search_navigat">
+					<div class="search">
+						<input name="search" type="text" class="search_text" value="站内搜索" />
+					    <input type=hidden name=ie value=GB2312> 
+					    <input type=hidden name=oe value=GB2312> 
+					    <input type=hidden name=hl value=zh-CN>  
+						<a href="javascript:void(0);" class="search_txt">站内搜索</a>
+					</div>
+					<div class="fast_navigat"></div>
+				</div>
+			</form>
+			<c:if test="${sessionScope.loginUser == null}">
+				<a href="${ctx }/login" class="user_info_login">登录</a>
+				<a href="${ctx }/regist" class="user_info_signup">注册</a>
+			</c:if>
+			<c:if test="${sessionScope.loginUser != null}">
+				<span>${sessionScope.loginUser.showName}</span>
+				<a href="${ctx }/logout">注销</a>
+				<a href="${ctx }/study/course">管理中心</a>
+			</c:if>
 		</div>
 	    <div id="wrapper_box">
 	        <div id="wrapper">
