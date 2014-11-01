@@ -39,6 +39,19 @@ public class SchoolDao extends BaseDao {
 	}
 	
 	/**
+	 * 根据ID获取学校
+	 * @param id
+	 * @return
+	 */
+	public SchoolItem selectById(String id) {
+		SchoolMapper mapper = this.getMapper(SchoolMapper.class);
+		if(mapper != null) {
+			return mapper.selectById(id);
+		}
+		return null;
+	}
+	
+	/**
 	 * 根据具体搜索条件查询学校
 	 * @param query
 	 * @return

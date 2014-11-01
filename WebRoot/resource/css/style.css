@@ -204,10 +204,14 @@ div[contenteditable=true] {-webkit-line-break: after-white-space; -webkit-nbsp-m
 
 .schoool_box_list { width:1200px; margin-bottom:20px;}
 .schoool_box_list ul { width:1200px; position:relative;}
-.schoool_box_list ul li { width:220px; height:205px;float:left; display:block; margin:0 19px 20px 0; border:2px #fff solid; padding-bottom:5px; position:relative; background:#f5f5f5; }
-.schoool_box_list ul li:hover{ border:#ccc 2px solid;}
-.schoool_box_list h2 { width:220px; height:24px; line-height:24px; font-size:16px; color:#333; overflow:hidden; text-align:center;}
-.schoool_box_list p { text-align:center; margin-top:3px;}
+.schoool_box_list ul li { min-height:190px;}
+.schoool_box_list ul li, .sh_ke .sh_sch_ke li { width:220px;float:left; display:block; margin:0 19px 20px 0; border:2px #fff solid; padding-bottom:8px; position:relative; background:#f5f5f5; }
+.schoool_box_list ul li:hover, .sh_ke .sh_sch_ke li:hover{ border:#009871 2px solid;}
+.schoool_box_list .sch_star img, .sh_ke .sh_sch_ke .sch_star img{vertical-align:middle;}
+.schoool_box_list b, .sh_ke .sh_sch_ke b { color:#f90; font-size:18px; margin:0 5px; font-weight:normal;}
+.sch_unm { color:#009871;font-size:18px; margin-right:10px; font-weight:normal;}
+.schoool_box_list h2, .sh_ke .sh_sch_ke h2{ width:220px; height:24px; line-height:24px; font-size:16px; color:#333; overflow:hidden; text-align:center;}
+.schoool_box_list p, .sh_ke .sh_sch_ke p{ text-align:center; margin-top:3px;}
 .sch_yuan { position:absolute; left:5px; bottom:8px;}
 .sch_yuan span { font-size:18px; color:#f00; margin-left:5px;}
 .sch_s {position:absolute; right:5px; bottom:8px;}
@@ -356,14 +360,12 @@ div[contenteditable=true] {-webkit-line-break: after-white-space; -webkit-nbsp-m
 .sh_list_switch dl dd a:hover{ color:#f90;}
 .sh_list_switch .icon{ background: url(../images/icon.png) no-repeat 0 -82px; color:#044a38; width:140px;}
 
-
-
 .sh_info_r { float:right; display:block; width:990px; margin-top:10px;}
 .sh_all, .sh_ke{ margin:0 10px 10px 0; overflow:hidden; display: inline-block;}
 .sh_all h2, .sh_ke h2{ float:left;font-size:18px; height:40px; line-height:40px; text-indent:10px;color:#009871;}
-.sh_all .sh_all_tea {border-top:1px solid #ccc; padding-left:20px; display:inline-block;}
+.sh_all .sh_all_tea {border-top:1px solid #ccc; padding-left:20px; display:inline-block; width: 950px;}
 .sh_all .sh_all_tea li {float:left; display:block; margin:10px 15px 10px 20px;}
 .sh_all .sh_all_tea li p{text-align:center;  line-height:30px;}
-.sh_ke  .sh_sch_ke {border-top:1px solid #ccc; padding:20px 0 0 10px; display:inline-block;}
+.sh_ke  .sh_sch_ke {border-top:1px solid #ccc; padding:20px 0 0 10px; display:inline-block; width: 960px;}
 
 

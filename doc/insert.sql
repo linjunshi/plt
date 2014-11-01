@@ -41,6 +41,7 @@ insert into user values('10013', 'teacher11', 'teacher11', md5('admin'), '', 0, 
 insert into user values('10014', 'teacher12', 'teacher12', md5('admin'), '', 0, 3, 10000, 10000, null, null, null, null, null, now(), now());
 insert into user values('10015', 'teacher13', 'teacher13', md5('admin'), '', 0, 3, 10000, 10000, null, null, null, null, null, now(), now());
 insert into user values('10016', 'teacher14', 'teacher14', md5('admin'), '', 0, 3, 10000, 10000, null, null, null, null, null, now(), now());
+insert into user values('10017', 'teacher15', 'teacher14', md5('admin'), '', 0, 3, 10000, 10000, null, null, null, null, null, now(), now());
 
 -- 用户教育信息 --
 drop table if exists user_education;

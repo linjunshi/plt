@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
+import com.santrong.plt.webpage.school.entry.SchoolItem;
 import com.santrong.plt.webpage.school.entry.SchoolTotalView;
 
 
@@ -20,4 +21,7 @@ public interface SchoolMapper {
 			+ "where a.areaCode like '${areaCode}%' and (a.schoolGrade & ${gradeGroup}) = ${gradeGroup} "
 			+ "group by a.id limit ${limit}")
 	List<SchoolTotalView> selectTotalByGradeGroup(@Param("gradeGroup") int gradeGroup, @Param("areaCode") String areaCode, @Param("limit") int limit);
+	
+	@Select("select * from school where id=#{id}")
+	SchoolItem selectById(String id);
 }

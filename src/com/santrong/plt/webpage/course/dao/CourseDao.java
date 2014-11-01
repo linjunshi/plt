@@ -109,7 +109,12 @@ public class CourseDao extends BaseDao {
 			if(MyUtils.isNotNull(query.getUserId())) {
 				criteria.where(eq("a.ownerId", "?"));
 				criteria.setStringParam(query.getUserId());
-			}			
+			}
+			// 所属学校
+			if(MyUtils.isNotNull(query.getSchoolId())) {
+				criteria.where(eq("e.id", "?"));
+				criteria.setStringParam(query.getSchoolId());
+			}
 			// 排序
 			if(!StringUtils.isNullOrEmpty(query.getOrderBy())) {
 				if("desc".equalsIgnoreCase(query.getOrderRule())) {
@@ -189,7 +194,11 @@ public class CourseDao extends BaseDao {
 				criteria.where(eq("a.ownerId", "?"));
 				criteria.setStringParam(query.getUserId());
 			}				
-			
+			// 所属学校
+			if(MyUtils.isNotNull(query.getSchoolId())) {
+				criteria.where(eq("e.id", "?"));
+				criteria.setStringParam(query.getSchoolId());
+			}
 			Connection conn = ThreadUtils.currentConnection();
 			PreparedStatement stm = criteria.getRealStatement(conn);
 			ResultSet rs = stm.executeQuery();

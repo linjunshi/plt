@@ -1,5 +1,6 @@
 package com.santrong.plt.webpage.school;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -10,16 +11,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.santrong.plt.opt.area.AreaEntry;
 import com.santrong.plt.opt.grade.GradeDefine;
+import com.santrong.plt.opt.grade.GradeDefineEntry;
 import com.santrong.plt.system.Global;
 import com.santrong.plt.util.MyUtils;
 import com.santrong.plt.webpage.BaseAction;
 import com.santrong.plt.webpage.course.dao.CourseDao;
 import com.santrong.plt.webpage.course.entry.CourseItem;
+import com.santrong.plt.webpage.course.entry.CourseQuery;
 import com.santrong.plt.webpage.school.dao.SchoolDao;
 import com.santrong.plt.webpage.school.entry.SchoolItem;
 import com.santrong.plt.webpage.school.entry.SchoolQuery;
 import com.santrong.plt.webpage.user.dao.UserDao;
 import com.santrong.plt.webpage.user.entry.UserItem;
+import com.santrong.plt.webpage.user.entry.UserQuery;
 
 /**
  * @author weinianjie
@@ -80,18 +84,51 @@ public class SchoolAction extends BaseAction {
 	 */
 	@RequestMapping("/{id}.html")
 	public String detail(@PathVariable String id) {
+		HttpServletRequest request = this.getRequest();
+		String grade = request.getParameter("grade");
+		String level = request.getParameter("level");
+		int pageNum = this.getIntParameter("page");
+		if(pageNum == 0) {
+			pageNum = 1;
+		}
+		
+		// 获取学校和学校里的年级
+		SchoolDao schoolDao = new SchoolDao();
+		SchoolItem school = schoolDao.selectById(id);
+		if(school == null) {
+			return "404";
+		}
+		List<GradeDefineEntry> gradeList = new ArrayList<GradeDefineEntry>();
+		for(GradeDefineEntry g:GradeDefine.gradeList){
+			if((school.getSchoolGrade() & g.getGradeGroup()) == g.getGradeGroup()) {
+				gradeList.add(g);
+			}
+		}
 		
 		// 查询学校里的老师和学生
 		UserDao userDao = new UserDao();
-		List<UserItem> teacher = userDao.selectTeacherBySchoolId(id);
+		UserQuery userQuery = new UserQuery();
+		userQuery.setRole(UserItem.Role_Teacher);
+		userQuery.setSchoolId(school.getId());
+		userQuery.setPageSize(6);
+		List<UserItem> teacherList = userDao.selectByQuery(userQuery);
 		
 		// 查询学校里所有开设的课程
 		CourseDao courseDao = new CourseDao();
-		List<CourseItem> course = courseDao.selectCourseBySchoolId(id);
+		CourseQuery courseQuery = new CourseQuery();
+		courseQuery.setGradeEnName(grade);
+		courseQuery.setLevelEnName(level);
+		courseQuery.setSchoolId(school.getId());
+		courseQuery.setPageNum(pageNum);
+		courseQuery.setPageSize(8);
+		courseQuery.setCount(courseDao.selectCountByQuery(courseQuery));
+		List<CourseItem> courseList = courseDao.selectByQuery(courseQuery);
 
-		HttpServletRequest request = getRequest();
-		request.setAttribute("teacher", teacher);
-		request.setAttribute("course", course);
+		request.setAttribute("school", school);
+		request.setAttribute("gradeList", gradeList);
+		request.setAttribute("teacherList", teacherList);
+		request.setAttribute("courseList", courseList);
+		request.setAttribute("query", courseQuery);
 		
 		return "school/detail";
 	}

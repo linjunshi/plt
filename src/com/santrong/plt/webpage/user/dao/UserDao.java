@@ -111,7 +111,12 @@ public class UserDao extends BaseDao{
 				criteria.where(eq("(a.role & ?)", "?"));
 				criteria.setIntParam(query.getRole());
 				criteria.setIntParam(query.getRole());
-			}		
+			}
+			// 所属学校
+			if(MyUtils.isNotNull(query.getSchoolId())) {
+				criteria.where(eq("a.schoolId", "?"));
+				criteria.setStringParam(query.getSchoolId());
+			}
 			// 排序
 			if(!StringUtils.isNullOrEmpty(query.getOrderBy())) {
 				if("desc".equalsIgnoreCase(query.getOrderRule())) {
@@ -186,7 +191,11 @@ public class UserDao extends BaseDao{
 				criteria.where(like("b.areaCode", "?"));
 				criteria.setStringParam(AreaUtils.lostTail(query.getAreaCode()) + "%");
 			}
-			
+			// 所属学校
+			if(MyUtils.isNotNull(query.getSchoolId())) {
+				criteria.where(eq("a.schoolId", "?"));
+				criteria.setStringParam(query.getSchoolId());
+			}
 			Connection conn = ThreadUtils.currentConnection();
 			PreparedStatement stm = criteria.getRealStatement(conn);
 			ResultSet rs = stm.executeQuery();

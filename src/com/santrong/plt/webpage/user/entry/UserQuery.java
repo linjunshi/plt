@@ -11,10 +11,19 @@ public class UserQuery extends PageQuery{
 	private String keywords;
 	private String areaCode;
 	private String subjectEnName;
+	private String schoolId;
 	private int schoolAbsoluteGrade;
 	private int schoolGrade;
 	private int absoluteRole;
 	private int role;
+	
+	public String getSchoolId() {
+		return schoolId;
+	}
+
+	public void setSchoolId(String schoolId) {
+		this.schoolId = schoolId;
+	}
 
 	public String getSubjectEnName() {
 		return subjectEnName;
