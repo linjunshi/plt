@@ -10,4 +10,5 @@ public class HttpDefine {
 	public static final String Xml_Header = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>";
 
 	public static final String Basic_Server_Test 			= "10000";	// 测试
+	public static final String Teacher_Service_20001 			= "20001";	// 登录web服务器
 }

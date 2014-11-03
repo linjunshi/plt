@@ -338,7 +338,7 @@ create table course_chapter_to_resource(
 insert into course_chapter_to_resource values('10000', '马克思主义0', '10000', '10000', 1, 1);
 insert into course_chapter_to_resource values('10001', '张老师直播1', '10000', '10000', 2, 2);
 insert into course_chapter_to_resource values('10002', '文档1', '10000', '10000', 3, 3);
-insert into course_chapter_to_resource values('10003', '测验1', '10000', '10000', 4, 4);
+
 
 -- 点播文件表 --
 drop table if exists resource_file;
@@ -400,16 +400,33 @@ create table resource_live(
 insert into resource_live values('10000', '张老师直播1', null, '2014-12-12 13:00', '2014-12-12 15:00', 7200, null, '10000', now(), now());
 
 
--- 直播资源组表 --
-drop table if exists resource_live_group;
-create table resource_live_group(
+-- 直播评分表 --
+drop table if exists resource_live_score;
+create table resource_live_score(
 	id varchar(32) not null comment 'UUID',
-	groupName varchar(128) not null comment '组名',
-	ownerId varchar(32) not null comment '所有者ID',
+	liveId varchar(32) not null comment '直播ID',
+	userId varchar(32) not null comment '用户ID',
 	cts datetime comment '创建时间',
-	uts datetime comment '修改时间',
 	primary key (id)
-) engine=InnoDB default charset=utf8 collate=utf8_bin comment '直播资源组表';
+) engine=InnoDB default charset=utf8 collate=utf8_bin comment '直播评分表';
+
+-- 直播点名表 --
+drop table if exists resource_live_call;
+create table resource_live_call(
+	id varchar(32) not null comment 'UUID',
+	cts datetime comment '创建时间',
+	primary key (id)
+) engine=InnoDB default charset=utf8 collate=utf8_bin comment '直播点名表';
+
+-- 直播答到表 --
+drop table if exists resource_live_reply;
+create table resource_live_reply(
+	id varchar(32) not null comment 'UUID',
+	callId varchar(32) not null comment '点名ID',
+	userId varchar(32) not null comment '用户ID',
+	cts datetime comment '创建时间',
+	primary key (id)
+) engine=InnoDB default charset=utf8 collate=utf8_bin comment '直播答到表';
 
 
 -- 文档资源表 --
@@ -446,13 +463,12 @@ create table resource_doc_group(
 drop table if exists resource_train;
 create table resource_train(
 	id varchar(32) not null comment 'UUID',
-	title varchar(128) not null comment '测验名',
+	trainName varchar(128) not null comment '测验名',
+	del int(10) comment '是否删除',
 	cts datetime comment '创建时间',
 	uts datetime comment '修改时间',	
 	primary key (id)
 ) engine=InnoDB default charset=utf8 collate=utf8_bin comment '测验表';
-
-insert into resource_train values('10000', '模拟测验1', now(), now());
 
 -- 测验记录表 --
 drop table if exists resource_train_history;
@@ -461,7 +477,9 @@ create table resource_train_history(
 	userId varchar(32) not null comment '用户ID',
 	chapterId varchar(32) not null comment '章节ID',
 	trainId varchar(32) not null comment '测验ID',
-	answer varchar(1024) not null comment '答案',
+	questionId varchar(32) not null comment '习题ID',
+	answer int(10) not null comment '答案',
+	del int(10) comment '是否删除',
 	cts datetime comment '创建时间',
 	uts datetime comment '修改时间',		
 	primary key (id)
@@ -471,12 +489,14 @@ create table resource_train_history(
 drop table if exists resource_train_question;
 create table resource_train_question(
 	id varchar(32) not null comment 'UUID',
-	title varchar(128) not null comment '题目名',
-	remark varchar(512) comment '题目描述',
+	topic varchar(128) not null comment '题目',
 	questionType int(10) default 0 not null comment '题目类型',
-	answer varchar(1024) comment '标准答案',
-	score int(10) not null comment '题目分值',
-	extends varchar(1024) comment '扩展存储',
+	opt1 varchar(128) not null comment '选项1',
+	opt2 varchar(128) comment '选项2',
+	opt3 varchar(128) comment '选项3',
+	opt4 varchar(128) comment '选项4',
+	answer int(10) not null comment '答案',
+	del int(10) comment '是否删除',
 	cts datetime comment '创建时间',
 	uts datetime comment '修改时间',	
 	primary key (id)
