@@ -247,4 +247,17 @@ public class UserDao extends BaseDao{
 		return null;
 	}
 	
+	/**
+	 * 查询多个用户信息
+	 * @param ids
+	 * @return
+	 */
+	public List<UserItem> selectByIds(String[] ids) {
+		String _ids = MyUtils.consistIds(ids);//组装IDS
+		UserMapper mapper = this.getMapper(UserMapper.class);
+		if(mapper != null) {
+			return mapper.selectByIds(_ids);
+		}
+		return null;
+	}
 }

@@ -405,10 +405,10 @@
 .sh_info_r { float:right; display:block; width:990px; margin-top:10px;}
 .sh_all, .sh_ke{ margin:0 10px 10px 0; overflow:hidden;display: inline-block;}
 .sh_all h2, .sh_ke h2{ float:left;font-size:18px; height:40px; line-height:40px; text-indent:10px;color:#009871;}
-.sh_all .sh_all_tea {border-top:1px solid #ccc; padding-left:20px; display:inline-block;}
+.sh_all .sh_all_tea {border-top:1px solid #ccc; padding-left:20px; display:inline-block;width: 950px;}
 .sh_all .sh_all_tea li {float:left; display:block; margin:10px 15px 10px 20px;}
 .sh_all .sh_all_tea li p{text-align:center;  line-height:30px;}
-.sh_ke  .sh_sch_ke {border-top:1px solid #ccc; padding:20px 0 0 10px; display: inline-block;}
+.sh_ke  .sh_sch_ke {border-top:1px solid #ccc; padding:20px 0 0 10px; display: inline-block;width: 950px;}
 
 /*--------------后台------------------------*/
 
