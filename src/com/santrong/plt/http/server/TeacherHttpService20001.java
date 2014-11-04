@@ -13,7 +13,7 @@ import com.santrong.plt.webpage.user.entry.UserItem;
  * @date 2014年7月24日
  * @time 下午8:35:02
  */
-public class TeacherService20001 implements AbstractHttpService{
+public class TeacherHttpService20001 implements AbstractHttpService{
 
 	@Override
 	public String excute(XmlReader xml) {
@@ -37,14 +37,12 @@ public class TeacherService20001 implements AbstractHttpService{
 		sb.append(HttpDefine.Xml_Header);
 		sb.append("<ResMsg>");
 			sb.append("<MsgHead>");
-				sb.append("<MsgCode>").append(HttpDefine.Teacher_Service_20001).append("</MsgCode>");
-				sb.append("<ResultCode>").append(rt).append("</ResultCode>");
+				sb.append("<MsgCode type=\"int\">").append(HttpDefine.Teacher_Service_20001).append("</MsgCode>");
+				sb.append("<ResultCode type=\"int\">").append(rt).append("</ResultCode>");
 			sb.append("</MsgHead>");
 			sb.append("<MsgBody>");
-				sb.append("<DirectCtrlResp>");
-					sb.append("<UserName type=\"string\">").append(username).append("</UserName>");
-					sb.append("<UserId type=\"string\">").append(userId).append("</UserId>");
-				sb.append("</DirectCtrlResp>");
+				sb.append("<UserName type=\"string\">").append(username).append("</UserName>");
+				sb.append("<UserId type=\"string\">").append(userId).append("</UserId>");
 			sb.append("</MsgBody>");
 		sb.append("</ResMsg>");
 		return sb.toString();
