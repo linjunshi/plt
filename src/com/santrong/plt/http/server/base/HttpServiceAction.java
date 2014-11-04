@@ -36,12 +36,26 @@ public class HttpServiceAction {
 		// 第一种信令规范
 		XmlReader xml = new XmlReader();
 		xml.parse(xmlMsg);
-		String msgCode = xml.find("/MsgHead/MsgCode").getText();
+		int msgCode = xml.getInt("/MsgHead/MsgCode", 0);
 		try {
+			AbstractHttpService service = null;
 			
-			// 分发任务
-			AbstractHttpService service = (AbstractHttpService) Class.forName("com.companyname.projectname.http.server.BasicHttpService" + msgCode).newInstance();
-			return service.excute(xml);
+			if(msgCode >= 20000 && msgCode < 21000) {
+				// 老师客户端
+				service = (AbstractHttpService) Class.forName("com.santrong.plt.http.server.TeacherHttpService" + msgCode).newInstance();
+				
+			}else if(msgCode >= 21000 && msgCode < 22000) {
+				// 中心服务器
+				service = (AbstractHttpService) Class.forName("com.santrong.plt.http.server.ServerHttpService" + msgCode).newInstance();
+				
+			}else if(msgCode >= 30000 && msgCode < 31000) {
+				// 学生Flash端
+				service = (AbstractHttpService) Class.forName("com.santrong.plt.http.server.StudentHttpService" + msgCode).newInstance();
+			}
+			
+			if(service != null) {
+				return service.excute(xml);
+			}
 			
 		} catch (Exception e) {
 			Log.printStackTrace(e);

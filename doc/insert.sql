@@ -406,6 +406,7 @@ create table resource_live_score(
 	id varchar(32) not null comment 'UUID',
 	liveId varchar(32) not null comment '直播ID',
 	userId varchar(32) not null comment '用户ID',
+	score int(10) not null comment '分数',
 	cts datetime comment '创建时间',
 	primary key (id)
 ) engine=InnoDB default charset=utf8 collate=utf8_bin comment '直播评分表';
