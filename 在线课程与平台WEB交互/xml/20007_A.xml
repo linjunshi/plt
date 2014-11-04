@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ReqMsg>
+	<MsgHead>
+    <!--获取课程信息-->
+		<MsgCode>20007</MsgCode>
+		<SessionId>1</SessionId>
+	</MsgHead>
+	<MsgBody>
+    <CourseID>1</CourseID>
+	</MsgBody>
+</ReqMsg>

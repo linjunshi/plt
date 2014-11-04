@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ReqMsg>
+	<MsgHead>
+		<MsgCode>32007</MsgCode>
+		<ModId>id_ctrl_conn</ModId>
+		<SessionId></SessionId> <!-- 接收方需把此值原样返回给发送方 -->
+	</MsgHead>
+	<MsgBody>
+		<SetParamReq>
+			<StrmBandwidth type="int">1000</StrmBandwidth> <!-- 单位：Kbps -->
+			<StrmFmt type="int"></StrmFmt>  <!-- 3：CIF；4：4CIF；22：720P；25：1080P；35：1280*1024 -->
+			<StrmFRate type="int">帧率</StrmFRate>
+			<AudSmpRate type="int">48000</AudSmpRate>
+			<AudCh type="int">1：双声道/2：单声道</AudCh>
+			<AudBitrate type="int">码率Kbps</AudBitrate>
+         	</SetParamReq>
+	</MsgBody>
+</ReqMsg>

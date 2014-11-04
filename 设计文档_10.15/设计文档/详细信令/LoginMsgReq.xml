@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ReqMsg>
+<MsgHead>
+<MsgCode>31001</MsgCode>
+<ModId>id_web_conn</ModId>
+<SessionId>1</SessionId>
+</MsgHead>
+<MsgBody>
+	<LoginReq>
+		<Addr type="string">192.168.100.103</Addr>
+		<Port type="int">3000</Port>
+		<Heartbeat type="int">5</Heartbeat>
+	</LoginReq>		
+</MsgBody>
+</ReqMsg>

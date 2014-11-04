@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ReqMsg>
+	<MsgHead>
+		<MsgCode>34006</MsgCode>
+		<ModId>id_ctrl_conn</ModId>
+		<SessionId></SessionId> <!-- 接收方需把此值原样返回给发送方 -->
+	</MsgHead>
+	<MsgBody>
+		<GetUniChInfoReq>
+			<ConfID type="string">conf_id000001</ConfID>
+			<UniType type="int"></UniType>
+		</GetUniChInfoReq>
+	</MsgBody>
+</ReqMsg>

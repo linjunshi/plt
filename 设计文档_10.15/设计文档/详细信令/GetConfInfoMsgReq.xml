@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ReqMsg>
+	<MsgHead>
+		<MsgCode>31007</MsgCode>
+		<ModId>id_web_conn</ModId>
+		<SessionId>1</SessionId> <!-- 接收方需把此值原样返回给发送方 -->
+	</MsgHead>
+	<MsgBody></MsgBody>
+</ReqMsg>

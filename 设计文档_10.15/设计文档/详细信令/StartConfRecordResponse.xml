@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ResMsg>	   
+	  <MsgHead>
+		 <MsgCode>31004</MsgCode>
+	  	 <ReturnCode>0:1</ReturnCode>
+	  	 <!-- 0：成功; 1：密码不正确; 2：消息类型不正确; 3：消息非法; 4：处理失败 -->
+	  	 <SessionId></SessionId> <!-- 接收方需把此值原样返回给发送方 -->
+	  </MsgHead>  
+    <MsgBody>
+         <StartConfRcdResp>
+		<ConfID type="string">confid0000911</ConfID>
+          	<ResultCode type="int">0|1</ResultCode> <!-- 0：成功；1：资源不足 -->
+         	<DoRcd type="int">0</DoRcd> <!-- 0 可以录制   1 磁盘剩余空不足 2 处理失败 -->
+		<DoUni type="int">0</DoUni> <!-- 0:可以直播 1：开启直播失败 -->
+         	<RcdName type="string">xxxxconf20010211</RcdName>  <!-- 录制课件名 -->
+         </StartConfRcdResp>
+    </MsgBody>
+</ResMsg>

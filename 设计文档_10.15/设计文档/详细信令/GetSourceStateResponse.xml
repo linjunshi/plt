@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ResMsg>	   
+	  <MsgHead>
+		 <MsgCode>31016</MsgCode>
+	  	 <ReturnCode>0:1</ReturnCode>
+	  	 <SessionId></SessionId> 
+	  </MsgHead>  
+    <MsgBody>
+         <GetSrcStateResp>
+          	<ResultCode type="int">0|1</ResultCode> <!-- 0：成功；1：失败 -->
+		<SrcStateArray>
+			<SrcAddr type="string" state=""></SrcAddr>
+		</SrcStateArray>
+         </GetSrcStateResp>
+    </MsgBody>
+</ResMsg>

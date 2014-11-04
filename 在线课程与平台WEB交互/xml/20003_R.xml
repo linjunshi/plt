@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ReqMsg>
+	<MsgHead>
+    <!--获取作业统计结果（只统计做过题的用户，且错误的用户）-->
+		<MsgCode>20003</MsgCode>
+    <!--SessionId同客户端请求指令中SessionId-->    
+		<SessionId>1</SessionId>
+    <!--0表示失败，1表示成功-->
+    <ResultCode></ResultCode>
+	</MsgHead>
+	<MsgBody>
+    <HomeWork>
+      <!--作业ID-->
+      <HomeWorkID></HomeWorkID>
+      <!-- 作业类型 1选择题；2、多选题；4、对错题；8、填空题-->
+      <Type></Type>
+    </HomeWork>
+    <Users>
+      <User>
+        <!-- 选择题：多选或者单选答案；对错题：0表示错误，1表示正确；填空题：填空内容-->
+        <Result></Result>
+      </User>
+      <User>
+        <Result></Result>
+      </User>
+    </Users>
+  </MsgBody>
+</ReqMsg>

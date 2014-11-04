@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ReqMsg>
+	<MsgHead>
+		<MsgCode>32010</MsgCode>
+		<ModId>id_ctrl_conn</ModId>
+		<SessionId></SessionId> <!-- 接收方需把此值原样返回给发送方 -->
+	</MsgHead>
+	<MsgBody>
+		<SetModeReq>
+			<Mode type="int">1000</Mode> <!-- 单位：Kbps -->
+			<bScale type="int"></bScale>  <!-- 3：CIF；4：4CIF；22：720P；25：1080P；35：1280*1024 -->
+         	</SetModeReq>
+	</MsgBody>
+</ReqMsg>

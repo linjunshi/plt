@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ResMsg>	   
+	  <MsgHead>
+		   <MsgCode>31009</MsgCode>
+	  	 <ReturnCode>0:1</ReturnCode>
+	  	 <!-- 0：成功; 1：密码不正确; 2：消息类型不正确; 3：消息非法; 4：处理失败 -->
+	  	 <SessionId></SessionId> <!-- 接收方需把此值原样返回给发送方 -->
+	  </MsgHead>
+    <MsgBody>
+         <GetResResp>  
+			<ResultCode type="int"></ResultCode>
+			<ConfMax type="int">4</ConfMax><!-- 最大高清通道数10 -->
+		       	<ConfInUse type="int">2</ConfInUse>
+			<UniVodMax type="int">2</UniVodMax>
+			<UniCur type="int">2</UniCur>
+			<VodCur type="int">2</VodCur>
+			<SpaceInfo>
+         	  		<FreePcent type="int">50</FreePcent> <!-- 百分比 -->
+         	  		<FreeSize type="int">233</FreeSize><!-- 单位MB -->
+         	  	</SpaceInfo>
+			<Model type="string">SAN_RVS_AIO</Model>
+			<SerialNo type="string">AIO_20140724</SerialNo>
+         </GetResResp>
+    </MsgBody>
+</ResMsg>

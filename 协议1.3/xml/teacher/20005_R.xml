@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ReqMsg>
+	<MsgHead>
+    <!--获取当前服务器时间-->
+		<MsgCode type="int">20005</MsgCode>
+    <!--0表示失败，1表示成功-->
+    <ResultCode type="int"></ResultCode>
+	</MsgHead>
+	<MsgBody>
+   <!--当前服务器时间-->
+    <ServerTime>
+      <Year type="int"></Year>
+      <Month type="int"></Month>
+      <Day type="int"></Day>
+      <Hour type="int"></Hour>
+      <Minute type="int"></Minute>
+      <Second type="int"></Second>
+    </ServerTime>
+   </MsgBody>
+</ReqMsg>

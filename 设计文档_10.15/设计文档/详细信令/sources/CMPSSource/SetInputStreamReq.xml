@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ReqMsg>
+	<MsgHead>
+		<MsgCode>32011</MsgCode>
+		<ModId>id_ctrl_conn</ModId>
+		<SessionId></SessionId> <!-- 接收方需把此值原样返回给发送方 -->
+	</MsgHead>
+	<MsgBody>
+		<SetInputStreamReq>
+			<ConfID type="string">conf_id000001</ConfID>
+			<StreamInfoArray>
+				<StreamInfo>
+					<StrmType type="int">0</StrmType> <!-- 0：视频主流；1：辅流；2：VGA-->
+					<StrmId type="int"></StrmId> <!-- 由control给会议中的每路流分配唯一流标示 -->
+					<StrmBandwidth type="int">1000</StrmBandwidth> <!-- 单位：Kbps -->
+					<StrmFmt type="int"></StrmFmt>  <!-- 3：CIF；4：4CIF；22：720P；25：1080P；35：1280*1024 -->
+					<StrmFRate type="int">帧率</StrmFRate>
+					<AudSmpRate type="int">48000</AudSmpRate>
+					<AudCh type="int">1：双声道/2：单声道</AudCh>
+					<AudBitrate type="int">码率Kbps</AudBitrate>
+				</StreamInfo>
+				<StreamInfo>
+					<StrmType type="int">0</StrmType> <!-- 0：视频主流；1：辅流；2：VGA-->
+					<StrmId type="int"></StrmId> <!-- 由control给会议中的每路流分配唯一流标示 -->
+					<StrmBandwidth type="int">1000</StrmBandwidth> <!-- 单位：Kbps -->
+					<StrmFmt type="int"></StrmFmt>  <!-- 3：CIF；4：4CIF；22：720P；25：1080P；35：1280*1024 -->
+					<StrmFRate type="int">帧率</StrmFRate>
+				</StreamInfo>
+			</StreamInfoArray>
+		</SetInputStreamReq>
+	</MsgBody>
+</ReqMsg>

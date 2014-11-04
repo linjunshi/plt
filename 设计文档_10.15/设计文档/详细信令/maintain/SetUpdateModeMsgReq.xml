@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ReqMsg>
+	<MsgHead>
+		<MsgCode>39005</MsgCode>
+		<ModId>id_web_conn</ModId>
+		<SessionId></SessionId> <!-- 接收方需把此值原样返回给发送方 -->
+	</MsgHead>
+	<MsgBody>
+		<SetUpdateModeReq>
+			<Mode type="int">是否在线升级</Mode>
+			<AutoUpdate type="int"></AutoUpdate>
+			<Time type="string">每天升级的时间</Time>
+			<HttpUrl type="string">www.santrong.com</HttpUrl>
+		</SetUpdateModeReq>
+	</MsgBody>
+</ReqMsg>

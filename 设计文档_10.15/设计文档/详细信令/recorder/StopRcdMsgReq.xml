@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ReqMsg>
+	<MsgHead>
+		<MsgCode>33007</MsgCode>
+		<ModId>id_ctrl_conn</ModId>
+		<SessionId></SessionId> <!-- 接收方需把此值原样返回给发送方 -->
+	</MsgHead>
+	<MsgBody>
+		<StopRcdReq>
+			<ConfID type="string">confid0000911</ConfID>
+			<RcdType type="int">录制模式</RcdType> <!-- 1：资源模式 2：电影模式 4：合成编码模式 -->
+		</StopRcdReq>
+	</MsgBody>
+</ReqMsg>

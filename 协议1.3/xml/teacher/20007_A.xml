@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ReqMsg>
+	<MsgHead>
+    <!--获取直播信息-->
+		<MsgCode type="int">20007</MsgCode>
+	</MsgHead>
+	<MsgBody>
+    <LiveID type="string">1</LiveID>
+	</MsgBody>
+</ReqMsg>

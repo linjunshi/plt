@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ReqMsg>
+	<MsgHead>
+    <!--获取点名结果（只反馈未应答的用户）-->
+		<MsgCode type="int">20002</MsgCode>
+    <!--0表示失败，1表示成功-->
+    <ResultCode type="int"></ResultCode>
+	</MsgHead>
+	<MsgBody>
+    <!--课程ID-->
+    <LiveID type="string"></LiveID>
+    <CallNameID type="int"></CallNameID>
+    <UserIDs>
+      <!--未应答用户ID列表-->
+      <UserID type="string"></UserID>
+      <UserID type="string"></UserID>
+      <UserID type="string"></UserID>
+    </UserIDs>
+  </MsgBody>
+</ReqMsg>

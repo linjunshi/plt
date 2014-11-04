@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ResMsg>	   
+	  <MsgHead>
+		 <MsgCode>31007</MsgCode>
+	  	 <ReturnCode>0</ReturnCode>
+	  	 <SessionId>1</SessionId>
+	  </MsgHead>
+    <MsgBody>
+         <GetConfInfoResp>
+		  <ResultCode type="int">1</ResultCode>
+         	  <ConfInfoArray>
+         	     <ConfInfo>          	  
+         	  	<ConfID type="string">34535345</ConfID>
+         	  	<RcdName type="string">xx会议</RcdName>
+         	  	<StartTime type="string">12:00</StartTime>
+         	  	<RcdState type="int">0</RcdState>
+         	  	<LiveState type="int">0</LiveState>
+			<RecordType type="int">1</RecordType>
+			<Layout type="int">1</Layout>
+			<bScale type="int">1</bScale> 
+			<CourseName type="string">课程名</CourseName>
+			<CourseAbs type="string">课程概要</CourseAbs>
+			<Teacher type="string">老师</Teacher>
+			    <RcdStreamInfoArray>
+				<RcdStreamInfo>
+					<StrmAddr type="string">数据源地址</StrmAddr>
+					<StrmPort type="int">数据源端口</StrmPort>
+					<StrmUser type="string">用户名</StrmUser>
+					<StrmPW type="string">密码</StrmPW>
+					<StrmType type="int">0</StrmType>
+					<StrmBandwidth type="int">1000</StrmBandwidth>
+					<StrmFmt type="int">22</StrmFmt>
+					<StrmFRate type="int">25</StrmFRate>
+					<AudSmpRate type="int">48000</AudSmpRate>
+					<AudCh type="int">2</AudCh>
+					<AudBitrate type="int">128</AudBitrate>
+				</RcdStreamInfo>
+				<RcdStreamInfo>
+					<StrmAddr type="string">数据源地址</StrmAddr>
+					<StrmPort type="int">数据源端口</StrmPort>
+					<StrmUser type="string">用户名</StrmUser>
+					<StrmPW type="string">密码</StrmPW>
+					<StrmType type="int">0</StrmType>
+					<StrmBandwidth type="int">1000</StrmBandwidth>
+					<StrmFmt type="int">22</StrmFmt>
+					<StrmFRate type="int">25</StrmFRate>
+				</RcdStreamInfo>
+			</RcdStreamInfoArray>   
+         	     </ConfInfo>
+         	  </ConfInfoArray>
+         </GetConfInfoResp>
+    </MsgBody>
+</ResMsg>

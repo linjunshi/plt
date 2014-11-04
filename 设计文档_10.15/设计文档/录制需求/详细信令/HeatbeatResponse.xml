@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ResMsg>	   
+	  <MsgHead>
+		   <MsgCode>31003</MsgCode>
+	  	 <ReturnCode>0:1</ReturnCode>
+	  	 <!-- 0：成功; 1：密码不正确; 2：消息类型不正确; 3：消息非法; 4：处理失败 -->
+	  	  <SessionId></SessionId> <!-- 接收方需把此值原样返回给发送方 -->
+	  </MsgHead>
+    <MsgBody>
+         <HeatbeatResp>
+         </HeatbeatResp>
+    </MsgBody>
+</ResMsg>

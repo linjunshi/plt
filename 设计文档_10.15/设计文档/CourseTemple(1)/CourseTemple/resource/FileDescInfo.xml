@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<FileDescInfo number="2" totalduration="48">
+<Files type="mp4" id="1" starttime="1.000" thumbnail="thumb1.jpg">
+    <File width="1280" height="720" samplrate="44100" duration="48">videos/1_1.mp4</File>
+</Files>
+<Files type="mp4" id="2" starttime="1.213" thumbnail="thumb2.jpg">
+    <File width="1280" height="720" duration="48">videos/2_1.mp4</File>
+</Files>
+</FileDescInfo>

@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ReqMsg>
+	<MsgHead>
+    <!--获取课程列表-->
+		<MsgCode type="int">20006</MsgCode>
+	</MsgHead>
+	<MsgBody>
+	</MsgBody>
+</ReqMsg>

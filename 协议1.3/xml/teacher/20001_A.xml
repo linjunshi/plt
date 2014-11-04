@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ReqMsg>
+	<MsgHead>
+    <!--登陆web服务器-->
+		<MsgCode type="int">20001</MsgCode>
+	</MsgHead>
+	<MsgBody>
+    <!--用户名-->
+    <UserName type="string"></UserName>
+    <!--密码-->
+    <PassWord type="string"></PassWord>
+	</MsgBody>
+</ReqMsg>

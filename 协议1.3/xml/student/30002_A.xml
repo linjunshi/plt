@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ReqMsg>
+	<MsgHead>
+    <!--课程评分-->
+		<MsgCode type="int">30002</MsgCode>
+	</MsgHead>
+	<MsgBody>
+    <!--课程ID-->
+    <LiveID type="string"></LiveID>
+    <!--评分 1-5-->
+    <Score type="int"></Score>
+	</MsgBody>
+</ReqMsg>

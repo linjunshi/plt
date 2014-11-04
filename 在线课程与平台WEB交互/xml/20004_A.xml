@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ReqMsg>
+	<MsgHead>
+    <!--获取作业内容-->
+		<MsgCode>20004</MsgCode>
+		<SessionId>1</SessionId>
+	</MsgHead>
+	<MsgBody>
+    <!--课程ID, 作业需要管理课程ID-->
+    <CourseID></CourseID>
+    <!--作业ID-->
+    <HomeWorkID></HomeWorkID>
+	</MsgBody>
+</ReqMsg>

@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ResMsg>
+	  <MsgHead>
+		 <MsgCode>39004</MsgCode>
+	  	 <ReturnCode>0:1</ReturnCode>
+	  	 <!-- 0：成功; 1：密码不正确; 2：消息类型不正确; 3：消息非法; 4：处理失败 -->
+	  	 <SessionId></SessionId> <!-- 接收方需把此值原样返回给发送方 -->
+	  </MsgHead>
+    <MsgBody>
+         <GetModInfoResp>
+		<ResultCode type="int"></ResultCode>
+		<Version>
+			<maintain type="string">1.0.0.0</maintain>
+			<control type="string">1.0.0.0</control>
+			<uniserver type="string">1.0.0.0</uniserver>
+			<vodserver type="string">1.0.0.0</vodserver>
+			<webservice type="string">1.0.0.0</webservice>
+			<SystemVer type="string">1.0.0.0</SystemVer>
+		</Version>
+		<State>
+			<maintain type="int">1</maintain>
+			<control type="int">1</control>
+			<uniserver type="int">1</uniserver>
+			<vodserver type="int">1</vodserver>
+		</State>
+	</GetModInfoResp>
+    </MsgBody>
+</ResMsg>

@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ReqMsg>
+	<MsgHead>
+    <!--获取用户信息-->
+		<MsgCode type="int">30001</MsgCode>
+		<SessionId type="string">1</SessionId>
+	</MsgHead>
+	<MsgBody>
+    <UserIDs>
+      <UserID type="string">1</UserID>
+      <UserID type="string">2</UserID>
+    </UserIDs>
+	</MsgBody>
+</ReqMsg>

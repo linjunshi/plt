@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ReqMsg>
+	<MsgHead>
+    <!--登陆web服务器-->
+		<MsgCode type="int">20001</MsgCode>
+    <!--0表示失败，1表示成功-->
+    <ResultCode type="int"></ResultCode>
+	</MsgHead>
+	<MsgBody>
+    <!--用户名-->
+    <UserName type="string"></UserName>
+    <!--用户ID-->
+    <UserID type="string"></UserID>
+	</MsgBody>
+</ReqMsg>

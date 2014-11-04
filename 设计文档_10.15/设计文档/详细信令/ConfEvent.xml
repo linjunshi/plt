@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ReqMsg>	   
+	  <MsgHead>
+		   <MsgCode>99999</MsgCode>
+	  	 <ModId>id_ctrl_conn</ModId>
+
+		   <SessionId></SessionId>
+	  </MsgHead>
+    <MsgBody>
+         <ConfEvent>
+		<EventId type="int">66001</EventId>
+		<SrcConnState> <!-- 66006 src->ctrl -->
+			<ConnState type="string">1|0|</ConnState> <!-- 1:连接 0:断开 -->
+		<SrcConnState>
+         	<RcdFinish> <!-- 66001 rcd->ctrl -->
+         	  	<ConfID type="string">aes11fj883</ConfID>
+         	  	<ReasonID type="string">10001</ReasonID> <!-- 10001:最大时长 10002：磁盘空间不足 -->
+			<FileURL type="string">filename</FileURL>
+         	  	<RcdTime type="string">02:01:22</RcdTime> <!-- 录制时长 -->
+         	  	<RcdSize type="int">0</RcdSize> <!-- 课件大小 单位MB -->
+		  	<RcdType type="int"></RcdType>
+         	</RcdFinish>
+		<UniUsrCount> <!-- 66005 uni->ctrl -->
+			<UsrCount type="int"></UsrCount>
+		</UniUsrCount>
+		<VodUsrCount> <!-- 66004 vod->ctrl -->
+			<UsrCount type="int"></UsrCount>
+		</VodUsrCount>
+         	<SpaceInfo> <!-- 66002 ctrl->web -->
+         	  	<FreePercent type="int">50</FreePercent> <!-- 百分比 -->
+         	  	<FreeSize type="int">233</FreeSize><!-- 单位MB -->
+         	</SpaceInfo>
+         	<RcdResInfo> <!-- 66003 ctrl->web -->
+         	  	<ConfMax type="int">4</ConfMax><!-- 最大高清通道数10 -->
+		       	<ConfInUse type="int">2</ConfInUse>
+			<UniVodMax type="int">2</UniVodMax>
+			<UniCur type="int">2</UniCur>
+			<VodCur type="int">2</VodCur>
+         	</RcdResInfo>
+		<ConfRcdFinish> <!-- 66007 ctrl->web -->
+			<ConfID type="string">aes11fj883</ConfID>
+			<ReasonID type="string">10001</ReasonID>
+			<FileURL type="string">filename</FileURL>
+			<RcdTime type="string">02:01:22</RcdTime>
+			<RSRCRcdSize type="int">0</RSRCRcdSize>
+			<MVRcdSize type="int">0</MVRcdSize>
+			<CMPSRcdSize type="int">0</CMPSRcdSize>
+			<RcdType type="int">1</RcdType>
+		</ConfRcdFinish>
+		<UpdateState> <!-- 66008 main->web -->
+			<Percent></Percent><!-- 0~100，100:升级完成>
+		</UpdateState>
+         </ConfEvent>
+    </MsgBody>
+</ReqMsg>

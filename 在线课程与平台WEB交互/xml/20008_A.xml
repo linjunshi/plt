@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ReqMsg>
+	<MsgHead>
+    <!--课程评分-->
+		<MsgCode>20008</MsgCode>
+		<SessionId>1</SessionId>
+	</MsgHead>
+	<MsgBody>
+    <!--课程ID-->
+    <CourseID></CourseID>
+    <!--评分 1-5-->
+    <Score></Score>
+	</MsgBody>
+</ReqMsg>

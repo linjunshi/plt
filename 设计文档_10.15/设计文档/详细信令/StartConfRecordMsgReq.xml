@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ReqMsg>
+	<MsgHead>
+		<MsgCode>31004</MsgCode>
+		<ModId>id_web_conn</ModId>
+		<SessionId></SessionId> <!-- 接收方需把此值原样返回给发送方 -->
+	</MsgHead>
+	<MsgBody>
+		<StartConfRecordReq>
+			<ConfID type="string">conf_id000001</ConfID>
+			<IsLive type="int">1</IsLive>
+			<RecordType type="int">1</RecordType>
+			<Layout type="int">1</Layout>
+			<bScale type="int">1</bScale>
+			<RcdStreamInfoArray>
+				<RcdStreamInfo>
+					<StrmAddr type="string">192.168.100.111</StrmAddr>
+					<StrmPort type="int">4567</StrmPort>
+					<StrmUser type="string">用户名</StrmUser>
+					<StrmPW type="string">密码</StrmPW>
+					<StrmType type="int">0</StrmType>
+					<StrmBandwidth type="int">1000</StrmBandwidth>
+					<StrmFmt type="int">22</StrmFmt>
+					<StrmFRate type="int">25</StrmFRate>
+					<AudSmpRate type="int">48000</AudSmpRate>
+					<AudCh type="int">22</AudCh>
+					<AudBitrate type="int">128</AudBitrate>
+				</RcdStreamInfo>
+				<RcdStreamInfo>
+					<StrmAddr type="string">192.168.100.112</StrmAddr>
+					<StrmPort type="int">4567</StrmPort>
+					<StrmUser type="string"></StrmUser>
+					<StrmPW type="string"></StrmPW>
+					<StrmType type="int">1</StrmType>
+					<StrmBandwidth type="int">1000</StrmBandwidth>
+					<StrmFmt type="int">22</StrmFmt>
+					<StrmFRate type="int">25</StrmFRate>
+				</RcdStreamInfo>
+			</RcdStreamInfoArray>
+		</StartConfRecordReq>
+	</MsgBody>
+</ReqMsg>

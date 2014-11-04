@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ReqMsg>
+	<MsgHead>
+		<MsgCode>31012</MsgCode>
+		<ModId>id_web_conn</ModId>
+		<SessionId></SessionId>
+	</MsgHead>
+	<MsgBody>
+		<TiltCtrlReq>
+			<ConfID type="string">conf_id000001</ConfID>
+			<StrmId type="int">1</StrmId>
+			<TiltType type="int"></TiltType>
+			<Speed type="int"></Speed>
+			<CamAddr type="int"></CamAddr> <!-- 摄像头地址位 -->
+		</TiltCtrlReq>
+	</MsgBody>
+</ReqMsg>

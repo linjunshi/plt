@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ReqMsg>
+	<MsgHead>
+    <!--获取开课时间及当前服务器时间-->
+		<MsgCode>20005</MsgCode>
+    <!--SessionId同客户端请求指令中SessionId-->    
+		<SessionId>1</SessionId>
+    <!--0表示失败，1表示成功-->
+    <ResultCode></ResultCode>
+	</MsgHead>
+	<MsgBody>
+   <!--当前服务器时间-->
+    <ServerTime>
+      <Year></Year>
+      <Month></Month>
+      <Day></Day>
+      <Hour></Hour>
+      <Minute></Minute>
+      <Second></Second>
+    </ServerTime>
+   <!--开课时间-->
+    <StartTime>
+      <Year></Year>
+      <Month></Month>
+      <Day></Day>
+      <Hour></Hour>
+      <Minute></Minute>
+      <Second></Second>
+    </StartTime>
+   </MsgBody>
+</ReqMsg>

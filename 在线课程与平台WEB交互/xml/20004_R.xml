@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ReqMsg>
+	<MsgHead>
+    <!--获取作业内容-->
+		<MsgCode>20004</MsgCode>
+    <!--SessionId同客户端请求指令中SessionId-->    
+		<SessionId>1</SessionId>
+    <!--0表示失败，1表示成功-->
+    <ResultCode></ResultCode>
+	</MsgHead>
+	<MsgBody>
+    <!--作业ID-->
+    <HomeWorkID></HomeWorkID>
+    <!--题目-->
+    <Topic></Topic>
+    <!-- 作业类型 1选择题；2、多选题；4、对错题；8、填空题-->
+    <Type></Type>
+    <!--作业选项，填空题只有一条记录，需要填空的地方用空格代替-->
+    <Items>
+      <Item>A:10</Item>
+      <Item>B:20</Item>
+      <Item>C:30</Item>
+      <Item>D:40</Item>
+    </Items>
+    
+    
+  </MsgBody>
+</ReqMsg>

@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ReqMsg>
+	<MsgHead>
+		<MsgCode>35004</MsgCode>
+		<ModId>id_ctrl_conn</ModId>
+		<SessionId></SessionId>
+	</MsgHead>
+	<MsgBody>
+		<GetFileStateReq>
+			<FileName type="string"></FileName>
+		</GetFileStateReq>
+	</MsgBody>
+</ReqMsg>

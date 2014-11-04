@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ReqMsg>
+	<MsgHead>
+    <!--获取用户信息-->
+		<MsgCode>20001</MsgCode>
+    <!--SessionId同客户端请求指令中SessionId-->    
+		<SessionId>1</SessionId>
+    <!--0表示失败，1表示成功-->
+    <ResultCode></ResultCode>
+	</MsgHead>
+	<MsgBody>
+    <Users>
+      <User>
+        <!--用户名-->
+        <Name></Name>
+        <!--用户ID-->
+        <ID></ID>
+        <!--用户身份 1表示老师，2表示学生-->
+        <Identity></Identity>
+      </User>
+      <User>
+        <Name></Name>
+        <ID></ID>
+        <Identity></Identity>
+      </User>
+    </Users>
+    </MsgBody>
+</ReqMsg>

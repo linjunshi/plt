@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ReqMsg>
+	<MsgHead>
+    <!--获取作业统计结果-->
+		<MsgCode type="int">20003</MsgCode>
+	</MsgHead>
+	<MsgBody>
+    <!--课程ID-->
+    <LiveID type="string"></LiveID>
+    <!--作业ID-->    
+    <HomeWorkID type="string">1</HomeWorkID>
+	</MsgBody>
+</ReqMsg>

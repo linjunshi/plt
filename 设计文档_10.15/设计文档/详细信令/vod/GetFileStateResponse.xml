@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ResMsg>	   
+	  <MsgHead>
+		 <MsgCode>35004</MsgCode>
+	  	 <ReturnCode>0:1</ReturnCode>
+	  	 <SessionId></SessionId> 
+	  </MsgHead>  
+    <MsgBody>
+         <GetFileStateResp>
+          	<ResultCode type="int">0|1</ResultCode> <!-- 0：成功；1：失败 -->
+		<FileName type="string"></FileName>
+		<FileState type="int">0|1</FileState> <!-- 0：未占用；1：被占用 -->
+         </GetFileStateResp>
+    </MsgBody>
+</ResMsg>

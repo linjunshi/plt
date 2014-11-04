@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ReqMsg>
+	<MsgHead>
+    <!--获取课程列表-->
+		<MsgCode type="int">20006</MsgCode>
+    <!--0表示失败，1表示成功-->
+    <ResultCode type="int"></ResultCode>
+	</MsgHead>
+	<MsgBody>
+    <Lives>
+      <Live>
+        <!--课程ID-->
+        <LiveID type="string"></LiveID>
+        <!--课程名称-->
+        <LiveName type="string"></LiveName>
+      </Live>
+      <Live>
+        <!--课程ID-->
+        <LiveID type="string"></LiveID>
+        <!--课程名称-->
+        <LiveName type="string"></LiveName>
+      </Live>      
+    </Lives>  
+</MsgBody>
+</ReqMsg>

@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ResMsg>	   
+	  <MsgHead>
+		 <MsgCode>31012</MsgCode>
+	  	 <ReturnCode>0:1</ReturnCode>
+	  	 <SessionId></SessionId> 
+	  </MsgHead>  
+    <MsgBody>
+         <GetPushStrmStateResp>
+          	<ResultCode type="int">0|1</ResultCode> <!-- 0：成功；1：失败 -->
+		<State type="int">0|1</State> <!-- 0：未开启推流；1：已开启推流 -->
+		<Url type="string">http://www.keyyun.com/aio-number/live</Url>
+         </GetPushStrmStateResp>
+    </MsgBody>
+</ResMsg>

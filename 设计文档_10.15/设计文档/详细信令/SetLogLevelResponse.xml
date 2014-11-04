@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?> 
+<ResMsg>
+<MsgHead>
+	<MsgCode>31011</MsgCode>
+	<!-- 消息ID -->
+	<ReturnCode>0:1</ReturnCode>
+	<!-- 返回结果，0：成功，1：消息不合法 -->
+	<SessionId></SessionId>
+</MsgHead>
+<MsgBody>
+	<SetLogLevelResp>
+		<ResultCode type="int">0</ResultCode>
+	</SetLogLevelResp>
+</MsgBody>
+</ResMsg>

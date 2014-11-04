@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ReqMsg>
+	<MsgHead>
+    <!--上报作业结果-->
+		<MsgCode type="int">30004</MsgCode>
+	</MsgHead>
+	<MsgBody>
+    <!--直播ID-->
+    <LiveID type="string">aaabbbb</LiveID>
+    <Results>
+      <Result type="string">A</Result>
+      <Result type="string">B</Result>
+    </Results>
+	</MsgBody>
+</ReqMsg>

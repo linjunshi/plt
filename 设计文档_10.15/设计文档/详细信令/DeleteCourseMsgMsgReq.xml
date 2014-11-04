@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ReqMsg>
+	<MsgHead>
+		<MsgCode>31010</MsgCode>
+		<ModId>id_web_conn</ModId>
+	  <SessionId>1</SessionId>
+	</MsgHead>
+	<MsgBody>
+		<DelCourseReq>
+			<CourseName type="string" >20120101</CourseName>
+			<ConfID type="string" >conf_1</ConfID>
+		</DelCourseReq>
+	</MsgBody>
+</ReqMsg>

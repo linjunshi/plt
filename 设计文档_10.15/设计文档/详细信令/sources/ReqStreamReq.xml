@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ReqMsg>
+	<MsgHead>
+		<MsgCode>32004</MsgCode>
+		<ModId>id_ctrl_conn</ModId>
+		<SessionId></SessionId> <!-- 接收方需把此值原样返回给发送方 -->
+	</MsgHead>
+	<MsgBody>
+		<StreamReq>
+			<Video count="">
+				<RcvAddr type="string">192.123.11.2:778</RcvAddr>
+			</Video>
+			<Audio count="">
+				<RcvAddr type="string">192.123.11.2:779</RcvAddr>
+			</Audio>
+		</StreamReq>
+	</MsgBody>
+</ReqMsg>

@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ReqMsg>
+	<MsgHead>
+		<MsgCode>31006</MsgCode>
+		<ModId>id_web_conn</ModId>
+		<SessionId></SessionId> <!-- 接收方需把此值原样返回给发送方 -->
+	</MsgHead>
+	<MsgBody>
+		<RcdCtlReq>
+			<ConfID type="string">confid009873</ConfID>
+			<OperType type="int">1</OperType> <!-- 0：停止录制; 1：开始录制; 2：暂停录制; -->
+			<CourseName type="string">课程名</CourseName>
+			<CourseAbs type="string">课程概要</CourseAbs>
+			<Teacher type="string">老师</Teacher>
+			<RcdName type="string">xxxxconf2001</RcdName>
+		</RcdCtlReq>
+	</MsgBody>
+</ReqMsg>

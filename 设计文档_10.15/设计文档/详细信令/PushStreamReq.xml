@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ReqMsg>
+	<MsgHead>
+		<MsgCode>31017</MsgCode>
+		<ModId>id_web_conn</ModId>
+		<SessionId></SessionId>
+	</MsgHead>
+	<MsgBody>
+		<PushStrmReq>
+			<ConfID type="string">conf_id000001</ConfID>
+			<bPushStream type="int">0|1</bPushStream> <!-- 0:关闭推流，1：开启推流 -->
+			<Url type="string">http://www.keyyun.com/aio-number/live</Url>
+		</PushStrmReq>
+	</MsgBody>
+</ReqMsg>

@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ReqMsg>
+	<MsgHead>
+    <!--获取作业内容-->
+		<MsgCode type="int">20004</MsgCode>
+    <!--0表示失败，1表示成功-->
+    <ResultCode type="int"></ResultCode>
+	</MsgHead>
+	<MsgBody>
+    <!--作业ID-->
+    <HomeWorkID type="string"></HomeWorkID>
+    <!--题目-->
+    <Topic type="string"></Topic>
+    <!-- 作业类型 1选择题；2、多选题；4、对错题；8、填空题-->
+    <Type type="int"></Type>
+    <!--作业选项，填空题只有一条记录，需要填空的地方用空格代替-->
+    <Items>
+      <!-- 选择、判断题 Options无效-->
+      <Option type="string">A</Option>
+      <Item type="string">10</Item>
+    </Items>
+    <Items>
+      <Option type="string">B</Option>
+      <Item type="string">20</Item>
+    </Items>
+    <Items>
+      <Option type="string">C</Option>
+      <Item type="string">30</Item>
+    </Items>
+    <Items>
+      <Option type="string">D</Option>
+      <Item type="string">40</Item>
+    </Items>  
+  </MsgBody>
+</ReqMsg>

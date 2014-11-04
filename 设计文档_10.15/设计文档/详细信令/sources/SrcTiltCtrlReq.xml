@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ReqMsg>
+	<MsgHead>
+		<MsgCode>32009</MsgCode>
+		<ModId>id_ctrl_conn</ModId>
+		<SessionId></SessionId>
+	</MsgHead>
+	<MsgBody>
+		<TiltCtrlReq>
+			<TiltType type="int"></TiltType>
+			<Speed type="int"></Speed>
+			<CamAddr type="int"></CamAddr> <!-- 摄像头地址位 -->
+		</TiltCtrlReq>
+	</MsgBody>
+</ReqMsg>

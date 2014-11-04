@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ReqMsg>
+	<MsgHead>
+		<MsgCode>33005</MsgCode>
+		<ModId>id_ctrl_conn</ModId>
+		<SessionId></SessionId> <!-- 接收方需把此值原样返回给发送方 -->
+	</MsgHead>
+	<MsgBody>
+		<RcdCtlReq>
+			<ConfID type="string">confid009873</ConfID>
+			<OperType type="int">1</OperType> <!-- 1：恢复录制; 2：暂停录制; -->
+		</RcdCtlReq>
+	</MsgBody>
+</ReqMsg>

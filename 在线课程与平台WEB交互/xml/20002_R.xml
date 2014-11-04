@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ReqMsg>
+	<MsgHead>
+    <!--获取点名结果（只反馈未应答的用户）-->
+		<MsgCode>20002</MsgCode>
+    <!--SessionId同客户端请求指令中SessionId-->    
+		<SessionId>1</SessionId>
+    <!--0表示失败，1表示成功-->
+    <ResultCode></ResultCode>
+	</MsgHead>
+	<MsgBody>
+    <!--课程ID-->
+    <CourseID></CourseID>
+    <UserIDs>
+      <!--未应答用户ID列表-->
+      <UserID></UserID>
+      <UserID></UserID>
+      <UserID></UserID>
+    </UserIDs>
+  </MsgBody>
+</ReqMsg>

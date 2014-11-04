@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ReqMsg>
+	<MsgHead>
+    <!--获取课程信息-->
+		<MsgCode type="int">20007</MsgCode>
+    <!--0表示失败，1表示成功-->
+    <ResultCode type="int"></ResultCode>
+	</MsgHead>
+	<MsgBody>
+    <!--课程ID-->
+    <LiveID type="string"></LiveID>
+    <!--课程名称-->
+    <LiveName type="string"></LiveName>
+    
+    <!--开课时间-->
+    <StartTime>
+      <Year type="int"></Year>
+      <Month type="int"></Month>
+      <Day type="int"></Day>
+      <Hour type="int"></Hour>
+      <Minute type="int"></Minute>
+      <Second type="int"></Second>
+    </StartTime>
+    <!--结束时间-->
+    <StopTime>
+      <Year type="int"></Year>
+      <Month type="int"></Month>
+      <Day type="int"></Day>
+      <Hour type="int"></Hour>
+      <Minute type="int"></Minute>
+      <Second type="int"></Second>
+    </StopTime>    
+    </MsgBody>
+</ReqMsg>

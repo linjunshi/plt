@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ResDescInfo>
+  <ConfID type="string">conf_id000001</ConfID>
+   <CourseName type="string">课程名</CourseName>
+			<CourseAbs type="string">课程概要</CourseAbs>
+			<Teacher type="string">老师</Teacher>
+			<ResName type="string">xxxxconf2001</ResName> <!-- 录制课件名 -->
+			<ResType type="int">录制模式</ResType> <!-- 1：资源模式 2：电影模式 4：合成编码模式 -->
+			<RcdTime>录制时间</RcdTime>
+</ResDescInfo>

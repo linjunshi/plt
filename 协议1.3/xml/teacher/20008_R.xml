@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ReqMsg>
+  <MsgHead>
+    <!--获取作业列表-->
+    <MsgCode type="int">20008</MsgCode>
+    <ResultCode type="int">1</ResultCode>
+  </MsgHead>
+  <MsgBody>
+    <LiveID type="string">1</LiveID>
+    <HomeWorks>
+      <HomeWork>
+        <Name type="string"></Name>
+        <ID Type="string"></ID>
+      </HomeWork>
+      <HomeWork>
+        <Name type="string"></Name>
+        <ID Type="string"></ID>
+      </HomeWork>
+    </HomeWorks>
+  </MsgBody>
+</ReqMsg>

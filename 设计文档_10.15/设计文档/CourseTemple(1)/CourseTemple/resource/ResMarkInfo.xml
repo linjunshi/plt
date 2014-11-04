@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<MarkInfo>
+<TextMark>
+<Comment time="1">mark1</Comment>
+<Comment time="2">mark2</Comment>
+</TextMark>
+<PictureMark>
+<Comment time="1">picture/picture1.jpg</Comment>
+<Comment time="2">picture/picture2.jpg</Comment>
+</PictureMark>
+</MarkInfo>

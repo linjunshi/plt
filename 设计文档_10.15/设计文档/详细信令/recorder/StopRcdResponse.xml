@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ResMsg>	   
+	  <MsgHead>
+		   <MsgCode>33007</MsgCode>
+	  	 <ReturnCode>0:1</ReturnCode> 
+	  	 <!-- 0：成功; 1：密码不正确; 2：消息类型不正确; 3：消息非法; 4：处理失败 -->
+	  	  <SessionId></SessionId> <!-- 接收方需把此值原样返回给发送方 -->
+	  </MsgHead>  
+    <MsgBody>
+          
+	 <StopConfRcdResp>
+		  <ConfID type="string">confid0000911</ConfID>
+           	  <ResultCode type="int">0</ResultCode>   <!-- 0:成功；1：失败 -->
+         	  <RcdResult type="int">0</RcdResult>  <!-- 0:录制成功；1：未开启录制；2：磁盘空间不足，未录制; 3 处理失败-->
+         	  <FileURL type="string">filename</FileURL>
+         	  <RcdTime type="string">02:01:22</RcdTime> <!-- 录制时长 -->
+         	  <RcdSize type="int">0</RcdSize> <!-- 课件大小 单位MB -->
+		  <RcdType type="int">录制模式</RcdType> <!-- 1：资源模式 2：电影模式 4：合成编码模式 -->
+         </StopConfRcdResp>
+    </MsgBody>
+</ResMsg>

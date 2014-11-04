@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ReqMsg>
+	<MsgHead>
+		<MsgCode>31016</MsgCode>
+		<ModId>id_web_conn</ModId>
+		<SessionId></SessionId>
+	</MsgHead>
+	<MsgBody>
+		<GetSrcStateReq>
+		<GetSrcStateReq>
+	</MsgBody>
+</ReqMsg>

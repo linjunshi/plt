@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ReqMsg>
+<MsgHead>
+  <MsgCode>31008</MsgCode>
+  <ModId>id_web_conn</ModId>
+  <SessionId></SessionId> <!-- 接收方需把此值原样返回给发送方 -->
+</MsgHead>
+<MsgBody>
+	<Config>
+		<FreeSize type="int">256</FreeSize> <!-- 设置磁盘空间阀值，磁盘空间少于此值则自行停止录制 -->
+    		<MaxTime type="int">180</MaxTime>  <!-- 最大录制时长，单位：分钟 -->
+	</Config>
+</MsgBody>
+</ReqMsg>

@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ReqMsg>
+	<MsgHead>
+		<MsgCode>31018</MsgCode>
+		<ModId>id_web_conn</ModId>
+		<SessionId></SessionId>
+	</MsgHead>
+	<MsgBody>
+		<GetPushStrmStateReq>
+			<ConfID type="string">conf_id000001</ConfID>
+		</GetPushStrmStateReq>
+	</MsgBody>
+</ReqMsg>

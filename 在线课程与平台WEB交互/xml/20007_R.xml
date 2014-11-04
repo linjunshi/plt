@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ReqMsg>
+	<MsgHead>
+    <!--获取课程信息-->
+		<MsgCode>20007</MsgCode>
+    <!--SessionId同客户端请求指令中SessionId-->    
+		<SessionId>1</SessionId>
+    <!--0表示失败，1表示成功-->
+    <ResultCode></ResultCode>
+	</MsgHead>
+	<MsgBody>
+    <!--课程ID-->
+    <CourseID></CourseID>
+    <!--课程名称-->
+    <CourseName></CourseName>
+    <!--开课时间-->
+    <StartTime>
+      <Year></Year>
+      <Month></Month>
+      <Day></Day>
+      <Hour></Hour>
+      <Minute></Minute>
+      <Second></Second>
+    </StartTime>
+    <!--结束时间-->
+    <StopTime>
+      <Year></Year>
+      <Month></Month>
+      <Day></Day>
+      <Hour></Hour>
+      <Minute></Minute>
+      <Second></Second>
+    </StopTime>    
+    </MsgBody>
+</ReqMsg>

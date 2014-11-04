@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ReqMsg>
+	<MsgHead>
+		<MsgCode>35005</MsgCode>
+		<ModId>id_ctrl_conn</ModId>
+		<SessionId></SessionId>
+	</MsgHead>
+	<MsgBody>
+	</MsgBody>
+</ReqMsg>

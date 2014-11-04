@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ReqMsg>
+  <MsgHead>
+    <!--上报点名结果-->
+    <MsgCode type="int">30003</MsgCode>
+  </MsgHead>
+  <UserID type="string">1fafjdafaafda</UserID>
+  <CallNameID type="int">12345</CallNameID>
+  <MsgBody>
+  </MsgBody>
+</ReqMsg>

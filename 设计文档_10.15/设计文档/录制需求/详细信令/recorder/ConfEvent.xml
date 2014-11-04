@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ResMsg>	   
+	  <MsgHead>
+		 <MsgCode>99999</MsgCode>
+	  	 <ModId>id_ctrl_conn</ModId>
+
+	  </MsgHead>
+    <MsgBody>
+         <ConfEvent>
+         	  <TerminateInfo>
+         	  	 <ConfID type="string">aesdfadfj883</ConfID>
+         	  	 <ReasonID type="string">10001</ReasonID>
+			 <!-- 10001:磁盘空间达到阀值；10002：文件大小达到阀值；10003文件时长达到阀值；10004无数据流-->
+         	  </TerminateInfo>
+         	  <SpaceInfo>
+         	  	 <FreePercent type="int">50</FreePercent> <!-- 百分比 -->
+         	  	 <FreeSize type="int">233</FreeSize><!-- 单位MB -->
+         	  </SpaceInfo>
+         </ConfEvent>
+    </MsgBody>
+</ResMsg>

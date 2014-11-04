@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?> 
+<ReqMsg>
+<MsgHead>
+	<MsgCode>31011</MsgCode>
+	<!-- 消息ID -->
+  <ModId>id_web_conn</ModId>
+  <SessionId></SessionId>
+</MsgHead>
+<MsgBody>
+	<SetLogLevelReq>
+		<LogLevel type="int">0</LogLevel> <!-- ERROR:3 WARN:4 INFO:6 DEBUG:7 -->
+	</SetLogLevelReq>
+</MsgBody>
+</ReqMsg>

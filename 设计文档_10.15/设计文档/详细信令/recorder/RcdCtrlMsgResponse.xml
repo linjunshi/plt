@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ResMsg>	   
+	  <MsgHead>
+		  <MsgCode>33005</MsgCode>
+	  	<ReturnCode>0:1</ReturnCode>
+	  	<!-- 0：成功; 1：密码不正确; 2：消息类型不正确; 3：消息非法; 4：处理失败 -->
+	  	<SessionId></SessionId> <!-- 接收方需把此值原样返回给发送方 -->
+	  </MsgHead>
+    <MsgBody>
+         <RcdCtlResp>
+         	  <ResultCode type="int">0</ResultCode><!-- 0：成功；1：磁盘空间不足；2：流参数不对，创建文件失败；3：已开启录制；4：未开启录制； -->
+         </RcdCtlResp>
+    </MsgBody>
+</ResMsg>

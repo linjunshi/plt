@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ReqMsg>
+	<MsgHead>
+		<MsgCode>33004</MsgCode>
+		<ModId>id_ctrl_conn</ModId>
+		<SessionId>1</SessionId> <!-- 接收方需把此值原样返回给发送方 -->
+	</MsgHead>
+	<MsgBody>
+		<StartRcdReq>
+			<ConfID type="string">conf_id000001</ConfID>
+			<CourseName type="string">课程名</CourseName>
+			<CourseAbs type="string">课程概要</CourseAbs>
+			<Teacher type="string">老师</Teacher>
+			<RcdName type="string">xxxxconf2001</RcdName>
+			<RcdType type="int">1</RcdType>
+			<MaxTime type="int">180</MaxTime>
+			<RcdStreamInfoArray>
+				<RcdStreamInfo>
+					<StrmType type="int">0</StrmType>
+					<StrmId type="int">2</StrmId>
+					<StrmBandwidth type="int">1000</StrmBandwidth>
+					<StrmFmt type="int">22</StrmFmt>
+					<StrmFRate type="int">23</StrmFRate>
+					<AudSmpRate type="int">48000</AudSmpRate>
+					<AudCh type="int">12道</AudCh>
+					<AudBitrate type="int">128</AudBitrate>
+				</RcdStreamInfo>
+				<RcdStreamInfo>
+					<StrmType type="int">0</StrmType>
+					<StrmId type="int">1</StrmId>
+					<StrmBandwidth type="int">1000</StrmBandwidth>
+					<StrmFmt type="int">22</StrmFmt>
+					<StrmFRate type="int">帧率</StrmFRate>
+				</RcdStreamInfo>
+			</RcdStreamInfoArray>
+		</StartRcdReq>
+	</MsgBody>
+</ReqMsg>
