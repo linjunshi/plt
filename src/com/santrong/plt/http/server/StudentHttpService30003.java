@@ -1,9 +1,16 @@
 package com.santrong.plt.http.server;
 
+import java.util.Date;
+
 import com.santrong.plt.http.HttpDefine;
 import com.santrong.plt.http.server.base.AbstractHttpService;
 import com.santrong.plt.log.Log;
+import com.santrong.plt.util.MyUtils;
 import com.santrong.plt.util.XmlReader;
+import com.santrong.plt.webpage.live.dao.LiveCallDao;
+import com.santrong.plt.webpage.live.dao.LiveReplyDao;
+import com.santrong.plt.webpage.live.entry.LiveCallItem;
+import com.santrong.plt.webpage.live.entry.LiveReplyItem;
 
 /**
  * @author huangweihua
@@ -16,12 +23,26 @@ public class StudentHttpService30003 implements AbstractHttpService{
 	public String excute(XmlReader xml) {
 		int rt = 0;
 		try{
-			String UserID = xml.find("/MsgBody/UserID").getText();
+			String userID = xml.find("/MsgBody/UserID").getText();
 			String CallNameID = xml.find("/MsgBody/CallNameID").getText();
 			
-			
-			
-			
+			if (CallNameID != "") {
+				LiveCallDao liveCallDao = new LiveCallDao();
+				LiveCallItem liveCallItem = new LiveCallItem();
+				liveCallItem = liveCallDao.selectId("10000", CallNameID);
+				
+				
+				LiveReplyDao LiveReplyDao = new LiveReplyDao();
+				LiveReplyItem liveReplyItem = new LiveReplyItem();
+				if (LiveReplyDao.selectBy(liveCallItem.getId(), userID) == null) {
+					liveReplyItem.setId(MyUtils.getGUID());
+					liveReplyItem.setCallId(liveCallItem.getId());
+					liveReplyItem.setUserId(userID);
+					liveReplyItem.setCts(new Date());
+					LiveReplyDao.insert(liveReplyItem);
+					rt = 1;
+				}
+			}
 			
 		}catch(Exception e) {
 			Log.printStackTrace(e);

@@ -260,4 +260,18 @@ public class UserDao extends BaseDao{
 		}
 		return null;
 	}
+	
+	/**
+	 * 查询多个用户信息,不包括ids里的用户
+	 * @param ids
+	 * @return
+	 */
+	public List<UserItem> selectNotInByIds(String[] ids) {
+		String _ids = MyUtils.consistIds(ids);//组装IDS
+		UserMapper mapper = this.getMapper(UserMapper.class);
+		if(mapper != null) {
+			return mapper.selectNotInByIds(_ids);
+		}
+		return null;
+	}
 }

@@ -32,6 +32,14 @@ public interface UserMapper {
     @Select("select * from user where id in (${ids})")
     List<UserItem> selectByIds(@Param("ids")String ids);
     
+    /**
+	 * 查询多个用户信息,不包括ids里的用户
+	 * @param ids
+	 * @return
+	 */
+    @Select("select * from user where id not in (${ids})")
+    List<UserItem> selectNotInByIds(@Param("ids")String ids);
+    
     @Select("select count(*) as cn from user where username=#{username}")
     int existsByUserName(String username);
     
