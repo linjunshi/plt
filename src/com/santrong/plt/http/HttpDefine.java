@@ -20,7 +20,7 @@ public class HttpDefine {
 			sb.append("<UserName type=\"string\">").append("admin").append("</UserName>");
 			sb.append("<PassWord type=\"string\">").append("admin").append("</PassWord>");
 		sb.append("</MsgBody>");
-	sb.append("</ReqMsg>");
+		sb.append("</ReqMsg>");
 		
 		System.out.println("send:" + sb.toString());
 		String rt = MyUtils.sendPost("http://127.0.0.1/http/basic", sb.toString());
