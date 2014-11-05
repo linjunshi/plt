@@ -20,6 +20,8 @@ public class CourseDetailView {
 	private Date endTime;
 	private int collectCount;
 	private int saleCount;
+	private int commentCount;
+	private int chapterCount;
 	private String remark;
 	private Date cts;
 	private Date uts;
@@ -30,6 +32,19 @@ public class CourseDetailView {
 	private List<ChapterDetailView> chapterDetailList;
 	private List<CommentItem> commentList;
 	
+	
+	public int getCommentCount() {
+		return commentCount;
+	}
+	public void setCommentCount(int commentCount) {
+		this.commentCount = commentCount;
+	}
+	public int getChapterCount() {
+		return chapterCount;
+	}
+	public void setChapterCount(int chapterCount) {
+		this.chapterCount = chapterCount;
+	}
 	public String getRemark() {
 		return remark;
 	}

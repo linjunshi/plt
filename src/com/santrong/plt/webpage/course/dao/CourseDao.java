@@ -14,6 +14,7 @@ import com.santrong.plt.util.AreaUtils;
 import com.santrong.plt.util.BeanUtils;
 import com.santrong.plt.util.MyUtils;
 import com.santrong.plt.webpage.BaseDao;
+import com.santrong.plt.webpage.course.entry.CourseBuyQuery;
 import com.santrong.plt.webpage.course.entry.CourseDetailView;
 import com.santrong.plt.webpage.course.entry.CourseItem;
 import com.santrong.plt.webpage.course.entry.CourseQuery;
@@ -211,6 +212,102 @@ public class CourseDao extends BaseDao {
 		
 		return count;
 	}
+	
+	/**
+	 * 购买者根据搜索条件查询课程
+	 * @param query
+	 * @return
+	 */
+	public 	List<CourseItem> selectByBuyQuery(CourseBuyQuery query) {
+		List<CourseItem> list = new ArrayList<CourseItem>();
+		
+		try{
+			Statement criteria = new Statement("course", "a");
+			criteria.setFields("a.*");
+			criteria.ljoin("web_order", "b", "a.id", "b.courseId");
+			criteria.ljoin("subject", "d", "a.subjectId", "d.id");
+			criteria.ljoin("grade", "e", "a.gradeId", "e.id");
+			
+			
+			// 关键词
+			if(!StringUtils.isNullOrEmpty(query.getKeywords())) {
+				criteria.where(or(
+						like("a.courseName", "?")));
+				criteria.setStringParam("%" + query.getKeywords() + "%");
+			}
+			// 购买用户
+			if(MyUtils.isNotNull(query.getUserId())) {
+				criteria.where(eq("b.userId", "?"));
+				criteria.setStringParam(query.getUserId());
+			}
+			// 排序
+			if(!StringUtils.isNullOrEmpty(query.getOrderBy())) {
+				if("desc".equalsIgnoreCase(query.getOrderRule())) {
+					criteria.desc("a." + query.getOrderBy());
+				}else {
+					criteria.asc("a." + query.getOrderBy());
+				}
+			}
+			
+			// 分页
+			criteria.limit(query.getLimitBegin(), query.getLimitEnd());
+			
+			Connection conn = ThreadUtils.currentConnection();
+			PreparedStatement stm = criteria.getRealStatement(conn);
+			ResultSet rs = stm.executeQuery();
+			while(rs.next()){
+				CourseItem item = new CourseItem();
+				BeanUtils.Rs2Bean(rs, item);
+				list.add(item);
+			}
+			
+		}catch(Exception e){
+			Log.printStackTrace(e);
+		}
+		
+		return list;
+	}	
+	
+	/**
+	 * 购买者根据搜索条件查询课程总数
+	 * @param query
+	 * @return
+	 */
+	public 	int selectCountByBuyQuery(CourseBuyQuery query) {
+		int count = 0;
+		
+		try{
+			Statement criteria = new Statement("course", "a");
+			criteria.setFields("count(*) cn");
+			criteria.ljoin("web_order", "b", "a.id", "b.courseId");
+			criteria.ljoin("subject", "d", "a.subjectId", "d.id");
+			criteria.ljoin("grade", "e", "a.gradeId", "e.id");
+			
+			
+			// 关键词
+			if(!StringUtils.isNullOrEmpty(query.getKeywords())) {
+				criteria.where(or(
+						like("a.courseName", "?")));
+				criteria.setStringParam("%" + query.getKeywords() + "%");
+			}
+			// 购买用户
+			if(MyUtils.isNotNull(query.getUserId())) {
+				criteria.where(eq("b.userId", "?"));
+				criteria.setStringParam(query.getUserId());
+			}
+			
+			Connection conn = ThreadUtils.currentConnection();
+			PreparedStatement stm = criteria.getRealStatement(conn);
+			ResultSet rs = stm.executeQuery();
+			rs.next();
+			count = rs.getInt("cn");
+			
+		}catch(Exception e){
+			Log.printStackTrace(e);
+		}
+		
+		return count;
+	}		
 	
 	/**
 	 * 查询某间学校的所有课程信息

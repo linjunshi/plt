@@ -41,7 +41,7 @@
 					$('.sh_list_switch .show dd').show('slow');
 					$('.sh_list_switch dt').click(function(){
 						$(this).toggleClass('icon');
-						$(this).nextAll().slideToggle();
+						$(this).nextAll().toggle();
 					});					
 				});				
 		</script>

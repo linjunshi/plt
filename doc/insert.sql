@@ -281,6 +281,8 @@ create table web_order(
 	primary key (id)
 ) engine=InnoDB default charset=utf8 collate=utf8_bin comment '订单表';
 
+insert into web_order values('10000', '10000', '10000', now(), now());
+
 -- 课程评论表 --
 drop table if exists course_comment;
 create table course_comment(
