@@ -1,6 +1,5 @@
 package com.santrong.plt.http.server;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.jdom.Element;
