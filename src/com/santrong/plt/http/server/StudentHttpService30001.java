@@ -24,8 +24,13 @@ public class StudentHttpService30001 implements AbstractHttpService{
 		List<UserItem> userList = null;
 		try{
 			List<Element> idList = xml.finds("/MsgBody/UserIDs/UserID");
-			if (idList != null) {
-				String[] userIds = (String[])idList.toArray(new String[idList.size()]);
+			if (idList != null && idList.size() > 0) {
+				String[] userIds = new String[idList.size()];
+				int i = 0;
+				for(Element e:idList) {
+					userIds[i++] = e.getText();					
+				}
+				
 				UserDao userDao = new UserDao();
 				userList = userDao.selectByIds(userIds);
 				if (userList != null) {
@@ -38,7 +43,7 @@ public class StudentHttpService30001 implements AbstractHttpService{
 		
 		StringBuilder sb = new StringBuilder();
 		sb.append(HttpDefine.Xml_Header);
-		sb.append("<ResMsg>");
+		sb.append("<RespMsg>");
 			sb.append("<MsgHead>");
 				//sb.append("<!--获取用户信息(30001)-->");
 				sb.append("<MsgCode type=\"int\">").append(HttpDefine.Student_Service_30001).append("</MsgCode>");
@@ -47,27 +52,19 @@ public class StudentHttpService30001 implements AbstractHttpService{
 			sb.append("</MsgHead>");
 			sb.append("<MsgBody>");
 				sb.append("<Users>");
-				if (rt == 1) {
-					for(UserItem user:userList){
-						sb.append("<User>");
-						//<!--用户名-->
-						sb.append("<UserName type=\"string\">").append(user.getUsername()).append("</UserName>");
-						//<!--用户ID-->
-						sb.append("<UserID type=\"string\">").append(user.getId()).append("</UserID>");
-						//<!--用户身份 1表示老师，2表示学生-->
-						sb.append("<Identity type=\"int\">").append(user.isTeacher()? 1:2).append("</Identity>");
-						sb.append("</User>");
-					}
-				}else{
+				for(UserItem user:userList){
 					sb.append("<User>");
-					sb.append("<UserName type=\"string\">").append("</UserName>");
-					sb.append("<UserID type=\"string\">").append("</UserID>");
-					sb.append("<Identity type=\"int\">").append("</Identity>");
+					//<!--用户名-->
+					sb.append("<UserName type=\"string\">").append(user.getUsername()).append("</UserName>");
+					//<!--用户ID-->
+					sb.append("<UserID type=\"string\">").append(user.getId()).append("</UserID>");
+					//<!--用户身份 1表示老师，2表示学生-->
+					sb.append("<Identity type=\"int\">").append(user.isTeacher()? 1:2).append("</Identity>");
 					sb.append("</User>");
 				}
 				sb.append("</Users>");
 			sb.append("</MsgBody>");
-		sb.append("</ResMsg>");
+		sb.append("</RespMsg>");
 		return sb.toString();
 	}
 

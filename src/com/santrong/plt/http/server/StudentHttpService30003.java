@@ -24,23 +24,28 @@ public class StudentHttpService30003 implements AbstractHttpService{
 		int rt = 0;
 		try{
 			String userID = xml.find("/MsgBody/UserID").getText();
-			String CallNameID = xml.find("/MsgBody/CallNameID").getText();
+			String callNameID = xml.find("/MsgBody/CallNameID").getText();
+			String liveID = xml.find("/MsgBody/LiveID").getText();
 			
-			if (CallNameID != "") {
+			if (MyUtils.isNotNull(userID) && MyUtils.isNotNull(callNameID) && MyUtils.isNotNull(liveID)) {
 				LiveCallDao liveCallDao = new LiveCallDao();
-				LiveCallItem liveCallItem = new LiveCallItem();
-				liveCallItem = liveCallDao.selectId("10000", CallNameID);
+				LiveCallItem liveCallItem = liveCallDao.selectByCall(liveID, callNameID);
 				
-				
-				LiveReplyDao LiveReplyDao = new LiveReplyDao();
-				LiveReplyItem liveReplyItem = new LiveReplyItem();
-				if (LiveReplyDao.selectBy(liveCallItem.getId(), userID) == null) {
-					liveReplyItem.setId(MyUtils.getGUID());
-					liveReplyItem.setCallId(liveCallItem.getId());
-					liveReplyItem.setUserId(userID);
-					liveReplyItem.setCts(new Date());
-					LiveReplyDao.insert(liveReplyItem);
-					rt = 1;
+				if(liveCallItem != null) {
+					LiveReplyDao LiveReplyDao = new LiveReplyDao();
+					if(!LiveReplyDao.exists(liveCallItem.getId(), userID)) {
+						
+						LiveReplyItem liveReplyItem = new LiveReplyItem();	
+						liveReplyItem.setId(MyUtils.getGUID());
+						liveReplyItem.setCallId(liveCallItem.getId());
+						liveReplyItem.setUserId(userID);
+						liveReplyItem.setCts(new Date());
+						if(LiveReplyDao.insert(liveReplyItem) > 0) {
+							rt = 1;
+						}
+					}else {
+						rt = 1;
+					}
 				}
 			}
 			
@@ -50,7 +55,7 @@ public class StudentHttpService30003 implements AbstractHttpService{
 		
 		StringBuilder sb = new StringBuilder();
 		sb.append(HttpDefine.Xml_Header);
-		sb.append("<ResMsg>");
+		sb.append("<RespMsg>");
 			sb.append("<MsgHead>");
 				//sb.append("<!--上报点名结果(30003)-->");
 				sb.append("<MsgCode type=\"int\">").append(HttpDefine.Student_Service_30003).append("</MsgCode>");
@@ -59,7 +64,7 @@ public class StudentHttpService30003 implements AbstractHttpService{
 			sb.append("</MsgHead>");
 			sb.append("<MsgBody>");
 			sb.append("</MsgBody>");
-		sb.append("</ResMsg>");
+		sb.append("</RespMsg>");
 		return sb.toString();
 	}
 

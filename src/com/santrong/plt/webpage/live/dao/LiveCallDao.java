@@ -10,16 +10,31 @@ import com.santrong.plt.webpage.live.entry.LiveCallItem;
  */
 public class LiveCallDao extends BaseDao {
 
+	
+	/**
+	 * 新增一条直播点名的记录
+	 * @author huangweihua
+	 * @param liveCallItem
+	 * @return int
+	 */
+	public int insert(LiveCallItem liveCallItem) {
+		LiveCallMapper mapper = this.getMapper(LiveCallMapper.class);
+		if(mapper != null) {
+			return mapper.insert(liveCallItem);
+		}
+		return 0;
+	}
+	
 	/**
 	 * 查询直播点名的ID
 	 * @author huangweihua
 	 * @param liveId, callName
 	 * @return 
 	 */
-	public LiveCallItem selectId(String liveId, String callName) {
+	public LiveCallItem selectByCall(String liveId, String callName) {
 		LiveCallMapper mapper = this.getMapper(LiveCallMapper.class);
 		if(mapper != null) {
-			return mapper.selectId(liveId, callName);
+			return mapper.selectByCall(liveId, callName);
 		}
 		return null;
 	}

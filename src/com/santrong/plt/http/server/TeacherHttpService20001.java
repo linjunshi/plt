@@ -35,7 +35,7 @@ public class TeacherHttpService20001 implements AbstractHttpService{
 
 		StringBuilder sb = new StringBuilder();
 		sb.append(HttpDefine.Xml_Header);
-		sb.append("<ResMsg>");
+		sb.append("<RespMsg>");
 			sb.append("<MsgHead>");
 				sb.append("<MsgCode type=\"int\">").append(HttpDefine.Teacher_Service_20001).append("</MsgCode>");
 				sb.append("<ResultCode type=\"int\">").append(rt).append("</ResultCode>");
@@ -44,7 +44,7 @@ public class TeacherHttpService20001 implements AbstractHttpService{
 				sb.append("<UserName type=\"string\">").append(username).append("</UserName>");
 				sb.append("<UserId type=\"string\">").append(userId).append("</UserId>");
 			sb.append("</MsgBody>");
-		sb.append("</ResMsg>");
+		sb.append("</RespMsg>");
 		return sb.toString();
 	}
 

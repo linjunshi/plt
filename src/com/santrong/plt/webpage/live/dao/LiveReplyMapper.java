@@ -1,6 +1,7 @@
 package com.santrong.plt.webpage.live.dao;
 
 import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
 import com.santrong.plt.webpage.live.entry.LiveReplyItem;
@@ -15,6 +16,6 @@ public interface LiveReplyMapper {
 	@Insert("insert into resource_live_reply values(#{id}, #{callId}, #{userId}, #{ctx})")
 	int insert(LiveReplyItem liveReplyItem);
 	
-	@Select("select * from resource_live_Reply where userId = #{userId} and userId = #{userId}")
-	LiveReplyItem selectBy(String callId, String userId);
+	@Select("select count(*) from resource_live_Reply where callId = #{callId} and userId = #{userId}")
+	int exists(@Param("callId")String callId, @Param("userId")String userId);
 }

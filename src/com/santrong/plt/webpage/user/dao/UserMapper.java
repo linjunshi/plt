@@ -38,7 +38,7 @@ public interface UserMapper {
 	 * @return
 	 */
     @Select("select * from user where id not in (${ids})")
-    List<UserItem> selectNotInByIds(@Param("ids")String ids);
+    List<UserItem> selectByNotInIds(@Param("ids")String ids);
     
     @Select("select count(*) as cn from user where username=#{username}")
     int existsByUserName(String username);

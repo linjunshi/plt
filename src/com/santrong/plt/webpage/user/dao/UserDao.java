@@ -266,11 +266,11 @@ public class UserDao extends BaseDao{
 	 * @param ids
 	 * @return
 	 */
-	public List<UserItem> selectNotInByIds(String[] ids) {
+	public List<UserItem> selectByNotInIds(String[] ids) {
 		String _ids = MyUtils.consistIds(ids);//组装IDS
 		UserMapper mapper = this.getMapper(UserMapper.class);
 		if(mapper != null) {
-			return mapper.selectNotInByIds(_ids);
+			return mapper.selectByNotInIds(_ids);
 		}
 		return null;
 	}

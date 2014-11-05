@@ -34,21 +34,13 @@ public class TeacherHttpService20005 implements AbstractHttpService{
 				seconds = calendar.get(Calendar.SECOND);//秒
 				rt = 1;
 			}
-			/*SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-			System.out.println("time now:" + df.format(calendar.getTime()));
-			System.out.println("YEAR:" + year);
-			System.out.println("month:" + month);
-			System.out.println("day:" + day);
-			System.out.println("hour:" + hour);
-			System.out.println("minute:" + minute);
-			System.out.println("seconds:" + seconds);*/
 		}catch(Exception e) {
 			Log.printStackTrace(e);
 		}
 
 		StringBuilder sb = new StringBuilder();
 		sb.append(HttpDefine.Xml_Header);
-		sb.append("<ResMsg>");
+		sb.append("<RespMsg>");
 			sb.append("<MsgHead>");
 				//sb.append("<!--获取当前服务器时间-->");
 				sb.append("<MsgCode type=\"int\">").append(HttpDefine.Teacher_Service_20005).append("</MsgCode>");
@@ -66,7 +58,7 @@ public class TeacherHttpService20005 implements AbstractHttpService{
 					sb.append("<Second type=\"int\">").append(seconds).append("</Second>");
 				sb.append("</ServerTime>");
 			sb.append("</MsgBody>");
-		sb.append("</ResMsg>");
+		sb.append("</RespMsg>");
 		return sb.toString();
 	}
 

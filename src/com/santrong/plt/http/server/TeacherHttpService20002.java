@@ -6,11 +6,10 @@ import java.util.List;
 import com.santrong.plt.http.HttpDefine;
 import com.santrong.plt.http.server.base.AbstractHttpService;
 import com.santrong.plt.log.Log;
+import com.santrong.plt.util.MyUtils;
 import com.santrong.plt.util.XmlReader;
 import com.santrong.plt.webpage.live.dao.LiveCallReplyDao;
 import com.santrong.plt.webpage.live.entry.LiveCallReplyItem;
-import com.santrong.plt.webpage.user.dao.UserDao;
-import com.santrong.plt.webpage.user.entry.UserItem;
 
 /**
  * @author weinianjie
@@ -24,26 +23,43 @@ public class TeacherHttpService20002 implements AbstractHttpService{
 		int rt = 0;
 		String liveID = "";
 		String callNameID = "";
-		List<UserItem> userList = null;
+		List<String> livingUserList = null;
 		try{
 			liveID = xml.find("/MsgBody/LiveID").getText();
 			callNameID = xml.find("/MsgBody/CallNameID").getText();
-			if (liveID != "" && callNameID != "") {
-				LiveCallReplyDao liveCallReplyDao = new LiveCallReplyDao();
+			if (MyUtils.isNotNull(liveID) && MyUtils.isNotNull(callNameID)) {
+				livingUserList = new ArrayList<String>();
+				livingUserList.add("10000");
+				livingUserList.add("10001");
+				livingUserList.add("10002");
+				livingUserList.add("10003");
+				livingUserList.add("10004");
+				livingUserList.add("10005");
+				livingUserList.add("10006");
+				livingUserList.add("10007");
+				livingUserList.add("10008");
+				livingUserList.add("10009");
+				livingUserList.add("10010");
+				
 				//获取直播课堂点名已签到的学生
+				LiveCallReplyDao liveCallReplyDao = new LiveCallReplyDao();
 				List<LiveCallReplyItem> lcrList = liveCallReplyDao.selectUserID(callNameID, liveID);
-				List<String> userIdList = new ArrayList<String>();
-				for(LiveCallReplyItem lcrItem:lcrList){
-					userIdList.add(lcrItem.getUserId());
-				}
-				String[] userIds = (String[])userIdList.toArray(new String[userIdList.size()]);
+
 				
 				//获取直播课堂点名未签到的学生
-				UserDao userDao = new UserDao();
-				userList = userDao.selectNotInByIds(userIds);
-				if (userList != null) {
-					rt = 1;
+				if(lcrList != null && lcrList.size() > 0) {
+					for(int i=0;i<lcrList.size();i++) {
+						for(int j=0;j<livingUserList.size();j++) {
+							if(lcrList.get(i).getUserId() == livingUserList.get(j)) {
+								livingUserList.remove(j);
+								break;
+							}
+						}
+					}
 				}
+				
+				rt = 1;
+				
 			}
 		}catch(Exception e) {
 			Log.printStackTrace(e);
@@ -51,7 +67,7 @@ public class TeacherHttpService20002 implements AbstractHttpService{
 
 		StringBuilder sb = new StringBuilder();
 		sb.append(HttpDefine.Xml_Header);
-		sb.append("<ResMsg>");
+		sb.append("<RespMsg>");
 			sb.append("<MsgHead>");
 //				sb.append("<!--获取点名结果（只反馈未应答的用户）-->");
 				sb.append("<MsgCode type=\"int\">").append(HttpDefine.Teacher_Service_20002).append("</MsgCode>");
@@ -63,19 +79,15 @@ public class TeacherHttpService20002 implements AbstractHttpService{
 				sb.append("<LiveID type=\"string\">").append(liveID).append("</LiveID>");
 				sb.append("<CallNameID type=\"int\">").append(callNameID).append("</CallNameID>");
 				sb.append("<UserIDs>");
-//					sb.append("<!--未应答用户ID列表-->");	
-				if (rt == 1) {
-					for (UserItem userItem:userList) {
-						if (userItem.isStudent()) {
-							sb.append("<UserID type=\"string\">").append(userItem.getId()).append("</UserID>");
-						}
+//				sb.append("<!--未应答用户ID列表-->");
+				if(livingUserList != null) {
+					for (String id:livingUserList) {
+						sb.append("<UserID type=\"string\">").append(id).append("</UserID>");
 					}
-				}else{
-					sb.append("<UserID type=\"string\">").append("</UserID>");
 				}
-				sb.append("<UserIDs>");
+				sb.append("</UserIDs>");
 			sb.append("</MsgBody>");
-		sb.append("</ResMsg>");
+		sb.append("</RespMsg>");
 		return sb.toString();
 	}
 

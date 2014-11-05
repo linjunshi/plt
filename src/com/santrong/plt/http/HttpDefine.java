@@ -31,9 +31,12 @@ public class HttpDefine {
 
 	public static final String Basic_Server_Test 			= "10000";	// 测试
 	
+	/*中心服务器*/
+	public static final String Server_Service_21002 			= "21002";	// 上报老师开始点名(21002)
+	
 	/*老师客户端软件*/
 	public static final String Teacher_Service_20001 			= "20001";	// 登录web服务器(20001)
-	public static final String Teacher_Service_20002 			= "20001";	// 获取点名结果(20002)
+	public static final String Teacher_Service_20002 			= "20002";	// 获取点名结果(20002)
 	public static final String Teacher_Service_20005 			= "20005";	// 获取服务器时间(20005)
 	
 	/*flash学生客户端软件*/

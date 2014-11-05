@@ -1,6 +1,5 @@
 package com.santrong.plt.http.server;
 
-import java.util.Date;
 import java.util.List;
 
 import org.jdom.Element;
@@ -8,12 +7,7 @@ import org.jdom.Element;
 import com.santrong.plt.http.HttpDefine;
 import com.santrong.plt.http.server.base.AbstractHttpService;
 import com.santrong.plt.log.Log;
-import com.santrong.plt.util.MyUtils;
 import com.santrong.plt.util.XmlReader;
-import com.santrong.plt.webpage.live.dao.LiveCallDao;
-import com.santrong.plt.webpage.live.dao.LiveReplyDao;
-import com.santrong.plt.webpage.live.entry.LiveCallItem;
-import com.santrong.plt.webpage.live.entry.LiveReplyItem;
 
 /**
  * @author huangweihua
@@ -46,7 +40,7 @@ public class StudentHttpService30004 implements AbstractHttpService{
 		
 		StringBuilder sb = new StringBuilder();
 		sb.append(HttpDefine.Xml_Header);
-		sb.append("<ResMsg>");
+		sb.append("<RespMsg>");
 			sb.append("<MsgHead>");
 				//sb.append("<!--上报作业结果(30004)-->");
 				sb.append("<MsgCode type=\"int\">").append(HttpDefine.Student_Service_30004).append("</MsgCode>");
@@ -55,7 +49,7 @@ public class StudentHttpService30004 implements AbstractHttpService{
 			sb.append("</MsgHead>");
 			sb.append("<MsgBody>");
 			sb.append("</MsgBody>");
-		sb.append("</ResMsg>");
+		sb.append("</RespMsg>");
 		return sb.toString();
 	}
 

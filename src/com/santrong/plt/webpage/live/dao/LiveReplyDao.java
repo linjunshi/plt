@@ -25,16 +25,16 @@ public class LiveReplyDao extends BaseDao {
 	}
 	
 	/**
-	 * 查询直播答到的记录
+	 * 查询是否存在
 	 * @author huangweihua
 	 * @param callId userId
 	 * @return 
 	 */
-	public LiveReplyItem selectBy(String callId, String userId) {
+	public boolean exists(String callId, String userId) {
 		LiveReplyMapper mapper = this.getMapper(LiveReplyMapper.class);
 		if(mapper != null) {
-			return mapper.selectBy(callId, userId);
+			return mapper.exists(callId, userId) > 0;
 		}
-		return null;
+		return false;
 	}
 }

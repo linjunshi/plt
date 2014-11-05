@@ -22,19 +22,25 @@ public class StudentHttpService30002 implements AbstractHttpService{
 		int rt = 0;
 		try{
 			String liveId = xml.find("/MsgBody/LiveID").getText();
-			String score = xml.find("/MsgBody/Score").getText();
+			int score = xml.getInt("/MsgBody/Score", 0);
+			String userId = xml.find("/MsgBody/UserID").getText();
 			
-			if (liveId != "" && score != "") {
-				LiveDao LiveDao = new LiveDao();
-				LiveScoreItem liveScoreItem = new LiveScoreItem();
-				
-				liveScoreItem.setId(MyUtils.getGUID());
-				liveScoreItem.setUserId("10000");
-				liveScoreItem.setLiveId(liveId);
-				liveScoreItem.setScore(MyUtils.stringToInt(score));
-				liveScoreItem.setCts(new Date());
-				if (LiveDao.insert(liveScoreItem) > 0) {
-					rt = 1;
+			if (MyUtils.isNotNull(liveId) && MyUtils.isNotNull(userId)) {
+				if(score > 0 && score < 6) {
+					
+					//TODO 判断只能评分一次
+					
+					LiveDao LiveDao = new LiveDao();
+					LiveScoreItem liveScoreItem = new LiveScoreItem();
+					
+					liveScoreItem.setId(MyUtils.getGUID());
+					liveScoreItem.setUserId(userId);
+					liveScoreItem.setLiveId(liveId);
+					liveScoreItem.setScore(score);
+					liveScoreItem.setCts(new Date());
+					if (LiveDao.insert(liveScoreItem) > 0) {
+						rt = 1;
+					}
 				}
 			}
 		}catch(Exception e) {
@@ -43,7 +49,7 @@ public class StudentHttpService30002 implements AbstractHttpService{
 		
 		StringBuilder sb = new StringBuilder();
 		sb.append(HttpDefine.Xml_Header);
-		sb.append("<ResMsg>");
+		sb.append("<RespMsg>");
 			sb.append("<MsgHead>");
 				//sb.append("<!--上报课程评价(30002)-->");
 				sb.append("<MsgCode type=\"int\">").append(HttpDefine.Student_Service_30002).append("</MsgCode>");
@@ -52,7 +58,7 @@ public class StudentHttpService30002 implements AbstractHttpService{
 			sb.append("</MsgHead>");
 			sb.append("<MsgBody>");
 			sb.append("</MsgBody>");
-		sb.append("</ResMsg>");
+		sb.append("</RespMsg>");
 		return sb.toString();
 	}
 
