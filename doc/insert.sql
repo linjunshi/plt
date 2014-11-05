@@ -415,6 +415,8 @@ create table resource_live_score(
 drop table if exists resource_live_call;
 create table resource_live_call(
 	id varchar(32) not null comment 'UUID',
+	liveId varchar(32) not null comment '直播ID',
+	callName varchar(32) not null comment '点名标识',
 	cts datetime comment '创建时间',
 	primary key (id)
 ) engine=InnoDB default charset=utf8 collate=utf8_bin comment '直播点名表';
@@ -465,6 +467,7 @@ drop table if exists resource_train;
 create table resource_train(
 	id varchar(32) not null comment 'UUID',
 	trainName varchar(128) not null comment '测验名',
+	ownerId varchar(32) not null comment '所有者',
 	del int(10) comment '是否删除',
 	cts datetime comment '创建时间',
 	uts datetime comment '修改时间',	
@@ -497,6 +500,7 @@ create table resource_train_question(
 	opt3 varchar(128) comment '选项3',
 	opt4 varchar(128) comment '选项4',
 	answer int(10) not null comment '答案',
+	ownerId varchar(32) not null comment '所有者',
 	del int(10) comment '是否删除',
 	cts datetime comment '创建时间',
 	uts datetime comment '修改时间',	
