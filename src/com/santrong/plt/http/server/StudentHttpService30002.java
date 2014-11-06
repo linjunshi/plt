@@ -7,7 +7,7 @@ import com.santrong.plt.http.server.base.AbstractHttpService;
 import com.santrong.plt.log.Log;
 import com.santrong.plt.util.MyUtils;
 import com.santrong.plt.util.XmlReader;
-import com.santrong.plt.webpage.live.dao.LiveDao;
+import com.santrong.plt.webpage.live.dao.LiveScoreDao;
 import com.santrong.plt.webpage.live.entry.LiveScoreItem;
 
 /**
@@ -30,7 +30,7 @@ public class StudentHttpService30002 implements AbstractHttpService{
 					
 					//TODO 判断只能评分一次
 					
-					LiveDao LiveDao = new LiveDao();
+					LiveScoreDao liveScoreDao = new LiveScoreDao();
 					LiveScoreItem liveScoreItem = new LiveScoreItem();
 					
 					liveScoreItem.setId(MyUtils.getGUID());
@@ -38,7 +38,7 @@ public class StudentHttpService30002 implements AbstractHttpService{
 					liveScoreItem.setLiveId(liveId);
 					liveScoreItem.setScore(score);
 					liveScoreItem.setCts(new Date());
-					if (LiveDao.insert(liveScoreItem) > 0) {
+					if (liveScoreDao.insert(liveScoreItem) > 0) {
 						rt = 1;
 					}
 				}

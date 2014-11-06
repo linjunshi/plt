@@ -37,7 +37,11 @@ public class HttpDefine {
 	/*老师客户端软件*/
 	public static final String Teacher_Service_20001 			= "20001";	// 登录web服务器(20001)
 	public static final String Teacher_Service_20002 			= "20002";	// 获取点名结果(20002)
+	
 	public static final String Teacher_Service_20005 			= "20005";	// 获取服务器时间(20005)
+	public static final String Teacher_Service_20006 			= "20006";	// 获取当天直播列表(20006)
+	public static final String Teacher_Service_20007 			= "20007";	// 获取直播信息(20007)
+	public static final String Teacher_Service_20008 			= "20008";	// 获取作业列表(20008)
 	
 	/*flash学生客户端软件*/
 	public static final String Student_Service_30001			= "30001";	// 获取用户信息(30001)

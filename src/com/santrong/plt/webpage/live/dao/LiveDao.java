@@ -1,7 +1,9 @@
 package com.santrong.plt.webpage.live.dao;
 
+import java.util.List;
+
 import com.santrong.plt.webpage.BaseDao;
-import com.santrong.plt.webpage.live.entry.LiveScoreItem;
+import com.santrong.plt.webpage.live.entry.LiveItem;
 
 /**
  * @author weinianjie
@@ -16,11 +18,11 @@ public class LiveDao extends BaseDao {
 	 * @param liveScoreItem
 	 * @return int
 	 */
-	public int insert(LiveScoreItem liveScoreItem) {
+	public List<LiveItem> selectAll() {
 		LiveMapper mapper = this.getMapper(LiveMapper.class);
 		if(mapper != null) {
-			return mapper.insert(liveScoreItem);
+			return mapper.selectAll();
 		}
-		return 0;
+		return null;
 	}
 }

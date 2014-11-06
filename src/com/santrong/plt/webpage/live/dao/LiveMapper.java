@@ -1,8 +1,10 @@
 package com.santrong.plt.webpage.live.dao;
 
-import org.apache.ibatis.annotations.Insert;
+import java.util.List;
 
-import com.santrong.plt.webpage.live.entry.LiveScoreItem;
+import org.apache.ibatis.annotations.Select;
+
+import com.santrong.plt.webpage.live.entry.LiveItem;
 
 /**
  * @author weinianjie
@@ -11,7 +13,7 @@ import com.santrong.plt.webpage.live.entry.LiveScoreItem;
  */
 public interface LiveMapper {
 
-	@Insert("insert into user values(#{id}, #{liveId}, #{userId}, #{score}, #{cts})")
-	int insert(LiveScoreItem liveScoreItem);
 	
+	@Select("select * from resource_live_score")
+	List<LiveItem> selectAll();
 }
