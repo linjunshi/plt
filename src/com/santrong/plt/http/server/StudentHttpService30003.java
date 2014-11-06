@@ -7,10 +7,10 @@ import com.santrong.plt.http.server.base.AbstractHttpService;
 import com.santrong.plt.log.Log;
 import com.santrong.plt.util.MyUtils;
 import com.santrong.plt.util.XmlReader;
-import com.santrong.plt.webpage.live.dao.LiveCallDao;
-import com.santrong.plt.webpage.live.dao.LiveReplyDao;
-import com.santrong.plt.webpage.live.entry.LiveCallItem;
-import com.santrong.plt.webpage.live.entry.LiveReplyItem;
+import com.santrong.plt.webpage.course.resource.live.dao.LiveCallDao;
+import com.santrong.plt.webpage.course.resource.live.dao.LiveReplyDao;
+import com.santrong.plt.webpage.course.resource.live.entry.LiveCallItem;
+import com.santrong.plt.webpage.course.resource.live.entry.LiveReplyItem;
 
 /**
  * @author huangweihua

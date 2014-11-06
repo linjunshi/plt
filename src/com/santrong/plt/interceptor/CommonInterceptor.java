@@ -34,20 +34,21 @@ public class CommonInterceptor implements HandlerInterceptor{
 			// 记录用户访问(过滤掉接口的请求)
 			if(!url.startsWith("/http/basic.action")) {
 				Log.logRequest(request);
+				
+				// 获取用户地理信息
+				if(request.getSession().getAttribute(Global.SessionKey_Area) == null) {
+					String clientIp = "183.17.255.255";//MyUtils.getRequestAddrIp(request, null);
+					AreaService areaService= new AreaService();
+//					AreaEntry area = areaService.getAreaByTaobao(clientIp);
+					AreaEntry area = areaService.getIpAreaByCz88(clientIp);
+					request.getSession().setAttribute(Global.SessionKey_Area, area);
+				}				
 			}
 			
+			return true;
 		}
 		
-		// 获取用户地理信息
-		if(request.getSession().getAttribute(Global.SessionKey_Area) == null) {
-			String clientIp = "183.17.255.255";//MyUtils.getRequestAddrIp(request, null);
-			AreaService areaService= new AreaService();
-//			AreaEntry area = areaService.getAreaByTaobao(clientIp);
-			AreaEntry area = areaService.getIpAreaByCz88(clientIp);
-			request.getSession().setAttribute(Global.SessionKey_Area, area);
-		}
-		
-		return true;
+		return false;
 	}
 	
 	/**

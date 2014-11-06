@@ -21,9 +21,9 @@ import com.santrong.plt.webpage.course.entry.CourseQuery;
 import com.santrong.plt.webpage.school.dao.SchoolDao;
 import com.santrong.plt.webpage.school.entry.SchoolItem;
 import com.santrong.plt.webpage.school.entry.SchoolQuery;
-import com.santrong.plt.webpage.user.dao.UserDao;
-import com.santrong.plt.webpage.user.entry.UserItem;
-import com.santrong.plt.webpage.user.entry.UserQuery;
+import com.santrong.plt.webpage.teacher.dao.UserDao;
+import com.santrong.plt.webpage.teacher.entry.UserItem;
+import com.santrong.plt.webpage.teacher.entry.UserQuery;
 
 /**
  * @author weinianjie

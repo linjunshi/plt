@@ -1,5 +1,6 @@
 -- 2014-09-25 weinianjie
-create database plt;
+set names utf8;
+create database if not exists plt;
 use plt;
 
 -- 用户表 --
@@ -485,6 +486,7 @@ create table resource_train_history(
 	trainId varchar(32) not null comment '测验ID',
 	questionId varchar(32) not null comment '习题ID',
 	answer int(10) not null comment '答案',
+	result int(10) not null comment '正确与否1yes2no',
 	del int(10) comment '是否删除',
 	cts datetime comment '创建时间',
 	uts datetime comment '修改时间',		
