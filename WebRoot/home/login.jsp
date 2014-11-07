@@ -14,9 +14,9 @@ Globals.page = "Index_login";
 * {	margin: 0;padding: 0;}
 body {color: #666;font: 12px/1.8em Arial, Helvetica, sans-serif;background:#FFF;margin: 0;padding: 0;overflow: inherit;}
 .mr h2 {text-align: center;font-size:26px;margin:30px 0 10px 0; padding-top:20px; height:30px; line-height:30px;color: #009871; font-weight:100;}
-.border {background: url(resource/images/banner_img_4.jpg) no-repeat center center;height:420px;clear: both;}
+.border {background: url(${ctx}/resource/images/banner_img_4.jpg) no-repeat center center;height:420px;clear: both;}
 .center {width: 1000px;	margin: 0 auto;	height: 420px;position: relative;}
-.user {	width: 300px;height: 230px;border:1px #fff solid;background: url(resource/images/007.png);	position: absolute;	top: 100px;	right: 20px;}
+.user {	width: 300px;height: 230px;border:1px #fff solid;background: url(${ctx}/resource/images/007.png);	position: absolute;	top: 100px;	right: 20px;}
 .formlogin {height:auto;width:300px;padding-top: 20px;}
 .loginuser {width: 300px;display: block;float: left;color: #FFF;margin:15px 0;height:30px;}
 .login {display: block;	width: 100px;text-align: right;float: left;font-size: 16px;color: #000;	height:30px;line-height:30px;}
@@ -60,7 +60,7 @@ body {color: #666;font: 12px/1.8em Arial, Helvetica, sans-serif;background:#FFF;
   <div class="center">
   
     <div class="user">
-      <form class="formlogin" action="${ctx}/login" method="post">
+      <form class="formlogin" action="${ctx}/account/login" method="post">
         <div class="loginuser">
           <label class="login"><fmt:message key="index_user_username"/>：</label>
           <input name="username" type="text" size="20" class="text2" value="${username}">

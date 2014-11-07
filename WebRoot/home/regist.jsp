@@ -28,7 +28,7 @@ Globals.page = "Index_regist";
 				</div>
 			</c:if>
 			
-			<form action="${ctx}/regist" method="post" class="form_vertical" id="register_form">
+			<form action="${ctx}/account/regist" method="post" class="form_vertical" id="register_form">
 				<div class="form_item">
 					<label for="username">用户名：</label>
 					<div class="form_field">

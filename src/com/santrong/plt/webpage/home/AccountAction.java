@@ -22,6 +22,7 @@ import com.santrong.plt.webpage.teacher.entry.UserItem;
  * @time 下午4:29:21
  */
 @Controller
+@RequestMapping("/account")
 public class AccountAction extends BaseAction {
 
 	/**

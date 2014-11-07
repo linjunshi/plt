@@ -3,8 +3,6 @@ package com.santrong.plt.webpage.manage;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.springframework.web.bind.annotation.ModelAttribute;
-
 import com.santrong.plt.system.Global;
 import com.santrong.plt.webpage.BaseAction;
 import com.santrong.plt.webpage.teacher.entry.UserItem;
@@ -14,24 +12,18 @@ import com.santrong.plt.webpage.teacher.entry.UserItem;
  * @date 2014年11月6日
  * @time 下午4:43:47
  */
-public class GodBaseAction extends BaseAction {
+public abstract class GodBaseAction extends BaseAction {
 	
-	/**
-	 * 前置执行方法
-	 * @param request
-	 * @param response
-	 */
-	@ModelAttribute
-	public final void init(HttpServletRequest request, HttpServletResponse response) throws Exception {
+	// 控制器方法的前置方法
+	public RmCode preMethod(HttpServletRequest request, HttpServletResponse response) {
 		UserItem user = (UserItem)request.getSession().getAttribute(Global.SessionKey_LoginUser);
 		if(user == null) {
-			response.sendRedirect(request.getContextPath() + "/account/login"); // 跳到登录页面
-			return;
+			return RmCode.REQUIRE_LOGIN;
 		}
 		
 		if(!user.isGod()) {
-			response.sendRedirect(request.getContextPath() + "/account/login"); // 跳到没有权限页面
-			return;
+			return RmCode.REQUIRE_AUTH;
 		}
+		return RmCode.PASS;
 	}
 }
