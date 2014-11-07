@@ -8,9 +8,9 @@ import com.santrong.plt.log.Log;
 import com.santrong.plt.opt.ThreadUtils;
 import com.santrong.plt.util.MyUtils;
 import com.santrong.plt.util.XmlReader;
-import com.santrong.plt.webpage.train.dao.TrainDao;
-import com.santrong.plt.webpage.train.dao.TrainQuestionDao;
-import com.santrong.plt.webpage.train.entry.TrainItem;
+import com.santrong.plt.webpage.course.resource.train.dao.TrainDao;
+import com.santrong.plt.webpage.course.resource.train.dao.TrainQuestionDao;
+import com.santrong.plt.webpage.course.resource.train.entry.TrainItem;
 
 /**
  * @author huangweihua

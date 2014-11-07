@@ -1,0 +1,228 @@
+package com.santrong.plt.webpage.teacher.entry;
+
+import java.util.Date;
+
+
+/**
+ * @author huangweihua
+ * @date   2014年10月28日
+ * @time   上午11:16:34
+ */
+public class UserDetailView {
+	
+	/*user 用户*/
+	private String id;
+	private String showName;
+	private String username;
+	private String password;
+	private String url;
+	private int gender;
+	private int role;
+	private String schoolId;
+	private String subjectId;
+	private String registIp;
+	private Date registTime;
+	private String lastLoginIp;
+	private Date lastLoginTime;
+	private String remark;
+	private Date cts;
+	private Date uts;
+	
+	/*user_education 用户教育信息*/
+	private int education;
+	private int positional;
+	private String graduateSchool;
+	
+	/*user_extends 用户其他扩展信息*/
+	private Date birthday;
+	private String nativePlace;
+	
+	// 其他信息
+	private String subjectName;
+	private String schoolName;
+	
+	
+	public String getSubjectName() {
+		return subjectName;
+	}
+
+	public void setSubjectName(String subjectName) {
+		this.subjectName = subjectName;
+	}
+
+	public String getSchoolName() {
+		return schoolName;
+	}
+
+	public void setSchoolName(String schoolName) {
+		this.schoolName = schoolName;
+	}
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	public String getShowName() {
+		return showName;
+	}
+
+	public void setShowName(String showName) {
+		this.showName = showName;
+	}
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public String getUrl() {
+		return url;
+	}
+
+	public void setUrl(String url) {
+		this.url = url;
+	}
+
+	public int getGender() {
+		return gender;
+	}
+
+	public void setGender(int gender) {
+		this.gender = gender;
+	}
+
+	public int getRole() {
+		return role;
+	}
+
+	public void setRole(int role) {
+		this.role = role;
+	}
+
+	public String getSchoolId() {
+		return schoolId;
+	}
+
+	public void setSchoolId(String schoolId) {
+		this.schoolId = schoolId;
+	}
+
+	public String getSubjectId() {
+		return subjectId;
+	}
+
+	public void setSubjectId(String subjectId) {
+		this.subjectId = subjectId;
+	}
+
+	public String getRegistIp() {
+		return registIp;
+	}
+
+	public void setRegistIp(String registIp) {
+		this.registIp = registIp;
+	}
+
+	public Date getRegistTime() {
+		return registTime;
+	}
+
+	public void setRegistTime(Date registTime) {
+		this.registTime = registTime;
+	}
+
+	public String getLastLoginIp() {
+		return lastLoginIp;
+	}
+
+	public void setLastLoginIp(String lastLoginIp) {
+		this.lastLoginIp = lastLoginIp;
+	}
+
+	public Date getLastLoginTime() {
+		return lastLoginTime;
+	}
+
+	public void setLastLoginTime(Date lastLoginTime) {
+		this.lastLoginTime = lastLoginTime;
+	}
+
+	public String getRemark() {
+		return remark;
+	}
+
+	public void setRemark(String remark) {
+		this.remark = remark;
+	}
+
+	public Date getCts() {
+		return cts;
+	}
+
+	public void setCts(Date cts) {
+		this.cts = cts;
+	}
+
+	public Date getUts() {
+		return uts;
+	}
+
+	public void setUts(Date uts) {
+		this.uts = uts;
+	}
+
+	public int getEducation() {
+		return education;
+	}
+
+	public void setEducation(int education) {
+		this.education = education;
+	}
+
+	public int getPositional() {
+		return positional;
+	}
+
+	public void setPositional(int positional) {
+		this.positional = positional;
+	}
+
+	public String getGraduateSchool() {
+		return graduateSchool;
+	}
+
+	public void setGraduateSchool(String graduateSchool) {
+		this.graduateSchool = graduateSchool;
+	}
+
+	public Date getBirthday() {
+		return birthday;
+	}
+
+	public void setBirthday(Date birthday) {
+		this.birthday = birthday;
+	}
+
+	public String getNativePlace() {
+		return nativePlace;
+	}
+
+	public void setNativePlace(String nativePlace) {
+		this.nativePlace = nativePlace;
+	}
+}

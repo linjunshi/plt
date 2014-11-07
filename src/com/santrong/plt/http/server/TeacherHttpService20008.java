@@ -7,8 +7,8 @@ import com.santrong.plt.http.server.base.AbstractHttpService;
 import com.santrong.plt.log.Log;
 import com.santrong.plt.util.MyUtils;
 import com.santrong.plt.util.XmlReader;
-import com.santrong.plt.webpage.train.dao.TrainQuestionDao;
-import com.santrong.plt.webpage.train.entry.TrainQuestionItem;
+import com.santrong.plt.webpage.course.resource.train.dao.TrainQuestionDao;
+import com.santrong.plt.webpage.course.resource.train.entry.TrainQuestionItem;
 
 /**
  * @author huangweihua

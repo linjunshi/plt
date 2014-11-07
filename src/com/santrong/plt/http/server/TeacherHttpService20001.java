@@ -5,8 +5,8 @@ import com.santrong.plt.http.server.base.AbstractHttpService;
 import com.santrong.plt.log.Log;
 import com.santrong.plt.util.MyUtils;
 import com.santrong.plt.util.XmlReader;
-import com.santrong.plt.webpage.user.dao.UserDao;
-import com.santrong.plt.webpage.user.entry.UserItem;
+import com.santrong.plt.webpage.teacher.dao.UserDao;
+import com.santrong.plt.webpage.teacher.entry.UserItem;
 
 /**
  * @author weinianjie

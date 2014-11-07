@@ -6,8 +6,8 @@ import com.santrong.plt.http.HttpDefine;
 import com.santrong.plt.http.server.base.AbstractHttpService;
 import com.santrong.plt.log.Log;
 import com.santrong.plt.util.XmlReader;
-import com.santrong.plt.webpage.live.dao.LiveDao;
-import com.santrong.plt.webpage.live.entry.LiveItem;
+import com.santrong.plt.webpage.course.resource.live.dao.LiveDao;
+import com.santrong.plt.webpage.course.resource.live.entry.LiveItem;
 
 /**
  * @author huangweihua
@@ -47,7 +47,7 @@ public class TeacherHttpService20006 implements AbstractHttpService{
 							//sb.append("<!--课程ID-->");
 							sb.append("<LiveID type=\"string\">").append(liveItem.getId()).append("</LiveID>");
 							//sb.append("<!--课程名称-->");
-							sb.append("<LiveName type=\"string\">").append(liveItem.getLiveName()).append("</LiveName>");
+							sb.append("<LiveName type=\"string\">").append(liveItem.getTitle()).append("</LiveName>");
 						sb.append("</Live>");
 					}
 				sb.append("</Lives>");

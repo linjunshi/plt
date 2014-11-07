@@ -10,7 +10,7 @@ import com.santrong.plt.opt.SimpleTipItem;
 import com.santrong.plt.opt.ThreadUtils;
 import com.santrong.plt.system.Global;
 import com.santrong.plt.util.MyUtils;
-import com.santrong.plt.webpage.user.entry.UserItem;
+import com.santrong.plt.webpage.teacher.entry.UserItem;
 
 /**
  * @Author weinianjie

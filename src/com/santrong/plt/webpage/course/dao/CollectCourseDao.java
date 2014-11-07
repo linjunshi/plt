@@ -37,4 +37,5 @@ public class CollectCourseDao extends BaseDao{
 		}
 		return false;
 	}
+
 }

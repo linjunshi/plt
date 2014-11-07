@@ -7,12 +7,12 @@ import com.santrong.plt.http.server.base.AbstractHttpService;
 import com.santrong.plt.log.Log;
 import com.santrong.plt.util.MyUtils;
 import com.santrong.plt.util.XmlReader;
-import com.santrong.plt.webpage.train.dao.TrainDao;
-import com.santrong.plt.webpage.train.dao.TrainHistoryDao;
-import com.santrong.plt.webpage.train.dao.TrainQuestionDao;
-import com.santrong.plt.webpage.train.entry.TrainHistoryItem;
-import com.santrong.plt.webpage.train.entry.TrainItem;
-import com.santrong.plt.webpage.train.entry.TrainQuestionItem;
+import com.santrong.plt.webpage.course.resource.train.dao.TrainDao;
+import com.santrong.plt.webpage.course.resource.train.dao.TrainHistoryDao;
+import com.santrong.plt.webpage.course.resource.train.dao.TrainQuestionDao;
+import com.santrong.plt.webpage.course.resource.train.entry.TrainHistoryItem;
+import com.santrong.plt.webpage.course.resource.train.entry.TrainItem;
+import com.santrong.plt.webpage.course.resource.train.entry.TrainQuestionItem;
 
 /**
  * @author huangweihua

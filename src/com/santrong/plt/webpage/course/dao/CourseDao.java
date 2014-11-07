@@ -15,6 +15,7 @@ import com.santrong.plt.util.BeanUtils;
 import com.santrong.plt.util.MyUtils;
 import com.santrong.plt.webpage.BaseDao;
 import com.santrong.plt.webpage.course.entry.CourseBuyQuery;
+import com.santrong.plt.webpage.course.entry.CourseCollectQuery;
 import com.santrong.plt.webpage.course.entry.CourseDetailView;
 import com.santrong.plt.webpage.course.entry.CourseItem;
 import com.santrong.plt.webpage.course.entry.CourseQuery;
@@ -218,7 +219,7 @@ public class CourseDao extends BaseDao {
 	 * @param query
 	 * @return
 	 */
-	public 	List<CourseItem> selectByBuyQuery(CourseBuyQuery query) {
+	public 	List<CourseItem> selectByQuery(CourseBuyQuery query) {
 		List<CourseItem> list = new ArrayList<CourseItem>();
 		
 		try{
@@ -273,7 +274,7 @@ public class CourseDao extends BaseDao {
 	 * @param query
 	 * @return
 	 */
-	public 	int selectCountByBuyQuery(CourseBuyQuery query) {
+	public 	int selectCountByQuery(CourseBuyQuery query) {
 		int count = 0;
 		
 		try{
@@ -308,6 +309,93 @@ public class CourseDao extends BaseDao {
 		
 		return count;
 	}		
+	
+	/**
+	 * 根据条件查询收藏
+	 * @param query
+	 * @return
+	 */
+	public List<CourseItem> selectByQuery(CourseCollectQuery query) {
+		List<CourseItem> list = new ArrayList<CourseItem>();
+		
+		try{
+			Statement criteria = new Statement("course_collection", "a");
+			criteria.setFields("b.*");
+			criteria.ljoin("course", "b", "a.courseId", "b.id");
+			
+			// 所属用户
+			if(MyUtils.isNotNull(query.getUserId())) {
+				criteria.where(eq("a.userId", "?"));
+				criteria.setStringParam(query.getUserId());
+			}
+			// 所属课程
+			if(MyUtils.isNotNull(query.getCourseId())) {
+				criteria.where(eq("a.courseId", "?"));
+				criteria.setStringParam(query.getCourseId());
+			}			
+			// 排序
+			if(!StringUtils.isNullOrEmpty(query.getOrderBy())) {
+				if("desc".equalsIgnoreCase(query.getOrderRule())) {
+					criteria.desc("a." + query.getOrderBy());
+				}else {
+					criteria.asc("a." + query.getOrderBy());
+				}
+			}
+			
+			// 分页
+			criteria.limit(query.getLimitBegin(), query.getLimitEnd());
+			
+			Connection conn = ThreadUtils.currentConnection();
+			PreparedStatement stm = criteria.getRealStatement(conn);
+			ResultSet rs = stm.executeQuery();
+			while(rs.next()){
+				CourseItem item = new CourseItem();
+				BeanUtils.Rs2Bean(rs, item);
+				list.add(item);
+			}
+			
+		}catch(Exception e){
+			Log.printStackTrace(e);
+		}
+		
+		return list;
+	}
+	
+	/**
+	 * 根据条件查询收藏课程总数
+	 * @param query
+	 * @return
+	 */
+	public int selectCountByQuery(CourseCollectQuery query) {
+		int count = 0;
+		
+		try{
+			Statement criteria = new Statement("course_collection", "a");
+			criteria.setFields("count(*) cn");
+			criteria.ljoin("course", "b", "a.courseId", "b.id");
+			
+			// 所属用户
+			if(MyUtils.isNotNull(query.getUserId())) {
+				criteria.where(eq("a.userId", "?"));
+				criteria.setStringParam(query.getUserId());
+			}
+			// 所属课程
+			if(MyUtils.isNotNull(query.getCourseId())) {
+				criteria.where(eq("a.courseId", "?"));
+				criteria.setStringParam(query.getCourseId());
+			}	
+			Connection conn = ThreadUtils.currentConnection();
+			PreparedStatement stm = criteria.getRealStatement(conn);
+			ResultSet rs = stm.executeQuery();
+			rs.next();
+			count = rs.getInt("cn");
+			
+		}catch(Exception e){
+			Log.printStackTrace(e);
+		}
+		
+		return count;
+	}			
 	
 	/**
 	 * 查询某间学校的所有课程信息
@@ -398,4 +486,5 @@ public class CourseDao extends BaseDao {
 		}
 		return 0;
 	}
+	
 }

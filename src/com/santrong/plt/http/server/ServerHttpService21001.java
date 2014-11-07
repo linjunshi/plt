@@ -8,8 +8,8 @@ import com.santrong.plt.http.server.base.AbstractHttpService;
 import com.santrong.plt.log.Log;
 import com.santrong.plt.util.MyUtils;
 import com.santrong.plt.util.XmlReader;
-import com.santrong.plt.webpage.live.dao.LiveDao;
-import com.santrong.plt.webpage.live.entry.LiveItem;
+import com.santrong.plt.webpage.course.resource.live.dao.LiveDao;
+import com.santrong.plt.webpage.course.resource.live.entry.LiveItem;
 
 /**
  * @author huangweihua

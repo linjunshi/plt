@@ -8,8 +8,20 @@ js、css和图片等静态资源
 /download/*
 提供用户下载的静态资源
 
+/course/comment
+评论课程
+
+/course/collection
+收藏课程
+
+/course/buy
+购买课程
+
 /course/*/*?attr=val...
 点播课程，第一*代表学级（高中），第二*代表科目，其他属性用常规键值对方式附带。如果只要科目不要学级，则学级置为all
+
+/course/*.html
+点播课详细，*代表课程id
 
 /live/*/*?attr=val...
 直播课程，第一*代表学级（高中），第二*代表科目，其他属性用常规键值对方式附带。如果只要科目不要学级，则学级置为all
@@ -19,9 +31,6 @@ js、css和图片等静态资源
 
 /teacher/*/*?attr=val...
 老师，第一*代表学级（高中），第二*代表科目，其他属性用常规键值对方式附带。如果只要科目不要学级，则学级置为all
-
-/course/*.html
-点播课详细，*代表课程id
 
 /live/*.html
 直播课详细，*代表课程id
@@ -40,7 +49,39 @@ js、css和图片等静态资源
 /study/train
 我的测验
 
-/*/*
-第一个*为主功能，第二个*为次功能
+/collection
+我的收藏
+
+/comment
+我的评论
+
+/train
+我的作业
+
+/manage/machine
+一体机管理
+
+/manage/course
+课程管理
+
+/manage/question
+习题管理
+
+/manage/video
+视频管理
 
 
+
+/god/*
+超级管理员的功能一律这样开头
+
+------------------------------------------其他-----------------------------------------
+
+/account/login
+登录
+
+/account/logout
+注销
+
+/account/regist
+注册
