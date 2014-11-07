@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.santrong.plt.webpage.BaseDao;
 import com.santrong.plt.webpage.course.entry.ChapterAndResourceEntry;
+import com.santrong.plt.webpage.course.entry.ChapterItem;
 
 /**
  * @author weinianjie
@@ -21,6 +22,19 @@ public class ChapterDao extends BaseDao {
 		ChapterMapper mapper = this.getMapper(ChapterMapper.class);
 		if(mapper != null) {
 			return mapper.selectByCourseId(courseId);
+		}
+		return null;
+	}
+	
+	/**
+	 * 根据资源ID获取所在章节
+	 * @param resourceId
+	 * @return
+	 */
+	public ChapterItem selectByResourceId(String resourceId) {
+		ChapterMapper mapper = this.getMapper(ChapterMapper.class);
+		if(mapper != null) {
+			return mapper.selectByResourceId(resourceId);
 		}
 		return null;
 	}

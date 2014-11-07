@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Select;
 
 import com.santrong.plt.webpage.course.entry.ChapterAndResourceEntry;
+import com.santrong.plt.webpage.course.entry.ChapterItem;
 
 /**
  * @author weinianjie
@@ -17,4 +18,7 @@ public interface ChapterMapper {
 			+ "left join course_chapter_to_resource b on a.id=b.chapterId "
 			+ "where a.courseId=#{courseId} order by a.priority asc, b.priority asc")
 	List<ChapterAndResourceEntry> selectByCourseId(String courseId);
+	
+	@Select("select a.* from course_chapter a left join course_chapter_to_resource b on a.id=b.chapterId where a.id=#{resourceId}")
+	ChapterItem selectByResourceId(String resourceId);
 }

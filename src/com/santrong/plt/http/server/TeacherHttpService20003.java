@@ -7,6 +7,8 @@ import com.santrong.plt.http.server.base.AbstractHttpService;
 import com.santrong.plt.log.Log;
 import com.santrong.plt.util.MyUtils;
 import com.santrong.plt.util.XmlReader;
+import com.santrong.plt.webpage.course.dao.ChapterDao;
+import com.santrong.plt.webpage.course.entry.ChapterItem;
 import com.santrong.plt.webpage.course.resource.train.dao.TrainDao;
 import com.santrong.plt.webpage.course.resource.train.dao.TrainHistoryDao;
 import com.santrong.plt.webpage.course.resource.train.dao.TrainQuestionDao;
@@ -39,12 +41,16 @@ public class TeacherHttpService20003 implements AbstractHttpService{
 					TrainQuestionDao tqDao = new TrainQuestionDao();
 					tqItem = tqDao.selectById(questionID);
 					if (tqItem != null) {
-//					TODO 章节id 习题作业id
-						String chapterId = "10000";
-						TrainHistoryDao thDao = new TrainHistoryDao();
-						thList = thDao.selectByHistory(chapterId, train.getId(), questionID);
-						if (thList != null) {
-							rt = 1;
+
+						// 获取直播所在的章节
+						ChapterDao chapterDao = new ChapterDao();
+						ChapterItem chapter = chapterDao.selectByResourceId(liveID);
+						if(chapter != null) {
+							TrainHistoryDao thDao = new TrainHistoryDao();
+							thList = thDao.selectByHistory(chapter.getId(), train.getId(), questionID);
+							if (thList != null) {
+								rt = 1;
+							}
 						}
 					}
 				}
