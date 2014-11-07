@@ -7,9 +7,9 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.santrong.plt.webpage.course.dao.CourseDao;
-import com.santrong.plt.webpage.course.entry.CourseCollectQuery;
-import com.santrong.plt.webpage.course.entry.CourseItem;
+import com.santrong.plt.webpage.course.dao.CommentDao;
+import com.santrong.plt.webpage.course.entry.CommentItem;
+import com.santrong.plt.webpage.course.entry.CommentQuery;
 import com.santrong.plt.webpage.manage.StudentBaseAction;
 import com.santrong.plt.webpage.teacher.entry.UserItem;
 
@@ -19,11 +19,11 @@ import com.santrong.plt.webpage.teacher.entry.UserItem;
  * @time 下午5:07:16
  */
 @Controller
-@RequestMapping("/collection")
-public class CollectionAction extends StudentBaseAction {
+@RequestMapping("/comment")
+public class CommentMAction extends StudentBaseAction {
 
 	@RequestMapping("")
-	public String myCollection() {
+	public String myComment() {
 		UserItem user = this.currentUser();
 		if(user == null) {
 			// 没登陆
@@ -36,15 +36,15 @@ public class CollectionAction extends StudentBaseAction {
 			pageNum = 1;
 		}
 		
-		CourseDao dao = new CourseDao();
-		CourseCollectQuery query = new CourseCollectQuery();
+		CommentDao dao = new CommentDao();
+		CommentQuery query = new CommentQuery();
 		query.setPageNum(pageNum);
 		query.setCount(dao.selectCountByQuery(query));
-		List<CourseItem> courseList = dao.selectByQuery(query);
+		List<CommentItem> commentList = dao.selectByQuery(query);
 		
-		request.setAttribute("courseList", courseList);
+		request.setAttribute("commentList", commentList);
 		request.setAttribute("query", query);
 		
-		return "manage/student/myCollection";
+		return "manage/student/myComment";
 	}
 }

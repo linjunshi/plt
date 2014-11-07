@@ -19,7 +19,7 @@ import com.santrong.plt.webpage.manage.StudentBaseAction;
  */
 @Controller
 @RequestMapping("/study")
-public class StudyAction extends StudentBaseAction {
+public class StudyMAction extends StudentBaseAction {
 
 	/**
 	 * 我的课程
