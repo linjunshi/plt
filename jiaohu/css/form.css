@@ -24,12 +24,19 @@ box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);}
 .inline_ele{margin-right:5px;}
 .form_item{	margin-bottom:6px;}
 .form_item label{font-size:14px;line-height:28px;}
+
+.form_info label{display:block;	float:left;width:100px;text-align:right;}
+.form_info .form_field{float:none;}
+.form_info .form_action,.form_vertical .item_no_label{padding-left:0;}
+.form_info .form_des, .form_info .form_action { margin-left:100px;}
+.form_info .form_item{ margin:20px 0;}
+
 .form_vertical label{display:block;	float:none;width:auto;text-align:left;}
 .form_vertical .form_field{float:none;}
 .form_vertical .form_action,.form_vertical .item_no_label{padding-left:0;}
 .form_item select{ *margin-top:5px;*vertical-align:top;}
 .form_action{clear:both;}
-.form_action a{ width:80px; height:30px; line-height:30px; background:#009871; display:block; color:#fff; text-align:center; font-size:16px; letter-spacing:4px;}
+.form_action a{width:80px; height:30px; line-height:30px; background:#009871; display: inline-block; color:#fff; text-align:center; font-size:16px; letter-spacing:4px; margin-right:10px;}
 .form_action a:hover{ background:#044a38;}
 .form_des{color: #999;font-size:12px;margin-left:5px;}
 p.form_des{	margin:0;}
@@ -40,8 +47,16 @@ span.form_error, span.form_success{border-width:1px;display:inline-block;*displa
 .form_error,{background: none repeat scroll 0 0 #FBE3E4;border-color: #FBC2C4;color: #8A1F11;}
 .form_success {background: none repeat scroll 0 0 #E6EFC2;border-color: #C6D880;color: #264409;}
 .form_error a, .form_success a{text-decoration:underline;}
-.form_error a { color: #8A1F11;}
+.form_error a{color:#009871; text-decoration:none;}
+.form_error a:hover{ color:#f90;}
 .form_success a {color: #264409;}
 .form_item:before, .form_item:after { content:"";  display:table;}
 .form_item:after{clear:both;overflow:hidden;}
 .form_item{ zoom:1;}
+
+.form_questions { margin:0 0 20px 100px;}
+.form_tarea { width:460px; !important; margin:5px; }
+.field_te { width:30px !important; margin-top:3px;}
+.ma{ margin-left:100px;}
+.for_but { margin-left:130px;}
+.form_ra_text { height:30px; line-height:30px; margin-right:10px;cursor:pointer;}

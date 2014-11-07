@@ -266,8 +266,10 @@
 .sec_con h2 { font-size:18px; color:#009871; margin:5px 0;}
 .sec_con p{ line-height:30px; min-height:150px;}
 
+
 .th_introduce, .th_catalog, .th_evaluation{ width:100%; min-height:100px;border:1px #dbdbdb solid; position:relative; margin-bottom:20px;}
 .th_introduce h2, .th_catalog h2, .th_evaluation h2{font-size:18px; color:#009871; padding:5px 0; background:#f5f5f5;border-bottom:#CCC 1px solid; text-indent:10px; }
+.th_evaluation { border:0;}
 .th_introduce .th_img, .th_introduce .th_text{ float:left; display:block; width:120px;margin:10px;}
 .th_introduce .th_text{ float:left; display:block; width:60%; line-height:30px;}
 .th_focus a{ position:absolute; right:20px; top:10px; padding:0 10px; border:1px #009871 solid; background:#009871; color:#fff;}
@@ -286,24 +288,31 @@
 .course_list_des { padding-left:86px;}
 .course_list_des p{ line-height:24px;}
 
-.th_evaluation .comm_pjxq {padding: 13px 25px; border-bottom:1px #dbdbdb dashed;}
-.th_mr { width:300px;}
-.th_mr span{ float:left; margin-right:10px;}
-.th_evaluation .th_pt { float:right;width:380px;display:block; margin-top:3px;}
+/*----------------老师评价-----------------------------价*/
+.th_evaluation { width:100%; height:auto;}
+.th_evaluation .comm_pjxq { width:100%;padding:13px 0px;display:block; height:35px; border-bottom:1px  #ccc dashed; position:relative;}
+.th_mr { width:300px; margin-left:10px;}
+.th_mr span{margin-right:10px;}
+.th_evaluation .th_pt {width:260px;margin-top:3px; position:absolute; right:20px; top:10px;}
+.th_evaluation .th_pt label{ margin-right:5px;}
 .th_evaluation .pt4 { font-weight:700; color:#666; margin-top:5px}
 .th_evaluation .pt5 { font-size:20px; color:#f90;margin-top:-5px}
-.th_evaluation .pt6 {margin-top:5px}
+.th_evaluation .pt6 {margin-top:5px; font-size:14px;}
 .th_evaluation .th_con{ height:160px;}
 .th_evaluation .th_textarea { width:96%; margin:10px 20px; height:100px;border:1px #dbdbdb solid;}
-.th_evaluation .th_pt_but {	width:80px;	height: 30px;line-height: 30px;	position: absolute;	right: 30px;bottom: 13px;background: #009871;text-align:center;	color:#fff;font-size:18px;}
+.th_evaluation .th_pt_but {	width:80px;	height: 30px;line-height: 30px;	position:absolute;	right: 30px;bottom: 10px;background: #009871;text-align:center;	color:#fff;font-size:18px;}
 .th_evaluation .th_pt_but:hover, .th_text_but:hover{ background:#06654d;}
 
 .th_propaganda { margin-bottom:20px;}/*图片广告*/
 
-.th_lea { width:99%;  margin-bottom:5px; position:relative;}
-.th_lea ul li {border-bottom:1px #dbdbdb dashed;}
-.th_img_user { float:left; margin:15px;}
-.th_mr2 { float:left; display:block; width:880px; margin:10px 0 0 20px; overflow:hidden;}
+.th_lea {margin-bottom:5px;}
+.th_lea ul li { width:98%; float:left; display:block; border-bottom:1px #dbdbdb dashed;}
+.th_img_user {margin:15px;float:left;display:block;}
+.th_mr2 { float:left;display:block; width:960px; margin:10px 0 0 20px; overflow:hidden;}
+.th_mr2 p{ margin-bottom:5px;}
+.th_mr2 b{ margin-right:20px; color:#009871;}
+
+/*-------------*/
 .th_time { float:right; display:block;margin:80px 30px 0 0px;}
 .th_time a{ margin-left:20px; }
 .th_text_i { margin-bottom:40px;}
@@ -334,7 +343,7 @@
 .infos{ float:left; display:block; width:500px; margin:5px 0;}
 .course_operate{width: 180px;position: absolute;right: 10px;top: 9px;}
 .pt6, .pt7, .pt8, .pt9 { margin-bottom:15px;}
-.pt7 a:hover,.pt9 a:hover{background:#044a38;}
+.pt7 a:hover,.pt9 a:hover, .sh_coll_but a:hover{background:#044a38;}
 .pt8 a:hover { color:#044a38;} 
 .pt6 { color:#f00; font-size:20px;}
 .pt7 a{ color:#fff; background:#009871; padding:3px;}
@@ -353,8 +362,6 @@
 .sh_list_switch dl dd a:hover{ color:#f90;}
 .sh_list_switch .icon{ background:#009871 url(../images/icon.png) no-repeat 20px -84px; color:#fff; width:190px; display:block; text-indent:40px;}
 
-
-
 .sh_info_r { float:right; display:block; width:990px; margin-top:10px;}
 .sh_all, .sh_ke{ margin:0 10px 10px 0; overflow:hidden;display: inline-block;}
 .sh_all h2, .sh_ke h2{ float:left;font-size:18px; height:40px; line-height:40px; text-indent:10px;color:#009871;}
@@ -371,8 +378,17 @@
 .st_titile_r { float:left; display:block; width:960px; height:40px; line-height:40px; position:relative;}
 .st_titile_r a{ float:left; display:block; font-size:18px;color:#666; margin-right:20px; padding:0 10px;}
 .st_titile_r a:hover{ color:#188EEE; background:url(../images/user_hover.png) no-repeat left bottom;}
-
+.sh_title { font-size:18px; border-bottom:1px #009871 solid; width:97%;}
 .pt10{ border-top:#ccc solid 1px;}
-
-
 .sh_form_con { margin-left:100px; padding-bottom:10px;}
+
+/*--------我的收藏---------*/
+.sh_collection { width:100%;}
+.sh_collection ul li{ float:left; width:97%; padding:5px 0; margin:10px 0; border-bottom:1px #dbdbdb dashed;}
+.sh_collection img { float:left; padding:5px;}
+.sh_coll_con { float:left;display:block; width:400px; margin:10px;}
+.sh_coll_con h2 a{ color:#009871;  font-size:18px; overflow:hidden;}
+.sh_coll_con h2 a:hvoer {color:#F90;}
+.sh_coll_m{ float:left; display:block; width:200px; margin-top:10px; text-align:center; color:#f00;}
+.sh_coll_but { float:right; margin:10px 10px 0 0;}
+.sh_coll_but a{ padding:3px 10px; background:#009871; color:#fff;}
