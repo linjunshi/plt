@@ -80,10 +80,8 @@ public class TeacherHttpService20002 implements AbstractHttpService{
 				sb.append("<CallNameID type=\"int\">").append(callNameID).append("</CallNameID>");
 				sb.append("<UserIDs>");
 //				sb.append("<!--未应答用户ID列表-->");
-				if(livingUserList != null) {
-					for (String id:livingUserList) {
-						sb.append("<UserID type=\"string\">").append(id).append("</UserID>");
-					}
+				for (String id:livingUserList) {
+					sb.append("<UserID type=\"string\">").append(id).append("</UserID>");
 				}
 				sb.append("</UserIDs>");
 			sb.append("</MsgBody>");

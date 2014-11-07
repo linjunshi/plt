@@ -14,6 +14,9 @@ import com.santrong.plt.webpage.live.entry.LiveItem;
 public interface LiveMapper {
 
 	
-	@Select("select * from resource_live_score")
-	List<LiveItem> selectAll();
+	@Select("select * from resource_live where DATE_FORMAT(cts, '%Y-%m-%d') = DATE_FORMAT(now(), '%Y-%m-%d');")
+	List<LiveItem> selectByToday();
+	
+	@Select("select * from resource_live where id = #{id};")
+	LiveItem selectById(String id);
 }

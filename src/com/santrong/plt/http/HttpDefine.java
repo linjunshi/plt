@@ -32,12 +32,15 @@ public class HttpDefine {
 	public static final String Basic_Server_Test 			= "10000";	// 测试
 	
 	/*中心服务器*/
+	public static final String Server_Service_21001 			= "21001";	// 判断直播是不是某个老师开的(21001)
 	public static final String Server_Service_21002 			= "21002";	// 上报老师开始点名(21002)
+	public static final String Server_Service_21003 			= "21003";	// 上报老师布置作业(21003)
 	
 	/*老师客户端软件*/
 	public static final String Teacher_Service_20001 			= "20001";	// 登录web服务器(20001)
 	public static final String Teacher_Service_20002 			= "20002";	// 获取点名结果(20002)
-	
+	public static final String Teacher_Service_20003 			= "20003";	// 获取作业结果(20003)
+	public static final String Teacher_Service_20004 			= "20004";	// 获取作业内容(20004)
 	public static final String Teacher_Service_20005 			= "20005";	// 获取服务器时间(20005)
 	public static final String Teacher_Service_20006 			= "20006";	// 获取当天直播列表(20006)
 	public static final String Teacher_Service_20007 			= "20007";	// 获取直播信息(20007)

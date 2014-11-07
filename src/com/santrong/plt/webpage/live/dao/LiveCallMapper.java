@@ -1,6 +1,7 @@
 package com.santrong.plt.webpage.live.dao;
 
 import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
 import com.santrong.plt.webpage.live.entry.LiveCallItem;
@@ -17,6 +18,6 @@ public interface LiveCallMapper {
 	
 	
 	@Select("select * from resource_live_call where liveId = #{liveId} and callName = #{callName}")
-	LiveCallItem selectByCall(String liveId, String callName);
+	LiveCallItem selectByCall(@Param("liveId")String liveId,@Param("callName")String callName);
 	
 }

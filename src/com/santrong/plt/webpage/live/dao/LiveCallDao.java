@@ -1,5 +1,6 @@
 package com.santrong.plt.webpage.live.dao;
 
+import com.santrong.plt.log.Log;
 import com.santrong.plt.webpage.BaseDao;
 import com.santrong.plt.webpage.live.entry.LiveCallItem;
 
@@ -18,9 +19,13 @@ public class LiveCallDao extends BaseDao {
 	 * @return int
 	 */
 	public int insert(LiveCallItem liveCallItem) {
-		LiveCallMapper mapper = this.getMapper(LiveCallMapper.class);
-		if(mapper != null) {
-			return mapper.insert(liveCallItem);
+		try {
+			LiveCallMapper mapper = this.getMapper(LiveCallMapper.class);
+			if(mapper != null) {
+				return mapper.insert(liveCallItem);
+			}
+		} catch (Exception e) {
+			Log.printStackTrace(e);
 		}
 		return 0;
 	}
@@ -32,9 +37,13 @@ public class LiveCallDao extends BaseDao {
 	 * @return 
 	 */
 	public LiveCallItem selectByCall(String liveId, String callName) {
-		LiveCallMapper mapper = this.getMapper(LiveCallMapper.class);
-		if(mapper != null) {
-			return mapper.selectByCall(liveId, callName);
+		try {
+			LiveCallMapper mapper = this.getMapper(LiveCallMapper.class);
+			if(mapper != null) {
+				return mapper.selectByCall(liveId, callName);
+			}
+		} catch (Exception e) {
+			Log.printStackTrace(e);
 		}
 		return null;
 	}

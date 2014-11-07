@@ -9,7 +9,7 @@ import java.util.Date;
  */
 public class LiveItem {
 	private String id;
-	private String title;
+	private String liveName;
 	private String url;
 	private Date beginTime;
 	private Date endTime;
@@ -19,12 +19,7 @@ public class LiveItem {
 	private Date cts;
 	private Date uts;
 	
-	public String getTitle() {
-		return title;
-	}
-	public void setTitle(String title) {
-		this.title = title;
-	}
+	
 	public String getId() {
 		return id;
 	}
@@ -33,6 +28,12 @@ public class LiveItem {
 	}
 	public String getUrl() {
 		return url;
+	}
+	public String getLiveName() {
+		return liveName;
+	}
+	public void setLiveName(String liveName) {
+		this.liveName = liveName;
 	}
 	public void setUrl(String url) {
 		this.url = url;

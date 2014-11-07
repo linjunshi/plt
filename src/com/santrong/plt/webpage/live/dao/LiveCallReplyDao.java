@@ -2,6 +2,7 @@ package com.santrong.plt.webpage.live.dao;
 
 import java.util.List;
 
+import com.santrong.plt.log.Log;
 import com.santrong.plt.webpage.BaseDao;
 import com.santrong.plt.webpage.live.entry.LiveCallReplyItem;
 
@@ -19,9 +20,13 @@ public class LiveCallReplyDao extends BaseDao {
 	 * @return
 	 */
 	public List<LiveCallReplyItem> selectUserID(String callNameId, String liveId) {
-		LiveCallReplyMapper mapper = this.getMapper(LiveCallReplyMapper.class);
-		if(mapper != null) {
-			return mapper.selectUserID(callNameId, liveId);
+		try {
+			LiveCallReplyMapper mapper = this.getMapper(LiveCallReplyMapper.class);
+			if(mapper != null) {
+				return mapper.selectUserID(callNameId, liveId);
+			}
+		} catch (Exception e) {
+			Log.printStackTrace(e);
 		}
 		return null;
 	}

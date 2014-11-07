@@ -1,5 +1,6 @@
 package com.santrong.plt.http.server;
 
+import java.util.Date;
 import java.util.List;
 
 import org.jdom.Element;
@@ -7,7 +8,12 @@ import org.jdom.Element;
 import com.santrong.plt.http.HttpDefine;
 import com.santrong.plt.http.server.base.AbstractHttpService;
 import com.santrong.plt.log.Log;
+import com.santrong.plt.util.MyUtils;
 import com.santrong.plt.util.XmlReader;
+import com.santrong.plt.webpage.train.dao.TrainHistoryDao;
+import com.santrong.plt.webpage.train.dao.TrainQuestionDao;
+import com.santrong.plt.webpage.train.entry.TrainHistoryItem;
+import com.santrong.plt.webpage.train.entry.TrainQuestionItem;
 
 /**
  * @author huangweihua
@@ -21,19 +27,45 @@ public class StudentHttpService30004 implements AbstractHttpService{
 		int rt = 0;
 		try{
 			String liveID = xml.find("/MsgBody/LiveID").getText();
+			String questionId = xml.find("/MsgBody/HomeWorkID").getText();
 			List<Element> resList = xml.finds("/MsgBody/Results/Result");
-			if (resList != null) {
-				String[] results = (String[])resList.toArray(new String[resList.size()]);
 			
+			if (MyUtils.isNotNull(liveID) && MyUtils.isNotNull(questionId) && resList != null) {
+				//有可能是多选题
+				int answer = 0;
+				for (Element res:resList) {
+					answer = answer + Integer.parseInt(res.getValue());
+				}
+//				TODO	一个拿trainid ,一个拿 chapterid,返回的是多个值
+				String userId = "10000";
+				String chapterId = "10000";
+				int rightAnswer = 0;
+				
+				TrainQuestionDao tqDao = new TrainQuestionDao();
+				TrainQuestionItem tqItem = tqDao.selectById(questionId);
+				if (tqItem != null) {
+					rightAnswer = tqItem.getAnswer();
+				}
+				TrainHistoryDao trainHistoryDao = new TrainHistoryDao();
+				if (!trainHistoryDao.exists(userId, liveID, chapterId, questionId)) {
+					TrainHistoryItem thItem = new TrainHistoryItem();
+					thItem.setId(MyUtils.getGUID());
+					thItem.setUserId(userId);
+					thItem.setChapterId(chapterId);
+					thItem.setQuestionId(questionId);
+					thItem.setTrainId(liveID);
+					thItem.setDel(0);//伪标记默认值为0,1标记为已删除
+					thItem.setAnswer(answer);
+					thItem.setResult(rightAnswer == answer?1:2);//正确与否1yes2no
+					thItem.setCts(new Date());
+					thItem.setUts(new Date());
+					if (trainHistoryDao.insert(thItem) > 0) {
+						rt = 1;
+					}
+				}else{
+					rt = 1;
+				}
 			}
-			
-			
-			/* <!--直播ID-->
-			    <LiveID type="string">aaabbbb</LiveID>
-			    <Results>
-			      <Result type="string">A</Result>
-			      <Result type="string">B</Result>
-			    </Results>*/
 		}catch(Exception e) {
 			Log.printStackTrace(e);
 		}
