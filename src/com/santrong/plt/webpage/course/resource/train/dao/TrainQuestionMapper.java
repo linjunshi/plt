@@ -31,4 +31,7 @@ public interface TrainQuestionMapper {
 	
 	@Delete("delete from resource_train_to_question where trainId=#{trainId} and questionId=#{questionId}")
 	int removeQuestion4Train(@Param("questionId")String questionId, @Param("trainId")String trainId);
+	
+	@Delete("delete from resource_train_question where id = #{id}")
+	int deleteById(String id);
 }

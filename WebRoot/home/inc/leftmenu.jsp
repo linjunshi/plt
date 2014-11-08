@@ -25,7 +25,7 @@
                     <dd><a href="${ctx}/study/course">我的课程</a></dd>
                     <dd><a href="${ctx}/manage/video">视频管理</a></dd>
 					<dd><a href="${ctx}/manage/doc">学习材料</a></dd>
-                    <dd><a href="${ctx}/manage/question/add">试题管理</a></dd>
+                    <dd><a href="${ctx}/manage/question/list">试题管理</a></dd>
                     <dd><a href="#" onclick="alert('developing')">测验管理</a></dd>
                     <dd><a href="#">我的关注</a></dd>
                     <dd><a href="#" onclick="alert('developing')">个人信息</a></dd>

@@ -96,4 +96,22 @@ public class TrainQuestionDao extends BaseDao{
 		}
 		return 0;
 	}	
+	
+	/**
+	 * 从题库中，删除一条试题记录
+	 * @author huangweihua
+	 * @param id
+	 * @return boolean
+	 */
+	public boolean deleteById(String id) {
+		try {
+			TrainQuestionMapper mapper = this.getMapper(TrainQuestionMapper.class);
+			if (mapper != null) {
+				return mapper.deleteById(id) > 0;
+			}
+		} catch (Exception e) {
+			Log.printStackTrace(e);
+		}
+		return false;
+	}
 }

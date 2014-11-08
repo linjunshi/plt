@@ -418,22 +418,36 @@
 .st_titile_r { float:left; display:block; width:960px; height:40px; line-height:40px; position:relative;}
 .st_titile_r a{ float:left; display:block; font-size:18px;color:#666; margin-right:20px; padding:0 10px;}
 .st_titile_r a:hover{ color:#188EEE; background:url(../images/user_hover.png) no-repeat left bottom;}
-.sh_title { font-size:18px; border-bottom:1px #009871 solid; width:97%;}
+.sh_title { font-size:18px; border-bottom:1px #009871 solid; width:97%;position:relative;}
 .pt10{ border-top:#ccc solid 1px;}
 .sh_form_con { margin-left:100px; padding-bottom:10px;}
 
-/*--------我的收藏---------*/
+/*--------我的收藏----试题列表---我的评价-------*/
 .sh_collection { width:100%;}
-.sh_collection ul li{ float:left; width:97%; padding:5px 0; margin:10px 0; border-bottom:1px #dbdbdb dashed;}
+.sh_collection ul li{ float:left;width:97%; padding:5px 0; margin:10px 0; border-bottom:1px #dbdbdb dashed;}
 .sh_collection img { float:left; padding:5px;}
 .sh_coll_con { float:left;display:block; width:400px; margin:10px;}
 .sh_coll_con h2 a{ color:#009871;  font-size:18px; overflow:hidden;}
 .sh_coll_con h2 a:hvoer {color:#F90;}
+.sh_coll_con span{ color:#000; margin-right:5px;}
 .sh_coll_m{ float:left; display:block; width:200px; margin-top:10px; text-align:center; color:#f00;}
 .sh_coll_but { float:right; margin:10px 10px 0 0;}
 .sh_coll_but a{ padding:3px 10px; background:#009871; color:#fff;}
-.sh_coll_but input{ padding:3px 10px; background:#009871; color:#fff;border:0;}
-.sh_coll_but input:hover{ cursor:pointer;}
+.sh_coll_img{ float:left; display:block; width:60px; margin:10px 0 0 40px;}
+.sh_coll_th{ width:100px;float:left; margin:10px 0 0 10px;}
+.sh_coll_tab { margin-top:10px; text-align:center; border:#ccc 1px solid;}
+.sh_coll_tab th{ height:40px;text-align:center; font-size:16px; background:#dbdbdb; color:#009871;}
+.sh_coll_tab tr td{ line-height:30px; overflow:hidden;}
+.sh_coll_tab tr td a{ margin-right:10px; padding:2px 10px; background:#009871; color:#fff;}
+.sh_coll_tab tbody tr:hover { background:#f0fffb;}
+.sh_coll_tab tfoot { height:30px; text-align:right;}
+.sh_add { position:absolute; right:10px; top:5px; font-size:14px; color:#009871;}
+.sh_add:hover{ color:#f90;}
+.sh_coll_tab .btn_question_update {margin-left: 25%;}
+.sh_coll_tab .btn_question_operation input{ margin-right:10px; padding:0px 7px; background:#009871; color:#fff; border:0;float: left;}
+.sh_coll_tab .btn_question_operation input:hover{ background:#044a38;cursor:pointer;}
 /* --------------------error tips------------------------- */
+.sh_coll_but input{ padding:3px 10px; background:#009871; color:#fff;border:0;}
+.sh_coll_but input:hover{ background:#f90;cursor:pointer;}
 .system_tip { width:300px; line-height:26px; margin:10px auto; border:solid 1px #F5D8A7; border-radius:2px; background-color:#FFF6DB;padding-left: 10px; text-align: center; }
 /* -------------------------------------------------- */

@@ -1,6 +1,9 @@
 package com.santrong.plt.webpage.manage.teacher.train;
 
 import java.util.Date;
+import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,9 +19,30 @@ import com.santrong.plt.webpage.teacher.entry.UserItem;
 @RequestMapping("/manage/question")
 public class QuestionMAction extends TeacherBaseAction{
 
+	@RequestMapping("/list")
+	public String questionList(){
+		UserItem user = this.currentUser();
+		TrainQuestionDao tqDao = new TrainQuestionDao();
+		List<TrainQuestionItem> questionList = tqDao.selectByUserId(user.getId());
+//		questionList = null;
+		HttpServletRequest request = this.getRequest();
+		request.setAttribute("questionList", questionList);
+		
+		return "/manage/teacher/myTrainMList";
+	}
+	
+	@RequestMapping(value="/delete", method=RequestMethod.POST)
+	public String questionDelete(String questionId){
+		TrainQuestionDao tqDao = new TrainQuestionDao();
+		if (tqDao.deleteById(questionId)) {
+			return this.redirect("/manage/question/list");
+		}
+		return this.redirect("/manage/question/list");
+	}
+	
 	@RequestMapping(value="/add", method=RequestMethod.GET)
 	public String addQuestion(){
-		return "/manage/teacher/myTrainManager";
+		return "/manage/teacher/myTrainMAdd";
 	}
 	
 	@RequestMapping(value="/add", method=RequestMethod.POST)
@@ -31,17 +55,17 @@ public class QuestionMAction extends TeacherBaseAction{
 		
 		if (questionType <= 0) {
 			addError("请您选择题目的类型！");
-			return "/manage/teacher/myTrainManager";
+			return "/manage/teacher/myTrainMAdd";
 		}
 		
 		if (!MyUtils.isNotNull(topic)) {
 			addError("请您填写试题的题目！");
-			return "/manage/teacher/myTrainManager";
+			return "/manage/teacher/myTrainMAdd";
 		}
 		
 		if (!(answer != null)) {
 			addError("请您勾选正确的答案！");
-			return "/manage/teacher/myTrainManager";
+			return "/manage/teacher/myTrainMAdd";
 		}
 		
 		int sum = 0;
@@ -64,7 +88,8 @@ public class QuestionMAction extends TeacherBaseAction{
 		tqItem.setUts(new Date());
 		
 		if (tqDao.insert(tqItem)) {
-			return redirect("/manage/question/add");
+			addError("新增试题成功！");
+			return "/manage/teacher/myTrainMAdd";
 		}
 		return FAIL;
 	}
