@@ -34,6 +34,7 @@ import com.santrong.plt.webpage.course.entry.ChapterAndResourceEntry;
 import com.santrong.plt.webpage.course.entry.ChapterDetailView;
 import com.santrong.plt.webpage.course.entry.CollectionItem;
 import com.santrong.plt.webpage.course.entry.CommentItem;
+import com.santrong.plt.webpage.course.entry.CommentUserView;
 import com.santrong.plt.webpage.course.entry.CourseDetailView;
 import com.santrong.plt.webpage.course.entry.CourseItem;
 import com.santrong.plt.webpage.course.entry.CourseQuery;
@@ -232,7 +233,7 @@ public class CourseAction extends BaseAction {
 		
 		// 课程评价
 		CommentDao commentDao = new CommentDao();
-		List<CommentItem> commentList = commentDao.selectByCourseId(course.getId());
+		List<CommentUserView> commentList = commentDao.selectByCourseId(course.getId());
 		course.setCommentList(commentList);
 		
 		
@@ -295,7 +296,8 @@ public class CourseAction extends BaseAction {
 	}
 	
 	/**
-	 * 点击收藏弹出提示收藏成功，ajax异步，不判断重复收藏
+	 * 1、点击收藏,修改该课程的收藏数量,自动加1;<br>
+	 * 2、弹出提示收藏成功，ajax异步，不判断重复收藏
 	 * @author huangweihua
 	 * @param courseId
 	 * @return
@@ -310,7 +312,6 @@ public class CourseAction extends BaseAction {
 				// 没登陆
 				return this.redirect("/login");
 			}
-			
 			
 			CollectCourseDao collectCourseDao = new CollectCourseDao();
 			// 如果没搜藏过

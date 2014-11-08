@@ -30,7 +30,7 @@ public class CourseDetailView {
 	private String levelName;
 	
 	private List<ChapterDetailView> chapterDetailList;
-	private List<CommentItem> commentList;
+	private List<CommentUserView> commentList;
 	
 	
 	public int getCommentCount() {
@@ -57,10 +57,10 @@ public class CourseDetailView {
 	public void setChapterDetailList(List<ChapterDetailView> chapterDetailList) {
 		this.chapterDetailList = chapterDetailList;
 	}
-	public List<CommentItem> getCommentList() {
+	public List<CommentUserView> getCommentList() {
 		return commentList;
 	}
-	public void setCommentList(List<CommentItem> commentList) {
+	public void setCommentList(List<CommentUserView> commentList) {
 		this.commentList = commentList;
 	}
 	public String getId() {

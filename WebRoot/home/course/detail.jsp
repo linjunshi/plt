@@ -26,7 +26,7 @@ Globals.page = "Index_courseDetail";
 		            <h2 class="mb15">${course.courseName}</h2>
 		            <div class="pri_m ">
 		                <p >价格<b>${course.price}</b>元</p>
-		                <p><span>总课时：<em>14课时</em></span><span> 结束时间：<em class="data_time"><fmt:formatDate value="${course.endTime}" type="date" dateStyle="default"/></em></span><span> 担保期：<em>15天</em> </span></p>
+		                <p><span>总课时：<em>${course.chapterCount}课时</em></span><span> 结束时间：<em class="data_time"><fmt:formatDate value="${course.endTime}" type="date" dateStyle="default"/></em></span><span> 担保期：<em>15天</em> </span></p>
 		            </div>
 		            <div class="detai_num clearfix">
 		                <p>已经购买人数<br/>

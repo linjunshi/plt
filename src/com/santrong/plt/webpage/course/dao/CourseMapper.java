@@ -48,7 +48,7 @@ public interface CourseMapper {
 	 * @param  schoolId
 	 * @return List<CourseItem>
 	 */
-	@Select("select a.*,b.* from course a LEFT JOIN user b on a.ownerId = b.id where b.schoolId = #{schoolId} ORDER BY a.cts DESC;")
+	@Select("select a.*, b.* from course a LEFT JOIN user b on a.ownerId = b.id where b.schoolId = #{schoolId} ORDER BY a.cts DESC;")
 	List<CourseItem> selectCourseBySchoolId(String schoolId);
 	
 	/**
@@ -57,16 +57,16 @@ public interface CourseMapper {
 	 * @param  id
 	 * @return 
 	 */
-	@Update("update course set collectCount=(collectCount + 1) where id = #{id}")
+	@Update("update course set collectCount = (collectCount + 1) where id = #{id}")
 	int addCollection(String id);
-	
+
 	/**
 	 * 取消收藏，修改该课程的收藏数量,自动减1
 	 * @author huangweihua
 	 * @param  id
 	 * @return 
 	 */
-	@Update("update course set collectCount=(collectCount - 1) where id = #{id}")
+	@Update("update course set collectCount = (collectCount - 1) where id = #{id}")
 	int removeCollection(String id);	
 	
 	/**
@@ -75,7 +75,7 @@ public interface CourseMapper {
 	 * @param  id
 	 * @return 
 	 */
-	@Update("update course set commentCount=(commentCount + 1) where id = #{id}")
+	@Update("update course set commentCount = (commentCount + 1) where id = #{id}")
 	int addComment(String id);
 	
 	/**
@@ -84,6 +84,6 @@ public interface CourseMapper {
 	 * @param  id
 	 * @return 
 	 */
-	@Update("update course set commentCount=(commentCount - 1) where id = #{id}")
+	@Update("update course set commentCount = (commentCount - 1) where id = #{id}")
 	int removeComment(String id);
 }

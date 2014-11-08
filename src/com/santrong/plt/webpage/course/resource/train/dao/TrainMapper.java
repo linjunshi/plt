@@ -16,7 +16,7 @@ import com.santrong.plt.webpage.course.resource.train.entry.TrainItem;
  */
 public interface TrainMapper {
 
-	@Insert("insert into resource_train values(#{id}, #{trainName}, #{ownerId}, #{del}, #{cts}, #{uts})")
+	@Insert("insert into resource_train values(#{id}, #{title}, #{ownerId}, #{del}, #{cts}, #{uts})")
 	int insert(TrainItem trainItem);
 	
 	/**

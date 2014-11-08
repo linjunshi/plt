@@ -19,16 +19,16 @@ public class TrainQuestionDao extends BaseDao{
 	 * @param TrainHistoryItem
 	 * @return int
 	 */
-	public int insert(TrainQuestionItem trainQuestionItem){
+	public boolean insert(TrainQuestionItem trainQuestionItem){
 		try {
 			TrainQuestionMapper mapper = this.getMapper(TrainQuestionMapper.class);
 			if (mapper != null) {
-				return mapper.insert(trainQuestionItem);
+				return mapper.insert(trainQuestionItem) > 0;
 			}
 		} catch (Exception e) {
 			Log.printStackTrace(e);
 		}
-		return 0;
+		return false;
 	}
 	
 	/**

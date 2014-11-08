@@ -418,10 +418,22 @@
 .st_titile_r { float:left; display:block; width:960px; height:40px; line-height:40px; position:relative;}
 .st_titile_r a{ float:left; display:block; font-size:18px;color:#666; margin-right:20px; padding:0 10px;}
 .st_titile_r a:hover{ color:#188EEE; background:url(../images/user_hover.png) no-repeat left bottom;}
-
+.sh_title { font-size:18px; border-bottom:1px #009871 solid; width:97%;}
 .pt10{ border-top:#ccc solid 1px;}
-
-
 .sh_form_con { margin-left:100px; padding-bottom:10px;}
 
+/*--------我的收藏---------*/
+.sh_collection { width:100%;}
+.sh_collection ul li{ float:left; width:97%; padding:5px 0; margin:10px 0; border-bottom:1px #dbdbdb dashed;}
+.sh_collection img { float:left; padding:5px;}
+.sh_coll_con { float:left;display:block; width:400px; margin:10px;}
+.sh_coll_con h2 a{ color:#009871;  font-size:18px; overflow:hidden;}
+.sh_coll_con h2 a:hvoer {color:#F90;}
+.sh_coll_m{ float:left; display:block; width:200px; margin-top:10px; text-align:center; color:#f00;}
+.sh_coll_but { float:right; margin:10px 10px 0 0;}
+.sh_coll_but a{ padding:3px 10px; background:#009871; color:#fff;}
+.sh_coll_but input{ padding:3px 10px; background:#009871; color:#fff;border:0;}
+.sh_coll_but input:hover{ cursor:pointer;}
+/* --------------------error tips------------------------- */
+.system_tip { width:300px; line-height:26px; margin:10px auto; border:solid 1px #F5D8A7; border-radius:2px; background-color:#FFF6DB;padding-left: 10px; text-align: center; }
 /* -------------------------------------------------- */

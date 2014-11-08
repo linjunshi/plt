@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
 
 import com.santrong.plt.webpage.course.entry.CommentItem;
+import com.santrong.plt.webpage.course.entry.CommentUserView;
 
 /**
  * @author weinianjie
@@ -16,7 +17,7 @@ import com.santrong.plt.webpage.course.entry.CommentItem;
 public interface CommentMapper {
 
 	@Select("select a.*, b.showName from course_comment a left join user b on a.userId=b.id where courseId=#{courseId} order by cts desc")
-	List<CommentItem> selectByCourseId(String courseId);
+	List<CommentUserView> selectByCourseId(String courseId);
 	
 	/**
 	 * 新增一条评论

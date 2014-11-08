@@ -39,7 +39,7 @@ public class ServerHttpService21003 implements AbstractHttpService{
 					train.setId(MyUtils.getGUID());
 					train.setOwnerId("10000");
 					train.setDel(0);
-					train.setTrainName("随堂作业");
+					train.setTitle("随堂作业");
 					train.setCts(new Date());
 					train.setUts(new Date());
 					if(trainDao.insert(train) <= 0) {

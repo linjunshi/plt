@@ -15,6 +15,7 @@ import com.santrong.plt.util.MyUtils;
 import com.santrong.plt.webpage.BaseDao;
 import com.santrong.plt.webpage.course.entry.CommentItem;
 import com.santrong.plt.webpage.course.entry.CommentQuery;
+import com.santrong.plt.webpage.course.entry.CommentUserView;
 
 /**
  * @author weinianjie
@@ -28,7 +29,7 @@ public class CommentDao extends BaseDao {
 	 * @param courseId
 	 * @return
 	 */
-	public List<CommentItem> selectByCourseId(String courseId) {
+	public List<CommentUserView> selectByCourseId(String courseId) {
 		CommentMapper mapper = this.getMapper(CommentMapper.class);
 		if(mapper != null) {
 			return mapper.selectByCourseId(courseId);

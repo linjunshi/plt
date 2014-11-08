@@ -11,7 +11,7 @@ public class TrainItem {
 
 //	resource_train 作业
 	private String id;
-	private String trainName;
+	private String title;
 	private String ownerId;
 	private int del;
 	private Date cts;
@@ -23,11 +23,11 @@ public class TrainItem {
 	public void setId(String id) {
 		this.id = id;
 	}
-	public String getTrainName() {
-		return trainName;
+	public String getTitle() {
+		return title;
 	}
-	public void setTrainName(String trainName) {
-		this.trainName = trainName;
+	public void setTitle(String title) {
+		this.title = title;
 	}
 	public String getOwnerId() {
 		return ownerId;

@@ -1,5 +1,6 @@
 package com.santrong.plt.webpage.course.dao;
 
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
@@ -19,4 +20,6 @@ public interface CollectCourseMapper {
 	@Select("select count(*) as cn from course_collection where courseId=#{courseId} and userId=#{userId}")
 	int exists(@Param("courseId") String courseId, @Param("userId") String userId);
 	
+	@Delete("delete from course_collection where userId = #{userId} and courseId = #{courseId}")
+	int removeCollect(@Param("userId")String userId, @Param("courseId")String courseId);
 }

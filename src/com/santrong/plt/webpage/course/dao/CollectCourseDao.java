@@ -37,5 +37,22 @@ public class CollectCourseDao extends BaseDao{
 		}
 		return false;
 	}
+	
+	/**
+	 * 删除一条收藏记录
+	 * @author huangweihua
+	 * @param userId
+	 * @param courseId
+	 * @return boolean
+	 */
+	public boolean removeCollect(String userId, String courseId) {
+		try {
+			CollectCourseMapper mapper = this.getMapper(CollectCourseMapper.class);
+			return mapper.removeCollect(userId, courseId) > 0;
+		} catch (Exception e) {
+			Log.printStackTrace(e);
+		}
+		return false;
+	}
 
 }

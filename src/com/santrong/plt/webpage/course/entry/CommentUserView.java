@@ -3,11 +3,11 @@ package com.santrong.plt.webpage.course.entry;
 import java.util.Date;
 
 /**
- * @author weinianjie
- * @date 2014年10月20日
- * @time 上午11:54:09
+ * @author huangweihua
+ * @date 2014年11月8日 
+ * @time 上午11:20:33
  */
-public class CommentItem {
+public class CommentUserView {
 	private String id;
 	private String userId;
 	private String courseId;
@@ -15,6 +15,8 @@ public class CommentItem {
 	private Date cts;
 	private Date uts;
 	
+	private String showName;
+
 	public String getRemark() {
 		return remark;
 	}
@@ -61,5 +63,13 @@ public class CommentItem {
 
 	public void setUts(Date uts) {
 		this.uts = uts;
+	}
+
+	public String getShowName() {
+		return showName;
+	}
+
+	public void setShowName(String showName) {
+		this.showName = showName;
 	}
 }
