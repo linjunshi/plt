@@ -10,6 +10,8 @@ import com.santrong.plt.http.server.base.AbstractHttpService;
 import com.santrong.plt.log.Log;
 import com.santrong.plt.util.MyUtils;
 import com.santrong.plt.util.XmlReader;
+import com.santrong.plt.webpage.course.dao.ChapterDao;
+import com.santrong.plt.webpage.course.entry.ChapterItem;
 import com.santrong.plt.webpage.course.resource.train.dao.TrainHistoryDao;
 import com.santrong.plt.webpage.course.resource.train.dao.TrainQuestionDao;
 import com.santrong.plt.webpage.course.resource.train.entry.TrainHistoryItem;
@@ -27,43 +29,50 @@ public class StudentHttpService30004 implements AbstractHttpService{
 		int rt = 0;
 		try{
 			String liveID = xml.find("/MsgBody/LiveID").getText();
+			String userId = xml.find("/MsgBody/UserID").getText();
 			String questionId = xml.find("/MsgBody/HomeWorkID").getText();
 			List<Element> resList = xml.finds("/MsgBody/Results/Result");
 			
-			if (MyUtils.isNotNull(liveID) && MyUtils.isNotNull(questionId) && resList != null) {
+			if (MyUtils.isNotNull(liveID) && MyUtils.isNotNull(userId) && MyUtils.isNotNull(questionId) && resList != null) {
 				//有可能是多选题
 				int answer = 0;
 				for (Element res:resList) {
-					answer = answer + Integer.parseInt(res.getValue());
+					answer = answer | MyUtils.stringToInt(res.getText(), 0);
 				}
-//				TODO	一个拿trainid ,一个拿 chapterid,返回的是多个值
-				String userId = "10000";
-				String chapterId = "10000";
-				int rightAnswer = 0;
 				
-				TrainQuestionDao tqDao = new TrainQuestionDao();
-				TrainQuestionItem tqItem = tqDao.selectById(questionId);
-				if (tqItem != null) {
-					rightAnswer = tqItem.getAnswer();
-				}
-				TrainHistoryDao trainHistoryDao = new TrainHistoryDao();
-				if (!trainHistoryDao.exists(userId, liveID, chapterId, questionId)) {
-					TrainHistoryItem thItem = new TrainHistoryItem();
-					thItem.setId(MyUtils.getGUID());
-					thItem.setUserId(userId);
-					thItem.setChapterId(chapterId);
-					thItem.setQuestionId(questionId);
-					thItem.setTrainId(liveID);
-					thItem.setDel(0);//伪标记默认值为0,1标记为已删除
-					thItem.setAnswer(answer);
-					thItem.setResult(rightAnswer == answer?1:2);//正确与否1yes2no
-					thItem.setCts(new Date());
-					thItem.setUts(new Date());
-					if (trainHistoryDao.insert(thItem) > 0) {
+				// 获取直播所在的章节
+				ChapterDao chapterDao = new ChapterDao();
+				ChapterItem chapter = chapterDao.selectByResourceId(liveID);
+				if(chapter != null) {
+					
+					// 获取正确答案
+					int rightAnswer = 0;
+					TrainQuestionDao tqDao = new TrainQuestionDao();
+					TrainQuestionItem tqItem = tqDao.selectById(questionId);
+					if (tqItem != null) {
+						rightAnswer = tqItem.getAnswer();
+					}
+					
+					// 记录答题
+					TrainHistoryDao trainHistoryDao = new TrainHistoryDao();
+					if (!trainHistoryDao.exists(userId, liveID, chapter.getId(), questionId)) {
+						TrainHistoryItem thItem = new TrainHistoryItem();
+						thItem.setId(MyUtils.getGUID());
+						thItem.setUserId(userId);
+						thItem.setChapterId(chapter.getId());
+						thItem.setQuestionId(questionId);
+						thItem.setTrainId(liveID);
+						thItem.setDel(0);//伪标记默认值为0,1标记为已删除
+						thItem.setAnswer(answer);
+						thItem.setResult(rightAnswer == answer?1:2);//正确与否1yes2no
+						thItem.setCts(new Date());
+						thItem.setUts(new Date());
+						if (trainHistoryDao.insert(thItem) > 0) {
+							rt = 1;
+						}
+					}else{
 						rt = 1;
 					}
-				}else{
-					rt = 1;
 				}
 			}
 		}catch(Exception e) {

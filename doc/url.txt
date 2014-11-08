@@ -67,6 +67,9 @@ js、css和图片等静态资源
 /manage/question
 习题管理
 
+/manage/question/add
+新增试题
+
 /manage/video
 视频管理
 

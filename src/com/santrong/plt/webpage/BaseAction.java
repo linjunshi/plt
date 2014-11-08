@@ -24,6 +24,16 @@ public abstract class BaseAction {
 	
 	protected final static String Redirect = "redirect:";
 	
+	public enum RmCode {
+		PASS,// 通过
+		REQUIRE_LOGIN,// 需要登录
+		REQUIRE_AUTH// 需要权限
+	}
+	
+	// 控制器方法的前置方法
+	public RmCode preMethod(HttpServletRequest request, HttpServletResponse response) {
+		return RmCode.PASS;
+	}
 	
 	public final UserItem currentUser() {
 		UserItem user = (UserItem)ThreadUtils.currentHttpRequest().getSession().getAttribute(Global.SessionKey_LoginUser);

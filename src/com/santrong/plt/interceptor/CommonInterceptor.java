@@ -3,6 +3,7 @@ package com.santrong.plt.interceptor;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -11,6 +12,8 @@ import com.santrong.plt.opt.ThreadUtils;
 import com.santrong.plt.opt.area.AreaEntry;
 import com.santrong.plt.opt.area.AreaService;
 import com.santrong.plt.system.Global;
+import com.santrong.plt.webpage.BaseAction;
+import com.santrong.plt.webpage.BaseAction.RmCode;
 
 /**
  * @Author weinianjie
@@ -23,11 +26,35 @@ public class CommonInterceptor implements HandlerInterceptor{
 	 * 找到控制器才会执行，且在执行控制器之前，返回true才会执行下一个拦截器或者控制器
 	 */
 	@Override
-	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object arg2) throws Exception {
+	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
 		
 		ThreadUtils.setHttpRequest(request);
-		ThreadUtils.setHttpResponse(response);
+		ThreadUtils.setHttpResponse(response);		
 		
+		// 登录和权限判断
+		if(handler instanceof HandlerMethod){
+			
+			HandlerMethod handlerMethod = (HandlerMethod)handler;
+			if(handlerMethod.getBean() instanceof BaseAction) {
+				
+				BaseAction action = (BaseAction)handlerMethod.getBean();
+				RmCode code = action.preMethod(request, response);
+				switch(code) {
+				case REQUIRE_LOGIN :
+				response.sendRedirect(request.getContextPath() + "/account/login"); // 跳到登录页面
+				return false;
+				
+				case REQUIRE_AUTH :
+				response.sendRedirect(request.getContextPath() + "/deny"); // 跳到登录页面
+				return false;
+				
+				default:
+					break;
+				}
+			}
+		}
+		
+		// URL特殊处理
 		String url = request.getRequestURI();
 		if (url != null) {
 			

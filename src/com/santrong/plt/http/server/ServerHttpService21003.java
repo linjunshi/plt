@@ -8,6 +8,8 @@ import com.santrong.plt.log.Log;
 import com.santrong.plt.opt.ThreadUtils;
 import com.santrong.plt.util.MyUtils;
 import com.santrong.plt.util.XmlReader;
+import com.santrong.plt.webpage.course.resource.live.dao.LiveDao;
+import com.santrong.plt.webpage.course.resource.live.entry.LiveItem;
 import com.santrong.plt.webpage.course.resource.train.dao.TrainDao;
 import com.santrong.plt.webpage.course.resource.train.dao.TrainQuestionDao;
 import com.santrong.plt.webpage.course.resource.train.entry.TrainItem;
@@ -27,6 +29,7 @@ public class ServerHttpService21003 implements AbstractHttpService{
 			
 			if(MyUtils.isNotNull(liveID) && MyUtils.isNotNull(homeWorkID)) {
 				
+				// 尝试获取该直播对应的随堂作业
 				TrainDao trainDao = new TrainDao();
 				TrainItem train = trainDao.selectByLiveId(liveID);
 				
@@ -35,9 +38,12 @@ public class ServerHttpService21003 implements AbstractHttpService{
 				// 如果还没有插入过随堂作业，则插入一次作业
 				boolean insertRT = true;
 				if(train == null) {
+					LiveDao liveDao = new LiveDao();
+					LiveItem liveItem = liveDao.selectById(liveID);
+					
 					train = new TrainItem();
 					train.setId(MyUtils.getGUID());
-					train.setOwnerId("10000");
+					train.setOwnerId(liveItem.getOwnerId());
 					train.setDel(0);
 					train.setTitle("随堂作业");
 					train.setCts(new Date());

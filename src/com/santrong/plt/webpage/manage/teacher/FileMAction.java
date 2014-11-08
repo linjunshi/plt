@@ -7,19 +7,19 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.santrong.plt.opt.SimpleQuery;
-import com.santrong.plt.webpage.course.resource.doc.dao.DocDao;
-import com.santrong.plt.webpage.course.resource.doc.entry.DocItem;
+import com.santrong.plt.webpage.course.resource.file.dao.FileDao;
+import com.santrong.plt.webpage.course.resource.file.entry.FileItem;
+import com.santrong.plt.webpage.course.resource.file.entry.FileQuery;
 import com.santrong.plt.webpage.manage.TeacherBaseAction;
 
 /**
  * @author weinianjie
  * @date 2014年10月18日
- * @time 上午11:19:35
+ * @time 上午10:26:52
  */
 @Controller
 @RequestMapping("/manage")
-public class DocAction extends TeacherBaseAction {
+public class FileMAction extends TeacherBaseAction {
 	
 	/**
 	 * 视频管理
@@ -27,26 +27,27 @@ public class DocAction extends TeacherBaseAction {
 	 * @param pageNum
 	 * @return
 	 */
-	@RequestMapping("/doc")
+	@RequestMapping("/video")
 	public String list(String keyword, Integer pageNum){
 		HttpServletRequest request = getRequest();
 		if(pageNum == null) {
 			pageNum = 0;
 		}
 		
-		DocDao docDao = new DocDao();
-		SimpleQuery query = new SimpleQuery();
+		FileDao fileDao = new FileDao();
+		FileQuery query = new FileQuery();
 		query.setKeywords(keyword);
 		query.setPageNum(pageNum);
 		query.setOrderBy("cts");
 		query.setOrderRule("desc");
-		query.setCount(docDao.selectCountByQuery(query));
-		List<DocItem> docList = docDao.selectByQuery(query);
+		query.setCount(fileDao.selectCountByQuery(query));
+		List<FileItem> fileList = fileDao.selectByQuery(query);
 		
 		request.setAttribute("query", query);
-		request.setAttribute("docList", docList);
+		request.setAttribute("fileList", fileList);
 		
-		return "manage/doc/list";
+		return "manage/file/list";
 	}
-
+	
+	
 }
