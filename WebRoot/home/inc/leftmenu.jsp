@@ -8,7 +8,6 @@
             <div class="sh_list_switch">
                 <dl class="show">
                     <dt><a href="#">我是老师</a></dt>
-                    <dd><a href="#">一体课课程</a></dd>
                     <dd><a href="#" onclick="alert('developing')">我的直播</a></dd>
                     <dd><a href="${ctx}/manage/course">课程管理</a></dd>
                     <dd><a href="${ctx}/manage/file">课件管理</a></dd>

@@ -7,10 +7,10 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.santrong.plt.webpage.BaseAction;
 import com.santrong.plt.webpage.course.dao.CourseDao;
 import com.santrong.plt.webpage.course.entry.CourseItem;
 import com.santrong.plt.webpage.course.entry.CourseQuery;
+import com.santrong.plt.webpage.manage.TeacherBaseAction;
 
 /**
  * @author weinianjie
@@ -19,7 +19,7 @@ import com.santrong.plt.webpage.course.entry.CourseQuery;
  */
 @Controller
 @RequestMapping("/manage/course")
-public class CourseMAction extends BaseAction {
+public class CourseMAction extends TeacherBaseAction {
 
 	/**
 	 * 课程管理
