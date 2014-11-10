@@ -66,7 +66,10 @@ Globals.page = "Manage_index";
 						</tbody>
 						<tfoot>
 							<tr>
-								<td colspan="5">这里放页码</td>
+								<td colspan="5">
+									<c:set var="basicUrl" value="${ctx}/manage/question/list" />
+		            				<%@ include file="../../inc/pagination.jsp"%>
+								</td>
 							</tr>
 						</tfoot>
 					</table>

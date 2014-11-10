@@ -22,6 +22,34 @@ public class TrainQuestionItem {
 	private int del;
 	private Date cts;
 	private Date uts;
+
+	// 题目的默认类型值
+	/**
+	 * 单选题 (默认值为1)
+	 */
+	public static final int QUESTION_TYPE_SINGLE_SELECTION			=	1; //单选题 (默认值为1)
+	/**
+	 * 多选题 (默认值为2)
+	 */
+	public static final int QUESTION_TYPE_MULTIPLE_CHOICE			=	2; //多选题 (默认值为2)
+	/**
+	 * 判断题 (默认值为4)
+	 */
+	public static final int QUESTION_TYPE_JUDGE_TRUE_OR_FLASE		=	4; //判断题 (默认值为4)
+	/**
+	 * 简答题  (默认值为8)
+	 */
+	public static final int QUESTION_TYPE_SHORT_ANSWER				=	8; //简答题 (默认值为8)
+	
+	// 是否已删除
+	/**
+	 * 默认为 IS_NOT_DELETE = 0，标识为未删除
+	 */
+	public static final int IS_NOT_DELETE 							=	0; //默认0
+	/**
+	 * IS_DELETE = 1，标识为已删除
+	 */
+	public static final int IS_DELETE								=	1; //1 标识成伪删除
 	
 	public String getId() {
 		return id;

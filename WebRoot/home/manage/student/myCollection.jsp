@@ -48,6 +48,8 @@ Globals.page = "Manage_collection";
 							</li>
 						</c:forEach>
 					</ul>
+					<c:set var="basicUrl" value="${ctx}/collection" />
+		            <%@ include file="../../inc/pagination.jsp"%>
 				</div>
 			</div>
 		</div>
