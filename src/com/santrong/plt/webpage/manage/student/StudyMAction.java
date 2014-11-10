@@ -10,6 +10,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.santrong.plt.webpage.course.dao.CourseDao;
 import com.santrong.plt.webpage.course.entry.CourseBuyQuery;
 import com.santrong.plt.webpage.course.entry.CourseItem;
+import com.santrong.plt.webpage.course.resource.train.dao.TrainDao;
+import com.santrong.plt.webpage.course.resource.train.entry.TrainItem;
+import com.santrong.plt.webpage.course.resource.train.entry.TrainQuery;
 import com.santrong.plt.webpage.manage.StudentBaseAction;
 
 /**
@@ -57,4 +60,29 @@ public class StudyMAction extends StudentBaseAction {
 		return "manage/student/myLive";
 	}
 	
+	
+	/**
+	 * 我的作业
+	 * @return
+	 */
+	@RequestMapping("/train")
+	public String myTrain() {
+		HttpServletRequest request = getRequest();
+		int pageNum = this.getIntParameter("page");
+		if(pageNum == 0) {
+			pageNum = 1;
+		}
+		
+		TrainDao dao = new TrainDao();
+		TrainQuery query =new TrainQuery();
+		query.setOwnerId(this.currentUser().getId());
+		query.setPageSize(12);
+		query.setPageNum(pageNum);
+		query.setCount(dao.selectCountByQuery(query));
+		List<TrainItem> trainList = dao.selectByQuery(query);
+		
+		request.setAttribute("trainList", trainList);
+		request.setAttribute("query", query);
+		return "manage/student/myTrain";
+	}
 }
