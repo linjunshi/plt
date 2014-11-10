@@ -66,6 +66,12 @@ public class FileDao extends BaseDao {
 						like("f.fileName", "?")));
 				criteria.setStringParam("%" + query.getKeywords() + "%");
 			}
+			// 所属用户
+			if(MyUtils.isNotNull(query.getOnwerId())) {
+				criteria.where(or(
+						like("f.ownerId", "?")));
+				criteria.setStringParam(query.getOnwerId());
+			}			
 			
 			// 排序
 			if(!StringUtils.isNullOrEmpty(query.getOrderBy())) {
@@ -112,6 +118,12 @@ public class FileDao extends BaseDao {
 						like("f.fileName", "?")));
 				criteria.setStringParam("%" + query.getKeywords() + "%");
 			}
+			// 所属用户
+			if(MyUtils.isNotNull(query.getOnwerId())) {
+				criteria.where(or(
+						like("f.ownerId", "?")));
+				criteria.setStringParam(query.getOnwerId());
+			}			
 			
 			Connection conn = ThreadUtils.currentConnection();
 			PreparedStatement stm = criteria.getRealStatement(conn);

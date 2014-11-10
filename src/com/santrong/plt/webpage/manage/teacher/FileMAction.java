@@ -18,25 +18,27 @@ import com.santrong.plt.webpage.manage.TeacherBaseAction;
  * @time 上午10:26:52
  */
 @Controller
-@RequestMapping("/manage")
+@RequestMapping("/manage/file")
 public class FileMAction extends TeacherBaseAction {
 	
 	/**
-	 * 视频管理
+	 * 课件管理
 	 * @param keyword
 	 * @param pageNum
 	 * @return
 	 */
-	@RequestMapping("/video")
-	public String list(String keyword, Integer pageNum){
+	@RequestMapping("")
+	public String list(){
 		HttpServletRequest request = getRequest();
-		if(pageNum == null) {
-			pageNum = 0;
+		int pageNum = this.getIntParameter("page");
+		if(pageNum == 0) {
+			pageNum = 1;
 		}
 		
 		FileDao fileDao = new FileDao();
 		FileQuery query = new FileQuery();
-		query.setKeywords(keyword);
+		query.setOnwerId(this.currentUser().getId());
+		query.setPageSize(12);
 		query.setPageNum(pageNum);
 		query.setOrderBy("cts");
 		query.setOrderRule("desc");
@@ -46,7 +48,7 @@ public class FileMAction extends TeacherBaseAction {
 		request.setAttribute("query", query);
 		request.setAttribute("fileList", fileList);
 		
-		return "manage/file/list";
+		return "manage/teacher/fileList";
 	}
 	
 	

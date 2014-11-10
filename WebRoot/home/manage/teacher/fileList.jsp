@@ -12,7 +12,6 @@ Globals.page = "Manage_index";
 </script>
 </head>
 <body>
-	<div class="wrap">
 		
 		<%@ include file="../../inc/top.jsp"%>
 		
@@ -43,7 +42,5 @@ Globals.page = "Manage_index";
 		</div>
 		
 		<%@ include file="../../inc/friendlylink.jsp"%>
-		<%@ include file="../../inc/copyright.jsp"%>
-	</div>
 </body>
 </html>
