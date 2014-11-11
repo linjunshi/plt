@@ -1,3 +1,15 @@
+-- 2014-09-25 weinianjie
+set names utf8;
+
+-- 行政区划表 --
+drop table if exists web_area;
+create table web_area(
+	id varchar(32) not null comment 'UUID',
+	areaName varchar(64) not null comment '区域名称',
+	areaCode varchar(32) not null comment '地区编码',
+	primary key (id)
+) engine=InnoDB default charset=utf8 collate=utf8_bin comment '行政区划表';
+
 insert into web_area values('110000','北京市','110000');
 insert into web_area values('110101','东城区','110101');
 insert into web_area values('110102','西城区','110102');

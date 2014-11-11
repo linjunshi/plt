@@ -1,6 +1,6 @@
 package com.santrong.plt.http;
 
-import com.santrong.plt.util.MyUtils;
+import com.santrong.plt.util.HttpUtils;
 
 /**
  * @author weinianjie
@@ -23,7 +23,7 @@ public class HttpDefine {
 		sb.append("</ReqMsg>");
 		
 		System.out.println("send:" + sb.toString());
-		String rt = MyUtils.sendPost("http://127.0.0.1/http/basic", sb.toString());
+		String rt = HttpUtils.sendPost("http://127.0.0.1/http/basic", sb.toString());
 		System.out.println("receive:" + rt);
 	}
 	
