@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import com.santrong.plt.webpage.course.resource.train.entry.TrainQuestionItem;
 
@@ -34,4 +35,16 @@ public interface TrainQuestionMapper {
 	
 	@Delete("delete from resource_train_question where id = #{id}")
 	int deleteById(String id);
+	
+	@Update("update resource_train_question set "
+			+ "topic = #{topic},"
+			+ "questionType = #{questionType},"
+			+ "opt1 = #{opt1},"
+			+ "opt2 = #{opt2},"
+			+ "opt3 = #{opt3},"
+			+ "opt4 = #{opt4},"
+			+ "answer = #{answer},"
+			+ "uts = #{uts}"
+			+ " where id = #{id} ")
+	int update(TrainQuestionItem question);
 }

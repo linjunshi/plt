@@ -15,14 +15,14 @@ import com.santrong.plt.webpage.course.resource.train.entry.TrainQuestionItem;
  */
 public class TeacherHttpService20004 implements AbstractHttpService{
 
+	@SuppressWarnings("null")
 	@Override
 	public String excute(XmlReader xml) {
 		int rt = 0;
-//		String liveID = "";
 		String questionID = "";
 		TrainQuestionItem tqItem = null;
+		String[] rightAnswers = null;
 		try{
-//			liveID = xml.find("/MsgBody/LiveID").getText();
 			questionID = xml.find("/MsgBody/HomeWorkID").getText();
 			if (MyUtils.isNotNull(questionID)) {
 				TrainQuestionDao tqDao = new TrainQuestionDao();
@@ -50,26 +50,45 @@ public class TeacherHttpService20004 implements AbstractHttpService{
 					sb.append("<HomeWorkID type=\"string\">").append(tqItem.getId()).append("</HomeWorkID>");
 					//sb.append("<!--题目-->");
 					sb.append("<Topic type=\"string\">").append(tqItem.getTopic()).append("</Topic>");
-					//sb.append("<!-- 作业类型 1选择题；2、多选题；4、对错题；8、填空题-->");
+					//sb.append("<!-- 作业类型 1选择题；2、多选题；3、对错题；4、填空题-->");
 					sb.append("<Type type=\"int\">").append(tqItem.getQuestionType()).append("</Type>");
-					//sb.append("<!--作业选项，填空题只有一条记录，需要填空的地方用空格代替-->");
-					sb.append("<Items>");
-					//sb.append("<!-- 选择、判断题 Options无效-->");
-					sb.append("<Option type=\"string\">").append("A").append("</Option>");
-					sb.append("<Item type=\"string\">").append(tqItem.getOpt1()).append("</Item>");
-					sb.append("</Items>");
-					sb.append("<Items>");
-					sb.append("<Option type=\"string\">").append("B").append("</Option>");
-					sb.append("<Item type=\"string\">").append(tqItem.getOpt2()).append("</Item>");
-					sb.append("</Items>");
-					sb.append("<Items>");
-					sb.append("<Option type=\"string\">").append("C").append("</Option>");
-					sb.append("<Item type=\"string\">").append(tqItem.getOpt3()).append("</Item>");
-					sb.append("</Items>");
-					sb.append("<Items>");
-					sb.append("<Option type=\"string\">").append("D").append("</Option>");
-					sb.append("<Item type=\"string\">").append(tqItem.getOpt4()).append("</Item>");
-					sb.append("</Items>");
+					
+//					<!--正确答案    作业类型 1选择题；2、多选题；3、对错题；4、填空题-->
+//					Item节点内容说明：
+//					option: 选择题的选项头，其他题型不用填 ;
+//					IsKey: 是否正确答案，1正确 0错误, 填空题 都写1;
+//					Text：选择题表示选项内容 ,判断题如果有选项内容 则填 没有就不填,填空题 直接写填空的答案
+					if (tqItem.isSingleSelection() || tqItem.isMulChoice()) {
+						int answer = tqItem.getAnswer(); 
+						int[] answers = TrainQuestionItem.Answers;
+						String[] answerOptions = TrainQuestionItem.Answers_Options;
+						int j = 0;
+						int isKey = 0;
+						String optionContent = "";
+						if (answers.length == answerOptions.length) {
+							for (int i = 0; i < answers.length; i++) {
+								if ((answer&answers[i]) == answers[i]) {
+									rightAnswers[j++] = answerOptions[i];
+									isKey = 1;
+								}
+								if (MyUtils.isNotNull(tqItem.getOpt1()) && answerOptions[i].equals("A")) {
+									optionContent = tqItem.getOpt1();
+								} else if (MyUtils.isNotNull(tqItem.getOpt2()) && answerOptions[i].equals("B")) {
+									optionContent = tqItem.getOpt2();
+								} else if (MyUtils.isNotNull(tqItem.getOpt3()) && answerOptions[i].equals("C")) {
+									optionContent = tqItem.getOpt3();
+								} else if (MyUtils.isNotNull(tqItem.getOpt4()) && answerOptions[i].equals("D")) {
+									optionContent = tqItem.getOpt4();
+								}
+								sb.append("<Item type=\"string\" option=\"").append(answerOptions[i]).append("\" IsKey=\"").append(isKey).append("\">").append(optionContent).append("</Item>");
+								isKey = 0;
+							}
+						}
+					} else if (tqItem.isTrueOrFlase()){
+						
+					} else if (tqItem.isBlankFilling()){
+						
+					}
 				}
 			sb.append("</MsgBody>");
 		sb.append("</RespMsg>");

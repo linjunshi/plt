@@ -26,8 +26,13 @@ public class TeacherHttpService20003 implements AbstractHttpService{
 	@Override
 	public String excute(XmlReader xml) {
 		int rt = 0;
+		
 		TrainQuestionItem tqItem = null;
 		List<TrainHistoryItem> thList = null;
+		
+		int rightCount = 0;//定义答对人数的变量，并初始化为0
+		int wrongCount = 0;//定义答错人数的变量，并初始化为0
+		
 		try{
 			String liveID = xml.find("/MsgBody/LiveID").getText();
 			String questionID = xml.find("/MsgBody/HomeWorkID").getText();
@@ -49,6 +54,13 @@ public class TeacherHttpService20003 implements AbstractHttpService{
 							TrainHistoryDao thDao = new TrainHistoryDao();
 							thList = thDao.selectByHistory(chapter.getId(), train.getId(), questionID);
 							if (thList != null) {
+								for (TrainHistoryItem thItem:thList) {
+									if (thItem.getResult() == TrainHistoryItem.ANSWER_IS_RIGHT) {
+										rightCount++;
+									}else if (thItem.getResult() == TrainHistoryItem.ANSWER_IS_WRONG) {
+										wrongCount++;
+									}
+								}
 								rt = 1;
 							}
 						}
@@ -69,25 +81,11 @@ public class TeacherHttpService20003 implements AbstractHttpService{
 				sb.append("<ResultCode type=\"int\">").append(rt).append("</ResultCode>");
 			sb.append("</MsgHead>");
 			sb.append("<MsgBody>");
-				if (tqItem != null) {
-					//sb.append("<!--作业ID-->");
-					sb.append("<HomeWorkID type=\"string\">").append(tqItem.getId()).append("</HomeWorkID>");
-					//sb.append("<!-- 作业类型 1选择题；2、多选题；4、对错题；8、填空题-->");
-					sb.append("<Type type=\"int\">").append(tqItem.getQuestionType()).append("</Type>");
-				}
-				if (thList != null) {
-					//sb.append("<!--作业选项，填空题只有一条记录，需要填空的地方用空格代替-->");
-					sb.append("<Users>");
-					for (TrainHistoryItem thItem:thList) {
-						sb.append("<User>");
-							//sb.append("<!--选择、判断题 Options无效-->");
-							sb.append("<UserID type=\"string\">").append(thItem.getUserId()).append("</UserID>");
-							//sb.append("<!--选择题：多选或者单选答案；对错题：0表示错误，1表示正确；填空题：填空内容-->");
-							sb.append("<Result type=\"string\">").append(thItem.getResult()).append("</Result>");
-					    sb.append("</User>");
-					}
-					sb.append("</Users>");
-				}
+				sb.append("<HomeWorkID type=\"string\">").append(tqItem.getId()).append("</HomeWorkID>");
+//				<!--答对人数-->
+				sb.append("<CurrResult>").append(rightCount).append("</CurrResult>");
+//				<!--答错人数-->
+				sb.append("<WrongResult>").append(wrongCount).append("</WrongResult>");
 			sb.append("</MsgBody>");
 		sb.append("</RespMsg>");
 		return sb.toString();

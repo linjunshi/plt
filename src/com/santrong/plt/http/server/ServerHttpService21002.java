@@ -22,7 +22,11 @@ public class ServerHttpService21002 implements AbstractHttpService{
 		try {
 			//此次点名ID号
 			String liveID = xml.find("/MsgBody/LiveID").getText();
+			//老师ID
+//			String masterID = xml.find("/MsgBody/MasterID").getText();
 			String namedID = xml.find("/MsgBody/NamedID").getText();
+			//此次点名的成员总数
+//			String namedNum = xml.find("/MsgBody/namedNum").getText();
 			
 			if(MyUtils.isNotNull(liveID) && MyUtils.isNotNull(namedID)) {
 				LiveCallDao liveCallDao = new LiveCallDao();

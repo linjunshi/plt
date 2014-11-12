@@ -84,28 +84,22 @@ public class TrainQuestionDao extends BaseDao{
 			}
 			
 			// 题目类型
-			switch (query.getQuestionType()) {
-			case 1:
+			if (query.isSingleSelection()) {
 				criteria.where(eq("a.questionType", TrainQuestionItem.QUESTION_TYPE_SINGLE_SELECTION));//单选题 (默认值为1)
-				break;
-			case 2:
+			} else if (query.isMulChoice()) {
 				criteria.where(eq("a.questionType", TrainQuestionItem.QUESTION_TYPE_MULTIPLE_CHOICE));//多选题 (默认值为2)
-				break;
-			case 4:
-				criteria.where(eq("a.questionType", TrainQuestionItem.QUESTION_TYPE_JUDGE_TRUE_OR_FLASE));//判断题 (默认值为4)
-				break;
-			case 8:
-				criteria.where(eq("a.questionType", TrainQuestionItem.QUESTION_TYPE_SHORT_ANSWER));//简答题 (默认值为8)
-				break;
-			default:
+			} else if (query.isMulChoice()) {
+				criteria.where(eq("a.questionType", TrainQuestionItem.QUESTION_TYPE_JUDGE_TRUE_OR_FLASE));//判断题 (默认值为3)
+			} else if (query.isMulChoice()) {
+				criteria.where(eq("a.questionType", TrainQuestionItem.QUESTION_TYPE_BLANK_FILLING));//填空题 (默认值为4)
+			} else {
 				System.out.println("warnings : The questionType has no corresponding value.");
-				break;
 			}
 			
 			// 是否已经标识为已删除（del）
-			if (query.getDel() == 0) {
+			if (query.getDel() == TrainQuestionItem.IS_NOT_DELETE) {
 				criteria.where(eq("a.del", TrainQuestionItem.IS_NOT_DELETE));
-			}else if (query.getDel() == 1) {
+			}else if (query.getDel() == TrainQuestionItem.IS_DELETE) {
 				criteria.where(eq("a.del", TrainQuestionItem.IS_DELETE));
 			}
 			
@@ -161,28 +155,22 @@ public class TrainQuestionDao extends BaseDao{
 			}
 			
 			// 题目类型
-			switch (query.getQuestionType()) {
-			case 1:
+			if (query.isSingleSelection()) {
 				criteria.where(eq("a.questionType", TrainQuestionItem.QUESTION_TYPE_SINGLE_SELECTION));//单选题 (默认值为1)
-				break;
-			case 2:
+			} else if (query.isMulChoice()) {
 				criteria.where(eq("a.questionType", TrainQuestionItem.QUESTION_TYPE_MULTIPLE_CHOICE));//多选题 (默认值为2)
-				break;
-			case 4:
-				criteria.where(eq("a.questionType", TrainQuestionItem.QUESTION_TYPE_JUDGE_TRUE_OR_FLASE));//判断题 (默认值为4)
-				break;
-			case 8:
-				criteria.where(eq("a.questionType", TrainQuestionItem.QUESTION_TYPE_SHORT_ANSWER));//简答题 (默认值为8)
-				break;
-			default:
+			} else if (query.isMulChoice()) {
+				criteria.where(eq("a.questionType", TrainQuestionItem.QUESTION_TYPE_JUDGE_TRUE_OR_FLASE));//判断题 (默认值为3)
+			} else if (query.isMulChoice()) {
+				criteria.where(eq("a.questionType", TrainQuestionItem.QUESTION_TYPE_BLANK_FILLING));//填空题 (默认值为4)
+			} else {
 				System.out.println("warnings : The questionType has no corresponding value.");
-				break;
 			}
 			
 			// 是否已经标识为已删除（del）
-			if (query.getDel() == 0) {
+			if (query.getDel() == TrainQuestionItem.IS_NOT_DELETE) {
 				criteria.where(eq("a.del", TrainQuestionItem.IS_NOT_DELETE));
-			}else if (query.getDel() == 1) {
+			}else if (query.getDel() == TrainQuestionItem.IS_DELETE) {
 				criteria.where(eq("a.del", TrainQuestionItem.IS_DELETE));
 			}
 			
@@ -257,6 +245,18 @@ public class TrainQuestionDao extends BaseDao{
 			TrainQuestionMapper mapper = this.getMapper(TrainQuestionMapper.class);
 			if (mapper != null) {
 				return mapper.deleteById(id) > 0;
+			}
+		} catch (Exception e) {
+			Log.printStackTrace(e);
+		}
+		return false;
+	}
+	
+	public boolean update(TrainQuestionItem question) {
+		try {
+			TrainQuestionMapper mapper = this.getMapper(TrainQuestionMapper.class);
+			if (mapper != null) {
+				return mapper.update(question) > 0;
 			}
 		} catch (Exception e) {
 			Log.printStackTrace(e);

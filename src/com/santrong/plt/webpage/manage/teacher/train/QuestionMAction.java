@@ -131,12 +131,12 @@ public class QuestionMAction extends TeacherBaseAction{
 		return FAIL;
 	}
 	
-	@RequestMapping(value="/update", method=RequestMethod.POST)
+	@RequestMapping("/update")
 	public String updateQuestion(String questionId){
 		try {
 			TrainQuestionDao tqDao = new TrainQuestionDao();
 			TrainQuestionItem tqItem = tqDao.selectById(questionId);
-			
+
 			HttpServletRequest request = this.getRequest();
 			request.setAttribute("tqItem", tqItem);
 			
@@ -144,5 +144,26 @@ public class QuestionMAction extends TeacherBaseAction{
 			Log.printStackTrace(e);
 		}
 		return "/manage/teacher/myTrainMUpdate";
+	}
+	
+	@RequestMapping(value = "/updatePost",method=RequestMethod.POST)
+	public String updateQuestionPost(TrainQuestionItem tqItem){
+		try {
+			if (tqItem != null) {
+				int sumAnswer = 0;
+				for (int i = 0; i < tqItem.getPageAnswer().length; i++) {
+					sumAnswer = sumAnswer + tqItem.getPageAnswer()[i];
+				}
+				
+				TrainQuestionDao tqDao = new TrainQuestionDao();
+				tqItem.setAnswer(sumAnswer);
+				tqItem.setUts(new Date());
+				tqDao.update(tqItem);
+				
+			}
+		} catch (Exception e) {
+			Log.printStackTrace(e);
+		}
+		return this.redirect("/manage/question/list");
 	}
 }

@@ -45,7 +45,12 @@ Globals.page = "Manage_index";
 									<td><input type="checkbox" name="CheckboxGroup1"
 										value="复选框" id="CheckboxGroup1_1" /></td>
 									<td>${question.topic}</td>
-									<td>${question.questionType}</td>
+									<td>
+									<c:if test="${question.questionType==1}">单选题</c:if>
+									<c:if test="${question.questionType==2}">多选题</c:if>
+									<c:if test="${question.questionType==3}">判断题</c:if>
+									<c:if test="${question.questionType==4}">填空题</c:if>
+									</td>
 									<td><fmt:formatDate value="${question.cts}" type="date" dateStyle="default" /></td>
 									<td class="btn_question_operation">
 									<div class="btn_question_update">

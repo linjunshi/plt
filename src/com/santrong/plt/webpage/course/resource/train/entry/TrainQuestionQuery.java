@@ -38,4 +38,37 @@ public class TrainQuestionQuery extends PageQuery{
 	public void setQuestionType(int questionType) {
 		this.questionType = questionType;
 	}
+	
+	/**
+	 * 是否是单选题
+	 * @return boolean
+	 */
+	public boolean isSingleSelection() {
+		return (questionType == TrainQuestionItem.QUESTION_TYPE_SINGLE_SELECTION);
+	}
+	
+	/**
+	 * 是否是多选题
+	 * @return boolean
+	 */
+	public boolean isMulChoice() {
+		return (questionType == TrainQuestionItem.QUESTION_TYPE_MULTIPLE_CHOICE);
+	}
+	
+	/**
+	 * 是否是判断题
+	 * @return boolean
+	 */
+	public boolean isTrueOrFlase() {
+		return (questionType == TrainQuestionItem.QUESTION_TYPE_JUDGE_TRUE_OR_FLASE);
+	}
+	
+	/**
+	 * 是否是填空题
+	 * @return boolean
+	 */
+	public boolean isBlankFilling() {
+		return (questionType == TrainQuestionItem.QUESTION_TYPE_BLANK_FILLING);
+	}
+	
 }

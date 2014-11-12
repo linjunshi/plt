@@ -22,6 +22,8 @@ public class TrainQuestionItem {
 	private int del;
 	private Date cts;
 	private Date uts;
+	
+	private int[] pageAnswer;
 
 	// 题目的默认类型值
 	/**
@@ -33,13 +35,13 @@ public class TrainQuestionItem {
 	 */
 	public static final int QUESTION_TYPE_MULTIPLE_CHOICE			=	2; //多选题 (默认值为2)
 	/**
-	 * 判断题 (默认值为4)
+	 * 判断题 (默认值为3)
 	 */
-	public static final int QUESTION_TYPE_JUDGE_TRUE_OR_FLASE		=	4; //判断题 (默认值为4)
+	public static final int QUESTION_TYPE_JUDGE_TRUE_OR_FLASE		=	3; //判断题 (默认值为3)
 	/**
-	 * 简答题  (默认值为8)
+	 * 填空题  (默认值为4)
 	 */
-	public static final int QUESTION_TYPE_SHORT_ANSWER				=	8; //简答题 (默认值为8)
+	public static final int QUESTION_TYPE_BLANK_FILLING				=	4; //填空题 (默认值为4)
 	
 	// 是否已删除
 	/**
@@ -50,6 +52,18 @@ public class TrainQuestionItem {
 	 * IS_DELETE = 1，标识为已删除
 	 */
 	public static final int IS_DELETE								=	1; //1 标识成伪删除
+	
+	/**
+	 * 选项的{"A","B","C","D"}分别对应的数值{1,2,4,8}
+	 * 0001,0010,0100,1000
+	 */
+	public static final int[] Answers								= {1,2,4,8};
+	/**
+	 * 选项的{"A","B","C","D"}分别对应的数值{1,2,4,8}
+	 * 0001,0010,0100,1000
+	 */
+	public static final String[] Answers_Options					= {"A","B","C","D"};
+	
 	
 	public String getId() {
 		return id;
@@ -122,5 +136,72 @@ public class TrainQuestionItem {
 	}
 	public void setUts(Date uts) {
 		this.uts = uts;
+	}
+	public int[] getPageAnswer() {
+		return pageAnswer;
+	}
+	public void setPageAnswer(int[] pageAnswer) {
+		this.pageAnswer = pageAnswer;
+	}
+	
+	/**
+	 * 是否是单选题
+	 * @return boolean
+	 */
+	public boolean isSingleSelection() {
+		return (questionType == QUESTION_TYPE_SINGLE_SELECTION);
+	}
+	/**
+	 * 是否是多选题
+	 * @return boolean
+	 */
+	public boolean isMulChoice() {
+		return (questionType == QUESTION_TYPE_MULTIPLE_CHOICE);
+	}
+	/**
+	 * 是否是判断题
+	 * @return boolean
+	 */
+	public boolean isTrueOrFlase() {
+		return (questionType == QUESTION_TYPE_JUDGE_TRUE_OR_FLASE);
+	}
+	/**
+	 * 是否是填空题
+	 * @return boolean
+	 */
+	public boolean isBlankFilling() {
+		return (questionType == QUESTION_TYPE_BLANK_FILLING);
+	}
+	
+	/**
+	 * 答案中是否包含选项 A
+	 * @return boolean
+	 */
+	public boolean getContainA() {
+		return ((answer & Answers[0]) == Answers[0]);
+	}
+
+	/**
+	 * 答案中是否包含选项 B
+	 * @return boolean
+	 */
+	public boolean getContainB() {
+		return ((answer & Answers[1]) == Answers[1]);
+	}
+
+	/**
+	 * 答案中是否包含选项 C
+	 * @return boolean
+	 */
+	public boolean getContainC() {
+		return ((answer & Answers[2]) == Answers[2]);
+	}
+
+	/**
+	 * 答案中是否包含选项 D
+	 * @return boolean
+	 */
+	public boolean getContainD() {
+		return ((answer & Answers[3]) == Answers[3]);
 	}
 }
