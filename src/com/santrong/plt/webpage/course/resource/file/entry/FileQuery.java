@@ -9,6 +9,7 @@ import com.santrong.plt.opt.PageQuery;
  */
 public class FileQuery extends PageQuery {
 	private String keywords;
+	private String onwerId;
 
 	public String getKeywords() {
 		return keywords;
@@ -17,5 +18,12 @@ public class FileQuery extends PageQuery {
 	public void setKeywords(String keywords) {
 		this.keywords = keywords;
 	}
-	
+
+	public String getOnwerId() {
+		return onwerId;
+	}
+
+	public void setOnwerId(String onwerId) {
+		this.onwerId = onwerId;
+	}
 }

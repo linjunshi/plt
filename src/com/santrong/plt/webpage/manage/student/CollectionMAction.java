@@ -28,12 +28,6 @@ public class CollectionMAction extends StudentBaseAction {
 
 	@RequestMapping("")
 	public String myCollection() {
-		UserItem user = this.currentUser();
-		if(user == null) {
-			// 没登陆
-			return this.redirect("/login");
-		}
-		
 		HttpServletRequest request = getRequest();
 		int pageNum = this.getIntParameter("page");
 		if(pageNum == 0) {

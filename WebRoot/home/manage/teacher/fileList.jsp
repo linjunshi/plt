@@ -12,7 +12,6 @@ Globals.page = "Manage_index";
 </script>
 </head>
 <body>
-	<div class="wrap">
 		
 		<%@ include file="../../inc/top.jsp"%>
 		
@@ -29,7 +28,7 @@ Globals.page = "Manage_index";
 						<c:forEach items="${fileList}" var="file" varStatus="st">
 							<tr>
 								<td>${st.index + 1}</td>
-								<td>${file.fileName}</td>
+								<td>${file.title}</td>
 								<td>${file.cts}</td>
 								<td>${file.duration}</td>
 								<td>${file.groupId}</td>
@@ -43,7 +42,5 @@ Globals.page = "Manage_index";
 		</div>
 		
 		<%@ include file="../../inc/friendlylink.jsp"%>
-		<%@ include file="../../inc/copyright.jsp"%>
-	</div>
 </body>
 </html>

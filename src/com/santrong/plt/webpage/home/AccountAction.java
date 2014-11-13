@@ -151,4 +151,10 @@ public class AccountAction extends BaseAction {
 		
 		return this.redirect("/");
 	}	
+	
+	@RequestMapping("/changePwd")
+	public String changePsw() {
+		
+		return "/manage/pwChange";
+	}
 }
