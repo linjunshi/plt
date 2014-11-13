@@ -24,7 +24,6 @@ import com.santrong.plt.util.XmlReader;
  * http://www.renren.com
  * 切入点在找人页面
  * urlDemo：http://support.renren.com/highschool/6201.html和http://support.renren.com/juniorschool/6201.html
-*	第一参数为区域编码，第2参数为jsonp的回调函数，第3参数为缓存清理
 *  建表请参考spider.sql * 
  */
 public class SchoolSpiderRR {
@@ -46,6 +45,8 @@ public class SchoolSpiderRR {
 			codeList.add("120100");// 天津
 			codeList.add("310100");// 上海
 			codeList.add("500100");// 重庆
+//			codeList.add("522200");// 老版贵州铜仁
+//			codeList.add("522400");// 老版贵州毕节
 			
 			final long begin = System.currentTimeMillis();
 			
@@ -155,3 +156,11 @@ public class SchoolSpiderRR {
 		}
 	}
 }
+//最终报错如下
+//6590---自治区直辖---新疆维吾尔自治区
+//5205---毕节市---贵州---老版5224
+//5206---铜仁市---贵州---老版5222
+//4603---三沙市---海南
+//4690---省直辖---海南
+//4290---省直辖---湖北
+//4190---省直辖---河南

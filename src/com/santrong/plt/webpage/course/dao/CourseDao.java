@@ -32,7 +32,7 @@ public class CourseDao extends BaseDao {
 	public List<CourseView> selectForIndexList(int gradeGroup, String areaCode) {
 		CourseMapper mapper = this.getMapper(CourseMapper.class);
 		if(mapper != null) {
-			return mapper.selectForIndexList(gradeGroup, areaCode);
+			return mapper.selectForIndexList(gradeGroup, AreaUtils.lostTail(areaCode) + "%");
 		}
 		return null;
 	}
