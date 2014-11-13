@@ -13,7 +13,7 @@ import com.santrong.plt.webpage.course.resource.train.entry.TrainQuestionItem;
  * @date 2014年11月6日 
  * @time 下午4:50:56
  */
-public class TeacherHttpService20004 implements AbstractHttpService{
+public class ClientHttpService20004 implements AbstractHttpService{
 
 	@SuppressWarnings("null")
 	@Override
@@ -40,7 +40,7 @@ public class TeacherHttpService20004 implements AbstractHttpService{
 		sb.append("<RespMsg>");
 			sb.append("<MsgHead>");
 				//sb.append("<!--获取作业内容(20004)-->");
-				sb.append("<MsgCode type=\"int\">").append(HttpDefine.Teacher_Service_20004).append("</MsgCode>");
+				sb.append("<MsgCode type=\"int\">").append(HttpDefine.Client_Service_20004).append("</MsgCode>");
 				//sb.append("<!--0表示失败，1表示成功-->");
 				sb.append("<ResultCode type=\"int\">").append(rt).append("</ResultCode>");
 			sb.append("</MsgHead>");

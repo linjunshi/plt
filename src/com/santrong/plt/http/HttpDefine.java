@@ -14,7 +14,7 @@ public class HttpDefine {
 		sb.append(Xml_Header);
 		sb.append("<ReqMsg>");
 		sb.append("<MsgHead>");
-//			sb.append("<MsgCode type=\"int\">").append(HttpDefine.Teacher_Service_20001).append("</MsgCode>");
+//			sb.append("<MsgCode type=\"int\">").append(HttpDefine.Client_Service_20001).append("</MsgCode>");
 		sb.append("</MsgHead>");
 		sb.append("<MsgBody>");
 //			sb.append("<UserName type=\"string\">").append("admin").append("</UserName>");
@@ -36,13 +36,13 @@ public class HttpDefine {
 	public static final String Server_Service_21002 			= "21002";	// 上报老师开始点名(21002)
 	public static final String Server_Service_21003 			= "21003";	// 上报老师布置作业(21003)
 	
-	/*最新修改*/
-	public static final String Student_Service_20001			= "20001";	// 获取用户信息(20001)
-	public static final String Teacher_Service_20002 			= "20002";	// 获取作业列表(20002)
-	public static final String Teacher_Service_20003 			= "20003";	// 获取作业结果(20003)
-	public static final String Teacher_Service_20004 			= "20004";	// 获取作业内容(20004)
-	public static final String Teacher_Service_20005 			= "20005";	// 获取点名结果(20005)
-	public static final String Student_Service_20006			= "20006";	// 上报课程评价(20006)
-	public static final String Student_Service_20007			= "20007";	// 上报点名结果(20007)
-	public static final String Student_Service_20008			= "20008";	// 上报作业结果(20008)
+	/*客户端*/
+	public static final String Client_Service_20001			= "20001";	// 获取用户信息(20001)学生
+	public static final String Client_Service_20002 			= "20002";	// 获取作业列表(20002)老师
+	public static final String Client_Service_20003 			= "20003";	// 获取作业结果(20003)老师
+	public static final String Client_Service_20004 			= "20004";	// 获取作业内容(20004)老师
+	public static final String Client_Service_20005 			= "20005";	// 获取点名结果(20005)老师
+	public static final String Client_Service_20006			= "20006";	// 上报课程评价(20006)学生
+	public static final String Client_Service_20007			= "20007";	// 上报点名结果(20007)学生
+	public static final String Client_Service_20008			= "20008";	// 上报作业结果(20008)学生
 }

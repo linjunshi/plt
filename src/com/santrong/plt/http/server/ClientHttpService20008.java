@@ -18,7 +18,7 @@ import com.santrong.plt.webpage.course.resource.train.entry.TrainQuestionItem;
  * @date 2014年11月5日  
  * @time 上午11:57:46
  */
-public class StudentHttpService20008 implements AbstractHttpService{
+public class ClientHttpService20008 implements AbstractHttpService{
 
 	@Override
 	public String excute(XmlReader xml) {
@@ -79,7 +79,7 @@ public class StudentHttpService20008 implements AbstractHttpService{
 		sb.append("<RespMsg>");
 			sb.append("<MsgHead>");
 				//sb.append("<!--上报作业结果(20008)-->");
-				sb.append("<MsgCode type=\"int\">").append(HttpDefine.Student_Service_20008).append("</MsgCode>");
+				sb.append("<MsgCode type=\"int\">").append(HttpDefine.Client_Service_20008).append("</MsgCode>");
 				//sb.append("<!--0表示失败，1表示成功-->");
 				sb.append("<ResultCode type=\"int\">").append(rt).append("</ResultCode>");
 			sb.append("</MsgHead>");

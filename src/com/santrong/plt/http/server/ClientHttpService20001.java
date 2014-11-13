@@ -16,7 +16,7 @@ import com.santrong.plt.webpage.teacher.entry.UserItem;
  * @date 2014年11月4日 
  * @time 下午3:40:39
  */
-public class StudentHttpService20001 implements AbstractHttpService{
+public class ClientHttpService20001 implements AbstractHttpService{
 
 	@Override
 	public String excute(XmlReader xml) {
@@ -46,7 +46,7 @@ public class StudentHttpService20001 implements AbstractHttpService{
 		sb.append("<RespMsg>");
 			sb.append("<MsgHead>");
 				//sb.append("<!--获取用户信息(20001)-->");
-				sb.append("<MsgCode type=\"int\">").append(HttpDefine.Student_Service_20001).append("</MsgCode>");
+				sb.append("<MsgCode type=\"int\">").append(HttpDefine.Client_Service_20001).append("</MsgCode>");
 				//sb.append("<!--0表示失败，1表示成功-->");
 				sb.append("<ResultCode type=\"int\">").append(rt).append("</ResultCode>");
 			sb.append("</MsgHead>");

@@ -17,7 +17,7 @@ import com.santrong.plt.webpage.course.resource.live.entry.LiveReplyItem;
  * @date 2014年11月4日  
  * @time 下午4:46:07
  */
-public class StudentHttpService20007 implements AbstractHttpService{
+public class ClientHttpService20007 implements AbstractHttpService{
 
 	@Override
 	public String excute(XmlReader xml) {
@@ -58,7 +58,7 @@ public class StudentHttpService20007 implements AbstractHttpService{
 		sb.append("<RespMsg>");
 			sb.append("<MsgHead>");
 				//sb.append("<!--上报点名结果(20007)-->");
-				sb.append("<MsgCode type=\"int\">").append(HttpDefine.Student_Service_20007).append("</MsgCode>");
+				sb.append("<MsgCode type=\"int\">").append(HttpDefine.Client_Service_20007).append("</MsgCode>");
 				//sb.append("<!--0表示失败，1表示成功-->");
 				sb.append("<ResultCode type=\"int\">").append(rt).append("</ResultCode>");
 			sb.append("</MsgHead>");
