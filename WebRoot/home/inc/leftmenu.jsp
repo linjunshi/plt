@@ -19,8 +19,8 @@
                     <dd><a href="${ctx}/study/train">我的测验</a></dd>
                     <dd><a href="${ctx}/comment">我的评论</a></dd>
                     <dd><a href="${ctx}/collection">我的收藏</a></dd>
-                    <dd><a href="#">个人信息</a></dd>
-                    <dd><a href="#">修改密码</a></dd>
+                    <dd><a href="${ctx}/account/personalInfo">个人信息</a></dd>
+                    <dd><a href="${ctx}/account/changePwd">修改密码</a></dd>
                     <dd><a href="#">账户余额</a></dd>
                     <dd><a href="#">交易记录</a></dd>
                 </dl>

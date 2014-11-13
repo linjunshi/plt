@@ -152,9 +152,96 @@ public class AccountAction extends BaseAction {
 		return this.redirect("/");
 	}	
 	
+	/**
+	 * 打开修改密码页面
+	 * @return
+	 */
 	@RequestMapping("/changePwd")
 	public String changePsw() {
-		
-		return "/manage/pwChange";
+		return "manage/pwdChange";
+	}
+	
+	/**
+	 * 修改密码
+	 * @param oldPwd
+	 * @param newPwd
+	 * @param comfirmPwd
+	 * @return
+	 */
+	@RequestMapping(value = "/changePwdPost",method=RequestMethod.POST)
+	public String changePwdPost(String oldPwd, String newPwd, String comfirmPwd) {
+		try {
+			if (!MyUtils.isNotNull(oldPwd)) {
+				addError("请输入您的原始密码！");
+				return "manage/pwdChange";
+			}
+			if (!MyUtils.isNotNull(newPwd)) {
+				addError("请输入您的新密码！");
+				return "manage/pwdChange";
+			}
+			if (!MyUtils.isNotNull(comfirmPwd)) {
+				addError("请输入您的确认新密码！");
+				return "manage/pwdChange";
+			}
+			
+			UserItem user = this.currentUser();
+			
+			if(user == null) {
+				return "login";
+			}
+			if(!user.getPassword().equals(MyUtils.getMD5(oldPwd))) {
+				addError("您输入的原始密码有误，请重新输入！");
+				return "manage/pwdChange";
+			}
+			if(!newPwd.equals(comfirmPwd)) {
+				addError("您输入的新密码和确认新密码不一致，请重新输入！");
+				return "manage/pwdChange";
+			}
+			
+			UserDao userDao = new UserDao();
+			user.setPassword(MyUtils.getMD5(newPwd));
+			user.setUts(new Date());
+			if (userDao.update(user) > 0) {
+				addError("恭喜您，已成功修改密码！");
+			} else {
+				addError("对不起，您修改密码失败了，请重新操作！");
+			}
+			
+		} catch (Exception e) {
+			Log.printStackTrace(e);
+		}
+		return "manage/pwdChange";
+	}
+	
+	/**
+	 * 忘记密码
+	 * @return
+	 */
+	@RequestMapping("/forgotPwd")
+	public String forgotPwd() {
+		return "manage/forgotPwd";
+	}
+	
+	/**
+	 * 打开个人信息页面
+	 * @return
+	 */
+	@RequestMapping("/personalInfo")
+	public String personalInfo() {
+		return "manage/personalInfo";
+	}
+	
+	@RequestMapping("/changePslInfo")
+	public String changePslInfo() {
+		try {
+			
+			
+			
+			
+			
+		} catch (Exception e) {
+			Log.printStackTrace(e);
+		}
+		return "manage/personalInfo";
 	}
 }
