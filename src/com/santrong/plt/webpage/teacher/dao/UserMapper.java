@@ -60,7 +60,7 @@ public interface UserMapper {
     		+ "lastLoginIp=#{lastLoginIp}, "
     		+ "lastLoginTime=#{lastLoginTime}, "
     		+ "remark=#{remark}, "
-    		+ "cts=#{cts} "
+    		+ "uts=#{uts} "
     		+ "where id=#{id}")
     int update(UserItem user);
     

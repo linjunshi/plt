@@ -47,8 +47,8 @@ public class CollectionMAction extends StudentBaseAction {
 	}
 	
 	/**
-	 * 1、点击取消收藏,修改该课程的收藏数量,自动减1；</br>
-	 * 2、并从收藏表中移除该条收藏记录
+	 * 1、点击取消收藏,从收藏表中移除该条收藏记录;</br>
+	 * 2、并修改该课程的收藏数量,自动减1；
 	 * @author huangweihua
 	 * @param courseId
 	 * @return
@@ -60,13 +60,13 @@ public class CollectionMAction extends StudentBaseAction {
 			
 			ThreadUtils.beginTranx();
 			
-			//1、点击取消收藏,修改该课程的收藏数量,自动减1；
-			CourseDao courseDao = new CourseDao();
-			courseDao.removeCollection(courseId);
-			
-			//2、并从收藏表中移除该条收藏记录
+			//1、并从收藏表中移除该条收藏记录
 			CollectCourseDao ccDao = new CollectCourseDao();
 			ccDao.removeCollect(userItem.getId(), courseId);
+			
+			//2、点击取消收藏,修改该课程的收藏数量,自动减1；
+			CourseDao courseDao = new CourseDao();
+			courseDao.removeCollection(courseId);
 			
 			ThreadUtils.commitTranx();
 			

@@ -16,14 +16,14 @@ import com.santrong.plt.webpage.teacher.entry.UserItem;
  * @date 2014年11月4日 
  * @time 下午3:40:39
  */
-public class StudentHttpService30001 implements AbstractHttpService{
+public class StudentHttpService20001 implements AbstractHttpService{
 
 	@Override
 	public String excute(XmlReader xml) {
 		int rt = 0;
 		List<UserItem> userList = null;
 		try{
-			List<Element> idList = xml.finds("/MsgBody/UserIDs/UserID");
+			List<Element> idList = xml.finds("/MsgBody/UserID");
 			if (idList != null && idList.size() > 0) {
 				String[] userIds = new String[idList.size()];
 				int i = 0;
@@ -45,13 +45,12 @@ public class StudentHttpService30001 implements AbstractHttpService{
 		sb.append(HttpDefine.Xml_Header);
 		sb.append("<RespMsg>");
 			sb.append("<MsgHead>");
-				//sb.append("<!--获取用户信息(30001)-->");
-				sb.append("<MsgCode type=\"int\">").append(HttpDefine.Student_Service_30001).append("</MsgCode>");
+				//sb.append("<!--获取用户信息(20001)-->");
+				sb.append("<MsgCode type=\"int\">").append(HttpDefine.Student_Service_20001).append("</MsgCode>");
 				//sb.append("<!--0表示失败，1表示成功-->");
 				sb.append("<ResultCode type=\"int\">").append(rt).append("</ResultCode>");
 			sb.append("</MsgHead>");
 			sb.append("<MsgBody>");
-				sb.append("<Users>");
 				for(UserItem user:userList){
 					sb.append("<User>");
 					//<!--用户名-->
@@ -62,7 +61,6 @@ public class StudentHttpService30001 implements AbstractHttpService{
 					sb.append("<Identity type=\"int\">").append(user.isTeacher()? 1:2).append("</Identity>");
 					sb.append("</User>");
 				}
-				sb.append("</Users>");
 			sb.append("</MsgBody>");
 		sb.append("</RespMsg>");
 		return sb.toString();

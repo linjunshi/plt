@@ -1,10 +1,20 @@
 package com.santrong.plt.webpage.course.resource.train.dao;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.ArrayList;
 import java.util.List;
 
+import com.mysql.jdbc.StringUtils;
+import com.santrong.plt.criteria.Statement;
 import com.santrong.plt.log.Log;
+import com.santrong.plt.opt.ThreadUtils;
+import com.santrong.plt.util.BeanUtils;
+import com.santrong.plt.util.MyUtils;
 import com.santrong.plt.webpage.BaseDao;
 import com.santrong.plt.webpage.course.resource.train.entry.TrainQuestionItem;
+import com.santrong.plt.webpage.course.resource.train.entry.TrainQuestionQuery;
 
 /**
  * @author huangweihua
@@ -47,6 +57,133 @@ public class TrainQuestionDao extends BaseDao{
 			Log.printStackTrace(e);
 		}
 		return null;
+	}
+	
+	/**
+	 * 查询该用户的所有的题目(分页)
+	 * @author huangweihua
+	 * @param TrainQuestionQuery query
+	 * @return List<TrainQuestionItem> list
+	 */
+	public List<TrainQuestionItem> selectByQuery(TrainQuestionQuery query) {
+		List<TrainQuestionItem> list = new ArrayList<TrainQuestionItem>();
+		try {
+			Statement criteria = new Statement("resource_train_question", "a");
+			criteria.setFields("a.*");
+			
+			// 关键词
+			if(!StringUtils.isNullOrEmpty(query.getKeywords())) {
+				criteria.where(or(like("a.topic", "?")));
+				criteria.setStringParam("%" + query.getKeywords() + "%");
+			}
+			
+			// 所属用户
+			if (MyUtils.isNotNull(query.getUserId())) {
+				criteria.where(eq("a.ownerId", "?"));
+				criteria.setStringParam(query.getUserId());
+			}
+			
+			// 题目类型
+			if (query.isSingleSelection()) {
+				criteria.where(eq("a.questionType", TrainQuestionItem.QUESTION_TYPE_SINGLE_SELECTION));//单选题 (默认值为1)
+			} else if (query.isMulChoice()) {
+				criteria.where(eq("a.questionType", TrainQuestionItem.QUESTION_TYPE_MULTIPLE_CHOICE));//多选题 (默认值为2)
+			} else if (query.isMulChoice()) {
+				criteria.where(eq("a.questionType", TrainQuestionItem.QUESTION_TYPE_JUDGE_TRUE_OR_FLASE));//判断题 (默认值为3)
+			} else if (query.isMulChoice()) {
+				criteria.where(eq("a.questionType", TrainQuestionItem.QUESTION_TYPE_BLANK_FILLING));//填空题 (默认值为4)
+			} else {
+				System.out.println("warnings : The questionType has no corresponding value.");
+			}
+			
+			// 是否已经标识为已删除（del）
+			if (query.getDel() == TrainQuestionItem.IS_NOT_DELETE) {
+				criteria.where(eq("a.del", TrainQuestionItem.IS_NOT_DELETE));
+			}else if (query.getDel() == TrainQuestionItem.IS_DELETE) {
+				criteria.where(eq("a.del", TrainQuestionItem.IS_DELETE));
+			}
+			
+			// 排序
+			if (!StringUtils.isNullOrEmpty(query.getOrderRule())) {
+				if ("desc".equalsIgnoreCase(query.getOrderRule())) {
+					criteria.desc("a." + query.getOrderBy());
+				}else{
+					criteria.asc("a." + query.getOrderBy());
+				}
+			}
+			
+			// 分页
+			criteria.limit(query.getLimitBegin(), query.getLimitEnd());
+			
+			Connection conn = ThreadUtils.currentConnection();
+			PreparedStatement stm = criteria.getRealStatement(conn);
+			ResultSet rs = stm.executeQuery();
+			while (rs.next()) {
+				TrainQuestionItem item = new TrainQuestionItem();
+				BeanUtils.Rs2Bean(rs, item);
+				list.add(item);
+			}
+						
+		} catch (Exception e) {
+			Log.printStackTrace(e);
+		}
+		return list;
+	}
+	
+	/**
+	 * 统计题库中总数
+	 * @author huangweihua
+	 * @param TrainQuestionQuery query
+	 * @return int
+	 */
+	public int selectCountByQuery(TrainQuestionQuery query) {
+		int count = 0;
+		try {
+			Statement criteria = new Statement("resource_train_question", "a");
+			criteria.setFields("count(*) cn");
+			
+			// 关键词
+			if(!StringUtils.isNullOrEmpty(query.getKeywords())) {
+				criteria.where(or(like("a.topic", "?")));
+				criteria.setStringParam("%" + query.getKeywords() + "%");
+			}
+			
+			// 所属用户
+			if (MyUtils.isNotNull(query.getUserId())) {
+				criteria.where(eq("a.ownerId", "?"));
+				criteria.setStringParam(query.getUserId());
+			}
+			
+			// 题目类型
+			if (query.isSingleSelection()) {
+				criteria.where(eq("a.questionType", TrainQuestionItem.QUESTION_TYPE_SINGLE_SELECTION));//单选题 (默认值为1)
+			} else if (query.isMulChoice()) {
+				criteria.where(eq("a.questionType", TrainQuestionItem.QUESTION_TYPE_MULTIPLE_CHOICE));//多选题 (默认值为2)
+			} else if (query.isMulChoice()) {
+				criteria.where(eq("a.questionType", TrainQuestionItem.QUESTION_TYPE_JUDGE_TRUE_OR_FLASE));//判断题 (默认值为3)
+			} else if (query.isMulChoice()) {
+				criteria.where(eq("a.questionType", TrainQuestionItem.QUESTION_TYPE_BLANK_FILLING));//填空题 (默认值为4)
+			} else {
+				System.out.println("warnings : The questionType has no corresponding value.");
+			}
+			
+			// 是否已经标识为已删除（del）
+			if (query.getDel() == TrainQuestionItem.IS_NOT_DELETE) {
+				criteria.where(eq("a.del", TrainQuestionItem.IS_NOT_DELETE));
+			}else if (query.getDel() == TrainQuestionItem.IS_DELETE) {
+				criteria.where(eq("a.del", TrainQuestionItem.IS_DELETE));
+			}
+			
+			Connection conn = ThreadUtils.currentConnection();
+			PreparedStatement stm = criteria.getRealStatement(conn);
+			ResultSet rs = stm.executeQuery();
+			rs.next();
+			count = rs.getInt("cn");
+			
+		} catch (Exception e) {
+			Log.printStackTrace(e);
+		}
+		return count;
 	}
 	
 	public TrainQuestionItem selectById(String id) {
@@ -108,6 +245,18 @@ public class TrainQuestionDao extends BaseDao{
 			TrainQuestionMapper mapper = this.getMapper(TrainQuestionMapper.class);
 			if (mapper != null) {
 				return mapper.deleteById(id) > 0;
+			}
+		} catch (Exception e) {
+			Log.printStackTrace(e);
+		}
+		return false;
+	}
+	
+	public boolean update(TrainQuestionItem question) {
+		try {
+			TrainQuestionMapper mapper = this.getMapper(TrainQuestionMapper.class);
+			if (mapper != null) {
+				return mapper.update(question) > 0;
 			}
 		} catch (Exception e) {
 			Log.printStackTrace(e);

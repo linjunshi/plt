@@ -25,7 +25,9 @@ public class ServerHttpService21003 implements AbstractHttpService{
 	public String excute(XmlReader xml) {
 		try {
 			String liveID = xml.find("/MsgBody/LiveID").getText();
+//			String masterID = xml.find("/MsgBody/MasterID").getText();
 			String homeWorkID = xml.find("/MsgBody/HomeWorkID").getText();
+//			String homeWorkNum = xml.find("/MsgBody/HomeWorkNum").getText();
 			
 			if(MyUtils.isNotNull(liveID) && MyUtils.isNotNull(homeWorkID)) {
 				

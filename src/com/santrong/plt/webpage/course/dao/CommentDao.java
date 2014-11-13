@@ -13,6 +13,7 @@ import com.santrong.plt.opt.ThreadUtils;
 import com.santrong.plt.util.BeanUtils;
 import com.santrong.plt.util.MyUtils;
 import com.santrong.plt.webpage.BaseDao;
+import com.santrong.plt.webpage.course.entry.CommentCourseView;
 import com.santrong.plt.webpage.course.entry.CommentItem;
 import com.santrong.plt.webpage.course.entry.CommentQuery;
 import com.santrong.plt.webpage.course.entry.CommentUserView;
@@ -30,9 +31,13 @@ public class CommentDao extends BaseDao {
 	 * @return
 	 */
 	public List<CommentUserView> selectByCourseId(String courseId) {
-		CommentMapper mapper = this.getMapper(CommentMapper.class);
-		if(mapper != null) {
-			return mapper.selectByCourseId(courseId);
+		try {
+			CommentMapper mapper = this.getMapper(CommentMapper.class);
+			if (mapper != null) {
+				return mapper.selectByCourseId(courseId);
+			}
+		} catch (Exception e) {
+			Log.printStackTrace(e);
 		}
 		return null;
 	}
@@ -42,25 +47,33 @@ public class CommentDao extends BaseDao {
 	 * @param id，userId，courseId，remark，cts，uts
 	 * @return
 	 */
-	public int insert(CommentItem commentItem){
-		CommentMapper mapper = this.getMapper(CommentMapper.class);
-		if(mapper != null) {
-			return mapper.insert(commentItem);
+	public int insert(CommentItem commentItem) {
+		try {
+			CommentMapper mapper = this.getMapper(CommentMapper.class);
+			if (mapper != null) {
+				return mapper.insert(commentItem);
+			}
+		} catch (Exception e) {
+			Log.printStackTrace(e);
 		}
 		return 0;
 	}
-	
+
 	/**
 	 * 删除一条课程评论记录
 	 * @param id
 	 * @return
 	 */
-	public int delete(String id){
-		CommentMapper mapper = this.getMapper(CommentMapper.class);
-		if(mapper != null) {
-			return mapper.delete(id);
+	public boolean delete(String id){
+		try {
+			CommentMapper mapper = this.getMapper(CommentMapper.class);
+			if(mapper != null) {
+				return mapper.delete(id) > 0;
+			}
+		} catch (Exception e) {
+			Log.printStackTrace(e);
 		}
-		return 0;
+		return false;
 	}
 	
 	/**
@@ -68,17 +81,20 @@ public class CommentDao extends BaseDao {
 	 * @param query
 	 * @return
 	 */
-	public List<CommentItem> selectByQuery(CommentQuery query) {
-		List<CommentItem> list = new ArrayList<CommentItem>();
+	public List<CommentCourseView> selectByQuery(CommentQuery query) {
+		List<CommentCourseView> list = new ArrayList<CommentCourseView>();
 		
 		try{
 			Statement criteria = new Statement("course_comment", "a");
-			
+			criteria.setFields("a.*,b.courseName, b.teacher, b.price");
+			criteria.ljoin("course", "b", "a.courseId", "b.id");
+
 			// 所属用户
 			if(MyUtils.isNotNull(query.getUserId())) {
 				criteria.where(eq("a.userId", "?"));
 				criteria.setStringParam(query.getUserId());
 			}
+			
 			// 排序
 			if(!StringUtils.isNullOrEmpty(query.getOrderBy())) {
 				if("desc".equalsIgnoreCase(query.getOrderRule())) {
@@ -95,7 +111,7 @@ public class CommentDao extends BaseDao {
 			PreparedStatement stm = criteria.getRealStatement(conn);
 			ResultSet rs = stm.executeQuery();
 			while(rs.next()){
-				CommentItem item = new CommentItem();
+				CommentCourseView item = new CommentCourseView();
 				BeanUtils.Rs2Bean(rs, item);
 				list.add(item);
 			}

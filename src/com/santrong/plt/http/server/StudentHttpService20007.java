@@ -17,15 +17,15 @@ import com.santrong.plt.webpage.course.resource.live.entry.LiveReplyItem;
  * @date 2014年11月4日  
  * @time 下午4:46:07
  */
-public class StudentHttpService30003 implements AbstractHttpService{
+public class StudentHttpService20007 implements AbstractHttpService{
 
 	@Override
 	public String excute(XmlReader xml) {
 		int rt = 0;
 		try{
+			String liveID = xml.find("/MsgBody/LiveID").getText();
 			String userID = xml.find("/MsgBody/UserID").getText();
 			String callNameID = xml.find("/MsgBody/CallNameID").getText();
-			String liveID = xml.find("/MsgBody/LiveID").getText();
 			
 			if (MyUtils.isNotNull(userID) && MyUtils.isNotNull(callNameID) && MyUtils.isNotNull(liveID)) {
 				LiveCallDao liveCallDao = new LiveCallDao();
@@ -57,8 +57,8 @@ public class StudentHttpService30003 implements AbstractHttpService{
 		sb.append(HttpDefine.Xml_Header);
 		sb.append("<RespMsg>");
 			sb.append("<MsgHead>");
-				//sb.append("<!--上报点名结果(30003)-->");
-				sb.append("<MsgCode type=\"int\">").append(HttpDefine.Student_Service_30003).append("</MsgCode>");
+				//sb.append("<!--上报点名结果(20007)-->");
+				sb.append("<MsgCode type=\"int\">").append(HttpDefine.Student_Service_20007).append("</MsgCode>");
 				//sb.append("<!--0表示失败，1表示成功-->");
 				sb.append("<ResultCode type=\"int\">").append(rt).append("</ResultCode>");
 			sb.append("</MsgHead>");

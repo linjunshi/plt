@@ -38,10 +38,10 @@ Globals.page = "Manage_index";
 	                                <span class="form_ra_text">单选</span>
 	                                <input value="2" class="form_radio" name="questionType" type="radio">
 	                                <span class="form_ra_text">多选</span>
-	                                <input value="4" class="form_radio" name="questionType" type="radio">
+	                                <input value="3" class="form_radio" name="questionType" type="radio">
 	                                <span class="form_ra_text">判断题</span>
-	                                <input value="8" class="form_radio" name="questionType" type="radio">
-	                                <span class="form_ra_text">简答题</span> </div>
+	                                <input value="4" class="form_radio" name="questionType" type="radio">
+	                                <span class="form_ra_text">填空题</span> </div>
 	                        </div>
 	                        <div class="form_item">
 	                            <label>标题：</label>
@@ -91,7 +91,7 @@ Globals.page = "Manage_index";
 	                        </div>
 	                        <div class="form_action"> 
 		                        <input class="btn_question" type="submit" value="提交"/>
-		                        <input class="btn_question" type="reset" value="取消"/> 
+		                        <a class="btn_question" href="${ctx}/manage/question/list">取消</a> 
 	                        </div>
 	                    </form>
 	                </div>

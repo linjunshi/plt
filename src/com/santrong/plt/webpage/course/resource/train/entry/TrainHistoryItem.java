@@ -21,6 +21,15 @@ public class TrainHistoryItem {
 	private Date cts;
 	private Date uts;
 	
+	/**
+	 * 答题正确，结果为1
+	 */
+	public static final int ANSWER_IS_RIGHT		=	1;
+	/**
+	 * 答题错误，结果为0
+	 */
+	public static final int ANSWER_IS_WRONG		=	0;
+	
 	public String getId() {
 		return id;
 	}
