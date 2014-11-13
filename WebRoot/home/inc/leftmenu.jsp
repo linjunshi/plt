@@ -12,7 +12,7 @@
                     <dd><a href="${ctx}/manage/course">课程管理</a></dd>
                     <dd><a href="${ctx}/manage/file">课件管理</a></dd>
                     <dd><a href="${ctx}/manage/question/list">试题管理</a></dd>
-                </dl>            
+                </dl>
                 <dl>
                     <dt><a href="#">我是学生</a></dt>
                     <dd><a href="${ctx}/study/course">我的课程</a></dd>

@@ -15,7 +15,7 @@ import com.santrong.plt.webpage.course.resource.live.entry.LiveCallReplyItem;
  * @date 2014年7月24日
  * @time 下午8:35:02
  */
-public class TeacherHttpService20005 implements AbstractHttpService{
+public class ClientHttpService20005 implements AbstractHttpService{
 
 	@Override
 	public String excute(XmlReader xml) {
@@ -49,7 +49,7 @@ public class TeacherHttpService20005 implements AbstractHttpService{
 		sb.append("<RespMsg>");
 			sb.append("<MsgHead>");
 //				sb.append("<!--获取点名结果（只反馈未应答的用户）-->");
-				sb.append("<MsgCode type=\"int\">").append(HttpDefine.Teacher_Service_20005).append("</MsgCode>");
+				sb.append("<MsgCode type=\"int\">").append(HttpDefine.Client_Service_20005).append("</MsgCode>");
 //				sb.append("<!--0表示失败，1表示成功-->");
 				sb.append("<ResultCode type=\"int\">").append(rt).append("</ResultCode>");
 			sb.append("</MsgHead>");

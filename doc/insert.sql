@@ -197,15 +197,6 @@ insert into school values('10016', '高级6中', null, '440300', 4);
 insert into school values('10017', '高级7中', null, '440300', 4);
 insert into school values('10018', '高级8中', null, '440300', 4);
 
--- 行政区划表 --
-drop table if exists web_area;
-create table web_area(
-	id varchar(32) not null comment 'UUID',
-	areaName varchar(64) not null comment '区域名称',
-	areaCode varchar(32) not null comment '地区编码',
-	primary key (id)
-) engine=InnoDB default charset=utf8 collate=utf8_bin comment '行政区划表';
-
 -- 一体机表 --
 drop table if exists machine;
 create table machine(

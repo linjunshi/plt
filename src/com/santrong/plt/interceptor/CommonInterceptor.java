@@ -31,7 +31,7 @@ public class CommonInterceptor implements HandlerInterceptor{
 		ThreadUtils.setHttpRequest(request);
 		ThreadUtils.setHttpResponse(response);		
 		
-		// 登录和权限判断
+		// 登录和角色权限判断，数据权限在各自方法中判断
 		if(handler instanceof HandlerMethod){
 			
 			HandlerMethod handlerMethod = (HandlerMethod)handler;
@@ -45,7 +45,7 @@ public class CommonInterceptor implements HandlerInterceptor{
 				return false;
 				
 				case REQUIRE_AUTH :
-				response.sendRedirect(request.getContextPath() + "/deny"); // 跳到登录页面
+				response.sendRedirect(request.getContextPath() + "/deny"); // 跳到没有权限页面
 				return false;
 				
 				default:

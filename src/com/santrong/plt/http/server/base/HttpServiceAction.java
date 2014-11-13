@@ -41,16 +41,12 @@ public class HttpServiceAction {
 			AbstractHttpService service = null;
 			
 			if(msgCode >= 20000 && msgCode < 21000) {
-				// 老师客户端
-				service = (AbstractHttpService) Class.forName("com.santrong.plt.http.server.TeacherHttpService" + msgCode).newInstance();
+				// 客户端
+				service = (AbstractHttpService) Class.forName("com.santrong.plt.http.server.ClientHttpService" + msgCode).newInstance();
 				
-			}else if(msgCode >= 21000 && msgCode < 22000) {
+			} else if(msgCode >= 21000 && msgCode < 22000) {
 				// 中心服务器
 				service = (AbstractHttpService) Class.forName("com.santrong.plt.http.server.ServerHttpService" + msgCode).newInstance();
-				
-			}else if(msgCode >= 30000 && msgCode < 31000) {
-				// 学生Flash端
-				service = (AbstractHttpService) Class.forName("com.santrong.plt.http.server.StudentHttpService" + msgCode).newInstance();
 			}
 			
 			if(service != null) {
