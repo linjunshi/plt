@@ -7,13 +7,6 @@
             <div class="sh_info_img"><img src="${ctx}/resource/images/003.jpg" width="160" height="100"></div>
             <div class="sh_list_switch">
                 <dl class="show">
-                    <dt><a href="#">我是老师</a></dt>
-                    <dd><a href="#" onclick="alert('developing')">我的直播</a></dd>
-                    <dd><a href="${ctx}/manage/course">课程管理</a></dd>
-                    <dd><a href="${ctx}/manage/file">课件管理</a></dd>
-                    <dd><a href="${ctx}/manage/question/list">试题管理</a></dd>
-                </dl>
-                <dl>
                     <dt><a href="#">我是学生</a></dt>
                     <dd><a href="${ctx}/study/course">我的课程</a></dd>
                     <dd><a href="${ctx}/study/train">我的测验</a></dd>
@@ -23,16 +16,13 @@
                     <dd><a href="#">修改密码</a></dd>
                     <dd><a href="#">账户余额</a></dd>
                     <dd><a href="#">交易记录</a></dd>
+                </dl>            
+                <dl class="show">
+                    <dt><a href="#">我是老师</a></dt>
+                    <dd><a href="#" onclick="alert('developing')">我的直播</a></dd>
+                    <dd><a href="${ctx}/manage/course">课程管理</a></dd>
+                    <dd><a href="${ctx}/manage/file">课件管理</a></dd>
+                    <dd><a href="${ctx}/manage/question/list">试题管理</a></dd>
                 </dl>
             </div>
         </div>
-        <script type="text/javascript">
-				$(function(){ 
-					$('.sh_list_switch .show dt').addClass('icon');
-					$('.sh_list_switch .show dd').show('slow');
-					$('.sh_list_switch dt').click(function(){
-						$(this).toggleClass('icon');
-						$(this).nextAll().toggle();
-					});					
-				});				
-		</script>

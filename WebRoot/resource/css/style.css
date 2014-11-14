@@ -358,7 +358,7 @@ div[contenteditable=true] {-webkit-line-break: after-white-space; -webkit-nbsp-m
 .sh_list_switch dl dd a{ color:#009871;}
 .sh_list_switch dl { width:190px;font-size:12px; padding:2px 0;line-height:200%; font-weight:normal; cursor:pointer;}
 .sh_list_switch dl dt { color:#fff;background:#009871 url(../images/icon.png) no-repeat 20px -54px; text-indent:40px;}
-.sh_list_switch dl dd { padding-left:60px; line-height:30px;display:none; background: url(../images/icon.png) no-repeat 40px -114px;}
+.sh_list_switch dl dd { padding-left:60px; line-height:30px; background: url(../images/icon.png) no-repeat 40px -114px;}
 .sh_list_switch dl dd a:hover{ color:#f90;}
 .sh_list_switch .icon{ background:#009871 url(../images/icon.png) no-repeat 20px -84px; color:#fff; width:190px; display:block; text-indent:40px;}
 

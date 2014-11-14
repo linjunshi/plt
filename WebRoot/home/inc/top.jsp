@@ -5,8 +5,8 @@
 	<div  id="header">
 	    <div id="headerinside"> <a href="#" class="logo"><img src="${ctx}/resource/photo/logo.png" width="265" height="70" /></a>
 	        <div class="city_info">
-	            <h2><a class="city_info_name" href="#">${sessionScope.area.cityName}</a></h2>
-			            <a class="city_info_toggle" href="#">切换城市</a>
+	            <h2><a class="city_info_name" href="${ctx}/">${sessionScope.area.cityName}</a></h2>
+			            <a class="city_info_toggle" href="${ctx}/changecity">切换城市</a>
 			</div>
 			<form class="search_form" action="${ctx}/course" method="get">
 				<div class="search_navigate">
@@ -18,7 +18,7 @@
 						</ul>
 						<div class="select_down"></div>
 						<c:set var="q" value="请输入你感兴趣的内容"/>
-						<c:if test="${query != null && query.keywords != null && query.keywords != '' }">
+						<c:if test="${!empty query && !empty query.keywords}">
 							<c:set var="q" value="${query.keywords}"/>	
 						</c:if>
 						<input class="search_text" type="text" name="q" value="${q}" />

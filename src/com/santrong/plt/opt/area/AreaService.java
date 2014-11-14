@@ -70,6 +70,9 @@ public class AreaService {
 				}else {
 					city = country;
 				}
+				if(city.endsWith("市")) {
+					city = city.substring(0, city.length() - 1);
+				}
 				AreaDao areaDao = new AreaDao();
 				AreaItem item = areaDao.selectByAreaName(city);
 				if(item != null) {

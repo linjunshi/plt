@@ -1,5 +1,7 @@
 package com.santrong.plt.webpage.home.dao;
 
+import java.util.List;
+
 import com.santrong.plt.webpage.BaseDao;
 import com.santrong.plt.webpage.home.entry.AreaItem;
 
@@ -21,6 +23,31 @@ public class AreaDao extends BaseDao {
 			return mapper.selectByAreaName(areaName);
 		}
 		return null;
+	}
+	
+	/**
+	 * 根据区域拼音获取区域实体
+	 * @param areaName
+	 * @return
+	 */
+	public AreaItem selectByAreaEName(String areaEName) {
+		AreaMapper mapper = this.getMapper(AreaMapper.class);
+		if(mapper != null) {
+			return mapper.selectByAreaEName(areaEName);
+		}
+		return null;
+	}
+	
+	/**
+	 * 获取所有城市
+	 * @return
+	 */
+	public List<AreaItem> selectCity() {
+		AreaMapper mapper = this.getMapper(AreaMapper.class);
+		if(mapper != null) {
+			return mapper.selectCity();
+		}
+		return null;		
 	}
 
 }

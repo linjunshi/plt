@@ -6,14 +6,22 @@ package com.santrong.plt.webpage.home.entry;
  * @time 下午2:36:56
  */
 public class AreaItem {
-	private String id;
-	private String areaName;
 	private String areaCode;
-	public String getId() {
-		return id;
+	private String areaName;
+	private String areaEName;
+	private String areaType;
+	
+	public String getAreaType() {
+		return areaType;
 	}
-	public void setId(String id) {
-		this.id = id;
+	public void setAreaType(String areaType) {
+		this.areaType = areaType;
+	}
+	public String getAreaEName() {
+		return areaEName;
+	}
+	public void setAreaEName(String areaEName) {
+		this.areaEName = areaEName;
 	}
 	public String getAreaName() {
 		return areaName;
