@@ -53,6 +53,9 @@ public class SchoolAction extends BaseAction {
 		HttpServletRequest request = getRequest();
 		AreaEntry area = (AreaEntry)(request.getSession().getAttribute(Global.SessionKey_Area));		
 		
+		// 关键字
+		String keyword = request.getParameter("q");		
+		
 		int pageNum = this.getIntParameter("page");
 		if(pageNum == 0) {
 			pageNum = 1;
@@ -66,6 +69,7 @@ public class SchoolAction extends BaseAction {
 		}
 		schoolQuery.setPageSize(15);
 		schoolQuery.setPageNum(pageNum);
+		schoolQuery.setKeywords(keyword);
 		schoolQuery.setCount(schoolDao.selectCountByQuery(schoolQuery));
 		List<SchoolItem> schoolList = schoolDao.selectByQuery(schoolQuery);
 		

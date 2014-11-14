@@ -136,8 +136,12 @@ public class CourseAction extends BaseAction {
 		if(MyUtils.isNotNull(grade) && !grade.equals("all")) {
 			courseQuery.setGradeEnName(grade);
 		}
+		if(MyUtils.isNotNull(param.getKeyword())) {
+			courseQuery.setKeywords(param.getKeyword());
+		}
 		courseQuery.setLevelEnName(param.getParamByStart("level"));
 		courseQuery.setLive(param.getParamContain("live"));
+	
 		
 		if(MyUtils.isNotNull(param.getOrderBy())) {
 			courseQuery.setOrderBy(param.getOrderBy());

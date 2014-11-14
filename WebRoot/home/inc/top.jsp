@@ -3,22 +3,29 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 	<div  id="header">
-	    <div id="headerinside"> <a href="#" class="logo"><img src="${ctx}/resource/images/logo.png" width="148" height="70" /></a>
+	    <div id="headerinside"> <a href="#" class="logo"><img src="${ctx}/resource/photo/logo.png" width="265" height="70" /></a>
 	        <div class="city_info">
 	            <h2><a class="city_info_name" href="#">${sessionScope.area.cityName}</a></h2>
 			            <a class="city_info_toggle" href="#">切换城市</a>
 			</div>
-			<form class="search_form" method="get">
-				<div class="search_navigat">
+			<form class="search_form" action="${ctx}/course" method="get">
+				<div class="search_navigate">
 					<div class="search">
-						<input name="search" type="text" class="search_text" value="站内搜索" />
-					    <input type=hidden name=ie value=GB2312> 
-					    <input type=hidden name=oe value=GB2312> 
-					    <input type=hidden name=hl value=zh-CN>  
-						<a href="javascript:void(0);" class="search_txt">站内搜索</a>
+						<ul class="search_category">
+							<li id="q_course">课程</li>
+							<li id="q_school" class="hide">学校</li>
+							<li id="q_teacher" class="hide">老师</li>
+						</ul>
+						<div class="select_down"></div>
+						<c:set var="q" value="请输入你感兴趣的内容"/>
+						<c:if test="${query != null && query.keywords != null && query.keywords != '' }">
+							<c:set var="q" value="${query.keywords}"/>	
+						</c:if>
+						<input class="search_text" type="text" name="q" value="${q}" />
 					</div>
-					<div class="fast_navigat"></div>
+					<input class="search_submit" type="submit" value="搜索" />
 				</div>
+				<div class="fast_navigate"></div>
 			</form>
 			<c:if test="${sessionScope.loginUser == null}">
 				<a href="${ctx }/account/login" class="user_info_login">登录</a>
