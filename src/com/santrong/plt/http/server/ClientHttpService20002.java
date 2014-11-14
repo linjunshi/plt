@@ -47,12 +47,14 @@ public class ClientHttpService20002 implements AbstractHttpService{
 			sb.append("</MsgHead>");
 			sb.append("<MsgBody>");
 		        sb.append("<LiveID type=\"string\">").append(liveID).append("</LiveID>");
-	        	for (TrainQuestionItem tqItem:tqList) {
-	        		sb.append("<HomeWork>");
+		        if (tqList != null) {
+		        	for (TrainQuestionItem tqItem:tqList) {
+		        		sb.append("<HomeWork>");
 		        		sb.append("<Name type=\"string\">").append(tqItem.getTopic()).append("</Name>");
 		        		sb.append("<ID type=\"string\">").append(tqItem.getId()).append("</ID>");
 		        		sb.append("<Type type=\"int\">").append(tqItem.getQuestionType()).append("</Type>");
-	        		sb.append("</HomeWork>");
+		        		sb.append("</HomeWork>");
+		        	}
 				}
 			sb.append("</MsgBody>");
 		sb.append("</RespMsg>");

@@ -51,15 +51,17 @@ public class ClientHttpService20001 implements AbstractHttpService{
 				sb.append("<ResultCode type=\"int\">").append(rt).append("</ResultCode>");
 			sb.append("</MsgHead>");
 			sb.append("<MsgBody>");
-				for(UserItem user:userList){
-					sb.append("<User>");
-					//<!--用户名-->
-					sb.append("<UserName type=\"string\">").append(user.getUsername()).append("</UserName>");
-					//<!--用户ID-->
-					sb.append("<UserID type=\"string\">").append(user.getId()).append("</UserID>");
-					//<!--用户身份 1表示老师，2表示学生-->
-					sb.append("<Identity type=\"int\">").append(user.isTeacher()? 1:2).append("</Identity>");
-					sb.append("</User>");
+				if (userList != null) {
+					for(UserItem user:userList){
+						sb.append("<User>");
+						//<!--用户名-->
+						sb.append("<UserName type=\"string\">").append(user.getUsername()).append("</UserName>");
+						//<!--用户ID-->
+						sb.append("<UserID type=\"string\">").append(user.getId()).append("</UserID>");
+						//<!--用户身份 1表示老师，2表示学生-->
+						sb.append("<Identity type=\"int\">").append(user.isTeacher()? 1:2).append("</Identity>");
+						sb.append("</User>");
+					}
 				}
 			sb.append("</MsgBody>");
 		sb.append("</RespMsg>");

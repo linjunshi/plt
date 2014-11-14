@@ -15,13 +15,11 @@ import com.santrong.plt.webpage.course.resource.train.entry.TrainQuestionItem;
  */
 public class ClientHttpService20004 implements AbstractHttpService{
 
-	@SuppressWarnings("null")
 	@Override
 	public String excute(XmlReader xml) {
 		int rt = 0;
 		String questionID = "";
 		TrainQuestionItem tqItem = null;
-		String[] rightAnswers = null;
 		try{
 			questionID = xml.find("/MsgBody/HomeWorkID").getText();
 			if (MyUtils.isNotNull(questionID)) {
@@ -62,13 +60,11 @@ public class ClientHttpService20004 implements AbstractHttpService{
 						int answer = tqItem.getAnswer(); 
 						int[] answers = TrainQuestionItem.Answers;
 						String[] answerOptions = TrainQuestionItem.Answers_Options;
-						int j = 0;
 						int isKey = 0;
 						String optionContent = "";
 						if (answers.length == answerOptions.length) {
 							for (int i = 0; i < answers.length; i++) {
 								if ((answer&answers[i]) == answers[i]) {
-									rightAnswers[j++] = answerOptions[i];
 									isKey = 1;
 								}
 								if (MyUtils.isNotNull(tqItem.getOpt1()) && answerOptions[i].equals("A")) {
