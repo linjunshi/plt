@@ -59,11 +59,10 @@ Globals.page = "Manage_index";
 		                        <div class="form_item">
 		                            <label>性别：</label>
 		                            <div class="form_field">
-		                                <label>
-		                                    <input <c:if test="${userDetailView.gender == 1}">checked="checked"</c:if> value="1" class="form_radio" name="gender" type="radio">
-		                                    <span>男</span>
-		                                    <input <c:if test="${userDetailView.gender == 2}">checked="checked"</c:if> value="2" class="form_radio" name="gender" type="radio">
-		                                    <span>女</span> </label>
+	                                    <input <c:if test="${userDetailView.gender == 1}"> checked="checked" </c:if> value="1" class="form_radio" name="gender" type="radio">
+	                                    <span>男</span>
+	                                    <input <c:if test="${userDetailView.gender == 2}"> checked="checked" </c:if> value="2" class="form_radio" name="gender" type="radio">
+	                                    <span>女</span> 
 		                            </div>
 		                        </div>
 		                        <div class="form_item">

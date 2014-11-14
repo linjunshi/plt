@@ -131,8 +131,8 @@ public class QuestionMAction extends TeacherBaseAction{
 		return FAIL;
 	}
 	
-	@RequestMapping("/update")
-	public String updateQuestion(String questionId){
+	@RequestMapping("/modify")
+	public String modifyQuestion(String questionId){
 		try {
 			TrainQuestionDao tqDao = new TrainQuestionDao();
 			TrainQuestionItem tqItem = tqDao.selectById(questionId);
@@ -146,8 +146,8 @@ public class QuestionMAction extends TeacherBaseAction{
 		return "/manage/teacher/myTrainMUpdate";
 	}
 	
-	@RequestMapping(value = "/updatePost",method=RequestMethod.POST)
-	public String updateQuestionPost(TrainQuestionItem tqItem){
+	@RequestMapping(value = "/modifyPost",method=RequestMethod.POST)
+	public String modifyQuestionPost(TrainQuestionItem tqItem){
 		try {
 			if (tqItem != null) {
 				int sumAnswer = 0;

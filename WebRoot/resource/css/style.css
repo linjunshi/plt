@@ -459,6 +459,10 @@ span.form_error, span.form_success{border-width:1px;display:inline-block;*displa
 .sh_coll_m{ float:left; display:block; width:200px; margin-top:10px; text-align:center; color:#f00;}
 .sh_coll_but { float:right; margin:10px 10px 0 0;}
 .sh_coll_but a{ padding:3px 10px; background:#009871; color:#fff;}
+
+.sh_coll_but input{ padding:3px 10px; background:#009871; color:#fff;border:0;}
+.sh_coll_but input:hover{ background:#f90;cursor:pointer;}
+
 .sh_coll_img{ float:left; display:block; width:60px; margin:10px 0 0 40px;}
 .sh_coll_th{ width:100px;float:left; margin:10px 0 0 10px;}
 .sh_coll_tab { margin-top:10px; text-align:center; border:#ccc 1px solid;}
@@ -469,11 +473,32 @@ span.form_error, span.form_success{border-width:1px;display:inline-block;*displa
 .sh_coll_tab tfoot { height:30px; text-align:right;}
 .sh_add { position:absolute; right:10px; top:5px; font-size:14px; color:#009871;}
 .sh_add:hover{ color:#f90;}
+.sh_coll_tab .sh_release a, .sh_coll_tab .sh_h_im a{ background:none; color:#666; }
+.sh_coll_tab .sh_release a:hover, .sh_coll_tab .sh_h_im a:hover{background:none; color:#f90;}
+.sh_coll_tab .sh_h_im { text-align:left;}
+.sh_coll_tab .sh_h_im a{overflow:hidden; padding:0; margin:0;}
+.sh_color_c { color:#f90 !important;}
 .sh_coll_tab .btn_question_update {margin-left: 25%;}
+.sh_coll_tab .btn_input {margin-left: 15%;}
 .sh_coll_tab .btn_question_operation input{ margin-right:10px; padding:0px 7px; background:#009871; color:#fff; border:0;float: left;}
 .sh_coll_tab .btn_question_operation input:hover{ background:#044a38;cursor:pointer;}
+
+/*----------------------课程章节维护页---------------------------*/
+.sh_add_chapter { width:97%; display:block;border-bottom:1px #dbdbdb solid;}
+.sh_add_chapter dt{border-bottom:1px #dbdbdb solid;text-indent:10px;color:#333;}
+.sh_add_chapter dd { margin-left:60px; border-bottom:1px #dbdbdb solid;border-left:1px #dbdbdb solid; height:40px; line-height:40px; text-indent:10px; color:#333;}
+.sh_add_chapter .pt11 { border-bottom:none !important; }
+.sh_add_chapter .pt11 a{color:#666;}
+.sh_add_opera { display:block; position:relative; height:40px; line-height:40px;}
+.sh_add_opera p { position:absolute; left:110px; top:0px;}
+.sh_operation { display:none; position:absolute; right:100px; top:2px; width:200px;}
+.sh_operation a{ margin-right:10px; padding:2px 6px; color:#666; width:80px;}
+.sh_operation a:hover{ color:#009871; text-decoration:underline;} 
+.sh_add_chapter dt:hover{ background:#dbdbdb;}
+.sh_add_chapter dt:hover .sh_operation { display:block;}
+.sh_addop_a {height:40px; line-height:40px; color:#666; margin-left:70px; padding:2px 10px; border:1px solid #ccc;}
+.sh_addop_a:hover,.sh_add_chapter .pt11 a:hover{ color:#009871; text-decoration:underline;}
+
 /* --------------------error tips------------------------- */
-.sh_coll_but input{ padding:3px 10px; background:#009871; color:#fff;border:0;}
-.sh_coll_but input:hover{ background:#f90;cursor:pointer;}
 .system_tip { width:300px; line-height:26px; margin:10px auto; border:solid 1px #F5D8A7; border-radius:2px; background-color:#FFF6DB;padding-left: 10px; text-align: center; }
 /* -------------------------------------------------- */

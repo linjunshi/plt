@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.santrong.plt.webpage.course.dao.CourseDao;
 import com.santrong.plt.webpage.course.entry.CourseItem;
@@ -45,5 +46,16 @@ public class CourseMAction extends TeacherBaseAction {
 		request.setAttribute("query", query);
 		
 		return "manage/teacher/courseList";
+	}
+	
+	@RequestMapping("/add")
+	public String addCourse(){
+		return "/manage/teacher/courseAdd";
+	}
+	
+	@RequestMapping(value = "/add", method = RequestMethod.POST)
+	public String addCoursePost(){
+		
+		return this.redirect("/manage/course");
 	}
 }

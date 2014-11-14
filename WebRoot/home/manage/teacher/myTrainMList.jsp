@@ -42,8 +42,7 @@ Globals.page = "Manage_index";
 						<tbody>
 							<c:forEach items="${questionList}"  var="question" varStatus="qt">
 								<tr>
-									<td><input type="checkbox" name="CheckboxGroup1"
-										value="复选框" id="CheckboxGroup1_1" /></td>
+									<td>${qt.index + 1}</td>
 									<td>${question.topic}</td>
 									<td>
 									<c:if test="${question.questionType==1}">单选题</c:if>
@@ -54,7 +53,7 @@ Globals.page = "Manage_index";
 									<td><fmt:formatDate value="${question.cts}" type="date" dateStyle="default" /></td>
 									<td class="btn_question_operation">
 									<div class="btn_question_update">
-										<form action="${ctx}/manage/question/update" method="post">
+										<form action="${ctx}/manage/question/modify" method="post">
 											<input type="hidden" value="${question.id}" name="questionId" />
 											<input type="submit" value="修改" />
 										</form>

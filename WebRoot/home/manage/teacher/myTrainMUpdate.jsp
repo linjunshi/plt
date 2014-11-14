@@ -30,7 +30,7 @@ Globals.page = "Manage_index";
 								</c:forEach>
 							</div>
 						</c:if>
-	                    <form method="post" action="${ctx}/manage/question/updatePost" class="form_info" id="question_form">
+	                    <form method="post" action="${ctx}/manage/question/modifyPost" class="form_info" id="question_form">
 	                        <div class="form_item">
 	                            <label>题型：</label>
 	                            <div class="form_field">
