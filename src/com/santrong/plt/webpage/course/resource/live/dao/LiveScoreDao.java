@@ -1,5 +1,6 @@
 package com.santrong.plt.webpage.course.resource.live.dao;
 
+import com.santrong.plt.log.Log;
 import com.santrong.plt.webpage.BaseDao;
 import com.santrong.plt.webpage.course.resource.live.entry.LiveScoreItem;
 
@@ -17,9 +18,13 @@ public class LiveScoreDao extends BaseDao {
 	 * @return int
 	 */
 	public int insert(LiveScoreItem liveScoreItem) {
-		LiveScoreMapper mapper = this.getMapper(LiveScoreMapper.class);
-		if(mapper != null) {
-			return mapper.insert(liveScoreItem);
+		try {
+			LiveScoreMapper mapper = this.getMapper(LiveScoreMapper.class);
+			if(mapper != null) {
+				return mapper.insert(liveScoreItem);
+			}
+		} catch (Exception e) {
+			Log.printStackTrace(e);
 		}
 		return 0;
 	}

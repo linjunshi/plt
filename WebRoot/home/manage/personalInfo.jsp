@@ -21,7 +21,7 @@ Globals.page = "Manage_index";
 			<div class="sectionMain clr">
 				<%@ include file="../inc/leftmenu.jsp"%>
 				<div class="sh_info_r">
-		            <div class="st_titile_r"> <a href="#">基本信息</a><a href="#">教育信息</a><a href="#">其他扩展信息</a></div>
+		            <div class="st_titile_r sh_title"> <a href="#">基本信息</a><a href="#">教育信息</a><a href="#">其他扩展信息</a></div>
 		            <div class="sh_form_con">
 		                <div id="demo_zone">
 		                	<c:if test="${tipError != null && fn:length(tipError)  > 0}">

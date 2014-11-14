@@ -18,7 +18,7 @@ Globals.page = "Manage_index";
 			<div class="sectionMain clr">
 				<%@ include file="../inc/leftmenu.jsp"%>
 				<div class="sh_info_r">
-					<div class="st_titile">
+					<div class="sh_title">
 						<h2>忘记密码</h2>
 					</div>
 					<div class="sh_form_con">
@@ -42,7 +42,7 @@ Globals.page = "Manage_index";
 									<label for="pwd">验证方式：</label>
 									<div class="form_field">
 										<input name="pwd" id="pwd" class="form_text" type="password">
-										<span class="form_error">输入的密码不正确，请重新输入</span>
+										<!-- <span class="form_error">输入的密码不正确，请重新输入</span> -->
 									</div>
 								</div>
 								<div class="form_action">

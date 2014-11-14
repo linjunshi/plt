@@ -65,6 +65,9 @@ public class TeacherAction extends BaseAction {
 		HttpServletRequest request = getRequest();
 		AreaEntry area = (AreaEntry)(request.getSession().getAttribute(Global.SessionKey_Area));		
 		
+		// 关键字
+		String keyword = request.getParameter("q");		
+		
 		// 条件-科目
 		SubjectDao subjectDao = new SubjectDao();
 		List<SubjectItem> subjectList = null;
@@ -83,10 +86,13 @@ public class TeacherAction extends BaseAction {
 			gradeList = gradeDao.selectGradeBySubjectEnName(subject);
 		}
 		
+		// 分页
 		int pageNum = this.getIntParameter("page");
 		if(pageNum == 0) {
 			pageNum = 1;
 		}
+		
+		
 		
 		// 获取老师
 		UserQuery userQuery = new UserQuery();
@@ -94,6 +100,7 @@ public class TeacherAction extends BaseAction {
 		userQuery.setRole(UserItem.Role_Teacher);
 		userQuery.setPageSize(15);
 		userQuery.setPageNum(pageNum);
+		userQuery.setKeywords(keyword);
 		if(MyUtils.isNotNull(subject) && !subject.equals("all")) {
 			userQuery.setSubjectEnName(subject);
 		}

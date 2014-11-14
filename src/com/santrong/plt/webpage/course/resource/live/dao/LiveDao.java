@@ -20,9 +20,13 @@ public class LiveDao extends BaseDao {
 	 * @return int
 	 */
 	public List<LiveItem> selectAll() {
-		LiveMapper mapper = this.getMapper(LiveMapper.class);
-		if(mapper != null) {
-			return mapper.selectAll();
+		try {
+			LiveMapper mapper = this.getMapper(LiveMapper.class);
+			if(mapper != null) {
+				return mapper.selectAll();
+			}
+		} catch (Exception e) {
+			Log.printStackTrace(e);
 		}
 		return null;
 	}

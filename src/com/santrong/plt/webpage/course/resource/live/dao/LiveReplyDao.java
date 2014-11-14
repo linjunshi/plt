@@ -1,5 +1,6 @@
 package com.santrong.plt.webpage.course.resource.live.dao;
 
+import com.santrong.plt.log.Log;
 import com.santrong.plt.webpage.BaseDao;
 import com.santrong.plt.webpage.course.resource.live.entry.LiveReplyItem;
 
@@ -17,9 +18,13 @@ public class LiveReplyDao extends BaseDao {
 	 * @return 
 	 */
 	public int insert(LiveReplyItem liveReplyItem) {
-		LiveReplyMapper mapper = this.getMapper(LiveReplyMapper.class);
-		if(mapper != null) {
-			return mapper.insert(liveReplyItem);
+		try {
+			LiveReplyMapper mapper = this.getMapper(LiveReplyMapper.class);
+			if(mapper != null) {
+				return mapper.insert(liveReplyItem);
+			}
+		} catch (Exception e) {
+			Log.printStackTrace(e);
 		}
 		return 0;
 	}
@@ -31,9 +36,13 @@ public class LiveReplyDao extends BaseDao {
 	 * @return 
 	 */
 	public boolean exists(String callId, String userId) {
-		LiveReplyMapper mapper = this.getMapper(LiveReplyMapper.class);
-		if(mapper != null) {
-			return mapper.exists(callId, userId) > 0;
+		try {
+			LiveReplyMapper mapper = this.getMapper(LiveReplyMapper.class);
+			if(mapper != null) {
+				return mapper.exists(callId, userId) > 0;
+			}
+		} catch (Exception e) {
+			Log.printStackTrace(e);
 		}
 		return false;
 	}

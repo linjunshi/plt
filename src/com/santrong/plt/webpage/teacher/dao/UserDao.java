@@ -83,7 +83,7 @@ public class UserDao extends BaseDao{
 			// 关键词
 			if(!StringUtils.isNullOrEmpty(query.getKeywords())) {
 				criteria.where(or(
-						like("u.showName", "?")));
+						like("a.showName", "?")));
 				criteria.setStringParam("%" + query.getKeywords() + "%");
 			}
 			// 科目条件

@@ -14,10 +14,12 @@ import com.santrong.plt.util.MyUtils;
  * @description 解析例如filter=level1_live_hasSchool&sort=price类型的参数，排序仅支持单个，升序为sort=xxxAsc，降序为sort=xxx，无排序没该属性
  */
 public class ParamHelper {
+	private String keyword = "";
 	private List<String> paramList = new ArrayList<String>();
 	private String orderBy = "";
 	private String orderRule = "";
-	
+
+	private String keyName = "";
 	private String filterName = "";
 	private String sortName = "";
 	
@@ -27,8 +29,13 @@ public class ParamHelper {
 	 * @param filterName
 	 * @param sortName
 	 */
-	public void init(HttpServletRequest request, String filterName, String sortName) {
-		String attr = request.getParameter(filterName);
+	public void init(HttpServletRequest request,  String keyName, String filterName, String sortName) {
+		String attr = request.getParameter(keyName);
+		if(MyUtils.isNotNull(attr)) {
+			this.keyword = attr;
+		}
+		
+		attr = request.getParameter(filterName);
 		if(MyUtils.isNotNull(attr)) {
 			String[] attrArr = attr.split("_");
 			for(String t:attrArr) {
@@ -49,12 +56,13 @@ public class ParamHelper {
 			this.orderBy = attr;
 		}
 		
+		this.keyName = keyName;
 		this.filterName = filterName;
 		this.sortName = sortName;
 	}
 	
 	public void init(HttpServletRequest request) {
-		this.init(request, "filter", "sort");
+		this.init(request, "q", "filter", "sort");
 	}
 	
 	public ParamHelper getSelf() {
@@ -137,5 +145,17 @@ public class ParamHelper {
 	}
 	public void setOrderRule(String orderRule) {
 		this.orderRule = orderRule;
+	}
+	public String getKeyword() {
+		return keyword;
+	}
+	public void setKeyword(String keyword) {
+		this.keyword = keyword;
+	}
+	public String getKeyName() {
+		return keyName;
+	}
+	public void setKeyName(String keyName) {
+		this.keyName = keyName;
 	}
 }

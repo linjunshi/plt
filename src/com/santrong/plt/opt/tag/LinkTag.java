@@ -157,6 +157,15 @@ public class LinkTag {
 					sb.append(key);
 				}
 			}
+			
+			// 插入关键词
+			if(MyUtils.isNotNull(param.getKeyword())) {
+				if(sb.length() != 0) {
+					sb.append("&");
+				}
+				sb.append(param.getKeyName() + "=" + param.getKeyword());
+			}			
+			
 			if(sb.length() != 0) {
 				sb.insert(0, "?");
 			}
@@ -180,6 +189,15 @@ public class LinkTag {
 				}
 				sb.deleteCharAt(sb.length() - 1);
 			}
+			
+			// 插入关键词
+			if(MyUtils.isNotNull(param.getKeyword())) {
+				if(sb.length() != 0) {
+					sb.append("&");
+				}
+				sb.append(param.getKeyName() + "=" + param.getKeyword());
+			}			
+			
 			if(sb.length() != 0) {
 				sb.insert(0, "?");
 			}			
@@ -200,6 +218,15 @@ public class LinkTag {
 					sb.append("Asc");
 				}
 			}
+			
+			// 插入关键词
+			if(MyUtils.isNotNull(param.getKeyword())) {
+				if(sb.length() != 0) {
+					sb.append("&");
+				}
+				sb.append(param.getKeyName() + "=" + param.getKeyword());
+			}
+			
 			if(sb.length() != 0) {
 				sb.insert(0, "?");
 			}

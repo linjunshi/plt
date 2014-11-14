@@ -21,7 +21,7 @@ Globals.page = "Manage_index";
 			<div class="sectionMain clr">
 				<%@ include file="../inc/leftmenu.jsp"%>
 				<div class="sh_info_r">
-					<div class="st_titile">
+					<div class="sh_title">
 						<h2>修改密码</h2>
 					</div>
 					<div class="sh_form_con">
