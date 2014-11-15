@@ -29,13 +29,16 @@ public class ServerHttpService21002 implements AbstractHttpService{
 //			String namedNum = xml.find("/MsgBody/namedNum").getText();
 			
 			if(MyUtils.isNotNull(liveID) && MyUtils.isNotNull(namedID)) {
+				
 				LiveCallDao liveCallDao = new LiveCallDao();
-				LiveCallItem liveCallItem = new LiveCallItem();
-				liveCallItem.setId(MyUtils.getGUID());
-				liveCallItem.setLiveId(liveID);
-				liveCallItem.setCallName(namedID);
-				liveCallItem.setCts(new Date());
-				liveCallDao.insert(liveCallItem);
+				if (!liveCallDao.existsByCall(liveID, namedID)) {
+					LiveCallItem liveCallItem = new LiveCallItem();
+					liveCallItem.setId(MyUtils.getGUID());
+					liveCallItem.setLiveId(liveID);
+					liveCallItem.setCallName(namedID);
+					liveCallItem.setCts(new Date());
+					liveCallDao.insert(liveCallItem);
+				}
 			}
 			
 		} catch (Exception e) {

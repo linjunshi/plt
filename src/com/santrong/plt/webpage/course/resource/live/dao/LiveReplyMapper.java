@@ -13,7 +13,7 @@ import com.santrong.plt.webpage.course.resource.live.entry.LiveReplyItem;
  */
 public interface LiveReplyMapper {
 
-	@Insert("insert into resource_live_reply values(#{id}, #{callId}, #{userId}, #{ctx})")
+	@Insert("insert into resource_live_reply values(#{id}, #{callId}, #{userId}, #{cts})")
 	int insert(LiveReplyItem liveReplyItem);
 	
 	@Select("select count(*) from resource_live_Reply where callId = #{callId} and userId = #{userId}")

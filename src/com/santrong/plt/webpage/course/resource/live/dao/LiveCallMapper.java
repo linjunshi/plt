@@ -20,4 +20,8 @@ public interface LiveCallMapper {
 	@Select("select * from resource_live_call where liveId = #{liveId} and callName = #{callName}")
 	LiveCallItem selectByCall(@Param("liveId")String liveId, @Param("callName")String callName);
 	
+	@Select("select count(*) as cn from resource_live_call where liveId = #{liveId} and callName = #{callName}")
+	int existsByCall(@Param("liveId")String liveId, @Param("callName")String callName);
+	
+	
 }
