@@ -282,7 +282,7 @@ public class FileUtils {
     			fileName = fileName.substring(fileName.lastIndexOf(File.separator) + 1);
     			if(!StringUtils.isNullOrEmpty(fileName)) {
     				//TODO 文件类型判断
-    				fileName = guid + "." + fileName.split(".")[1];
+    				fileName = guid + "." + fileName.split("\\.")[1];
     		        remoteFile = file;
 		            break;
     			}
@@ -295,9 +295,9 @@ public class FileUtils {
         }
         
         // 定义本地文件
-    	final File uploadFile = new File(DirDefine.updateFileDir, fileName);
+    	File uploadFile = new File(DirDefine.updateFileDir, fileName);
     	remoteFile.write(uploadFile);
-    	return "url:xxx";
+    	return "url:/upload/" + fileName;
     	
 		}catch(Exception e) {
 			Log.printStackTrace(e);

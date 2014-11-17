@@ -8,22 +8,21 @@ ManageClass.prototype = {
 		
 		//新增课程页面
 		courseAdd : function(){
+			
 			$("#changeCover").click(function() {
 				Boxy.load(Globals.ctx + "/manage/course/changeCover", {
 					afterShow : function(){
-						$("#coverUpload").change(function() {alert($(this).val());
+						
+						$(".selectCover").change(function() {
 							var extName = /\.[^\.]+$/.exec($(this).val());
 							if(/jpg|gif|png/i.test(extName)) {
-								$.ajaxFileUpload({
-									url : Globals.ctx + '/manage/course/coverUpload', 
-									secureuri : false,
-									fileElementId : 'coverUpload',
-									dataType : 'json',
+								$(".coverUpload").ajaxSubmit({
 									success: function (data){
-										if(data.result == '1') {
-											$(".preview").attr("src", data.url);
+										var json = eval('(' + data + ')');
+										if(json.result == '1') {
+											$(".preview").attr("src", json.url);
 										}else {
-											alert(data.error);
+											alert(json.error);
 										}
 									}
 								});
@@ -31,8 +30,17 @@ ManageClass.prototype = {
 								alert("不支持该文件类型");
 							}
 						});
-//						$("sure").
-						$("close").bindFormClose();
+						
+						$(".sure").click(function() {
+							var preview = $(".preview").attr("src");
+							if(preview != null && preview != '') {
+								$(".small_preview").attr("src", preview)
+								$("input[name=url]").val(preview);
+								$(".close").click();
+							}
+						});
+						
+						$(".close").bindFormClose();
 					}
 				})
 			});
