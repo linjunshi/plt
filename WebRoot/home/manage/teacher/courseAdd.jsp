@@ -8,7 +8,7 @@
 var Globals = {};
 Globals.ctx = "${ctx}";
 Globals.lang = "${lang}";
-Globals.page = "Manage_index";
+Globals.page = "Manage_courseAdd";
 </script>
 </head>
 <body>
@@ -84,7 +84,8 @@ Globals.page = "Manage_index";
 									<div class="form_item">
 										<label for="realname">课程封面：</label>
 										<div class="form_field">
-											<input name="file" type="file" />
+											<a href="javascript:void(0);" id="changeCover">更改封面</a>
+											<input type="hidden" name="url" value="" />
 										</div>
 									</div>
 									<div class="form_action">

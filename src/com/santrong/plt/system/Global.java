@@ -12,6 +12,8 @@ public class Global {
 	public static final String SessionKey_LoginUser = "loginUser";
 	public static final String SessionKey_Area = "area";
 	public static final String RequestKey_TipError = "tipError";
+	
+	public static int UploadFileSizeLimit = 150;								// 升级文件大小限制，单位M----请确保tomcat限制大小不小于用户配置大小
     
 	
     /*

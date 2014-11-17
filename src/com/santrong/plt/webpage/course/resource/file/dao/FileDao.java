@@ -68,8 +68,7 @@ public class FileDao extends BaseDao {
 			}
 			// 所属用户
 			if(MyUtils.isNotNull(query.getOnwerId())) {
-				criteria.where(or(
-						like("f.ownerId", "?")));
+				criteria.where(eq("f.ownerId", "?"));
 				criteria.setStringParam(query.getOnwerId());
 			}			
 			
@@ -120,8 +119,7 @@ public class FileDao extends BaseDao {
 			}
 			// 所属用户
 			if(MyUtils.isNotNull(query.getOnwerId())) {
-				criteria.where(or(
-						like("f.ownerId", "?")));
+				criteria.where(eq("f.ownerId", "?"));
 				criteria.setStringParam(query.getOnwerId());
 			}			
 			

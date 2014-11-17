@@ -8,9 +8,11 @@ package com.santrong.plt.system;
 public class DirDefine {
 	// 部署环境
 	public static final String ShellDir 		= "/opt/PLT/Service/webservice/webapp/shell";				// 所有shell脚本目录
+//	public static final String updateFileDir 	= "/opt/AIO/Service/update";							// 升级文件放置目录
 
 	
 	// 开发环境
 //	public static final String ShellDir 		= "E:/workspace/plt/linuxDir/opt/PLT/Service/webservice/webapp/shell";				// 所有shell脚本目录
+	public static final String updateFileDir 		= "E:/workspace/aio/linuxDir/opt/AIO/Service/update";				// 上传文件
 	
 }

@@ -12,7 +12,16 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.fileupload.FileItem;
+import org.apache.commons.fileupload.FileItemFactory;
+import org.apache.commons.fileupload.FileUpload;
+import org.apache.commons.fileupload.servlet.ServletFileUpload;
+
+import com.mysql.jdbc.StringUtils;
 import com.santrong.plt.log.Log;
+import com.santrong.plt.system.DirDefine;
+import com.santrong.plt.system.Global;
+import com.scand.fileupload.ProgressMonitorFileItemFactory;
 
 /**
  * @author weinianjie
@@ -237,4 +246,62 @@ public class FileUtils {
 		}
 		return len;
 	}
+	
+	
+	/**
+	 * 从客户端上传文件
+	 * @param request
+	 * @return
+	 */
+	@SuppressWarnings({ "unchecked", "deprecation" })
+	public static String uploadRemoteFile(HttpServletRequest request) {
+		try{
+		// 判断请求是否包含文件
+		boolean isMultipart = FileUpload.isMultipartContent(request);
+        if (!isMultipart) {
+            return "错误的请求";
+        }
+    	
+    	// 获取所有文件和输入
+    	FileItem remoteFile = null;
+    	List<FileItem> files = null;
+    	String fileName = "";
+    	String guid = MyUtils.getGUID();
+        FileItemFactory factory = new ProgressMonitorFileItemFactory(request, guid);
+        ServletFileUpload upload = new ServletFileUpload(factory);
+        upload.setSizeMax(Global.UploadFileSizeLimit * 1024 * 1024);// 设置允许的最大值
+        files = upload.parseRequest(request);// 注意，该工具类会将http头中file类型的表单字段和文本类型的表单字段都封装成FileItem，不过文本类型的字段封装时候内容和名称都设置为空值
+        if (files == null) {
+        	return "找不到文件";
+        }
+        
+        // 辨别出升级文件
+        for(FileItem file : files) {
+    		if (!file.isFormField()) {// 如果是不是普通文本类型封装成的FileItem
+    			fileName = file.getName();
+    			fileName = fileName.substring(fileName.lastIndexOf(File.separator) + 1);
+    			if(!StringUtils.isNullOrEmpty(fileName)) {
+    				//TODO 文件类型判断
+    				fileName = guid + "." + fileName.split(".")[1];
+    		        remoteFile = file;
+		            break;
+    			}
+    		}
+        }
+    
+        // 取不到升级文件
+        if(remoteFile == null){
+        	return "找不到文件";
+        }
+        
+        // 定义本地文件
+    	final File uploadFile = new File(DirDefine.updateFileDir, fileName);
+    	remoteFile.write(uploadFile);
+    	return "url:xxx";
+    	
+		}catch(Exception e) {
+			Log.printStackTrace(e);
+		}
+		return "发生了未知错误";
+	}	
 }
