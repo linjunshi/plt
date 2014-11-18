@@ -2,6 +2,8 @@ package com.santrong.plt.webpage.course.dao;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Delete;
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
@@ -86,4 +88,42 @@ public interface CourseMapper {
 	 */
 	@Update("update course set commentCount = (commentCount - 1) where id = #{id}")
 	int removeComment(String id);
+	
+	/**
+	 * 新增一条课程记录
+	 * @param courseItem
+	 * @return
+	 */
+	@Insert("insert into course values(#{id},#{courseName},#{teacher},#{price},#{live},#{endTime},#{gradeId},#{subjectId},#{remark},#{saleCount},#{collectCount},#{commentCount},#{chapterCount},#{ownerId},#{cts},#{uts})")
+	int insert(CourseItem courseItem);
+	
+	/**
+	 * 修改一条课程记录
+	 * @param courseItem
+	 * @return
+	 */
+	@Update("update course set "
+			+ "courseName = #{courseName},"
+			+ "teacher = #{teacher},"
+			+ "price = #{price},"
+			+ "live = #{live},"
+			+ "endTime = #{endTime},"
+			+ "gradeId = #{gradeId},"
+			+ "subjectId = #{subjectId},"
+			+ "remark = #{remark},"
+			+ "saleCount = #{saleCount},"
+			+ "collectCount = #{collectCount},"
+			+ "commentCount = #{commentCount},"
+			+ "chapterCount = #{chapterCount},"
+			+ "ownerId = #{ownerId},"
+			+ "cts = #{cts},"
+			+ "uts = #{uts}"
+			+ " where id = #{id}")
+	int update(CourseItem courseItem);
+	
+	@Select("select * from course where id = #{id}")
+	CourseItem selectById(String id);
+	
+	@Delete("delete from course where id = #{id}")
+	int deleteById(String id);
 }

@@ -30,22 +30,31 @@ public class CourseDao extends BaseDao {
 	
 	// 根据年级和地区获取课程，首页
 	public List<CourseView> selectForIndexList(int gradeGroup, String areaCode) {
-		CourseMapper mapper = this.getMapper(CourseMapper.class);
-		if(mapper != null) {
-			return mapper.selectForIndexList(gradeGroup, AreaUtils.lostTail(areaCode) + "%");
+		try {
+			CourseMapper mapper = this.getMapper(CourseMapper.class);
+			if(mapper != null) {
+				return mapper.selectForIndexList(gradeGroup, AreaUtils.lostTail(areaCode) + "%");
+			}
+		} catch (Exception e) {
+			Log.printStackTrace(e);
 		}
 		return null;
 	}
 	
 	// 获取课程详细信息
 	public CourseDetailView selectDetailById(String id) {
-		CourseMapper mapper = this.getMapper(CourseMapper.class);
-		if(mapper != null) {
-			return mapper.selectDetailById(id);
+		try {
+			CourseMapper mapper = this.getMapper(CourseMapper.class);
+			if(mapper != null) {
+				return mapper.selectDetailById(id);
+			}
+		} catch (Exception e) {
+			Log.printStackTrace(e);
 		}
 		return null;
 	}
 
+	
 	
 	/**
 	 * 查询某位老师的所有课程信息
@@ -54,9 +63,13 @@ public class CourseDao extends BaseDao {
 	 * @return List<CourseItem>
 	 */
 	public List<CourseItem> selectByUserId(String userId){
-		CourseMapper mapper = this.getMapper(CourseMapper.class);
-		if(mapper != null) {
-			return mapper.selectByUserId(userId);
+		try {
+			CourseMapper mapper = this.getMapper(CourseMapper.class);
+			if(mapper != null) {
+				return mapper.selectByUserId(userId);
+			}
+		} catch (Exception e) {
+			Log.printStackTrace(e);
 		}
 		return null;
 	}
@@ -487,4 +500,71 @@ public class CourseDao extends BaseDao {
 		return 0;
 	}
 	
+	/**
+	 * 新增一条课程记录
+	 * @param courseItem
+	 * @return
+	 */
+	public boolean insert(CourseItem courseItem) {
+		try {
+			CourseMapper mapper = this.getMapper(CourseMapper.class);
+			if (mapper != null) {
+				return mapper.insert(courseItem) > 0;
+			}
+		} catch (Exception e) {
+			Log.printStackTrace(e);
+		}
+		return false;
+	}
+	
+	/**
+	 * 修改一条课程记录
+	 * @param courseItem
+	 * @return
+	 */
+	public boolean update(CourseItem courseItem) {
+		try {
+			CourseMapper mapper = this.getMapper(CourseMapper.class);
+			if (mapper != null) {
+				return mapper.update(courseItem) > 0;
+			}
+		} catch (Exception e) {
+			Log.printStackTrace(e);
+		}
+		return false;
+	}
+	
+	/**
+	 * 查询一条课程记录
+	 * @param id
+	 * @return
+	 */
+	public CourseItem selectById(String id) {
+		try {
+			CourseMapper mapper = this.getMapper(CourseMapper.class);
+			if (mapper != null) {
+				return mapper.selectById(id);
+			}
+		} catch (Exception e) {
+			Log.printStackTrace(e);
+		}
+		return null;
+	}
+	
+	/**
+	 * 删除一条课程记录
+	 * @param id
+	 * @return
+	 */
+	public boolean deleteById(String id) {
+		try {
+			CourseMapper mapper = this.getMapper(CourseMapper.class);
+			if (mapper != null) {
+				return mapper.deleteById(id) > 0;
+			}
+		} catch (Exception e) {
+			Log.printStackTrace(e);
+		}
+		return false;
+	}
 }

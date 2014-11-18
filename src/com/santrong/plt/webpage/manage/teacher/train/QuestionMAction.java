@@ -68,30 +68,26 @@ public class QuestionMAction extends TeacherBaseAction{
 	/**
 	 * 新增一条试题记录到题库中
 	 * @author huangweihua
-	 * @param questionType
-	 * @param topic
-	 * @param opt1
-	 * @param opt2
-	 * @param opt3
-	 * @param opt4
+	 * @param tqItem
 	 * @param answer
 	 * @return
 	 */
 	@RequestMapping(value="/add", method=RequestMethod.POST)
-	public String addQuestionPost(int questionType, String topic, String opt1, String opt2, String opt3, String opt4, String[] answer){
+//	public String addQuestionPost(int questionType, String topic, String opt1, String opt2, String opt3, String opt4, String[] answer){
+	public String addQuestionPost(TrainQuestionItem tqItem, String[] answer){
 		try {
 			UserItem user = this.currentUser();
 			if(user == null) {
 				addError("请您先登录用户！");
-				return "/login";
+				return this.redirect("/login");
 			}
 			
-			if (questionType <= 0) {
+			if (tqItem.getQuestionType() <= 0) {
 				addError("请您选择题目的类型！");
 				return "/manage/teacher/myTrainMAdd";
 			}
 			
-			if (!MyUtils.isNotNull(topic)) {
+			if (!MyUtils.isNotNull(tqItem.getTopic())) {
 				addError("请您填写试题的题目！");
 				return "/manage/teacher/myTrainMAdd";
 			}
@@ -106,14 +102,14 @@ public class QuestionMAction extends TeacherBaseAction{
 				sum = sum + MyUtils.stringToInt(answer[i]);
 			}
 			TrainQuestionDao tqDao = new TrainQuestionDao();
-			TrainQuestionItem tqItem = new TrainQuestionItem(); 
+//			TrainQuestionItem tqItem = new TrainQuestionItem(); 
+//			tqItem.setTopic(topic);
+//			tqItem.setQuestionType(questionType);
+//			tqItem.setOpt1(opt1);
+//			tqItem.setOpt2(opt2);
+//			tqItem.setOpt3(opt3);
+//			tqItem.setOpt4(opt4);
 			tqItem.setId(MyUtils.getGUID());
-			tqItem.setTopic(topic);
-			tqItem.setQuestionType(questionType);
-			tqItem.setOpt1(opt1);
-			tqItem.setOpt2(opt2);
-			tqItem.setOpt3(opt3);
-			tqItem.setOpt4(opt4);
 			tqItem.setAnswer(sum);
 			tqItem.setOwnerId(user.getId());
 			tqItem.setDel(0);
@@ -134,12 +130,15 @@ public class QuestionMAction extends TeacherBaseAction{
 	@RequestMapping("/modify")
 	public String modifyQuestion(String questionId){
 		try {
-			TrainQuestionDao tqDao = new TrainQuestionDao();
-			TrainQuestionItem tqItem = tqDao.selectById(questionId);
-
-			HttpServletRequest request = this.getRequest();
-			request.setAttribute("tqItem", tqItem);
-			
+			if (MyUtils.isNotNull(questionId)) {
+				TrainQuestionDao tqDao = new TrainQuestionDao();
+				TrainQuestionItem tqItem = tqDao.selectById(questionId);
+				
+				HttpServletRequest request = this.getRequest();
+				request.setAttribute("tqItem", tqItem);
+			} else {
+				return this.redirect("/manage/question/list");
+			}
 		} catch (Exception e) {
 			Log.printStackTrace(e);
 		}

@@ -505,3 +505,8 @@ span.form_error, span.form_success{border-width:1px;display:inline-block;*displa
 /* --------------------error tips------------------------- */
 .system_tip { width:300px; line-height:26px; margin:10px auto; border:solid 1px #F5D8A7; border-radius:2px; background-color:#FFF6DB;padding-left: 10px; text-align: center; }
 /* -------------------------------------------------- */
+.Wdate {
+border: #999 1px solid;
+height: 20px;
+background: #fff url(datePicker.gif) no-repeat right;
+}

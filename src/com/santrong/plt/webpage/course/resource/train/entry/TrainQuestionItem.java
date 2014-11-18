@@ -22,6 +22,7 @@ public class TrainQuestionItem {
 	private int del;
 	private Date cts;
 	private Date uts;
+	private String comment;
 	
 	private int[] pageAnswer;
 
@@ -136,6 +137,12 @@ public class TrainQuestionItem {
 	}
 	public void setUts(Date uts) {
 		this.uts = uts;
+	}
+	public String getComment() {
+		return comment;
+	}
+	public void setComment(String comment) {
+		this.comment = comment;
 	}
 	public int[] getPageAnswer() {
 		return pageAnswer;

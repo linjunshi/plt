@@ -74,6 +74,12 @@ Globals.page = "Manage_index";
 														<input type="submit" value="删除" />
 													</form>
 												</div>
+												<div>
+													<form action="${ctx}/manage/course/chapterEditor" method="post">
+														<input type="hidden" value="${course.id}" name="courseId" />
+														<input type="submit" value="章节维护" />
+													</form>
+												</div>
 				                            </td>
 				                        </tr>
 			                    	</c:forEach>

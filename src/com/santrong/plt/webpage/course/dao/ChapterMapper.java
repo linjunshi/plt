@@ -21,4 +21,7 @@ public interface ChapterMapper {
 	
 	@Select("select a.* from course_chapter a left join course_chapter_to_resource b on a.id=b.chapterId where a.id=#{resourceId}")
 	ChapterItem selectByResourceId(String resourceId);
+	
+	@Select("select * from course_chapter where courseId = #{courseId} ")
+	List<ChapterItem> selectAllByCourseId(String courseId);
 }

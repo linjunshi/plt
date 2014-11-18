@@ -2,6 +2,7 @@ package com.santrong.plt.webpage.course.dao;
 
 import java.util.List;
 
+import com.santrong.plt.log.Log;
 import com.santrong.plt.webpage.BaseDao;
 import com.santrong.plt.webpage.course.entry.ChapterAndResourceEntry;
 import com.santrong.plt.webpage.course.entry.ChapterItem;
@@ -19,9 +20,13 @@ public class ChapterDao extends BaseDao {
 	 * @return
 	 */
 	public List<ChapterAndResourceEntry> selectByCourseId(String courseId) {
-		ChapterMapper mapper = this.getMapper(ChapterMapper.class);
-		if(mapper != null) {
-			return mapper.selectByCourseId(courseId);
+		try {
+			ChapterMapper mapper = this.getMapper(ChapterMapper.class);
+			if(mapper != null) {
+				return mapper.selectByCourseId(courseId);
+			}
+		} catch (Exception e) {
+			Log.printStackTrace(e);
 		}
 		return null;
 	}
@@ -32,9 +37,28 @@ public class ChapterDao extends BaseDao {
 	 * @return
 	 */
 	public ChapterItem selectByResourceId(String resourceId) {
-		ChapterMapper mapper = this.getMapper(ChapterMapper.class);
-		if(mapper != null) {
-			return mapper.selectByResourceId(resourceId);
+		try {
+			ChapterMapper mapper = this.getMapper(ChapterMapper.class);
+			if(mapper != null) {
+				return mapper.selectByResourceId(resourceId);
+			}
+		} catch (Exception e) {
+			Log.printStackTrace(e);
+		}
+		return null;
+	}
+	
+	/**
+	 * 获取该课程的所有章节
+	 * @param courseId
+	 * @return
+	 */
+	public List<ChapterItem> selectAllByCourseId(String courseId) {
+		try {
+			ChapterMapper mapper = this.getMapper(ChapterMapper.class);
+			return mapper.selectAllByCourseId(courseId);
+		} catch (Exception e) {
+			Log.printStackTrace(e);
 		}
 		return null;
 	}
