@@ -47,4 +47,16 @@ public class LiveCallDao extends BaseDao {
 		}
 		return null;
 	}
+	
+	public boolean existsByCall(String liveId, String callName) {
+		try {
+			LiveCallMapper mapper = this.getMapper(LiveCallMapper.class);
+			if(mapper != null) {
+				return mapper.existsByCall(liveId, callName) > 0;
+			}
+		} catch (Exception e) {
+			Log.printStackTrace(e);
+		}
+		return false;
+	}
 }

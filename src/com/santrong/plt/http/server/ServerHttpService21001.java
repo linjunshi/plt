@@ -20,7 +20,7 @@ public class ServerHttpService21001 implements AbstractHttpService{
 
 	@Override
 	public String excute(XmlReader xml) {
-		int rt = 1;
+		int rt = 0;
 		int endYear = 0;
 		int endMonth = 0;
 		int endDay = 0;
@@ -49,7 +49,7 @@ public class ServerHttpService21001 implements AbstractHttpService{
 //						endSeconds = cal.get(Calendar.SECOND);
 					}					
 					
-					rt = 0;
+					rt = 1;
 				}
 
 			}
@@ -62,7 +62,7 @@ public class ServerHttpService21001 implements AbstractHttpService{
 		sb.append(HttpDefine.Xml_Header);
 		sb.append("<RespMsg>");
 			sb.append("<MsgHead>");
-				sb.append("<MsgCode type=\"int\">").append(HttpDefine.Server_Service_21003).append("</MsgCode>");
+				sb.append("<MsgCode type=\"int\">").append(HttpDefine.Server_Service_21001).append("</MsgCode>");
 				sb.append("<ResultCode type=\"int\">").append(rt).append("</ResultCode>");
 			sb.append("</MsgHead>");
 			sb.append("<MsgBody>");
