@@ -27,27 +27,14 @@ Globals.page = "Manage_courseAdd";
 								<div class="form_item">
 									<label for="username">课程分类：</label>
 									<div class="form_field">
-										<select name="grade">
-											<option selected="selected" value="1">高中</option>
-											<option value="2">初中</option>
-											<option value="3">小学</option>
+										<select id="gradeSelect">
+											<c:forEach items="${applicationScope.gradeList}" var="grade" varStatus="st">
+											<option value="${grade.gradeEnName}">${grade.gradeName}</option>
+											</c:forEach>
+										</select>
+										<select name="gradeId" id="levelSelect">
 										</select> 
-										<select name="grade">
-											<option selected="selected" value="1">高一</option>
-											<option value="2">高二</option>
-											<option value="3">高三</option>
-										</select> 
-										<select name="grade">
-											<option selected="selected" value="1">初一</option>
-											<option value="2">初二</option>
-											<option value="3">初三</option>
-										</select> <select name="grade">
-											<option selected="selected" value="1">一年级</option>
-											<option value="2">二年级</option>
-											<option value="3">三年级</option>
-											<option value="2">四年级</option>
-											<option value="3">五年级</option>
-											<option value="2">六年级</option>
+										<select name="subjectId" id="subjectSelect">
 										</select>
 									</div>
 									<div class="form_item">
@@ -59,13 +46,13 @@ Globals.page = "Manage_courseAdd";
 									<div class="form_item">
 										<label for="pwd">课程价格：</label>
 										<div class="form_field">
-											<input name="pwd" id="pwd" class="form_text" type="password">元
+											<input name="text" id="pwd" class="form_text" type="password">元
 										</div>
 									</div>
 									<div class="form_item">
 										<label for="pwd">结束时间：</label>
 										<div class="form_field">
-											<input name="pwd" id="pwd" class="form_text" type="password">
+											<input name="text" id="pwd" class="form_text" type="password">
 										</div>
 									</div>
 									<div class="form_item">

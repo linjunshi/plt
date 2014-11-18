@@ -27,4 +27,9 @@ public interface SubjectMapper {
 			+ "left join grade c on b.gradeId=c.id "
 			+ "where c.gradeEnName=#{gradeName} order by priority desc")
 	List<SubjectItem> selectByGradeEnName(String gradeName);	
+	
+	@Select("select distinct a.* from subject a "
+			+ "left join grade_to_subject b on a.id=b.subjectId "
+			+ "where b.gradeId=#{gradeId} order by priority desc")
+	List<SubjectItem> selectByGradeId(String gradeId);	
 }

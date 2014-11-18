@@ -35,4 +35,12 @@ public class SubjectDao extends BaseDao{
 		}
 		return null;
 	}	
+	
+	public List<SubjectItem> selectByGradeId(String gradeId) {
+		SubjectMapper mapper = this.getMapper(SubjectMapper.class);
+		if(mapper != null) {
+			return mapper.selectByGradeId(gradeId);
+		}
+		return null;
+	}		
 }

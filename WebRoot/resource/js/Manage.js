@@ -9,6 +9,36 @@ ManageClass.prototype = {
 		//新增课程页面
 		courseAdd : function(){
 			
+			// 年级选择
+			$("#gradeSelect").change(function() {
+				$.get(Globals.ctx + "/data/levelByGrade?gradeEnName=" + $(this).val(), function(data) {
+					if(data != "error") {
+						var json = eval('(' + data + ')');
+						var html = '';
+						for(var i=0;i<json.length;i++) {
+							html += '<option value="' + json[i].levelId + '">' + json[i].levelName + '</option>';
+						}
+						$("#levelSelect").html(html);
+						$("#levelSelect").change();
+					}
+				})
+			});
+			
+			// 学科选择
+			$("#levelSelect").change(function() {
+				$.get(Globals.ctx + "/data/subjectByLevel?gradeId=" + $(this).val(), function(data) {
+					if(data != "error") {
+						var json = eval('(' + data + ')');
+						var html = '';
+						for(var i=0;i<json.length;i++) {
+							html += '<option value="' + json[i].id + '">' + json[i].subjectName + '</option>';
+						}
+						$("#subjectSelect").html(html);
+					}
+				})
+			});
+			
+			// 封面选择
 			$("#changeCover").click(function() {
 				Boxy.load(Globals.ctx + "/manage/course/changeCover", {
 					afterShow : function(){
