@@ -19,7 +19,7 @@ Globals.page = "Index_courseDetail";
 				<div class="detai_img">
 					<img src="${ctx}/resource/images/356.jpg" width="290" height="200" />
 					<a href="javascript:void(0)" id="coll_course" class="detai_coll">收藏课程</a>
-					<a href="javascript:void(0);" class="detai_share">分享给朋友</a>
+					<!-- <a href="javascript:void(0);" class="detai_share">分享给朋友</a> -->
 					<input type="hidden" name="courseId" value="${course.id}"/>
 				</div>
 				<div class="priInfo">
@@ -39,8 +39,8 @@ Globals.page = "Index_courseDetail";
 		                    评价内容</p>
 		            </div>
 		            <p class="detai_numb">该课程累积购买人数为49人</p>
-		            <div class="detai_but">购买类型： <a href="#">购买整课</a><a href="#">购买部分章节</a> </div>
-		            <div class="detai_buy"><a href="#" class="bottom_a">立刻购买</a><a href="#" class="bottom_b">加入购物车</a></div>
+		            <!-- <div class="detai_but">购买类型： <a href="#">购买整课</a><a href="#">购买部分章节</a> </div> -->
+		            <div class="detai_buy"><a href="#" class="bottom_a">立刻购买</a><!-- <a href="#" class="bottom_b">加入购物车</a> --></div>
 		        </div>
 		        <div class="priSchool">
 		            <div>
@@ -58,7 +58,7 @@ Globals.page = "Index_courseDetail";
 		                    <li>注册时间：<fmt:formatDate value="${teacher.registTime}" type="date" dateStyle="default"/></li>
 		                </ul>
 		            </div>
-		            <div class="pri_bottom"><a href="javascript:void(0)" class="bottom_c">收藏学校</a><a href="${ctx}/school/${teacher.schoolId}.html" target="_blank" class="bottom_d">进入学校</a></div>
+		            <div class="pri_bottom"><!-- <a href="javascript:void(0)" class="bottom_c">收藏学校</a> --><a href="${ctx}/school/${teacher.schoolId}.html" target="_blank" class="bottom_d">进入学校</a></div>
 		        </div>
 		    </div>
 		    <div class="sectionMain clr">
@@ -89,8 +89,8 @@ Globals.page = "Index_courseDetail";
 		            	<c:forEach items="${chapter.resourceList}" var="resource">
 		            	<dd>
 				           	<div class="course_list_des">
-					        	<span>${resource.title}---type:${resource.typeString}</span>
-					       		<a href="${ctx}/course_res?resId=${resource.id}&resType=${resource.type}" target="_blank" >进入</a>
+					        	<span>${resource.title}---type:${resource.typeCnString}</span>
+					       		<a href="${ctx}/${resource.typeEnString}?resId=${resource.id}" target="_blank" >进入</a>
 				            </div>
 		            	</dd>
 		            	</c:forEach>

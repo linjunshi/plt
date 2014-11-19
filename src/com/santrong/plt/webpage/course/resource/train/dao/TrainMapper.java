@@ -28,6 +28,9 @@ public interface TrainMapper {
 	@Select("select * from resource_train where ownerId = #{userId} and del = 0")
 	List<TrainItem> selectByUserId(@Param("userId")String userId);
 	
+	@Select("select * from resource_train where id = #{trainId}")
+	TrainItem selectById(@Param("trainId")String trainId);	
+	
 	@Select("select a.* from resource_train a "
 			+ "inner join course_chapter_to_resource b on a.id=b.resourceId "
 			+ "inner join course_chapter_to_resource c on b.chapterId=c.chapterId and c.resourceType=4 "

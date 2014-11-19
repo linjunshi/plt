@@ -204,4 +204,18 @@ public class TrainQuestionItem {
 	public boolean getContainD() {
 		return ((answer & Answers[3]) == Answers[3]);
 	}
+	
+	public String getTypeString() {
+		switch(this.questionType) {
+		case QUESTION_TYPE_SINGLE_SELECTION :
+			return "单选题";
+		case QUESTION_TYPE_MULTIPLE_CHOICE :
+			return "多选题";
+		case QUESTION_TYPE_JUDGE_TRUE_OR_FLASE:
+			return "判断题";
+		case QUESTION_TYPE_BLANK_FILLING:
+			return "填空题";			
+		}
+		return "";
+	}
 }

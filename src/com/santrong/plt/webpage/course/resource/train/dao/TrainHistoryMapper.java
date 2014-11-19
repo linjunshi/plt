@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
 import com.santrong.plt.webpage.course.resource.train.entry.TrainHistoryItem;
+import com.santrong.plt.webpage.course.resource.train.entry.TrainHistoryView;
 
 
 /**
@@ -40,4 +41,11 @@ public interface TrainHistoryMapper {
 			+ "LEFT JOIN resource_train c on c.id = b.trainId "
 			+ "where a.chapterId = #{chapterId} and a.trainId = #{trainId} and a.questionId = #{questionId} and del = 0")
 	List<TrainHistoryItem> selectByHistory(@Param("chapterId")String chapterId, @Param("trainId")String trainId, @Param("questionId")String questionId);
+	
+	@Select("select a.id historyId, a.userId, a.trainId, a.questionId, a.chapterId, a.answer historyAnswer, a.result, a.cts, a.uts, b.topic, "
+			+ "b.questionType, b. answer questionAnswer, b.opt1, b.opt2, b.opt3, b.opt4 "
+			+ "from resource_train_history a "
+			+ "left join resource_train_question b on a.questionId=b.id "
+			+ "where a.userId=#{userId} and a.trainId=#{trainId} and a.chapterId=#{chapterId}")
+	List<TrainHistoryView>  selectUserDone(@Param("userId")String userId, @Param("trainId")String trainId, @Param("chapterId")String chapterId);
 }

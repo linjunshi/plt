@@ -187,6 +187,7 @@ create table course(
 	courseName varchar(128) not null comment '课程名称',
 	teacher varchar(32) comment '主讲老师',
 	price int(10) not null comment '价格',
+	url varchar(256) comment '封面',
 	live int(10) default 0 not null comment '是否直播',
 	endTime datetime comment '结束时间',
 	gradeId varchar(32) not null comment '所属年级',
@@ -300,9 +301,10 @@ create table course_chapter_to_resource(
 	primary key (id)
 ) engine=InnoDB default charset=utf8 collate=utf8_bin comment '章节关联资源表';
 
-insert into course_chapter_to_resource values('10000', '马克思主义0', '10000', '10000', 1, 1);
-insert into course_chapter_to_resource values('10001', '张老师直播1', '10000', '10000', 2, 2);
-insert into course_chapter_to_resource values('10002', '文档1', '10000', '10000', 3, 3);
+insert into course_chapter_to_resource values('10000', '随堂测验', '10000', '10000', 4, 1);
+insert into course_chapter_to_resource values('10001', '张老师直播1', '10000', '10001', 2, 2);
+insert into course_chapter_to_resource values('10002', '张老师点播1', '10000', '10002', 1, 2);
+insert into course_chapter_to_resource values('10003', '文档1', '10000', '10003', 3, 3);
 
 
 -- 点播文件表 --
@@ -321,7 +323,7 @@ create table resource_file(
 	primary key (id)
 ) engine=InnoDB default charset=utf8 collate=utf8_bin comment '点播文件表';
 
-insert into resource_file values('10000', '马克思主义0', '', 1024, 66, '10000', '10000', '', now(), now());
+insert into resource_file values('10012', '马克思主义0', '', 1024, 66, '10000', '10000', '', now(), now());
 insert into resource_file values('10001', '马克思主义1', '', 1024, 66, '10000', '10008', '', now(), now());
 insert into resource_file values('10002', '马克思主义2', '', 1024, 66, '10000', '10009', '', now(), now());
 insert into resource_file values('10003', '马克思主义3', '', 1024, 66, '10000', '10010', '', now(), now());
@@ -362,7 +364,7 @@ create table resource_live(
 	primary key (id)
 ) engine=InnoDB default charset=utf8 collate=utf8_bin comment '直播资源表';
 
-insert into resource_live values('10000', '张老师直播1', null, '2014-12-12 13:00', '2014-12-12 15:00', 7200, null, '10000', now(), now());
+insert into resource_live values('10001', '张老师直播1', null, '2014-12-12 13:00', '2014-12-12 15:00', 7200, null, '10000', now(), now());
 
 
 -- 直播评分表 --
@@ -412,7 +414,7 @@ create table resource_doc(
 	primary key (id)
 ) engine=InnoDB default charset=utf8 collate=utf8_bin comment '文档资源表';
 
-insert into resource_doc values('10000', '文档1', '', 1, '10000', '10000', '', now(), now());
+insert into resource_doc values('10003', '文档1', '', 1, '10000', '10000', '', now(), now());
 
 
 -- 文档资源组表 --
@@ -466,6 +468,7 @@ create table resource_train_question(
 	opt3 varchar(128) comment '选项3',
 	opt4 varchar(128) comment '选项4',
 	answer int(10) not null comment '答案',
+	remark varchar(256) comment '详解',
 	ownerId varchar(32) not null comment '所有者',
 	del int(10) comment '是否删除',
 	cts datetime comment '创建时间',

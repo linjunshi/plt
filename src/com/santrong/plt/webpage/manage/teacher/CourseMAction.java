@@ -7,10 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.santrong.plt.util.FileUtils;
-import com.santrong.plt.util.MyUtils;
 import com.santrong.plt.webpage.course.dao.CourseDao;
 import com.santrong.plt.webpage.course.entry.CourseItem;
 import com.santrong.plt.webpage.course.entry.CourseQuery;
@@ -66,24 +63,4 @@ public class CourseMAction extends TeacherBaseAction {
 	public String changeCover(){
 		return "/manage/teacher/changeCover";
 	}
-	
-	/**
-	 * ajax图片上传
-	 * @param request
-	 * @return
-	 */
-	@RequestMapping("/coverUpload")
-	@ResponseBody
-	public String coverUpload(HttpServletRequest request){
-		StringBuilder sb = new StringBuilder();
-		sb.append("{'result':");
-		String result = FileUtils.uploadRemoteFile(request);
-		if(MyUtils.isNotNull(result) && result.startsWith("url")) {
-			sb.append("1").append(",").append("'url':").append("'").append(result.split(":")[1]).append("'");
-		}else {
-			sb.append("0").append(",").append("'error':").append("'").append(result).append("'");
-		}
-		sb.append("}");
-		return sb.toString();
-	}	
 }

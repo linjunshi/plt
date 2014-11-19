@@ -31,7 +31,11 @@ public class ResourceEntry {
 		this.type = type;
 	}
 	
-	public String getTypeString() {
-		return ResourceType.getDescription(type);
+	public String getTypeCnString() {
+		return ResourceType.getDescriptionCn(type);
+	}
+	
+	public String getTypeEnString() {
+		return ResourceType.getDescriptionEn(type);
 	}
 }

@@ -5,6 +5,7 @@ import java.util.List;
 import com.santrong.plt.log.Log;
 import com.santrong.plt.webpage.BaseDao;
 import com.santrong.plt.webpage.course.resource.train.entry.TrainHistoryItem;
+import com.santrong.plt.webpage.course.resource.train.entry.TrainHistoryView;
 
 /**
  * @author huangweihua
@@ -65,6 +66,22 @@ public class TrainHistoryDao extends BaseDao{
 			TrainHistoryMapper mapper = this.getMapper(TrainHistoryMapper.class);
 			if (mapper != null) {
 				return mapper.selectByHistory(chapterId, trainId, questionId);
+			}
+		} catch (Exception e) {
+			Log.printStackTrace(e);
+		}
+		return null;
+	}
+	
+	/**
+	 * 获取某个测验学生的全部答题
+	 * @return
+	 */
+	public List<TrainHistoryView>  selectUserDone(String userId, String trainId, String chapterId) {
+		try {
+			TrainHistoryMapper mapper = this.getMapper(TrainHistoryMapper.class);
+			if (mapper != null) {
+				return mapper.selectUserDone(userId, trainId, chapterId);
 			}
 		} catch (Exception e) {
 			Log.printStackTrace(e);

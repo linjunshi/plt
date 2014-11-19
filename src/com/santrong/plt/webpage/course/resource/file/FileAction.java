@@ -1,4 +1,4 @@
-package com.santrong.plt.webpage.course.resource.live;
+package com.santrong.plt.webpage.course.resource.file;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,11 +11,11 @@ import com.santrong.plt.webpage.BaseAction;
  * @time 下午5:01:51
  */
 @Controller
-@RequestMapping("/live")
-public class LiveAction extends BaseAction {
+@RequestMapping("/file")
+public class FileAction extends BaseAction {
 
 	@RequestMapping("")
 	public String home(String resId) {
-		return "course/resource/live/detail";
+		return "course/resource/file/detail";
 	}
 }

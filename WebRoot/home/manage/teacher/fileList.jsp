@@ -20,27 +20,61 @@ Globals.page = "Manage_index";
 					<div class="sh_info_r">
 			            <div class="sh_title">
 			                <h2>课件列表</h2>
-			            </div>					
-						<table>
-							<thead>
-								<tr><th>序号</th><th>文件名</th><th>录制时间</th><th>时长</th><th>所属组</th><th>描述</th><th>操作</th></tr>
-							</thead>
-							<tbody>
-								<c:forEach items="${fileList}" var="file" varStatus="st">
-									<tr>
-										<td>${st.index + 1}</td>
-										<td>${file.title}</td>
-										<td>${file.cts}</td>
-										<td>${file.duration}</td>
-										<td>${file.groupId}</td>
-										<td>${file.remark}</td>
-										<td><a href="#">删除</a></td>
-									</tr>
-								</c:forEach>
-							</tbody>
-						</table>
-	                    <c:set var="basicUrl" value="${ctx}/manage/file" />
-	    				<%@ include file="../../inc/pagination.jsp"%>						
+			            </div>		
+			            
+<div class="sh_collection">
+			                <table border="1" class="sh_coll_tab">
+			                    <colgroup>
+			                    <col width="80">
+			                    <col width="330">
+			                    <col width="110">
+			                    <col width="150">
+			                    <col width="150">
+			                    <col width="150">
+			                    </colgroup>
+			                    <thead>
+			                        <tr>
+			                            <th>序号</th>
+			                            <th>课件名</th>
+			                            <th>录制时间</th>
+			                            <th>录制时长</th>
+			                            <th>描述</th>
+			                            <th>操作</th>
+			                        </tr>
+			                    </thead>
+			                    <tbody>
+			                    	<c:forEach items="${fileList}" var="file" varStatus="st">
+				                        <tr>
+				                            <td>${st.index + 1}</td>
+				                            <td class="sh_h_im">
+				                            	<a href="${ctx}/course/${course.id}.html" target="_blank"><img src="${ctx}/resource/images/003.jpg"></a>
+				                            	<p>${file.title}</p>
+				                            </td>
+				                            <td><fmt:formatDate value="${file.cts}" type="both" /></td>
+				                            <td>${file.duration}</td>
+				                            <td>${file.remark}</td>
+				                            <td class="btn_question_operation">
+					                            <div class="btn_input">
+													<input type="submit" value="预览" />
+												</div>
+												<div class="btn_input">
+													<input type="submit" value="删除" />
+												</div>
+				                            </td>
+				                        </tr>
+			                    	</c:forEach>
+			                        
+		                        </tbody>
+			                    <tfoot>
+			                        <tr>
+			                            <td colspan="6">
+				                            <c:set var="basicUrl" value="${ctx}/manage/file" />
+				            				<%@ include file="../../inc/pagination.jsp"%>
+				            			</td>
+			                        </tr>
+			                    </tfoot>
+			                </table>
+			            </div>			            
 					</div>
 				</div>
 			</div>

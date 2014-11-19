@@ -1,8 +1,6 @@
 package com.santrong.plt.webpage.course.entry;
 
 import java.lang.reflect.Field;
-import java.util.HashMap;
-import java.util.Map;
 
 import com.santrong.plt.log.Log;
 import com.santrong.plt.opt.Description;
@@ -14,33 +12,51 @@ import com.santrong.plt.opt.Description;
  */
 public class ResourceType {
 	
-	private static Map<Integer, String> map = new HashMap<Integer, String>();
-
-	@Description("视频文件")
-	public static final int Type_Video = 1;
+	@Description(cn = "课件", en = "file")
+	public static final int Type_File = 1;
 	
-	@Description("直播资源")
+	@Description(cn = "直播资源", en = "live")
 	public static final int Type_Live = 2;
 	
-	@Description("学习材料")
+	@Description(cn = "学习材料", en = "doc")
 	public static final int Type_Doc = 3;
 	
-	@Description("测验")
+	@Description(cn = "测验", en = "train")
 	public static final int Type_Train = 4;
 	
 	static{
+
+	}
+	
+	// 获取cn
+	public static final String getDescriptionCn(int key) {
 		Field[] fields = ResourceType.class.getFields();
 		for(Field f:fields) {
 			Description d = ((Description)f.getAnnotation(Description.class));
 			try {
-				map.put(f.getInt(null), d.value());
+				if(f.getInt(null) == key) {
+					return d.cn();
+				}
 			}catch(Exception e) {
 				Log.printStackTrace(e);
 			}
 		}
+		return null;
 	}
 	
-	public static final String getDescription(int key) {
-		return map.get(key);
-	}
+	// 获取en
+	public static final String getDescriptionEn(int key) {
+		Field[] fields = ResourceType.class.getFields();
+		for(Field f:fields) {
+			Description d = ((Description)f.getAnnotation(Description.class));
+			try {
+				if(f.getInt(null) == key) {
+					return d.en();
+				}
+			}catch(Exception e) {
+				Log.printStackTrace(e);
+			}
+		}
+		return null;
+	}	
 }
