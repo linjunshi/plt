@@ -76,6 +76,11 @@ public class TrainAction extends StudentBaseAction {
 		return "course/resource/train/detail";
 	}
 	
+	/**
+	 * 提交试题
+	 * @param form
+	 * @return
+	 */
 	@RequestMapping(value = "/question/commit", method = RequestMethod.POST)
 	public String questionCommit(TrainHistoryForm form) {
 		
@@ -114,6 +119,12 @@ public class TrainAction extends StudentBaseAction {
 		return this.redirect("/train/result?resId=" + form.getResourceId() + "&chapterId=" + form.getChapterId());
 	}
 	
+	/**
+	 * 做题结果页
+	 * @param resId
+	 * @param chapterId
+	 * @return
+	 */
 	@RequestMapping(value = "/result")
 	public String questionCommit(String resId, String chapterId) {
 		TrainQuestionDao qDao = new TrainQuestionDao();
