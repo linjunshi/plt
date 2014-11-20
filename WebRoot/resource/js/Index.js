@@ -80,33 +80,45 @@ IndexClass.prototype = {
 		// 做题事件
 		var bindAnswer = function() {
 			var index = $("input[name=index]").val();
-			// 单选
-			$("#questionDiv input[type=radio]").change(function() {
-				$(".question_index").eq(index-1).find("input[name=answer]").val($(this).val());
-				$(".question_index").eq(index-1).addClass("done");
-			});
-			// 多选
-			$("#questionDiv input[type=checkbox]").change(function() {
+			var module = $("input[name=module]").val();
+			
+			// 如果是结果状态，禁用控件
+			if(module == 'result') {
+				$("#questionDiv input").attr("disabled",true);
+			}
+			
+			// 事件
+			$("#questionDiv input").change(function() {
+				var type = $(this).attr("type");
+				
 				var val = 0;
-				$("#questionDiv input[type=checkbox]:checked").each(function() {
-					val = val + $(this).val()/1;
-				});
+				if(type=='radio') {//单选
+					val = $(this).val()
+				}else {// 多选
+					$("#questionDiv input[type=checkbox]:checked").each(function() {
+						val = val + $(this).val()/1;
+					});
+				}
+				
 				$(".question_index").eq(index-1).find("input[name=answer]").val(val);
-				$(".question_index").eq(index-1).addClass("done");
+				if(module == 'answer') {
+					$(".question_index").eq(index-1).addClass("done");
+				}
 			});
 		}
 		
 		// 作业序号事件
 		$(".question_index").click(function() {
 			var total = $("input[name=total]").val();
-			var index = $(this).text();
+			var index = $(this).find("span").text();
 			$("input[name=index]").val(index);
 			
 			var trainId = $("input[name=trainId]").val();
+			var chapterId = $("input[name=chapterId]").val();
 			$.ajax({
 				type : 'GET',
 				url : Globals.ctx + '/train/question',
-				data : {trainId : trainId , index : index},
+				data : {trainId : trainId , chapterId : chapterId, index : index},
 				success : function(result){
 					$("#questionDiv").html(result);
 					$(".preOne").css({"visibility" : (index <= 1? "hidden" : "visible")});

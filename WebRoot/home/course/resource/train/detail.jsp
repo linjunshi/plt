@@ -19,7 +19,7 @@ Globals.page = "Index_doneTrain";
 		        <!-- <%@ include file="../../../inc/leftmenu.jsp"%> -->
 		        <div class="sh_info_r" id="trainDiv">
 		            <div class="sh_title">
-		                <h2>${train.title}，来自${chapter.remark}</h2>
+		                <h2>${train.title}，来自${chapter.remark}，课程名称${course.courseName}</h2>
 		            </div>
 		            <div class="form_questions">
 		            <p>当前第1题，一共${total}题</p>

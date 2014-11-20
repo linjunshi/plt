@@ -1,6 +1,8 @@
 package com.santrong.plt.webpage.course.resource.train.entry;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  * @author huangweihua
@@ -217,5 +219,15 @@ public class TrainQuestionItem {
 			return "填空题";			
 		}
 		return "";
+	}
+	
+	public List<String> getAnswerString() {
+		List<String> list = new ArrayList<String>();
+		for(int i=0;i<Answers.length;i++) {
+			if((answer & Answers[i]) == Answers[i]) {
+				list.add(Answers_Options[i]);
+			}
+		}
+		return list;
 	}
 }

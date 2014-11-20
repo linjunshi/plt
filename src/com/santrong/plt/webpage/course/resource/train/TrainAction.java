@@ -15,7 +15,9 @@ import com.santrong.plt.log.Log;
 import com.santrong.plt.opt.ThreadUtils;
 import com.santrong.plt.util.MyUtils;
 import com.santrong.plt.webpage.course.dao.ChapterDao;
+import com.santrong.plt.webpage.course.dao.CourseDao;
 import com.santrong.plt.webpage.course.entry.ChapterItem;
+import com.santrong.plt.webpage.course.entry.CourseItem;
 import com.santrong.plt.webpage.course.resource.train.dao.TrainDao;
 import com.santrong.plt.webpage.course.resource.train.dao.TrainHistoryDao;
 import com.santrong.plt.webpage.course.resource.train.dao.TrainQuestionDao;
@@ -54,12 +56,16 @@ public class TrainAction extends StudentBaseAction {
 		
 		// 获取章节
 		ChapterDao chapterDao = new ChapterDao();
-		ChapterItem chapter = chapterDao.selectByResourceId(resId);		
+		ChapterItem chapter = chapterDao.selectByResourceId(resId);
 		
 		// 未知的train或者train没有添加到课程章节里的，无法开始该测试
 		if(train ==  null || chapter == null) {
 			this.redirect("/");
 		}
+		
+		// 获取课程
+		CourseDao courseDao = new CourseDao();
+		CourseItem course = courseDao.selectByChapterId(chapter.getCourseId());		
 		
 		// 获取习题总数
 		TrainQuestionDao dao = new TrainQuestionDao();
@@ -97,6 +103,7 @@ public class TrainAction extends StudentBaseAction {
 		request.setAttribute("total", total);
 		request.setAttribute("train", train);
 		request.setAttribute("chapter", chapter);
+		request.setAttribute("course", course);
 		request.setAttribute("indexList", indexList);
 		
 		// 页面处于答题结果时候需要的数据
@@ -113,23 +120,18 @@ public class TrainAction extends StudentBaseAction {
 	 * @return
 	 */
 	@RequestMapping(value = "/question", method = RequestMethod.GET)
-	public String questionGet(String trainId, Integer index) {
+	public String questionGet(String trainId, String chapterId, Integer index) {
+		// 获取题目
 		TrainQuestionDao questionDao = new TrainQuestionDao();
 		TrainQuestionItem question = questionDao.selectByTrainIdAndIndex(trainId, --index);
 		if(question != null) {
+			// 获取做题记录，有可能没有
+			TrainHistoryDao historyDao = new TrainHistoryDao();
+			TrainHistoryItem history = historyDao.selectByUnique(question.getId(), trainId, chapterId, this.currentUser().getId());
+			
 			this.getRequest().setAttribute("question", question);
-			if(question.isSingleSelection()) {
-				return "course/resource/train/question_single";
-			}
-			if(question.isMulChoice()) {
-				return "course/resource/train/question_multiple";
-			}
-			if(question.isTrueOrFlase()) {
-				return "course/resource/train/question_boolean";
-			}
-			if(question.isBlankFilling()) {
-				return "course/resource/train/question_fill";
-			}
+			this.getRequest().setAttribute("history", history);
+			return "course/resource/train/question";
 		}
 		return "blank";
 	}

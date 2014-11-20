@@ -382,7 +382,7 @@ span.form_error, span.form_success{border-width:1px;display:inline-block;*displa
 
 
 /*----------------做作业------------------*/
-#trainDiv .question_index {width:30px; height:30px; border:solid 1px #ccc;}
+#trainDiv .question_index {width:30px; height:30px; border:solid 1px #ccc; cursor:pointer;}
 #trainDiv .done {background-color:#ccc;}
 #trainDiv .wrong {background-color:#a00;}
 
