@@ -74,18 +74,92 @@ public class TrainHistoryDao extends BaseDao{
 	}
 	
 	/**
-	 * 获取某个测验学生的全部答题
+	 * 获取一条作业历史
+	 * @param id
 	 * @return
 	 */
-	public List<TrainHistoryView>  selectUserDone(String userId, String trainId, String chapterId) {
+	public TrainHistoryItem selectById(String id) {
 		try {
 			TrainHistoryMapper mapper = this.getMapper(TrainHistoryMapper.class);
 			if (mapper != null) {
-				return mapper.selectUserDone(userId, trainId, chapterId);
+				return mapper.selectById(id);
+			}
+		} catch (Exception e) {
+			Log.printStackTrace(e);
+		}				
+		return null;
+	}
+	
+	/**
+	 * 获取一条作业历史
+	 * @param questionId
+	 * @param trainId
+	 * @param chapterId
+	 * @param userId
+	 * @return
+	 */
+	public TrainHistoryItem selectByUnique(String questionId, String trainId, String chapterId, String userId) {
+		try {
+			TrainHistoryMapper mapper = this.getMapper(TrainHistoryMapper.class);
+			if (mapper != null) {
+				return mapper.selectByUnique(questionId, trainId, chapterId, userId);
+			}
+		} catch (Exception e) {
+			Log.printStackTrace(e);
+		}				
+		return null;
+	}	
+	
+	/**
+	 * 获取某个测验某个学生的全部答题详细
+	 * @return
+	 */
+	public List<TrainHistoryView>  selectUserDoneDetail(String userId, String trainId, String chapterId) {
+		try {
+			TrainHistoryMapper mapper = this.getMapper(TrainHistoryMapper.class);
+			if (mapper != null) {
+				return mapper.selectUserDoneDetail(userId, trainId, chapterId);
 			}
 		} catch (Exception e) {
 			Log.printStackTrace(e);
 		}
 		return null;
 	}
+	
+	/**
+	 * 获取某个测验某个学生的答题历史
+	 * @return
+	 */
+	public List<TrainHistoryItem>  selectUserHistory(String userId, String trainId, String chapterId) {
+		try {
+			TrainHistoryMapper mapper = this.getMapper(TrainHistoryMapper.class);
+			if (mapper != null) {
+				return mapper.selectUserHistory(userId, trainId, chapterId);
+			}
+		} catch (Exception e) {
+			Log.printStackTrace(e);
+		}
+		return null;
+	}	
+	
+	/**
+	 * 删除用户测验记录
+	 * @param userId
+	 * @param trainId
+	 * @param chapterId
+	 * @return
+	 */
+	public int deleteUserHistory(String userId, String trainId, String chapterId) {
+		try {
+			TrainHistoryMapper mapper = this.getMapper(TrainHistoryMapper.class);
+			if (mapper != null) {
+				return mapper.deleteUserHistory(userId, trainId, chapterId);
+			}
+		} catch (Exception e) {
+			Log.printStackTrace(e);
+		}
+		return 0;
+	}
+	
+	
 }

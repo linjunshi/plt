@@ -8,7 +8,6 @@ import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
-import com.santrong.plt.webpage.course.resource.train.entry.TrainHistoryItem;
 import com.santrong.plt.webpage.course.resource.train.entry.TrainQuestionItem;
 
 
@@ -23,7 +22,7 @@ public interface TrainQuestionMapper {
 	int insert(TrainQuestionItem trainQuestionItem);
 	
 	@Select("select * from resource_train_question where ownerId = #{userId} and del = 0")
-	List<TrainQuestionItem> selectByUserId(String userId);
+	List<TrainQuestionItem> selectByUserId(String userId);	
 	
 	@Select("select * from resource_train_question where id = #{id}")
 	TrainQuestionItem selectById(String id);
@@ -52,23 +51,19 @@ public interface TrainQuestionMapper {
 	@Select("select * from resource_train_question a "
 			+ "left join resource_train_to_question b on a.id=b.questionId "
 			+ "where b.trainId=#{trainId} limit ${index}, 1")
-	TrainQuestionItem selectByTrainIdAndIndex(@Param("trainId")String trainId, @Param("index")int index);
+	TrainQuestionItem selectByTrainIdAndIndex(@Param("trainId")String trainId, @Param("index")int index);	
+	
+	@Select("select a.* from resource_train_question a left join resource_train_to_question b on a.id=b.questionId where b.trainId=#{trainId}")
+	List<TrainQuestionItem> selectByTrainId(String trainId);	
 	
 	@Select("select count(*) from resource_train_question a "
 			+ "left join resource_train_to_question b on a.id=b.questionId "
 			+ "where b.trainId=#{trainId}")
 	int selectCountByTrainId(@Param("trainId")String trainId);
+
+		
+
 	
-	@Select("select * from resource_train_history where questionId=#{questionId} and trainId=#{trainId} and chapterId=#{chapterId} and userId=#{userId}")
-	TrainHistoryItem selectInHistory2(@Param("questionId")String questionId, @Param("trainId")String trainId, @Param("chapterId")String chapterId, @Param("userId")String userId);
 	
-	@Select("select * from resource_train_history where id=#{id}")
-	TrainHistoryItem selectInHistory(String id);
-	
-	@Update("update resource_train_history set answer=#{answer},result=#{result},uts=#{uts} where id=#{id}")
-	int updateInHistory(TrainHistoryItem history);
-	
-	@Insert("insert into resource_train_history values(#{id}, #{userId}, #{chapterId}, #{trainId}, #{questionId}, answer=#{answer}, result=#{result}, del=${del}, #{cts}, #{uts})")
-	int insertInHistory(TrainHistoryItem history);			
 	
 }

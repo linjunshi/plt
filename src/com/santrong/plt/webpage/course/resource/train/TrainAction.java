@@ -1,5 +1,6 @@
 package com.santrong.plt.webpage.course.resource.train;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -8,7 +9,10 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.santrong.plt.log.Log;
+import com.santrong.plt.opt.ThreadUtils;
 import com.santrong.plt.util.MyUtils;
 import com.santrong.plt.webpage.course.dao.ChapterDao;
 import com.santrong.plt.webpage.course.entry.ChapterItem;
@@ -17,8 +21,8 @@ import com.santrong.plt.webpage.course.resource.train.dao.TrainHistoryDao;
 import com.santrong.plt.webpage.course.resource.train.dao.TrainQuestionDao;
 import com.santrong.plt.webpage.course.resource.train.entry.TrainHistoryForm;
 import com.santrong.plt.webpage.course.resource.train.entry.TrainHistoryItem;
-import com.santrong.plt.webpage.course.resource.train.entry.TrainHistoryView;
 import com.santrong.plt.webpage.course.resource.train.entry.TrainItem;
+import com.santrong.plt.webpage.course.resource.train.entry.TrainQuestionIndex;
 import com.santrong.plt.webpage.course.resource.train.entry.TrainQuestionItem;
 import com.santrong.plt.webpage.manage.StudentBaseAction;
 
@@ -38,106 +42,162 @@ public class TrainAction extends StudentBaseAction {
 	 * @return
 	 */
 	@RequestMapping("")
-	public String home(String resId, Integer index) {
+	public String home(String resId) {
 		
 		//TODO 权限判断
 		
-		index = index == null? 0 : --index;
+		String module = "answer";// 答题模式answer，统计模式result
 		
+		// 获取测验
 		TrainDao trainDao = new TrainDao();
 		TrainItem train = trainDao.selectById(resId);
 		
+		// 获取章节
 		ChapterDao chapterDao = new ChapterDao();
-		ChapterItem chapter = chapterDao.selectByResourceId(resId);
+		ChapterItem chapter = chapterDao.selectByResourceId(resId);		
 		
-		if(train ==  null) {
+		// 未知的train或者train没有添加到课程章节里的，无法开始该测试
+		if(train ==  null || chapter == null) {
 			this.redirect("/");
 		}
 		
+		// 获取习题总数
 		TrainQuestionDao dao = new TrainQuestionDao();
+		int total = dao.selectCountByTrainId(resId);		
 		
-		int total = dao.selectCountByTrainId(resId);
-		if(total > 0) {
-			if(index < 0 || index >= total) {
-				this.redirect("/");
+		// 获取答题记录
+		int doneCount = 0;
+		int wrongCount = 0;
+		TrainHistoryDao historyDao = new TrainHistoryDao();
+		List<TrainHistoryItem> historyList = historyDao.selectUserHistory(this.currentUser().getId(), resId, chapter.getId());// 有历史记录会进入答题结果状态，情况历史记录才能进入答题状态
+		for(TrainHistoryItem item:historyList) {
+			module = "result";
+			if(item.getAnswer() != 0) {
+				doneCount++;
+				if(item.getResult() == 0) {
+					wrongCount++;
+				}
 			}
-			
-			TrainQuestionItem question = dao.selectByTrainIdAndIndex(resId, index);
-			
-			this.getRequest().setAttribute("question", question);
 		}
 		
-		this.getRequest().setAttribute("resId", resId);
-		this.getRequest().setAttribute("index", ++index);
-		this.getRequest().setAttribute("train", train);
-		this.getRequest().setAttribute("chapter", chapter);
-		this.getRequest().setAttribute("total", total);
+		// 数据组装
+		List<TrainQuestionIndex> indexList = new ArrayList<TrainQuestionIndex>();
+		for(int i=0;i<total;i++) {
+			TrainQuestionIndex qIndex = new TrainQuestionIndex();
+			if(historyList.size() > 0) {
+				qIndex.setAnswer(historyList.get(i).getAnswer());
+				qIndex.setResult(historyList.get(i).getResult());
+			}
+			indexList.add(qIndex);
+		}
+
+		// 基本数据
+		HttpServletRequest request = this.getRequest();
+		request.setAttribute("module", module);
+		request.setAttribute("total", total);
+		request.setAttribute("train", train);
+		request.setAttribute("chapter", chapter);
+		request.setAttribute("indexList", indexList);
+		
+		// 页面处于答题结果时候需要的数据
+		request.setAttribute("doneCount", doneCount);
+		request.setAttribute("wrongCount", wrongCount);
 		
 		return "course/resource/train/detail";
 	}
 	
 	/**
-	 * 提交试题
-	 * @param form
+	 * 做作业时候获取单道习题
+	 * @param trainId
+	 * @param index
 	 * @return
 	 */
-	@RequestMapping(value = "/question/commit", method = RequestMethod.POST)
-	public String questionCommit(TrainHistoryForm form) {
-		
-		// TODO 权限判断
-		
-		TrainQuestionDao dao = new TrainQuestionDao();
-		TrainQuestionItem question = dao.selectById(form.getQuestionId());
-		TrainHistoryItem history = dao.selectInHistory(form.getQuestionId(), form.getTrainId(), form.getChapterId(), this.currentUser().getId());
-		int result = question.getAnswer() == form.answerTotal()? 1 : 0;
-		
-		if(history == null) {
-			history  = new TrainHistoryItem();
+	@RequestMapping(value = "/question", method = RequestMethod.GET)
+	public String questionGet(String trainId, Integer index) {
+		TrainQuestionDao questionDao = new TrainQuestionDao();
+		TrainQuestionItem question = questionDao.selectByTrainIdAndIndex(trainId, --index);
+		if(question != null) {
+			this.getRequest().setAttribute("question", question);
+			if(question.isSingleSelection()) {
+				return "course/resource/train/question_single";
+			}
+			if(question.isMulChoice()) {
+				return "course/resource/train/question_multiple";
+			}
+			if(question.isTrueOrFlase()) {
+				return "course/resource/train/question_boolean";
+			}
+			if(question.isBlankFilling()) {
+				return "course/resource/train/question_fill";
+			}
 		}
-		history.setUserId(this.currentUser().getId());
-		history.setChapterId(form.getChapterId());
-		history.setTrainId(form.getTrainId());
-		history.setQuestionId(form.getQuestionId());
-		history.setAnswer(form.answerTotal());
-		history.setResult(result);
-		history.setUts(new Date());
-		
-		if(MyUtils.isNotNull(history.getId())) {// 已经有的就更新
-			dao.updateInHistory(history);
-		}else {// 没有的就新增
-			history.setId(MyUtils.getGUID());
-			history.setCts(new Date());
-			dao.insertInHistory(history);
-		}
-		
-		// 不是最后一题，就跳转下一题
-		if(form.getIndex() < form.getTotal()) {
-			return this.redirect("/train?resId=" + form.getResourceId() + "&index=" + (form.getIndex() + 1));
-		}
-		
-		// 否则跳转结账页面
-		return this.redirect("/train/result?resId=" + form.getResourceId() + "&chapterId=" + form.getChapterId());
+		return "blank";
 	}
 	
 	/**
-	 * 做题结果页
-	 * @param resId
-	 * @param chapterId
+	 * 提交试题--批量提交
+	 * @param form
 	 * @return
 	 */
-	@RequestMapping(value = "/result")
-	public String questionCommit(String resId, String chapterId) {
-		TrainQuestionDao qDao = new TrainQuestionDao();
-		TrainHistoryDao hDao = new TrainHistoryDao();
-		int total = qDao.selectCountByTrainId(resId);// 总题数
-		List<TrainHistoryView> historyList = hDao.selectUserDone(this.currentUser().getId(), resId, chapterId);
-		int replayCount = historyList.size();
+	@RequestMapping(value = "/question", method = RequestMethod.POST)
+	@ResponseBody
+	public String questionPost(TrainHistoryForm form) {
 		
-		HttpServletRequest request = this.getRequest();
-		request.setAttribute("total", total);
-		request.setAttribute("replayCount", replayCount);
-		request.setAttribute("historyList", historyList);
+		// TODO 权限判断
 		
-		return "course/resource/train/result";
+		// 该获取测验的所有习题
+		TrainQuestionDao questionDao = new TrainQuestionDao();
+		List<TrainQuestionItem> questionList = questionDao.selectByTrainId(form.getTrainId());
+		
+		// 用户提交的数据跟习题对比结果后存入历史
+		if(questionList != null && questionList.size() == form.getAnswer().length) {
+			try{
+				ThreadUtils.beginTranx();
+				
+				// 不管有没有，先删除历史再说
+				TrainHistoryDao historydao = new TrainHistoryDao();
+				historydao.deleteUserHistory(this.currentUser().getId(), form.getTrainId(), form.getChapterId());			
+				
+				for(int i=0;i<questionList.size();i++) {
+					int result = questionList.get(i).getAnswer() == form.getAnswer()[i]? 1 : 0;
+					TrainHistoryItem history = new TrainHistoryItem();
+					history.setId(MyUtils.getGUID());
+					history.setTrainId(form.getTrainId());
+					history.setChapterId(form.getChapterId());
+					history.setQuestionId(questionList.get(i).getId());
+					history.setUserId(this.currentUser().getId());
+					history.setAnswer(form.getAnswer()[i]);
+					history.setResult(result);
+					history.setDel(0);
+					history.setCts(new Date());
+					history.setCts(new Date());
+					historydao.insert(history);
+				}
+				
+				ThreadUtils.commitTranx();
+				return SUCCESS;
+			}catch(Exception e) {
+				ThreadUtils.rollbackTranx();
+				Log.printStackTrace(e);
+				return FAIL;
+			}
+		}
+		
+		return FAIL;
+	}
+	
+	/**
+	 * 重置测验
+	 * @param form
+	 * @return
+	 */
+	@RequestMapping(value = "/reset", method = RequestMethod.POST)
+	@ResponseBody
+	public String reset(String chapterId, String trainId) {
+		TrainHistoryDao dao = new TrainHistoryDao();
+		if(dao.deleteUserHistory(this.currentUser().getId(), trainId, chapterId) > 0) {
+			return SUCCESS;
+		}
+		return FAIL;
 	}
 }

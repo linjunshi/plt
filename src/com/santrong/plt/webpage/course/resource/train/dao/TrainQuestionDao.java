@@ -13,7 +13,6 @@ import com.santrong.plt.opt.ThreadUtils;
 import com.santrong.plt.util.BeanUtils;
 import com.santrong.plt.util.MyUtils;
 import com.santrong.plt.webpage.BaseDao;
-import com.santrong.plt.webpage.course.resource.train.entry.TrainHistoryItem;
 import com.santrong.plt.webpage.course.resource.train.entry.TrainQuestionItem;
 import com.santrong.plt.webpage.course.resource.train.entry.TrainQuestionQuery;
 
@@ -43,7 +42,7 @@ public class TrainQuestionDao extends BaseDao{
 	}
 	
 	/**
-	 * 查询该用户的所有题目
+	 * 查询该用户的所有题目，主要用在老师客户端接口
 	 * @author huangweihua
 	 * @param TrainHistoryItem
 	 * @return int
@@ -58,7 +57,7 @@ public class TrainQuestionDao extends BaseDao{
 			Log.printStackTrace(e);
 		}
 		return null;
-	}
+	}	
 	
 	/**
 	 * 查询该用户的所有的题目(分页)
@@ -218,7 +217,7 @@ public class TrainQuestionDao extends BaseDao{
 	}
 	
 	/**
-	 * 习题从作业中移除
+	 * 习题从测验中移除
 	 * @param questionId
 	 * @param trainId
 	 * @return
@@ -236,7 +235,7 @@ public class TrainQuestionDao extends BaseDao{
 	}	
 	
 	/**
-	 * 从题库中，删除一条试题记录
+	 * 删除一条试题
 	 * @author huangweihua
 	 * @param id
 	 * @return boolean
@@ -253,6 +252,11 @@ public class TrainQuestionDao extends BaseDao{
 		return false;
 	}
 	
+	/**
+	 * 更新试题
+	 * @param question
+	 * @return
+	 */
 	public boolean update(TrainQuestionItem question) {
 		try {
 			TrainQuestionMapper mapper = this.getMapper(TrainQuestionMapper.class);
@@ -281,7 +285,24 @@ public class TrainQuestionDao extends BaseDao{
 			Log.printStackTrace(e);
 		}		
 		return null;
-	}
+	}	
+	
+	/**
+	 * 获取一个测验里的所有习题
+	 * @param trainId
+	 * @return
+	 */
+	public List<TrainQuestionItem> selectByTrainId(String trainId) {
+		TrainQuestionMapper mapper = this.getMapper(TrainQuestionMapper.class);
+		try{
+			if(mapper != null){
+				return mapper.selectByTrainId(trainId);
+			}
+		}catch(Exception e) {
+			Log.printStackTrace(e);
+		}
+		return null;
+	}	
 	
 	/**
 	 * 获取测验里的习题数
@@ -299,76 +320,5 @@ public class TrainQuestionDao extends BaseDao{
 		}		
 		return 0;
 	}	
-	
-	/**
-	 * 获取一条作业历史
-	 * @param questionId
-	 * @param trainId
-	 * @param chapterId
-	 * @param userId
-	 * @return
-	 */
-	public TrainHistoryItem selectInHistory(String questionId, String trainId, String chapterId, String userId) {
-		try {
-			TrainQuestionMapper mapper = this.getMapper(TrainQuestionMapper.class);
-			if (mapper != null) {
-				return mapper.selectInHistory2(questionId, trainId, chapterId, userId);
-			}
-		} catch (Exception e) {
-			Log.printStackTrace(e);
-		}				
-		return null;
-	}	
-	
-	/**
-	 * 获取一条作业历史
-	 * @param id
-	 * @return
-	 */
-	public TrainHistoryItem selectInHistory(String id) {
-		try {
-			TrainQuestionMapper mapper = this.getMapper(TrainQuestionMapper.class);
-			if (mapper != null) {
-				return mapper.selectInHistory(id);
-			}
-		} catch (Exception e) {
-			Log.printStackTrace(e);
-		}				
-		return null;
-	}
-	
-	/**
-	 * 更新一条作业历史
-	 * @param queston
-	 * @return
-	 */
-	public int updateInHistory(TrainHistoryItem history) {
-		try {
-			TrainQuestionMapper mapper = this.getMapper(TrainQuestionMapper.class);
-			if (mapper != null) {
-				return mapper.updateInHistory(history);
-			}
-		} catch (Exception e) {
-			Log.printStackTrace(e);
-		}				
-		return 0;
-	}	
-	
-	/**
-	 * 插入一条作业历史
-	 * @param queston
-	 * @return
-	 */
-	public int insertInHistory(TrainHistoryItem history) {
-		try {
-			TrainQuestionMapper mapper = this.getMapper(TrainQuestionMapper.class);
-			if (mapper != null) {
-				return mapper.insertInHistory(history);
-			}
-		} catch (Exception e) {
-			Log.printStackTrace(e);
-		}				
-		return 0;
-	}		
 	
 }

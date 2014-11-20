@@ -70,7 +70,99 @@ IndexClass.prototype = {
 	},
 	
 	// 学校列表页
-	school:function() {
+	school : function() {
 
+	},
+	
+	// 做作业页面
+	doneTrain : function() {
+		
+		// 做题事件
+		var bindAnswer = function() {
+			var index = $("input[name=index]").val();
+			// 单选
+			$("#questionDiv input[type=radio]").change(function() {
+				$(".question_index").eq(index-1).find("input[name=answer]").val($(this).val());
+				$(".question_index").eq(index-1).addClass("done");
+			});
+			// 多选
+			$("#questionDiv input[type=checkbox]").change(function() {
+				var val = 0;
+				$("#questionDiv input[type=checkbox]:checked").each(function() {
+					val = val + $(this).val()/1;
+				});
+				$(".question_index").eq(index-1).find("input[name=answer]").val(val);
+				$(".question_index").eq(index-1).addClass("done");
+			});
+		}
+		
+		// 作业序号事件
+		$(".question_index").click(function() {
+			var total = $("input[name=total]").val();
+			var index = $(this).text();
+			$("input[name=index]").val(index);
+			
+			var trainId = $("input[name=trainId]").val();
+			$.ajax({
+				type : 'GET',
+				url : Globals.ctx + '/train/question',
+				data : {trainId : trainId , index : index},
+				success : function(result){
+					$("#questionDiv").html(result);
+					$(".preOne").css({"visibility" : (index <= 1? "hidden" : "visible")});
+					$(".nextOne").css({"visibility" : (index >= total? "hidden" : "visible")});
+					bindAnswer();
+				}
+			});
+		});
+		
+		// 上一题
+		$(".preOne").click(function() {
+			$(".question_index").eq($("input[name=index]").val()-2).click();
+		});
+		
+		// 下一题
+		$(".nextOne").click(function() {
+			$(".question_index").eq($("input[name=index]").val()).click();
+		});
+		
+		// 默认显示第一题
+		if($(".question_index").size()>0) {
+			$(".question_index").eq(0).click();
+		}
+
+		// 提交结果
+		$(".ajax_submit").click(function() {
+	    	var form = $(this).closest("form");
+	    	if(form.length > 0){
+	    		form.ajaxSubmit({
+	    			success : function(result) {
+						if(result == 'success') {
+							location.reload();
+						}else {
+							alert(result);
+						}
+	    			}
+	    		});
+	    	}
+		});
+		
+		// 重新做题
+		$(".ajax_reset").click(function() {
+			var chapterId = $("input[name=chapterId]").val();
+			var trainId = $("input[name=trainId]").val();
+			$.ajax({
+				type : 'POST',
+				url : Globals.ctx + '/train/reset',
+				data : {chapterId : chapterId, trainId : trainId},
+				success : function(result) {
+					if(result == 'success') {
+						location.reload();
+					}else {
+						alert(result);
+					}
+				}
+			});
+		});
 	}
 };

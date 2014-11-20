@@ -162,5 +162,4 @@ public class TrainDao extends BaseDao{
 		
 		return count;
 	}	
-	
 }
