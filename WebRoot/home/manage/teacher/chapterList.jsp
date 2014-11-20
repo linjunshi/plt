@@ -8,7 +8,7 @@
 var Globals = {};
 Globals.ctx = "${ctx}";
 Globals.lang = "${lang}";
-Globals.page = "Manage_index";
+Globals.page = "Manage_chapterList";
 </script>
 </head>
 <body>
@@ -19,28 +19,43 @@ Globals.page = "Manage_index";
 				<%@ include file="../../inc/leftmenu.jsp"%>
 				
 				<div class="sh_info_r">
-		            <div class="sh_title">
-		                <h2>章节维护</h2>
+		            <div class="st_titile_r sh_title">
+						<a href="${ctx}/manage/course/modify?courseId=${course.id}">基本信息</a>
+						<a href="${ctx}/manage/course/chapterEditor?courseId=${course.id}">章节维护</a>
+						<input type="hidden" id="courseId" name="courseId" value="${course.id}">
 		            </div>
-		            
 		            <div class="sh_collection">
-						<c:forEach items="${chapterList}" var="chapter" varStatus="ct">
+						<c:forEach items="${course.chapterDetailList}" var="chapter" varStatus="st">
 							<dl class="sh_add_chapter">
+								<input type="hidden" id="chapterId" name="chapterId" value="${chapter.id}"/>
 								<dt>
 									<div class="sh_add_opera">
-										<h2>第一百零三章</h2>
-										<p>故事的发展有了进一步的改观</p>
-										<span class="sh_operation"><a href="#">删除</a><a
-											href="#">修改</a></span>
+										<h2>第${st.count}课:</h2>
+										<p class="show_remark">${chapter.remark}</p>
+										<p class="hide_remark">
+											<input type='text' value='${chapter.remark}' name='remark' id='remark' class='chapter_remark'> 
+											<a href='javascript:void(0);' class='chapter_submit'>保存</a>
+											<a href='javascript:void(0);' class='chapter_cancel'>取消</a>
+											<span>5-30个字符支持汉字、数字、“_”</span>
+										</p>
+										<span class="sh_operation">
+											<a href="javascript:void(0);" class="removeMaxChapter">删除</a>
+											<a href="javascript:void(0);" class="editMaxChapter">修改</a>
+										</span>
 									</div>
 								</dt>
-								<dd>第一小节</dd>
+								<c:forEach items="${chapter.resourceList}" var="resource">
+									<dd class="pt10"><a href="${ctx}/course_res?resId=${resource.id}&resType=${resource.type}" target="_blank" >${resource.title}---type:${resource.typeString}</a></dd>
+								</c:forEach>
 								<dd class="pt11">
-									<a href="#">添加一小节</a>
+									<a href="javascript:void(0);" class="addMinChapter" >添加一小节</a>
 								</dd>
 							</dl>
+							<c:if test="${st.last}">
+								<input type="hidden" value="${st.count}" id="priority" name="priority" >
+							</c:if>
 						</c:forEach>
-						<a href="#" class="sh_addop_a">添加一章</a> 
+						<a href="javascript:void(0);" class="sh_addop_a">添加一章</a> 
 		             </div>
 		        </div>
 				

@@ -116,7 +116,7 @@ jQuery.extend(Boxy, {
         actuator:               null,           // element which opened this dialog
         center:                 true,           // center dialog in viewport?
         show:                   true,           // show dialog immediately?
-        modal:                  false,          // make dialog modal?
+        modal:                  true,          // make dialog modal?
         fixed:                  true,           // use fixed positioning, if supported? absolute positioning used otherwise
         closeText:              '[关闭]',      // text to use for default close link
         unloadOnHide:           false,          // should this dialog be removed from the DOM after being hidden?

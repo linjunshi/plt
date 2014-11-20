@@ -94,7 +94,7 @@ public interface CourseMapper {
 	 * @param courseItem
 	 * @return
 	 */
-	@Insert("insert into course values(#{id},#{courseName},#{teacher},#{price},#{live},#{endTime},#{gradeId},#{subjectId},#{remark},#{saleCount},#{collectCount},#{commentCount},#{chapterCount},#{ownerId},#{cts},#{uts})")
+	@Insert("insert into course values(#{id},#{courseName},#{teacher},#{price},#{url},#{live},#{endTime},#{gradeId},#{subjectId},#{remark},#{saleCount},#{collectCount},#{commentCount},#{chapterCount},#{ownerId},#{cts},#{uts})")
 	int insert(CourseItem courseItem);
 	
 	/**

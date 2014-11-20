@@ -104,7 +104,7 @@ Globals.page = "Manage_index";
 								<div class="form_item">
 									<label>试题详解：</label>
 									<div class="form_field">
-										<textarea id="intro" name="intro"></textarea>
+										<textarea id="remark" name="remark">${tqItem.remark}</textarea>
 										<p class="form_des">请匆超过600字符</p>
 									</div>
 								</div>

@@ -18,11 +18,11 @@ public class TrainQuestionItem {
 	private String opt3;
 	private String opt4;
 	private int answer;
+	private String remark;
 	private String ownerId;
 	private int del;
 	private Date cts;
 	private Date uts;
-	private String comment;
 	
 	private int[] pageAnswer;
 
@@ -114,6 +114,12 @@ public class TrainQuestionItem {
 	public void setAnswer(int answer) {
 		this.answer = answer;
 	}
+	public String getRemark() {
+		return remark;
+	}
+	public void setRemark(String remark) {
+		this.remark = remark;
+	}
 	public String getOwnerId() {
 		return ownerId;
 	}
@@ -137,12 +143,6 @@ public class TrainQuestionItem {
 	}
 	public void setUts(Date uts) {
 		this.uts = uts;
-	}
-	public String getComment() {
-		return comment;
-	}
-	public void setComment(String comment) {
-		this.comment = comment;
 	}
 	public int[] getPageAnswer() {
 		return pageAnswer;

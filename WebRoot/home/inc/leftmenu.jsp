@@ -14,12 +14,11 @@
                     <dd><a href="${ctx}/collection">我的收藏</a></dd>
                     <dd><a href="${ctx}/account/personalInfo">个人信息</a></dd>
                     <dd><a href="${ctx}/account/changePwd">修改密码</a></dd>
-                    <dd><a href="#">账户余额</a></dd>
-                    <dd><a href="#">交易记录</a></dd>
+                    <dd><a href="#" onclick="alert('开发中')">交易记录</a></dd>
                 </dl>            
                 <dl class="show">
                     <dt><a href="#">我是老师</a></dt>
-                    <dd><a href="#" onclick="alert('developing')">我的直播</a></dd>
+                    <dd><a href="#" onclick="alert('开发中')">我的直播</a></dd>
                     <dd><a href="${ctx}/manage/course">课程管理</a></dd>
                     <dd><a href="${ctx}/manage/file">课件管理</a></dd>
                     <dd><a href="${ctx}/manage/question/list">试题管理</a></dd>

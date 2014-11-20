@@ -8,9 +8,17 @@ import java.util.List;
  * @time 下午3:18:46
  */
 public class ChapterDetailView {
+	private String id;
 	private String remark;
 	private List<ResourceEntry> resourceList;
 	
+	
+	public String getId() {
+		return id;
+	}
+	public void setId(String id) {
+		this.id = id;
+	}
 	public String getRemark() {
 		return remark;
 	}

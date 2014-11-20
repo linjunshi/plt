@@ -12,35 +12,39 @@ Globals.page = "Manage_index";
 </script>
 </head>
 <body>
-		
 		<%@ include file="../../inc/top.jsp"%>
-		
-		<div class="main">
-			
-			<%@ include file="../../inc/leftmenu.jsp"%>
-			
-			<div class="maanage_right_major">
-				<table>
-					<thead>
-						<tr><th>序号</th><th>文件名</th><th>录制时间</th><th>时长</th><th>所属组</th><th>描述</th><th>操作</th></tr>
-					</thead>
-					<tbody>
-						<c:forEach items="${fileList}" var="file" varStatus="st">
-							<tr>
-								<td>${st.index + 1}</td>
-								<td>${file.title}</td>
-								<td>${file.cts}</td>
-								<td>${file.duration}</td>
-								<td>${file.groupId}</td>
-								<td>${file.remark}</td>
-								<td><a href="#">删除</a></td>
-							</tr>
-						</c:forEach>
-					</tbody>
-				</table>
+		<div id="container_box">
+			<div id="container_content">
+			    <div class="sectionMain clr">
+					<%@ include file="../../inc/leftmenu.jsp"%>
+					<div class="sh_info_r">
+			            <div class="sh_title">
+			                <h2>课件列表</h2>
+			            </div>					
+						<table>
+							<thead>
+								<tr><th>序号</th><th>文件名</th><th>录制时间</th><th>时长</th><th>所属组</th><th>描述</th><th>操作</th></tr>
+							</thead>
+							<tbody>
+								<c:forEach items="${fileList}" var="file" varStatus="st">
+									<tr>
+										<td>${st.index + 1}</td>
+										<td>${file.title}</td>
+										<td>${file.cts}</td>
+										<td>${file.duration}</td>
+										<td>${file.groupId}</td>
+										<td>${file.remark}</td>
+										<td><a href="#">删除</a></td>
+									</tr>
+								</c:forEach>
+							</tbody>
+						</table>
+	                    <c:set var="basicUrl" value="${ctx}/manage/file" />
+	    				<%@ include file="../../inc/pagination.jsp"%>						
+					</div>
+				</div>
 			</div>
 		</div>
-		
 		<%@ include file="../../inc/friendlylink.jsp"%>
 </body>
 </html>
