@@ -102,6 +102,5 @@ Globals.page = "Manage_index";
 	    </div>
 	</div>
 	<%@ include file="../../inc/friendlylink.jsp"%>
-	<%@ include file="../../inc/copyright.jsp"%>
 </body>
 </html>

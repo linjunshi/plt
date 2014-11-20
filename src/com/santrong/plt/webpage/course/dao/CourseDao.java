@@ -501,6 +501,7 @@ public class CourseDao extends BaseDao {
 	}
 	
 	/**
+<<<<<<< HEAD
 	 * 新增一条课程记录
 	 * @param courseItem
 	 * @return
@@ -567,4 +568,22 @@ public class CourseDao extends BaseDao {
 		}
 		return false;
 	}
+	
+	/**
+	 * 查询章节所在的课程
+	 * @param chapterId
+	 * @return
+	 */
+	public CourseItem selectByChapterId(String chapterId) {
+		try {
+			CourseMapper mapper = this.getMapper(CourseMapper.class);
+			if (mapper != null) {
+				return mapper.selectByChapterId(chapterId);
+			}
+		} catch (Exception e) {
+			Log.printStackTrace(e);
+		}
+		return null;
+	}
+	
 }

@@ -18,7 +18,7 @@ Globals.page = "Manage_index";
 			    <div class="sectionMain clr">
 					<%@ include file="../../inc/leftmenu.jsp"%>
 					<div class="sh_info_r">
-			            <div class="st_titile_r"> <a href="${ctx}/study/course">我的课程</a><a href="${ctx}/study/live">我的直播</a></div>
+			            <div class="st_titile_r"> <a href="${ctx}/study/course">我的课程</a><%-- <a href="${ctx}/study/live">我的直播</a> --%></div>
 			            
 		                <div class="sh_ke">
 		                    <ul class="sh_sch_ke clr">

@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.gson.Gson;
 import com.santrong.plt.log.Log;
-import com.santrong.plt.util.FileUtils;
 import com.santrong.plt.util.MyUtils;
 import com.santrong.plt.webpage.course.dao.ChapterDao;
 import com.santrong.plt.webpage.course.dao.CourseDao;
@@ -382,24 +381,4 @@ public class CourseMAction extends TeacherBaseAction {
 	public String changeCover(){
 		return "/manage/teacher/changeCover";
 	}
-	
-	/**
-	 * ajax图片上传
-	 * @param request
-	 * @return
-	 */
-	@RequestMapping("/coverUpload")
-	@ResponseBody
-	public String coverUpload(HttpServletRequest request){
-		StringBuilder sb = new StringBuilder();
-		sb.append("{'result':");
-		String result = FileUtils.uploadRemoteFile(request);
-		if(MyUtils.isNotNull(result) && result.startsWith("url")) {
-			sb.append("1").append(",").append("'url':").append("'").append(result.split(":")[1]).append("'");
-		}else {
-			sb.append("0").append(",").append("'error':").append("'").append(result).append("'");
-		}
-		sb.append("}");
-		return sb.toString();
-	}	
 }

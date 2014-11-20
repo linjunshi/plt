@@ -59,6 +59,18 @@ public class TrainDao extends BaseDao{
 		return null;
 	}
 	
+	public TrainItem selectById(String trainId) {
+		try {
+			TrainMapper mapper = this.getMapper(TrainMapper.class);
+			if (mapper != null) {
+				return mapper.selectById(trainId);
+			}
+		} catch (Exception e) {
+			Log.printStackTrace(e);
+		}
+		return null;
+	}	
+	
 	/**
 	 * 获取某个直播的随堂作业，如果还没有则返回null
 	 * @param liveId
@@ -150,5 +162,4 @@ public class TrainDao extends BaseDao{
 		
 		return count;
 	}	
-	
 }

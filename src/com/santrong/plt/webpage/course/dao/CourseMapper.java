@@ -126,4 +126,7 @@ public interface CourseMapper {
 	
 	@Delete("delete from course where id = #{id}")
 	int deleteById(String id);
+
+	@Select("select a.* from course a left join course_chapter b on a.id=b.courseId where b.id=#{chapterId}")
+	CourseItem selectByChapterId(String chapterId);
 }

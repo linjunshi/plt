@@ -22,7 +22,7 @@ public interface TrainQuestionMapper {
 	int insert(TrainQuestionItem trainQuestionItem);
 	
 	@Select("select * from resource_train_question where ownerId = #{userId} and del = 0")
-	List<TrainQuestionItem> selectByUserId(String userId);
+	List<TrainQuestionItem> selectByUserId(String userId);	
 	
 	@Select("select * from resource_train_question where id = #{id}")
 	TrainQuestionItem selectById(String id);
@@ -48,4 +48,23 @@ public interface TrainQuestionMapper {
 			+ "uts = #{uts}"
 			+ " where id = #{id} ")
 	int update(TrainQuestionItem question);
+	
+	@Select("select * from resource_train_question a "
+			+ "left join resource_train_to_question b on a.id=b.questionId "
+			+ "where b.trainId=#{trainId} limit ${index}, 1")
+	TrainQuestionItem selectByTrainIdAndIndex(@Param("trainId")String trainId, @Param("index")int index);	
+	
+	@Select("select a.* from resource_train_question a left join resource_train_to_question b on a.id=b.questionId where b.trainId=#{trainId}")
+	List<TrainQuestionItem> selectByTrainId(String trainId);	
+	
+	@Select("select count(*) from resource_train_question a "
+			+ "left join resource_train_to_question b on a.id=b.questionId "
+			+ "where b.trainId=#{trainId}")
+	int selectCountByTrainId(@Param("trainId")String trainId);
+
+		
+
+	
+	
+	
 }

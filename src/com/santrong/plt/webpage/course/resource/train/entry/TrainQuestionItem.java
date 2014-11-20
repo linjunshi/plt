@@ -1,6 +1,8 @@
 package com.santrong.plt.webpage.course.resource.train.entry;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  * @author huangweihua
@@ -210,5 +212,29 @@ public class TrainQuestionItem {
 	 */
 	public boolean getContainD() {
 		return ((answer & Answers[3]) == Answers[3]);
+	}
+	
+	public String getTypeString() {
+		switch(this.questionType) {
+		case QUESTION_TYPE_SINGLE_SELECTION :
+			return "单选题";
+		case QUESTION_TYPE_MULTIPLE_CHOICE :
+			return "多选题";
+		case QUESTION_TYPE_JUDGE_TRUE_OR_FLASE:
+			return "判断题";
+		case QUESTION_TYPE_BLANK_FILLING:
+			return "填空题";			
+		}
+		return "";
+	}
+	
+	public List<String> getAnswerString() {
+		List<String> list = new ArrayList<String>();
+		for(int i=0;i<Answers.length;i++) {
+			if((answer & Answers[i]) == Answers[i]) {
+				list.add(Answers_Options[i]);
+			}
+		}
+		return list;
 	}
 }

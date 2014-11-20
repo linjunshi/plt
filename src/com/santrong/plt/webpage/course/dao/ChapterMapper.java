@@ -17,12 +17,12 @@ import com.santrong.plt.webpage.course.entry.ChapterItem;
  */
 public interface ChapterMapper {
 	
-	@Select("select a.id, a.remark, b.title, b.id as resourceId, b.resourceType from course_chapter a "
+	@Select("select a.id, a.remark, b.title, b.resourceId, b.resourceType from course_chapter a "
 			+ "left join course_chapter_to_resource b on a.id=b.chapterId "
 			+ "where a.courseId=#{courseId} order by a.priority asc, b.priority asc")
 	List<ChapterAndResourceEntry> selectByCourseId(String courseId);
 	
-	@Select("select a.* from course_chapter a left join course_chapter_to_resource b on a.id=b.chapterId where a.id=#{resourceId}")
+	@Select("select a.* from course_chapter a left join course_chapter_to_resource b on a.id=b.chapterId where b.resourceId=#{resourceId}")
 	ChapterItem selectByResourceId(String resourceId);
 	
 	@Select("select * from course_chapter where courseId = #{courseId} ")

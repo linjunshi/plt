@@ -42,7 +42,7 @@ public class TrainQuestionDao extends BaseDao{
 	}
 	
 	/**
-	 * 查询该用户的所有题目
+	 * 查询该用户的所有题目，主要用在老师客户端接口
 	 * @author huangweihua
 	 * @param TrainHistoryItem
 	 * @return int
@@ -57,7 +57,7 @@ public class TrainQuestionDao extends BaseDao{
 			Log.printStackTrace(e);
 		}
 		return null;
-	}
+	}	
 	
 	/**
 	 * 查询该用户的所有的题目(分页)
@@ -217,7 +217,7 @@ public class TrainQuestionDao extends BaseDao{
 	}
 	
 	/**
-	 * 习题从作业中移除
+	 * 习题从测验中移除
 	 * @param questionId
 	 * @param trainId
 	 * @return
@@ -235,7 +235,7 @@ public class TrainQuestionDao extends BaseDao{
 	}	
 	
 	/**
-	 * 从题库中，删除一条试题记录
+	 * 删除一条试题
 	 * @author huangweihua
 	 * @param id
 	 * @return boolean
@@ -252,6 +252,11 @@ public class TrainQuestionDao extends BaseDao{
 		return false;
 	}
 	
+	/**
+	 * 更新试题
+	 * @param question
+	 * @return
+	 */
 	public boolean update(TrainQuestionItem question) {
 		try {
 			TrainQuestionMapper mapper = this.getMapper(TrainQuestionMapper.class);
@@ -263,4 +268,57 @@ public class TrainQuestionDao extends BaseDao{
 		}
 		return false;
 	}
+	
+	/**
+	 * 获取一次测验里的一道习题
+	 * @param trainId
+	 * @param index
+	 * @return
+	 */
+	public TrainQuestionItem selectByTrainIdAndIndex(String trainId, int index) {
+		try {
+			TrainQuestionMapper mapper = this.getMapper(TrainQuestionMapper.class);
+			if (mapper != null) {
+				return mapper.selectByTrainIdAndIndex(trainId, index);
+			}
+		} catch (Exception e) {
+			Log.printStackTrace(e);
+		}		
+		return null;
+	}	
+	
+	/**
+	 * 获取一个测验里的所有习题
+	 * @param trainId
+	 * @return
+	 */
+	public List<TrainQuestionItem> selectByTrainId(String trainId) {
+		TrainQuestionMapper mapper = this.getMapper(TrainQuestionMapper.class);
+		try{
+			if(mapper != null){
+				return mapper.selectByTrainId(trainId);
+			}
+		}catch(Exception e) {
+			Log.printStackTrace(e);
+		}
+		return null;
+	}	
+	
+	/**
+	 * 获取测验里的习题数
+	 * @param trainId
+	 * @return
+	 */
+	public int selectCountByTrainId(String trainId) {
+		try {
+			TrainQuestionMapper mapper = this.getMapper(TrainQuestionMapper.class);
+			if (mapper != null) {
+				return mapper.selectCountByTrainId(trainId);
+			}
+		} catch (Exception e) {
+			Log.printStackTrace(e);
+		}		
+		return 0;
+	}	
+	
 }

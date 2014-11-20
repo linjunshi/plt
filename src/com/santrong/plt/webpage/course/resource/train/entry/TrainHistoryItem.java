@@ -1,6 +1,8 @@
 package com.santrong.plt.webpage.course.resource.train.entry;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  * @author huangweihua
@@ -89,5 +91,16 @@ public class TrainHistoryItem {
 	}
 	public void setUts(Date uts) {
 		this.uts = uts;
+	}
+	
+	
+	public List<String> getAnswerString() {
+		List<String> list = new ArrayList<String>();
+		for(int i=0;i<TrainQuestionItem.Answers.length;i++) {
+			if((answer & TrainQuestionItem.Answers[i]) == TrainQuestionItem.Answers[i]) {
+				list.add(TrainQuestionItem.Answers_Options[i]);
+			}
+		}
+		return list;
 	}
 }
