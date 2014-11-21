@@ -82,7 +82,21 @@ IndexClass.prototype = {
 			var index = $("input[name=index]").val();
 			var module = $("input[name=module]").val();
 			
-			// 如果是结果状态，禁用控件
+			// 答题模式，还原选择
+			if(module == 'answer') {
+				var val = $(".question_index").eq(index-1).find("input[name=answer]").val()/1;
+				console.info("--"+val);
+				var bit = 2;
+				for(var i=0;i<4;i++) {// ABCD
+					var key = Math.pow(bit, i);
+					if((val&key)==key) {
+						console.info(key);
+						$("#questionDiv input[value="+key+"]").attr("checked", "checked");
+					}
+				}
+			}			
+			
+			// 结果模式，禁用控件
 			if(module == 'result') {
 				$("#questionDiv input").attr("disabled",true);
 			}
@@ -102,7 +116,7 @@ IndexClass.prototype = {
 				
 				$(".question_index").eq(index-1).find("input[name=answer]").val(val);
 				if(module == 'answer') {
-					$(".question_index").eq(index-1).addClass("done");
+					$(".question_index").eq(index-1).addClass("done");// 标识已做题
 				}
 			});
 		}

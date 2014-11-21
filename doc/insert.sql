@@ -72,7 +72,7 @@ create table grade(
 	gradeGroup int(10) comment '年级类型',
 	gradeEnName varchar(16) not null comment '年级英文名',
 	levelEnName varchar(16) not null comment '级别英文名',
-	priority int(10) comment '优先级',
+	priority int(10) default 0 not null comment '优先级',
 	primary key (id)
 ) engine=InnoDB default charset=utf8 collate=utf8_bin comment '年级表';
 
@@ -95,7 +95,7 @@ create table subject(
 	id varchar(32) not null comment 'UUID',
 	subjectName varchar(64) not null comment '科目名称',
 	subjectEnName varchar(16) not null comment '科目英文名',
-	priority int(10) comment '优先级',
+	priority int(10) default 0 not null comment '优先级',
 	primary key (id)
 ) engine=InnoDB default charset=utf8 collate=utf8_bin comment '科目表';
 
@@ -278,7 +278,7 @@ create table course_chapter(
 	id varchar(32) not null comment 'UUID',
 	courseId varchar(32) not null comment '课程ID',
 	remark varchar(1024) comment '描述',
-	priority int(10) comment '优先级',
+	priority int(10) default 0 not null comment '优先级',
 	cts datetime comment '创建时间',
 	uts datetime comment '修改时间',	
 	primary key (id)
@@ -481,6 +481,7 @@ drop table if exists resource_train_to_question;
 create table resource_train_to_question(
 	trainId varchar(32) not null comment '测验ID',
 	questionId varchar(32) not null comment '习题ID',
+	priority int(10) default 0 not null comment '优先级',
 	primary key (trainId, questionId)
 ) engine=InnoDB default charset=utf8 collate=utf8_bin comment '测验-习题关联表';
 

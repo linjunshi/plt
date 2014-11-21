@@ -382,9 +382,11 @@ span.form_error, span.form_success{border-width:1px;display:inline-block;*displa
 
 
 /*----------------做作业------------------*/
-#trainDiv .question_index {width:30px; height:30px; border:solid 1px #ccc; cursor:pointer;}
-#trainDiv .done {background-color:#ccc;}
-#trainDiv .wrong {background-color:#a00;}
+.trainDiv .train_main {width:400px; float:left; border-right:solid 1px #ccc;}
+.trainDiv .train_form {width:300px; float:left;}
+.trainDiv .question_index {float:left; padding:0px 8px; margin:4px; border:solid 1px #ccc; cursor:pointer;}
+.trainDiv .done {background-color:#ccc;}
+.trainDiv .wrong {background-color:#f55;}
 
 
 /*-------------------2014.10.28 by huangwh------------------------*/

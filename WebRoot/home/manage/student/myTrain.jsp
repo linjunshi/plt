@@ -21,7 +21,7 @@ Globals.page = "Manage_index";
 			            
 			            <ul>
 				            <c:forEach items="${trainList}" var="train">
-				            <li>${train.title}</li>
+				            <li>${train.title}----<a href="${ctx}/train?resId=${train.id}" target="_blank">做测验</a></li>
 				            </c:forEach>
 		                </ul>
 		                

@@ -40,7 +40,7 @@ ManageClass.prototype = {
 			
 			// 封面选择
 			$("#changeCover").click(function() {
-				Boxy.load(Globals.ctx + "/manage/course/changeCover", {
+				Boxy.load(Globals.ctx + "/manage/course/changeCover", {title : '-',
 					afterShow : function(){
 						
 						$(".selectCover").change(function() {

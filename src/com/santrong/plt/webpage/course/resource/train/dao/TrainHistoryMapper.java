@@ -56,7 +56,9 @@ public interface TrainHistoryMapper {
 			+ "where a.userId=#{userId} and a.trainId=#{trainId} and a.chapterId=#{chapterId}")
 	List<TrainHistoryView>  selectUserDoneDetail(@Param("userId")String userId, @Param("trainId")String trainId, @Param("chapterId")String chapterId);
 	
-	@Select("select * from resource_train_history where userId=#{userId} and trainId=#{trainId} and chapterId=#{chapterId}")
+	@Select("select a.* from resource_train_history a "
+			+ "left join resource_train_to_question b on a.questionId=b.questionId and a.trainId=b.trainId "
+			+ "where a.userId=#{userId} and a.trainId=#{trainId} and a.chapterId=#{chapterId} order by b.priority")
 	List<TrainHistoryItem>  selectUserHistory(@Param("userId")String userId, @Param("trainId")String trainId, @Param("chapterId")String chapterId);
 	
 	@Delete("delete from resource_train_history where userId=#{userId} and trainId=#{trainId} and chapterId=#{chapterId}")

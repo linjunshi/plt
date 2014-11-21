@@ -199,16 +199,35 @@ public class TrainQuestionDao extends BaseDao{
 	}
 	
 	/**
+	 * 查找最大的排序
+	 * @param questionId
+	 * @param trainId
+	 * @param priority
+	 * @return
+	 */
+	public int selectMaxPriority(String questionId, String trainId) {
+		try {
+			TrainQuestionMapper mapper = this.getMapper(TrainQuestionMapper.class);
+			if (mapper != null) {
+				return mapper.selectMaxPriority(questionId, trainId);
+			}
+		} catch (Exception e) {
+			Log.printStackTrace(e);
+		}
+		return 0;
+	}	
+	
+	/**
 	 * 习题添加到作业里
 	 * @param questionId
 	 * @param trainId
 	 * @return
 	 */
-	public int addQuestion2Train(String questionId, String trainId) {
+	public int addQuestion2Train(String questionId, String trainId, int priority) {
 		try {
 			TrainQuestionMapper mapper = this.getMapper(TrainQuestionMapper.class);
 			if (mapper != null) {
-				return mapper.addQuestion2Train(questionId, trainId);
+				return mapper.addQuestion2Train(questionId, trainId, priority);
 			}
 		} catch (Exception e) {
 			Log.printStackTrace(e);
