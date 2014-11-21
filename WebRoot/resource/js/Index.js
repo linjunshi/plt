@@ -90,11 +90,10 @@ IndexClass.prototype = {
 				for(var i=0;i<4;i++) {// ABCD
 					var key = Math.pow(bit, i);
 					if((val&key)==key) {
-						console.info(key);
 						$("#questionDiv input[value="+key+"]").attr("checked", "checked");
 					}
 				}
-			}			
+			}
 			
 			// 结果模式，禁用控件
 			if(module == 'result') {

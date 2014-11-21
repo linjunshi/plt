@@ -72,7 +72,7 @@ public class AccountAction extends BaseAction {
 		user.setPassword(MyUtils.getMD5(password));
 		user.setUrl(null);
 		user.setGender(0);
-		user.setRole(UserItem.Role_Teacher + UserItem.Role_Student);
+		user.setRole(UserItem.Role_Student);
 		user.setSchoolId(null);
 		user.setSubjectId(null);
 		user.setRegistIp(MyUtils.getRequestAddrIp(getRequest(), "127.0.0.1"));

@@ -22,7 +22,7 @@ public abstract class TeacherBaseAction extends BaseAction {
 		}
 		
 		if(!user.isTeacher()) {
-			return RmCode.REQUIRE_AUTH;
+			return RmCode.REQUIRE_TEACHER_AUTH;
 		}
 		return RmCode.PASS;
 	}

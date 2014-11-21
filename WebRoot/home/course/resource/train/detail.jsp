@@ -21,7 +21,8 @@
 					<h2>${train.title}，来自${chapter.remark}，课程名称${course.courseName}</h2>
 					<p>当前第1题，一共${total}题</p>
 	
-					<div id="questionDiv"></div>
+					<div id="questionDiv">
+					</div>
 	
 					<div class="form_action">
 						<a class="btn_question preOne" style="visibility: hidden"

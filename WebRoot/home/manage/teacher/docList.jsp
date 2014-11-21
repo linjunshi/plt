@@ -14,11 +14,11 @@ Globals.page = "Manage_index";
 <body>
 	<div class="wrap">
 		
-		<%@ include file="../../inc/top.jsp"%>
+		<%@ include file="../../inc/top2.jsp"%>
 		
 		<div class="main">
 			
-			<%@ include file="../../inc/leftmenu.jsp"%>
+			<%@ include file="../../inc/leftmenu2.jsp"%>
 			
 			<div class="maanage_right_major">
 				<table>

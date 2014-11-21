@@ -12,11 +12,11 @@ Globals.page = "Manage_index";
 </script>
 </head>
 <body>
-	<%@ include file="../../inc/top.jsp"%>
+	<%@ include file="../../inc/top2.jsp"%>
 	<div id="container_box">
 		<div id="container_content">
 			<div class="sectionMain clr">
-				<%@ include file="../../inc/leftmenu.jsp"%>
+				<%@ include file="../../inc/leftmenu2.jsp"%>
 				<div class="sh_info_r">
 					<div class="sh_title">
 						<h2>添加试题</h2>

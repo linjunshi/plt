@@ -15,7 +15,7 @@ Globals.page = "Manage_index";
 </style>
 </head>
 <body>
-	<%@ include file="../inc/top.jsp"%>
+	<%@ include file="../inc/top2.jsp"%>
 	<div id="container_box">
 		<div id="container_content">
 			<div class="sectionMain clr">

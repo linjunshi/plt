@@ -30,7 +30,7 @@ import com.santrong.plt.webpage.course.entry.ResourceEntry;
 @RequestMapping("/course_res")
 public class ResourceAction extends BaseAction {
 	
-	@RequestMapping(value="",method=RequestMethod.GET)
+	@RequestMapping(value="", method=RequestMethod.GET)
 	private String openResource(String courseId, String resId, String resType) {
 		
 		if(MyUtils.isNull(courseId) || MyUtils.isNull(resId) || MyUtils.isNull(resType)) {
