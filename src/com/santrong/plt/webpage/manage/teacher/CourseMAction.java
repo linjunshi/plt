@@ -58,9 +58,4 @@ public class CourseMAction extends TeacherBaseAction {
 		
 		return this.redirect("/manage/course");
 	}
-	
-	@RequestMapping("/changeCover")
-	public String changeCover(){
-		return "/manage/teacher/changeCover";
-	}
 }

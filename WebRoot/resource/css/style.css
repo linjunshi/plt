@@ -494,6 +494,13 @@ span.form_error, span.form_success{border-width:1px;display:inline-block;*displa
 .sh_coll_tab .btn_question_operation input{ margin-right:10px; padding:0px 7px; background:#009871; color:#fff; border:0;float: left;}
 .sh_coll_tab .btn_question_operation input:hover{ background:#044a38;cursor:pointer;}
 
+/*----------------------学校选择控件---------------------------*/
+.choice_school {width:600px; height:600px; padding:16px;}
+.choice_school .group {width:100%; margin-bottom:10px; border:solid 1px #ccc;}
+.choice_school .group a {margin-right:20px;}
+.choice_school .group a.current {background-color:#ccc;}
+
+
 /*----------------------课程章节维护页---------------------------*/
 .sh_add_chapter { width:97%; display:block;border-bottom:1px #dbdbdb solid;}
 .sh_add_chapter dt{border-bottom:1px #dbdbdb solid;text-indent:10px;color:#333;}

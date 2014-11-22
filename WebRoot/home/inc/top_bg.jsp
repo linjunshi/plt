@@ -3,7 +3,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 	<div  id="header">
-	    <div id="headerinside"> <a href="#" class="logo"><img src="${ctx}/resource/photo/logo.png" width="265" height="70" /></a>
+	    <div id="headerinside"> <a href="${ctx}/" class="logo"><img src="${ctx}/resource/photo/logo.png" width="265" height="70" /></a>
 	        <div class="city_info">
 	            <h2><a class="city_info_name" href="${ctx}/">${sessionScope.area.cityName}</a></h2>
 			            <a class="city_info_toggle" href="${ctx}/changecity">切换城市</a>

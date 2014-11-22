@@ -8,40 +8,53 @@
 var Globals = {};
 Globals.ctx = "${ctx}";
 Globals.lang = "${lang}";
-Globals.page = "Manage_apply";
+Globals.page = "Manage_applyTeacher";
 </script>
 </head>
 <body>
-		<%@ include file="../../inc/top_bg.jsp"%>
-		<div id="container_box">
-			<div id="container_content">
-			    <div>请填下以下信息完成老师身份申请</div>
+	<%@ include file="../../inc/top_bg.jsp"%>
+	<div id="container_box">
+		<div id="container_content">
+			<div>请填下以下信息完成老师身份申请</div>
 			<form method="post" action="${ctx}/apply/teacher" class="form_info">
-				<input type="hidden" name="id" value="${sessionScope.loginUser.id}" />
+				<input type="hidden" name="userId" value="${sessionScope.loginUser.id}" />
 				<div class="form_item">
 					<label for="pwd">所在学校：</label>
 					<div class="form_field">
-						<input name="schoolId" class="form_text" type="text">
+						<input name="schoolName" type="text" readonly="readonly"
+							class="form_text" value="${form.schoolName}" /> <input
+							name="schoolId" type="hidden" value="${form.schoolId}" />
 					</div>
 				</div>
 				<div class="form_item">
 					<label for="pwd">教学科目：</label>
 					<div class="form_field">
-						<input name="subjectId" class="form_text" type="text">
+						<select name="subjectId">
+							<c:forEach items="${subjectList}" var="subject">
+							<option value="${subject.id}"<c:if test="${form.subjectId==subject.id}"> selected="selected"</c:if>>${subject.subjectName}</option>
+							</c:forEach>
+						</select>
+					</div>
+				</div>
+				<div class="form_item">
+					<label for="pwd">手机号码：</label>
+					<div class="form_field">
+						<input name="phone" class="form_text" type="text"
+							value="${form.phone}">
 					</div>
 				</div>
 				<div class="form_item">
 					<label for="pwd">个人简介：</label>
 					<div class="form_field">
-						<textarea name="remark"></textarea>
+						<textarea name="remark">${form.remark}</textarea>
 					</div>
 				</div>
 				<div class="form_action">
-					<input type="submit" value="提交"/>
+					<input type="submit" value="提交" />
 				</div>
 			</form>
 		</div>
-		</div>
-		<%@ include file="../../inc/friendlylink.jsp"%>
+	</div>
+	<%@ include file="../../inc/friendlylink.jsp"%>
 </body>
 </html>

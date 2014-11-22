@@ -40,7 +40,7 @@ ManageClass.prototype = {
 			
 			// 封面选择
 			$("#changeCover").click(function() {
-				Boxy.load(Globals.ctx + "/manage/course/changeCover", {title : '-',
+				Boxy.load(Globals.ctx + "/component/change/cover", {title : '-',
 					afterShow : function(){
 						
 						$(".selectCover").change(function() {
@@ -73,6 +73,52 @@ ManageClass.prototype = {
 						$(".close").bindFormClose();
 					}
 				})
+			});
+		},
+		
+		// 申请老师
+		applyTeacher : function() {
+			//选学校
+			$("input[name=schoolName]").click(function() {
+				Boxy.load(Globals.ctx + "/component/choice/school", {title : '-',
+					afterShow : function(){
+						$(".province, .city, .county").click(function(e) {
+							var target = $(e.target);
+							if(target.is("a")) {
+								
+								var group = target.parent();
+								group.find("a").removeClass("current");
+								target.addClass("current");
+								
+								var areaCode = target.attr("id").split("_")[1];
+								$.get(Globals.ctx + "/component/choice/school/data?areaCode=" + areaCode, function(result) {
+									var html = '';
+									var json = eval('{' + result + '}');
+									for(var i=0;i<json.length;i++) {
+										if(group.hasClass("county")) {
+											html += '<a href="javascript:void(0);" id="a_'+ json[i].id + '">' + json[i].schoolName + '</a>';
+										}else{
+											html += '<a href="javascript:void(0);" id="a_'+ json[i].areaCode + '">' + json[i].areaName + '</a>';
+										}
+									}
+									group.nextAll().hide();
+									group.next().html(html);
+									group.next().show();
+								});
+							}
+						});
+						
+						$(".school").click(function(e) {
+							var target = $(e.target);
+							if(target.is("a")) {
+								var schoolId = target.attr("id").split("_")[1];
+								$("input[name=schoolName]").val(target.text());
+								$("input[name=schoolId]").val(schoolId);
+								Boxy.get(this).hideAndUnload();
+							}
+						});
+					}
+				});
 			});
 		}
 }
