@@ -12,7 +12,7 @@ Globals.page = "Manage_apply";
 </script>
 </head>
 <body>
-		<%@ include file="../../inc/top2.jsp"%>
+		<%@ include file="../../inc/top_bg.jsp"%>
 		<div id="container_box">
 			<div id="container_content">
 			    <div>恭喜你成为课云平台老师</div>

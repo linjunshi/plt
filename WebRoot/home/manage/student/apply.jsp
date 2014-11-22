@@ -12,7 +12,7 @@ Globals.page = "Manage_apply";
 </script>
 </head>
 <body>
-		<%@ include file="../../inc/top2.jsp"%>
+		<%@ include file="../../inc/top_bg.jsp"%>
 		<div id="container_box">
 			<div id="container_content">
 			    <div>请填下以下信息完成老师身份申请</div>

@@ -15,11 +15,11 @@ Globals.page = "Manage_index";
 </style>
 </head>
 <body>
-	<%@ include file="../inc/top2.jsp"%>
+	<%@ include file="../inc/top_bg.jsp"%>
 	<div id="container_box">
 		<div id="container_content">
 			<div class="sectionMain clr">
-				<%@ include file="../inc/leftmenu.jsp"%>
+				<%@ include file="../inc/leftmenu_student.jsp"%>
 				<div class="sh_info_r">
 		            <div class="st_titile_r sh_title"> <a href="#">基本信息</a><a href="#">教育信息</a><a href="#">其他扩展信息</a></div>
 		            <div class="sh_form_con">

@@ -15,11 +15,11 @@ Globals.page = "Manage_index";
 </style>
 </head>
 <body>
-	<%@ include file="../inc/top2.jsp"%>
+	<%@ include file="../inc/top_bg.jsp"%>
 	<div id="container_box">
 		<div id="container_content">
 			<div class="sectionMain clr">
-				<%@ include file="../inc/leftmenu.jsp"%>
+				<%@ include file="../inc/leftmenu_student.jsp"%>
 				<div class="sh_info_r">
 					<div class="sh_title">
 						<h2>修改密码</h2>
