@@ -62,18 +62,11 @@ Globals.page = "Manage_index";
 					                            <a href="#">发布</a>
 					                        </td>
 				                            <td class="btn_question_operation">
-					                            <div class="btn_input">
-													<form action="${ctx}/manage/course/modify" method="post">
-														<input type="hidden" value="${course.id}" name="courseId" />
-														<input type="submit" value="修改" />
-													</form>
-												</div>
-												<div>
+					                            	<a href="${ctx}/manage/course/modify?courseId=${course.id}">修改</a>
 													<form action="${ctx}/manage/course/delete" method="post">
 														<input type="hidden" value="${course.id}" name="courseId" />
 														<input type="submit" value="删除" />
 													</form>
-												</div>
 				                            </td>
 				                        </tr>
 			                    	</c:forEach>

@@ -18,14 +18,31 @@ Globals.page = "Manage_courseAdd";
 			<div class="sectionMain clr">
 				<%@ include file="../../inc/leftmenu_teacher.jsp"%>
 				<div class="sh_info_r">
-					<div class="sh_title">
-						<h2>新建课程页</h2>
+					<div class="st_titile_r sh_title">
+						<c:if test="${fn == 'add'}"> 
+						<a href="${ctx}/manage/course/add">基本信息</a>
+						</c:if>
+						<c:if test="${fn == 'modify'}">
+						<a href="${ctx}/manage/course/modify?courseId=${course.id}">基本信息</a>
+						</c:if>
+						<a href="${ctx}/manage/course/chapterEditor?courseId=${course.id}" <c:if test="${fn == 'add'}">style="display: none;"</c:if> >章节维护</a>
 					</div>
 					<div class="sh_form_con">
 						<div id="demo_zone">
-							<form method="post" action="#" class="form_info" id="addcourse_form">
+							<c:if test="${tipError != null && fn:length(tipError)  > 0}">
+								<div class="system_tip">
+									<c:forEach items="${tipError}" var="tip">
+									<p>${tip.msg}</p>
+									</c:forEach>
+								</div>
+							</c:if>
+							<form method="post" 
+							<c:if test="${fn == 'add'}">action="${ctx}/manage/course/add"</c:if> 
+							<c:if test="${fn == 'modify'}">action="${ctx}/manage/course/modify"</c:if> 
+							class="form_info" id="course_form">
+								<input type="hidden" name="id" value="${course.id}"/>
 								<div class="form_item">
-									<label for="username">课程分类：</label>
+									<label for="gradeId">课程分类：</label>
 									<div class="form_field">
 										<select id="gradeSelect">
 											<c:forEach items="${applicationScope.gradeList}" var="grade" varStatus="st">
@@ -33,38 +50,53 @@ Globals.page = "Manage_courseAdd";
 											</c:forEach>
 										</select>
 										<select name="gradeId" id="levelSelect">
-										</select> 
+										</select>
 										<select name="subjectId" id="subjectSelect">
 										</select>
 									</div>
 									<div class="form_item">
-										<label for="name">课程名称：</label>
+										<label for="courseName">课程名称：</label>
 										<div class="form_field">
-											<input class="form_text" id="email" name="email" type="email">
+											<input class="form_text" id="courseName" name="courseName" type="text" value="${course.courseName}">
 										</div>
 									</div>
 									<div class="form_item">
-										<label for="pwd">课程价格：</label>
+										<label for="teacher">主讲老师：</label>
 										<div class="form_field">
-											<input name="text" id="pwd" class="form_text" type="password">元
+											<input class="form_text" id="teacher" name="teacher" type="text" value="${course.teacher}">
 										</div>
 									</div>
 									<div class="form_item">
-										<label for="pwd">结束时间：</label>
+										<label for="price">课程价格：</label>
 										<div class="form_field">
-											<input name="text" id="pwd" class="form_text" type="password">
+											<input placeholder="如：1000" class="form_text" name="price" id="price" type="text" value="${course.price}"> 元
 										</div>
 									</div>
 									<div class="form_item">
-										<label for="realname">购买人数限制：</label>
+										<label for="chapterCount">课时数量：</label>
 										<div class="form_field">
-											<input placeholder="请填入数量" class="form_text" id="realname" name="realname" type="text"> 人
+											<input placeholder="如：2" class="form_text" name="chapterCount" id="chapterCount" type="text" value="${course.chapterCount}"> 小时
 										</div>
 									</div>
+									<div class="form_item">
+										<label for="endTime">结束时间：</label>
+										<div class="form_field">
+											<input placeholder="格式：2014-01-01 59:59:59" class="form_text" name="endTime" id="endTime" type="date" value="<fmt:formatDate type="both" value="${course.endTime}" />">
+										</div>
+									</div>
+									 <div class="form_item">
+		                            	<label>是否直播课：</label>
+			                            <div class="form_field">
+		                                    <input <c:if test="${course.live == 1}"> checked="checked" </c:if> value="1" class="form_radio" name="live" type="radio">
+		                                    <span>是</span>
+		                                    <input <c:if test="${course.live == 0}"> checked="checked" </c:if> value="0" class="form_radio" name="live" type="radio">
+		                                    <span>否</span> 
+			                            </div>
+			                        </div>
 									<div class="form_item">
 										<label>课程描述：</label>
 										<div class="form_field">
-											<textarea id="intro" name="intro"></textarea>
+											<textarea id="remark" name="remark">${course.remark}</textarea>
 											<p class="form_des">说明注释文字可以放在这里啊</p>
 										</div>
 									</div>
@@ -77,7 +109,8 @@ Globals.page = "Manage_courseAdd";
 										</div>
 									</div>
 									<div class="form_action">
-										<a href="#">保存</a>
+										<input class="btn_question" type="submit" value="保存" /> 
+										<a class="btn_question" href="${ctx}/manage/course">取消</a>
 									</div>
 								</div>
 							</form>

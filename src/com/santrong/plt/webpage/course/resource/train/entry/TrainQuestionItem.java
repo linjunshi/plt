@@ -20,6 +20,7 @@ public class TrainQuestionItem {
 	private String opt3;
 	private String opt4;
 	private int answer;
+	private String remark;
 	private String ownerId;
 	private int del;
 	private Date cts;
@@ -114,6 +115,12 @@ public class TrainQuestionItem {
 	}
 	public void setAnswer(int answer) {
 		this.answer = answer;
+	}
+	public String getRemark() {
+		return remark;
+	}
+	public void setRemark(String remark) {
+		this.remark = remark;
 	}
 	public String getOwnerId() {
 		return ownerId;

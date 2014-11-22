@@ -491,6 +491,8 @@ span.form_error, span.form_success{border-width:1px;display:inline-block;*displa
 .sh_color_c { color:#f90 !important;}
 .sh_coll_tab .btn_question_update {margin-left: 25%;}
 .sh_coll_tab .btn_input {margin-left: 15%;}
+.sh_coll_tab .btn_question_operation a{ margin-left: 15%;height:23px;line-height:23px; padding:0px 10px; background:#009871; color:#fff; border:0;float: left;}
+.sh_coll_tab .btn_question_operation a:hover{ background:#044a38;cursor:pointer;}
 .sh_coll_tab .btn_question_operation input{ margin-right:10px; padding:0px 7px; background:#009871; color:#fff; border:0;float: left;}
 .sh_coll_tab .btn_question_operation input:hover{ background:#044a38;cursor:pointer;}
 
@@ -516,7 +518,23 @@ span.form_error, span.form_success{border-width:1px;display:inline-block;*displa
 .sh_add_chapter dt:hover .sh_operation { display:block;}
 .sh_addop_a {height:40px; line-height:40px; color:#666; margin-left:70px; padding:2px 10px; border:1px solid #ccc;}
 .sh_addop_a:hover,.sh_add_chapter .pt11 a:hover{ color:#009871; text-decoration:underline;}
-
+/* .sh_add_chapter dl { width:190px;font-size:12px; padding:2px 0;line-height:200%; font-weight:normal; cursor:pointer;}
+.sh_add_chapter dl dt { color:#fff;background:#009871 url(../images/icon.png) no-repeat 20px -54px; text-indent:40px;}
+.sh_add_chapter dl dd { padding-left:60px; line-height:30px; background: url(../images/icon.png) no-repeat 40px -114px;}
+.sh_add_chapter dl dt a{ color:#fff;} */
+.sh_add_chapter .pt10 a{ color:#009871; text-decoration:underline;  width:80px; margin:20px 10px; padding:2px 6px;}
+.sh_add_chapter .pt10 a:hover{ color:#f90;}
+.sh_add_opera p .chapter_remark{margin-bottom:5px;width: 300px;}
+.sh_add_opera p a{ margin-left: 15px;height:28px;line-height:28px; padding:2px 10px; background:#009871; color:#fff; border:0; }
+.sh_add_opera p a:hover{ background:#044a38;cursor:pointer;}
+.sh_add_opera p span{margin-left:15px;color:#808080;}
+.sh_add_opera .hide_remark {display:none;}
+.sh_add_opera .show_remark {display:block;}
 /* --------------------error tips------------------------- */
 .system_tip { width:300px; line-height:26px; margin:10px auto; border:solid 1px #F5D8A7; border-radius:2px; background-color:#FFF6DB;padding-left: 10px; text-align: center; }
 /* -------------------------------------------------- */
+.Wdate {
+border: #999 1px solid;
+height: 20px;
+background: #fff url(datePicker.gif) no-repeat right;
+}

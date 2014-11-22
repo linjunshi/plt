@@ -16,6 +16,7 @@ public class CourseDetailView {
 	private String ownerId;
 	private String gradeId;
 	private String subjectId;
+	private String url;
 	private int price;
 	private Date endTime;
 	private int collectCount;
@@ -92,6 +93,12 @@ public class CourseDetailView {
 	}
 	public void setSubjectId(String subjectId) {
 		this.subjectId = subjectId;
+	}
+	public String getUrl() {
+		return url;
+	}
+	public void setUrl(String url) {
+		this.url = url;
 	}
 	public int getPrice() {
 		return price;

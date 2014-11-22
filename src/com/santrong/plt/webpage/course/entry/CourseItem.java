@@ -14,6 +14,7 @@ public class CourseItem {
 	private int price;
 	private int live;
 	private Date endTime;
+	private String url;
 	private String ownerId;
 	private String gradeId;
 	private String subjectId;
@@ -103,6 +104,12 @@ public class CourseItem {
 	}
 	public void setEndTime(Date endTime) {
 		this.endTime = endTime;
+	}
+	public String getUrl() {
+		return url;
+	}
+	public void setUrl(String url) {
+		this.url = url;
 	}
 	public String getRemark() {
 		return remark;

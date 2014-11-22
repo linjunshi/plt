@@ -73,6 +73,16 @@ public abstract class BaseAction {
 		}
 	}
 	
+	@SuppressWarnings("unchecked")
+	public final int errorSize() {
+		HttpServletRequest request = this.getRequest();
+		List<SimpleTipItem> list = (ArrayList<SimpleTipItem>)request.getAttribute(Global.RequestKey_TipError);
+		if(list != null) {
+			return list.size();
+		}
+		return 0;
+	}
+	
 	public final boolean getBooleanParameter(String param) {
 		try{
 			return Boolean.parseBoolean(this.getRequest().getParameter(param));
