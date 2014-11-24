@@ -22,13 +22,13 @@ Globals.page = "Manage_index";
 			                <h2>课件列表</h2>
 			            </div>		
 			            
-<div class="sh_collection">
+						<div class="sh_collection">
 			                <table border="1" class="sh_coll_tab">
 			                    <colgroup>
 			                    <col width="80">
 			                    <col width="330">
-			                    <col width="110">
-			                    <col width="150">
+			                    <col width="160">
+			                    <col width="100">
 			                    <col width="150">
 			                    <col width="150">
 			                    </colgroup>
@@ -47,7 +47,7 @@ Globals.page = "Manage_index";
 				                        <tr>
 				                            <td>${st.index + 1}</td>
 				                            <td class="sh_h_im">
-				                            	<a href="${ctx}/course/${course.id}.html" target="_blank"><img src="${ctx}/resource/images/003.jpg"></a>
+				                            	<a href="${ctx}/course/${course.id}.html" target="_blank"><img src="${ctx}/resource/images/003.jpg" width="40" height="40"></a>
 				                            	<p>${file.title}</p>
 				                            </td>
 				                            <td><fmt:formatDate value="${file.cts}" type="both" /></td>

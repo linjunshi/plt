@@ -18,21 +18,25 @@ Globals.page = "Manage_index";
 			    <div class="sectionMain clr">
 					<%@ include file="../../inc/leftmenu_student.jsp"%>
 					<div class="sh_info_r">
-			            
-			            <ul>
-				            <c:forEach items="${trainList}" var="train">
-				            <li>${train.title}----<a href="${ctx}/train?resId=${train.id}" target="_blank">做测验</a></li>
-				            </c:forEach>
-		                </ul>
-		                
+				      <div class="sh_title">
+				        <h2>我的测验</h2></div>
+		                <c:forEach items="${trainList}" var="train">
+						     <div class="sh_work">
+						        <div class="sh_work_img"><img src="${ctx}/resource/images/003.jpg" width="40" height="40" /></div>
+						        <div class="sh_work_con">
+						          <h2>${train.title}<span>来自：${train.courseName}---${train.remark}</span></h2>
+						          <p><fmt:formatDate value="${train.cts}" type="both" /></p>
+						          <p>良好</p>
+						          <p><a href="${ctx}/train?resId=${train.id}" target="_blank">查看作业</a></p>
+						        </div>
+						      </div>
+				     	 </c:forEach>
 			            <c:set var="basicUrl" value="${ctx}/study/train" />
 		            	<%@ include file="../../inc/pagination.jsp"%>		                
-		                
 			        </div>
 				</div>
 			</div>
 		</div>
-		
 		<%@ include file="../../inc/friendlylink.jsp"%>
 </body>
 </html>

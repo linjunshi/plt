@@ -25,6 +25,7 @@ import com.santrong.plt.webpage.course.entry.ChapterAndResourceEntry;
 import com.santrong.plt.webpage.course.entry.ChapterDetailView;
 import com.santrong.plt.webpage.course.entry.ChapterItem;
 import com.santrong.plt.webpage.course.entry.CourseDetailView;
+import com.santrong.plt.webpage.course.entry.CourseForm;
 import com.santrong.plt.webpage.course.entry.CourseItem;
 import com.santrong.plt.webpage.course.entry.CourseQuery;
 import com.santrong.plt.webpage.course.entry.ResourceEntry;

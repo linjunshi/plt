@@ -123,6 +123,17 @@ span.form_error, span.form_success{border-width:1px;display:inline-block;*displa
 .user_info_login { position:absolute;top:30px; right:80px; color:#fff; width:60px; height:30px; line-height:30px; text-align:center; background:#009871; }
 .user_info_signup {position:absolute;top:30px; right:10px;color:#666; width:60px; height:30px; line-height:30px; text-align:center; background:#ccc;}
 .user_info_signup:hover, .user_info_login:hover{color:#fff;background:#044a38;}
+/*.user_info_hidd { float:right; display:block; margin-top:30px;}
+.user_info_hi_img{  width:150px;float:left; }
+.user_info_hidd  span { float:right;  padding:0 10px; line-height:30px;}
+.user_info_hidd  p { padding:0 10px; float:right; display:block; text-align:center; border-left:1px #ccc solid;}*/
+.user_info_hidd {float:left; position:relative;  width:320px;}
+.user_info_hi_img {position:absolute; top:30px; border:solid 1px blue;}
+.user_info_hi_img .user_username {line-height:30px;border:solid 1px yellow;}
+.user_info_hidd p {position:absolute; top:30px; right:10px; }
+.user_info_hidd  a {padding:0 10px; text-align:center; border-left:1px #ccc solid;}
+
+
 
 /*---------------主导航部分--------------------*/
 #wrapper_box { width:100%; height:40px; background:#009871;margin-bottom:10px;}
@@ -140,6 +151,20 @@ span.form_error, span.form_success{border-width:1px;display:inline-block;*displa
 .friend_link_header a:hover { color:#2F8CCD;}
 #footer { height:50px; background:#f9f9f9;}
 #footer P{ width:1200px; line-height:50px; margin:0 auto; text-align:center; color:#2F8CCD; background:#f9f9f9;}
+
+/*-----------城市切换　----------------*/
+.city_switch { width:100%; border-bottom:1px #dbdbdb solid; padding:10px 0;}
+.city_switch h3{ float:left; display: block; height:100%;line-height:30px;color:#333; font-size:18px; text-indent:10px;}
+.city_switch p{ margin-left:110px;}
+.city_switch p a, .city_in .city_con a{ padding:5px; margin-right:10px; line-height:30px; color:#009871}
+.city_switch p a:hover, .city_in .city_con a:hover{ background:#009871; color:#fff;}
+.city_in{ width:100%;}
+.city_in ol li{ margin:5px 0; padding:5px 0; border-top:1px #fff solid;border-bottom:1px #fff solid;}
+.city_in .city_sec { width:100%; margin:10px 0; text-indent:25px; height:40px; background:url(../images/in_hover.gif) no-repeat 10px bottom; color:#fff; font-size:16px; padding:0; line-height:30px;}
+.city_in .city_alp {float:left; display:block; padding:0 10px; margin-left:10px; background:#f1f1f1; height:100%; line-height:30px; color:#000; border:1px #dbdbdb solid;}
+.city_in .city_con {margin-left:60px; display:block;}
+.city_in ol li:hover { background:#dbdbdb;border-top:1px #ccc solid;border-bottom:1px #ccc solid;}
+.city_in ol li:hover .city_alp { background:#009871; color:#fff; border:1px #009871 solid;}
 
 /*---------------主内容部分--------------------*/
 #container_box {width:1200px; margin:0 auto; padding-bottom:10px;}
@@ -289,9 +314,7 @@ span.form_error, span.form_success{border-width:1px;display:inline-block;*displa
 .sch_s {position:absolute; right:5px; bottom:8px;}
 .sch_s i { color:#f00; font-weight:none;}
 
-
 /*--------------------课程详细-------------------*/
-
 .detailPrimary { width:1200px; min-height:350px; border:1px #dbdbdb solid; position:relative; }
 .detai_img { float:left; display:block;}
 .detai_img img { padding:10px;}
@@ -382,11 +405,37 @@ span.form_error, span.form_success{border-width:1px;display:inline-block;*displa
 
 
 /*----------------做作业------------------*/
-.trainDiv .train_main {width:400px; float:left; border-right:solid 1px #ccc;}
-.trainDiv .train_form {width:300px; float:left;}
-.trainDiv .question_index {float:left; padding:0px 8px; margin:4px; border:solid 1px #ccc; cursor:pointer;}
-.trainDiv .done {background-color:#ccc;}
-.trainDiv .wrong {background-color:#f55;}
+.sh_work { width:960px; height:50px; border-bottom:1px #dbdbdb dashed; padding:10px 0 0 0;}
+.sh_work_img { width:60px; float:left;}
+.sh_work_con {}
+.sh_work_con h2{ width:360px;float:left; display:block; margin-right:10px; font-size:16px; color:#666; position:relative;}
+.sh_work_con h2 span { position:absolute; left:8px; top:24px; font-size:12px; color:#999;}
+.sh_work_con p{ width:130px;float:left; display:block; text-align:center; line-height:35px;}
+.sh_work_con p a{ padding:2px 10px; background:#009871; color:#fff;}
+
+.sh_work_le{ width:55%; height:auto; float:left; display:block; margin:10px 10px 20px 20px; border-right:1px #dbdbdb solid;}
+.sh_work_le h2{font-size:16px; color:#009871; padding:3px 0; margin-bottom:5px;}
+.sh_work_form{ padding:10px 0; margin-right:10px;}
+.sh_work_form .sh_work_rad { margin-bottom:10px;}
+.sh_work_form .sh_work_rad p{display:block; padding:5px 0 5PX 10px;}
+.sh_work_form .sh_work_rad span{ margin-left:10px;}
+.sh_work_form .sh_work_rad .sh_work_answer { color:#f90;}
+.sh_work_form .sh_work_rad P b{  font-style:none; color:#f00;}
+.sh_form_but { margin:20px 0 0 10px; display:block;}
+.sh_form_but a{ padding:2px 10px; background:#009871; color:#fff; margin-right:10px; text-decoration:none;}
+.sh_form_but .sh_form_grey { background:#ccc; cursor:default;}
+
+.sh_work_right{ width:40%; height:auto; float:left; display:block; margin:10px 0 0 20px;}
+.sh_work_right .sh_work_result span{ margin-right:20px;}
+.sh_work_right ul {width:100%; margin:10px 0; display:block;}
+.sh_work_right ul li{ width:20px; float:left;margin:5px;background:#ccc; padding:5px; text-align:center; color:#222; cursor:pointer; border:1px #999 solid;}
+.sh_work_right ul .done { background:#fff;}
+.sh_work_right ul .wrong {background:#f00;}
+
+.sh_work_color p{ width:60px; display:inline-block; margin:10px 0 0 10px;}
+.pt13{padding:0px 6px; background:#ccc; margin-left:5px;border:1px #999 solid;}
+.pt14{padding:0px 6px; background:#f00; margin-left:5px;border:1px #900 solid;}
+.pt15{padding:0px 6px; background:#fff; margin-left:5px;border:1px #999 solid;}
 
 
 /*-------------------2014.10.28 by huangwh------------------------*/
@@ -502,6 +551,19 @@ span.form_error, span.form_success{border-width:1px;display:inline-block;*displa
 .choice_school .group a {margin-right:20px;}
 .choice_school .group a.current {background-color:#ccc;}
 
+/*-----------课程--直播--老师------------*/
+.sh_myvod { width:100%; margin-bottom:20px; }
+.sh_myvod_ti{ float:left;width:960px; background:#dbdbdb; height:30px; line-height:30px; padding:5px 0 5px 10px; margin-top:10px;}
+.sh_myvod_ti span{ width:100px; display:inline-block;margin:0 10px 0 0; text-align:center; font-size:16px;}
+.sh_myvod_ti .sh_ti_sid { margin:0px 360px 0px 120px!important;}
+.sh_myvod li { width:98%; height:auto; display:block;padding:10px 0;clear:both;background:url(../images/time_img.jpg) no-repeat 120px center;}
+.sh_myvod_le {float:left;display:block;width:130px;font-size:16px;text-align:center; color:#009871; margin:5px 20px 0 0;}
+.sh_myvod_le span{font-size:13px; color:#999;}
+.sh_myvod_ri {width:820px;float:left;border-bottom:1px #ccc solid;}
+.sh_myvod_ri span, .sh_myvod_ri h2, .sh_myvod_ri p{ float:left; display: block;padding:10px 0;}
+.sh_myvod_ri span, .sh_myvod_ri p{width:100px; text-align:center;}
+.sh_myvod_ri h2{ width:300px; margin-right:150px; overflow:hidden;}
+.sh_myvod_ri p a{ width:60px; padding:2px 10px; background:#009871; color:#fff; margin-left:30px;}
 
 /*----------------------课程章节维护页---------------------------*/
 .sh_add_chapter { width:97%; display:block;border-bottom:1px #dbdbdb solid;}

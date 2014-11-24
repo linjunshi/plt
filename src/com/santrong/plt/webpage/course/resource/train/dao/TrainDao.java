@@ -15,6 +15,7 @@ import com.santrong.plt.util.MyUtils;
 import com.santrong.plt.webpage.BaseDao;
 import com.santrong.plt.webpage.course.resource.train.entry.TrainItem;
 import com.santrong.plt.webpage.course.resource.train.entry.TrainQuery;
+import com.santrong.plt.webpage.manage.student.entry.TrainSimpleView;
 
 /**
  * @author huangweihua
@@ -93,23 +94,31 @@ public class TrainDao extends BaseDao{
 	 * @param query
 	 * @return
 	 */
-	public List<TrainItem> selectByQuery(TrainQuery query) {
-		List<TrainItem> list = new ArrayList<TrainItem>();
+	public List<TrainSimpleView> selectByQuery(TrainQuery query) {
+		List<TrainSimpleView> list = new ArrayList<TrainSimpleView>();
 		
 		try{
 			Statement criteria = new Statement("resource_train", "a");
+			criteria.setFields("a.id,b.title,c.remark,d.courseName,e.cts");
+			criteria.ljoin("course_chapter_to_resource", "b", "a.id", "b.resourceId");
+			criteria.ljoin("course_chapter", "c", "b.chapterId", "c.id");
+			criteria.ljoin("course", "d", "c.courseId", "d.id");
+			criteria.ljoin("web_order", "e", "d.id", "e.courseId");
+			
+			// 未删除
+			criteria.where(ne("a.del", "1"));
 			
 			// 所属用户
 			if(MyUtils.isNotNull(query.getOwnerId())) {
-				criteria.where(eq("a.ownerId", "?"));
+				criteria.where(eq("e.userId", "?"));
 				criteria.setStringParam(query.getOwnerId());
 			}
 			// 排序
 			if(!StringUtils.isNullOrEmpty(query.getOrderBy())) {
 				if("desc".equalsIgnoreCase(query.getOrderRule())) {
-					criteria.desc("a." + query.getOrderBy());
+					criteria.desc("e." + query.getOrderBy());
 				}else {
-					criteria.asc("a." + query.getOrderBy());
+					criteria.asc("e." + query.getOrderBy());
 				}
 			}
 			
@@ -120,7 +129,7 @@ public class TrainDao extends BaseDao{
 			PreparedStatement stm = criteria.getRealStatement(conn);
 			ResultSet rs = stm.executeQuery();
 			while(rs.next()){
-				TrainItem item = new TrainItem();
+				TrainSimpleView item = new TrainSimpleView();
 				BeanUtils.Rs2Bean(rs, item);
 				list.add(item);
 			}
@@ -143,10 +152,17 @@ public class TrainDao extends BaseDao{
 		try{
 			Statement criteria = new Statement("resource_train", "a");
 			criteria.setFields("count(*) cn");
+			criteria.ljoin("course_chapter_to_resource", "b", "a.id", "b.resourceId");
+			criteria.ljoin("course_chapter", "c", "b.chapterId", "c.id");
+			criteria.ljoin("course", "d", "c.courseId", "d.id");
+			criteria.ljoin("web_order", "e", "d.id", "e.courseId");			
+			
+			// 未删除
+			criteria.where(ne("a.del", "1"));			
 			
 			// 所属用户
 			if(MyUtils.isNotNull(query.getOwnerId())) {
-				criteria.where(eq("a.ownerId", "?"));
+				criteria.where(eq("e.userId", "?"));
 				criteria.setStringParam(query.getOwnerId());
 			}
 			

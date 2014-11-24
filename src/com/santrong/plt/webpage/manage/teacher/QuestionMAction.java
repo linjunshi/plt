@@ -1,4 +1,4 @@
-package com.santrong.plt.webpage.manage.teacher.train;
+package com.santrong.plt.webpage.manage.teacher;
 
 import java.util.Date;
 import java.util.List;

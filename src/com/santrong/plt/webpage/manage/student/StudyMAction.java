@@ -11,9 +11,9 @@ import com.santrong.plt.webpage.course.dao.CourseDao;
 import com.santrong.plt.webpage.course.entry.CourseBuyQuery;
 import com.santrong.plt.webpage.course.entry.CourseItem;
 import com.santrong.plt.webpage.course.resource.train.dao.TrainDao;
-import com.santrong.plt.webpage.course.resource.train.entry.TrainItem;
 import com.santrong.plt.webpage.course.resource.train.entry.TrainQuery;
 import com.santrong.plt.webpage.manage.StudentBaseAction;
+import com.santrong.plt.webpage.manage.student.entry.TrainSimpleView;
 
 /**
  * @author weinianjie
@@ -79,7 +79,7 @@ public class StudyMAction extends StudentBaseAction {
 		query.setPageSize(12);
 		query.setPageNum(pageNum);
 		query.setCount(dao.selectCountByQuery(query));
-		List<TrainItem> trainList = dao.selectByQuery(query);
+		List<TrainSimpleView> trainList = dao.selectByQuery(query);
 		
 		request.setAttribute("trainList", trainList);
 		request.setAttribute("query", query);

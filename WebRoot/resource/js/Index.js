@@ -90,25 +90,25 @@ IndexClass.prototype = {
 				for(var i=0;i<4;i++) {// ABCD
 					var key = Math.pow(bit, i);
 					if((val&key)==key) {
-						$("#questionDiv input[value="+key+"]").attr("checked", "checked");
+						$(".sh_work_form input[value="+key+"]").attr("checked", "checked");
 					}
 				}
 			}
 			
 			// 结果模式，禁用控件
 			if(module == 'result') {
-				$("#questionDiv input").attr("disabled",true);
+				$(".sh_work_form input").attr("disabled",true);
 			}
 			
 			// 事件
-			$("#questionDiv input").change(function() {
+			$(".sh_work_form input").change(function() {
 				var type = $(this).attr("type");
 				
 				var val = 0;
 				if(type=='radio') {//单选
 					val = $(this).val()
 				}else {// 多选
-					$("#questionDiv input[type=checkbox]:checked").each(function() {
+					$(".sh_work_form input[type=checkbox]:checked").each(function() {
 						val = val + $(this).val()/1;
 					});
 				}
@@ -133,9 +133,14 @@ IndexClass.prototype = {
 				url : Globals.ctx + '/train/question',
 				data : {trainId : trainId , chapterId : chapterId, index : index},
 				success : function(result){
-					$("#questionDiv").html(result);
-					$(".preOne").css({"visibility" : (index <= 1? "hidden" : "visible")});
-					$(".nextOne").css({"visibility" : (index >= total? "hidden" : "visible")});
+					$(".sh_work_form").html(result);
+					$(".preOne, .nextOne").removeClass("sh_form_grey");
+					if(index <= 1) {
+						$(".preOne").addClass("sh_form_grey");
+					}
+					if(index >= total) {
+						$(".nextOne").addClass("sh_form_grey");
+					}					
 					bindAnswer();
 				}
 			});
@@ -143,12 +148,16 @@ IndexClass.prototype = {
 		
 		// 上一题
 		$(".preOne").click(function() {
-			$(".question_index").eq($("input[name=index]").val()-2).click();
+			if(!$(this).hasClass("sh_form_grey")) {
+				$(".question_index").eq($("input[name=index]").val()-2).click();
+			}
 		});
 		
 		// 下一题
 		$(".nextOne").click(function() {
-			$(".question_index").eq($("input[name=index]").val()).click();
+			if(!$(this).hasClass("sh_form_grey")) {
+				$(".question_index").eq($("input[name=index]").val()).click();
+			}
 		});
 		
 		// 默认显示第一题
