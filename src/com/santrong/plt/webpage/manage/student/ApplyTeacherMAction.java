@@ -63,11 +63,6 @@ public class ApplyTeacherMAction extends StudentBaseAction {
 		this.getRequest().getSession().setAttribute(Global.SessionKey_LoginUser, user);
 		
 		return "manage/student/applyPass";
-	}	
-	
-	@RequestMapping("/changeCover")
-	public String changeCover(){
-		return "/manage/teacher/changeCover";
-	}	
+	}		
 
 }

@@ -12,7 +12,7 @@ import com.santrong.plt.webpage.teacher.entry.UserItem;
  * @date 2014年11月6日
  * @time 下午4:43:07
  */
-public abstract class StudentBaseAction extends BaseAction {
+public abstract class RegistBaseAction extends BaseAction {
 	
 	// 控制器方法的前置方法
 	public RmCode preMethod(HttpServletRequest request, HttpServletResponse response) {
@@ -21,8 +21,8 @@ public abstract class StudentBaseAction extends BaseAction {
 			return RmCode.REQUIRE_LOGIN;
 		}
 		
-		if(!user.isStudent()) {
-			return RmCode.REQUIRE_STUDENT_AUTH;
+		if(!user.isRegist()) {
+			return RmCode.REQUIRE_REGIST_AUTH;
 		}
 		return RmCode.PASS;
 	}	

@@ -89,7 +89,7 @@ public class HomeAction extends BaseAction{
 		
 		TreeMap<String, List<AreaItem>> cityMap = new TreeMap<String, List<AreaItem>>();
 		for(AreaItem city:cityList) {
-			String firstWord = city.getAreaEName().substring(0, 1);
+			String firstWord = city.getAreaEnName().substring(0, 1);
 			List<AreaItem> list = cityMap.get(firstWord);
 			
 			if(list == null) {
@@ -111,7 +111,7 @@ public class HomeAction extends BaseAction{
 	@RequestMapping("/changecity/{city}")
 	public String changeCityPost(@PathVariable String city) {
 		AreaDao dao = new AreaDao();
-		AreaItem area = dao.selectByAreaEName(city);
+		AreaItem area = dao.selectByAreaEnName(city);
 		
 		if(area == null) {
 			this.redirect("/404");

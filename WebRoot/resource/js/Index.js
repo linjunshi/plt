@@ -6,7 +6,11 @@ function IndexClass() {
 //index模块的具体页面初始化
 IndexClass.prototype = {
 	// 登录页
-	login:function() {
+	login : function() {
+	},
+	
+	// 注册页
+	regist : function() {
 	},
 	
 	// 首页

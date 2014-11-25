@@ -18,6 +18,7 @@ import com.santrong.plt.webpage.teacher.entry.UserCourseView;
 import com.santrong.plt.webpage.teacher.entry.UserDetailView;
 import com.santrong.plt.webpage.teacher.entry.UserItem;
 import com.santrong.plt.webpage.teacher.entry.UserQuery;
+import com.santrong.plt.webpage.teacher.entry.UserTmpItem;
 
 /**
  * @author weinianjie
@@ -51,6 +52,22 @@ public class UserDao extends BaseDao{
 		return false;
 	}	
 	
+	public boolean existsByEmail(String email) {
+		UserMapper mapper = this.getMapper(UserMapper.class);
+		if(mapper != null) {
+			return mapper.existsByEmail(email) > 0;
+		}
+		return false;
+	}		
+	
+	public boolean existsByPhone(String phone) {
+		UserMapper mapper = this.getMapper(UserMapper.class);
+		if(mapper != null) {
+			return mapper.existsByPhone(phone) > 0;
+		}
+		return false;
+	}		
+	
 	public int insert(UserItem user) {
 		UserMapper mapper = this.getMapper(UserMapper.class);
 		if(mapper != null) {
@@ -58,6 +75,30 @@ public class UserDao extends BaseDao{
 		}
 		return 0;
 	}
+	
+	public int insertTmp(UserTmpItem tmp) {
+		UserMapper mapper = this.getMapper(UserMapper.class);
+		if(mapper != null) {
+			return mapper.insertTmp(tmp);
+		}
+		return 0;
+	}
+	
+	public UserTmpItem selectTmpByUserId(String userId) {
+		UserMapper mapper = this.getMapper(UserMapper.class);
+		if(mapper != null) {
+			return mapper.selectTmpByUserId(userId);
+		}
+		return null;
+	}	
+	
+	public int updateTmp(UserTmpItem tmp) {
+		UserMapper mapper = this.getMapper(UserMapper.class);
+		if(mapper != null) {
+			return mapper.updateTmp(tmp);
+		}
+		return 0;
+	}	
 	
 	public int update(UserItem user) {
 		UserMapper mapper = this.getMapper(UserMapper.class);

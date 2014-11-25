@@ -8,11 +8,9 @@
             <div><a href="${ctx}/account/personalInfo">帐号设置</a></div>
             <div class="sh_list_switch">
                 <dl class="show">
-                    <dd><a href="${ctx}/study/course">我的课程</a></dd>
-                    <dd><a href="${ctx}/study/train">我的测验</a></dd>
-                    <dd><a href="${ctx}/comment">我的评论</a></dd>
-                    <dd><a href="${ctx}/collection">我的收藏</a></dd>
-                    <dd><a href="#" onclick="alert('开发中')">交易记录</a></dd>
+                    <dd><a href="${ctx}/account/personalInfo">个人信息</a></dd>
+                    <dd><a href="${ctx}/account/changePwd">修改密码</a></dd>
+                    <dd><a href="${ctx}/account/reactive">帐号激活</a></dd>
                 </dl>
             </div>
         </div>

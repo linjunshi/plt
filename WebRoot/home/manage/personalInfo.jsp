@@ -19,7 +19,7 @@ Globals.page = "Manage_index";
 	<div id="container_box">
 		<div id="container_content">
 			<div class="sectionMain clr">
-				<%@ include file="../inc/leftmenu_student.jsp"%>
+				<%@ include file="../inc/leftmenu_regist.jsp"%>
 				<div class="sh_info_r">
 		            <div class="st_titile_r sh_title"> <a href="#">基本信息</a><a href="#">教育信息</a><a href="#">其他扩展信息</a></div>
 		            <div class="sh_form_con">

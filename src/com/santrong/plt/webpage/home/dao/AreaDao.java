@@ -31,10 +31,10 @@ public class AreaDao extends BaseDao {
 	 * @param areaName
 	 * @return
 	 */
-	public AreaItem selectByAreaEName(String areaEName) {
+	public AreaItem selectByAreaEnName(String areaEnName) {
 		AreaMapper mapper = this.getMapper(AreaMapper.class);
 		if(mapper != null) {
-			return mapper.selectByAreaEName(areaEName);
+			return mapper.selectByAreaEnName(areaEnName);
 		}
 		return null;
 	}

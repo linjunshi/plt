@@ -25,11 +25,80 @@ jQuery(function($){
             }  
         });
         _ajax(_opt);
-    };	
+    };
+    
+	// 数据校验
+	$.fn.validate = function() {
+		$(this).find(".text_warn").removeClass("text_warn");
+        var isPass = true;
+        
+        // 必填检测
+        $(this).find("[required]").each(function(){
+        	if($(this).val().trim() == "") {
+        		$(this).addClass("text_warn");
+                isPass = false;
+        	}
+        });
+        
+        // 相同检测
+        $(this).find("[equalTo]").each(function(){
+        	var equalTo = $(this).attr("equalTo");
+        	if($(this).val().trim() != $("input[name=" + equalTo + "]").val().trim()) {
+        		$(this).addClass("text_warn");
+                isPass = false;
+        	}
+        });
+        
+        // 必填IP
+        // 正则表达式别用g属性，否则第二次检测的时候会混合第一次结果导致错误
+        var re_ip = /^(\d+)\.(\d+)\.(\d+)\.(\d+)$/i
+        $(this).find("[required_Ip]").each(function(){
+        	var val = $(this).val().trim();
+        	if(val == "" || !re_ip.test(val) || RegExp.$1 > 256 || RegExp.$2 > 256 || RegExp.$3 > 256 || RegExp.$4 > 256) {
+        		$(this).addClass("text_warn");
+                isPass = false;
+        	}
+        });	
+        
+        // 必填0或正整数
+        var re_number = /^[0-9]+$/i
+        $(this).find("[required_Number]").each(function(){
+        	var val = $(this).val().trim();
+        	if(val == "" || !re_number.test(val)) {
+        		$(this).addClass("text_warn");
+                isPass = false;
+        	}
+        });	
+        
+        // 日期类型检测
+        var re_Date = /^[2]\d{3}\-[01]{0,1}\d\-[0123]{0,1}\d$/i;
+        $(this).find("[required_Date]").each(function(){
+        	var val = $(this).val().trim();
+        	if(val == "" || !re_Date.test(val)) {
+        		$(this).addClass("text_warn");
+                isPass = false;
+        	}
+        });     
+        
+        // 时间类型检测
+        var re_Time = /[012]{0,1}\d:[0123456]{0,1}\d:[0123456]{0,1}\d$/i;
+        $(this).find("[required_Time]").each(function(){
+        	var val = $(this).val().trim();
+        	if(val == "" || !re_Time.test(val)) {
+        		$(this).addClass("text_warn");
+                isPass = false;
+        	}
+        });         
+        
+        return isPass;
+	}
 	
-	/**
-	 * 同步显示和隐藏
-	 */
+	// form提交校验数据
+	$(".common_form").submit(function() {
+		return $(this).validate();
+	});
+	
+	// 同步显示和隐藏
 	$.fn.toggleShow = function(el, opt) {
 		opt = $.extend({
 			event : "mouseover",

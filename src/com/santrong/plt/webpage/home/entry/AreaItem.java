@@ -8,7 +8,7 @@ package com.santrong.plt.webpage.home.entry;
 public class AreaItem {
 	private String areaCode;
 	private String areaName;
-	private String areaEName;
+	private String areaEnName;
 	private String areaType;
 	
 	public String getAreaType() {
@@ -17,11 +17,11 @@ public class AreaItem {
 	public void setAreaType(String areaType) {
 		this.areaType = areaType;
 	}
-	public String getAreaEName() {
-		return areaEName;
+	public String getAreaEnName() {
+		return areaEnName;
 	}
-	public void setAreaEName(String areaEName) {
-		this.areaEName = areaEName;
+	public void setAreaEnName(String areaEnName) {
+		this.areaEnName = areaEnName;
 	}
 	public String getAreaName() {
 		return areaName;

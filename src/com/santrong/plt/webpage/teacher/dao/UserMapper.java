@@ -10,6 +10,7 @@ import org.apache.ibatis.annotations.Update;
 import com.santrong.plt.webpage.teacher.entry.UserCourseView;
 import com.santrong.plt.webpage.teacher.entry.UserDetailView;
 import com.santrong.plt.webpage.teacher.entry.UserItem;
+import com.santrong.plt.webpage.teacher.entry.UserTmpItem;
 
 /**
  * @Author weinianjie
@@ -43,8 +44,23 @@ public interface UserMapper {
     @Select("select count(*) as cn from user where username=#{username}")
     int existsByUserName(String username);
     
-    @Insert("insert into user values(#{id}, #{showName}, #{username}, #{password}, #{url}, #{gender}, #{role}, #{schoolId}, #{subjectId}, #{registIp}, #{registTime}, #{lastLoginIp}, #{lastLoginTime}, #{remark}, #{cts}, #{uts})")
+    @Select("select count(*) as cn from user where email=#{email}")
+    int existsByEmail(String email);
+    
+    @Select("select count(*) as cn from user where phone=#{phone}")
+    int existsByPhone(String phone);
+    
+    @Insert("insert into user values(#{id}, #{showName}, #{username}, #{password}, #{url}, #{gender}, #{role}, #{schoolId}, #{subjectId}, #{email}, #{phone}, #{registIp}, #{registTime}, #{lastLoginIp}, #{lastLoginTime}, #{remark}, #{cts}, #{uts})")
     int insert(UserItem user);
+
+    @Insert("insert into user_tmp values(#{userId}, #{activeCode}, #{cts})")
+    int insertTmp(UserTmpItem tmp);
+    
+    @Select("select * from user_tmp where userId=#{userId}")
+    UserTmpItem selectTmpByUserId(String userId);
+    
+    @Update("update user_tmp set activeCode=#{activeCode},cts=#{cts} where userId=#{userId}")
+    int updateTmp(UserTmpItem tmp);
     
     @Update("update user set "
     		+ "showName=#{showName}, "
@@ -55,6 +71,8 @@ public interface UserMapper {
     		+ "role=#{role}, "
     		+ "schoolId=#{schoolId}, "
     		+ "subjectId=#{subjectId}, "
+    		+ "email=#{email}, "
+    		+ "phone=#{phone}, "
     		+ "registIp=#{registIp}, "
     		+ "registTime=#{registTime}, "
     		+ "lastLoginIp=#{lastLoginIp}, "

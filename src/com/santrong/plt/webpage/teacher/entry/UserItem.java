@@ -17,6 +17,8 @@ public class UserItem {
 	private int role;
 	private String schoolId;
 	private String subjectId;
+	private String email;
+	private String phone;
 	private String registIp;
 	private Date registTime;
 	private String lastLoginIp;
@@ -28,12 +30,25 @@ public class UserItem {
 	// 非表字段
 	private String schoolName;
 	
-	public final static int Role_Student = 1; // 1
-	public final  static int Role_Teacher = 2; // 10
-	public final  static int Role_School = 4; // 100
+	public final static int Role_Regist = 1; // 1
+	public final static int Role_Student = 2; // 10
+	public final  static int Role_Teacher = 4; // 110
+	public final  static int Role_School = 6; // 1000
 	public final  static int Role_God = 64; // 100000
 
 	
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	public String getPhone() {
+		return phone;
+	}
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
 	public String getSchoolName() {
 		return schoolName;
 	}
@@ -136,6 +151,10 @@ public class UserItem {
 	public void setPassword(String password) {
 		this.password = password;
 	}
+	
+	public boolean isRegist() {
+		return (role & Role_Regist) == Role_Regist;
+	}	
 	
 	public boolean isStudent() {
 		return (role & Role_Student) == Role_Student;

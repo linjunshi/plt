@@ -128,8 +128,8 @@ span.form_error, span.form_success{border-width:1px;display:inline-block;*displa
 .user_info_hidd  span { float:right;  padding:0 10px; line-height:30px;}
 .user_info_hidd  p { padding:0 10px; float:right; display:block; text-align:center; border-left:1px #ccc solid;}*/
 .user_info_hidd {float:left; position:relative;  width:320px;}
-.user_info_hi_img {position:absolute; top:30px; border:solid 1px blue;}
-.user_info_hi_img .user_username {line-height:30px;border:solid 1px yellow;}
+.user_info_hi_img {position:absolute; top:30px; }
+.user_info_hi_img .user_username {line-height:30px;}
 .user_info_hidd p {position:absolute; top:30px; right:10px; }
 .user_info_hidd  a {padding:0 10px; text-align:center; border-left:1px #ccc solid;}
 
@@ -600,3 +600,11 @@ border: #999 1px solid;
 height: 20px;
 background: #fff url(datePicker.gif) no-repeat right;
 }
+
+
+/*----------公共的-提醒-警告-优先级最高----------*/
+.warn {color:#ee0000;}
+.error {color:#ee0000;}
+.notice {color:#ee0000;}
+.text_warn {border:solid 1px #ff9c00;}
+.radio_warn {}

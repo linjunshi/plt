@@ -71,7 +71,7 @@ public class CalcAreaSpell {
 						Connection con = null;
 						try{
 							con = DriverManager.getConnection("jdbc:mysql://localhost:3306/plt" , "root" , "linux" ) ;
-							String sql = "update web_area set areaEName=? where areaCode=?";
+							String sql = "update web_area set areaEnName=? where areaCode=?";
 							Entry<String, String> area = null;
 							while(true) {
 								synchronized(areaList) {
@@ -87,17 +87,16 @@ public class CalcAreaSpell {
 								}
 								
 								try {
-									String areaEName = CnToSpell.getFullSpell(area.getValue());
-									String last4 = areaEName.substring(areaEName.length() - 4, areaEName.length());
+									String areaEnName = CnToSpell.getFullSpell(area.getValue());
+									String last4 = areaEnName.substring(areaEnName.length() - 4, areaEnName.length());
 									if(last4.equals("shi ")) {
-										areaEName = areaEName.substring(0, areaEName.length() - 5);
+										areaEnName = areaEnName.substring(0, areaEnName.length() - 5);
 									}
-									areaEName = areaEName.replaceAll(" ", "");
+									areaEnName = areaEnName.replaceAll(" ", "");
 									PreparedStatement stm = con.prepareStatement(sql);
-									stm.setString(1, areaEName);
+									stm.setString(1, areaEnName);
 									stm.setString(2, area.getKey());
 									stm.execute();
-//													Log.debug(areaEName);
 								}catch(Exception e) {
 									Log.debug("parse-fail:" + count + " and code:" + area.getKey());
 									Log.printStackTrace(e);

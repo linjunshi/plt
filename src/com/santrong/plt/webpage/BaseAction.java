@@ -27,8 +27,10 @@ public abstract class BaseAction {
 	public enum RmCode {
 		PASS,// 通过
 		REQUIRE_LOGIN,// 需要登录
-		REQUIRE_AUTH,// 需要权限
-		REQUIRE_TEACHER_AUTH// 需要老师权限
+		REQUIRE_REGIST_AUTH,// 需要注册权限
+		REQUIRE_STUDENT_AUTH,// 需要学生权限
+		REQUIRE_TEACHER_AUTH,// 需要老师权限
+		REQUIRE_AUTH// 需要权限
 	}
 	
 	// 控制器方法的前置方法

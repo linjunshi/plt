@@ -16,7 +16,7 @@ Globals.page = "Manage_index";
 	<div id="container_box">
 		<div id="container_content">
 			<div class="sectionMain clr">
-				<%@ include file="../inc/leftmenu_student.jsp"%>
+				<%@ include file="../inc/leftmenu_regist.jsp"%>
 				<div class="sh_info_r">
 					<div class="sh_title">
 						<h2>忘记密码</h2>

@@ -17,15 +17,15 @@ public interface AreaMapper {
 	@Select("select * from web_area where areaName=#{areaName}")
 	AreaItem selectByAreaName(String areaName) ;
 	
-	@Select("select * from web_area where areaEName=#{areaEName}")
-	AreaItem selectByAreaEName(String areaEName) ;	
+	@Select("select * from web_area where areaEnName=#{areaEnName}")
+	AreaItem selectByAreaEnName(String areaEnName) ;	
 	
-	@Select("select * from web_area where areaType='省' order by areaEName asc")
+	@Select("select * from web_area where areaType='省' order by areaEnName asc")
 	List<AreaItem> selectProvince() ;	
 	
-	@Select("select * from web_area where areaType='市' order by areaEName asc")
+	@Select("select * from web_area where areaType='市' order by areaEnName asc")
 	List<AreaItem> selectCity() ;
 	
-	@Select("select * from web_area where areaCode like ${codeLike}  order by areaEName asc")
+	@Select("select * from web_area where areaCode like ${codeLike}  order by areaEnName asc")
 	List<AreaItem> selectByCodeLike(@Param("codeLike")String codeLike) ;
 }

@@ -32,14 +32,9 @@
 				<a href="${ctx }/account/regist" class="user_info_signup">注册</a>
 			</c:if>
 			<c:if test="${sessionScope.loginUser != null}">
-				<div class="user_info_hidd">
-					<div class="user_info_hi_img">
-						<img src="${ctx}/resource/photo/logo.png" width="30" height="30" />
-						<span class="user_username">${sessionScope.loginUser.showName}</span>					
-						<div><a href="${ctx }/account/logout">注销</a></div>
-						<div><a href="${ctx }/study/course">管理中心</a></div>
-					</div>
-				</div>
+				<span>${sessionScope.loginUser.showName}</span>
+				<a href="${ctx }/account/logout">注销</a>
+				<a href="${ctx }/study/course">管理中心</a>
 			</c:if>
 		</div>
 	    <div id="wrapper_box">
