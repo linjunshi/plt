@@ -17,11 +17,11 @@
 							<li id="q_teacher" class="hide">老师</li>
 						</ul>
 						<div class="select_down"></div>
-						<c:set var="q" value="请输入你感兴趣的内容"/>
+						<c:set var="q" value=""/>
 						<c:if test="${!empty query && !empty query.keywords}">
 							<c:set var="q" value="${query.keywords}"/>	
 						</c:if>
-						<input class="search_text" type="text" name="q" value="${q}" />
+						<input class="search_text" type="text" placeholder="请输入你感兴趣的内容" name="q" value="${q}" />
 					</div>
 					<input class="search_submit" type="submit" value="搜索" />
 				</div>

@@ -46,7 +46,8 @@ public class ApplyTeacherMAction extends StudentBaseAction {
 		UserItem user = dao.selectById(form.getUserId());
 		user.setSchoolId(form.getSchoolId());
 		user.setSubjectId(form.getSubjectId());
-		//TODO 手机号码
+		user.setPhone(form.getPhone());
+		// TODO 身份证
 		user.setRemark(form.getRemark());
 		user.setRole(user.getRole()|UserItem.Role_Teacher);// 加上老师权限
 		user.setUts(new Date());

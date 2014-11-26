@@ -50,7 +50,7 @@ Globals.page = "Index_regist";
 				<div class="form_item">
 					<label for="pwd">邮箱：</label>
 					<div class="form_field">
-						<input name="email" class="form_text" type="text" required />
+						<input name="email" class="form_text" type="text" required_Mail />
 					</div>
 				</div>				
 				<div class="form_action">

@@ -19,6 +19,7 @@ public class UserItem {
 	private String subjectId;
 	private String email;
 	private String phone;
+	private String idCard;
 	private String registIp;
 	private Date registTime;
 	private String lastLoginIp;
@@ -36,7 +37,12 @@ public class UserItem {
 	public final  static int Role_School = 6; // 1000
 	public final  static int Role_God = 64; // 100000
 
-	
+	public String getIdCard() {
+		return idCard;
+	}
+	public void setIdCard(String idCard) {
+		this.idCard = idCard;
+	}
 	public String getEmail() {
 		return email;
 	}

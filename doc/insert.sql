@@ -17,6 +17,7 @@ create table user(
 	subjectId varchar(32) comment '所属学科',
 	email varchar(64) not null comment '邮箱',
 	phone varchar(16) comment '电话',
+	idCard varchar(32) comment '身份证',
 	registIp varchar(32) comment '注册IP',
 	registTime datetime comment '注册时间',
 	lastLoginIp varchar(32) comment '最后登录IP',

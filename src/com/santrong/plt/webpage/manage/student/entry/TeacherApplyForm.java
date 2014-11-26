@@ -11,9 +11,16 @@ public class TeacherApplyForm {
 	private String schoolId;
 	private String subjectName;
 	private String subjectId;
+	private String idCard;
 	private String phone;
 	private String remark;
 	
+	public String getIdCard() {
+		return idCard;
+	}
+	public void setIdCard(String idCard) {
+		this.idCard = idCard;
+	}
 	public String getUserId() {
 		return userId;
 	}
