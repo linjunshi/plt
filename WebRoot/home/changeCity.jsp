@@ -38,7 +38,7 @@ Globals.page = "Index_index";
 			                    <h3 class="city_alp">${item.key}</h3>
 			                    <p class="city_con">
 						    	<c:forEach items="${item.value}" var="city">
-						    		<a href="${ctx}/changecity/${city.areaEName}">${city.areaName}</a>
+						    		<a href="${ctx}/changecity/${city.areaEnName}">${city.areaName}</a>
 						    	</c:forEach>			                    
 			                    </p>
 			                </li>
