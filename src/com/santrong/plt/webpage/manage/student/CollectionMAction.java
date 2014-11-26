@@ -36,6 +36,7 @@ public class CollectionMAction extends StudentBaseAction {
 		
 		CourseDao dao = new CourseDao();
 		CourseCollectQuery query = new CourseCollectQuery();
+		query.setUserId(this.currentUser().getId());
 		query.setPageNum(pageNum);
 		query.setCount(dao.selectCountByQuery(query));
 		List<CourseItem> courseList = dao.selectByQuery(query);

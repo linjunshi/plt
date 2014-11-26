@@ -1,5 +1,6 @@
 package com.santrong.plt.webpage.home;
 
+import java.util.Calendar;
 import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
@@ -12,6 +13,7 @@ import com.mysql.jdbc.StringUtils;
 import com.santrong.plt.log.Log;
 import com.santrong.plt.opt.ThreadUtils;
 import com.santrong.plt.system.Global;
+import com.santrong.plt.util.MailUtils;
 import com.santrong.plt.util.MyUtils;
 import com.santrong.plt.webpage.BaseAction;
 import com.santrong.plt.webpage.teacher.dao.UserDao;
@@ -21,6 +23,7 @@ import com.santrong.plt.webpage.teacher.entry.UserDetailView;
 import com.santrong.plt.webpage.teacher.entry.UserEducationItem;
 import com.santrong.plt.webpage.teacher.entry.UserExtendsItem;
 import com.santrong.plt.webpage.teacher.entry.UserItem;
+import com.santrong.plt.webpage.teacher.entry.UserTmpItem;
 
 /**
  * @author weinianjie
@@ -49,8 +52,8 @@ public class AccountAction extends BaseAction {
 	 * @return
 	 */
 	@RequestMapping(value="/regist", method=RequestMethod.POST)
-	public String registPost(String username, String password, String pwdagain) {
-		if(StringUtils.isNullOrEmpty(username) || StringUtils.isNullOrEmpty(password) || StringUtils.isNullOrEmpty(pwdagain)) {
+	public String registPost(String username, String password, String pwdagain, String email) {
+		if(StringUtils.isNullOrEmpty(username) || StringUtils.isNullOrEmpty(password) || StringUtils.isNullOrEmpty(pwdagain) || StringUtils.isNullOrEmpty(email)) {
 			addError("请您输入的用户名、密码和确认密码！");
 			return "regist";
 		}
@@ -61,35 +64,112 @@ public class AccountAction extends BaseAction {
 		
 		UserDao userDao = new UserDao();
 		if(userDao.existsByUserName(username)) {
-			addError("您输入的用户名已经存在！");
+			addError("用户名已经被注册！");
 			return "regist";
 		}
 		
-		UserItem user = new UserItem();
-		user.setId(MyUtils.getGUID());
-		user.setShowName(username);
-		user.setUsername(username);
-		user.setPassword(MyUtils.getMD5(password));
-		user.setUrl(null);
-		user.setGender(0);
-		user.setRole(UserItem.Role_Teacher + UserItem.Role_Student);
-		user.setSchoolId(null);
-		user.setSubjectId(null);
-		user.setRegistIp(MyUtils.getRequestAddrIp(getRequest(), "127.0.0.1"));
-		user.setRegistTime(new Date());
-		user.setLastLoginIp(MyUtils.getRequestAddrIp(getRequest(), "127.0.0.1"));
-		user.setLastLoginTime(new Date());
-		user.setRemark(null);
-		user.setCts(new Date());
-		user.setUts(new Date());
-		
-		if(userDao.insert(user) <= 0) {
+		if(userDao.existsByEmail(email)) {
+			addError("邮箱已经被注册！");
 			return "regist";
+		}		
+		
+		try{
+			ThreadUtils.beginTranx();
+			
+			UserItem user = new UserItem();
+			user.setId(MyUtils.getGUID());
+			user.setShowName(username);
+			user.setUsername(username);
+			user.setPassword(MyUtils.getMD5(password));
+			user.setUrl(null);
+			user.setGender(0);
+//			user.setRole(UserItem.Role_Regist | UserItem.Role_Student);
+			user.setRole(UserItem.Role_Regist);
+			user.setSchoolId(null);
+			user.setSubjectId(null);
+			user.setEmail(email);
+			user.setPhone(null);
+			user.setRegistIp(MyUtils.getRequestAddrIp(getRequest(), "127.0.0.1"));
+			user.setRegistTime(new Date());
+			user.setLastLoginIp(MyUtils.getRequestAddrIp(getRequest(), "127.0.0.1"));
+			user.setLastLoginTime(new Date());
+			user.setRemark(null);
+			user.setCts(new Date());
+			user.setUts(new Date());
+			
+			UserTmpItem tmp = new UserTmpItem();
+			tmp.setUserId(user.getId());
+			tmp.setActiveCode(MyUtils.getGUID());
+			tmp.setCts(new Date());
+			
+			if(userDao.insert(user) <= 0 || userDao.insertTmp(tmp) <= 0) {
+				ThreadUtils.rollbackTranx();
+				return "regist";
+			}
+			
+			ThreadUtils.commitTranx();
+			getRequest().getSession().setAttribute(Global.SessionKey_LoginUser, user);
+		
+			// 发送邮件
+			try{
+				StringBuilder activeUrl = new StringBuilder();
+				activeUrl.append("http://").append(this.getRequest().getRemoteAddr()).append("/");
+				if(MyUtils.isNotNull(this.getContext())) {
+					activeUrl.append(this.getContext()).append("/");
+				}
+				activeUrl.append("account/active?u=").append(username).append("&a=").append(tmp.getActiveCode());
+
+				StringBuilder sb = new StringBuilder();
+				sb.append("请点击以下链接激活帐号（如不能点击请复制到浏览器地址栏打开）</br/>");
+				sb.append("<a href=\"").append(activeUrl.toString()).append("\">").append(activeUrl.toString()).append("</a><br/>");
+				sb.append("激活链接24小时有效");				
+				MailUtils.sendMail(email, "课云平台帐号激活", sb.toString());
+			}catch(Exception e) {
+				Log.printStackTrace(e);
+			}
+		
+		}catch(Exception e) {
+			ThreadUtils.rollbackTranx();
+			Log.printStackTrace(e);
 		}
 		
-		getRequest().getSession().setAttribute(Global.SessionKey_LoginUser, user);
 		return this.redirect("/study/course");
 	}	
+	
+	/**
+	 * 帐号激活
+	 * @param u
+	 * @param a
+	 * @return
+	 */
+	@RequestMapping(value="/active", method=RequestMethod.GET)
+	public String active(String u, String a) {
+		int rs = 0;
+		UserDao dao = new UserDao();
+		UserItem user = dao.selectByUserName(u);
+		
+		if(user != null) {
+			UserTmpItem tmp = dao.selectTmpByUserId(user.getId());
+			if(tmp != null) {
+				if(tmp.getActiveCode().equals(a)) {
+					long t1 = tmp.getCts().getTime();
+					long t2 = Calendar.getInstance().getTimeInMillis();
+					long radius = (t2-t1)/1000/3600;
+					if(radius < 24) {// 24小时内激活
+						user.setRole(user.getRole() | UserItem.Role_Student);// 加上学生权限
+						if(dao.update(user) > 0) {
+							getRequest().getSession().setAttribute(Global.SessionKey_LoginUser, user);// 标识登录状态
+							rs = 1;
+						}
+					}
+				}
+			}
+		}
+		
+		this.getRequest().setAttribute("rs", rs);
+		
+		return "/manage/regist/activeResult";
+	}
 	
 	/**
 	 * 获取登录页面

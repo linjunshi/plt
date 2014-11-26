@@ -15,6 +15,9 @@ create table user(
 	role int(10) not null default 1 comment '角色',
 	schoolId varchar(32) comment '所属学校',
 	subjectId varchar(32) comment '所属学科',
+	email varchar(64) not null comment '邮箱',
+	phone varchar(16) comment '电话',
+	idCard varchar(32) comment '身份证',
 	registIp varchar(32) comment '注册IP',
 	registTime datetime comment '注册时间',
 	lastLoginIp varchar(32) comment '最后登录IP',
@@ -25,24 +28,24 @@ create table user(
 	primary key (id)
 ) engine=InnoDB default charset=utf8 collate=utf8_bin comment '用户表';
 
-insert into user values('10000', 'admin', 'admin', md5('admin'), '', 0, 71, 10000, 10000, null, null, null, null, null, now(), now());
-insert into user values('10001', 'teacher1', 'teacher1', md5('admin'), '', 1, 3, 10000, 10000, null, null, null, null, null, now(), now());
-insert into user values('10002', 'teacher2', 'teacher2', md5('admin'), '', 1, 3, 10000, 10000, null, null, null, null, null, now(), now());
-insert into user values('10003', 'teacher3', 'teacher3', md5('admin'), '', 1, 3, 10000, 10000, null, null, null, null, null, now(), now());
-insert into user values('10004', 'teacher4', 'teacher4', md5('admin'), '', 2, 3, 10000, 10000, null, null, null, null, null, now(), now());
-insert into user values('10005', 'teacher5', 'teacher5', md5('admin'), '', 2, 3, 10000, 10000, null, null, null, null, null, now(), now());
-insert into user values('10006', 'student1', 'student1', md5('admin'), '', 2, 1, 10000, 10000, null, null, null, null, null, now(), now());
-insert into user values('10007', 'student2', 'student2', md5('admin'), '', 0, 1, 10000, 10000, null, null, null, null, null, now(), now());
-insert into user values('10008', 'teacher6', 'teacher6', md5('admin'), '', 0, 3, 10000, 10000, null, null, null, null, null, now(), now());
-insert into user values('10009', 'teacher7', 'teacher7', md5('admin'), '', 0, 3, 10000, 10000, null, null, null, null, null, now(), now());
-insert into user values('10010', 'teacher8', 'teacher8', md5('admin'), '', 0, 3, 10000, 10000, null, null, null, null, null, now(), now());
-insert into user values('10011', 'teacher9', 'teacher9', md5('admin'), '', 0, 3, 10000, 10000, null, null, null, null, null, now(), now());
-insert into user values('10012', 'teacher10', 'teacher10', md5('admin'), '', 0, 3, 10000, 10000, null, null, null, null, null, now(), now());
-insert into user values('10013', 'teacher11', 'teacher11', md5('admin'), '', 0, 3, 10000, 10000, null, null, null, null, null, now(), now());
-insert into user values('10014', 'teacher12', 'teacher12', md5('admin'), '', 0, 3, 10000, 10000, null, null, null, null, null, now(), now());
-insert into user values('10015', 'teacher13', 'teacher13', md5('admin'), '', 0, 3, 10000, 10000, null, null, null, null, null, now(), now());
-insert into user values('10016', 'teacher14', 'teacher14', md5('admin'), '', 0, 3, 10000, 10000, null, null, null, null, null, now(), now());
-insert into user values('10017', 'teacher15', 'teacher14', md5('admin'), '', 0, 3, 10000, 10000, null, null, null, null, null, now(), now());
+insert into user values('10000', 'admin', 'admin', md5('admin'), '', 0, 71, 10000, 10000, 'weinianjie@163.com', '18665955410', null, null, null, null, null, now(), now());
+insert into user values('10001', 'teacher1', 'teacher1', md5('admin'), '', 1, 3, 10000, 10000, '304468211@qq.com', '18665955411', null, null, null, null, null, now(), now());
+insert into user values('10002', 'teacher2', 'teacher2', md5('admin'), '', 1, 3, 10000, 10000, '', '18665955412', null, null, null, null, null, now(), now());
+insert into user values('10003', 'teacher3', 'teacher3', md5('admin'), '', 1, 3, 10000, 10000, '', '18665955413', null, null, null, null, null, now(), now());
+insert into user values('10004', 'teacher4', 'teacher4', md5('admin'), '', 2, 3, 10000, 10000, '', '18665955414', null, null, null, null, null, now(), now());
+insert into user values('10005', 'teacher5', 'teacher5', md5('admin'), '', 2, 3, 10000, 10000, '', '18665955415', null, null, null, null, null, now(), now());
+insert into user values('10006', 'student1', 'student1', md5('admin'), '', 2, 1, 10000, 10000, '418941485@qq.com', '18665955416', null, null, null, null, null, now(), now());
+insert into user values('10007', 'student2', 'student2', md5('admin'), '', 0, 1, 10000, 10000, '', '18665955417', null, null, null, null, null, now(), now());
+insert into user values('10008', 'teacher6', 'teacher6', md5('admin'), '', 0, 3, 10000, 10000, '', '18665955418', null, null, null, null, null, now(), now());
+insert into user values('10009', 'teacher7', 'teacher7', md5('admin'), '', 0, 3, 10000, 10000, '', '18665955419', null, null, null, null, null, now(), now());
+insert into user values('10010', 'teacher8', 'teacher8', md5('admin'), '', 0, 3, 10000, 10000, '', '18665955420', null, null, null, null, null, now(), now());
+insert into user values('10011', 'teacher9', 'teacher9', md5('admin'), '', 0, 3, 10000, 10000, '', '18665955421', null, null, null, null, null, now(), now());
+insert into user values('10012', 'teacher10', 'teacher10', md5('admin'), '', 0, 3, 10000, 10000, '', '18665955422', null, null, null, null, null, now(), now());
+insert into user values('10013', 'teacher11', 'teacher11', md5('admin'), '', 0, 3, 10000, 10000, '', '18665955423', null, null, null, null, null, now(), now());
+insert into user values('10014', 'teacher12', 'teacher12', md5('admin'), '', 0, 3, 10000, 10000, '', '18665955424', null, null, null, null, null, now(), now());
+insert into user values('10015', 'teacher13', 'teacher13', md5('admin'), '', 0, 3, 10000, 10000, '', '18665955425', null, null, null, null, null, now(), now());
+insert into user values('10016', 'teacher14', 'teacher14', md5('admin'), '', 0, 3, 10000, 10000, '', '18665955426', null, null, null, null, null, now(), now());
+insert into user values('10017', 'teacher15', 'teacher14', md5('admin'), '', 0, 3, 10000, 10000, '', '18665955427', null, null, null, null, null, now(), now());
 
 -- 用户教育信息 --
 drop table if exists user_education;
@@ -63,6 +66,15 @@ create table user_extends(
 	primary key (userId)
 ) engine=InnoDB default charset=utf8 collate=utf8_bin comment '用户扩展信息表';
 
+-- 用户临时信息 --
+drop table if exists user_tmp;
+create table user_tmp(
+	userId varchar(32) not null comment '用户ID',
+	activeCode varchar(128) comment '激活码',
+	cts datetime comment '创建时间',
+	primary key (userId)
+) engine=InnoDB default charset=utf8 collate=utf8_bin comment '用户临时信息表';
+
 -- 年级表 --
 drop table if exists grade;
 create table grade(
@@ -72,7 +84,7 @@ create table grade(
 	gradeGroup int(10) comment '年级类型',
 	gradeEnName varchar(16) not null comment '年级英文名',
 	levelEnName varchar(16) not null comment '级别英文名',
-	priority int(10) comment '优先级',
+	priority int(10) default 0 not null comment '优先级',
 	primary key (id)
 ) engine=InnoDB default charset=utf8 collate=utf8_bin comment '年级表';
 
@@ -95,7 +107,7 @@ create table subject(
 	id varchar(32) not null comment 'UUID',
 	subjectName varchar(64) not null comment '科目名称',
 	subjectEnName varchar(16) not null comment '科目英文名',
-	priority int(10) comment '优先级',
+	priority int(10) default 0 not null comment '优先级',
 	primary key (id)
 ) engine=InnoDB default charset=utf8 collate=utf8_bin comment '科目表';
 
@@ -278,7 +290,7 @@ create table course_chapter(
 	id varchar(32) not null comment 'UUID',
 	courseId varchar(32) not null comment '课程ID',
 	remark varchar(1024) comment '描述',
-	priority int(10) comment '优先级',
+	priority int(10) default 0 not null comment '优先级',
 	cts datetime comment '创建时间',
 	uts datetime comment '修改时间',	
 	primary key (id)
@@ -481,6 +493,7 @@ drop table if exists resource_train_to_question;
 create table resource_train_to_question(
 	trainId varchar(32) not null comment '测验ID',
 	questionId varchar(32) not null comment '习题ID',
+	priority int(10) default 0 not null comment '优先级',
 	primary key (trainId, questionId)
 ) engine=InnoDB default charset=utf8 collate=utf8_bin comment '测验-习题关联表';
 

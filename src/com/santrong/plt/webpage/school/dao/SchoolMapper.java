@@ -24,4 +24,7 @@ public interface SchoolMapper {
 	
 	@Select("select * from school where id=#{id}")
 	SchoolItem selectById(String id);
+	
+	@Select("select * from school where areaCode=#{areaCode}")
+	List<SchoolItem> selectByAreaCode(String areaCode);	
 }

@@ -12,11 +12,11 @@ Globals.page = "Manage_index";
 </script>
 </head>
 <body>
-	<%@ include file="../inc/top.jsp"%>
+	<%@ include file="../inc/top_bg.jsp"%>
 	<div id="container_box">
 		<div id="container_content">
 			<div class="sectionMain clr">
-				<%@ include file="../inc/leftmenu.jsp"%>
+				<%@ include file="../inc/leftmenu_regist.jsp"%>
 				<div class="sh_info_r">
 					<div class="sh_title">
 						<h2>忘记密码</h2>

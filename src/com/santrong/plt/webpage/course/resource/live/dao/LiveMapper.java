@@ -8,6 +8,7 @@ import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
 import com.santrong.plt.webpage.course.resource.live.entry.LiveItem;
+import com.santrong.plt.webpage.manage.teacher.entry.TeacherLiveForm;
 
 /**
  * @author weinianjie
@@ -42,4 +43,11 @@ public interface LiveMapper {
 			+ "uts = #{uts}"
 			+ " where id = #{id}")
 	int update(LiveItem liveItem);
+	
+	@Select("select a.id,a.beginTime,a.endTime,b.title,c.remark,d.courseName from resource_live a "
+			+ "left join course_chapter_to_resource b on a.id=b.resourceId "
+			+ "left join course_chapter c on b.chapterId=c.id "
+			+ "left join course d on c.courseId=d.id "
+			+ "where a.ownerId=#{userId} and a.beginTime > now()")
+	List<TeacherLiveForm> selectTeacherLive(String userId);
 }

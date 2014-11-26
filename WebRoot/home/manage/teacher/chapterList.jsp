@@ -16,7 +16,7 @@ Globals.page = "Manage_chapterList";
 	<div id="container_box">
 		<div id="container_content">
 			<div class="sectionMain clr">
-				<%@ include file="../../inc/leftmenu.jsp"%>
+				<%@ include file="../../inc/leftmenu_teacher.jsp"%>
 				
 				<div class="sh_info_r">
 		            <div class="st_titile_r sh_title">

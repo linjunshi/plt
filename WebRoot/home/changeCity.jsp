@@ -15,18 +15,37 @@ Globals.page = "Index_index";
 	<%@ include file="inc/top.jsp"%>
 	<div id="container_box">
 		<div class="container_content">
-		    
-		    <p>当前城市：${sessionScope.area.cityName}</p>
-		    
-		    <c:forEach items="${cityMap}" var="item">
-		    	<div>
-		    	<p>${item.key}</p>
-		    	<c:forEach items="${item.value}" var="city">
-		    		<a style="margin:4px 10px;" href="${ctx}/changecity/${city.areaEName}">${city.areaName}</a>
-		    	</c:forEach>
-		    	</div>
-		    </c:forEach>
-		    
+		
+		    <div class="sectionMain clr">
+		        <div class="city_switch">
+		            <h3>常用城市:</h3>
+		            <p>
+						<a href="${ctx}/changecity/beijing">北京</a>
+						<a href="${ctx}/changecity/shanghai">上海</a>
+						<a href="${ctx}/changecity/guangzhou">广州</a>
+			            <a href="${ctx}/changecity/shenzhen">深圳</a>
+		            </p>
+		        </div>
+		        <div class="city_switch">
+		            <h3>当前城市:</h3>
+		            <p><a>${sessionScope.area.cityName}</a></p>
+		        </div>
+		        <div class="city_in">
+		            <h3 class="city_sec"> 按拼音首字母选择 <span class="arrow"></span> </h3>
+		            <ol>
+			            <c:forEach items="${cityMap}" var="item">
+			                <li>
+			                    <h3 class="city_alp">${item.key}</h3>
+			                    <p class="city_con">
+						    	<c:forEach items="${item.value}" var="city">
+						    		<a href="${ctx}/changecity/${city.areaEName}">${city.areaName}</a>
+						    	</c:forEach>			                    
+			                    </p>
+			                </li>
+		                </c:forEach>
+		            </ol>
+		        </div>
+		    </div>
 		</div>
 	</div>
 	<%@ include file="inc/friendlylink.jsp"%>	

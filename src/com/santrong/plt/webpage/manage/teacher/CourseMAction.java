@@ -683,9 +683,9 @@ public class CourseMAction extends TeacherBaseAction {
 					if (MyUtils.isNotNull(ids)) {
 						TrainQuestionDao tqDao = new TrainQuestionDao();
 						tqDao.removeAllQuestion4Train(resourceId);
-						
+						int priority = 1;
 						for (String questionId : stringArr) {
-							tqDao.addQuestion2Train(questionId, trainItem.getId());
+							tqDao.addQuestion2Train(questionId, trainItem.getId(), priority++);
 						}
 					}
 					
@@ -709,8 +709,9 @@ public class CourseMAction extends TeacherBaseAction {
 					
 					if (MyUtils.isNotNull(ids)) {
 						TrainQuestionDao tqDao = new TrainQuestionDao();
+						int priority = 1;
 						for (String questionId : stringArr) {
-							tqDao.addQuestion2Train(questionId, trainItem.getId());
+							tqDao.addQuestion2Train(questionId, trainItem.getId(), priority++);
 						}
 					}
 					

@@ -28,8 +28,11 @@ public interface TrainQuestionMapper {
 	@Select("select * from resource_train_question where id = #{id}")
 	TrainQuestionItem selectById(String id);
 	
-	@Insert("insert into resource_train_to_question values(#{trainId},#{questionId})")
-	int addQuestion2Train(@Param("questionId")String questionId, @Param("trainId")String trainId);
+	@Insert("select max(priority) from resource_train_to_question where questionId=#{questionId} and trainId=#{trainId}")
+	int selectMaxPriority(@Param("questionId")String questionId, @Param("trainId")String trainId);
+	
+	@Insert("insert into resource_train_to_question values(#{trainId}, #{questionId}, #{priority})")
+	int addQuestion2Train(@Param("questionId")String questionId, @Param("trainId")String trainId, @Param("priority")int priority);
 	
 	@Delete("delete from resource_train_to_question where trainId=#{trainId} and questionId=#{questionId}")
 	int removeQuestion4Train(@Param("questionId")String questionId, @Param("trainId")String trainId);
@@ -55,7 +58,7 @@ public interface TrainQuestionMapper {
 	
 	@Select("select * from resource_train_question a "
 			+ "left join resource_train_to_question b on a.id=b.questionId "
-			+ "where b.trainId=#{trainId} limit ${index}, 1")
+			+ "where b.trainId=#{trainId} order by b.priority limit ${index}, 1")
 	TrainQuestionItem selectByTrainIdAndIndex(@Param("trainId")String trainId, @Param("index")int index);	
 	
 	@Select("select a.* from resource_train_question a left join resource_train_to_question b on a.id=b.questionId where b.trainId=#{trainId}")

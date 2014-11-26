@@ -5,6 +5,7 @@ import java.util.List;
 import com.santrong.plt.log.Log;
 import com.santrong.plt.webpage.BaseDao;
 import com.santrong.plt.webpage.course.resource.live.entry.LiveItem;
+import com.santrong.plt.webpage.manage.teacher.entry.TeacherLiveForm;
 
 /**
  * @author weinianjie
@@ -119,5 +120,22 @@ public class LiveDao extends BaseDao {
 			Log.printStackTrace(e);
 		}
 		return false;
+	}
+	
+	/**
+	 * 查询老师要上的直播课
+	 * @param userId
+	 * @return
+	 */
+	public List<TeacherLiveForm> selectTeacherLive(String userId) {
+		try {
+			LiveMapper mapper = this.getMapper(LiveMapper.class);
+			if(mapper != null) {
+				return mapper.selectTeacherLive(userId);
+			}
+		} catch (Exception e) {
+			Log.printStackTrace(e);
+		}
+		return null;		
 	}
 }

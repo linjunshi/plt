@@ -2,6 +2,7 @@ package com.santrong.plt.listener;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.Properties;
 
 import javax.servlet.ServletContext;
@@ -40,6 +41,9 @@ public class StartUpListener implements ServletContextListener {
 	@Override
 	public void contextInitialized(ServletContextEvent sct) {
 		try{
+			// 设置时间算法
+			Locale.setDefault(Locale.ENGLISH);
+			
 			// 把proxool配置载入环境
 			try{
 				Properties dbProps = new Properties();

@@ -501,7 +501,6 @@ public class CourseDao extends BaseDao {
 	}
 	
 	/**
-<<<<<<< HEAD
 	 * 新增一条课程记录
 	 * @param courseItem
 	 * @return

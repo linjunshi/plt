@@ -52,6 +52,19 @@ public class SchoolDao extends BaseDao {
 	}
 	
 	/**
+	 * 根据区域获取学校
+	 * @param areaCode
+	 * @return
+	 */
+	public List<SchoolItem> selectByAreaCode(String areaCode) {
+		SchoolMapper mapper = this.getMapper(SchoolMapper.class);
+		if(mapper != null) {
+			return mapper.selectByAreaCode(areaCode);
+		}
+		return null;
+	}
+	
+	/**
 	 * 根据具体搜索条件查询学校
 	 * @param query
 	 * @return

@@ -6,7 +6,7 @@ drop table if exists web_area;
 create table web_area(
 	areaCode varchar(6) not null comment '区域编码',
 	areaName varchar(64) not null comment '区域名称',
-	areaEName varchar(128) comment '区域拼音',
+	areaEnName varchar(128) comment '区域拼音',
 	areaType varchar(8) comment '区域类型',
 	primary key (areaCode),
 	key (areaName),

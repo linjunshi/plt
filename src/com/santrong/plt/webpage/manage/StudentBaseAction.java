@@ -22,7 +22,7 @@ public abstract class StudentBaseAction extends BaseAction {
 		}
 		
 		if(!user.isStudent()) {
-			return RmCode.REQUIRE_AUTH;
+			return RmCode.REQUIRE_STUDENT_AUTH;
 		}
 		return RmCode.PASS;
 	}	

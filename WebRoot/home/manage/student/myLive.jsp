@@ -12,11 +12,11 @@ Globals.page = "Manage_index";
 </script>
 </head>
 <body>
-		<%@ include file="../../inc/top.jsp"%>
+		<%@ include file="../../inc/top_bg.jsp"%>
 		<div id="container_box">
 			<div id="container_content">
 			    <div class="sectionMain clr">
-					<%@ include file="../../inc/leftmenu.jsp"%>
+					<%@ include file="../../inc/leftmenu_student.jsp"%>
 					<div class="sh_info_r">
 			            <div class="st_titile_r"> <a href="${ctx}/study/course">我的课程</a><a href="${ctx}/study/live">我的直播</a></div>
 			            <div class="result_list pt10">

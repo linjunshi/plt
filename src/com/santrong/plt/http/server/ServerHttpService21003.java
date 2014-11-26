@@ -58,7 +58,8 @@ public class ServerHttpService21003 implements AbstractHttpService{
 				// 习题绑定到作业
 				if(insertRT) {
 					TrainQuestionDao tqDao = new TrainQuestionDao();
-					if(tqDao.addQuestion2Train(homeWorkID, train.getId()) <= 0) {
+					int priority = tqDao.selectMaxPriority(homeWorkID, train.getId()) + 1;
+					if(tqDao.addQuestion2Train(homeWorkID, train.getId(), priority) <= 0) {
 						Log.mark("server push question to platform fail:questionId=" + homeWorkID + ",trainId=" + train.getId());
 					}
 				}
