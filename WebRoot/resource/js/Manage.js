@@ -174,7 +174,7 @@ ManageClass.prototype = {
 						alert("该大章节中有小章节，不能删除!");
 					}else{
 						
-						// 通过POST方式，后台处理与数据库的交互逻辑
+						// 通过POST方式，提交数据到后台处理业务逻辑
 						$.post(Globals.ctx + "/manage/course/removeChapter", {chapterId : chapterId}, function(result){
 							if (result == "success") {
 //								_this.parents("dl").remove();
@@ -190,41 +190,45 @@ ManageClass.prototype = {
 			/********************修改大章节的标题 START********************************************************/				
 			// TODO 点击章节 修改
 			$(".editMaxChapter").live("click", function() {
-				$(this).parents(".sh_add_opera").children(".show_remark").hide();
-				$(this).parents(".sh_add_opera").children(".hide_remark").show();
-				$(this).parents(".sh_add_opera").children(".sh_operation").hide();
+				var parent_obj = $(this).parents(".sh_add_opera");
+				$(parent_obj).children(".show_remark").hide();
+				$(parent_obj).children(".hide_remark").show();
+				$(parent_obj).children(".sh_operation").hide();
 			});
 			
 			// TODO 点击章节 取消
 			$(".chapter_cancel").live("click", function(){
 				var chapterId = $(this).parents(".sh_add_chapter").children("input[name=chapterId]").val();
+				var parent_obj = $(this).parents(".sh_add_opera");
 				// chapterId 为空，执行新增操作；否则执行修改操作
 				if (chapterId == "") {
 					$(".sh_addop_a").show();
 					$(this).parents("dl").remove();
 				} else {
-					$(this).parents(".sh_add_opera").children(".show_remark").show();
-					$(this).parents(".sh_add_opera").children(".hide_remark").hide();
-					$(this).parents(".sh_add_opera").children(".sh_operation").show();
+					$(parent_obj).children(".show_remark").show();
+					$(parent_obj).children(".hide_remark").hide();
+					$(parent_obj).children(".sh_operation").show();
 				}
 			});
 			
 			// TODO 点击章节 保存
 			$(".chapter_submit").live("click", function(data){
-				var _submit = $(this);
-				var chapterId = _submit.parents(".sh_add_chapter").children("input[name=chapterId]").val();
-				var remark = _submit.parent().children("input[name=remark]").val();
+				var opera_obj = $(this).parents(".sh_add_opera");
+				var dls_obj = $(this).parents(".sh_collection").find("dl.sh_add_chapter");
+				var chapter_obj = $(this).parents(".sh_add_chapter").children("input[name=chapterId]");
+				var chapterId = $(chapter_obj).val();
+				var remark = $(this).parent().children("input[name=remark]").val();
 				if (remark == "") {
 					alert("章节标题不能为空！");
 				} else {
-					
 					// chapterId 为空，执行新增操作；否则执行修改操作
 					if (chapterId == "") {
+						//新增操作
 						var courseId = $("input[name=courseId]").val();
 						if (courseId != "") {
 							var priority = $("input[name=priority]").val();
 							if (priority == "" || priority == 0) {
-								priority = _submit.parents(".sh_collection").find("dl.sh_add_chapter").length;
+								priority = $(dls).length;
 							}
 							// 通过POST方式，递交给后台处理与数据库交互的逻辑
 							$.post(Globals.ctx + "/manage/course/addChapter", {courseId : courseId, remark : remark, priority : priority}, function(result){
@@ -233,13 +237,13 @@ ManageClass.prototype = {
 								} else {
 									$("input[name=priority]").val(parseInt(priority) + 1);
 									var json = $.parseJSON(result);
-									_submit.parents(".sh_add_opera").children(".show_remark").html(json.remark);
-									_submit.parents(".sh_add_chapter").children("input[name=chapterId]").val(json.id);
-									_submit.parents(".sh_add_opera").children(".show_remark").show();
-									_submit.parents(".sh_add_opera").children(".hide_remark").hide();
-									_submit.parents(".sh_add_opera").children(".sh_operation").show();
+									$(opera_obj).children(".show_remark").html(json.remark);
+									$(chapter_obj).val(json.id);
+									$(opera_obj).children(".show_remark").show();
+									$(opera_obj).children(".hide_remark").hide();
+									$(opera_obj).children(".sh_operation").show();
 									$(".sh_addop_a").show();
-									_submit.parents(".sh_collection").find("dl.sh_add_chapter").children("dd.pt11").show();
+									$(dls_obj).children("dd.pt11").show();
 								}
 							});
 						} else {
@@ -247,13 +251,14 @@ ManageClass.prototype = {
 						}
 						
 					} else {
+						//修改操作
 						// 通过POST方式，递交给后台处理与数据库交互的逻辑
 						$.post(Globals.ctx + "/manage/course/modifyChapter", {id : chapterId, remark : remark}, function(result){
 							if (result == "success") {
-								_submit.parents(".sh_add_opera").children(".show_remark").html(remark);
-								_submit.parents(".sh_add_opera").children(".show_remark").show();
-								_submit.parents(".sh_add_opera").children(".hide_remark").hide();
-								_submit.parents(".sh_add_opera").children(".sh_operation").show();
+								$(opera_obj).children(".show_remark").html(remark);
+								$(opera_obj).children(".show_remark").show();
+								$(opera_obj).children(".hide_remark").hide();
+								$(opera_obj).children(".sh_operation").show();
 							} else {
 								alert(result);
 							}
@@ -265,8 +270,10 @@ ManageClass.prototype = {
 			//TODO 回车提交事件
 			$(".chapter_remark").live("keydown", function() {
 				if (event.keyCode == "13") {//keyCode=13是回车键
-					var _submit = $(this);
-					var chapterId = _submit.parents(".sh_add_chapter").children("input[name=chapterId]").val();
+					var opera_obj = $(this).parents(".sh_add_opera");
+					var dls_obj = $(this).parents(".sh_collection").find("dl.sh_add_chapter");
+					var chapter_obj = $(this).parents(".sh_add_chapter").children("input[name=chapterId]");
+					var chapterId = $(chapter_obj).val();
 					var remark = $(this).val();
 					if (remark == "") {
 						alert("章节标题不能为空！");
@@ -278,7 +285,7 @@ ManageClass.prototype = {
 							if (courseId != "") {
 								var priority = $("input[name=priority]").val();
 								if (priority == "" || priority == 0) {
-									priority = _submit.parents(".sh_collection").find("dl.sh_add_chapter").length;
+									priority = $(dls_obj).length;
 								}
 								// 通过POST方式，递交给后台处理与数据库交互的逻辑
 								$.post(Globals.ctx + "/manage/course/addChapter", {courseId : courseId, remark : remark, priority : priority}, function(result){
@@ -287,13 +294,13 @@ ManageClass.prototype = {
 									} else {
 										$("input[name=priority]").val(parseInt(priority) + 1);
 										var json = $.parseJSON(result);
-										_submit.parents(".sh_add_opera").children(".show_remark").html(json.remark);
-										_submit.parents(".sh_add_chapter").children("input[name=chapterId]").val(json.id);
-										_submit.parents(".sh_add_opera").children(".show_remark").show();
-										_submit.parents(".sh_add_opera").children(".hide_remark").hide();
-										_submit.parents(".sh_add_opera").children(".sh_operation").show();
+										$(opera_obj).children(".show_remark").html(json.remark);
+										$(chapter_obj).val(json.id);
+										$(opera_obj).children(".show_remark").show();
+										$(opera_obj).children(".hide_remark").hide();
+										$(opera_obj).children(".sh_operation").show();
 										$(".sh_addop_a").show();
-										_submit.parents(".sh_collection").find("dl.sh_add_chapter").children("dd.pt11").show();
+										$(dls_obj).children("dd.pt11").show();
 									}
 								});
 							} else {
@@ -304,10 +311,10 @@ ManageClass.prototype = {
 							// 通过POST方式，递交给后台处理与数据库交互的逻辑
 							$.post(Globals.ctx + "/manage/course/modifyChapter", {id : chapterId, remark : remark}, function(result){
 								if (result == "success") {
-									_submit.parents(".sh_add_opera").children(".show_remark").html(remark);
-									_submit.parents(".sh_add_opera").children(".show_remark").show();
-									_submit.parents(".sh_add_opera").children(".hide_remark").hide();
-									_submit.parents(".sh_add_opera").children(".sh_operation").show();
+									$(opera_obj).children(".show_remark").html(remark);
+									$(opera_obj).children(".show_remark").show();
+									$(opera_obj).children(".hide_remark").hide();
+									$(opera_obj).children(".sh_operation").show();
 								} else {
 									alert(result);
 								}
@@ -358,9 +365,11 @@ ManageClass.prototype = {
 						$dl_new = $(dl_html).insertAfter(domEle);
 					}
 					if (index + 1 == dl_length || flag == 1) {
-						$dl_new.children("dt").children(".sh_add_opera").children(".show_remark").hide();
-						$dl_new.children("dt").children(".sh_add_opera").children(".hide_remark").show();
-						$dl_new.children("dt").children(".sh_add_opera").children(".sh_operation").hide();
+						var opera_obj = $dl_new.children("dt").children(".sh_add_opera");
+						$(opera_obj).children(".show_remark").hide();
+						$(opera_obj).children(".hide_remark").show();
+						$(opera_obj).children(".hide_remark").children("input[name='remark']").focus();
+						$(opera_obj).children(".sh_operation").hide();
 						$(".sh_addop_a").hide();
 						$dl_new.children("dd.pt11").hide();
 					}
@@ -443,7 +452,6 @@ ManageClass.prototype = {
 			// TODO 点击确认选择，添加试题到题库里去（addResourceTrain.jsp） 
 			/************************添加课程章节关联资源 END******************************************/
 			$("#selectTrainQuestion").live("click",function(){
-				debugger;
 				var ids = "";
 				var title = $("#title").val();
 				var courseId = $("#courseId").val();
@@ -453,19 +461,23 @@ ManageClass.prototype = {
 				if (title == "") {
 					alert("测验题目不可以为空，请您务必填写！");
 					$("#title").focus();
+					return false;
 				}
 				
 				$("input[name='question_checkbox']").each(function(i) {
-				        if ($(this).attr("checked") == "checked") {
-				                ids = ids + "," + $(this).val();
-				        }
+			        if ($(this).attr("checked") == "checked") {
+			                ids = ids + "," + $(this).val();
+			        }
 				});
 				if (ids.length > 0) {
 					ids = ids.replace(',','');
+				} else {
+					alert("请您勾选试题！");
+					return false;
 				}
 				
 				if (courseId != "" && chapterId != "" && courseId != null && chapterId != null) {
-					// 通过post方式，后台处理与数据库的交互逻辑
+					// 通过post方式，提交数据到后台处理业务逻辑
 					$.post(Globals.ctx + "/manage/course/selectTrainList",{ids:ids, title:title,courseId:courseId,chapterId:chapterId,resourceId:resourceId},function(result){
 						if (result == "success") {
 							alert("成功添加试题！");
@@ -489,7 +501,7 @@ ManageClass.prototype = {
 				var resourceId = _this.parent().children("input[name=resourceId]").val();
 				var resourceType = _this.parent().children("input[name=resourceType]").val();
 				if (chapterId != "" && resourceId != "" && resourceType != "" && chapterId != null && resourceId != null && resourceType != null) {
-					// 通过get方式，后台处理与数据库的交互逻辑
+					// 通过get方式，提交数据到后台处理业务逻辑
 					$.get(Globals.ctx + "/manage/course/removeResource?chapterId=" + chapterId + "&resourceId=" + resourceId + "&resourceType=" + resourceType, function(result){
 						if (result == "success") {
 							location.reload();
@@ -522,7 +534,7 @@ ManageClass.prototype = {
 					} else if (resourceType == 4) {
 						url = "/manage/course/addResourceTrain";
 					}
-					// 通过get方式，后台处理与数据库的交互逻辑
+					// 通过get方式，提交数据到后台处理业务逻辑
 					$.get(Globals.ctx + url +"?courseId="+ courseId +"&chapterId=" + chapterId + "&resourceId=" + resourceId 
 							+ "&resourceType=" + resourceType + "&oldResourceId=" + resourceId , function(result){
 						$(".sh_info_r").html(result);
@@ -534,6 +546,42 @@ ManageClass.prototype = {
 			});
 			/************************修改一资源 END******************************************/
 			
+		},
+		
+		//试题新增 修改页面
+		myTrainMAdd : function() {
+			
+			var id = $("#id").val();
+			if (id == "") {
+				//新增页面默认选项
+				$("input[name='questionType']").eq(0).attr("checked","checked");
+				$("#answer_radio").show();
+				$("#answer_checkbox").hide();
+			} else {
+				//修改页面默认选项
+				var questionType = "1";
+				$("input[name='questionType']").each(function(i,data){
+					questionType = $(this).val();
+					if (questionType == "1" && $(this).attr("checked") == "checked") {
+						$("#answer_radio").show();
+						$("#answer_checkbox").hide();
+					} else if (questionType == "2" && $(this).attr("checked") == "checked") {
+						$("#answer_radio").hide();
+						$("#answer_checkbox").show();
+					}
+				});
+			}
+			
+			//改变选择类型，显示相应类型的控件
+			$("input[name='questionType']").change(function(){
+				if ($(this).val() == 1) {
+					$("#answer_radio").show();
+					$("#answer_checkbox").hide();
+				} else if ($(this).val() == 2) {
+					$("#answer_radio").hide();
+					$("#answer_checkbox").show();
+				}
+			});
 		}
 		
 }

@@ -28,13 +28,14 @@
 				<div class="fast_navigate"></div>
 			</form>
 			<c:if test="${sessionScope.loginUser == null}">
-				<a href="${ctx }/account/login" class="user_info_login">登录</a>
-				<a href="${ctx }/account/regist" class="user_info_signup">注册</a>
+				<a href="${ctx}/account/login" class="user_info_login">登录</a>
+				<a href="${ctx}/account/regist" class="user_info_signup">注册</a>
 			</c:if>
 			<c:if test="${sessionScope.loginUser != null}">
 				<span>${sessionScope.loginUser.showName}</span>
-				<a href="${ctx }/account/logout">注销</a>
-				<a href="${ctx }/study/course">管理中心</a>
+				<a href="${ctx}/account/logout">注销</a>
+				<a href="${ctx}/study/course">管理中心</a>
+				<a href="${ctx}/account/personalInfo">帐号设置</a>
 			</c:if>
 		</div>
 	    <div id="wrapper_box">
