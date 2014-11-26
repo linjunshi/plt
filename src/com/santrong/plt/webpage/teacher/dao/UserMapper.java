@@ -50,7 +50,7 @@ public interface UserMapper {
     @Select("select count(*) as cn from user where phone=#{phone}")
     int existsByPhone(String phone);
     
-    @Insert("insert into user values(#{id}, #{showName}, #{username}, #{password}, #{url}, #{gender}, #{role}, #{schoolId}, #{subjectId}, #{email}, #{phone}, #{registIp}, #{registTime}, #{lastLoginIp}, #{lastLoginTime}, #{remark}, #{cts}, #{uts})")
+    @Insert("insert into user values(#{id}, #{showName}, #{username}, #{password}, #{url}, #{gender}, #{role}, #{schoolId}, #{subjectId}, #{email}, #{phone}, #{idCard}, #{registIp}, #{registTime}, #{lastLoginIp}, #{lastLoginTime}, #{remark}, #{cts}, #{uts})")
     int insert(UserItem user);
 
     @Insert("insert into user_tmp values(#{userId}, #{activeCode}, #{cts})")
@@ -73,6 +73,7 @@ public interface UserMapper {
     		+ "subjectId=#{subjectId}, "
     		+ "email=#{email}, "
     		+ "phone=#{phone}, "
+    		+ "idCard=#{idCard}, "
     		+ "registIp=#{registIp}, "
     		+ "registTime=#{registTime}, "
     		+ "lastLoginIp=#{lastLoginIp}, "
