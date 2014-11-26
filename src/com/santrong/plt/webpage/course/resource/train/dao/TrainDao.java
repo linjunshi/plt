@@ -42,6 +42,24 @@ public class TrainDao extends BaseDao{
 	}
 	
 	/**
+	 * 修改一条作业的记录
+	 * @author huangweihua
+	 * @param TrainItem
+	 * @return int
+	 */
+	public boolean update(TrainItem trainItem){
+		try {
+			TrainMapper mapper = this.getMapper(TrainMapper.class);
+			if (mapper != null) {
+				return mapper.update(trainItem) > 0;
+			}
+		} catch (Exception e) {
+			Log.printStackTrace(e);
+		}
+		return false;
+	}
+	
+	/**
 	 * 查询所属用户的所有作业(del = 0)
 	 * @author huangweihua
 	 * @param userId,del = 0

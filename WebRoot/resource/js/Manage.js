@@ -76,22 +76,59 @@ ManageClass.prototype = {
 			});
 		},
 		
-		//章节维护页面
+		// TODO 章节维护页面
 		chapterList : function(){
 			
-			// 删除一大章节
+			// 封面选择
+			$("#changeCover").live("click", function() {
+				Boxy.load(Globals.ctx + "/manage/course/changeCover", {
+					afterShow : function(){
+						
+						$(".selectCover").change(function() {
+							var extName = /\.[^\.]+$/.exec($(this).val());
+							if(/jpg|gif|png/i.test(extName)) {
+								$(".coverUpload").ajaxSubmit({
+									success: function (data){
+										var json = eval('(' + data + ')');
+										if(json.result == '1') {
+											$(".preview").attr("src", json.url);
+										}else {
+											alert(json.error);
+										}
+									}
+								});
+							}else if(extName != null) {
+								alert("不支持该文件类型");
+							}
+						});
+						
+						$(".sure").click(function() {
+							var preview = $(".preview").attr("src");
+							if(preview != null && preview != '') {
+								$(".small_preview").attr("src", preview)
+								$("input[name=url]").val(preview);
+								$(".close").click();
+							}
+						});
+						
+						$(".close").bindFormClose();
+					}
+				})
+			});
+			
+			// TODO 删除一大章节
 			$(".removeMaxChapter").live("click", function() {
 				var _this = $(this);
 				var chapterId = _this.parents(".sh_add_chapter").children("input[name=chapterId]").val();
 				
-				// TODO 判断章节内是否有内容，有内容不给删除
+				// 判断章节内是否有内容，有内容不给删除
 				var dl_dd = _this.parents("dl").find("dd");
 				if (dl_dd.size() > 0) {
 					if (dl_dd.hasClass("pt10")) {
 						alert("该大章节中有小章节，不能删除!");
 					}else{
 						
-						// TODO 通过POST方式，后台处理与数据库的交互逻辑
+						// 通过POST方式，后台处理与数据库的交互逻辑
 						$.post(Globals.ctx + "/manage/course/removeChapter", {chapterId : chapterId}, function(result){
 							if (result == "success") {
 //								_this.parents("dl").remove();
@@ -105,17 +142,17 @@ ManageClass.prototype = {
 			});
 			
 			/********************修改大章节的标题 START********************************************************/				
-			// 点击修改
+			// TODO 点击章节 修改
 			$(".editMaxChapter").live("click", function() {
 				$(this).parents(".sh_add_opera").children(".show_remark").hide();
 				$(this).parents(".sh_add_opera").children(".hide_remark").show();
 				$(this).parents(".sh_add_opera").children(".sh_operation").hide();
 			});
 			
-			// 点击取消
+			// TODO 点击章节 取消
 			$(".chapter_cancel").live("click", function(){
 				var chapterId = $(this).parents(".sh_add_chapter").children("input[name=chapterId]").val();
-				// TODO chapterId 为空，执行新增操作；否则执行修改操作
+				// chapterId 为空，执行新增操作；否则执行修改操作
 				if (chapterId == "") {
 					$(".sh_addop_a").show();
 					$(this).parents("dl").remove();
@@ -126,7 +163,7 @@ ManageClass.prototype = {
 				}
 			});
 			
-			// 点击保存
+			// TODO 点击章节 保存
 			$(".chapter_submit").live("click", function(data){
 				var _submit = $(this);
 				var chapterId = _submit.parents(".sh_add_chapter").children("input[name=chapterId]").val();
@@ -135,7 +172,7 @@ ManageClass.prototype = {
 					alert("章节标题不能为空！");
 				} else {
 					
-					// TODO chapterId 为空，执行新增操作；否则执行修改操作
+					// chapterId 为空，执行新增操作；否则执行修改操作
 					if (chapterId == "") {
 						var courseId = $("input[name=courseId]").val();
 						if (courseId != "") {
@@ -143,7 +180,7 @@ ManageClass.prototype = {
 							if (priority == "" || priority == 0) {
 								priority = _submit.parents(".sh_collection").find("dl.sh_add_chapter").length;
 							}
-							// TODO 新增操作：通过POST方式，后台处理与数据库的交互逻辑
+							// 通过POST方式，递交给后台处理与数据库交互的逻辑
 							$.post(Globals.ctx + "/manage/course/addChapter", {courseId : courseId, remark : remark, priority : priority}, function(result){
 								if (result == "fail") {
 									alert("添加章节失败，请刷新页面后重新操作！");
@@ -164,7 +201,7 @@ ManageClass.prototype = {
 						}
 						
 					} else {
-						// TODO 修改操作：通过POST方式，后台处理与数据库的交互逻辑
+						// 通过POST方式，递交给后台处理与数据库交互的逻辑
 						$.post(Globals.ctx + "/manage/course/modifyChapter", {id : chapterId, remark : remark}, function(result){
 							if (result == "success") {
 								_submit.parents(".sh_add_opera").children(".show_remark").html(remark);
@@ -182,32 +219,62 @@ ManageClass.prototype = {
 			//TODO 回车提交事件
 			$(".chapter_remark").live("keydown", function() {
 				if (event.keyCode == "13") {//keyCode=13是回车键
-					var remark_this = $(this);
-					var chapterId = remark_this.parents(".sh_add_chapter").children("input[name=chapterId]").val();
+					var _submit = $(this);
+					var chapterId = _submit.parents(".sh_add_chapter").children("input[name=chapterId]").val();
 					var remark = $(this).val();
 					if (remark == "") {
 						alert("章节标题不能为空！");
 					} else {
-
-						// TODO 通过POST方式，后台处理与数据库的交互逻辑
-						$.post(Globals.ctx + "/manage/course/modifyChapter", {id : chapterId, remark : remark}, function(result){
-							if (result == "success") {
-								remark_this.parents(".sh_add_opera").children(".show_remark").show();
-								remark_this.parents(".sh_add_opera").children(".hide_remark").hide();
-								remark_this.parents(".sh_add_opera").children(".sh_operation").show();
+						
+						// chapterId 为空，执行新增操作；否则执行修改操作
+						if (chapterId == "") {
+							var courseId = $("input[name=courseId]").val();
+							if (courseId != "") {
+								var priority = $("input[name=priority]").val();
+								if (priority == "" || priority == 0) {
+									priority = _submit.parents(".sh_collection").find("dl.sh_add_chapter").length;
+								}
+								// 通过POST方式，递交给后台处理与数据库交互的逻辑
+								$.post(Globals.ctx + "/manage/course/addChapter", {courseId : courseId, remark : remark, priority : priority}, function(result){
+									if (result == "fail") {
+										alert("添加章节失败，请刷新页面后重新操作！");
+									} else {
+										$("input[name=priority]").val(parseInt(priority) + 1);
+										var json = $.parseJSON(result);
+										_submit.parents(".sh_add_opera").children(".show_remark").html(json.remark);
+										_submit.parents(".sh_add_chapter").children("input[name=chapterId]").val(json.id);
+										_submit.parents(".sh_add_opera").children(".show_remark").show();
+										_submit.parents(".sh_add_opera").children(".hide_remark").hide();
+										_submit.parents(".sh_add_opera").children(".sh_operation").show();
+										$(".sh_addop_a").show();
+										_submit.parents(".sh_collection").find("dl.sh_add_chapter").children("dd.pt11").show();
+									}
+								});
 							} else {
-								alert(result);
+								alert("添加章节失败，请刷新页面后重新操作！");
 							}
-						});
+							
+						} else {
+							// 通过POST方式，递交给后台处理与数据库交互的逻辑
+							$.post(Globals.ctx + "/manage/course/modifyChapter", {id : chapterId, remark : remark}, function(result){
+								if (result == "success") {
+									_submit.parents(".sh_add_opera").children(".show_remark").html(remark);
+									_submit.parents(".sh_add_opera").children(".show_remark").show();
+									_submit.parents(".sh_add_opera").children(".hide_remark").hide();
+									_submit.parents(".sh_add_opera").children(".sh_operation").show();
+								} else {
+									alert(result);
+								}
+							});
+						}
 					}
 				}
 			});
 			
-			/********************修改大章节的标题 END********************************************************/			
-			
-			// 添加一个大章节输入框
+			// TODO 添加一个大章节输入框
 			$(".sh_addop_a").live("click", function() {
 				var dl_length = $(this).parent(".sh_collection").find("dl.sh_add_chapter").length;
+				
 				var dl_html = "<dl class='sh_add_chapter'>"
 					+ "<input type='hidden' id='chapterId' name='chapterId' value=''/>"
 					+ "<dt>"
@@ -227,13 +294,24 @@ ManageClass.prototype = {
 					+ "</div>"
 					+ "</dt>"
 					+ "<dd class='pt11'>"
-					+ "<a href='javascript:void(0);' class='addMinChapter' >添加一小节</a>"
+					+ "<a href='javascript:void(0);' class='add_resource_file' ><b>+</b>课件</a>"
+					+ "<a href='javascript:void(0);' class='add_resource_live' ><b>+</b>直播</a>"
+					+ "<a href='javascript:void(0);' class='add_resource_train' ><b>+</b>试题</a>"
 					+ "</dd>"
 					+ "</dl>";
-				
+
+				//该课程还没有绑定章节的时候，插入一个初始的样式
+				var flag = 0;
+				if (dl_length == 0) {
+					$(dl_html).insertBefore(this);
+					flag = 1;
+				}
 				$(this).parent(".sh_collection").find("dl.sh_add_chapter").each(function(index, domEle){
+					var $dl_new = $(domEle);
 					if (index + 1 == dl_length) {
-						var $dl_new = $(dl_html).insertAfter(domEle);
+						$dl_new = $(dl_html).insertAfter(domEle);
+					}
+					if (index + 1 == dl_length || flag == 1) {
 						$dl_new.children("dt").children(".sh_add_opera").children(".show_remark").hide();
 						$dl_new.children("dt").children(".sh_add_opera").children(".hide_remark").show();
 						$dl_new.children("dt").children(".sh_add_opera").children(".sh_operation").hide();
@@ -241,13 +319,175 @@ ManageClass.prototype = {
 						$dl_new.children("dd.pt11").hide();
 					}
 				});
+			});
+			/********************修改大章节的标题 END********************************************************/	
+			
+			/************************添加课程章节关联资源 START******************************************/
+			// TODO 添加一个课件（资源）
+			$(".add_resource_file").live("click", function() {
+				var _this = $(this);
+				var courseId = $("#courseId").val();
+				var chapterId = _this.parents(".sh_add_chapter").children("input[name=chapterId]").val();
+				
+				if (courseId != "" && chapterId != "" && courseId != null && chapterId != null) {
+					$.get(Globals.ctx + "/manage/course/addResourceFile?courseId="+ courseId +"&chapterId=" + chapterId, function(result){
+						$(".sh_info_r").html(result);
+					});
+				} else {
+					alert("添加课件失败，请刷新页面后重新操作！");
+				}
+			});
+			
+			// TODO addResourceFile.jsp 点击“选择”按钮的时候触发的事件
+			$(".selectResourceFile").live("click", function() {
+				var _this = $(this);
+				var courseId = $("#courseId").val();
+				var chapterId = $("#chapterId").val();
+				var oldResourceId = $("#oldResourceId").val();
+				var resourceId = _this.parent().children("input[name=resourceId]").val();
+				if (courseId != "" && chapterId != "" && resourceId != "" && courseId != null && chapterId != null && resourceId != null) {
+					// 异步请求后台服务
+					$.get(Globals.ctx + "/manage/course/selectFile?courseId=" + courseId +"&chapterId=" + chapterId + "&resourceId=" + resourceId 
+							+ "&oldResourceId=" + oldResourceId, function(result){
+						if (result == "error_param") {
+							alert("你已经把该课件添加到当前章节了！");
+						} else if (result == "fail") {
+							alert("课件选择失败，刷新页面后，请重新操作！");
+							location.reload();
+						} else {
+							location.href = Globals.ctx + result;
+						}
+					});
+				} else {
+					alert("添加课件失败，请刷新页面后重新操作！");
+				}
+			});
+			
+			
+			// TODO 添加一个直播（资源）
+			$(".add_resource_live").live("click", function() {
+				var _this = $(this);
+				var courseId = $("#courseId").val();
+				var chapterId = _this.parents(".sh_add_chapter").children("input[name=chapterId]").val();
+				
+				if (courseId != "" && chapterId != "" && courseId != null && chapterId != null) {
+					$.get(Globals.ctx + "/manage/course/addResourceLive?courseId="+ courseId +"&chapterId=" + chapterId, function(result){
+						$(".sh_info_r").html(result);
+					});
+				} else {
+					alert("添加直播失败，请刷新页面后重新操作！");
+				}
+			});
+			
+			// TODO 添加一个试题（资源）
+			$(".add_resource_train").live("click", function() {
+				var _this = $(this);
+				var courseId = $("#courseId").val();
+				var chapterId = _this.parents(".sh_add_chapter").children("input[name=chapterId]").val();
+				
+				if (courseId != "" && chapterId != "" && courseId != null && chapterId != null) {
+					$.get(Globals.ctx + "/manage/course/addResourceTrain?courseId="+ courseId +"&chapterId=" + chapterId, function(result){
+						$(".sh_info_r").html(result);
+					});
+				} else {
+					alert("添加试题失败，请刷新页面后重新操作！");
+				}
+			});
+			
+			// TODO 点击确认选择，添加试题到题库里去（addResourceTrain.jsp） 
+			/************************添加课程章节关联资源 END******************************************/
+			$("#selectTrainQuestion").live("click",function(){
+				debugger;
+				var ids = "";
+				var title = $("#title").val();
+				var courseId = $("#courseId").val();
+				var chapterId = $("#chapterId").val();
+				var resourceId = $("#resourceId").val();
+				
+				if (title == "") {
+					alert("测验题目不可以为空，请您务必填写！");
+					$("#title").focus();
+				}
+				
+				$("input[name='question_checkbox']").each(function(i) {
+				        if ($(this).attr("checked") == "checked") {
+				                ids = ids + "," + $(this).val();
+				        }
+				});
+				if (ids.length > 0) {
+					ids = ids.replace(',','');
+				}
+				
+				if (courseId != "" && chapterId != "" && courseId != null && chapterId != null) {
+					// 通过post方式，后台处理与数据库的交互逻辑
+					$.post(Globals.ctx + "/manage/course/selectTrainList",{ids:ids, title:title,courseId:courseId,chapterId:chapterId,resourceId:resourceId},function(result){
+						if (result == "success") {
+							alert("成功添加试题！");
+							location.reload();
+						} else {
+							alert("添加试题失败！");
+						}
+					});
+				} else {
+					alert("添加试题失败，请刷新页面后重新操作！");
+				}
 				
 			});
 			
-			// 添加一个小章节（资源）
-			$(".addMinChapter").live("click", function() {
-				alert("添加一个小章节");
+			
+			/************************删除一资源 START******************************************/
+			// TODO 删除一资源
+			$(".removeResource").live("click", function() {
+				var _this = $(this);
+				var chapterId = _this.parents(".sh_add_chapter").children("input[name=chapterId]").val();
+				var resourceId = _this.parent().children("input[name=resourceId]").val();
+				var resourceType = _this.parent().children("input[name=resourceType]").val();
+				if (chapterId != "" && resourceId != "" && resourceType != "" && chapterId != null && resourceId != null && resourceType != null) {
+					// 通过get方式，后台处理与数据库的交互逻辑
+					$.get(Globals.ctx + "/manage/course/removeResource?chapterId=" + chapterId + "&resourceId=" + resourceId + "&resourceType=" + resourceType, function(result){
+						if (result == "success") {
+							location.reload();
+							$("html,body").animate({scrollTop:$("#" + chapterId).offset().top},1000);
+						}else {
+							alert(result);
+						}
+					});
+				} else {
+					alert("删除失败！");
+				}
 			});
+			/************************删除一资源 END******************************************/
+			/************************修改一资源 START******************************************/
+			// TODO 修改一资源
+			$(".editResource").live("click", function() {
+				var _this = $(this);
+				var courseId = $("#courseId").val();
+				var chapterId = _this.parents(".sh_add_chapter").children("input[name=chapterId]").val();
+				var resourceId = _this.parent().children("input[name=resourceId]").val();
+				var resourceType = _this.parent().children("input[name=resourceType]").val();
+				var url = "/manage/course";
+				if (courseId != "" && chapterId != "" && resourceId != "" && resourceType != "" && 
+					courseId != null && chapterId != null && resourceId != null && resourceType != null) {
+					
+					if (resourceType == 1) {
+						url = "/manage/course/addResourceFile";
+					} else if (resourceType == 2) {
+						url = "/manage/course/addResourceLive";
+					} else if (resourceType == 4) {
+						url = "/manage/course/addResourceTrain";
+					}
+					// 通过get方式，后台处理与数据库的交互逻辑
+					$.get(Globals.ctx + url +"?courseId="+ courseId +"&chapterId=" + chapterId + "&resourceId=" + resourceId 
+							+ "&resourceType=" + resourceType + "&oldResourceId=" + resourceId , function(result){
+						$(".sh_info_r").html(result);
+					});
+					
+				} else {
+					alert("修改失败！");
+				}
+			});
+			/************************修改一资源 END******************************************/
+			
 		}
 		
 }

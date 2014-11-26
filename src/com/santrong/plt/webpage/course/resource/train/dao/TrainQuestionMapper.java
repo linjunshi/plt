@@ -9,6 +9,7 @@ import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
 import com.santrong.plt.webpage.course.resource.train.entry.TrainQuestionItem;
+import com.santrong.plt.webpage.course.resource.train.entry.TrainToQuestionItem;
 
 
 /**
@@ -32,6 +33,9 @@ public interface TrainQuestionMapper {
 	
 	@Delete("delete from resource_train_to_question where trainId=#{trainId} and questionId=#{questionId}")
 	int removeQuestion4Train(@Param("questionId")String questionId, @Param("trainId")String trainId);
+	
+	@Delete("delete from resource_train_to_question where trainId = #{trainId}")
+	int removeAllQuestion4Train(String trainId);
 	
 	@Delete("delete from resource_train_question where id = #{id}")
 	int deleteById(String id);
@@ -62,7 +66,15 @@ public interface TrainQuestionMapper {
 			+ "where b.trainId=#{trainId}")
 	int selectCountByTrainId(@Param("trainId")String trainId);
 
-		
+	/**
+	 * 获取作业已经绑定的习题列表
+	 * @author huangweihua
+	 * @tablename resource_train_to_question 作业关联作业习题表
+	 * @param trainId
+	 * @return
+	 */
+	@Select("select * from resource_train_to_question where trainId = #{trainId}")
+	List<TrainToQuestionItem> selectTrain2QuestionByTrainId(String trainId);
 
 	
 	

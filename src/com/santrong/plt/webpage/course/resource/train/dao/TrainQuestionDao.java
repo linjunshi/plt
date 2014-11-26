@@ -15,6 +15,7 @@ import com.santrong.plt.util.MyUtils;
 import com.santrong.plt.webpage.BaseDao;
 import com.santrong.plt.webpage.course.resource.train.entry.TrainQuestionItem;
 import com.santrong.plt.webpage.course.resource.train.entry.TrainQuestionQuery;
+import com.santrong.plt.webpage.course.resource.train.entry.TrainToQuestionItem;
 
 /**
  * @author huangweihua
@@ -235,6 +236,23 @@ public class TrainQuestionDao extends BaseDao{
 	}	
 	
 	/**
+	 * 习题从测验中全部移除
+	 * @param trainId
+	 * @return
+	 */
+	public int removeAllQuestion4Train(String trainId) {
+		try {
+			TrainQuestionMapper mapper = this.getMapper(TrainQuestionMapper.class);
+			if (mapper != null) {
+				return mapper.removeAllQuestion4Train(trainId);
+			}
+		} catch (Exception e) {
+			Log.printStackTrace(e);
+		}
+		return 0;
+	}	
+	
+	/**
 	 * 删除一条试题
 	 * @author huangweihua
 	 * @param id
@@ -321,4 +339,20 @@ public class TrainQuestionDao extends BaseDao{
 		return 0;
 	}	
 	
+	/**
+	 * 获取作业已经绑定的习题列表
+	 * @author huangweihua
+	 * @tablename resource_train_to_question 作业关联作业习题表
+	 * @param trainId
+	 * @return
+	 */
+	public List<TrainToQuestionItem> selectTrain2QuestionByTrainId(String trainId) {
+		try {
+			TrainQuestionMapper mapper = this.getMapper(TrainQuestionMapper.class);
+			return mapper.selectTrain2QuestionByTrainId(trainId);
+		} catch (Exception e) {
+			Log.printStackTrace(e);
+		}
+		return null;
+	}
 }

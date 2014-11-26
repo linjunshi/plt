@@ -2,7 +2,10 @@ package com.santrong.plt.webpage.course.resource.live.dao;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Delete;
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import com.santrong.plt.webpage.course.resource.live.entry.LiveItem;
 
@@ -22,4 +25,21 @@ public interface LiveMapper {
 	
 	@Select("select * from resource_live where id = #{id};")
 	LiveItem selectById(String id);	
+	
+	@Delete("delete from resource_live where id = #{id};")
+	int delete(String id);
+	
+	@Insert("insert into resource_live values(#{id},#{title},#{url},#{beginTime},#{endTime},#{duration},#{groupId},#{ownerId},#{cts},#{uts})")
+	int insert(LiveItem liveItem);
+	
+	@Update("update resource_live set "
+			+ "title = #{title},"
+			+ "url = #{url},"
+			+ "beginTime = #{beginTime},"
+			+ "endTime = #{endTime},"
+			+ "duration = #{duration},"
+			+ "groupId = #{groupId},"
+			+ "uts = #{uts}"
+			+ " where id = #{id}")
+	int update(LiveItem liveItem);
 }

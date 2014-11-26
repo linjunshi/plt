@@ -53,7 +53,8 @@ box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);}
 .form_info .form_action,.form_vertical .item_no_label{padding-left:0;}
 .form_info .form_des, .form_info .form_action { margin-left:100px;}
 .form_info .form_item{ margin:20px 0;}
-
+.form_info .form_field a{color:#009871;}
+.form_info .form_field a:hover{color:#f90;}
 .form_vertical label{display:block;	float:none;width:auto;text-align:left;}
 .form_vertical .form_field{float:none;}
 .form_vertical .form_action,.form_vertical .item_no_label{padding-left:0;}
@@ -468,6 +469,13 @@ span.form_error, span.form_success{border-width:1px;display:inline-block;*displa
 .sh_coll_m{ float:left; display:block; width:200px; margin-top:10px; text-align:center; color:#f00;}
 .sh_coll_but { float:right; margin:10px 10px 0 0;}
 .sh_coll_but a{ padding:3px 10px; background:#009871; color:#fff;}
+.pt15 { margin-top:0px;width:300px;}
+.sh_col_form { width:960px; height:30px; margin-top:15px;}
+.form_height {position:absolute;margin-top:20px;}
+/* .form_height a{ height:30px; line-height:30px; background:#009871; display: inline-block; color:#fff; text-align:center; font-size:16px;}
+.form_height a:hover{ color:#f90;} */
+.form_height a {padding:0px 10px; height:26px;border-radius: 2px; line-height:26px; background:#009871; display: inline-block; color:#fff; text-align:center; font-size:14px; letter-spacing:2px; margin-right:10px;}
+.form_height a:hover { background:#044a38;}
 
 .sh_coll_but input{ padding:3px 10px; background:#009871; color:#fff;border:0;}
 .sh_coll_but input:hover{ background:#f90;cursor:pointer;}
@@ -482,6 +490,8 @@ span.form_error, span.form_success{border-width:1px;display:inline-block;*displa
 .sh_coll_tab tfoot { height:30px; text-align:right;}
 .sh_add { position:absolute; right:10px; top:5px; font-size:14px; color:#009871;}
 .sh_add:hover{ color:#f90;}
+.sh_prev { position:absolute; right:80px; top:5px; font-size:14px; color:#009871;}
+.sh_prev:hover{ color:#f90;}
 .sh_coll_tab .sh_release a, .sh_coll_tab .sh_h_im a{ background:none; color:#666; }
 .sh_coll_tab .sh_release a:hover, .sh_coll_tab .sh_h_im a:hover{background:none; color:#f90;}
 .sh_coll_tab .sh_h_im { text-align:left;}
@@ -497,29 +507,36 @@ span.form_error, span.form_success{border-width:1px;display:inline-block;*displa
 .sh_add_chapter { width:97%; display:block;border-bottom:1px #dbdbdb solid;}
 .sh_add_chapter dt{border-bottom:1px #dbdbdb solid;text-indent:10px;color:#333;}
 .sh_add_chapter dd { margin-left:60px; border-bottom:1px #dbdbdb solid;border-left:1px #dbdbdb solid; height:40px; line-height:40px; text-indent:10px; color:#333;}
-.sh_add_chapter .pt11 { border-bottom:none !important; }
 .sh_add_chapter .pt11 a{color:#666;}
 .sh_add_opera { display:block; position:relative; height:40px; line-height:40px;}
 .sh_add_opera p { position:absolute; left:110px; top:0px;}
-.sh_operation { display:none; position:absolute; right:100px; top:2px; width:200px;}
+.sh_operation { display:none; position:absolute; right:0px; top:2px; width:200px;}
 .sh_operation a{ margin-right:10px; padding:2px 6px; color:#666; width:80px;}
 .sh_operation a:hover{ color:#009871; text-decoration:underline;} 
-.sh_add_chapter dt:hover{ background:#dbdbdb;}
-.sh_add_chapter dt:hover .sh_operation { display:block;}
+.sh_operation_2 { display:none; position:inherit; float:right; top:2px; width:200px;}
+.sh_operation_2 a{ margin-right:10px; padding:2px 6px; color:#666; width:80px;}
+.sh_operation_2 a:hover{ color:#009871; text-decoration:underline;} 
+.sh_add_chapter dt:hover, .sh_add_chapter .pt10:hover{ background:#dbdbdb;}
+.sh_add_chapter dt:hover .sh_operation, .sh_add_chapter .pt10:hover .sh_operation_2{ display:block;}
 .sh_addop_a {height:40px; line-height:40px; color:#666; margin-left:70px; padding:2px 10px; border:1px solid #ccc;}
 .sh_addop_a:hover,.sh_add_chapter .pt11 a:hover{ color:#009871; text-decoration:underline;}
 /* .sh_add_chapter dl { width:190px;font-size:12px; padding:2px 0;line-height:200%; font-weight:normal; cursor:pointer;}
 .sh_add_chapter dl dt { color:#fff;background:#009871 url(../images/icon.png) no-repeat 20px -54px; text-indent:40px;}
 .sh_add_chapter dl dd { padding-left:60px; line-height:30px; background: url(../images/icon.png) no-repeat 40px -114px;}
 .sh_add_chapter dl dt a{ color:#fff;} */
-.sh_add_chapter .pt10 a{ color:#009871; text-decoration:underline;  width:80px; margin:20px 10px; padding:2px 6px;}
-.sh_add_chapter .pt10 a:hover{ color:#f90;}
+
+.sh_add_chapter .pt10 {border-top:none !important;}
+.sh_add_chapter .pt10 .sh_resource { color:#009871; text-decoration:underline;  width:80px; margin:20px 0px; padding:2px 6px;}
+.sh_add_chapter .pt10 .sh_resource:hover { color:#f90;}
 .sh_add_opera p .chapter_remark{margin-bottom:5px;width: 300px;}
 .sh_add_opera p a{ margin-left: 15px;height:28px;line-height:28px; padding:2px 10px; background:#009871; color:#fff; border:0; }
 .sh_add_opera p a:hover{ background:#044a38;cursor:pointer;}
 .sh_add_opera p span{margin-left:15px;color:#808080;}
 .sh_add_opera .hide_remark {display:none;}
 .sh_add_opera .show_remark {display:block;}
+.hide_remark .chapter_remark {}
+.sh_add_chapter .pt11 { border-bottom:none !important; }
+.sh_add_chapter .pt11 a {margin-right:10px; padding:2px 10px; border:1px solid #ccc;}
 /* --------------------error tips------------------------- */
 .system_tip { width:300px; line-height:26px; margin:10px auto; border:solid 1px #F5D8A7; border-radius:2px; background-color:#FFF6DB;padding-left: 10px; text-align: center; }
 /* -------------------------------------------------- */
@@ -528,3 +545,5 @@ border: #999 1px solid;
 height: 20px;
 background: #fff url(datePicker.gif) no-repeat right;
 }
+
+

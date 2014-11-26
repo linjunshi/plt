@@ -24,8 +24,6 @@ public class QuestionMAction extends TeacherBaseAction{
 	@RequestMapping("/list")
 	public String questionList() {
 		try {
-			UserItem user = this.currentUser();
-			
 			int pageNum = this.getIntParameter("page");
 			if(pageNum == 0) {
 				pageNum = 1;
@@ -34,7 +32,7 @@ public class QuestionMAction extends TeacherBaseAction{
 			TrainQuestionDao tqDao = new TrainQuestionDao();
 			TrainQuestionQuery query = new TrainQuestionQuery();
 			query.setPageNum(pageNum);
-			query.setUserId(user.getId());
+			query.setUserId(currentUser().getId());
 			query.setDel(0);
 			query.setCount(tqDao.selectCountByQuery(query));
 			List<TrainQuestionItem> questionList = tqDao.selectByQuery(query);

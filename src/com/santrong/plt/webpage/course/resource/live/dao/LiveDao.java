@@ -66,4 +66,58 @@ public class LiveDao extends BaseDao {
 		}
 		return null;
 	}	
+	
+	/**
+	 * 删除一条直播记录(id)
+	 * @author huangweihua
+	 * @param id
+	 * @return boolean
+	 */
+	public boolean delete(String id) {
+		try {
+			LiveMapper mapper = this.getMapper(LiveMapper.class);
+			if(mapper != null) {
+				return mapper.delete(id) > 0;
+			}
+		} catch (Exception e) {
+			Log.printStackTrace(e);
+		}
+		return false;
+	}	
+	
+	/**
+	 * 新增一条直播记录
+	 * @author huangweihua
+	 * @param liveItem
+	 * @return boolean
+	 */
+	public boolean insert(LiveItem liveItem) {
+		try {
+			LiveMapper mapper = this.getMapper(LiveMapper.class);
+			if(mapper != null) {
+				return mapper.insert(liveItem) > 0;
+			}
+		} catch (Exception e) {
+			Log.printStackTrace(e);
+		}
+		return false;
+	}
+	
+	/**
+	 * 修改一条直播记录
+	 * @author huangweihua
+	 * @param liveItem
+	 * @return boolean
+	 */
+	public boolean update(LiveItem liveItem) {
+		try {
+			LiveMapper mapper = this.getMapper(LiveMapper.class);
+			if(mapper != null) {
+				return mapper.update(liveItem) > 0;
+			}
+		} catch (Exception e) {
+			Log.printStackTrace(e);
+		}
+		return false;
+	}
 }

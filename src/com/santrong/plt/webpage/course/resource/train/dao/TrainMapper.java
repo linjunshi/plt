@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import com.santrong.plt.webpage.course.resource.train.entry.TrainItem;
 
@@ -18,6 +19,14 @@ public interface TrainMapper {
 
 	@Insert("insert into resource_train values(#{id}, #{title}, #{ownerId}, #{del}, #{cts}, #{uts})")
 	int insert(TrainItem trainItem);
+	
+	@Update("update resource_train set "
+			+ "title = #{title},"
+			+ "ownerId = #{ownerId},"
+			+ "del = #{del},"
+			+ "uts = #{uts}"
+			+ " where id = #{id}")
+	int update(TrainItem trainItem);
 	
 	/**
 	 * 查询所属用户的所有作业

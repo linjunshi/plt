@@ -6,6 +6,7 @@ import com.santrong.plt.log.Log;
 import com.santrong.plt.webpage.BaseDao;
 import com.santrong.plt.webpage.course.entry.ChapterAndResourceEntry;
 import com.santrong.plt.webpage.course.entry.ChapterItem;
+import com.santrong.plt.webpage.course.entry.ChapterToResourceItem;
 
 /**
  * @author weinianjie
@@ -66,7 +67,7 @@ public class ChapterDao extends BaseDao {
 	/**
 	 * 通过课程的大章节ID（chapterId），查找是否存在小章节（下级资源节点）
 	 * @author huangweihua
-	 * @tablename course_chapter_to_resource
+	 * @tablename course_chapter_to_resource 课程章节关联资源表
 	 * @param chapterId
 	 * @return boolean
 	 */
@@ -145,4 +146,122 @@ public class ChapterDao extends BaseDao {
 		}
 		return 0;
 	}
+	
+	/**
+	 * 新增一条某个章节与资源的关联记录
+	 * @author huangweihua
+	 * @tablename course_chapter_to_resource 课程章节关联资源表
+	 * @param chapterToResourceItem
+	 * @return boolean
+	 */
+	public boolean insertChapterToResource(ChapterToResourceItem chapterToResourceItem) {
+		try {
+			ChapterMapper mapper = this.getMapper(ChapterMapper.class);
+			return mapper.insertChapterToResource(chapterToResourceItem) > 0;
+		} catch (Exception e) {
+			Log.printStackTrace(e);
+		}
+		return false;
+	}
+	
+	/**
+	 * 修改一条某个章节与资源的关联记录
+	 * @author huangweihua
+	 * @tablename course_chapter_to_resource 课程章节关联资源表
+	 * @param chapterToResourceItem
+	 * @return boolean
+	 */
+	public boolean updateChapterToResource(ChapterToResourceItem chapterToResourceItem) {
+		try {
+			ChapterMapper mapper = this.getMapper(ChapterMapper.class);
+			return mapper.updateChapterToResource(chapterToResourceItem) > 0;
+		} catch (Exception e) {
+			Log.printStackTrace(e);
+		}
+		return false;
+	}
+	
+	/**
+	 * 获取当前课程章节关联资源表中，排序号最大的数值
+	 * @tablename course_chapter_to_resource 课程章节关联资源表
+	 * @param chapterId
+	 * @return
+	 */
+	public int selectCRMaxPriority(String chapterId) {
+		try {
+			ChapterMapper mapper = this.getMapper(ChapterMapper.class);
+			return mapper.selectCRMaxPriority(chapterId);
+		} catch (Exception e) {
+			Log.printStackTrace(e);
+		}
+		return 0;
+	}
+	
+	/**
+	 * 判断是否已经存在同种资源的同一条记录，避免重复绑定资源
+	 * @tablename course_chapter_to_resource 课程章节关联资源表
+	 * @param chapterId
+	 * @param resourceId
+	 * @return
+	 */
+	public boolean existsChapterAndResource(String chapterId, String resourceId) {
+		try {
+			ChapterMapper mapper = this.getMapper(ChapterMapper.class);
+			return mapper.existsChapterAndResource(chapterId, resourceId) > 0;
+		} catch (Exception e) {
+			Log.printStackTrace(e);
+		}
+		return false;
+	}
+	
+	/**
+	 * 查询章节绑定的资源记录
+	 * @tablename course_chapter_to_resource 课程章节关联资源表
+	 * @param chapterId
+	 * @param resourceId
+	 * @return
+	 */
+	public ChapterToResourceItem selectChapterAndResource(String chapterId, String resourceId) {
+		try {
+			ChapterMapper mapper = this.getMapper(ChapterMapper.class);
+			return mapper.selectChapterAndResource(chapterId, resourceId);
+		} catch (Exception e) {
+			Log.printStackTrace(e);
+		}
+		return null;
+	}
+	
+	/**
+	 * 移除一条章节绑定资源的记录
+	 * @tablename course_chapter_to_resource 课程章节关联资源表
+	 * @param chapterId
+	 * @param resourceId
+	 * @return
+	 */
+	public boolean removeChapterAndResource(String chapterId, String resourceId) {
+		try {
+			ChapterMapper mapper = this.getMapper(ChapterMapper.class);
+			return mapper.removeChapterAndResource(chapterId, resourceId) > 0;
+		} catch (Exception e) {
+			Log.printStackTrace(e);
+		}
+		return false;
+	}
+	
+	/**
+	 * 判断同一个资源是否已经绑定多个章节
+	 * @tablename course_chapter_to_resource 课程章节关联资源表
+	 * @param resourceId
+	 * @return int
+	 */
+	public int selectCountByResourceId(String resourceId) {
+		try {
+			ChapterMapper mapper = this.getMapper(ChapterMapper.class);
+			return mapper.selectCountByResourceId(resourceId);
+		} catch (Exception e) {
+			Log.printStackTrace(e);
+		}
+		return 0;
+	}
+	
 }

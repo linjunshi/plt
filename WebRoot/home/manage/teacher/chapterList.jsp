@@ -26,7 +26,7 @@ Globals.page = "Manage_chapterList";
 		            </div>
 		            <div class="sh_collection">
 						<c:forEach items="${course.chapterDetailList}" var="chapter" varStatus="st">
-							<dl class="sh_add_chapter">
+							<dl id="${chapter.id}" class="sh_add_chapter">
 								<input type="hidden" id="chapterId" name="chapterId" value="${chapter.id}"/>
 								<dt>
 									<div class="sh_add_opera">
@@ -45,17 +45,27 @@ Globals.page = "Manage_chapterList";
 									</div>
 								</dt>
 								<c:forEach items="${chapter.resourceList}" var="resource">
-									<dd class="pt10"><a href="${ctx}/course_res?resId=${resource.id}&resType=${resource.type}" target="_blank" >${resource.title}---type:${resource.typeString}</a></dd>
+									<dd class="pt10">
+										<a class="sh_resource" href="${ctx}/course_res?resId=${resource.id}&resType=${resource.type}" target="_blank" >${resource.title}---type:${resource.type}</a>
+										<span class="sh_operation_2">
+											<input type="hidden" id="resourceId" name="resourceId" value="${resource.id}"/>
+											<input type="hidden" id="resourceType" name="resourceType" value="${resource.type}"/>
+											<a href="javascript:void(0);" class="removeResource">删除</a>
+											<a href="javascript:void(0);" class="editResource">修改</a>
+										</span>
+									</dd>
 								</c:forEach>
 								<dd class="pt11">
-									<a href="javascript:void(0);" class="addMinChapter" >添加一小节</a>
+									<a href="javascript:void(0);" class="add_resource_file" ><b>+</b>课件</a>
+									<a href="javascript:void(0);" class="add_resource_live" ><b>+</b>直播</a>
+									<a href="javascript:void(0);" class="add_resource_train" ><b>+</b>试题</a>
 								</dd>
 							</dl>
 							<c:if test="${st.last}">
 								<input type="hidden" value="${st.count}" id="priority" name="priority" >
 							</c:if>
 						</c:forEach>
-						<a href="javascript:void(0);" class="sh_addop_a">添加一章</a> 
+						<a href="javascript:void(0);" class="sh_addop_a"><b>+添加章节</b></a> 
 		             </div>
 		        </div>
 				
