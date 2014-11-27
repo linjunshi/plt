@@ -51,6 +51,7 @@ ManageClass.prototype = {
 										var json = eval('(' + data + ')');
 										if(json.result == '1') {
 											$(".preview").attr("src", json.url);
+											$("input[name=url]").val(json.url);
 										}else {
 											alert(json.error);
 										}
@@ -72,8 +73,11 @@ ManageClass.prototype = {
 						
 						$(".close").bindFormClose();
 					}
-				})
+				});
 			});
+			
+			//首次触发年级联动
+			$("#gradeSelect").change();
 		},
 		
 		// 申请老师

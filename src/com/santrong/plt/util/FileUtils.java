@@ -295,7 +295,7 @@ public class FileUtils {
         }
         
         // 定义本地文件
-    	File uploadFile = new File(DirDefine.updateFileDir, fileName);
+    	File uploadFile = new File(DirDefine.UpdateFileDir, fileName);
     	remoteFile.write(uploadFile);
     	return "url:/upload/" + fileName;
     	

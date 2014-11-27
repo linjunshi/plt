@@ -242,6 +242,7 @@ span.form_error, span.form_success{border-width:1px;display:inline-block;*displa
 .catalog_box_more:hover { color:#188EEE;}
 .catalog_box_nav li a:hover, .column_left_nav li a:hover{ background:url(../images/user_hover.png) no-repeat left bottom; color:#188EEE;}
 .img_item {float:left;display:block; overflow:hidden;}
+.img_item .pic img {width:234px; height:140px;}
 .img_list {float:left;display:block;width:220px; margin:20px 22px 0px 0px; padding-bottom:10px; border:1px #fff solid; overflow:hidden;}
 .img_user h2{ width:200px; height:40px; line-height:40px; overflow:hidden; font-size:18px; text-align:center; margin-top:6px;}
 .img_counts {float:left;display:block; margin-left:10px; text-align:right;}

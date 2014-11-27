@@ -61,7 +61,7 @@ Globals.page = "Index_course";
 		            <div class="result_list">
 		                <ul class="clr">
 							<c:forEach items="${courseList}" var="course">
-							<li class="clearfix"><a href="${ctx}/course/${course.id}.html" target="_blank" class="result_img"><img src="${ctx}/resource/images/005.jpg" width="130" height="110"></a>
+							<li class="clearfix"><a href="${ctx}/course/${course.id}.html" target="_blank" class="result_img"><img src="${ctx}${course.thumbnail}" width="130" height="110"></a>
 		                        <div class="result_con">
 		                            <h3 ><a href="${ctx}/course/${course.id}.html" target="_blank" class="result_con_ti">${course.courseName}</a></h3>
 		                            <p class="pt1">${course.teacher}</p>

@@ -99,7 +99,7 @@ Globals.page = "Index_index";
 		            <ul>
 						<c:forEach items="${gaozhong_courseList}" var="item" varStatus="st">
 		                <li class="img_list<c:if test="${(st.index+1)%5 == 0}"> margin_right_clear</c:if>">
-		                    <div class="pic"><a href="${ctx}/course/${item.id}.html" target="_blank"><img src="${ctx}/resource/photo/01.jpg" border="0" /></a></div>
+		                    <div class="pic"><a href="${ctx}/course/${item.id}.html" target="_blank"><img src="${ctx}${item.thumbnail}" border="0" /></a></div>
 		                    <div class="img_user">
 		                        <h2>${item.courseName}</h2>
 		                    </div>
@@ -124,7 +124,7 @@ Globals.page = "Index_index";
 		            <ul>
 						<c:forEach items="${chuzhong_courseList}" var="item" varStatus="st">
 		                <li class="img_list<c:if test="${(st.index+1)%5 == 0}"> margin_right_clear</c:if>">
-		                    <div class="pic"><a href="${ctx}/course/${item.id}.html" target="_blank"><img src="${ctx}/resource/photo/01.jpg" border="0" /></a></div>
+		                    <div class="pic"><a href="${ctx}/course/${item.id}.html" target="_blank"><img src="${ctx}${item.thumbnail}" border="0" /></a></div>
 		                    <div class="img_user">
 		                        <h2>${item.courseName}</h2>
 		                    </div>
@@ -149,7 +149,7 @@ Globals.page = "Index_index";
 		            <ul>
 						<c:forEach items="${xiaoxue_courseList}" var="item" varStatus="st">
 		                <li class="img_list<c:if test="${(st.index+1)%5 == 0}"> margin_right_clear</c:if>">
-		                    <div class="pic"><a href="${ctx}/course/${item.id}.html" target="_blank"><img src="${ctx}/resource/photo/01.jpg" border="0" /></a></div>
+		                    <div class="pic"><a href="${ctx}/course/${item.id}.html" target="_blank"><img src="${ctx}${item.thumbnail}" border="0" /></a></div>
 		                    <div class="img_user">
 		                        <h2>${item.courseName}</h2>
 		                    </div>

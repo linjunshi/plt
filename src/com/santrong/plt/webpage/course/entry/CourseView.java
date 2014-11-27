@@ -1,5 +1,7 @@
 package com.santrong.plt.webpage.course.entry;
 
+import com.santrong.plt.util.MyUtils;
+
 
 /**
  * @author weinianjie
@@ -9,10 +11,17 @@ package com.santrong.plt.webpage.course.entry;
 public class CourseView {
 	private String id;
 	private String courseName;
+	private String url;// 缩略图
 	private int price;
 	private int saleCount;
 
 	
+	public String getUrl() {
+		return url;
+	}
+	public void setUrl(String url) {
+		this.url = url;
+	}
 	public String getId() {
 		return id;
 	}
@@ -36,5 +45,14 @@ public class CourseView {
 	}
 	public void setSaleCount(int saleCount) {
 		this.saleCount = saleCount;
+	}
+	
+	// 获取缩略图
+	public String getThumbnail() {
+		if(MyUtils.isNotNull(this.url)) {
+			return url;
+		}else {
+			return "/resource/photo/course01.jpg";
+		}
 	}
 }

@@ -2,6 +2,8 @@ package com.santrong.plt.webpage.course.entry;
 
 import java.util.Date;
 
+import com.santrong.plt.util.MyUtils;
+
 /**
  * @author weinianjie
  * @date 2014年10月10日
@@ -26,6 +28,15 @@ public class CourseItem {
 	private Date cts;
 	private Date uts;
 	
+	
+	// 获取缩略图
+	public String getThumbnail() {
+		if(MyUtils.isNotNull(this.url)) {
+			return url;
+		}else {
+			return "/resource/photo/course01.jpg";
+		}
+	}		
 	
 	public int getLive() {
 		return live;

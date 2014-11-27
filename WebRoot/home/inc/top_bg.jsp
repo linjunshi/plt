@@ -42,7 +42,7 @@
 	            <div>
 	                <ul>
 						<li><a href='${ctx}/study/course'>我是学生</a></li>
-						<li><a href='${ctx}/manage/course'>我是老师</a></li>
+						<li><a href='${ctx}/manage/live'>我是老师</a></li>
 	                </ul>
 	            </div>
 	        </div>
