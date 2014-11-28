@@ -40,4 +40,14 @@ public class UserExtendsDao extends BaseDao{
 		}
 		return false;
 	}
+	
+	public UserExtendsItem selectByUserId(String userId) {
+		try {
+			UserExtendsMapper mapper = this.getMapper(UserExtendsMapper.class);
+			return mapper.selectByUserId(userId);
+		} catch (Exception e) {
+			Log.printStackTrace(e);
+		}
+		return null;
+	}
 }

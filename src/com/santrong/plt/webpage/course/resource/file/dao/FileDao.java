@@ -37,15 +37,36 @@ public class FileDao extends BaseDao {
 	}
 	
 	/**
+	 * 删除一个
+	 * @param id
+	 * @return
+	 */
+	public boolean deleteById(String id) {
+		try {
+			FileMapper mapper = this.getMapper(FileMapper.class);
+			if(mapper != null) {
+				return mapper.deleteById(id) > 0;
+			}
+		} catch (Exception e) {
+			Log.printStackTrace(e);
+		}
+		return false;
+	}
+	
+	/**
 	 * 删除多个
 	 * @param ids
 	 * @return
 	 */
 	public int delByIds(String[] ids) {
-		String _ids = MyUtils.consistIds(ids);
-		FileMapper mapper = this.getMapper(FileMapper.class);
-		if(mapper != null) {
-			return mapper.delByIds(_ids);
+		try {
+			String _ids = MyUtils.consistIds(ids);
+			FileMapper mapper = this.getMapper(FileMapper.class);
+			if(mapper != null) {
+				return mapper.delByIds(_ids);
+			}
+		} catch (Exception e) {
+			Log.printStackTrace(e);
 		}
 		return 0;
 	}

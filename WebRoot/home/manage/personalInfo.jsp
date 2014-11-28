@@ -8,7 +8,7 @@
 var Globals = {};
 Globals.ctx = "${ctx}";
 Globals.lang = "${lang}";
-Globals.page = "Manage_index";
+Globals.page = "Manage_personalInfo";
 </script>
 <style type="text/css">
 .system_tip { width:350px; line-height:26px; margin:10px auto; margin-left:100px; border:solid 1px #F5D8A7; border-radius:2px; background-color:#FFF6DB;padding-left: 10px;  }
@@ -21,7 +21,11 @@ Globals.page = "Manage_index";
 			<div class="sectionMain clr">
 				<%@ include file="../inc/leftmenu_regist.jsp"%>
 				<div class="sh_info_r">
-		            <div class="st_titile_r sh_title"> <a href="#">基本信息</a><a href="#">教育信息</a><a href="#">其他扩展信息</a></div>
+		            <div class="st_titile_r sh_title">
+		            	<a href="${ctx}/account/personalInfo">基本信息</a>
+		            	<a href="${ctx}/account/personalInfoEdu">教育信息</a>
+		            	<a href="${ctx}/account/personalInfoExtend">其他扩展信息</a>
+		            </div>
 		            <div class="sh_form_con">
 		                <div id="demo_zone">
 		                	<c:if test="${tipError != null && fn:length(tipError)  > 0}">
@@ -31,98 +35,60 @@ Globals.page = "Manage_index";
 									</c:forEach>
 								</div>
 							</c:if>
-		                    <form method="post" action="${ctx}/account/changePslInfo" class="form_info" id="personalInfo_form">
+		                    <form method="post" action="${ctx}/account/personalInfo" class="form_info" id="personalInfo_form">
 		                        <div class="form_item">
 		                            <label for="showName">昵称：</label>
 		                            <div class="form_field">
-		                                <input placeholder="6-32个字符" class="form_text" id="showName" name="showName" type="text" value="${userDetailView.showName}" />
-		                                <span class="form_success">昵称可用</span></div>
-		                        </div>
-		                        <div class="form_item">
-		                            <label for="name">邮箱：</label>
-		                            <div class="form_field">
-		                                <input class="form_text" id="email" name="email" type="email">
-		                                <span class="form_error">请输入正确的邮箱格式</span></div>
-		                        </div>
-		                        <!-- <div class="form_item">
-		                            <label for="password">密码：</label>
-		                            <div class="form_field">
-		                                <input name="password" id="password" class="form_text" type="password"/>
+		                                <input placeholder="6-32个字符" class="form_text" id="showName" name="showName" type="text" value="${user.showName}" />
+		                                <!-- <span class="form_success">昵称可用</span> -->
 		                            </div>
 		                        </div>
 		                        <div class="form_item">
-		                            <label for="comfirmPwd">确认密码：</label>
-		                            <div class="form_field">
-		                                <input name="comfirmPwd" id="comfirmPwd" class="form_text" type="password">
-		                                <span class="form_error">输入的密码不正确，请重新输入</span> </div>
-		                        </div> -->
-		                        <div class="form_item">
 		                            <label>性别：</label>
 		                            <div class="form_field">
-	                                    <input <c:if test="${userDetailView.gender == 1}"> checked="checked" </c:if> value="1" class="form_radio" name="gender" type="radio">
+	                                    <input <c:if test="${user.gender == 1}"> checked="checked" </c:if> value="1" class="form_radio" name="gender" type="radio">
 	                                    <span>男</span>
-	                                    <input <c:if test="${userDetailView.gender == 2}"> checked="checked" </c:if> value="2" class="form_radio" name="gender" type="radio">
+	                                    <input <c:if test="${user.gender == 2}"> checked="checked" </c:if> value="2" class="form_radio" name="gender" type="radio">
 	                                    <span>女</span> 
 		                            </div>
 		                        </div>
 		                        <div class="form_item">
 		                            <label for="realname">姓名：</label>
 		                            <div class="form_field">
-		                                <input placeholder="请填入真实姓名" class="form_text" id="username" name="username" type="text" value="${userDetailView.username}">
+		                                <input placeholder="请填入您的真实姓名" class="form_text" id="username" name="username" type="text" value="${user.username}">
 		                            </div>
 		                        </div>
+		                        <div class="form_item">
+		                            <label>身份证号码：</label>
+		                            <div class="form_field ">
+		                               <input placeholder="请填入您的真实身份证号码" class="form_text" id="idCard" name="idCard" type="text" value="${user.idCard}">
+		                            </div>
+		                        </div>  
 		                        <div class="form_item">
 		                            <label for="realname">手机号：</label>
 		                            <div class="form_field">
-		                                <input placeholder="请填入手机号码" class="form_text" id="phonenum" name="phonenum" type="text" value="">
+		                                <input placeholder="请填入您的手机号码" class="form_text" id="phone" name="phone" type="text" value="${user.phone}">
 		                            </div>
 		                        </div>
 		                        <div class="form_item">
-		                            <label>生日：</label>
-		                            <div class="form_field ">
-		                                <select name="birthday" size="1" id="birthday" class="inline_ele">
-		                                    <option selected="selected" value="1">1982</option>
-		                                    <option value="2">1983</option>
-		                                    <option value="3">1984</option>
-		                                </select>
-		                                <select name="birthday" size="1" id="birthday" class="inline_ele">
-		                                    <option selected="selected" value="1">01</option>
-		                                    <option value="2">02</option>
-		                                    <option value="3">03</option>
-		                                </select>
-		                                <select name="birthday" size="1" id="birthday" class="inline_ele">
-		                                    <option selected="selected" value="1">01</option>
-		                                    <option value="2">25</option>
-		                                    <option value="3">31</option>
-		                                </select>                                
-		                            </div>
+		                            <label for="name">邮箱：</label>
+		                            <div class="form_field">
+		                                <input placeholder="请填入您的邮箱" class="form_text" id="email" name="email" type="email" value="${user.email}">
+		                                <!-- <span class="form_error">请输入正确的邮箱格式</span></div> -->
+		                        	</div>
 		                        </div>
-		                        <div class="form_item">
-		                            <label>证件号码：</label>
-		                            <div class="form_field ">
-		                                <select name="id_type" size="1" id="id_type" class="inline_ele">
-		                                    <option selected="selected" value="1">身份证</option>
-		                                    <option value="2">学生证</option>
-		                                    <option value="3">军官证</option>
-		                                </select>
-		                                <input class="form_text" id="id_text" name="id_text" type="text">
-		                            </div>
-		                        </div>                        
-		                        <div class="form_item">
-		                            <label>毕业学校：</label>
-		                            <div class="form_field ">
-		                                <select name="graduateSchool" size="1" id="graduateSchool" class="inline_ele">
-		                                    <option selected="selected" value="1">XXXX学校</option>
-		                                    <option value="2">广东学校</option>
-		                                    <option value="3">广东学校</option>
-		                                </select>
-		                                
-		                            </div>
-		                        </div>                        
+								<div class="form_item">
+										<label for="realname">上传头像：</label>
+										<div class="form_field">
+											<img src="" style="width:80px; height:60px;" class="small_preview" />
+											<a href="javascript:void(0);" id="changeCover">更改头像</a>
+											<input type="hidden" id="url" name="url" value="${user.url}" />
+										</div>
+									</div>                     
 		                        <div class="form_item">
 		                            <label>个人简介：</label>
 		                            <div class="form_field">
-		                                <textarea id="remark" name="remark">${userDetailView.remark}</textarea>
+		                                <textarea id="remark" name="remark">${user.remark}</textarea>
 		                                <p class="form_des">说明注释文字可以放在这里啊</p>
 		                            </div>
 		                        </div>

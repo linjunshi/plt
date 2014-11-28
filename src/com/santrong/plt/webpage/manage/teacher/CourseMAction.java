@@ -98,7 +98,7 @@ public class CourseMAction extends TeacherBaseAction {
 		try {
 			UserItem user = this.currentUser();
 			if (user == null) {
-				return this.redirect("/login");
+				return this.redirect("account/login");
 			}
 			
 			if (courseForm != null) {
@@ -508,6 +508,9 @@ public class CourseMAction extends TeacherBaseAction {
 				LiveDao liveDao = new LiveDao();
 				LiveItem live = liveDao.selectById(resourceId);
 				request.setAttribute("live", live);
+				request.setAttribute("fn", "modify");
+			} else {
+				request.setAttribute("fn", "add");
 			}
 			
 			request.setAttribute("courseId", courseId);
@@ -552,9 +555,9 @@ public class CourseMAction extends TeacherBaseAction {
 							liveItem.setTitle(liveForm.getTitle());
 							liveItem.setDuration(liveForm.getDuration());
 							liveItem.setBeginTime(MyUtils.stringToDate(
-									liveForm.getBeginTime(), "yyyy-MM-dd HH:mm:ss"));
+									liveForm.getBeginTime(), "yyyy/MM/dd HH:mm"));
 							liveItem.setEndTime(MyUtils.stringToDate(
-									liveForm.getEndTime(), "yyyy-MM-dd HH:mm:ss"));
+									liveForm.getEndTime(), "yyyy/MM/dd HH:mm"));
 							liveItem.setUrl(liveForm.getUrl());
 							liveItem.setUts(new Date());
 							liveDao.update(liveItem);

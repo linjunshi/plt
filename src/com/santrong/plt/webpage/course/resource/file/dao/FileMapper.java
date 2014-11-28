@@ -18,4 +18,7 @@ public interface FileMapper {
 	
 	@Delete("delete from resource_file where id in (${ids})")
 	int delByIds(@Param("ids")String ids);
+	
+	@Delete("delete from resource_file where id = #{id}")
+	int deleteById(String id);
 }

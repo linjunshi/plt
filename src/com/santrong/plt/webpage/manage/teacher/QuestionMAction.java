@@ -98,7 +98,7 @@ public class QuestionMAction extends TeacherBaseAction{
 			UserItem user = this.currentUser();
 			if(user == null) {
 				addError("请您先登录用户！");
-				return this.redirect("/login");
+				return this.redirect("account/login");
 			}
 			
 			if (tqForm != null) {

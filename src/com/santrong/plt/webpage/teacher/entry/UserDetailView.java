@@ -20,6 +20,9 @@ public class UserDetailView {
 	private int role;
 	private String schoolId;
 	private String subjectId;
+	private String email;
+	private String phone;
+	private String idCard;
 	private String registIp;
 	private Date registTime;
 	private String lastLoginIp;
@@ -128,6 +131,30 @@ public class UserDetailView {
 
 	public void setSubjectId(String subjectId) {
 		this.subjectId = subjectId;
+	}
+	
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getPhone() {
+		return phone;
+	}
+
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+
+	public String getIdCard() {
+		return idCard;
+	}
+
+	public void setIdCard(String idCard) {
+		this.idCard = idCard;
 	}
 
 	public String getRegistIp() {

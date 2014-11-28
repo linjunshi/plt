@@ -125,6 +125,45 @@ ManageClass.prototype = {
 		// TODO 章节维护页面
 		chapterList : function(){
 			
+			//时间控件
+			var LiveTimeFn = function(){
+				var now   = new Date();
+				var year  = now.getFullYear();
+				var month = now.getMonth() + 1 < 10 ? ('0' + (now.getMonth() + 1)) : now.getMonth() + 1;
+				var date  = now.getDate() < 10 ? ('0' + now.getDate()) : now.getDate();
+				var hours = now.getHours() < 10 ? ('0' + now.getHours()) : now.getHours();
+				var minutes = now.getMinutes() < 10 ? ('0' + now.getMinutes()) : now.getMinutes();
+				
+				var input_value = year + '/' + month + '/' + date + ' ' + hours + ':' + minutes;
+				
+				var resourceId = $("#resourceId").val();
+				if (resourceId != null && resourceId != "") {
+					input_value = $("#beginTime").val();
+				}
+			    
+				$('#beginTime').datetimepicker({
+					dayOfWeekStart : 1,//一周从星期几开始：1为星期一，2为星期二...7为星期日
+					lang : 'zh',//语言为简体中文
+//					format:	'Y/m/d H:i',//默认格式显示，format:	'Y/m/d H:i',
+//					disabledDates:[year + '/' + month +  '/' + '27'],//不显示指定的日期，不能触发点击事件
+//					startDate :	input_value,//从那一天开始，默认选择日期
+					onGenerate : function( ct ){
+						$(this).find('.xdsoft_date').toggleClass('xdsoft_disabled');
+						//解决当前日期能选择的功能
+						var data_year = $(this).find('td.xdsoft_current').attr("data-year");
+						var data_month = $(this).find('td.xdsoft_current').attr("data-month");
+						var data_date = $(this).find('td.xdsoft_current').attr("data-date");
+						if (data_year == now.getFullYear() && data_month == now.getMonth() && data_date == now.getDate()) {
+							$(this).find('td.xdsoft_current').toggleClass('xdsoft_disabled');
+						}
+					},//小于当前日期的都不能触发点击事件，默认为灰色
+					minDate:'-' + year + '/02/2',//yesterday is minimum date(for today use 0 or -1970/01/01)
+					maxDate:'+1970/01/1',//tommorow is maximum date calendar
+					value : input_value, //文本框内默认显示的日期
+					step : 30,//timepicker 设置时间的间隔，以分钟为单位
+				});
+			}
+			
 			// 封面选择
 			$("#changeCover").live("click", function() {
 				Boxy.load(Globals.ctx + "/manage/course/changeCover", {
@@ -418,7 +457,6 @@ ManageClass.prototype = {
 				}
 			});
 			
-			
 			// TODO 添加一个直播（资源）
 			$(".add_resource_live").live("click", function() {
 				var _this = $(this);
@@ -428,9 +466,20 @@ ManageClass.prototype = {
 				if (courseId != "" && chapterId != "" && courseId != null && chapterId != null) {
 					$.get(Globals.ctx + "/manage/course/addResourceLive?courseId="+ courseId +"&chapterId=" + chapterId, function(result){
 						$(".sh_info_r").html(result);
+						LiveTimeFn();
 					});
 				} else {
 					alert("添加直播失败，请刷新页面后重新操作！");
+				}
+			});
+			
+			//addResourceLive.jsp 提交直播表单校验
+			$("#liveSubmit").live("click", function (){
+				var title = $("#title").val();
+				if (title == "" || title == null) {
+					alert("直播名称不可以为空，请您务必填写！");
+					$("#title").focus();
+					return false;
 				}
 			});
 			
@@ -538,6 +587,9 @@ ManageClass.prototype = {
 					$.get(Globals.ctx + url +"?courseId="+ courseId +"&chapterId=" + chapterId + "&resourceId=" + resourceId 
 							+ "&resourceType=" + resourceType + "&oldResourceId=" + resourceId , function(result){
 						$(".sh_info_r").html(result);
+						if (resourceType == 2) {
+							LiveTimeFn();
+						}
 					});
 					
 				} else {
@@ -582,6 +634,47 @@ ManageClass.prototype = {
 					$("#answer_checkbox").show();
 				}
 			});
-		}
+		},
 		
+		//TODO 个人信息页面
+		personalInfo : function() {
+			
+			// 上传头像控件
+			$("#changeCover").click(function() {
+				Boxy.load(Globals.ctx + "/component/change/cover", {title : '-',
+					afterShow : function(){
+						
+						$(".selectCover").change(function() {
+							var extName = /\.[^\.]+$/.exec($(this).val());
+							if(/jpg|gif|png/i.test(extName)) {
+								$(".coverUpload").ajaxSubmit({
+									success: function (data){
+										var json = eval('(' + data + ')');
+										if(json.result == '1') {
+											$(".preview").attr("src", json.url);
+										}else {
+											alert(json.error);
+										}
+									}
+								});
+							}else if(extName != null) {
+								alert("不支持该文件类型");
+							}
+						});
+						
+						$(".sure").click(function() {
+							var preview = $(".preview").attr("src");
+							if(preview != null && preview != '') {
+								$(".small_preview").attr("src", preview)
+								$("input[name=url]").val(preview);
+								$(".close").click();
+							}
+						});
+						
+						$(".close").bindFormClose();
+					}
+				})
+			});
+			
+		}
 }

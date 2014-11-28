@@ -257,43 +257,38 @@ public class AccountAction extends BaseAction {
 	@RequestMapping(value = "/changePwdPost",method=RequestMethod.POST)
 	public String changePwdPost(String oldPwd, String newPwd, String comfirmPwd) {
 		try {
-			if (!MyUtils.isNotNull(oldPwd)) {
-				addError("请输入您的原始密码！");
-				return "manage/pwdChange";
-			}
-			if (!MyUtils.isNotNull(newPwd)) {
-				addError("请输入您的新密码！");
-				return "manage/pwdChange";
-			}
-			if (!MyUtils.isNotNull(comfirmPwd)) {
-				addError("请输入您的确认新密码！");
-				return "manage/pwdChange";
-			}
 			
 			UserItem user = this.currentUser();
-			
 			if(user == null) {
-				return "login";
+				return this.redirect("/account/login");
+			}
+			
+			if (MyUtils.isNull(oldPwd)) {
+				addError("请输入您的原始密码！");
+			}
+			if (MyUtils.isNull(newPwd)) {
+				addError("请输入您的新密码！");
+			}
+			if (MyUtils.isNull(comfirmPwd)) {
+				addError("请输入您的确认新密码！");
 			}
 			if(!user.getPassword().equals(MyUtils.getMD5(oldPwd))) {
 				addError("您输入的原始密码有误，请重新输入！");
-				return "manage/pwdChange";
 			}
 			if(!newPwd.equals(comfirmPwd)) {
 				addError("您输入的新密码和确认新密码不一致，请重新输入！");
-				return "manage/pwdChange";
 			}
-			
-			UserDao userDao = new UserDao();
-			user.setPassword(MyUtils.getMD5(newPwd));
-			user.setUts(new Date());
-			if (userDao.update(user) > 0) {
-				getRequest().getSession().setAttribute(Global.SessionKey_LoginUser, user);
-				addError("恭喜您，已成功修改密码！");
-			} else {
-				addError("对不起，您修改密码失败了，请重新操作！");
+			if (!(errorSize() > 0)) {
+				UserDao userDao = new UserDao();
+				user.setPassword(MyUtils.getMD5(newPwd));
+				user.setUts(new Date());
+				if (userDao.update(user) > 0) {
+					getRequest().getSession().setAttribute(Global.SessionKey_LoginUser, user);
+					addError("恭喜您，已成功修改密码！");
+				} else {
+					addError("对不起，您修改密码失败了，请重新操作！");
+				}
 			}
-			
 		} catch (Exception e) {
 			Log.printStackTrace(e);
 		}
@@ -310,7 +305,7 @@ public class AccountAction extends BaseAction {
 	}
 	
 	/**
-	 * 打开个人信息页面
+	 * 打开个人信息-->基本信息页面
 	 * @return
 	 */
 	@RequestMapping("/personalInfo")
@@ -318,18 +313,184 @@ public class AccountAction extends BaseAction {
 		try {
 			UserItem user = this.currentUser();
 			if (user== null) {
-				return "login";
+				return this.redirect("/account/login");
 			}
-			UserDao userDao = new UserDao();
-			UserDetailView userDetailView = userDao.selectDetailById(user.getId());
+//			UserDao userDao = new UserDao();
+//			UserDetailView userDetailView = userDao.selectDetailById(user.getId());
 			
 			HttpServletRequest request = getRequest();
-			request.setAttribute("userDetailView", userDetailView);
+			request.setAttribute("user", user);
 			
 		} catch (Exception e) {
 			Log.printStackTrace(e);
 		}
 		return "manage/personalInfo";
+	}
+	
+	@RequestMapping(value="/personalInfo",method=RequestMethod.POST)
+	public String personalInfoPost(UserItem userForm) {
+		try {
+			UserItem user = this.currentUser();
+			if (user== null) {
+				return this.redirect("/account/login");
+			}
+			if (userForm == null) {
+				return "manage/personalInfo";
+			}
+			
+			//用户基本信息
+			UserDao userDao = new UserDao();
+			user.setShowName(userForm.getShowName());
+			user.setGender(userForm.getGender());
+			user.setUsername(userForm.getUsername());
+			user.setIdCard(userForm.getIdCard());
+			user.setPhone(userForm.getPhone());
+			user.setEmail(userForm.getEmail());
+			user.setUrl(userForm.getUrl());
+			user.setRemark(userForm.getRemark());
+			user.setUts(new Date());
+			if (userDao.update(user) > 0) {
+				getRequest().getSession().setAttribute(Global.SessionKey_LoginUser, user);
+//					addError("恭喜您，已成功个人信息！");
+			} else {
+				addError("对不起，您修改个人信息失败了！");
+			}
+			
+		} catch (Exception e) {
+			Log.printStackTrace(e);
+		}
+		return this.redirect("/account/personalInfo");
+	}
+	
+	/**
+	 * 打开个人信息-->教育信息页面
+	 * @return
+	 */
+	@RequestMapping("/personalInfoEdu")
+	public String personalInfoEdu() {
+		try {
+			UserItem user = this.currentUser();
+			if (user== null) {
+				return this.redirect("/account/login");
+			}
+			
+			UserEducationDao userEducationDao = new UserEducationDao();
+			UserEducationItem userEducationItem = userEducationDao.selectByUserId(user.getId());
+			
+			HttpServletRequest request = getRequest();
+			request.setAttribute("userEducation", userEducationItem);
+			
+		} catch (Exception e) {
+			Log.printStackTrace(e);
+		}
+		return "manage/personalInfoEdu";
+	}
+	
+	@RequestMapping(value="/personalInfoEdu",method=RequestMethod.POST)
+	public String personalInfoEduPost(UserEducationItem userEduForm) {
+		try {
+			UserItem user = this.currentUser();
+			if (user== null) {
+				return this.redirect("/account/login");
+			}
+			
+			//用户教育信息
+			UserEducationDao uEduDao = new UserEducationDao();
+			UserEducationItem uEduItem = new UserEducationItem();
+			if (uEduDao.existByUserId(user.getId())) {
+				uEduItem.setUserId(user.getId());
+				uEduItem.setEducation(userEduForm.getEducation());
+				uEduItem.setPositional(userEduForm.getPositional());
+				uEduItem.setGraduateSchool(userEduForm.getGraduateSchool());
+				if (uEduDao.update(uEduItem)) {
+//					getRequest().getSession().setAttribute(Global.SessionKey_LoginUser, user);
+					addError("恭喜您，已成功个人信息！");
+				} else {
+					addError("对不起，您修改个人信息失败了！");
+				}
+			} else {
+				uEduItem.setUserId(user.getId());
+				uEduItem.setEducation(userEduForm.getEducation());
+				uEduItem.setPositional(userEduForm.getPositional());
+				uEduItem.setGraduateSchool(userEduForm.getGraduateSchool());
+				if (uEduDao.insert(uEduItem)) {
+//					getRequest().getSession().setAttribute(Global.SessionKey_LoginUser, user);
+					addError("恭喜您，已成功个人信息！");
+				} else {
+					addError("对不起，您修改个人信息失败了！");
+				}
+			}
+		} catch (Exception e) {
+			Log.printStackTrace(e);
+		}
+		return this.redirect("/account/personalInfoEdu");
+	}
+	
+	/**
+	 * 打开个人信息-->扩展信息页面
+	 * @return
+	 */
+	@RequestMapping("/personalInfoExtend")
+	public String personalInfoExtend() {
+		try {
+			UserItem user = this.currentUser();
+			if (user== null) {
+				return this.redirect("/account/login");
+			}
+			
+			UserExtendsDao userExtendsDao = new UserExtendsDao();
+			UserExtendsItem userExtendsItem = userExtendsDao.selectByUserId(user.getId());
+			
+			HttpServletRequest request = getRequest();
+			request.setAttribute("userExtends", userExtendsItem);
+			
+		} catch (Exception e) {
+			Log.printStackTrace(e);
+		}
+		return "manage/personalInfoExtend";
+	}
+	
+	@RequestMapping(value="/personalInfoExtend",method=RequestMethod.POST)
+	public String personalInfoExtendPost() {
+		try {
+			UserItem user = this.currentUser();
+			if (user== null) {
+				return this.redirect("/account/login");
+			}
+			HttpServletRequest request = getRequest();
+			String birthday = request.getParameter("birthday");
+			String nativePlace = request.getParameter("nativePlace");
+			
+			if (MyUtils.isNotNull(birthday) || MyUtils.isNotNull(nativePlace)) {
+				//用户扩展信息
+				UserExtendsDao userExtendsDao = new UserExtendsDao();
+				UserExtendsItem userExtendsItem = new UserExtendsItem();
+				if (userExtendsDao.existsByUserId(user.getId())) {
+					userExtendsItem.setUserId(user.getId());
+					userExtendsItem.setBirthday(MyUtils.stringToDate(birthday, "yyyy-MM-dd HH:mm:ss"));
+					userExtendsItem.setNativePlace(nativePlace);
+					if (userExtendsDao.update(userExtendsItem)) {
+//					getRequest().getSession().setAttribute(Global.SessionKey_LoginUser, user);
+						addError("恭喜您，已成功个人信息！");
+					} else {
+						addError("对不起，您修改个人信息失败了！");
+					}
+				} else {
+					userExtendsItem.setUserId(user.getId());
+					userExtendsItem.setBirthday(MyUtils.stringToDate(birthday, "yyyy-MM-dd HH:mm:ss"));
+					userExtendsItem.setNativePlace(nativePlace);
+					if (userExtendsDao.insert(userExtendsItem)) {
+//					getRequest().getSession().setAttribute(Global.SessionKey_LoginUser, user);
+						addError("恭喜您，已成功个人信息！");
+					} else {
+						addError("对不起，您修改个人信息失败了！");
+					}
+				}
+			}
+		} catch (Exception e) {
+			Log.printStackTrace(e);
+		}
+		return this.redirect("/account/personalInfoExtend");
 	}
 	
 	/**
@@ -342,61 +503,92 @@ public class AccountAction extends BaseAction {
 	@RequestMapping(value = "/changePslInfo", method=RequestMethod.POST)
 	public String changePslInfo(UserDetailView userDetail) {
 		try {
-			int success = 0;
+			UserItem user = this.currentUser();
+			if (user== null) {
+				return this.redirect("/account/login");
+			}
 			if (userDetail == null) {
 				return "manage/personalInfo";
 			}
 			
-			UserItem user = this.currentUser();
+			HttpServletRequest request = getRequest();
+			String fn = request.getParameter("fn");
 			
-			ThreadUtils.beginTranx();
-			
-			UserDao userDao = new UserDao();
-			user.setUsername(userDetail.getUsername());
-			user.setShowName(userDetail.getShowName());
-			user.setGender(userDetail.getGender());
-			user.setRemark(userDetail.getRemark());
-			user.setUts(new Date());
-			userDao.update(user);
-			
-			UserEducationDao uEduDao = new UserEducationDao();
-			UserEducationItem uEduItem = new UserEducationItem();
-			if (uEduDao.existByUserId(user.getId())) {
-				uEduItem.setUserId(userDetail.getId());
-				uEduItem.setEducation(userDetail.getEducation());
-				uEduItem.setPositional(userDetail.getPositional());
-				uEduItem.setGraduateSchool(userDetail.getGraduateSchool());
-				uEduDao.update(uEduItem);
-			} else {
-				uEduItem.setUserId(userDetail.getId());
-				uEduItem.setEducation(userDetail.getEducation());
-				uEduItem.setPositional(userDetail.getPositional());
-				uEduItem.setGraduateSchool(userDetail.getGraduateSchool());
-				uEduDao.insert(uEduItem);
-			}
-			
-			UserExtendsDao userExtendsDao = new UserExtendsDao();
-			UserExtendsItem userExtendsItem = new UserExtendsItem();
-			if (userExtendsDao.existsByUserId(user.getId())) {
-				userExtendsItem.setUserId(user.getId());
-				userExtendsItem.setBirthday(userDetail.getBirthday());
-				userExtendsItem.setNativePlace(userDetail.getNativePlace());
-				userExtendsDao.update(userExtendsItem);
-			} else {
-				userExtendsItem.setUserId(user.getId());
-				userExtendsItem.setBirthday(userDetail.getBirthday());
-				userExtendsItem.setNativePlace(userDetail.getNativePlace());
-				userExtendsDao.insert(userExtendsItem);
-			}
-			
-			success = 1;
-			ThreadUtils.commitTranx();
-			
-			if (success == 1) {
-				getRequest().getSession().setAttribute(Global.SessionKey_LoginUser, user);
-				addError("恭喜您，已成功个人信息！");
-			} else {
-				addError("对不起，您修改个人信息失败了！");
+			if (fn.equals("base")) {
+				//用户基本信息
+				UserDao userDao = new UserDao();
+				user.setShowName(userDetail.getShowName());
+				user.setGender(userDetail.getGender());
+				user.setUsername(userDetail.getUsername());
+				user.setIdCard(userDetail.getIdCard());
+				user.setPhone(userDetail.getPhone());
+				user.setEmail(userDetail.getEmail());
+				user.setUrl(userDetail.getUrl());
+				user.setRemark(userDetail.getRemark());
+				user.setUts(new Date());
+				if (userDao.update(user) > 0) {
+					getRequest().getSession().setAttribute(Global.SessionKey_LoginUser, user);
+					addError("恭喜您，已成功个人信息！");
+				} else {
+					addError("对不起，您修改个人信息失败了！");
+				}
+				return this.redirect("/account/personalInfo");
+			} else if (fn.equals("education")) {
+				//用户教育信息
+				UserEducationDao uEduDao = new UserEducationDao();
+				UserEducationItem uEduItem = new UserEducationItem();
+				if (uEduDao.existByUserId(user.getId())) {
+					uEduItem.setUserId(userDetail.getId());
+					uEduItem.setEducation(userDetail.getEducation());
+					uEduItem.setPositional(userDetail.getPositional());
+					uEduItem.setGraduateSchool(userDetail.getGraduateSchool());
+					if (uEduDao.update(uEduItem)) {
+//						getRequest().getSession().setAttribute(Global.SessionKey_LoginUser, user);
+						addError("恭喜您，已成功个人信息！");
+					} else {
+						addError("对不起，您修改个人信息失败了！");
+					}
+					return this.redirect("/account/personalInfoEdu");
+				} else {
+					uEduItem.setUserId(userDetail.getId());
+					uEduItem.setEducation(userDetail.getEducation());
+					uEduItem.setPositional(userDetail.getPositional());
+					uEduItem.setGraduateSchool(userDetail.getGraduateSchool());
+					if (uEduDao.insert(uEduItem)) {
+//						getRequest().getSession().setAttribute(Global.SessionKey_LoginUser, user);
+						addError("恭喜您，已成功个人信息！");
+					} else {
+						addError("对不起，您修改个人信息失败了！");
+					}
+					return this.redirect("/account/personalInfoEdu");
+				}
+			} else if (fn.equals("extend")) {
+				//用户扩展信息
+				UserExtendsDao userExtendsDao = new UserExtendsDao();
+				UserExtendsItem userExtendsItem = new UserExtendsItem();
+				if (userExtendsDao.existsByUserId(user.getId())) {
+					userExtendsItem.setUserId(user.getId());
+					userExtendsItem.setBirthday(userDetail.getBirthday());
+					userExtendsItem.setNativePlace(userDetail.getNativePlace());
+					if (userExtendsDao.update(userExtendsItem)) {
+//						getRequest().getSession().setAttribute(Global.SessionKey_LoginUser, user);
+						addError("恭喜您，已成功个人信息！");
+					} else {
+						addError("对不起，您修改个人信息失败了！");
+					}
+					return this.redirect("/account/personalInfoExtend");
+				} else {
+					userExtendsItem.setUserId(user.getId());
+					userExtendsItem.setBirthday(userDetail.getBirthday());
+					userExtendsItem.setNativePlace(userDetail.getNativePlace());
+					if (userExtendsDao.insert(userExtendsItem)) {
+//						getRequest().getSession().setAttribute(Global.SessionKey_LoginUser, user);
+						addError("恭喜您，已成功个人信息！");
+					} else {
+						addError("对不起，您修改个人信息失败了！");
+					}
+					return this.redirect("/account/personalInfoExtend");
+				}
 			}
 			
 		} catch (Exception e) {
