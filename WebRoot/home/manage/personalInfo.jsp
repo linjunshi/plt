@@ -88,8 +88,7 @@ Globals.page = "Manage_personalInfo";
 		                        <div class="form_item">
 		                            <label>个人简介：</label>
 		                            <div class="form_field">
-		                                <textarea id="remark" name="remark">${user.remark}</textarea>
-		                                <p class="form_des">说明注释文字可以放在这里啊</p>
+		                                <textarea id="remark" name="remark" class="xheditor-mfull" rows="60" cols="100" style="width:85%;height: 230px;" >${user.remark}</textarea>
 		                            </div>
 		                        </div>
 		                        <div class="form_action"><input type="submit" value="保存" /></div>

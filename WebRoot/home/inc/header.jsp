@@ -13,6 +13,8 @@
 <script type="text/javascript" src="${ctx}/resource/js/lang/message.${lang}.js"></script>
 <script type="text/javascript" src="${ctx}/resource/js/jquery.min.js"></script>
 <script type="text/javascript" src="${ctx}/resource/js/jquery.datetimepicker.js"></script>
+<script type="text/javascript" src="${ctx}/resource/js/xheditor-1.2.1.min.js"></script>
+<script type="text/javascript" src="${ctx}/resource/js/lang/xheditor.zh-cn.js"></script>
 <script type="text/javascript" src="${ctx}/resource/js/jquery.form.js"></script>
 <script type="text/javascript" src="${ctx}/resource/js/jquery.boxy.js"></script>
 <script type="text/javascript" src="${ctx}/resource/js/event.js"></script>
