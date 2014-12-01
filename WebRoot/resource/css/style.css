@@ -124,7 +124,7 @@ span.form_error, span.form_success{border-width:1px;display:inline-block;*displa
 .user_info_login { position:absolute;top:30px; right:80px; color:#fff; width:60px; height:30px; line-height:30px; text-align:center; background:#009871; }
 .user_info_signup {position:absolute;top:30px; right:10px;color:#666; width:60px; height:30px; line-height:30px; text-align:center; background:#ccc;}
 .user_info_signup:hover, .user_info_login:hover{color:#fff;background:#044a38;}
-.user_info_hidd p{float:left; height:30px; line-height:30px; margin:30px 10px 0 0;padding:0 10px;}
+.user_info_hidd p{float:left; height:30px; line-height:30px; margin:30px 18px 0 0;}
 .user_info_hidd .user_info_sid *{vertical-align:middle; margin-left:10px;}
 .user_info_hidd .user_info_sid span{ margin-left:5px;}
 
@@ -601,7 +601,6 @@ span.form_error, span.form_success{border-width:1px;display:inline-block;*displa
 .sh_add_opera p span{margin-left:15px;color:#808080;}
 .sh_add_opera .hide_remark {display:none;}
 .sh_add_opera .show_remark {display:block;}
-.hide_remark .chapter_remark {}
 .sh_add_chapter .pt11 { border-bottom:none !important; }
 .sh_add_chapter .pt11 a {margin-right:10px; padding:2px 10px; border:1px solid #ccc;}
 /* --------------------error tips------------------------- */

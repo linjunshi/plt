@@ -59,110 +59,131 @@ public class QuestionMAction extends TeacherBaseAction{
 		}
 		return this.redirect("/manage/question/list");
 	}
-	
-	@RequestMapping(value="/add", method=RequestMethod.GET)
-	public String addQuestion(){
+
+	/**
+	 * 打开新增、修改试题的页面
+	 * @return String
+	 */
+	@RequestMapping(value="/addOrModifyQuestion", method=RequestMethod.GET)
+	public String addOrModifyQuestion(){
+		try {
+			HttpServletRequest request = this.getRequest();
+			String questionId = request.getParameter("questionId");
+			if (MyUtils.isNull(questionId)) {
+				//打开新增页面
+				request.setAttribute("addOrModify", "add");
+			} else {
+				//打开修改页面
+				TrainQuestionDao tqDao = new TrainQuestionDao();
+				TrainQuestionItem tqItem = tqDao.selectById(questionId);
+				request.setAttribute("tqItem", tqItem);
+				request.setAttribute("addOrModify", "modify");
+			}
+		} catch (Exception e) {
+			Log.printStackTrace(e);
+		}
 		return "/manage/teacher/myTrainMAdd";
 	}
 	
 	/**
-	 * 新增一条试题记录到题库中
+	 * 新增、修改一条试题记录
 	 * @author huangweihua
 	 * @param tqItem
 	 * @param answer
 	 * @return
 	 */
-	@RequestMapping(value="/add", method=RequestMethod.POST)
-//	public String addQuestionPost(int questionType, String topic, String opt1, String opt2, String opt3, String opt4, String[] answer){
-	public String addQuestionPost(TrainQuestionItem tqItem, String[] answer){
+	@RequestMapping(value="/addOrModifyQuestion", method=RequestMethod.POST)
+	public String addOrModifyQuestion(TrainQuestionItem tqForm){
 		try {
 			UserItem user = this.currentUser();
 			if(user == null) {
 				addError("请您先登录用户！");
-				return this.redirect("/login");
+				return this.redirect("account/login");
 			}
 			
-			if (tqItem.getQuestionType() <= 0) {
-				addError("请您选择题目的类型！");
-				return "/manage/teacher/myTrainMAdd";
-			}
-			
-			if (!MyUtils.isNotNull(tqItem.getTopic())) {
-				addError("请您填写试题的题目！");
-				return "/manage/teacher/myTrainMAdd";
-			}
-			
-			if (!(answer != null)) {
-				addError("请您勾选正确的答案！");
-				return "/manage/teacher/myTrainMAdd";
-			}
-			
-			int sum = 0;
-			for (int i = 0; i < answer.length; i++) {
-				sum = sum + MyUtils.stringToInt(answer[i]);
-			}
-			TrainQuestionDao tqDao = new TrainQuestionDao();
-//			TrainQuestionItem tqItem = new TrainQuestionItem(); 
-//			tqItem.setTopic(topic);
-//			tqItem.setQuestionType(questionType);
-//			tqItem.setOpt1(opt1);
-//			tqItem.setOpt2(opt2);
-//			tqItem.setOpt3(opt3);
-//			tqItem.setOpt4(opt4);
-			tqItem.setId(MyUtils.getGUID());
-			tqItem.setAnswer(sum);
-			tqItem.setOwnerId(user.getId());
-			tqItem.setDel(0);
-			tqItem.setCts(new Date());
-			tqItem.setUts(new Date());
-			
-			if (tqDao.insert(tqItem)) {
-				addError("新增试题成功！");
-				return "/manage/teacher/myTrainMAdd";
-			}
-			
-		} catch (Exception e) {
-			Log.printStackTrace(e);
-		}
-		return FAIL;
-	}
-	
-	@RequestMapping("/modify")
-	public String modifyQuestion(String questionId){
-		try {
-			if (MyUtils.isNotNull(questionId)) {
-				TrainQuestionDao tqDao = new TrainQuestionDao();
-				TrainQuestionItem tqItem = tqDao.selectById(questionId);
+			if (tqForm != null) {
 				
-				HttpServletRequest request = this.getRequest();
-				request.setAttribute("tqItem", tqItem);
-			} else {
-				return this.redirect("/manage/question/list");
-			}
-		} catch (Exception e) {
-			Log.printStackTrace(e);
-		}
-		return "/manage/teacher/myTrainMUpdate";
-	}
-	
-	@RequestMapping(value = "/modifyPost",method=RequestMethod.POST)
-	public String modifyQuestionPost(TrainQuestionItem tqItem){
-		try {
-			if (tqItem != null) {
-				int sumAnswer = 0;
-				for (int i = 0; i < tqItem.getPageAnswer().length; i++) {
-					sumAnswer = sumAnswer + tqItem.getPageAnswer()[i];
+				if (tqForm.getQuestionType() <= 0) {
+					addError("请您选择题目的类型！");
+				}
+				if (MyUtils.isNull(tqForm.getTopic())) {
+					addError("请您填写试题的题目！");
+				}
+				if (tqForm.isSingleSelection()) {//单选题
+					if (tqForm.getAnswer() <= 0) {
+						addError("请您勾选正确的答案！");
+					}
+				} else if (tqForm.isMulChoice()) {//多选题
+					if (!(tqForm.getPageAnswer() != null)) {
+						addError("请您勾选正确的答案！");
+					}
 				}
 				
-				TrainQuestionDao tqDao = new TrainQuestionDao();
-				tqItem.setAnswer(sumAnswer);
-				tqItem.setUts(new Date());
-				tqDao.update(tqItem);
 				
+				if (!(errorSize() > 0)) {
+					if (MyUtils.isNull(tqForm.getId())) {
+						// id不为空，执行新增操作
+						TrainQuestionDao tqDao = new TrainQuestionDao();
+						TrainQuestionItem tqItem = new TrainQuestionItem(); 
+						tqItem.setId(MyUtils.getGUID());
+						tqItem.setTopic(tqForm.getTopic());
+						tqItem.setQuestionType(tqForm.getQuestionType());
+						tqItem.setOpt1(tqForm.getOpt1());
+						tqItem.setOpt2(tqForm.getOpt2());
+						tqItem.setOpt3(tqForm.getOpt3());
+						tqItem.setOpt4(tqForm.getOpt4());
+						if (tqForm.isSingleSelection()) {//单选题
+							tqItem.setAnswer(tqForm.getAnswer());
+						} else if (tqForm.isMulChoice()) {//多选题
+							int sumAnswer = 0;
+							for (int i = 0; i < tqForm.getPageAnswer().length; i++) {
+								sumAnswer = sumAnswer + tqForm.getPageAnswer()[i];
+							}
+							tqItem.setAnswer(sumAnswer);
+						}
+						tqItem.setRemark(tqForm.getRemark());
+						tqItem.setOwnerId(user.getId());
+						tqItem.setDel(0);
+						tqItem.setCts(new Date());
+						tqItem.setUts(new Date());
+						
+						if (tqDao.insert(tqItem)) {
+							addError("新增试题成功！");
+							return "/manage/teacher/myTrainMAdd";
+						}
+					} else {
+						// id不为空，执行修改操作
+						
+						
+						TrainQuestionDao tqDao = new TrainQuestionDao();
+						TrainQuestionItem tqItem = tqDao.selectById(tqForm.getId());
+						tqItem.setTopic(tqForm.getTopic());
+						tqItem.setQuestionType(tqForm.getQuestionType());
+						tqItem.setOpt1(tqForm.getOpt1());
+						tqItem.setOpt2(tqForm.getOpt2());
+						tqItem.setOpt3(tqForm.getOpt3());
+						tqItem.setOpt4(tqForm.getOpt4());
+						tqItem.setOwnerId(user.getId());
+						if (tqForm.isSingleSelection()) {//单选题
+							tqItem.setAnswer(tqForm.getAnswer());
+						} else if (tqForm.isMulChoice()) {//多选题
+							int sumAnswer = 0;
+							for (int i = 0; i < tqForm.getPageAnswer().length; i++) {
+								sumAnswer = sumAnswer + tqForm.getPageAnswer()[i];
+							}
+							tqItem.setAnswer(sumAnswer);
+						}
+						tqItem.setRemark(tqForm.getRemark());
+						tqItem.setUts(new Date());
+						if(tqDao.update(tqItem)){
+							return this.redirect("/manage/question/list");
+						}
+					}
+				}
 			}
 		} catch (Exception e) {
 			Log.printStackTrace(e);
 		}
-		return this.redirect("/manage/question/list");
+		return "/manage/teacher/myTrainMAdd";
 	}
 }

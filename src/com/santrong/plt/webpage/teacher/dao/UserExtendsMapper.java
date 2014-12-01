@@ -25,4 +25,6 @@ public interface UserExtendsMapper {
 	@Select("select count(*) as cn from user_extends where userId = #{userId}")
 	int existsByUserId(String userId);
 	
+	@Select("select * from user_extends where userId = #{userId}")
+	UserExtendsItem selectByUserId(String userId);
 }

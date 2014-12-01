@@ -6,7 +6,10 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.santrong.plt.log.Log;
+import com.santrong.plt.util.MyUtils;
 import com.santrong.plt.webpage.course.resource.file.dao.FileDao;
 import com.santrong.plt.webpage.course.resource.file.entry.FileItem;
 import com.santrong.plt.webpage.course.resource.file.entry.FileQuery;
@@ -51,5 +54,22 @@ public class FileMAction extends TeacherBaseAction {
 		return "manage/teacher/fileList";
 	}
 	
-	
+	/**
+	 * 删除课件
+	 * @return
+	 */
+	@RequestMapping(value="/delete",method=RequestMethod.POST)
+	public String delete(){
+		try {
+			HttpServletRequest request = getRequest();
+			String fileId = request.getParameter("fileId");
+			if (MyUtils.isNotNull(fileId)) {
+				FileDao fileDao = new FileDao();
+				fileDao.deleteById(fileId);
+			}
+		} catch (Exception e) {
+			Log.printStackTrace(e);
+		}
+		return this.redirect("/manage/file");
+	}
 }

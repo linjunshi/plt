@@ -3,7 +3,10 @@
 
 
 <div class="sh_title">
-    <h2>新建直播</h2>
+    <h2>
+    	<c:if test="${fn=='add'}">新建直播</c:if>
+    	<c:if test="${fn=='modify'}">修改直播</c:if>
+    </h2>
     <a href="${ctx}/manage/course/chapterEditor?courseId=${courseId}" class="sh_add">&#60;&#60;返回上级</a>
 </div>
 <div class="sh_form_con">
@@ -27,33 +30,28 @@
 				</div>
 			</div>
 			<div class="form_item">
-				<label for="chapterCount">时长：</label>
+				<label for="beginTime">直播开始时间：</label>
 				<div class="form_field">
-					<input placeholder="如：2" class="form_text" name="duration" id="duration" type="text" value="${live.duration}"> 小时
+					<input placeholder="格式：2014/01/01 59:59" class="form_text" name="beginTime" id="beginTime" type="text" value="<fmt:formatDate type="date" pattern="yyyy/MM/dd HH:mm" value="${live.beginTime}" />">
 				</div>
 			</div>
 			<div class="form_item">
-				<label for="beginTime">开始时间：</label>
+				<label for="chapterCount">课程时长：</label>
 				<div class="form_field">
-					<input placeholder="格式：2014-01-01 59:59:59" class="form_text" name="beginTime" id="beginTime" type="text" value="<fmt:formatDate type="both" value="${live.beginTime}" />">
-				</div>
-			</div>
-			<div class="form_item">
-				<label for="endTime">结束时间：</label>
-				<div class="form_field">
-					<input placeholder="格式：2014-01-01 59:59:59" class="form_text" name="endTime" id="endTime" type="text" value="<fmt:formatDate type="both" value="${live.endTime}" />">
-				</div>
-			</div>
-			<div class="form_item">
-				<label for="realname">资源路径：</label>
-				<div class="form_field">
-					<img src="" style="width:80px; height:60px;" class="small_preview" />
-					<a href="javascript:void(0);" id="changeCover">更改路径</a>
-					<input type="hidden" name="url" value="" />
+					<select name="duration" size="1" id="duration" class="inline_ele">
+						<option <c:if test="${live.duration==5}">selected="selected"</c:if> value="5">5分钟</option>
+						<option <c:if test="${live.duration==10}">selected="selected"</c:if> value="10">10分钟</option>
+						<option <c:if test="${live.duration==15}">selected="selected"</c:if> value="15">15分钟</option>
+						<option <c:if test="${live.duration==20}">selected="selected"</c:if> value="20">20分钟</option>
+						<option <c:if test="${live.duration==30}">selected="selected"</c:if> value="30">30分钟</option>
+						<option <c:if test="${live.duration==45}">selected="selected"</c:if> value="45">45分钟</option>
+						<option <c:if test="${live.duration==60}">selected="selected"</c:if> value="60">60分钟</option>
+						<option <c:if test="${live.duration==90}">selected="selected"</c:if> value="90">90分钟</option>
+					</select>
 				</div>
 			</div>
 			<div class="form_action">
-				<input class="btn_question" type="submit" value="保存" /> 
+				<input class="btn_question" type="submit" id="liveSubmit" name="liveSubmit" value="保存" /> 
 				<a class="btn_question" href="${ctx}/manage/course/chapterEditor?courseId=${courseId}">取消</a>
 			</div>
 		</form>

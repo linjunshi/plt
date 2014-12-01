@@ -55,10 +55,13 @@ Globals.page = "Manage_index";
 				                            <td>${file.remark}</td>
 				                            <td class="btn_question_operation">
 					                            <div class="btn_input">
-													<input type="submit" value="预览" />
+													<input type="submit" onclick="alert('开发中')" value="预览" />
 												</div>
 												<div class="btn_input">
-													<input type="submit" value="删除" />
+													<form action="${ctx}/manage/file/delete" method="post">
+														<input type="hidden" value="${file.id}" name="fileId" />
+														<input type="submit" value="删除" />
+													</form>
 												</div>
 				                            </td>
 				                        </tr>

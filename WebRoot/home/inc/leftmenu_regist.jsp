@@ -4,8 +4,7 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 			
 		<div class="sh_info_le">
-            <div class="sh_info_img"><img src="${ctx}/resource/images/003.jpg" width="160" height="100"></div>
-            <div><a href="${ctx}/account/personalInfo">帐号设置</a></div>
+            <div class="sh_info_img"><img src="${ctx}${sessionScope.loginUser.headPhoto}" width="160" height="100"></div>
             <div class="sh_list_switch">
                 <dl class="show">
                     <dd><a href="${ctx}/account/personalInfo">个人信息</a></dd>

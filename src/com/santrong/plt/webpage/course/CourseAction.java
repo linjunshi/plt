@@ -271,7 +271,7 @@ public class CourseAction extends BaseAction {
 		UserItem user = this.currentUser();
 		if(user == null) {
 			// 没登陆
-			return this.redirect("/login");
+			return this.redirect("/account/login");
 		}
 		
 		CommentDao commentDao = new CommentDao();
@@ -314,7 +314,7 @@ public class CourseAction extends BaseAction {
 			UserItem user = this.currentUser();
 			if (user == null) {
 				// 没登陆
-				return this.redirect("/login");
+				return this.redirect("/account/login");
 			}
 			
 			CollectCourseDao collectCourseDao = new CollectCourseDao();

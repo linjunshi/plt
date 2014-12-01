@@ -28,14 +28,15 @@
 				<div class="fast_navigate"></div>
 			</form>
 			<c:if test="${sessionScope.loginUser == null}">
-				<a href="${ctx }/account/login" class="user_info_login">登录</a>
-				<a href="${ctx }/account/regist" class="user_info_signup">注册</a>
+				<a href="${ctx}/account/login" class="user_info_login">登录</a>
+				<a href="${ctx}/account/regist" class="user_info_signup">注册</a>
 			</c:if>
 			<c:if test="${sessionScope.loginUser != null}">
 				<div class="user_info_hidd">
-					<p class="user_info_sid"><img src="003.jpg" width="30" width="30"><span>${sessionScope.loginUser.showName}</span></p>
+					<p class="user_info_sid"><img src="${ctx}${sessionScope.loginUser.headPhoto}" width="30" width="30"><span>${sessionScope.loginUser.showName}</span></p>
 					<p><a href="${ctx }/account/logout">注销</a></p>
 					<p><a href="${ctx }/study/course">管理中心</a></p>
+					<p><a href="${ctx}/account/personalInfo">帐号设置</a></p>
 				</div>
 			</c:if>
 		</div>

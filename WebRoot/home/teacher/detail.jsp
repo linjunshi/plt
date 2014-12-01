@@ -17,7 +17,7 @@ Globals.page = "Index_teacherDetail";
 			<div id="container_content">
 				<div class="th_box clr">
 					<div class="th_box_left">
-						<img src="${ctx}/resource/images/006.png" width="170" height="150">
+						<img src="${ctx}${teacher.headPhoto}" width="170" height="150">
 						<div class="profile_identity">
 							<p>${teacher.username}</p>
 							<p>所属学校：${teacher.schoolName}</p>

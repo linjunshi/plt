@@ -93,19 +93,18 @@ Globals.page = "Manage_courseAdd";
 		                                    <span>否</span> 
 			                            </div>
 			                        </div>
-									<div class="form_item">
-										<label>课程描述：</label>
-										<div class="form_field">
-											<textarea id="remark" name="remark">${course.remark}</textarea>
-											<p class="form_des">说明注释文字可以放在这里啊</p>
-										</div>
-									</div>
-									<div class="form_item">
+			                        <div class="form_item">
 										<label for="realname">课程封面：</label>
 										<div class="form_field">
 											<img src="${course.url}" style="width:80px; height:60px;" class="small_preview" />
 											<a href="javascript:void(0);" id="changeCover">更改封面</a>
 											<input type="hidden" name="url" value="${course.url}" />
+										</div>
+									</div>
+									<div class="form_item">
+										<label>课程描述：</label>
+										<div class="form_field">
+											<textarea id="remark" name="remark" class="xheditor-mfull" rows="60" cols="100" style="width:85%;height: 230px;" >${course.remark}</textarea>
 										</div>
 									</div>
 									<div class="form_action">

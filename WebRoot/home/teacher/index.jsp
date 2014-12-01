@@ -44,7 +44,7 @@ Globals.page = "Index_teacher";
 		        <div class="schoool_box_list clearfix">
 		            <ul>
 		            	<c:forEach items="${teacherList}" var="teacher" varStatus="st">
-		                <li class="<c:if test="${(st.index+1)%5==0}">margin_right_clear</c:if>"><a href="${ctx}/teacher/${teacher.id}.html"><img src="${ctx}/resource/images/93.jpg" width="220" height="140"></a>
+		                <li class="<c:if test="${(st.index+1)%5==0}">margin_right_clear</c:if>"><a href="${ctx}/teacher/${teacher.id}.html"><img src="${ctx}${teacher.headPhoto}" width="220" height="140"></a>
 		                    <h2>${teacher.showName}</h2>
 		                    <p>${teacher.schoolName}</p>
 		                </li>

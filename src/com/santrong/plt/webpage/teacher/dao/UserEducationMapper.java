@@ -18,7 +18,7 @@ public interface UserEducationMapper {
 
 	@Update("update user_education set "
 			+ "education = #{education},"
-			+ "position = #{position},"
+			+ "positional = #{positional},"
 			+ "graduateSchool = #{graduateSchool} "
 			+ "where userId = #{userId}")
 	int update(UserEducationItem userEducationItem);
@@ -26,4 +26,6 @@ public interface UserEducationMapper {
 	@Select("select count(*) as cn from user_education where userId = #{userId}")
 	int existsByUserId(String userId);
 	
+	@Select("select * from user_education where userId = #{userId}")
+	UserEducationItem selectByUserId(String userId);
 }

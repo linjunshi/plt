@@ -29,81 +29,121 @@ public class UserDao extends BaseDao{
 	
 	
 	public UserItem selectByUserName(String username) {
-		UserMapper mapper = this.getMapper(UserMapper.class);
-		if(mapper != null) {
-			return mapper.selectByUserName(username);
+		try {
+			UserMapper mapper = this.getMapper(UserMapper.class);
+			if(mapper != null) {
+				return mapper.selectByUserName(username);
+			}
+		} catch (Exception e) {
+			Log.printStackTrace(e);
 		}
 		return null;
 	}
 	
 	public UserItem selectById(String id) {
-		UserMapper mapper = this.getMapper(UserMapper.class);
-		if(mapper != null) {
-			return mapper.selectById(id);
+		try {
+			UserMapper mapper = this.getMapper(UserMapper.class);
+			if(mapper != null) {
+				return mapper.selectById(id);
+			}
+		} catch (Exception e) {
+			Log.printStackTrace(e);
 		}
 		return null;
 	}
 	
 	public boolean existsByUserName(String username) {
-		UserMapper mapper = this.getMapper(UserMapper.class);
-		if(mapper != null) {
-			return mapper.existsByUserName(username) > 0;
+		try {
+			UserMapper mapper = this.getMapper(UserMapper.class);
+			if(mapper != null) {
+				return mapper.existsByUserName(username) > 0;
+			}
+		} catch (Exception e) {
+			Log.printStackTrace(e);
 		}
 		return false;
 	}	
 	
 	public boolean existsByEmail(String email) {
-		UserMapper mapper = this.getMapper(UserMapper.class);
-		if(mapper != null) {
-			return mapper.existsByEmail(email) > 0;
+		try {
+			UserMapper mapper = this.getMapper(UserMapper.class);
+			if(mapper != null) {
+				return mapper.existsByEmail(email) > 0;
+			}
+		} catch (Exception e) {
+			Log.printStackTrace(e);
 		}
 		return false;
 	}		
 	
 	public boolean existsByPhone(String phone) {
-		UserMapper mapper = this.getMapper(UserMapper.class);
-		if(mapper != null) {
-			return mapper.existsByPhone(phone) > 0;
+		try {
+			UserMapper mapper = this.getMapper(UserMapper.class);
+			if(mapper != null) {
+				return mapper.existsByPhone(phone) > 0;
+			}
+		} catch (Exception e) {
+			Log.printStackTrace(e);
 		}
 		return false;
 	}		
 	
 	public int insert(UserItem user) {
-		UserMapper mapper = this.getMapper(UserMapper.class);
-		if(mapper != null) {
-			return mapper.insert(user);
+		try {
+			UserMapper mapper = this.getMapper(UserMapper.class);
+			if(mapper != null) {
+				return mapper.insert(user);
+			}
+		} catch (Exception e) {
+			Log.printStackTrace(e);
 		}
 		return 0;
 	}
 	
 	public int insertTmp(UserTmpItem tmp) {
-		UserMapper mapper = this.getMapper(UserMapper.class);
-		if(mapper != null) {
-			return mapper.insertTmp(tmp);
+		try {
+			UserMapper mapper = this.getMapper(UserMapper.class);
+			if(mapper != null) {
+				return mapper.insertTmp(tmp);
+			}
+		} catch (Exception e) {
+			Log.printStackTrace(e);
 		}
 		return 0;
 	}
 	
 	public UserTmpItem selectTmpByUserId(String userId) {
-		UserMapper mapper = this.getMapper(UserMapper.class);
-		if(mapper != null) {
-			return mapper.selectTmpByUserId(userId);
+		try {
+			UserMapper mapper = this.getMapper(UserMapper.class);
+			if(mapper != null) {
+				return mapper.selectTmpByUserId(userId);
+			}
+		} catch (Exception e) {
+			Log.printStackTrace(e);
 		}
 		return null;
 	}	
 	
 	public int updateTmp(UserTmpItem tmp) {
-		UserMapper mapper = this.getMapper(UserMapper.class);
-		if(mapper != null) {
-			return mapper.updateTmp(tmp);
+		try {
+			UserMapper mapper = this.getMapper(UserMapper.class);
+			if(mapper != null) {
+				return mapper.updateTmp(tmp);
+			}
+		} catch (Exception e) {
+			Log.printStackTrace(e);
 		}
 		return 0;
 	}	
 	
 	public int update(UserItem user) {
-		UserMapper mapper = this.getMapper(UserMapper.class);
-		if(mapper != null) {
-			return mapper.update(user);
+		try {
+			UserMapper mapper = this.getMapper(UserMapper.class);
+			if(mapper != null) {
+				return mapper.update(user);
+			}
+		} catch (Exception e) {
+			Log.printStackTrace(e);
 		}
 		return 0;
 	}
@@ -253,9 +293,13 @@ public class UserDao extends BaseDao{
 	
 	// 获取用户详细信息，包括扩展部分的详细信息
 	public UserDetailView selectDetailById(String id) {
-		UserMapper mapper = this.getMapper(UserMapper.class);
-		if(mapper != null) {
-			return mapper.selectDetailById(id);
+		try {
+			UserMapper mapper = this.getMapper(UserMapper.class);
+			if(mapper != null) {
+				return mapper.selectDetailById(id);
+			}
+		} catch (Exception e) {
+			Log.printStackTrace(e);
 		}
 		return null;
 	}
@@ -267,9 +311,13 @@ public class UserDao extends BaseDao{
 	 * @return 
 	 */
 	public List<UserItem> selectTeacherBySchoolId(String shcoolId) {
-		UserMapper mapper = this.getMapper(UserMapper.class);
-		if (mapper != null) {
-			return mapper.selectTeacherBySchoolId(shcoolId);
+		try {
+			UserMapper mapper = this.getMapper(UserMapper.class);
+			if (mapper != null) {
+				return mapper.selectTeacherBySchoolId(shcoolId);
+			}
+		} catch (Exception e) {
+			Log.printStackTrace(e);
 		}
 		return null;
 	}
@@ -281,9 +329,13 @@ public class UserDao extends BaseDao{
  	 * @return
  	 */
 	public UserCourseView selectTeacherByUserId(String id) {
-		UserMapper mapper = this.getMapper(UserMapper.class);
-		if (mapper != null) {
-			return mapper.selectTeacherByUserId(id);
+		try {
+			UserMapper mapper = this.getMapper(UserMapper.class);
+			if (mapper != null) {
+				return mapper.selectTeacherByUserId(id);
+			}
+		} catch (Exception e) {
+			Log.printStackTrace(e);
 		}
 		return null;
 	}
@@ -294,10 +346,14 @@ public class UserDao extends BaseDao{
 	 * @return
 	 */
 	public List<UserItem> selectByIds(String[] ids) {
-		String _ids = MyUtils.consistIds(ids);//组装IDS
-		UserMapper mapper = this.getMapper(UserMapper.class);
-		if(mapper != null) {
-			return mapper.selectByIds(_ids);
+		try {
+			String _ids = MyUtils.consistIds(ids);//组装IDS
+			UserMapper mapper = this.getMapper(UserMapper.class);
+			if(mapper != null) {
+				return mapper.selectByIds(_ids);
+			}
+		} catch (Exception e) {
+			Log.printStackTrace(e);
 		}
 		return null;
 	}
@@ -308,10 +364,14 @@ public class UserDao extends BaseDao{
 	 * @return
 	 */
 	public List<UserItem> selectByNotInIds(String[] ids) {
-		String _ids = MyUtils.consistIds(ids);//组装IDS
-		UserMapper mapper = this.getMapper(UserMapper.class);
-		if(mapper != null) {
-			return mapper.selectByNotInIds(_ids);
+		try {
+			String _ids = MyUtils.consistIds(ids);//组装IDS
+			UserMapper mapper = this.getMapper(UserMapper.class);
+			if(mapper != null) {
+				return mapper.selectByNotInIds(_ids);
+			}
+		} catch (Exception e) {
+			Log.printStackTrace(e);
 		}
 		return null;
 	}

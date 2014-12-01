@@ -2,6 +2,8 @@ package com.santrong.plt.webpage.teacher.entry;
 
 import java.util.Date;
 
+import com.santrong.plt.util.MyUtils;
+
 
 /**
  * @author huangweihua
@@ -20,6 +22,9 @@ public class UserDetailView {
 	private int role;
 	private String schoolId;
 	private String subjectId;
+	private String email;
+	private String phone;
+	private String idCard;
 	private String registIp;
 	private Date registTime;
 	private String lastLoginIp;
@@ -129,6 +134,30 @@ public class UserDetailView {
 	public void setSubjectId(String subjectId) {
 		this.subjectId = subjectId;
 	}
+	
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getPhone() {
+		return phone;
+	}
+
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+
+	public String getIdCard() {
+		return idCard;
+	}
+
+	public void setIdCard(String idCard) {
+		this.idCard = idCard;
+	}
 
 	public String getRegistIp() {
 		return registIp;
@@ -224,5 +253,14 @@ public class UserDetailView {
 
 	public void setNativePlace(String nativePlace) {
 		this.nativePlace = nativePlace;
+	}
+	
+	// 获取头像
+	public String getHeadPhoto() {
+		if(MyUtils.isNotNull(this.url)) {
+			return url;
+		}else {
+			return "/resource/photo/person01.jpg";
+		}
 	}
 }
