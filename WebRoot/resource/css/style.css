@@ -404,7 +404,6 @@ span.form_error, span.form_success{border-width:1px;display:inline-block;*displa
 .th_te { width:96%; height:30px; margin:0 20px; border:1px #dbdbdb solid;}
 .th_text_but{position: absolute;right: 30px;bottom:10px; width:60px; padding:2px 10px; background:#009871; color:#fff; text-align:center;}
 
-
 /*----------------做作业------------------*/
 .sh_work { width:960px; height:50px; border-bottom:1px #dbdbdb dashed; padding:10px 0 0 0;}
 .sh_work_img { width:60px; float:left;}
@@ -440,16 +439,8 @@ span.form_error, span.form_success{border-width:1px;display:inline-block;*displa
 
 
 /*-------------------2014.10.28 by huangwh------------------------*/
-.th_lea { width:99%;  margin-bottom:5px; position:relative;}
-.th_lea ul li {border-bottom:1px #dbdbdb dashed;}
-.th_img_user { float:left; margin:15px;}
-.th_mr2 { float:left; display:block; width:880px; margin:10px 0 0 20px; overflow:hidden;}
-.th_time { float:right; display:block;margin:80px 30px 0 0px;}
-.th_time a{ margin-left:20px; }
-.th_text_i { margin-bottom:40px;}
-.th_te { width:96%; height:30px; margin:0 20px; border:1px #dbdbdb solid;}
-.th_text_but{position: absolute;right: 30px;bottom:10px; width:60px; padding:2px 10px; background:#009871; color:#fff; text-align:center;}
 
+.th_post_content {float:left;}
 
 /*--------------------老师详细-----------------------*/
 .th_box { width:1200px; background:#f5f5f5; padding-bottom:10px;}
