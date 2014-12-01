@@ -64,7 +64,7 @@ public interface ChapterMapper {
 	 * @param courseId
 	 * @return
 	 */
-	@Select("select max(priority) from course_chapter where courseId = #{courseId}")
+	@Select("select ifnull(max(priority),0) from course_chapter where courseId = #{courseId}")
 	int selectMaxPriority(String courseId);
 	
 	/**
@@ -100,7 +100,7 @@ public interface ChapterMapper {
 	 * @param chapterId
 	 * @return
 	 */
-	@Select("select max(priority) from course_chapter_to_resource where chapterId = #{chapterId}")
+	@Select("select ifnull(max(priority),0) from course_chapter_to_resource where chapterId = #{chapterId}")
 	int selectCRMaxPriority(String chapterId);
 	
 	/**

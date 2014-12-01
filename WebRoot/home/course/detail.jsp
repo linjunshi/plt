@@ -138,14 +138,14 @@ Globals.page = "Index_courseDetail";
 								<div class="th_post_content">
 									<p>${comment.remark}</p>
 								</div>
-							<!-- 	<div class="th_post_footer">
+							<!--<div class="th_post_footer">
 									<a href="javascript:void(0);" class="th_btn_upvote">(<em>2120</em>)</a>
 									<a href="javascript:void(0);" class="th_btn_reply">回复(<em>98</em>)</a>
-								</div> -->
+								</div>
 								<div class="th_text_i"	>
 									<label><textarea name="th" cols="2" rows="3" class="th_te"></textarea></label>
 									<a href="javascript:void(0);" class="th_text_but">提交</a>
-								</div>
+								</div> -->
 							</li>
 						</c:forEach>
 					</ul>
