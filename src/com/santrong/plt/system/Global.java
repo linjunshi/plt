@@ -22,6 +22,7 @@ public class Global {
     public static String Version = "";
     public static String Title = "XXX系统";
     public static String Language = "zh_CN";
+    public static String PltDomain= "plttest.santrong.com";
     
     /*
      * [Ftp]
