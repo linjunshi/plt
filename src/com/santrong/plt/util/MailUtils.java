@@ -19,9 +19,8 @@ public class MailUtils {
 	
 	    private static final String smtpServer = "smtp.exmail.qq.com";//发件服务器
 	    //private static final String smtpServer = "smtp.gmail.com";//发件服务器
-	    private static final String account = "wei-nianjie@santrong.com";//发件用户名
-//	    private static final String pwd = "12345";//发件密码
-	    private static final String pwd = "weijie1996815";//发件密码
+	    private static final String account = "santrong@santrong.com";//发件用户名
+	    private static final String pwd = "sanjian20140409";//发件密码
 
 	    public static int sendMail(String address, String subject, String content) {
 	        //int rs = -1;

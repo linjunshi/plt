@@ -14,8 +14,8 @@ public class Test {
 	
 	public static void main(String[] args) {
 
-		String a = "深圳市";
-		System.out.println(a.substring(0, a.length() - 1));
+		String a = System.getProperty("os.name");
+		System.out.print(a);
 		
 	}
 }

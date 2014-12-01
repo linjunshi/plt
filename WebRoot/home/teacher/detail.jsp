@@ -17,7 +17,7 @@ Globals.page = "Index_teacherDetail";
 			<div id="container_content">
 				<div class="th_box clr">
 					<div class="th_box_left">
-						<img src="${ctx}/resource/images/006.png" width="170" height="150">
+						<img src="${ctx}${teacher.headPhoto}" width="170" height="150">
 						<div class="profile_identity">
 							<p>${teacher.username}</p>
 							<p>所属学校：${teacher.schoolName}</p>
@@ -47,7 +47,7 @@ Globals.page = "Index_teacherDetail";
 						<ul class="th_items_as clr">
 	            			<c:forEach items="${courseList}" var="course" varStatus="clt">
 								<li class="th_items">
-									<a href="${ctx}/course/${course.id}.html"><img src="${ctx}/resource/images/356.jpg" width="240" height="160"></a>
+									<a href="${ctx}/course/${course.id}.html"><img src="${ctx}${course.thumbnail}" width="240" height="160"></a>
 									<div class="titi">
 										<strong>${course.courseName}</strong>
 									</div>

@@ -80,7 +80,7 @@ Globals.page = "Manage_personalInfo";
 								<div class="form_item">
 										<label for="realname">上传头像：</label>
 										<div class="form_field">
-											<img src="" style="width:80px; height:60px;" class="small_preview" />
+											<img src="${user.headPhoto}" style="width:80px; height:60px;" class="small_preview" />
 											<a href="javascript:void(0);" id="changeCover">更改头像</a>
 											<input type="hidden" id="url" name="url" value="${user.url}" />
 										</div>

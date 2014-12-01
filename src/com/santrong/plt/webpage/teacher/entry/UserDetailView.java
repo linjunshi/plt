@@ -2,6 +2,8 @@ package com.santrong.plt.webpage.teacher.entry;
 
 import java.util.Date;
 
+import com.santrong.plt.util.MyUtils;
+
 
 /**
  * @author huangweihua
@@ -251,5 +253,14 @@ public class UserDetailView {
 
 	public void setNativePlace(String nativePlace) {
 		this.nativePlace = nativePlace;
+	}
+	
+	// 获取头像
+	public String getHeadPhoto() {
+		if(MyUtils.isNotNull(this.url)) {
+			return url;
+		}else {
+			return "/resource/photo/person01.jpg";
+		}
 	}
 }

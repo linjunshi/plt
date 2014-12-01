@@ -2,6 +2,8 @@ package com.santrong.plt.webpage.teacher.entry;
 
 import java.util.Date;
 
+import com.santrong.plt.util.MyUtils;
+
 /**
  * @author weinianjie
  * @date 2014年7月14日
@@ -178,4 +180,13 @@ public class UserItem {
 		return (role & Role_God) == Role_God;
 	}
 	
+	
+	// 获取头像
+	public String getHeadPhoto() {
+		if(MyUtils.isNotNull(this.url)) {
+			return url;
+		}else {
+			return "/resource/photo/person01.jpg";
+		}
+	}
 }

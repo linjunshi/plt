@@ -96,9 +96,9 @@ Globals.page = "Manage_courseAdd";
 			                        <div class="form_item">
 										<label for="realname">课程封面：</label>
 										<div class="form_field">
-											<img src="" style="width:80px; height:60px;" class="small_preview" />
+											<img src="${course.url}" style="width:80px; height:60px;" class="small_preview" />
 											<a href="javascript:void(0);" id="changeCover">更改封面</a>
-											<input type="hidden" name="url" value="" />
+											<input type="hidden" name="url" value="${course.url}" />
 										</div>
 									</div>
 									<div class="form_item">

@@ -1,5 +1,7 @@
 package com.santrong.plt.system;
 
+import com.santrong.plt.util.SystemUtils;
+
 /**
  * @author weinianjie
  * @date 2014年8月8日
@@ -7,12 +9,22 @@ package com.santrong.plt.system;
  */
 public class DirDefine {
 	// 部署环境
-	public static final String ShellDir 		= "/opt/PLT/Service/webservice/webapp/shell";				// 所有shell脚本目录
-//	public static final String updateFileDir 	= "/opt/AIO/Service/update";							// 升级文件放置目录
+	public static final String ShellDir;								// 所有shell脚本目录
+	public static final String UpdateFileDir;					// 升级文件放置目录
 
 	
-	// 开发环境
-//	public static final String ShellDir 		= "E:/workspace/plt/linuxDir/opt/PLT/Service/webservice/webapp/shell";				// 所有shell脚本目录
-	public static final String updateFileDir 		= "E:/upload";				// 上传文件
-	
+	static {
+		
+		// 开发环境
+		if(SystemUtils.getOsType() == SystemUtils.WINDOWS) {
+			ShellDir = "E:/workspace/plt/linuxDir/opt/AIO/Service/webservice/webapp/shell";
+			UpdateFileDir = "E:/workspace/data/upload";
+			
+		// 部署环境
+		}else{
+			ShellDir = "/opt/AIO/Service/webservice/webapp/shell";
+			UpdateFileDir = "/RecData/upload";
+		}
+		
+	}
 }

@@ -19,7 +19,7 @@ import com.santrong.plt.webpage.course.entry.CourseView;
  */
 public interface CourseMapper {
 	
-	@Select("select a.id,a.courseName,a.price,a.saleCount,b.subjectName,d.showName from course a "
+	@Select("select a.id,a.courseName,a.url,a.price,a.saleCount,b.subjectName,d.showName from course a "
 			+ "left join subject b on a.subjectId=b.id "
 			+ "left join grade c on a.gradeId=c.id "
 			+ "left join user d on a.ownerId=d.id "
@@ -106,6 +106,7 @@ public interface CourseMapper {
 			+ "courseName = #{courseName},"
 			+ "teacher = #{teacher},"
 			+ "price = #{price},"
+			+ "url = #{url},"
 			+ "live = #{live},"
 			+ "endTime = #{endTime},"
 			+ "gradeId = #{gradeId},"

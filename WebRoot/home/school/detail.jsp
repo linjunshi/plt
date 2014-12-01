@@ -54,7 +54,7 @@ Globals.page = "Index_schoolDetail";
 			                        
 			                        <c:forEach items="${courseList}"  var="course" varStatus="ct">
 				                        <li class="<c:if test="${ct.count%4==0}">margin_right_clear</c:if>">
-				                        	<a href="${ctx}/course/${course.id}.html" target="_blank"><img src="${ctx}/resource/photo/03.jpg" width="220" height="140"></a>
+				                        	<a href="${ctx}/course/${course.id}.html" target="_blank"><img src="${ctx}${course.thumbnail}" width="220" height="140"></a>
 				                            <h2>${course.courseName}</h2>
 				                            <p><b>${course.price}</b>元</p>
 				                            <p><span class="sch_unm">${course.commentCount}</span>评论</p>

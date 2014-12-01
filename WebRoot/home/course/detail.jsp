@@ -17,7 +17,7 @@ Globals.page = "Index_courseDetail";
 		<div id="container_content">
 		    <div class="detailPrimary clr">
 				<div class="detai_img">
-					<img src="${ctx}/resource/images/356.jpg" width="290" height="200" />
+					<img src="${ctx}${course.thumbnail}" width="290" height="200" />
 					<a href="javascript:void(0)" id="coll_course" class="detai_coll">收藏课程</a>
 					<!-- <a href="javascript:void(0);" class="detai_share">分享给朋友</a> -->
 					<input type="hidden" name="courseId" value="${course.id}"/>

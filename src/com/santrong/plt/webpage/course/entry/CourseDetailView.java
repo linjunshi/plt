@@ -3,6 +3,8 @@ package com.santrong.plt.webpage.course.entry;
 import java.util.Date;
 import java.util.List;
 
+import com.santrong.plt.util.MyUtils;
+
 
 /**
  * @author weinianjie
@@ -33,6 +35,15 @@ public class CourseDetailView {
 	private List<ChapterDetailView> chapterDetailList;
 	private List<CommentUserView> commentList;
 	
+	
+	// 获取缩略图
+	public String getThumbnail() {
+		if(MyUtils.isNotNull(this.url)) {
+			return url;
+		}else {
+			return "/resource/photo/course01.jpg";
+		}
+	}	
 	
 	public int getCommentCount() {
 		return commentCount;

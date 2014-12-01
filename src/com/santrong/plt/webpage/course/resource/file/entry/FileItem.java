@@ -79,5 +79,4 @@ public class FileItem {
 	public void setUts(Date uts) {
 		this.uts = uts;
 	}
-	
 }

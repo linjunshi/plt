@@ -47,7 +47,7 @@ public class ApplyTeacherMAction extends StudentBaseAction {
 		user.setSchoolId(form.getSchoolId());
 		user.setSubjectId(form.getSubjectId());
 		user.setPhone(form.getPhone());
-		// TODO 身份证
+		user.setIdCard(form.getIdCard());
 		user.setRemark(form.getRemark());
 		user.setRole(user.getRole()|UserItem.Role_Teacher);// 加上老师权限
 		user.setUts(new Date());

@@ -48,7 +48,7 @@ Globals.page = "Manage_index";
 				                        <tr>
 				                            <td>${ct.index + 1}</td>
 				                            <td class="sh_h_im">
-				                            	<a href="${ctx}/course/${course.id}.html" target="_blank"><img src="${ctx}/resource/images/003.jpg"></a>
+				                            	<a href="${ctx}/course/${course.id}.html" target="_blank"><img src="${ctx}${course.thumbnail}" width="90" height="90"></a>
 				                            	<a href="${ctx}/course/${course.id}.html" target="_blank">${course.courseName}</a>
 				                            	<p>共${course.chapterCount}课时</p>
 				                            </td>
@@ -75,7 +75,7 @@ Globals.page = "Manage_index";
 			                    <tfoot>
 			                        <tr>
 			                            <td colspan="6">
-				                            <c:set var="basicUrl" value="${ctx}/study/course" />
+				                            <c:set var="basicUrl" value="${ctx}/manage/course" />
 				            				<%@ include file="../../inc/pagination.jsp"%>
 				            			</td>
 			                        </tr>
