@@ -36,7 +36,6 @@
 					<p class="user_info_sid"><img src="${ctx}${sessionScope.loginUser.headPhoto}" width="30" width="30"><span>${sessionScope.loginUser.showName}</span></p>
 					<p><a href="${ctx }/account/logout">注销</a></p>
 					<p><a href="${ctx }/study/course">管理中心</a></p>
-					<p><a href="${ctx}/account/personalInfo">帐号设置</a></p>
 				</div>
 			</c:if>
 		</div>

@@ -14,8 +14,8 @@ public class Test {
 	
 	public static void main(String[] args) {
 
-		String a = System.getProperty("os.name");
-		System.out.print(a);
+		char c =(char)((int)(Math.floor(Math.random() * 26)) + 'a');
+		System.out.print(c);
 		
 	}
 }

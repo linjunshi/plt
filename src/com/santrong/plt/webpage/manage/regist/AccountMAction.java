@@ -113,6 +113,64 @@ public class AccountMAction extends RegistBaseAction {
 	}
 	
 	
+	
+	/**
+	 * 打开修改密码页面
+	 * @return
+	 */
+	@RequestMapping("/changePwd")
+	public String changePsw() {
+		return "manage/regist/pwdChange";
+	}
+	
+	/**
+	 * 修改密码
+	 * @param oldPwd
+	 * @param newPwd
+	 * @param comfirmPwd
+	 * @return
+	 */
+	@RequestMapping(value = "/changePwdPost",method=RequestMethod.POST)
+	public String changePwdPost(String oldPwd, String newPwd, String comfirmPwd) {
+		try {
+			
+			UserItem user = this.currentUser();
+			if(user == null) {
+				return this.redirect("/account/login");
+			}
+			
+			if (MyUtils.isNull(oldPwd)) {
+				addError("请输入您的原始密码！");
+			}
+			if (MyUtils.isNull(newPwd)) {
+				addError("请输入您的新密码！");
+			}
+			if (MyUtils.isNull(comfirmPwd)) {
+				addError("请输入您的确认新密码！");
+			}
+			if(!user.getPassword().equals(MyUtils.getMD5(oldPwd))) {
+				addError("您输入的原始密码有误，请重新输入！");
+			}
+			if(!newPwd.equals(comfirmPwd)) {
+				addError("您输入的新密码和确认新密码不一致，请重新输入！");
+			}
+			if (!(errorSize() > 0)) {
+				UserDao userDao = new UserDao();
+				user.setPassword(MyUtils.getMD5(newPwd));
+				user.setUts(new Date());
+				if (userDao.update(user) > 0) {
+					getRequest().getSession().setAttribute(Global.SessionKey_LoginUser, user);
+					addError("恭喜您，已成功修改密码！");
+				} else {
+					addError("对不起，您修改密码失败了，请重新操作！");
+				}
+			}
+		} catch (Exception e) {
+			Log.printStackTrace(e);
+		}
+		return "manage/pwdChange";
+	}	
+	
 	/**
 	 * 打开个人信息-->基本信息页面
 	 * @return
@@ -133,7 +191,7 @@ public class AccountMAction extends RegistBaseAction {
 		} catch (Exception e) {
 			Log.printStackTrace(e);
 		}
-		return "manage/personalInfo";
+		return "manage/regist/personalInfo";
 	}
 	
 	/**
@@ -149,14 +207,13 @@ public class AccountMAction extends RegistBaseAction {
 				return this.redirect("/account/login");
 			}
 			if (userForm == null) {
-				return "manage/personalInfo";
+				return "manage/regist/personalInfo";
 			}
 			
 			//用户基本信息
 			UserDao userDao = new UserDao();
 			user.setShowName(userForm.getShowName());
 			user.setGender(userForm.getGender());
-			user.setUsername(userForm.getUsername());
 			user.setIdCard(userForm.getIdCard());
 			user.setPhone(userForm.getPhone());
 			user.setEmail(userForm.getEmail());
@@ -197,7 +254,7 @@ public class AccountMAction extends RegistBaseAction {
 		} catch (Exception e) {
 			Log.printStackTrace(e);
 		}
-		return "manage/personalInfoEdu";
+		return "manage/regist/personalInfoEdu";
 	}
 	
 	@RequestMapping(value="/personalInfoEdu",method=RequestMethod.POST)
@@ -261,7 +318,7 @@ public class AccountMAction extends RegistBaseAction {
 		} catch (Exception e) {
 			Log.printStackTrace(e);
 		}
-		return "manage/personalInfoExtend";
+		return "manage/regist/personalInfoExtend";
 	}
 	
 	@RequestMapping(value="/personalInfoExtend",method=RequestMethod.POST)
@@ -322,7 +379,7 @@ public class AccountMAction extends RegistBaseAction {
 				return this.redirect("/account/login");
 			}
 			if (userDetail == null) {
-				return "manage/personalInfo";
+				return "manage/regist/personalInfo";
 			}
 			
 			HttpServletRequest request = getRequest();
