@@ -26,10 +26,12 @@ import com.santrong.plt.opt.grade.GradeLevelEntry;
 import com.santrong.plt.system.Global;
 import com.santrong.plt.util.MyUtils;
 import com.santrong.plt.webpage.BaseAction;
+import com.santrong.plt.webpage.course.dao.BuyCourseDao;
 import com.santrong.plt.webpage.course.dao.ChapterDao;
 import com.santrong.plt.webpage.course.dao.CollectCourseDao;
 import com.santrong.plt.webpage.course.dao.CommentDao;
 import com.santrong.plt.webpage.course.dao.CourseDao;
+import com.santrong.plt.webpage.course.entry.BuyItem;
 import com.santrong.plt.webpage.course.entry.ChapterAndResourceEntry;
 import com.santrong.plt.webpage.course.entry.ChapterDetailView;
 import com.santrong.plt.webpage.course.entry.CollectionItem;
@@ -128,6 +130,7 @@ public class CourseAction extends BaseAction {
 
 		// 构建查询条件
 		CourseQuery courseQuery = new CourseQuery();
+		courseQuery.setStatus(CourseItem.Status_Publish);
 		courseQuery.setPageNum(page);
 		courseQuery.setAreaCode(area.getCityCode());
 		if(MyUtils.isNotNull(subject) && !subject.equals("all")) {
@@ -314,7 +317,7 @@ public class CourseAction extends BaseAction {
 			UserItem user = this.currentUser();
 			if (user == null) {
 				// 没登陆
-				return this.redirect("/account/login");
+				return "loginPage";
 			}
 			
 			CollectCourseDao collectCourseDao = new CollectCourseDao();
@@ -341,4 +344,49 @@ public class CourseAction extends BaseAction {
 		}
 		return SUCCESS;
 	}
+	
+	/**
+	 * 购买
+	 * @param courseId
+	 * @return
+	 */
+	@RequestMapping(value="/buy", method=RequestMethod.POST)
+	@ResponseBody
+	public String buyCourse(String courseId) {
+		try {
+			// 获取当前用户对象信息
+			UserItem user = this.currentUser();
+			if (user == null) {
+				// 没登陆
+				return "loginPage";
+			}
+			
+			BuyCourseDao buyCourseDao = new BuyCourseDao();
+			// 如果没搜藏过
+			if(!buyCourseDao.exists(courseId, user.getId())) {
+				ThreadUtils.beginTranx();
+				// 往课程收藏表插入一条记录
+				BuyItem buy = new BuyItem();
+				buy.setId(MyUtils.getGUID());
+				buy.setUserId(user.getId());
+				buy.setCourseId(courseId);
+				buy.setCts(new Date());
+				buy.setUts(new Date());
+				buyCourseDao.insert(buy);
+
+				// 购买量自增
+				CourseDao courseDao = new CourseDao();
+				courseDao.addBuy(courseId);
+				ThreadUtils.commitTranx();
+			}else{
+				return "已经购买过了";
+			}
+
+		} catch (Exception e) {
+			ThreadUtils.rollbackTranx();
+			Log.printStackTrace(e);
+			return FAIL;
+		}
+		return SUCCESS;
+	}	
 }

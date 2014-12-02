@@ -24,7 +24,7 @@ public interface CourseMapper {
 			+ "left join grade c on a.gradeId=c.id "
 			+ "left join user d on a.ownerId=d.id "
 			+ "left join school e on d.schoolId=e.id "
-			+ "where c.gradeGroup=#{gradeGroup} and e.areaCode like #{areaCode} "
+			+ "where c.gradeGroup=#{gradeGroup} and e.areaCode like #{areaCode} and status = 1 "
 			+ "order by a.cts limit 10")
 	List<CourseView> selectForIndexList(@Param("gradeGroup")int gradeGroup, @Param("areaCode")String areaCode);
 	
@@ -41,7 +41,7 @@ public interface CourseMapper {
 	 * @param  ownerId
 	 * @return List<CourseItem>
 	 */
-	@Select("select * from course where ownerId = #{userid}")
+	@Select("select * from course where ownerId = #{userid} and status != -1")
 	List<CourseItem> selectByUserId(String userid);
 	
 	/**
@@ -50,7 +50,7 @@ public interface CourseMapper {
 	 * @param  schoolId
 	 * @return List<CourseItem>
 	 */
-	@Select("select a.*, b.* from course a LEFT JOIN user b on a.ownerId = b.id where b.schoolId = #{schoolId} ORDER BY a.cts DESC;")
+	@Select("select a.*, b.* from course a LEFT JOIN user b on a.ownerId = b.id where b.schoolId = #{schoolId} and a.status != -1 ORDER BY a.cts DESC;")
 	List<CourseItem> selectCourseBySchoolId(String schoolId);
 	
 	/**
@@ -61,6 +61,14 @@ public interface CourseMapper {
 	 */
 	@Update("update course set collectCount = (collectCount + 1) where id = #{id}")
 	int addCollection(String id);
+	
+	/**
+	 * 购买人数自加
+	 * @param id
+	 * @return
+	 */
+	@Update("update course set saleCount = (saleCount + 1) where id = #{id}")
+	int addBuy(String id);	
 
 	/**
 	 * 取消收藏，修改该课程的收藏数量,自动减1
@@ -70,6 +78,14 @@ public interface CourseMapper {
 	 */
 	@Update("update course set collectCount = (collectCount - 1) where id = #{id}")
 	int removeCollection(String id);	
+	
+	/**
+	 * 发布课程
+	 * @param courseId
+	 * @return
+	 */
+	@Update("update course set status=1, uts=now() where id = #{courseId}")
+	int publishCourse(String courseId);
 	
 	/**
 	 * 新增一条评论时，修改该课程的评论数量,自动加1
@@ -94,7 +110,7 @@ public interface CourseMapper {
 	 * @param courseItem
 	 * @return
 	 */
-	@Insert("insert into course values(#{id},#{courseName},#{teacher},#{price},#{url},#{live},#{endTime},#{gradeId},#{subjectId},#{remark},#{saleCount},#{collectCount},#{commentCount},#{chapterCount},#{ownerId},#{cts},#{uts})")
+	@Insert("insert into course values(#{id},#{courseName},#{teacher},#{price},#{url},#{live},#{endTime},#{gradeId},#{subjectId},#{remark},#{saleCount},#{collectCount},#{commentCount},#{chapterCount},#{ownerId},#{status},#{cts},#{uts})")
 	int insert(CourseItem courseItem);
 	
 	/**
@@ -117,6 +133,7 @@ public interface CourseMapper {
 			+ "commentCount = #{commentCount},"
 			+ "chapterCount = #{chapterCount},"
 			+ "ownerId = #{ownerId},"
+			+ "status = #{status},"
 			+ "cts = #{cts},"
 			+ "uts = #{uts}"
 			+ " where id = #{id}")
@@ -125,7 +142,8 @@ public interface CourseMapper {
 	@Select("select * from course where id = #{id}")
 	CourseItem selectById(String id);
 	
-	@Delete("delete from course where id = #{id}")
+//	@Delete("delete from course where id = #{id}")
+	@Delete("update course set status = -1 where id = #{id}")
 	int deleteById(String id);
 
 	@Select("select a.* from course a left join course_chapter b on a.id=b.courseId where b.id=#{chapterId}")

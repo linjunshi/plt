@@ -25,9 +25,14 @@ public class CourseItem {
 	private int commentCount;
 	private int chapterCount;
 	private String remark;
+	private String status;// -1删除，0未发布，1发布
 	private Date cts;
 	private Date uts;
 	
+	
+	public static final int Status_Del = -1;
+	public static final int Status_Normal = 0;
+	public static final int Status_Publish = 1;
 	
 	// 获取缩略图
 	public String getThumbnail() {
@@ -38,6 +43,13 @@ public class CourseItem {
 		}
 	}		
 	
+	
+	public String getStatus() {
+		return status;
+	}
+	public void setStatus(String status) {
+		this.status = status;
+	}
 	public int getLive() {
 		return live;
 	}

@@ -1,9 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ include file="../inc/common.jsp"%>
+<%@ include file="../../inc/common.jsp"%>
 <c:set var="title" value="三简在线教育平台" ></c:set>
 <c:set var="keywords" value="456" ></c:set>
 <c:set var="description" value="789" ></c:set>
-<%@ include file="../inc/header.jsp"%>
+<%@ include file="../../inc/header.jsp"%>
 <script type="text/javascript">
 var Globals = {};
 Globals.ctx = "${ctx}";
@@ -15,11 +15,11 @@ Globals.page = "Manage_index";
 </style>
 </head>
 <body>
-	<%@ include file="../inc/top_bg.jsp"%>
+	<%@ include file="../../inc/top_bg.jsp"%>
 	<div id="container_box">
 		<div id="container_content">
 			<div class="sectionMain clr">
-				<%@ include file="../inc/leftmenu_regist.jsp"%>
+				<%@ include file="../../inc/leftmenu_regist.jsp"%>
 				<div class="sh_info_r">
 					<div class="sh_title">
 						<h2>修改密码</h2>
@@ -38,7 +38,7 @@ Globals.page = "Manage_index";
 									<label for="pwd">原始密码：</label>
 									<div class="form_field">
 										<input placeholder="请输入您的原密码！" name="oldPwd" id="oldPwd" class="form_text" type="password"/> 
-										<span class="form_error"><a href="${ctx}/account/forgotPwd">忘记密码</a></span>
+										<span class="form_error"><a href="${ctx}/account/forgotPwd" target="_blank">忘记密码</a></span>
 									</div>
 								</div>
 								<div class="form_item">
@@ -65,6 +65,6 @@ Globals.page = "Manage_index";
 		</div>
 	</div>
 
-	<%@ include file="../inc/friendlylink.jsp"%>
+	<%@ include file="../../inc/friendlylink.jsp"%>
 </body>
 </html>

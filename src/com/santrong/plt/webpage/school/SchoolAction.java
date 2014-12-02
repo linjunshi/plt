@@ -120,6 +120,7 @@ public class SchoolAction extends BaseAction {
 		// 查询学校里所有开设的课程
 		CourseDao courseDao = new CourseDao();
 		CourseQuery courseQuery = new CourseQuery();
+		courseQuery.setStatus(CourseItem.Status_Publish);
 		courseQuery.setGradeEnName(grade);
 		courseQuery.setLevelEnName(level);
 		courseQuery.setSchoolId(school.getId());

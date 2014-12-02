@@ -70,6 +70,10 @@ body {color: #666;font: 12px/1.8em Arial, Helvetica, sans-serif;background:#FFF;
           <label class="login"><fmt:message key="index_user_password"/>：</label>
           <input name="password" type="password" size="20" class="text2">
         </div>
+        <div class="loginuser">
+          <label class="login"></label>
+          <a href="${ctx}/account/forgotPwd" target="_blank">忘记密码</a>
+        </div>        
         <div class="loginbut">
 		<input type="submit" value="登录" class="btn-login" name="commit" />
       </div>

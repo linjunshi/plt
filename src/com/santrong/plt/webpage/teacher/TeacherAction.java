@@ -148,6 +148,7 @@ public class TeacherAction extends BaseAction {
 		CourseDao courseDao = new CourseDao();
 		CourseQuery query = new CourseQuery();
 		query.setUserId(teacher.getId());
+		query.setStatus(CourseItem.Status_Publish);
 		query.setLevelEnName(level);
 		query.setGradeEnName(grade);
 		query.setPageSize(3);

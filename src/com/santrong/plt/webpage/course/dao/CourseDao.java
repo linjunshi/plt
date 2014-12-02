@@ -130,6 +130,14 @@ public class CourseDao extends BaseDao {
 				criteria.where(eq("e.id", "?"));
 				criteria.setStringParam(query.getSchoolId());
 			}
+			// 状态，等于0是未发布状态
+			if(query.getStatus() > 0) {
+				criteria.where(eq("a.status", "?"));
+				criteria.setIntParam(query.getStatus());
+			}else{
+				// 未删除
+				criteria.where(ne("a.status", "-1"));				
+			}
 			// 排序
 			if(!StringUtils.isNullOrEmpty(query.getOrderBy())) {
 				if("desc".equalsIgnoreCase(query.getOrderRule())) {
@@ -213,6 +221,14 @@ public class CourseDao extends BaseDao {
 			if(MyUtils.isNotNull(query.getSchoolId())) {
 				criteria.where(eq("e.id", "?"));
 				criteria.setStringParam(query.getSchoolId());
+			}
+			// 状态，等于0是未发布状态
+			if(query.getStatus() > 0) {
+				criteria.where(eq("a.status", "?"));
+				criteria.setIntParam(query.getStatus());
+			}else{
+				// 未删除
+				criteria.where(ne("a.status", "-1"));				
 			}
 			Connection conn = ThreadUtils.currentConnection();
 			PreparedStatement stm = criteria.getRealStatement(conn);
@@ -427,6 +443,42 @@ public class CourseDao extends BaseDao {
 		}
 		return null;
 	}
+	
+	/**
+	 * 发布课程
+	 * @author weinianjie
+	 * @param  id
+	 * @return 
+	 */
+	public int publishCourse(String courseId){
+		try {
+			CourseMapper mapper = this.getMapper(CourseMapper.class);
+			if (mapper != null) {
+				return mapper.publishCourse(courseId);
+			}
+		} catch (Exception e) {
+			Log.printStackTrace(e);
+		}
+		return 0;
+	}	
+	
+	/**
+	 * 购买数加1
+	 * @author weinianjie
+	 * @param  id
+	 * @return 
+	 */
+	public int addBuy(String id){
+		try {
+			CourseMapper mapper = this.getMapper(CourseMapper.class);
+			if (mapper != null) {
+				return mapper.addBuy(id);
+			}
+		} catch (Exception e) {
+			Log.printStackTrace(e);
+		}
+		return 0;
+	}	
 	
 	/**
 	 * 点击收藏，修改该课程的收藏数量,自动加1

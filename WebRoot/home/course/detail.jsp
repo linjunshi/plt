@@ -40,7 +40,7 @@ Globals.page = "Index_courseDetail";
 		            </div>
 		            <p class="detai_numb">该课程累积购买人数为49人</p>
 		            <!-- <div class="detai_but">购买类型： <a href="#">购买整课</a><a href="#">购买部分章节</a> </div> -->
-		            <div class="detai_buy"><a href="#" class="bottom_a">立刻购买</a><!-- <a href="#" class="bottom_b">加入购物车</a> --></div>
+		            <div class="detai_buy"><a href="javascript:void(0);" class="bottom_a buy">立刻购买</a><!-- <a href="#" class="bottom_b">加入购物车</a> --></div>
 		        </div>
 		        <div class="priSchool">
 		            <div>

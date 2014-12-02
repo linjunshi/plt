@@ -1,9 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ include file="../inc/common.jsp"%>
+<%@ include file="../../inc/common.jsp"%>
 <c:set var="title" value="三简在线教育平台" ></c:set>
 <c:set var="keywords" value="456" ></c:set>
 <c:set var="description" value="789" ></c:set>
-<%@ include file="../inc/header.jsp"%>
+<%@ include file="../../inc/header.jsp"%>
 <script type="text/javascript">
 var Globals = {};
 Globals.ctx = "${ctx}";
@@ -15,11 +15,11 @@ Globals.page = "Manage_personalInfo";
 </style>
 </head>
 <body>
-	<%@ include file="../inc/top_bg.jsp"%>
+	<%@ include file="../../inc/top_bg.jsp"%>
 	<div id="container_box">
 		<div id="container_content">
 			<div class="sectionMain clr">
-				<%@ include file="../inc/leftmenu_regist.jsp"%>
+				<%@ include file="../../inc/leftmenu_regist.jsp"%>
 				<div class="sh_info_r">
 		            <div class="st_titile_r sh_title">
 		            	<a href="${ctx}/account/personalInfo">基本信息</a>
@@ -36,6 +36,7 @@ Globals.page = "Manage_personalInfo";
 								</div>
 							</c:if>
 		                    <form method="post" action="${ctx}/account/personalInfo" class="form_info" id="personalInfo_form">
+		                    	<input type="hidden" name="id" value="${user.id}" />
 		                        <div class="form_item">
 		                            <label for="showName">昵称：</label>
 		                            <div class="form_field">
@@ -50,12 +51,6 @@ Globals.page = "Manage_personalInfo";
 	                                    <span>男</span>
 	                                    <input <c:if test="${user.gender == 2}"> checked="checked" </c:if> value="2" class="form_radio" name="gender" type="radio">
 	                                    <span>女</span> 
-		                            </div>
-		                        </div>
-		                        <div class="form_item">
-		                            <label for="realname">姓名：</label>
-		                            <div class="form_field">
-		                                <input placeholder="请填入您的真实姓名" class="form_text" id="username" name="username" type="text" value="${user.username}">
 		                            </div>
 		                        </div>
 		                        <div class="form_item">
@@ -100,6 +95,6 @@ Globals.page = "Manage_personalInfo";
 		</div>
 	</div>
 
-	<%@ include file="../inc/friendlylink.jsp"%>
+	<%@ include file="../../inc/friendlylink.jsp"%>
 </body>
 </html>
