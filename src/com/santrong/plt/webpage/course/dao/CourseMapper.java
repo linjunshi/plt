@@ -24,7 +24,7 @@ public interface CourseMapper {
 			+ "left join grade c on a.gradeId=c.id "
 			+ "left join user d on a.ownerId=d.id "
 			+ "left join school e on d.schoolId=e.id "
-			+ "where c.gradeGroup=#{gradeGroup} and e.areaCode like #{areaCode} and status != -1"
+			+ "where c.gradeGroup=#{gradeGroup} and e.areaCode like #{areaCode} and status != -1 "
 			+ "order by a.cts limit 10")
 	List<CourseView> selectForIndexList(@Param("gradeGroup")int gradeGroup, @Param("areaCode")String areaCode);
 	
@@ -61,6 +61,14 @@ public interface CourseMapper {
 	 */
 	@Update("update course set collectCount = (collectCount + 1) where id = #{id}")
 	int addCollection(String id);
+	
+	/**
+	 * 购买人数自加
+	 * @param id
+	 * @return
+	 */
+	@Update("update course set saleCount = (saleCount + 1) where id = #{id}")
+	int addBuy(String id);	
 
 	/**
 	 * 取消收藏，修改该课程的收藏数量,自动减1

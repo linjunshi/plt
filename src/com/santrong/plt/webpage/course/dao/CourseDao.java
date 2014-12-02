@@ -445,6 +445,24 @@ public class CourseDao extends BaseDao {
 	}
 	
 	/**
+	 * 购买数加1
+	 * @author weinianjie
+	 * @param  id
+	 * @return 
+	 */
+	public int addBuy(String id){
+		try {
+			CourseMapper mapper = this.getMapper(CourseMapper.class);
+			if (mapper != null) {
+				return mapper.addBuy(id);
+			}
+		} catch (Exception e) {
+			Log.printStackTrace(e);
+		}
+		return 0;
+	}	
+	
+	/**
 	 * 点击收藏，修改该课程的收藏数量,自动加1
 	 * @author huangweihua
 	 * @param  id

@@ -40,6 +40,8 @@ IndexClass.prototype = {
 	
 	// 课程详细页
 	courseDetail:function() {
+		
+		//收藏
 		$("#coll_course").click(function(){
 			var courseId = $(".detai_img input[name=courseId]").val();
 			var url = Globals.ctx + "/course/coll_course"
@@ -51,6 +53,21 @@ IndexClass.prototype = {
 				}
 			})
 		});
+		
+		// 购买
+		$(".buy").click(function(){
+			var courseId = $(".detai_img input[name=courseId]").val();
+			var url = Globals.ctx + "/course/buy"
+			$.post(url, {courseId : courseId}, function(result) {
+				if(result == "success") {
+					alert("购买成功");
+				}else {
+					alert(result);
+				}
+			})
+		});
+		
+		// 课程描述选项卡切换
 		$("#content_nav li").click(function(){
 			if($(this).index() == 0){
 				$("#course_summary").show();
