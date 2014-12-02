@@ -130,6 +130,14 @@ public class CourseDao extends BaseDao {
 				criteria.where(eq("e.id", "?"));
 				criteria.setStringParam(query.getSchoolId());
 			}
+			// 状态，等于0是未发布状态
+			if(query.getStatus() > 0) {
+				criteria.where(eq("a.status", "?"));
+				criteria.setIntParam(query.getStatus());
+			}else{
+				// 未删除
+				criteria.where(ne("a.status", "-1"));				
+			}
 			// 排序
 			if(!StringUtils.isNullOrEmpty(query.getOrderBy())) {
 				if("desc".equalsIgnoreCase(query.getOrderRule())) {
@@ -213,6 +221,14 @@ public class CourseDao extends BaseDao {
 			if(MyUtils.isNotNull(query.getSchoolId())) {
 				criteria.where(eq("e.id", "?"));
 				criteria.setStringParam(query.getSchoolId());
+			}
+			// 状态，等于0是未发布状态
+			if(query.getStatus() > 0) {
+				criteria.where(eq("a.status", "?"));
+				criteria.setIntParam(query.getStatus());
+			}else{
+				// 未删除
+				criteria.where(ne("a.status", "-1"));				
 			}
 			Connection conn = ThreadUtils.currentConnection();
 			PreparedStatement stm = criteria.getRealStatement(conn);

@@ -16,8 +16,16 @@ public class CourseQuery extends PageQuery{
 	private boolean live;
 	private String userId;
 	private String schoolId;
+	private int status;
 
-	
+	public int getStatus() {
+		return status;
+	}
+
+	public void setStatus(int status) {
+		this.status = status;
+	}
+
 	public String getSchoolId() {
 		return schoolId;
 	}

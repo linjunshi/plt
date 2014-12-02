@@ -128,6 +128,7 @@ public class CourseAction extends BaseAction {
 
 		// 构建查询条件
 		CourseQuery courseQuery = new CourseQuery();
+		courseQuery.setStatus(CourseItem.Status_Publish);
 		courseQuery.setPageNum(page);
 		courseQuery.setAreaCode(area.getCityCode());
 		if(MyUtils.isNotNull(subject) && !subject.equals("all")) {
