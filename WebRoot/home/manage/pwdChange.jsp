@@ -38,7 +38,7 @@ Globals.page = "Manage_index";
 									<label for="pwd">原始密码：</label>
 									<div class="form_field">
 										<input placeholder="请输入您的原密码！" name="oldPwd" id="oldPwd" class="form_text" type="password"/> 
-										<span class="form_error"><a href="${ctx}/account/forgotPwd">忘记密码</a></span>
+										<span class="form_error"><a href="${ctx}/account/forgotPwd" target="_blank">忘记密码</a></span>
 									</div>
 								</div>
 								<div class="form_item">

@@ -22,6 +22,9 @@ public interface UserMapper {
     @Select("select * from user where username=#{username}")
     UserItem selectByUserName(@Param("username") String username);
     
+    @Select("select * from user where email=#{email}")
+    UserItem selectByEmail(@Param("email") String email);    
+    
     @Select("select * from user where id=#{id}")
     UserItem selectById(String id);
     

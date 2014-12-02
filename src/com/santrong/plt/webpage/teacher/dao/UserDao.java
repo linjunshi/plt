@@ -40,6 +40,18 @@ public class UserDao extends BaseDao{
 		return null;
 	}
 	
+	public UserItem selectByEmail(String email) {
+		try {
+			UserMapper mapper = this.getMapper(UserMapper.class);
+			if(mapper != null) {
+				return mapper.selectByEmail(email);
+			}
+		} catch (Exception e) {
+			Log.printStackTrace(e);
+		}
+		return null;
+	}	
+	
 	public UserItem selectById(String id) {
 		try {
 			UserMapper mapper = this.getMapper(UserMapper.class);
