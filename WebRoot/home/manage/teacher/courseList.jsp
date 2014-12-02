@@ -8,7 +8,7 @@
 var Globals = {};
 Globals.ctx = "${ctx}";
 Globals.lang = "${lang}";
-Globals.page = "Manage_index";
+Globals.page = "Manage_courseList";
 </script>
 </head>
 <body>
@@ -58,8 +58,12 @@ Globals.page = "Manage_index";
 				                            	<p><fmt:formatDate value="${course.cts}" type="time"/></p>
 				                            </td>
 				                            <td class="sh_release">
-					                            <a href="#">未发布</a>
-					                            <a href="#">发布</a>
+				                            	<c:if test="${course.status == 0}">
+													<a href="javascript:void(0);" class="publish" id="i_${course.id}">发布</a>				                            	
+				                            	</c:if>
+				                            	<c:if test="${course.status == 1}">
+				                            		<span>已发布</span>
+				                            	</c:if>
 					                        </td>
 				                            <td class="btn_question_operation">
 					                            	<a href="${ctx}/manage/course/modify?courseId=${course.id}">修改</a>

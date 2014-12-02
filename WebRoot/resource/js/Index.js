@@ -64,7 +64,7 @@ IndexClass.prototype = {
 				}else {
 					alert(result);
 				}
-			})
+			});
 		});
 		
 		// 课程描述选项卡切换

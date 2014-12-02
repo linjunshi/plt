@@ -445,6 +445,24 @@ public class CourseDao extends BaseDao {
 	}
 	
 	/**
+	 * 发布课程
+	 * @author weinianjie
+	 * @param  id
+	 * @return 
+	 */
+	public int publishCourse(String courseId){
+		try {
+			CourseMapper mapper = this.getMapper(CourseMapper.class);
+			if (mapper != null) {
+				return mapper.publishCourse(courseId);
+			}
+		} catch (Exception e) {
+			Log.printStackTrace(e);
+		}
+		return 0;
+	}	
+	
+	/**
 	 * 购买数加1
 	 * @author weinianjie
 	 * @param  id

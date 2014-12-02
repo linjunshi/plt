@@ -80,6 +80,21 @@ ManageClass.prototype = {
 			$("#gradeSelect").change();
 		},
 		
+		courseList : function() {
+			$(".publish").click(function(){
+				var courseId = $(this).attr("id").split("_")[1];
+				var url = Globals.ctx + "/manage/course/publish"
+				$.post(url, {courseId : courseId}, function(result) {
+					if(result == "success") {
+						alert("发布成功");
+						location.reload();
+					}else {
+						alert(result);
+					}
+				})
+			});
+		},
+		
 		// 申请老师
 		applyTeacher : function() {
 			//选学校

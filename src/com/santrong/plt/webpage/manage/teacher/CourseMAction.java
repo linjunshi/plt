@@ -86,6 +86,10 @@ public class CourseMAction extends TeacherBaseAction {
 		return "manage/teacher/courseList";
 	}
 	
+	/**
+	 * 新增课程获取
+	 * @return
+	 */
 	@RequestMapping("/add")
 	public String addCourse(){
 		HttpServletRequest request = this.getRequest();
@@ -93,6 +97,11 @@ public class CourseMAction extends TeacherBaseAction {
 		return "/manage/teacher/courseAdd";
 	}
 	
+	/**
+	 * 新增课程提交
+	 * @param courseForm
+	 * @return
+	 */
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
 	public String addCoursePost(CourseForm courseForm){
 		try {
@@ -232,7 +241,28 @@ public class CourseMAction extends TeacherBaseAction {
 	}
 	
 	/**
-	 * 删除一条课程记录
+	 * 发布课程
+	 * @param courseId
+	 * @return
+	 */
+	@RequestMapping(value="/publish", method=RequestMethod.POST)
+	@ResponseBody
+	public String publish(String courseId) {
+		try{
+			CourseDao dao = new CourseDao();
+			if(dao.publishCourse(courseId) > 0) {
+				return SUCCESS;
+			}
+			
+		}catch(Exception e) {
+			Log.printStackTrace(e);
+		}
+		return FAIL;
+	}
+	
+	
+	/**
+	 * 删除一条课程记录（伪删除）
 	 * @param courseId
 	 * @return
 	 */
