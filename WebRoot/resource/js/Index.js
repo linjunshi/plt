@@ -18,6 +18,25 @@ IndexClass.prototype = {
 		$(".category_grade li").toggleShow(".category_subject");
 
 		$(".school_nav li").toggleShow(".school_img_item ul", {hide : false});
+		
+		// 首页课程标签导航栏切换功能
+		$("#outer").children("li").each(function(){
+			if ($(this).attr("class") == "qwert") {
+				$(this).children("a").css("background","none");
+			}
+			$(this).mouseover(function(){
+				$("#outer").children("li").each(function(){
+					$(this).children("a").css("background","url(resource/images/next_button.png) no-repeat right 20px");
+					$(this).removeClass();
+					$(this).children("ul").removeClass();
+					$(this).children("ul").toggleClass("botcc");
+				});
+				$(this).toggleClass("qwert");
+				$(this).children("ul").removeClass();
+				$(this).children("ul").toggleClass("qwertt");
+				$(this).children("a").css("background","none");
+			});
+		});
 	},
 	
 	// 登录页

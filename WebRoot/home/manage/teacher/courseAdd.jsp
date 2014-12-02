@@ -75,13 +75,23 @@ Globals.page = "Manage_courseAdd";
 									<div class="form_item">
 										<label for="chapterCount">课时数量：</label>
 										<div class="form_field">
-											<input placeholder="如：2" class="form_text" name="chapterCount" id="chapterCount" type="text" value="${course.chapterCount}"> 小时
+											<%-- <input placeholder="如：2" class="form_text" name="chapterCount" id="chapterCount" type="text" value="${course.chapterCount}"> 小时 --%>
+											<select name="chapterCount" size="1" id="chapterCount" class="inline_ele">
+												<option <c:if test="${course.chapterCount==5}">selected="selected"</c:if> value="5">5分钟</option>
+												<option <c:if test="${course.chapterCount==10}">selected="selected"</c:if> value="10">10分钟</option>
+												<option <c:if test="${course.chapterCount==15}">selected="selected"</c:if> value="15">15分钟</option>
+												<option <c:if test="${course.chapterCount==20}">selected="selected"</c:if> value="20">20分钟</option>
+												<option <c:if test="${course.chapterCount==30}">selected="selected"</c:if> value="30">30分钟</option>
+												<option <c:if test="${course.chapterCount==45}">selected="selected"</c:if> value="45">45分钟</option>
+												<option <c:if test="${course.chapterCount==60}">selected="selected"</c:if> value="60">60分钟</option>
+												<option <c:if test="${course.chapterCount==90}">selected="selected"</c:if> value="90">90分钟</option>
+											</select>
 										</div>
 									</div>
 									<div class="form_item">
 										<label for="endTime">结束时间：</label>
 										<div class="form_field">
-											<input placeholder="格式：2014-01-01 59:59:59" class="form_text" name="endTime" id="endTime" type="date" value="<fmt:formatDate type="both" value="${course.endTime}" />">
+											<input placeholder="格式：2014-01-01 59:59:59" class="form_text" name="endTime" id="endTime" type="date" value="<fmt:formatDate type="date" pattern="yyyy/MM/dd" value="${course.endTime}" />">
 										</div>
 									</div>
 									 <div class="form_item">

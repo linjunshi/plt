@@ -130,7 +130,7 @@ public class CourseMAction extends TeacherBaseAction {
 					
 					courseItem.setId(MyUtils.getGUID());
 					courseItem.setOwnerId(user.getId());
-					courseItem.setEndTime(MyUtils.stringToDate(courseForm.getEndTime(), "yyyy-MM-dd HH:mm:ss"));
+					courseItem.setEndTime(MyUtils.stringToDate(courseForm.getEndTime(), "yyyy-MM-dd"));
 					courseItem.setChapterCount(courseForm.getChapterCount() > 0 ? courseForm.getChapterCount() : 0);
 					courseItem.setSaleCount(0);
 					courseItem.setCollectCount(0);
@@ -213,7 +213,7 @@ public class CourseMAction extends TeacherBaseAction {
 					CourseItem courseItem = courseDao.selectById(courseForm.getId());
 					BeanUtils.copyProperties(courseForm, courseItem);
 					
-					courseItem.setEndTime(MyUtils.stringToDate(courseForm.getEndTime(), "yyyy-MM-dd HH:mm:ss"));
+					courseItem.setEndTime(MyUtils.stringToDate(courseForm.getEndTime(), "yyyy-MM-dd"));
 					courseItem.setUts(new Date());
 					if (courseDao.update(courseItem)) {
 						addError("修改课程成功！");

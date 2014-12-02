@@ -18,24 +18,37 @@ Globals.page = "Index_index";
 		    <div id="main">
 		        <div class="column_left_a">
 		            <div id="hoverpage">
-		                <ul id="outer">
+		                <ul id="outer" class="oter_hover clearfix">
 		                	<c:forEach items="${applicationScope.gradeList}" var="grade" varStatus="st">
-		                    <li class="page p${st.index+1}">
-		                    	<a href="${ctx}/course/${grade.gradeEnName}" class="<c:if test="${st.index != 0}">menuitem</c:if>"><i class="<c:if test="${st.index == 0}">label_bg</c:if>">${grade.gradeName}</i></a>
-		                        <div> <em></em>
-		                            <ul>
-		                            	<c:forEach items="${grade.gradeSubjectList}" var="subject">
-		                            	<li><a href="${ctx}/course/${grade.gradeEnName}/${subject.subjectEnName}">${subject.subjectName}</a></li>
-		                            	</c:forEach>
-		                            </ul>
-		                        </div>
+		                    <li <c:if test="${st.index == 0}">class="qwert"</c:if> >
+		                    	<a href="${ctx}/course/${grade.gradeEnName}" >${grade.gradeName}</a>
+	                            <ul <c:if test="${st.index == 0}">class="qwertt"</c:if> <c:if test="${st.index != 0}">class="botcc"</c:if> >
+	                            	<c:forEach items="${grade.gradeSubjectList}" var="subject">
+	                            		<li><a href="${ctx}/course/${grade.gradeEnName}/${subject.subjectEnName}">${subject.subjectName}</a></li>
+	                            	</c:forEach>
+	                            </ul>
 		                    </li>
 		                    </c:forEach>
 		                </ul>
 		            </div>
 		        </div>
 		        <div class="column_left_b">
-					<a target="_blank" href="${ctx}/"><img src="${ctx}/resource/images/01.jpg" width="648" height="300"></a>
+			        <div id="MainPromotionBanner">
+		                <div id="SlidePlayer">
+		                    <ul class="Slides">
+		                        <li><a target="_blank" href="${ctx}/"><img src="${ctx}/resource/images/01.jpg" width="728" height="300"></a></li>
+		                        <li><a target="_blank" href="${ctx}/"><img src="${ctx}/resource/images/02.jpg" width="728" height="300"></a></li>
+		                        <li><a target="_blank" href="${ctx}/"><img src="${ctx}/resource/images/03.jpg" width="728" height="300"></a></li>
+		                        <li><a target="_blank" href="${ctx}/"><img src="${ctx}/resource/images/04.jpg" width="728" height="300"></a></li>
+		                        <li><a target="_blank" href="${ctx}/"><img src="${ctx}/resource/images/05.jpg" width="728" height="300"></a></li>
+		                    </ul>
+		                    <!-- <ul class="SlideTriggers"><li class="Current">1</li><li>2</li><li>3</li><li>4</li><li>5</li></ul> -->
+		                </div>
+		                <script type="text/javascript">
+							TB.widget.SimpleSlide.decoration('SlidePlayer', {eventType:'mouse', effect:'scroll'});
+						</script> 
+	            	</div>
+					
 		        </div>
 		        <div class="column_left_bottom">
 		            <div class="column_left_header clr">

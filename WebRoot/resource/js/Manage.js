@@ -84,7 +84,7 @@ ManageClass.prototype = {
 		applyTeacher : function() {
 			//选学校
 			$("input[name=schoolName]").click(function() {
-				Boxy.load(Globals.ctx + "/component/choice/school", {title : '-',
+				Boxy.load(Globals.ctx + "/component/choice/school", {title : '选择学校',
 					afterShow : function(){
 						$(".province, .city, .county").click(function(e) {
 							var target = $(e.target);
