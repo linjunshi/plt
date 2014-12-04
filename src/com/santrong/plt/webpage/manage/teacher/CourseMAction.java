@@ -144,6 +144,7 @@ public class CourseMAction extends TeacherBaseAction {
 					courseItem.setSaleCount(0);
 					courseItem.setCollectCount(0);
 					courseItem.setCommentCount(0);
+					courseItem.setStatus(0);//-1:删除，0:未发布，1:发布
 					courseItem.setCts(new Date());
 					courseItem.setUts(new Date());
 					if (courseDao.insert(courseItem)) {
@@ -161,8 +162,7 @@ public class CourseMAction extends TeacherBaseAction {
 		}
 		return "/manage/teacher/courseAdd";
 	}
-	
-	
+		
 	@RequestMapping(value = "/modify", method = RequestMethod.GET)
 	public String modifyCourse(String courseId){
 		try {
@@ -259,7 +259,6 @@ public class CourseMAction extends TeacherBaseAction {
 		}
 		return FAIL;
 	}
-	
 	
 	/**
 	 * 删除一条课程记录（伪删除）
@@ -440,7 +439,7 @@ public class CourseMAction extends TeacherBaseAction {
 			FileDao fileDao = new FileDao();
 			FileQuery query = new FileQuery();
 			query.setOnwerId(this.currentUser().getId());
-			query.setPageSize(12);
+			query.setPageSize(6);//6条记录一页
 			query.setPageNum(pageNum);
 			query.setOrderBy("cts");
 			query.setOrderRule("desc");
@@ -456,6 +455,7 @@ public class CourseMAction extends TeacherBaseAction {
 			request.setAttribute("courseId", courseId);
 			request.setAttribute("chapterId", chapterId);
 			request.setAttribute("oldResourceId", oldResourceId);
+			request.setAttribute("resourceType", ResourceType.Type_File);
 		} catch (Exception e) {
 			Log.printStackTrace(e);
 		}
@@ -650,6 +650,15 @@ public class CourseMAction extends TeacherBaseAction {
 			String chapterId = request.getParameter("chapterId");
 			String resourceId = request.getParameter("resourceId");
 			
+			String checkIds = request.getParameter("checkIds");//已经勾选的questionId
+			String cancelIds = request.getParameter("cancelIds");//还没有勾选的questionId
+			
+			int pageNum = this.getIntParameter("page");
+			if(pageNum == 0) {
+				pageNum = 1;
+			}
+			
+			// 执行修改操作的时候所要做的事情
 			if (MyUtils.isNotNull(resourceId)) {
 				TrainDao trainDao = new TrainDao();
 				TrainItem train = trainDao.selectById(resourceId);
@@ -657,26 +666,29 @@ public class CourseMAction extends TeacherBaseAction {
 				
 				TrainQuestionDao tqDao = new TrainQuestionDao();
 				List<TrainToQuestionItem> t2qList = tqDao.selectTrain2QuestionByTrainId(resourceId);
+				
+				// 每一次的翻页时，获取勾选的questionId的添加到SessionKey_TrainBindQuestionIds会话中，没有勾选的从会话中移除掉
 				request.setAttribute("t2qList", t2qList);
 			}
 			
-			int pageNum = this.getIntParameter("page");
-			if(pageNum == 0) {
-				pageNum = 1;
-			}
 			
 			TrainQuestionDao tqDao = new TrainQuestionDao();
 			TrainQuestionQuery query = new TrainQuestionQuery();
 			query.setPageNum(pageNum);
+			query.setPageSize(2);//设置每页显示的记录条数
 			query.setUserId(currentUser().getId());
 			query.setDel(0);
 			query.setCount(tqDao.selectCountByQuery(query));
 			List<TrainQuestionItem> questionList = tqDao.selectByQuery(query);
 			
+			request.setAttribute("query", query);
 			request.setAttribute("questionList", questionList);
 			request.setAttribute("courseId", courseId);
 			request.setAttribute("chapterId", chapterId);
 			request.setAttribute("resourceId", resourceId);
+			request.setAttribute("resourceType", ResourceType.Type_Train);
+			request.setAttribute("checkIds", checkIds);
+			request.setAttribute("cancelIds", cancelIds);
 			
 		} catch (Exception e) {
 			Log.printStackTrace(e);
@@ -815,7 +827,7 @@ public class CourseMAction extends TeacherBaseAction {
 	}
 	
 	@RequestMapping("/changeCover")
-	public String changeCover(){
+ 	public String changeCover(){
 		return "/manage/teacher/changeCover";
 	}
 }

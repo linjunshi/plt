@@ -4,6 +4,7 @@
 <input type="hidden" id="courseId" name="courseId" value="${courseId}" />
 <input type="hidden" id="chapterId" name="chapterId" value="${chapterId}" />
 <input type="hidden" id="oldResourceId" name="oldResourceId" value="${oldResourceId}" />
+<input type="hidden" id="resourceType" name="resourceType" value="${resourceType}" />
 <div class="sh_title">
     <h2>课件列表</h2>
     <a href="${ctx}/manage/course/chapterEditor?courseId=${courseId}" class="sh_add">&#60;&#60;返回上级</a>
@@ -31,7 +32,7 @@
            <tbody>
            	<c:forEach items="${fileList}" var="file" varStatus="st">
                  <tr>
-                     <td>${st.index + 1}</td>
+                     <td>${st.index + 1 + (query.pageNum-1)*query.pageSize}</td>
                      <td class="sh_h_im">
                      	<a href="${ctx}/course/${course.id}.html" target="_blank"><img src="${ctx}/resource/images/003.jpg"></a>
                      	<p>${file.title}</p>
@@ -53,7 +54,7 @@
                <tr>
                    <td colspan="6">
                     <c:set var="basicUrl" value="${ctx}/manage/course/addResourceFile?courseId=${courseId}&chapterId=${chapterId}&oldResourceId=${oldResourceId}" />
-    				<%@ include file="../../inc/pagination.jsp"%>
+    				<%@ include file="../../inc/pagination2.jsp"%>
     			</td>
                </tr>
            </tfoot>

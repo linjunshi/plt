@@ -168,7 +168,7 @@ public class AccountMAction extends RegistBaseAction {
 		} catch (Exception e) {
 			Log.printStackTrace(e);
 		}
-		return "manage/pwdChange";
+		return "manage/regist/pwdChange";
 	}	
 	
 	/**
@@ -335,10 +335,12 @@ public class AccountMAction extends RegistBaseAction {
 			if (MyUtils.isNotNull(birthday) || MyUtils.isNotNull(nativePlace)) {
 				//用户扩展信息
 				UserExtendsDao userExtendsDao = new UserExtendsDao();
-				UserExtendsItem userExtendsItem = new UserExtendsItem();
 				if (userExtendsDao.existsByUserId(user.getId())) {
+					UserExtendsItem userExtendsItem = userExtendsDao.selectByUserId(user.getId());
 					userExtendsItem.setUserId(user.getId());
-					userExtendsItem.setBirthday(MyUtils.stringToDate(birthday, "yyyy-MM-dd HH:mm:ss"));
+					if (MyUtils.stringToDate(birthday, "yyyy/MM/dd") != null) {
+						userExtendsItem.setBirthday(MyUtils.stringToDate(birthday, "yyyy/MM/dd"));
+					}
 					userExtendsItem.setNativePlace(nativePlace);
 					if (userExtendsDao.update(userExtendsItem)) {
 //					getRequest().getSession().setAttribute(Global.SessionKey_LoginUser, user);
@@ -347,8 +349,9 @@ public class AccountMAction extends RegistBaseAction {
 						addError("对不起，您修改个人信息失败了！");
 					}
 				} else {
+					UserExtendsItem userExtendsItem = new UserExtendsItem();
 					userExtendsItem.setUserId(user.getId());
-					userExtendsItem.setBirthday(MyUtils.stringToDate(birthday, "yyyy-MM-dd HH:mm:ss"));
+					userExtendsItem.setBirthday(MyUtils.stringToDate(birthday, "yyyy/MM/dd"));
 					userExtendsItem.setNativePlace(nativePlace);
 					if (userExtendsDao.insert(userExtendsItem)) {
 //					getRequest().getSession().setAttribute(Global.SessionKey_LoginUser, user);

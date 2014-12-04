@@ -57,7 +57,7 @@ public class PageQuery {
 		if(this.getPageCount() - this.pageNum < this.showSize / 2) {
 			begin = this.showSize;
 		}
-		for(int i=0-begin;i<begin;i++) {
+		for(int i=0-begin;i<=begin;i++) {
 			int tryNum = this.pageNum + i;
 			if(tryNum > this.getPageCount() || cal > this.showSize) {
 				break;

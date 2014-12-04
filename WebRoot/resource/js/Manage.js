@@ -145,7 +145,7 @@ ManageClass.prototype = {
 		chapterList : function(){
 			
 			//时间控件
-			var LiveTimeFn = function(){
+			var DateTimePickerFn = function(){
 				var now   = new Date();
 				var year  = now.getFullYear();
 				var month = now.getMonth() + 1 < 10 ? ('0' + (now.getMonth() + 1)) : now.getMonth() + 1;
@@ -451,6 +451,44 @@ ManageClass.prototype = {
 				}
 			});
 			
+			//点击分页按钮时
+			$(".pagination a").live("click", function() {
+				
+				//动态获取点击元素<a>上的属性href的跳转地址值
+				var url = $(this).attr("page_url");
+				if (url == undefined) { return false; }//点击当前页的时候do nothing
+				var courseId = $("#courseId").val();
+				var chapterId = $("#chapterId").val();
+				var resourceType = $("#resourceType").val();
+				var page = url.split("page")[1].split("=")[1];
+				if (resourceType == 1) {
+					var oldResourceId = $("#oldResourceId").val();
+					$.ajax({
+	                    url: Globals.ctx + "/manage/course/addResourceFile",
+	                    data: { courseId:courseId, chapterId:chapterId, oldResourceId:oldResourceId, page:page},
+	                    type: "GET",
+//	                    dataType : "html",//返回纯文本 HTML 信息；包含的 script 标签会在插入dom时执行。
+	                    success: function (data) {
+	                    	//var json = eval("(" + data + ")");
+	    					$(".sh_info_r").html(data);
+	                    }
+					});//ajax
+				} else if (resourceType == 4) {
+					var resourceId = $("#resourceId").val();
+					$.ajax({
+	                    url: Globals.ctx + "/manage/course/addResourceTrain",
+	                    data: { courseId:courseId, chapterId:chapterId, resourceId:resourceId, page:page},
+	                    type: "GET",
+//	                    dataType : "html",//返回纯文本 HTML 信息；包含的 script 标签会在插入dom时执行。
+	                    success: function (data) {
+	                    	//var json = eval("(" + data + ")");
+	    					$(".sh_info_r").html(data);
+	                    }
+					});//ajax
+				}
+				
+			});
+			
 			// TODO addResourceFile.jsp 点击“选择”按钮的时候触发的事件
 			$(".selectResourceFile").live("click", function() {
 				var _this = $(this);
@@ -485,7 +523,7 @@ ManageClass.prototype = {
 				if (courseId != "" && chapterId != "" && courseId != null && chapterId != null) {
 					$.get(Globals.ctx + "/manage/course/addResourceLive?courseId="+ courseId +"&chapterId=" + chapterId, function(result){
 						$(".sh_info_r").html(result);
-						LiveTimeFn();
+						DateTimePickerFn();
 					});
 				} else {
 					alert("添加直播失败，请刷新页面后重新操作！");
@@ -607,7 +645,7 @@ ManageClass.prototype = {
 							+ "&resourceType=" + resourceType + "&oldResourceId=" + resourceId , function(result){
 						$(".sh_info_r").html(result);
 						if (resourceType == 2) {
-							LiveTimeFn();
+							DateTimePickerFn();
 						}
 					});
 					
@@ -655,7 +693,7 @@ ManageClass.prototype = {
 			});
 		},
 		
-		//TODO 个人信息页面
+		//TODO 个人信息-基本页面
 		personalInfo : function() {
 			
 			// 上传头像控件
@@ -695,5 +733,36 @@ ManageClass.prototype = {
 				})
 			});
 			
+		},
+		
+		//TODO 个人信息-扩展信息页面
+		personalInfoExtend : function() {
+			
+			// 生日时间选择控件
+			var DatePickerFn = function(){
+
+				var birthday = $("#birthday").val();
+			    
+				$('#birthday').datetimepicker({
+					dayOfWeekStart : 1,//一周从星期几开始：1为星期一，2为星期二...7为星期日
+					lang : 'zh',//语言为简体中文
+					timepicker : false,//timepicker 时间控件隐藏
+					format :	'Y/m/d',//默认格式显示，format:	'Y/m/d H:i',
+//					disabledDates:[year + '/' + month +  '/' + '27'],//不显示指定的日期，不能触发点击事件
+//					startDate :	input_value,//从那一天开始，默认选择日期
+					value : birthday, //文本框内默认显示的日期
+//					step : 30,//timepicker 设置时间的间隔，以分钟为单位
+				});
+			}
+			
+			// 当DOM载入完成时绑定一个要执行的DatePickerFn()函数。
+			$(this).ready(function(){
+				DatePickerFn();
+			});
+			
+			//点击生日文本框时，触发点击事件
+			$("#birthday").click(function(){
+				DatePickerFn();
+			});
 		}
 }

@@ -4,7 +4,7 @@
 <input type="hidden" id="courseId" name="courseId" value="${courseId}" />
 <input type="hidden" id="chapterId" name="chapterId" value="${chapterId}" />
 <input type="hidden" id="resourceId" name="resourceId" value="${resourceId}" />
-
+<input type="hidden" id="resourceType" name="resourceType" value="${resourceType}" />
 <div class="sh_title">
 	<h2>作业试题维护</h2>
     <a href="${ctx}/manage/course/chapterEditor?courseId=${courseId}" class="sh_add">&#60;&#60;返回上级</a>
@@ -39,7 +39,7 @@
 						<c:if test="${t2q.questionId == question.id}"> checked="checked" </c:if>
 					</c:forEach>
 					></td>
-					<td>${qt.index + 1}</td>
+					<td>${qt.index + 1 + (query.pageNum-1)*query.pageSize}</td>
 					<td>${question.topic}</td>
 					<td>
 					<c:if test="${question.questionType==1}">单选题</c:if>
@@ -55,7 +55,7 @@
 			<tr>
 				<td colspan="5">
 					<c:set var="basicUrl" value="${ctx}/manage/course/addResourceTrain?courseId=${courseId}&chapterId=${chapterId}&resourceId=${resourceId}" />
-          				<%@ include file="../../inc/pagination.jsp"%>
+          			<%@ include file="../../inc/pagination2.jsp"%>
 				</td>
 			</tr>
 		</tfoot>

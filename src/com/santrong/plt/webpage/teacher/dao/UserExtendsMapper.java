@@ -16,7 +16,7 @@ public interface UserExtendsMapper {
 	@Insert("insert into user_extends values(#{userId}, #{birthday}, #{nativePlace})")
 	int insert(UserExtendsItem userExtendsItem);
 
-	@Update("update user_education set "
+	@Update("update user_extends set "
 			+ "birthday = #{birthday},"
 			+ "nativePlace = #{nativePlace} "
 			+ "where userId = #{userId}")
