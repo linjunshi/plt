@@ -41,6 +41,7 @@ public class QuestionMAction extends TeacherBaseAction{
 			
 			HttpServletRequest request = this.getRequest();
 			request.setAttribute("questionList", questionList);
+			request.setAttribute("query", query);
 		} catch (Exception e) {
 			Log.printStackTrace(e);
 		}
