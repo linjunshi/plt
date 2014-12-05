@@ -9,7 +9,7 @@
 	            <h2><a class="city_info_name_bg" href="${ctx}/">${sessionScope.area.cityName}</a></h2>
 			            <a class="city_info_toggle_bg" href="${ctx}/changecity">切换城市</a>
 			</div>
-			<form class="search_form" action="${ctx}/course" method="get">
+			<form class="search_form" action="${ctx}/course" method="get" name="search_form">
 				<div class="search_navigate">
 					<div class="search">
 						<ul class="search_category">
@@ -23,7 +23,7 @@
 							<c:set var="q" value="${query.keywords}"/>	
 						</c:if>
 						<input class="search_text" type="text" placeholder="请输入你感兴趣的内容" name="q" value="${q}" />
-            			<a href="javascript:void(0);" class="search_sid" title="点击搜索"><img src="${ctx}/resource/images/magnifier_24.png"></a>
+            			<a href="javascript:void(0);" onClick="javaScript:document.search_form.submit();" class="search_sid" title="点击搜索"><img src="${ctx}/resource/images/magnifier_24.png"></a>
 					</div>
 				</div>
 				<div class="fast_navigate"></div>
