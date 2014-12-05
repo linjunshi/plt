@@ -34,8 +34,8 @@
 			</c:if>
 			<c:if test="${sessionScope.loginUser != null}">
 			<div> 
-				<a href="${ctx}/study/course" class="user_info_th">我是老师</a> 
-				<a href="${ctx}/manage/live" class="user_info_stud">我是学生</a>
+				<a href="${ctx}/study/course" class="user_info_stud">我是学生</a> 
+				<a href="${ctx}/manage/live" class="user_info_th">我是老师</a>
 				<a href="${ctx}/account/personalInfo" class="user_info_img" title="帐号设置"></a> 
 				<a href="javascript:void(0);" class="user_info_user" title="${sessionScope.loginUser.showName}"><i></i><img src="${ctx}${sessionScope.loginUser.headPhoto}" width="40" width="40"></a> 
 			</div>
