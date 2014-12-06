@@ -12,7 +12,7 @@ Globals.page = "Manage_chapterList";
 </script>
 </head>
 <body>
-	<%@ include file="../../inc/top.jsp"%>
+	<%@ include file="../../inc/top_bg.jsp"%>
 	<div id="container_box">
 		<div id="container_content">
 			<div class="sectionMain clr">

@@ -25,7 +25,10 @@ public class CourseItem {
 	private int commentCount;
 	private int chapterCount;
 	private String remark;
-	private String status;// -1删除，0未发布，1发布
+	/**
+	 * -1:删除，0:未发布，1:发布
+	 */
+	private int status;// -1:删除，0:未发布，1:发布
 	private Date cts;
 	private Date uts;
 	
@@ -44,10 +47,10 @@ public class CourseItem {
 	}		
 	
 	
-	public String getStatus() {
+	public int getStatus() {
 		return status;
 	}
-	public void setStatus(String status) {
+	public void setStatus(int status) {
 		this.status = status;
 	}
 	public int getLive() {

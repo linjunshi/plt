@@ -144,6 +144,7 @@ public class CourseMAction extends TeacherBaseAction {
 					courseItem.setSaleCount(0);
 					courseItem.setCollectCount(0);
 					courseItem.setCommentCount(0);
+					courseItem.setStatus(0);//-1:删除，0:未发布，1:发布
 					courseItem.setCts(new Date());
 					courseItem.setUts(new Date());
 					if (courseDao.insert(courseItem)) {
@@ -161,8 +162,7 @@ public class CourseMAction extends TeacherBaseAction {
 		}
 		return "/manage/teacher/courseAdd";
 	}
-	
-	
+		
 	@RequestMapping(value = "/modify", method = RequestMethod.GET)
 	public String modifyCourse(String courseId){
 		try {
@@ -259,7 +259,6 @@ public class CourseMAction extends TeacherBaseAction {
 		}
 		return FAIL;
 	}
-	
 	
 	/**
 	 * 删除一条课程记录（伪删除）
@@ -440,7 +439,7 @@ public class CourseMAction extends TeacherBaseAction {
 			FileDao fileDao = new FileDao();
 			FileQuery query = new FileQuery();
 			query.setOnwerId(this.currentUser().getId());
-			query.setPageSize(12);
+			query.setPageSize(6);//6条记录一页
 			query.setPageNum(pageNum);
 			query.setOrderBy("cts");
 			query.setOrderRule("desc");
@@ -456,6 +455,7 @@ public class CourseMAction extends TeacherBaseAction {
 			request.setAttribute("courseId", courseId);
 			request.setAttribute("chapterId", chapterId);
 			request.setAttribute("oldResourceId", oldResourceId);
+			request.setAttribute("resourceType", ResourceType.Type_File);
 		} catch (Exception e) {
 			Log.printStackTrace(e);
 		}
@@ -650,34 +650,45 @@ public class CourseMAction extends TeacherBaseAction {
 			String chapterId = request.getParameter("chapterId");
 			String resourceId = request.getParameter("resourceId");
 			
-			if (MyUtils.isNotNull(resourceId)) {
-				TrainDao trainDao = new TrainDao();
-				TrainItem train = trainDao.selectById(resourceId);
-				request.setAttribute("train", train);
-				
-				TrainQuestionDao tqDao = new TrainQuestionDao();
-				List<TrainToQuestionItem> t2qList = tqDao.selectTrain2QuestionByTrainId(resourceId);
-				request.setAttribute("t2qList", t2qList);
-			}
-			
 			int pageNum = this.getIntParameter("page");
+			
 			if(pageNum == 0) {
+				// 点击修改的时候，才执行修改操作的时候所要做的事情
+				if (MyUtils.isNotNull(resourceId)) {
+					TrainDao trainDao = new TrainDao();
+					TrainItem train = trainDao.selectById(resourceId);
+					request.setAttribute("train", train);
+					
+					TrainQuestionDao tqDao = new TrainQuestionDao();
+					List<TrainToQuestionItem> t2qList = tqDao.selectTrain2QuestionByTrainId(resourceId);
+					String questionIds = "";
+					for(TrainToQuestionItem ttqItem : t2qList) {
+						questionIds += "," + ttqItem.getQuestionId();
+					}
+					if (questionIds != "") {
+						questionIds = questionIds.substring(1);
+					}
+					// 第一次加载页面的时候（点击修改的时候），才设置该隐藏值到页面上
+					request.setAttribute("questionIds", questionIds);
+				}
 				pageNum = 1;
 			}
 			
 			TrainQuestionDao tqDao = new TrainQuestionDao();
 			TrainQuestionQuery query = new TrainQuestionQuery();
 			query.setPageNum(pageNum);
+			query.setPageSize(2);//设置每页显示的记录条数
 			query.setUserId(currentUser().getId());
 			query.setDel(0);
 			query.setCount(tqDao.selectCountByQuery(query));
 			List<TrainQuestionItem> questionList = tqDao.selectByQuery(query);
 			
+			request.setAttribute("query", query);
 			request.setAttribute("questionList", questionList);
 			request.setAttribute("courseId", courseId);
 			request.setAttribute("chapterId", chapterId);
 			request.setAttribute("resourceId", resourceId);
-			
+			request.setAttribute("resourceType", ResourceType.Type_Train);
 		} catch (Exception e) {
 			Log.printStackTrace(e);
 		}
@@ -712,7 +723,7 @@ public class CourseMAction extends TeacherBaseAction {
 					trainItem.setUts(new Date());
 					trainDao.update(trainItem);
 					
-					// TODO 待完善 修改 题库的时候，题目匹对
+					// TODO 待完善 修改 题库的时候，题目匹对；目前的思路：先把之前的记录全部删除后，再添加
 					if (MyUtils.isNotNull(ids)) {
 						TrainQuestionDao tqDao = new TrainQuestionDao();
 						tqDao.removeAllQuestion4Train(resourceId);
@@ -815,7 +826,7 @@ public class CourseMAction extends TeacherBaseAction {
 	}
 	
 	@RequestMapping("/changeCover")
-	public String changeCover(){
+ 	public String changeCover(){
 		return "/manage/teacher/changeCover";
 	}
 }

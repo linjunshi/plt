@@ -85,11 +85,14 @@ Globals.page = "Index_index";
 		                <ul class="<c:if test="${st.index > 0}">hide</c:if>">
 							<c:forEach items="${grade.schoolList}" var="school">
 		                    <li class="school_list clr">
-		                        <div class="school_name">
-		                            <h2><a href="${ctx}/school/${school.id}.html">${school.schoolName}</a></h2>
+		                        <div class="school_user">
+		                            <h2>${school.schoolName}</h2>
 		                        </div>
-	                            <div class="teacher l">老师<b>${school.teacherCount}</b></div>
-	                            <div class="course l">课程<b>${school.courseCount}</b></div>
+		                        <div class="school_con">
+		                            <p>老师：<i>${school.teacherCount}</i></p>
+		                            <p>课程：<i>${school.courseCount}</i></p>                           
+		                        </div>
+                        		<p class="school_mo"><a href="${ctx}/school/${school.id}.html">进入</a></p>
 		                    </li>								
 							</c:forEach>
 		                </ul>

@@ -47,7 +47,7 @@ public class HomeAction extends BaseAction{
 			view.setGradeGroup(grade.getGradeGroup());
 			view.setGradeName(grade.getGradeName());
 			view.setGradeEnName(grade.getGradeEnName());
-			view.setSchoolList(schoolDao.selectTotalByGradeGroup(view.getGradeGroup(), area.getCityCode(), 6));
+			view.setSchoolList(schoolDao.selectTotalByGradeGroup(view.getGradeGroup(), area.getCityCode(), 5));
 			schoolView.add(view);
 		}
 		request.setAttribute("schoolView", schoolView);
