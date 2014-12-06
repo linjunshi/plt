@@ -9,6 +9,8 @@ ManageClass.prototype = {
 		//新增课程页面
 		courseAdd : function(){
 			
+			var xxx=;
+			
 			// 年级选择
 			$("#gradeSelect").change(function() {
 				$.get(Globals.ctx + "/data/levelByGrade?gradeEnName=" + $(this).val(), function(data) {
