@@ -650,27 +650,29 @@ public class CourseMAction extends TeacherBaseAction {
 			String chapterId = request.getParameter("chapterId");
 			String resourceId = request.getParameter("resourceId");
 			
-			String checkIds = request.getParameter("checkIds");//已经勾选的questionId
-			String cancelIds = request.getParameter("cancelIds");//还没有勾选的questionId
-			
 			int pageNum = this.getIntParameter("page");
+			
 			if(pageNum == 0) {
+				// 点击修改的时候，才执行修改操作的时候所要做的事情
+				if (MyUtils.isNotNull(resourceId)) {
+					TrainDao trainDao = new TrainDao();
+					TrainItem train = trainDao.selectById(resourceId);
+					request.setAttribute("train", train);
+					
+					TrainQuestionDao tqDao = new TrainQuestionDao();
+					List<TrainToQuestionItem> t2qList = tqDao.selectTrain2QuestionByTrainId(resourceId);
+					String questionIds = "";
+					for(TrainToQuestionItem ttqItem : t2qList) {
+						questionIds += "," + ttqItem.getQuestionId();
+					}
+					if (questionIds != "") {
+						questionIds = questionIds.substring(1);
+					}
+					// 第一次加载页面的时候（点击修改的时候），才设置该隐藏值到页面上
+					request.setAttribute("questionIds", questionIds);
+				}
 				pageNum = 1;
 			}
-			
-			// 执行修改操作的时候所要做的事情
-			if (MyUtils.isNotNull(resourceId)) {
-				TrainDao trainDao = new TrainDao();
-				TrainItem train = trainDao.selectById(resourceId);
-				request.setAttribute("train", train);
-				
-				TrainQuestionDao tqDao = new TrainQuestionDao();
-				List<TrainToQuestionItem> t2qList = tqDao.selectTrain2QuestionByTrainId(resourceId);
-				
-				// 每一次的翻页时，获取勾选的questionId的添加到SessionKey_TrainBindQuestionIds会话中，没有勾选的从会话中移除掉
-				request.setAttribute("t2qList", t2qList);
-			}
-			
 			
 			TrainQuestionDao tqDao = new TrainQuestionDao();
 			TrainQuestionQuery query = new TrainQuestionQuery();
@@ -687,9 +689,6 @@ public class CourseMAction extends TeacherBaseAction {
 			request.setAttribute("chapterId", chapterId);
 			request.setAttribute("resourceId", resourceId);
 			request.setAttribute("resourceType", ResourceType.Type_Train);
-			request.setAttribute("checkIds", checkIds);
-			request.setAttribute("cancelIds", cancelIds);
-			
 		} catch (Exception e) {
 			Log.printStackTrace(e);
 		}
@@ -724,7 +723,7 @@ public class CourseMAction extends TeacherBaseAction {
 					trainItem.setUts(new Date());
 					trainDao.update(trainItem);
 					
-					// TODO 待完善 修改 题库的时候，题目匹对
+					// TODO 待完善 修改 题库的时候，题目匹对；目前的思路：先把之前的记录全部删除后，再添加
 					if (MyUtils.isNotNull(ids)) {
 						TrainQuestionDao tqDao = new TrainQuestionDao();
 						tqDao.removeAllQuestion4Train(resourceId);

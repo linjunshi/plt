@@ -143,7 +143,7 @@ ManageClass.prototype = {
 		
 		// TODO 章节维护页面
 		chapterList : function(){
-			
+
 			//时间控件
 			var DateTimePickerFn = function(){
 				var now   = new Date();
@@ -451,7 +451,7 @@ ManageClass.prototype = {
 				}
 			});
 			
-			//点击分页按钮时
+			// TODO 点击分页按钮时
 			$(".pagination a").live("click", function() {
 				
 				//动态获取点击元素<a>上的属性href的跳转地址值
@@ -467,13 +467,12 @@ ManageClass.prototype = {
 	                    url: Globals.ctx + "/manage/course/addResourceFile",
 	                    data: { courseId:courseId, chapterId:chapterId, oldResourceId:oldResourceId, page:page},
 	                    type: "GET",
-//	                    dataType : "html",//返回纯文本 HTML 信息；包含的 script 标签会在插入dom时执行。
 	                    success: function (data) {
-	                    	//var json = eval("(" + data + ")");
 	    					$(".sh_info_r").html(data);
 	                    }
 					});//ajax
 				} else if (resourceType == 4) {
+					var title = $("#title").val();
 					var resourceId = $("#resourceId").val();
 					$.ajax({
 	                    url: Globals.ctx + "/manage/course/addResourceTrain",
@@ -483,6 +482,8 @@ ManageClass.prototype = {
 	                    success: function (data) {
 	                    	//var json = eval("(" + data + ")");
 	    					$(".sh_info_r").html(data);
+	    					CheckBox_Checked();//翻页是默认勾选
+	    					$("#title").val(title);
 	                    }
 					});//ajax
 				}
@@ -555,6 +556,45 @@ ManageClass.prototype = {
 				}
 			});
 			
+			// TODO 点击 试题列表的复选框时，保存勾选的id值或移除取消选的值
+			var checkArr = new Array();//创建一个数组对象，代码移到addResourceTrain.jsp最底部 
+			$("input[name='question_checkbox']").live("change",function(){
+				var currentVal = $(this).val();
+				if ($(this).attr("checked") != undefined) {
+					if ($(this).attr("checked") == "checked") {
+						if (checkArr.length == 0) {
+							checkArr.push(currentVal);
+						} else {
+							// 不管数组checkArr里有没有currentVal，先过滤掉currentVal，然后再加currentVal，避免重复值
+							checkArr = $.grep(checkArr,function(val,key){
+								//过滤函数有两个参数,第一个为当前元素,第二个为元素索引
+								return val != currentVal;
+							});
+							checkArr.push(currentVal);
+						}
+					} 
+				} else {
+					// 从数组checkArr中，移除之前勾选过的值
+					if (checkArr.length > 0) {
+						checkArr = $.map( checkArr, function(n){
+							  return n != currentVal ? n : null;
+							});
+					}
+				}
+			});
+			
+			// 翻页之后，遍历数组checkArr，有的就默认勾选
+			var CheckBox_Checked = function() {
+				$("input[name='question_checkbox']").each(function(i) {
+					var _this = $(this);
+					$.each( checkArr , function(key, val){
+						  if (val == _this.val()) {
+							  _this.attr('checked','checked')
+						  }
+					});
+				});
+			}
+			
 			// TODO 点击确认选择，添加试题到题库里去（addResourceTrain.jsp） 
 			/************************添加课程章节关联资源 END******************************************/
 			$("#selectTrainQuestion").live("click",function(){
@@ -570,11 +610,14 @@ ManageClass.prototype = {
 					return false;
 				}
 				
-				$("input[name='question_checkbox']").each(function(i) {
-			        if ($(this).attr("checked") == "checked") {
-			                ids = ids + "," + $(this).val();
-			        }
+				$.each( checkArr , function(key, val){
+					ids = ids + "," + val;
 				});
+//				$("input[name='question_checkbox']").each(function(i) {
+//			        if ($(this).attr("checked") == "checked") {
+//			                ids = ids + "," + $(this).val();
+//			        }
+//				});
 				if (ids.length > 0) {
 					ids = ids.replace(',','');
 				} else {
@@ -646,6 +689,14 @@ ManageClass.prototype = {
 						$(".sh_info_r").html(result);
 						if (resourceType == 2) {
 							DateTimePickerFn();
+						} else if (resourceType == 4) {
+							checkArr.length = 0;  // 输出 []，空数组，即被清空了
+//							console.log(checkArr); // 输出 []，空数组，即被清空了 
+							var questionIds = $("#questionIds").val();
+							if (questionIds != "" && questionIds != null) {
+								checkArr = questionIds.split(",");
+								CheckBox_Checked();//设置默认勾选
+							}
 						}
 					});
 					
