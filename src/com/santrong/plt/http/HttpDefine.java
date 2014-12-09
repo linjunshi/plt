@@ -47,4 +47,6 @@ public class HttpDefine {
 	
 	/*一体机*/
 	public static final String Aio_Service_30001			= "30001";	// 登录校验
+	public static final String Aio_Service_30002			= "30002";	// 新增课件
+	public static final String Aio_Service_30003			= "30003";	// 新增课件完成
 }

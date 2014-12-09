@@ -12,13 +12,26 @@ public class FileItem {
 	private String title;
 	private String url;
 	private long size;
-	private int duration;
+	private String duration;
 	private String groupId;
 	private String ownerId;
 	private String remark;
+	private int status;
 	private Date cts;
 	private Date uts;
 	
+	public static final int File_Push_Status_Wating = 0;
+	public static final int File_Push_Status_Pushing = 1;
+	public static final int File_Push_Status_Error = 2;
+	public static final int File_Push_Status_Done = 3;	
+	
+	
+	public int getStatus() {
+		return status;
+	}
+	public void setStatus(int status) {
+		this.status = status;
+	}
 	public String getTitle() {
 		return title;
 	}
@@ -31,10 +44,10 @@ public class FileItem {
 	public void setRemark(String remark) {
 		this.remark = remark;
 	}
-	public int getDuration() {
+	public String getDuration() {
 		return duration;
 	}
-	public void setDuration(int duration) {
+	public void setDuration(String duration) {
 		this.duration = duration;
 	}
 	public String getId() {

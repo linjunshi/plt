@@ -23,6 +23,22 @@ import com.santrong.plt.webpage.course.resource.file.entry.FileQuery;
  */
 public class FileDao extends BaseDao {
 
+	public int insert(FileItem file) {
+		FileMapper mapper = this.getMapper(FileMapper.class);
+		if(mapper != null) {
+			return mapper.insert(file);
+		}
+		return 0;
+	}
+	
+	public int updateStatus(String id, int status) {
+		FileMapper mapper = this.getMapper(FileMapper.class);
+		if(mapper != null) {
+			return mapper.updateStatus(id, status);
+		}
+		return 0;
+	}
+	
 	/**
 	 * 根据ID获取
 	 * @param id

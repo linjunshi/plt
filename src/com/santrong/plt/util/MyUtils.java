@@ -22,6 +22,7 @@ import com.santrong.plt.log.Log;
  */
 public class MyUtils {
 	public static final String DF_yyyy_MM_dd_HH_mm_ss = "yyyy-MM-dd HH:mm:ss";
+	public static final String DF_yyyy_MM_dd_HH_mm = "yyyy-MM-dd HH:mm";
 	public static final String DF_yyyy_MM = "yyyy-MM";
 	public static final String DF_yyyy_MM_dd = "yyyy-MM-dd";
 	public static final String DF_HH_mm_ss = "HH:mm:ss";

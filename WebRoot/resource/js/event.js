@@ -125,6 +125,14 @@ jQuery(function($) {
 		return isPass;
 	}
 
+	// 判断是否是IE，包括11
+	$.isIE = function isIE() {
+	    if (!!window.ActiveXObject || "ActiveXObject" in window)
+	        return true;
+	    else
+	        return false;
+	};	
+	
 	// 同步显示和隐藏
 	$.fn.toggleShow = function(el, opt) {
 		opt = $.extend({

@@ -9,8 +9,6 @@ ManageClass.prototype = {
 		//新增课程页面
 		courseAdd : function(){
 			
-			var xxx=;
-			
 			// 年级选择
 			$("#gradeSelect").change(function() {
 				$.get(Globals.ctx + "/data/levelByGrade?gradeEnName=" + $(this).val(), function(data) {
@@ -140,6 +138,35 @@ ManageClass.prototype = {
 						});
 					}
 				});
+			});
+		},
+		
+		// 老师待上课程
+		liveList : function() {
+			$(".open_tool").click(function(){
+//				if(!/MSIE/.test(navigator.userAgent)) {// IE11不兼容
+				if(!$.isIE()) {
+					Boxy.alert("仅支持IE");
+					return;
+				}
+				
+				var liveId = $(this).attr("id").split("_")[1];
+				if(liveId) {
+					$.ajax({url : Globals.ctx + "/manage/live/openTool", data : {liveId : liveId}, success : function(result) {
+						if(result.indexOf('{') != -1) {
+							var json = eval('(' + result + ')');
+//							if(SantrongPlayer && SantrongPlayer.StartPlayEX) {
+							if(SantrongPlayer) {
+								SantrongPlayer.StartPlayEX(json.rtmpUrl, json.webUrl, json.pltHost, json.teacherId, json.teacherName, json.sourceId, json.sourceTitle, json.beginTimeString, json.endTimeString);
+							}else{
+								Boxy.alert("请下载老师客户端");
+							}
+						}else {
+							Boxy.alert(result);
+						}
+					}});
+				}
+				
 			});
 		},
 		

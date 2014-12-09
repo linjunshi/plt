@@ -36,15 +36,15 @@
             <!-- To use express install, set to playerProductInstall.swf, otherwise the empty string. -->
             var xiSwfUrlStr = "${ctx}/resource/player/playerProductInstall.swf";
             var flashvars = {
-			rtmpUrl: "rtmp://<%=Global.PltDomain%>:1935/live",
+            VarType: "live",
+			PlayUrl: "rtmp://<%=Global.PltDomain%>:1935/",
 			WebUrl: "http://<%=Global.PltDomain%>/http/basic",
 			UserID: "${sessionScope.loginUser.id}",	
 			UserName: "${sessionScope.loginUser.username}",
-			MasterName: "${course.ownerId}",
-			CourseID: "${course.id}",
-			CourseName: "${course.courseName}",
-			ServAddr: "<%=Global.PltDomain%>",
-			ServPort: "10000"
+			MasterName: "${course.teacher}",
+			SourceID: "${live.id}",
+			SourceTitle: "${live.title}",
+			ServAddr: "<%=Global.PltDomain%>"
 			};			
             var params = {
 			 flashvars: "CourseName=abcderf" 
