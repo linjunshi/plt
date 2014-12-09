@@ -32,7 +32,7 @@ Globals.page = "Manage_myTrainMAdd";
 									</c:forEach>
 								</div>
 							</c:if>
-							<form method="post" action="${ctx}/manage/question/addOrModifyQuestion" class="form_info" id="question_form">
+							<form method="post" action="${ctx}/manage/question/addOrModifyQuestion" class="form_info common_form" id="question_form">
 								<input type="hidden" value="${tqItem.questionType}" />
 								<div class="form_item">
 									<label>题型：</label>
@@ -55,7 +55,7 @@ Globals.page = "Manage_myTrainMAdd";
 								<div class="form_item">
 									<label>标题：</label>
 									<div class="form_field">
-										<textarea id="topic" name="topic">${tqItem.topic}</textarea>
+										<textarea id="topic" name="topic" required>${tqItem.topic}</textarea>
 										<p class="form_des">请匆超过100字符</p>
 									</div>
 								</div>
@@ -63,7 +63,7 @@ Globals.page = "Manage_myTrainMAdd";
 									<label>选项：</label>
 									<div class="form_field">
 										<label class="field_te">A: </label> 
-										<input placeholder="请填入试题" class="form_tarea form_text" id="opt1" name="opt1" type="text" value="${tqItem.opt1}"><br /> 
+										<input placeholder="请填入试题" class="form_tarea form_text" id="opt1" name="opt1" type="text" value="${tqItem.opt1}" required><br /> 
 										<label class="field_te ma">B: </label> 
 										<input placeholder="请填入试题" class="form_tarea form_text" id="opt2" name="opt2" type="text" value="${tqItem.opt2}"><br /> 
 										<label class="field_te ma">C: </label>

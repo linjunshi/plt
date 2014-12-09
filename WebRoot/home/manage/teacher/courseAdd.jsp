@@ -39,7 +39,7 @@ Globals.page = "Manage_courseAdd";
 							<form method="post" 
 							<c:if test="${fn == 'add'}">action="${ctx}/manage/course/add"</c:if> 
 							<c:if test="${fn == 'modify'}">action="${ctx}/manage/course/modify"</c:if> 
-							class="form_info" id="course_form">
+							class="form_info common_form" id="course_form">
 								<input type="hidden" name="id" value="${course.id}"/>
 								<div class="form_item">
 									<label for="gradeId">课程分类：</label>
@@ -57,7 +57,7 @@ Globals.page = "Manage_courseAdd";
 									<div class="form_item">
 										<label for="courseName">课程名称：</label>
 										<div class="form_field">
-											<input class="form_text" id="courseName" name="courseName" type="text" value="${course.courseName}">
+											<input class="form_text" id="courseName" name="courseName" type="text" value="${course.courseName}" required>
 										</div>
 									</div>
 									<div class="form_item">
@@ -69,13 +69,12 @@ Globals.page = "Manage_courseAdd";
 									<div class="form_item">
 										<label for="price">课程价格：</label>
 										<div class="form_field">
-											<input placeholder="如：1000" class="form_text" name="price" id="price" type="text" value="${course.price}"> 元
+											<input placeholder="如：1000" class="form_text" name="price" id="price" type="text" value="${course.price}" required required_Number> 元
 										</div>
 									</div>
 									<div class="form_item">
 										<label for="chapterCount">课时数量：</label>
 										<div class="form_field">
-											<%-- <input placeholder="如：2" class="form_text" name="chapterCount" id="chapterCount" type="text" value="${course.chapterCount}"> 小时 --%>
 											<select name="chapterCount" size="1" id="chapterCount" class="inline_ele">
 												<option <c:if test="${course.chapterCount==5}">selected="selected"</c:if> value="5">5分钟</option>
 												<option <c:if test="${course.chapterCount==10}">selected="selected"</c:if> value="10">10分钟</option>
@@ -91,7 +90,7 @@ Globals.page = "Manage_courseAdd";
 									<div class="form_item">
 										<label for="endTime">结束时间：</label>
 										<div class="form_field">
-											<input placeholder="格式：2014-01-01 59:59:59" class="form_text" name="endTime" id="endTime" type="date" value="<fmt:formatDate type="date" pattern="yyyy/MM/dd" value="${course.endTime}" />">
+											<input placeholder="格式：2014-01-01 59:59:59" class="form_text" name="endTime" id="endTime" type="date" value="<fmt:formatDate type="date" pattern="yyyy/MM/dd" value="${course.endTime}" />" required_Date>
 										</div>
 									</div>
 									 <div class="form_item">

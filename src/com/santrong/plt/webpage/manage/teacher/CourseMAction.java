@@ -135,6 +135,7 @@ public class CourseMAction extends TeacherBaseAction {
 					CourseDao courseDao = new CourseDao();
 					
 					CourseItem courseItem = new CourseItem();
+					courseForm.setCourseName(courseForm.getCourseName().trim());
 					BeanUtils.copyProperties(courseForm, courseItem);
 					
 					courseItem.setId(MyUtils.getGUID());
@@ -220,6 +221,7 @@ public class CourseMAction extends TeacherBaseAction {
 				if(this.errorSize() == 0) {
 					CourseDao courseDao = new CourseDao();
 					CourseItem courseItem = courseDao.selectById(courseForm.getId());
+					courseForm.setCourseName(courseForm.getCourseName().trim());
 					BeanUtils.copyProperties(courseForm, courseItem);
 					
 					courseItem.setEndTime(MyUtils.stringToDate(courseForm.getEndTime(), "yyyy-MM-dd"));
@@ -371,7 +373,7 @@ public class CourseMAction extends TeacherBaseAction {
 	@ResponseBody
 	public String modifyChapterByAsync(ChapterItem chapterItem) {
 		try {
-			if (MyUtils.isNull(chapterItem.getRemark())) {
+			if (MyUtils.isNull(chapterItem.getRemark().trim())) {
 				return "章节标题不能为空！";
 			}
 			if (MyUtils.isNull(chapterItem.getId())) {
@@ -379,6 +381,7 @@ public class CourseMAction extends TeacherBaseAction {
 			}
 			
 			ChapterDao chapterDao = new ChapterDao();
+			chapterItem.setRemark(chapterItem.getRemark().trim());
 			chapterItem.setUts(new Date());
 			if (!chapterDao.update(chapterItem)) {
 				return "修改失败，请刷新页面后重新操作！";
@@ -401,11 +404,15 @@ public class CourseMAction extends TeacherBaseAction {
 		try {
 			if (MyUtils.isNotNull(chapterItem.getRemark()) && MyUtils.isNotNull(chapterItem.getCourseId())) {
 				ChapterDao chapterDao = new ChapterDao();
-				chapterDao.selectMaxPriority(chapterItem.getCourseId());
+				int count = 0;
+				count = chapterDao.selectMaxPriority(chapterItem.getCourseId());
 				chapterItem.setId(MyUtils.getGUID());
-				if (chapterDao.selectMaxPriority(chapterItem.getCourseId()) != 0) {
-					chapterItem.setPriority(chapterDao.selectMaxPriority(chapterItem.getCourseId()) + 1);
+				if (count != 0) {
+					chapterItem.setPriority(count + 1);
+				} else {
+					chapterItem.setPriority(1);
 				}
+				chapterItem.setRemark(chapterItem.getRemark().trim());
 				chapterItem.setCts(new Date());
 				chapterItem.setUts(new Date());
 				if (chapterDao.insert(chapterItem)) {
@@ -566,7 +573,7 @@ public class CourseMAction extends TeacherBaseAction {
 
 			if (liveForm != null) {
 
-				if (MyUtils.isNull(liveForm.getTitle())) {
+				if (MyUtils.isNull(liveForm.getTitle().trim())) {
 					addError("请您填写直播名称！");
 				}
 
@@ -582,7 +589,7 @@ public class CourseMAction extends TeacherBaseAction {
 								return this.redirect("/study/course");
 							}
 							
-							liveItem.setTitle(liveForm.getTitle());
+							liveItem.setTitle(liveForm.getTitle().trim());
 							liveItem.setDuration(liveForm.getDuration());
 							liveItem.setBeginTime(MyUtils.stringToDate(
 									liveForm.getBeginTime(), "yyyy/MM/dd HH:mm"));
@@ -603,12 +610,12 @@ public class CourseMAction extends TeacherBaseAction {
 						ThreadUtils.beginTranx();
 						
 						liveItem.setId(MyUtils.getGUID());
-						liveItem.setTitle(liveForm.getTitle());
+						liveItem.setTitle(liveForm.getTitle().trim());
 						liveItem.setDuration(liveForm.getDuration());
 						liveItem.setBeginTime(MyUtils.stringToDate(
-								liveForm.getBeginTime(), "yyyy-MM-dd HH:mm:ss"));
+								liveForm.getBeginTime(), "yyyy/MM/dd HH:mm"));
 						liveItem.setEndTime(MyUtils.stringToDate(
-								liveForm.getEndTime(), "yyyy-MM-dd HH:mm:ss"));
+								liveForm.getEndTime(), "yyyy/MM/dd HH:mm"));
 						liveItem.setOwnerId(currentUser().getId());
 						liveItem.setUrl(liveForm.getUrl());
 						liveItem.setCts(new Date());
@@ -620,7 +627,7 @@ public class CourseMAction extends TeacherBaseAction {
 						ctrItem.setId(MyUtils.getGUID());
 						ctrItem.setChapterId(chapterId);
 						ctrItem.setResourceId(liveItem.getId());
-						ctrItem.setTitle(liveItem.getTitle());
+						ctrItem.setTitle(liveItem.getTitle().trim());
 						ctrItem.setResourceType(ResourceType.Type_Live);
 						ctrItem.setPriority(ResourceType.Type_Live);
 						chapterDao.insertChapterToResource(ctrItem);
@@ -703,7 +710,7 @@ public class CourseMAction extends TeacherBaseAction {
 	@ResponseBody
 	public String selectTrainList() {
 		HttpServletRequest request = getRequest();
-		String title = request.getParameter("title");
+		String title = request.getParameter("title").trim();
 		String courseId = request.getParameter("courseId");
 		String chapterId = request.getParameter("chapterId");
 		String resourceId = request.getParameter("resourceId");

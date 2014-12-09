@@ -18,7 +18,7 @@
 				</c:forEach>
 			</div>
 		</c:if>
-		<form method="post" action="${ctx}/manage/course/addResourceLive" class="form_info" id="live_form">
+		<form method="post" action="${ctx}/manage/course/addResourceLive" class="form_info common_form" id="live_form">
 			<input type="hidden" id="courseId" name="courseId" value="${courseId}" />
 			<input type="hidden" id="chapterId" name="chapterId" value="${chapterId}" />
 			<input type="hidden" id="resourceId" name="resourceId" value="${resourceId}" />
@@ -26,13 +26,13 @@
 			<div class="form_item">
 				<label for="courseName">直播名称：</label>
 				<div class="form_field">
-					<input class="form_text" id="title" name="title" type="text" value="${live.title}">
+					<input class="form_text" id="title" name="title" type="text" value="${live.title}" required>
 				</div>
 			</div>
 			<div class="form_item">
 				<label for="beginTime">直播开始时间：</label>
 				<div class="form_field">
-					<input placeholder="格式：2014/01/01 59:59" class="form_text" name="beginTime" id="beginTime" type="text" value="<fmt:formatDate type="date" pattern="yyyy/MM/dd HH:mm" value="${live.beginTime}" />">
+					<input placeholder="格式：2014/01/01 59:59" class="form_text" name="beginTime" id="beginTime" type="text" value="<fmt:formatDate type="date" pattern="yyyy/MM/dd HH:mm" value="${live.beginTime}" />" required_Date>
 				</div>
 			</div>
 			<div class="form_item">

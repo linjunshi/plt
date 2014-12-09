@@ -35,13 +35,12 @@ Globals.page = "Manage_personalInfo";
 									</c:forEach>
 								</div>
 							</c:if>
-		                    <form method="post" action="${ctx}/account/personalInfo" class="form_info" id="personalInfo_form">
+		                    <form method="post" action="${ctx}/account/personalInfo" class="form_info common_form" id="personalInfo_form">
 		                    	<input type="hidden" name="id" value="${user.id}" />
 		                        <div class="form_item">
 		                            <label for="showName">昵称：</label>
 		                            <div class="form_field">
-		                                <input placeholder="6-32个字符" class="form_text" id="showName" name="showName" type="text" value="${user.showName}" />
-		                                <!-- <span class="form_success">昵称可用</span> -->
+		                                <input placeholder="6-32个字符" class="form_text" id="showName" name="showName" type="text" value="${user.showName}" required/>
 		                            </div>
 		                        </div>
 		                        <div class="form_item">
@@ -56,19 +55,19 @@ Globals.page = "Manage_personalInfo";
 		                        <div class="form_item">
 		                            <label>身份证号码：</label>
 		                            <div class="form_field ">
-		                               <input placeholder="请填入您的真实身份证号码" class="form_text" id="idCard" name="idCard" type="text" value="${user.idCard}">
+		                               <input placeholder="请填入您的真实身份证号码" class="form_text" id="idCard" name="idCard" type="text" value="${user.idCard}" required_Idcard>
 		                            </div>
 		                        </div>  
 		                        <div class="form_item">
 		                            <label for="realname">手机号：</label>
 		                            <div class="form_field">
-		                                <input placeholder="请填入您的手机号码" class="form_text" id="phone" name="phone" type="text" value="${user.phone}">
+		                                <input placeholder="请填入您的手机号码" class="form_text" id="phone" name="phone" type="text" value="${user.phone}" required_Phone>
 		                            </div>
 		                        </div>
 		                        <div class="form_item">
 		                            <label for="name">邮箱：</label>
 		                            <div class="form_field">
-		                                <input placeholder="请填入您的邮箱" class="form_text" id="email" name="email" type="email" value="${user.email}">
+		                                <input placeholder="请填入您的邮箱" class="form_text" id="email" name="email" type="email" value="${user.email}" required_Mail>
 		                                <!-- <span class="form_error">请输入正确的邮箱格式</span></div> -->
 		                        	</div>
 		                        </div>

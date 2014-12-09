@@ -35,7 +35,7 @@ Globals.page = "Manage_personalInfoEdu";
 									</c:forEach>
 								</div>
 							</c:if>
-		                    <form method="post" action="${ctx}/account/personalInfoEdu" class="form_info" id="personalInfo_form">
+		                    <form method="post" action="${ctx}/account/personalInfoEdu" class="form_info common_form" id="personalInfo_form">
 	                    	    <div class="form_item">
 		                            <label>学历：</label>
 		                            <div class="form_field ">
@@ -64,9 +64,7 @@ Globals.page = "Manage_personalInfoEdu";
 		                        <div class="form_item">
 		                            <label for="graduateSchool">毕业院校：</label>
 		                            <div class="form_field">
-		                                <input placeholder="请输入你的毕业院校" class="form_text" id="graduateSchool" name="graduateSchool" type="text" value="${userEducation.graduateSchool}" />
-		                               <!--  <span class="form_success">昵称可用</span> 
-		                               		 <span class="form_error">请输入正确的邮箱格式</span>-->
+		                                <input placeholder="请输入你的毕业院校" class="form_text" id="graduateSchool" name="graduateSchool" type="text" value="${userEducation.graduateSchool}" required/>
 	                                </div>
 		                        </div>
 		                        <div class="form_action"><input type="submit" value="保存" /></div>

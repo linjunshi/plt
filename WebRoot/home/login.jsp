@@ -61,14 +61,14 @@ body {color: #666;font: 12px/1.8em Arial, Helvetica, sans-serif;background:#FFF;
   <div class="center">
   
     <div class="user">
-      <form class="formlogin" action="${ctx}/account/login" method="post">
+      <form class="formlogin common_form" action="${ctx}/account/login" method="post">
         <div class="loginuser">
           <label class="login"><fmt:message key="index_user_username"/>：</label>
-          <input name="username" type="text" size="20" class="text2" value="${username}">
+          <input name="username" type="text" size="20" class="text2" value="${username}" required>
         </div>
         <div class="loginuser">
           <label class="login"><fmt:message key="index_user_password"/>：</label>
-          <input name="password" type="password" size="20" class="text2">
+          <input name="password" type="password" size="20" class="text2" required>
         </div>
         <div class="loginuser">
           <label class="login"></label>

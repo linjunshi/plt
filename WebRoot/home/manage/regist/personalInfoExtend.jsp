@@ -35,17 +35,17 @@ Globals.page = "Manage_personalInfoExtend";
 									</c:forEach>
 								</div>
 							</c:if>
-		                    <form method="post" action="${ctx}/account/personalInfoExtend" class="form_info" id="personalInfo_form">
+		                    <form method="post" action="${ctx}/account/personalInfoExtend" class="form_info common_form" id="personalInfo_form">
 		                        <div class="form_item">
 		                            <label for="nativePlace">籍贯：</label>
 		                            <div class="form_field">
-		                                <input placeholder="6-32个字符" class="form_text" id="nativePlace" name="nativePlace" type="text" value="${userExtends.nativePlace}" />
+		                                <input placeholder="6-32个字符" class="form_text" id="nativePlace" name="nativePlace" type="text" value="${userExtends.nativePlace}" required/>
 		                            </div>
 		                        </div>
 		                        <div class="form_item">
 									<label for="birthday">出生日期：</label>
 									<div class="form_field">
-										<input placeholder="格式：2014/01/01" class="form_text" name="birthday" id="birthday" type="text" value="<fmt:formatDate type="date" pattern="yyyy/MM/dd" value="${userExtends.birthday}" />">
+										<input placeholder="格式：2014/01/01" class="form_text" name="birthday" id="birthday" type="text" value="<fmt:formatDate type="date" pattern="yyyy/MM/dd" value="${userExtends.birthday}" />" required_Date>
 									</div>
 								</div>
 		                        <div class="form_action"><input type="submit" value="保存" /></div>

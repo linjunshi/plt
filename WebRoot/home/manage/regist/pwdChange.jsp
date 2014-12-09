@@ -33,25 +33,24 @@ Globals.page = "Manage_index";
 									</c:forEach>
 								</div>
 							</c:if>
-							<form method="post" action="${ctx}/account/changePwdPost" class="form_info" id="pwdChange_form">
+							<form method="post" action="${ctx}/account/changePwdPost" class="form_info common_form" id="pwdChange_form">
 								<div class="form_item">
 									<label for="pwd">原始密码：</label>
 									<div class="form_field">
-										<input placeholder="请输入您的原密码！" name="oldPwd" id="oldPwd" class="form_text" type="password"/> 
+										<input placeholder="请输入您的原密码！" name="oldPwd" id="oldPwd" class="form_text" type="password" required/> 
 										<span class="form_error"><a href="${ctx}/account/forgotPwd" target="_blank">忘记密码</a></span>
 									</div>
 								</div>
 								<div class="form_item">
 									<label for="pwd">新密码：</label>
 									<div class="form_field">
-										<input placeholder="请输入您的新密码！" name="newPwd" id="newPwd" class="form_text" type="password"/>
+										<input placeholder="请输入您的新密码！" name="newPwd" id="newPwd" class="form_text" type="password" required/>
 									</div>
 								</div>
 								<div class="form_item">
 									<label for="pwd">确认新密码：</label>
 									<div class="form_field">
-										<input placeholder="请输入您的确认新密码！" name="comfirmPwd" id="comfirmPwd" class="form_text" type="password"/>
-										<!-- <span class="form_error">输入的密码不正确，请重新输入</span> -->
+										<input placeholder="请输入您的确认新密码！" name="comfirmPwd" id="comfirmPwd" class="form_text" type="password" equalTo="newPwd"/>
 									</div>
 								</div>
 								<div class="form_action">

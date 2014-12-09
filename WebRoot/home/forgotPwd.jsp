@@ -24,12 +24,12 @@ Globals.page = "Manage_index";
 	
 	<div class="form_page">
 		<div id="demo_zone">
-			<form method="post" action="${ctx}/account/mailPwd" class="form_info"
+			<form method="post" action="${ctx}/account/mailPwd" class="form_info common_form"
 				id="register_form">
 				<div class="form_item">
 					<label for="pwd">注册邮箱：</label>
 					<div class="form_field">
-						<input name="email" class="form_text" />
+						<input name="email" class="form_text" required_Mail/>
 					</div>
 				</div>
 				<div class="form_action">

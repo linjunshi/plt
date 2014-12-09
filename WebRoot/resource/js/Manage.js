@@ -275,7 +275,7 @@ ManageClass.prototype = {
 				var dls_obj = $(this).parents(".sh_collection").find("dl.sh_add_chapter");
 				var chapter_obj = $(this).parents(".sh_add_chapter").children("input[name=chapterId]");
 				var chapterId = $(chapter_obj).val();
-				var remark = $(this).parent().children("input[name=remark]").val();
+				var remark = $.trim($(this).parent().children("input[name=remark]").val());;
 				if (remark == "") {
 					alert("章节标题不能为空！");
 				} else {
@@ -332,7 +332,7 @@ ManageClass.prototype = {
 					var dls_obj = $(this).parents(".sh_collection").find("dl.sh_add_chapter");
 					var chapter_obj = $(this).parents(".sh_add_chapter").children("input[name=chapterId]");
 					var chapterId = $(chapter_obj).val();
-					var remark = $(this).val();
+					var remark = $.trim($(this).val());
 					if (remark == "") {
 						alert("章节标题不能为空！");
 					} else {
@@ -472,7 +472,7 @@ ManageClass.prototype = {
 	                    }
 					});//ajax
 				} else if (resourceType == 4) {
-					var title = $("#title").val();
+					var title = $.trim($("#title").val());
 					var resourceId = $("#resourceId").val();
 					$.ajax({
 	                    url: Globals.ctx + "/manage/course/addResourceTrain",
@@ -533,7 +533,7 @@ ManageClass.prototype = {
 			
 			//addResourceLive.jsp 提交直播表单校验
 			$("#liveSubmit").live("click", function (){
-				var title = $("#title").val();
+				var title = $.trim($("#title").val());
 				if (title == "" || title == null) {
 					alert("直播名称不可以为空，请您务必填写！");
 					$("#title").focus();
@@ -599,7 +599,7 @@ ManageClass.prototype = {
 			/************************添加课程章节关联资源 END******************************************/
 			$("#selectTrainQuestion").live("click",function(){
 				var ids = "";
-				var title = $("#title").val();
+				var title = $.trim($("#title").val());
 				var courseId = $("#courseId").val();
 				var chapterId = $("#chapterId").val();
 				var resourceId = $("#resourceId").val();
