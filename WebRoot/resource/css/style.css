@@ -590,9 +590,12 @@ span.form_error, span.form_success{border-width:1px;display:inline-block;*displa
 .choice_school {width:800px;}
 .choice_school .boxy-content {width:90%; height:100%; border:1px #ccc solid;}
 .choice_school .group {margin:0px 0px 15px 0px;background:#dbdbdb; padding:5px; border:1px #999 solid;}
-.choice_school .group a {color:#009871;padding: 0 5px 0 5px;}
+.choice_school .group a {color:#009871;padding: 0 5px 0 5px;white-space: nowrap;}
 .choice_school .group a.current {background-color:#009871;color:#fff;padding: 0 5px 0 5px;font-weight: bold;}
 .choice_school .group a:hover {color:#f90;}
+.choice_school .school {height:140px;overflow-y:auto;}
+.choice_school .school a{ width:235px; margin-right:10px; overflow: hidden; text-align:left; display:inline-block;}
+
 /*----------------------选择学校弹出窗口-END---------------------*/
 
 /*-----------课程--直播--老师------------*/
