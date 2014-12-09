@@ -29,8 +29,6 @@ public class HttpDefine {
 	
 	public static final String Xml_Header = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>";
 
-	public static final String Basic_Server_Test 			= "10000";	// 测试
-	
 	/*中心服务器*/
 	public static final String Server_Service_21001 			= "21001";	// 判断直播是不是某个老师开的(21001)
 	public static final String Server_Service_21002 			= "21002";	// 上报老师开始点名(21002)
@@ -45,4 +43,10 @@ public class HttpDefine {
 	public static final String Client_Service_20006			= "20006";	// 上报课程评价(20006)学生
 	public static final String Client_Service_20007			= "20007";	// 上报点名结果(20007)学生
 	public static final String Client_Service_20008			= "20008";	// 上报作业结果(20008)学生
+	
+	
+	/*一体机*/
+	public static final String Aio_Service_30001			= "30001";	// 登录校验
+	public static final String Aio_Service_30002			= "30002";	// 新增课件
+	public static final String Aio_Service_30003			= "30003";	// 新增课件完成
 }

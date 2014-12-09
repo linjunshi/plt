@@ -22,6 +22,7 @@ import com.santrong.plt.opt.grade.GradeLevelEntry;
 import com.santrong.plt.opt.grade.GradeSubjectEntry;
 import com.santrong.plt.schedule.LogClearJob;
 import com.santrong.plt.schedule.ScheduleManager;
+import com.santrong.plt.util.SystemUtils;
 import com.santrong.plt.webpage.home.dao.GradeDao;
 import com.santrong.plt.webpage.home.dao.SubjectDao;
 import com.santrong.plt.webpage.home.entry.GradeItem;
@@ -48,6 +49,9 @@ public class StartUpListener implements ServletContextListener {
 			try{
 				Properties dbProps = new Properties();
 				dbProps.load(StartUpListener.class.getResourceAsStream("/datasource.properties"));
+				if(SystemUtils.getOsType() == SystemUtils.WINDOWS) {// 开发坏境不进行链接测试
+					dbProps.remove("jdbc-0.proxool.house-keeping-test-sql");
+				}
 				PropertyConfigurator.configure(dbProps);
 			}catch(Exception e) {
 				Log.printStackTrace(e);

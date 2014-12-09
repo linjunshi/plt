@@ -327,10 +327,11 @@ create table resource_file(
 	title varchar(128) not null comment '文件名称',
 	url varchar(255) comment '资源路径',
 	size bigint default 0 not null comment '资源大小',
-	duration int(10) default 0 not null comment '视频时长',
+	duration varchar(32) default '' comment '录制时长',
 	groupId varchar(32) comment '所属组ID',
 	ownerId varchar(32) not null comment '所有者ID',
 	remark varchar(1024) comment '备注',
+	status int(10) default 0 not null comment '推送状态，0待推送，1推送中，2推送异常，3推送完成',
 	cts datetime comment '创建时间',
 	uts datetime comment '修改时间',
 	primary key (id)

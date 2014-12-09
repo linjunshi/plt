@@ -37,6 +37,18 @@ public abstract class XmlImpl {
     	}
     }    
     
+    public long getLong(String xpath, int def) {
+    	return this.getLong(xpath, root, def);
+    }
+    
+    public long getLong(String xpath, Element parent, int def) {
+    	try{
+    		return Long.parseLong(find(xpath, parent).getText());
+    	}catch(Exception e) {
+    		return def;
+    	}
+    }        
+    
     public String getString(String xpath, String def) {
     	return this.getString(xpath, root, def);
     }
