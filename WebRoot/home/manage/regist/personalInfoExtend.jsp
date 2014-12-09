@@ -45,7 +45,7 @@ Globals.page = "Manage_personalInfoExtend";
 		                        <div class="form_item">
 									<label for="birthday">出生日期：</label>
 									<div class="form_field">
-										<input placeholder="格式：2014/01/01" class="form_text" name="birthday" id="birthday" type="text" value="<fmt:formatDate type="date" pattern="yyyy/MM/dd" value="${userExtends.birthday}" />" required_Date>
+										<input placeholder="格式：2014-01-01 ,双击选择" class="form_text" name="birthday" id="birthday" type="text" value="<fmt:formatDate type="date" pattern="yyyy-MM-dd" value="${userExtends.birthday}" />" required_Date>
 									</div>
 								</div>
 		                        <div class="form_action"><input type="submit" value="保存" /></div>

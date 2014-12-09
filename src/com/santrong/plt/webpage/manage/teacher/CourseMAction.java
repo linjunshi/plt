@@ -592,9 +592,9 @@ public class CourseMAction extends TeacherBaseAction {
 							liveItem.setTitle(liveForm.getTitle().trim());
 							liveItem.setDuration(liveForm.getDuration());
 							liveItem.setBeginTime(MyUtils.stringToDate(
-									liveForm.getBeginTime(), "yyyy/MM/dd HH:mm"));
+									liveForm.getBeginTime(), "yyyy-MM-dd HH:mm"));
 							liveItem.setEndTime(MyUtils.stringToDate(
-									liveForm.getEndTime(), "yyyy/MM/dd HH:mm"));
+									liveForm.getEndTime(), "yyyy-MM-dd HH:mm"));
 							liveItem.setUrl(liveForm.getUrl());
 							liveItem.setUts(new Date());
 							liveDao.update(liveItem);
@@ -613,9 +613,9 @@ public class CourseMAction extends TeacherBaseAction {
 						liveItem.setTitle(liveForm.getTitle().trim());
 						liveItem.setDuration(liveForm.getDuration());
 						liveItem.setBeginTime(MyUtils.stringToDate(
-								liveForm.getBeginTime(), "yyyy/MM/dd HH:mm"));
+								liveForm.getBeginTime(), "yyyy-MM-dd HH:mm"));
 						liveItem.setEndTime(MyUtils.stringToDate(
-								liveForm.getEndTime(), "yyyy/MM/dd HH:mm"));
+								liveForm.getEndTime(), "yyyy-MM-dd HH:mm"));
 						liveItem.setOwnerId(currentUser().getId());
 						liveItem.setUrl(liveForm.getUrl());
 						liveItem.setCts(new Date());

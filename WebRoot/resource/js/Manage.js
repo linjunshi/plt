@@ -78,6 +78,25 @@ ManageClass.prototype = {
 			
 			//首次触发年级联动
 			$("#gradeSelect").change();
+			
+			// 日期选择控件
+			var DatePickerFn = function(){
+
+				var endTime = $("#endTime").val();
+			    
+				$('#endTime').datetimepicker({
+					dayOfWeekStart : 1,//一周从星期几开始：1为星期一，2为星期二...7为星期日
+					lang : 'zh',//语言为简体中文
+					timepicker : false,//timepicker 时间控件隐藏
+					format : 'Y-m-d',//默认格式显示，format:	'Y/m/d H:i',
+//					disabledDates:[year + '/' + month +  '/' + '27'],//不显示指定的日期，不能触发点击事件
+//					startDate :	input_value,//从那一天开始，默认选择日期
+					value : endTime, //文本框内默认显示的日期
+//					step : 30,//timepicker 设置时间的间隔，以分钟为单位
+				});
+			}
+			DatePickerFn();
+			
 		},
 		
 		courseList : function() {
@@ -182,7 +201,7 @@ ManageClass.prototype = {
 				var hours = now.getHours() < 10 ? ('0' + now.getHours()) : now.getHours();
 				var minutes = now.getMinutes() < 10 ? ('0' + now.getMinutes()) : now.getMinutes();
 				
-				var input_value = year + '/' + month + '/' + date + ' ' + hours + ':' + minutes;
+				var input_value = year + '-' + month + '-' + date + ' ' + hours + ':' + minutes;
 				
 				var resourceId = $("#resourceId").val();
 				if (resourceId != null && resourceId != "") {
@@ -192,7 +211,7 @@ ManageClass.prototype = {
 				$('#beginTime').datetimepicker({
 					dayOfWeekStart : 1,//一周从星期几开始：1为星期一，2为星期二...7为星期日
 					lang : 'zh',//语言为简体中文
-//					format:	'Y/m/d H:i',//默认格式显示，format:	'Y/m/d H:i',
+					format:	'Y-m-d H:i',//默认格式显示，format:	'Y/m/d H:i',
 //					disabledDates:[year + '/' + month +  '/' + '27'],//不显示指定的日期，不能触发点击事件
 //					startDate :	input_value,//从那一天开始，默认选择日期
 					onGenerate : function( ct ){
@@ -827,7 +846,7 @@ ManageClass.prototype = {
 					dayOfWeekStart : 1,//一周从星期几开始：1为星期一，2为星期二...7为星期日
 					lang : 'zh',//语言为简体中文
 					timepicker : false,//timepicker 时间控件隐藏
-					format :	'Y/m/d',//默认格式显示，format:	'Y/m/d H:i',
+					format : 'Y-m-d',//默认格式显示，format:	'Y/m/d H:i',
 //					disabledDates:[year + '/' + month +  '/' + '27'],//不显示指定的日期，不能触发点击事件
 //					startDate :	input_value,//从那一天开始，默认选择日期
 					value : birthday, //文本框内默认显示的日期

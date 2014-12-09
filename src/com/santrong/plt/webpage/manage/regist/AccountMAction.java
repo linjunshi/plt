@@ -338,8 +338,8 @@ public class AccountMAction extends RegistBaseAction {
 				if (userExtendsDao.existsByUserId(user.getId())) {
 					UserExtendsItem userExtendsItem = userExtendsDao.selectByUserId(user.getId());
 					userExtendsItem.setUserId(user.getId());
-					if (MyUtils.stringToDate(birthday, "yyyy/MM/dd") != null) {
-						userExtendsItem.setBirthday(MyUtils.stringToDate(birthday, "yyyy/MM/dd"));
+					if (MyUtils.stringToDate(birthday, "yyyy-MM-dd") != null) {
+						userExtendsItem.setBirthday(MyUtils.stringToDate(birthday, "yyyy-MM-dd"));
 					}
 					userExtendsItem.setNativePlace(nativePlace);
 					if (userExtendsDao.update(userExtendsItem)) {

@@ -32,7 +32,7 @@
 			<div class="form_item">
 				<label for="beginTime">直播开始时间：</label>
 				<div class="form_field">
-					<input placeholder="格式：2014/01/01 59:59" class="form_text" name="beginTime" id="beginTime" type="text" value="<fmt:formatDate type="date" pattern="yyyy/MM/dd HH:mm" value="${live.beginTime}" />" required_Date>
+					<input placeholder="格式：2014-01-01 59:59" class="form_text" name="beginTime" id="beginTime" type="text" value="<fmt:formatDate type="date" pattern="yyyy-MM-dd HH:mm" value="${live.beginTime}" />" required_Date>
 				</div>
 			</div>
 			<div class="form_item">

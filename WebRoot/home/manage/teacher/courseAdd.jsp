@@ -90,7 +90,7 @@ Globals.page = "Manage_courseAdd";
 									<div class="form_item">
 										<label for="endTime">结束时间：</label>
 										<div class="form_field">
-											<input placeholder="格式：2014-01-01 59:59:59" class="form_text" name="endTime" id="endTime" type="date" value="<fmt:formatDate type="date" pattern="yyyy/MM/dd" value="${course.endTime}" />" required_Date>
+											<input placeholder="格式：2014-01-01 59:59:59" class="form_text" name="endTime" id="endTime" type="text" value="<fmt:formatDate type="date" pattern="yyyy-MM-dd" value="${course.endTime}" />" required_Date>
 										</div>
 									</div>
 									 <div class="form_item">
