@@ -37,8 +37,8 @@
             var xiSwfUrlStr = "${ctx}/resource/player/playerProductInstall.swf";
             var flashvars = {
             VarType: "vod",
-			PlayUrl: "rtmp://<%=Global.PltDomain%>:1980/",
-			WebUrl: "http://<%=Global.PltDomain%>/http/basic",
+			PlayUrl: "<%=Global.PltDomain%>",
+			WebUrl: "<%=Global.PltDomain%>",
 			UserID: "${sessionScope.loginUser.id}",	
 			UserName: "${sessionScope.loginUser.username}",
 			MasterName: "${course.teacher}",
