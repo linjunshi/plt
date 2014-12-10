@@ -45,6 +45,22 @@ public class GradeDefine {
 	}
 	
 	/**
+	 * 根据levelId获取学阶
+	 * @param levelId
+	 * @return
+	 */
+	public static GradeDefineEntry getByLevelId(String levelId) {
+		for(GradeDefineEntry entry : gradeList) {
+			for (GradeLevelEntry grade : entry.getGradeLevelList()) {
+				if (grade.getLevelId().equals(levelId)) {
+					return entry;
+				}
+			}
+		}
+		return null;
+	}
+	
+	/**
 	 * 获取全部科目
 	 * @return
 	 */

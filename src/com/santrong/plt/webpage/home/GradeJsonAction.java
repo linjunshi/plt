@@ -29,4 +29,16 @@ public class GradeJsonAction extends BaseAction {
 		}
 		return "error";
 	}
+	
+	// 根据年级id获取学阶
+		@RequestMapping("/gradeByLevelId")
+		@ResponseBody
+		public String getGradeByLevelId(String levelId) {
+			GradeDefineEntry entry = GradeDefine.getByLevelId(levelId);
+			if(entry != null) {
+				Gson gson = new Gson();
+				return gson.toJson(entry);
+			}
+			return "error";
+		}
 }

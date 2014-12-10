@@ -41,6 +41,8 @@ Globals.page = "Manage_courseAdd";
 							<c:if test="${fn == 'modify'}">action="${ctx}/manage/course/modify"</c:if> 
 							class="form_info common_form" id="course_form">
 								<input type="hidden" name="id" value="${course.id}"/>
+								<input id="levelId" name="levelId" type="hidden" value="${course.gradeId}">
+								<input id="subjectId" name="subjectId" type="hidden" value="${course.subjectId}">
 								<div class="form_item">
 									<label for="gradeId">课程分类：</label>
 									<div class="form_field">

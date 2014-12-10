@@ -9,6 +9,20 @@ ManageClass.prototype = {
 		//新增课程页面
 		courseAdd : function(){
 			
+			var levelId = $("#levelId").val();
+			var subjectId = $("#subjectId").val();
+			
+			var gradeSelectFn = function(levelId) {
+				$.get(Globals.ctx + "/data/gradeByLevelId?levelId=" + levelId, function(data) {
+					if(data != "error") {
+						var json = eval('(' + data + ')');
+						$("#gradeSelect").val(json.gradeEnName);
+						//首次触发年级联动
+						$("#gradeSelect").change();
+					}
+				})
+			}
+			
 			// 年级选择
 			$("#gradeSelect").change(function() {
 				$.get(Globals.ctx + "/data/levelByGrade?gradeEnName=" + $(this).val(), function(data) {
@@ -19,6 +33,10 @@ ManageClass.prototype = {
 							html += '<option value="' + json[i].levelId + '">' + json[i].levelName + '</option>';
 						}
 						$("#levelSelect").html(html);
+						if ( levelId != "") {
+							gradeSelectFn(levelId);
+							$("#levelSelect").val(levelId);
+						}
 						$("#levelSelect").change();
 					}
 				})
@@ -34,6 +52,9 @@ ManageClass.prototype = {
 							html += '<option value="' + json[i].id + '">' + json[i].subjectName + '</option>';
 						}
 						$("#subjectSelect").html(html);
+						if ( levelId != "") {
+							$("#subjectSelect").val(subjectId);
+						}
 					}
 				})
 			});
@@ -76,8 +97,13 @@ ManageClass.prototype = {
 				});
 			});
 			
-			//首次触发年级联动
-			$("#gradeSelect").change();
+			
+			if ( levelId != "") {
+				gradeSelectFn(levelId);
+			} else {
+				//首次触发年级联动
+				$("#gradeSelect").change();
+			}
 			
 			// 日期选择控件
 			var DatePickerFn = function(){
@@ -323,7 +349,7 @@ ManageClass.prototype = {
 				var dls_obj = $(this).parents(".sh_collection").find("dl.sh_add_chapter");
 				var chapter_obj = $(this).parents(".sh_add_chapter").children("input[name=chapterId]");
 				var chapterId = $(chapter_obj).val();
-				var remark = $.trim($(this).parent().children("input[name=remark]").val());;
+				var remark = $(this).parent().children("input[name=remark]").val().trim();
 				if (remark == "") {
 					alert("章节标题不能为空！");
 				} else {
@@ -375,12 +401,12 @@ ManageClass.prototype = {
 			
 			//TODO 回车提交事件
 			$(".chapter_remark").live("keydown", function() {
-				if (event.keyCode == "13") {//keyCode=13是回车键
+				if (window.event.keyCode == "13") {//keyCode=13是回车键
 					var opera_obj = $(this).parents(".sh_add_opera");
 					var dls_obj = $(this).parents(".sh_collection").find("dl.sh_add_chapter");
 					var chapter_obj = $(this).parents(".sh_add_chapter").children("input[name=chapterId]");
 					var chapterId = $(chapter_obj).val();
-					var remark = $.trim($(this).val());
+					var remark = $(this).val().trim();
 					if (remark == "") {
 						alert("章节标题不能为空！");
 					} else {
@@ -520,7 +546,7 @@ ManageClass.prototype = {
 	                    }
 					});//ajax
 				} else if (resourceType == 4) {
-					var title = $.trim($("#title").val());
+					var title = $("#title").val().trim();
 					var resourceId = $("#resourceId").val();
 					$.ajax({
 	                    url: Globals.ctx + "/manage/course/addResourceTrain",
@@ -581,7 +607,7 @@ ManageClass.prototype = {
 			
 			//addResourceLive.jsp 提交直播表单校验
 			$("#liveSubmit").live("click", function (){
-				var title = $.trim($("#title").val());
+				var title = $("#title").val().trim();
 				if (title == "" || title == null) {
 					alert("直播名称不可以为空，请您务必填写！");
 					$("#title").focus();
@@ -647,7 +673,7 @@ ManageClass.prototype = {
 			/************************添加课程章节关联资源 END******************************************/
 			$("#selectTrainQuestion").live("click",function(){
 				var ids = "";
-				var title = $.trim($("#title").val());
+				var title = $("#title").val().trim();
 				var courseId = $("#courseId").val();
 				var chapterId = $("#chapterId").val();
 				var resourceId = $("#resourceId").val();
