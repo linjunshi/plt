@@ -20,7 +20,7 @@ Globals.page = "Manage_liveList";
 					<div class="sh_info_r">
 			            <div class="sh_title">
 			                <h2>待上课程</h2>
-			                <span><a href="${ctx}/download/LiveManagerSetup.exe">下载老师客户端工具</a></span>
+			                <a href="${ctx}/download/LiveManagerSetup.exe" class="sh_add">下载老师客户端工具</a>
 			            </div>
 			            <object id="SantrongPlayer" classid="clsid:27671653-7A2D-4F23-92CF-76C7984F2CD5" class="hide" VIEWASTEXT></object>
 						<div class="sh_myvod_ti"><span>时间</span><span class="sh_ti_sid">直播名称</span><span>所属课程</span><span>操作</span></div>
