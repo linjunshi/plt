@@ -20,6 +20,7 @@ import com.google.gson.Gson;
 import com.santrong.plt.log.Log;
 import com.santrong.plt.opt.ThreadUtils;
 import com.santrong.plt.util.MyUtils;
+import com.santrong.plt.util.ValidateTools;
 import com.santrong.plt.webpage.course.dao.ChapterDao;
 import com.santrong.plt.webpage.course.dao.CourseDao;
 import com.santrong.plt.webpage.course.entry.ChapterAndResourceEntry;
@@ -130,6 +131,9 @@ public class CourseMAction extends TeacherBaseAction {
 				if (courseForm.getLive() == null) {
 					addError("是否是直播课程不能为空！");
 				}
+				if (MyUtils.isNotNull(courseForm.getEndTime()) && !ValidateTools.isDate(courseForm.getEndTime())) {
+					addError("日期格式不正确！");
+				}
 				
 				if(this.errorSize() == 0) {
 					CourseDao courseDao = new CourseDao();
@@ -216,6 +220,9 @@ public class CourseMAction extends TeacherBaseAction {
 				}
 				if (courseForm.getLive() == null) {
 					addError("是否是直播课程不能为空！");
+				}
+				if (MyUtils.isNotNull(courseForm.getEndTime()) && !ValidateTools.isDate(courseForm.getEndTime())) {
+					addError("日期格式不正确！");
 				}
 
 				if(this.errorSize() == 0) {
@@ -576,7 +583,12 @@ public class CourseMAction extends TeacherBaseAction {
 				if (MyUtils.isNull(liveForm.getTitle().trim())) {
 					addError("请您填写直播名称！");
 				}
-
+				if (MyUtils.isNotNull(liveForm.getBeginTime()) && !ValidateTools.isDateTime(liveForm.getBeginTime())) {
+					addError("日期格式不正确！");
+				}
+				if (MyUtils.isNotNull(liveForm.getEndTime()) && !ValidateTools.isDateTime(liveForm.getEndTime())) {
+					addError("日期格式不正确！");
+				}
 				if (MyUtils.isNotNull(courseId) && MyUtils.isNotNull(chapterId)) {
 					LiveDao liveDao = new LiveDao();
 					LiveItem liveItem = new LiveItem();
@@ -684,7 +696,7 @@ public class CourseMAction extends TeacherBaseAction {
 			TrainQuestionDao tqDao = new TrainQuestionDao();
 			TrainQuestionQuery query = new TrainQuestionQuery();
 			query.setPageNum(pageNum);
-			query.setPageSize(2);//设置每页显示的记录条数
+//			query.setPageSize(2);//设置每页显示的记录条数
 			query.setUserId(currentUser().getId());
 			query.setDel(0);
 			query.setCount(tqDao.selectCountByQuery(query));
@@ -802,7 +814,7 @@ public class CourseMAction extends TeacherBaseAction {
 		boolean flag = false;
 		
 		try {
-			if (MyUtils.isNotNull(chapterId) && MyUtils.isNotNull(resourceId) && MyUtils.isNotNull(resourceType)) {
+			if (MyUtils.isNotNull(chapterId) && MyUtils.isNotNull(resourceId) && MyUtils.isNotNull(resourceType) && ValidateTools.isInt(resourceType)) {
 				// 打开事务处理
 				ThreadUtils.beginTranx();
 				if (MyUtils.stringToInt(resourceType) == ResourceType.Type_File) {

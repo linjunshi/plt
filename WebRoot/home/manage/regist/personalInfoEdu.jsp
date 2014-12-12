@@ -48,6 +48,7 @@ Globals.page = "Manage_personalInfoEdu";
 		                                    <option value="6">硕士</option>
 		                                    <option value="7">博士</option>
 		                                </select>
+		                                <span class="not-empty" title='此项为必填项'>*</span>
 		                            </div>
 		                        </div>
 		                          <div class="form_item">
@@ -59,6 +60,7 @@ Globals.page = "Manage_personalInfoEdu";
 		                                    <option value="3">副教授</option>
 		                                    <option value="4">教授</option>
 		                                </select>
+		                                <span class="not-empty" title='此项为必填项'>*</span>
 		                            </div>
 		                        </div>
 		                        <div class="form_item">

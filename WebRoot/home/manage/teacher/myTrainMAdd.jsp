@@ -50,20 +50,21 @@ Globals.page = "Manage_myTrainMAdd";
 											<c:if test="${tqItem.questionType==4}">checked="checked"</c:if>
 											value="4" class="form_radio" name="questionType" type="radio">
 										<span class="form_ra_text">填空题</span>
+										<span class="not-empty" title='此项为必填项'>*</span>
 									</div>
 								</div>
 								<div class="form_item">
 									<label>标题：</label>
 									<div class="form_field">
 										<textarea id="topic" name="topic" required>${tqItem.topic}</textarea>
-										<p class="form_des">请匆超过100字符</p>
+										<p class="form_des">请匆超过100字符&nbsp;<span class="not-empty" title='此项为必填项'>*</span></p>
 									</div>
 								</div>
 								<div class="form_item">
 									<label>选项：</label>
 									<div class="form_field">
 										<label class="field_te">A: </label> 
-										<input placeholder="请填入试题" class="form_tarea form_text" id="opt1" name="opt1" type="text" value="${tqItem.opt1}" required><br /> 
+										<input placeholder="请填入试题" class="form_tarea form_text" id="opt1" name="opt1" type="text" value="${tqItem.opt1}" required><span class="not-empty" title='此项为必填项'>*</span><br /> 
 										<label class="field_te ma">B: </label> 
 										<input placeholder="请填入试题" class="form_tarea form_text" id="opt2" name="opt2" type="text" value="${tqItem.opt2}"><br /> 
 										<label class="field_te ma">C: </label>
@@ -87,6 +88,7 @@ Globals.page = "Manage_myTrainMAdd";
 										<input value="8" class="form_radio" name="answer" type="radio"
 											<c:if test="${tqItem.containD}">checked="checked"</c:if> />
 										<span class="form_ra_text">Ｄ</span>
+										<span class="not-empty" title='此项为必填项'>*</span>
 									</div>
 									<div class="form_field" id="answer_checkbox">
 										<input value="1" class="form_radio" name="pageAnswer" type="checkbox"
@@ -101,6 +103,7 @@ Globals.page = "Manage_myTrainMAdd";
 										<input value="8" class="form_radio" name="pageAnswer" type="checkbox"
 											<c:if test="${tqItem.containD}">checked="checked"</c:if> />
 										<span class="form_ra_text">Ｄ</span>
+										<span class="not-empty" title='此项为必填项'>*</span>
 									</div>
 								</div>
 								<div class="form_item">

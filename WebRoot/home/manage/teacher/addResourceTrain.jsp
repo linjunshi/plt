@@ -12,7 +12,7 @@
 <div class="sh_collection">
 	<div class="sh_col_form">
 		<span>测验名：</span>
-		<input class="form_text pt15" type="text" id="title" name="title" value="${train.title}" />
+		<input class="form_text pt15" type="text" id="title" name="title" value="${train.title}" />&nbsp;<span class="not-empty" title='此项为必填项'>*</span>
 	</div>
 	<table border="1" class="sh_coll_tab">
 		<colgroup>

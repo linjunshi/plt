@@ -29,8 +29,8 @@
 				<div class="fast_navigate"></div>
 			</form>
 			<c:if test="${sessionScope.loginUser == null}">
-				<a href="${ctx}/account/login" class="user_info_login">登录</a>
-				<a href="${ctx}/account/regist" class="user_info_signup">注册</a>
+				<a href="${ctx}/account/login" class="user_info_login_bg">登录</a>
+				<a href="${ctx}/account/regist" class="user_info_signup_bg">注册</a>
 			</c:if>
 			<c:if test="${sessionScope.loginUser != null}">
 			<div> 

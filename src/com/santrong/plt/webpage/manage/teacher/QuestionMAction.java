@@ -96,6 +96,9 @@ public class QuestionMAction extends TeacherBaseAction{
 	@RequestMapping(value="/addOrModifyQuestion", method=RequestMethod.POST)
 	public String addOrModifyQuestion(TrainQuestionItem tqForm){
 		try {
+			HttpServletRequest request = this.getRequest();
+			//打开新增页面
+			request.setAttribute("addOrModify", "add");
 			UserItem user = this.currentUser();
 			if(user == null) {
 				addError("请您先登录用户！");
@@ -106,6 +109,9 @@ public class QuestionMAction extends TeacherBaseAction{
 				
 				if (tqForm.getQuestionType() <= 0) {
 					addError("请您选择题目的类型！");
+				}
+				if (MyUtils.isNull(tqForm.getOpt1().trim())) {
+					addError("请您填写内容！");
 				}
 				if (MyUtils.isNull(tqForm.getTopic())) {
 					addError("请您填写试题的题目！");
@@ -154,8 +160,6 @@ public class QuestionMAction extends TeacherBaseAction{
 						}
 					} else {
 						// id不为空，执行修改操作
-						
-						
 						TrainQuestionDao tqDao = new TrainQuestionDao();
 						TrainQuestionItem tqItem = tqDao.selectById(tqForm.getId());
 						tqItem.setTopic(tqForm.getTopic());

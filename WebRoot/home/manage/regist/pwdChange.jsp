@@ -38,6 +38,7 @@ Globals.page = "Manage_index";
 									<label for="pwd">原始密码：</label>
 									<div class="form_field">
 										<input placeholder="请输入您的原密码！" name="oldPwd" id="oldPwd" class="form_text" type="password" required/> 
+										<span class="not-empty" title='此项为必填项'>*</span>
 										<span class="form_error"><a href="${ctx}/account/forgotPwd" target="_blank">忘记密码</a></span>
 									</div>
 								</div>
@@ -45,12 +46,14 @@ Globals.page = "Manage_index";
 									<label for="pwd">新密码：</label>
 									<div class="form_field">
 										<input placeholder="请输入您的新密码！" name="newPwd" id="newPwd" class="form_text" type="password" required/>
+										<span class="not-empty" title='此项为必填项'>*</span>
 									</div>
 								</div>
 								<div class="form_item">
 									<label for="pwd">确认新密码：</label>
 									<div class="form_field">
-										<input placeholder="请输入您的确认新密码！" name="comfirmPwd" id="comfirmPwd" class="form_text" type="password" equalTo="newPwd"/>
+										<input placeholder="请输入您的确认新密码！" name="comfirmPwd" id="comfirmPwd" class="form_text" type="password" required equalTo="newPwd"/>
+										<span class="not-empty" title='此项为必填项'>*</span>
 									</div>
 								</div>
 								<div class="form_action">

@@ -10,7 +10,7 @@ ManageClass.prototype = {
 		courseAdd : function(){
 			
 			var levelId = $("#levelId").val();
-			var subjectId = $("#subjectId").val();
+			var oldSubjectId = $("#oldSubjectId").val();
 			
 			var gradeSelectFn = function(levelId) {
 				$.get(Globals.ctx + "/data/gradeByLevelId?levelId=" + levelId, function(data) {
@@ -34,7 +34,6 @@ ManageClass.prototype = {
 						}
 						$("#levelSelect").html(html);
 						if ( levelId != "") {
-							gradeSelectFn(levelId);
 							$("#levelSelect").val(levelId);
 						}
 						$("#levelSelect").change();
@@ -52,8 +51,8 @@ ManageClass.prototype = {
 							html += '<option value="' + json[i].id + '">' + json[i].subjectName + '</option>';
 						}
 						$("#subjectSelect").html(html);
-						if ( levelId != "") {
-							$("#subjectSelect").val(subjectId);
+						if ( oldSubjectId != "") {
+							$("#subjectSelect").val(oldSubjectId);
 						}
 					}
 				})
@@ -61,7 +60,7 @@ ManageClass.prototype = {
 			
 			// 封面选择
 			$("#changeCover").click(function() {
-				Boxy.load(Globals.ctx + "/component/change/cover", {title : '-',
+				Boxy.load(Globals.ctx + "/component/change/cover", {title : '封面选择',
 					afterShow : function(){
 						
 						$(".selectCover").change(function() {
@@ -96,7 +95,6 @@ ManageClass.prototype = {
 					}
 				});
 			});
-			
 			
 			if ( levelId != "") {
 				gradeSelectFn(levelId);
@@ -525,16 +523,11 @@ ManageClass.prototype = {
 				}
 			});
 			
-			// TODO 点击分页按钮时
-			$(".pagination a").live("click", function() {
-				
-				//动态获取点击元素<a>上的属性href的跳转地址值
-				var url = $(this).attr("page_url");
-				if (url == undefined) { return false; }//点击当前页的时候do nothing
+			// 翻页、跳转到指定页面
+			var PageTurningFn = function(page){
 				var courseId = $("#courseId").val();
 				var chapterId = $("#chapterId").val();
 				var resourceType = $("#resourceType").val();
-				var page = url.split("page")[1].split("=")[1];
 				if (resourceType == 1) {
 					var oldResourceId = $("#oldResourceId").val();
 					$.ajax({
@@ -561,7 +554,38 @@ ManageClass.prototype = {
 	                    }
 					});//ajax
 				}
-				
+			}
+			
+			// TODO 点击分页按钮时
+			$(".pagination a").live("click", function() {
+				//动态获取点击元素<a>上的属性href的跳转地址值
+				var url = $(this).attr("page_url");
+				if (url == undefined) { return false; }//点击当前页的时候do nothing
+				var page = url.split("page")[1].split("=")[1];
+				PageTurningFn(page);
+			});
+			
+			// TODO 填写页码，点击“GO”按钮时，跳转到指定页面
+			var GoToPageFn = function(){
+				var page = eval($("#page").val().trim());
+				var pageCount = eval($("#pageCount").val().trim());
+				var re_number = /^[0-9]{1,}$/i;
+				if (page == "" || page == null || !re_number.test(page) || pageCount < page || page == 0) {
+					alert("请填写的页码数值范围为：1 - " + pageCount);
+					$("#page").val("");
+					$("#page").addClass("text_warn");
+					return false;
+				} else{
+					PageTurningFn(page);
+				}
+			}
+			$(".page_submit_input").live("click", function() {
+				GoToPageFn();
+			});
+			$(".page_go_input").live("keydown", function() {
+				if (window.event.keyCode == "13") {//keyCode=13是回车键
+					GoToPageFn();
+				}
 			});
 			
 			// TODO addResourceFile.jsp 点击“选择”按钮的时候触发的事件
@@ -687,11 +711,7 @@ ManageClass.prototype = {
 				$.each( checkArr , function(key, val){
 					ids = ids + "," + val;
 				});
-//				$("input[name='question_checkbox']").each(function(i) {
-//			        if ($(this).attr("checked") == "checked") {
-//			                ids = ids + "," + $(this).val();
-//			        }
-//				});
+
 				if (ids.length > 0) {
 					ids = ids.replace(',','');
 				} else {

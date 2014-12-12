@@ -48,7 +48,19 @@ jQuery(function($) {
 				isPass = false;
 			}
 		});
-
+		
+		// 长度检测
+		$(this).find("[required_Length]").each(function() {
+			var val = $(this).val().trim();
+			var re_Length = $(this).attr("required_Length");
+			if (val == "" && val.length < re_Length) {
+				if (!re_Idcard.test(val)) {
+					$(this).addClass("text_warn");
+					isPass = false;
+				}
+			}
+		});
+		
 		// 必填IP
 		// 正则表达式别用g属性，否则第二次检测的时候会混合第一次结果导致错误
 		var re_ip = /^(\d+)\.(\d+)\.(\d+)\.(\d+)$/i
@@ -72,31 +84,48 @@ jQuery(function($) {
 			}
 		});
 
-		// 日期类型检测
-		var re_Date = /^[2]\d{3}\-[01]{0,1}\d\-[0123]{0,1}\d$/i;
+		// 日期类型检测 :yyyy-MM-dd
+		var re_Date = /^([0-9]{3}[1-9]|[0-9]{2}[1-9][0-9]{1}|[0-9]{1}[1-9][0-9]{2}|[1-9][0-9]{3})-(((0[13578]|1[02])-(0[1-9]|[12][0-9]|3[01]))|((0[469]|11)-(0[1-9]|[12][0-9]|30))|(02-(0[1-9]|[1][0-9]|2[0-8])))$/i;
 		$(this).find("[required_Date]").each(function() {
 			var val = $(this).val().trim();
-			if (val == "" || !re_Date.test(val)) {
-				$(this).addClass("text_warn");
-				isPass = false;
+			if (val != "" ) {
+				if (!re_Date.test(val)) {
+					$(this).addClass("text_warn");
+					isPass = false;
+				}
 			}
 		});
 
-		// 时间类型检测
-		var re_Time = /[012]{0,1}\d:[0123456]{0,1}\d:[0123456]{0,1}\d$/i;
+		// 时间类型检测 Hi:mm[:ss]
+		var re_Time = /(0\d|1\d|2[0-3]):[0-5]\d(:([0-5]\d))?$/i;
 		$(this).find("[required_Time]").each(function() {
 			var val = $(this).val().trim();
-			if (val == "" || !re_Time.test(val)) {
-				$(this).addClass("text_warn");
-				isPass = false;
+			if (val != "" ) {
+				if (!re_Time.test(val)) {
+					$(this).addClass("text_warn");
+					isPass = false;
+				}
 			}
 		});
-
+		
+		// 日期时间类型检测:yyyy-MM-dd Hi:mm:ss
+		var re_Time = /([0-9]{3}[1-9]|[0-9]{2}[1-9][0-9]{1}|[0-9]{1}[1-9][0-9]{2}|[1-9][0-9]{3})-(((0[13578]|1[02])-(0[1-9]|[12][0-9]|3[01]))|((0[469]|11)-(0[1-9]|[12][0-9]|30))|(02-(0[1-9]|[1][0-9]|2[0-8])))(\s(0\d|1\d|2[0-3]):[0-5]\d(:([0-5]\d)))?$/i;
+		$(this).find("[required_DateTime]").each(function() {
+			var val = $(this).val().trim();
+			if (val != "" ) {
+				if (!re_Time.test(val)) {
+					$(this).addClass("text_warn");
+					isPass = false;
+				}
+			}
+		});
+		
 		// 邮箱类型检测
 		var re_Mail = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/i;
 		$(this).find("[required_Mail]").each(function() {
 			var val = $(this).val().trim();
 			if (val == "" || !re_Mail.test(val)) {
+//				$(this).focus();
 				$(this).addClass("text_warn");
 				isPass = false;
 			}
@@ -106,9 +135,11 @@ jQuery(function($) {
 		var re_Phone = /^(0|86|17951)?(13[0-9]|15[012356789]|17[678]|18[0-9]|14[57])[0-9]{8}$/i;
 		$(this).find("[required_Phone]").each(function() {
 			var val = $(this).val().trim();
-			if (val == "" || !re_Phone.test(val)) {
-				$(this).addClass("text_warn");
-				isPass = false;
+			if (val != "" ) {
+				if (!re_Phone.test(val)) {
+					$(this).addClass("text_warn");
+					isPass = false;
+				}
 			}
 		});
 
@@ -116,9 +147,11 @@ jQuery(function($) {
 		var re_Idcard = /^([0-9]{17}[0-9X]{1})|([0-9]{15})$/i;
 		$(this).find("[required_Idcard]").each(function() {
 			var val = $(this).val().trim();
-			if (val == "" || !re_Idcard.test(val)) {
-				$(this).addClass("text_warn");
-				isPass = false;
+			if (val != "" ) {
+				if (!re_Idcard.test(val)) {
+					$(this).addClass("text_warn");
+					isPass = false;
+				}
 			}
 		});
 

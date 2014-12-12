@@ -41,6 +41,7 @@ Globals.page = "Manage_personalInfo";
 		                            <label for="showName">昵称：</label>
 		                            <div class="form_field">
 		                                <input placeholder="6-32个字符" class="form_text" id="showName" name="showName" type="text" value="${user.showName}" required/>
+		                                <span class="not-empty" title='此项为必填项'>*</span>
 		                            </div>
 		                        </div>
 		                        <div class="form_item">
@@ -49,7 +50,8 @@ Globals.page = "Manage_personalInfo";
 	                                    <input <c:if test="${user.gender == 1}"> checked="checked" </c:if> value="1" class="form_radio" name="gender" type="radio">
 	                                    <span>男</span>
 	                                    <input <c:if test="${user.gender == 2}"> checked="checked" </c:if> value="2" class="form_radio" name="gender" type="radio">
-	                                    <span>女</span> 
+	                                    <span>女</span>
+	                                    <span class="not-empty" title='此项为必填项'>*</span>
 		                            </div>
 		                        </div>
 		                        <div class="form_item">
@@ -67,8 +69,8 @@ Globals.page = "Manage_personalInfo";
 		                        <div class="form_item">
 		                            <label for="name">邮箱：</label>
 		                            <div class="form_field">
-		                                <input placeholder="请填入您的邮箱" class="form_text" id="email" name="email" type="email" value="${user.email}" required_Mail>
-		                                <!-- <span class="form_error">请输入正确的邮箱格式</span></div> -->
+		                                <input placeholder="请填入您的邮箱" class="form_text" id="email" name="email" type="email" value="${user.email}" required required_Mail>
+		                                <span class="not-empty" title='此项为必填项'>*</span>
 		                        	</div>
 		                        </div>
 								<div class="form_item">
@@ -82,7 +84,7 @@ Globals.page = "Manage_personalInfo";
 		                        <div class="form_item">
 		                            <label>个人简介：</label>
 		                            <div class="form_field">
-		                                <textarea id="remark" name="remark" class="xheditor-mfull" rows="60" cols="100" style="width:85%;height: 230px;" >${user.remark}</textarea>
+		                                <textarea id="remark" name="remark" class="xheditor-mfull"  style="width:85%;height:230px;">${user.remark}</textarea>
 		                            </div>
 		                        </div>
 		                        <div class="form_action"><input type="submit" value="保存" /></div>

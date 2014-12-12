@@ -17,11 +17,13 @@ body {color: #666;font: 12px/1.8em Arial, Helvetica, sans-serif;background:#FFF;
 .mr h2 {text-align: center;font-size:26px;margin:30px 0 10px 0; padding-top:20px; height:30px; line-height:30px;color: #009871; font-weight:100;}
 .border {background: url(${ctx}/resource/images/banner_img_4.jpg) no-repeat center center;height:420px;clear: both;}
 .center {width: 1000px;	margin: 0 auto;	height: 420px;position: relative;}
-.user {	width: 300px;height: 230px;border:1px #fff solid;background: url(${ctx}/resource/images/007.png);	position: absolute;	top: 100px;	right: 20px;}
+.user {	width: 330px;height: 230px;border:1px #fff solid;background: url(${ctx}/resource/images/007.png);	position: absolute;	top: 100px;	right: 20px;border-radius: 15px;}
 .formlogin {height:auto;width:300px;padding-top: 20px;}
-.loginuser {width: 300px;display: block;float: left;color: #FFF;margin:15px 0;height:30px;}
+.loginuser {width: 330px;display: block;float: left;color: #FFF;margin:15px 0;height:30px;}
 .login {display: block;	width: 100px;text-align: right;float: left;font-size: 16px;color: #000;	height:30px;line-height:30px;}
 .text2 {display: block;	width: 150px;height:26px;text-align:left;float:left;}
+.login_forgot { margin-left:5px; font-size:12px; color:#009871; text-decoration: underline;}
+.login_forgot:hover{ color:#f90;text-decoration: underline;}
 
 .validation {display: block;width:60px;height:24px; line-height:24px;text-align: left;float: left;margin-right:3px;}
 .loginuser a{ line-height:40px;}
@@ -69,11 +71,8 @@ body {color: #666;font: 12px/1.8em Arial, Helvetica, sans-serif;background:#FFF;
         <div class="loginuser">
           <label class="login"><fmt:message key="index_user_password"/>：</label>
           <input name="password" type="password" size="20" class="text2" required>
+          <a href="${ctx}/account/forgotPwd" target="_blank" class="login_forgot">忘记密码?</a>
         </div>
-        <div class="loginuser">
-          <label class="login"></label>
-          <a href="${ctx}/account/forgotPwd" target="_blank">忘记密码</a>
-        </div>        
         <div class="loginbut">
 		<input type="submit" value="登录" class="btn-login" name="commit" />
       </div>

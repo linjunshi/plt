@@ -42,7 +42,7 @@ Globals.page = "Manage_courseAdd";
 							class="form_info common_form" id="course_form">
 								<input type="hidden" name="id" value="${course.id}"/>
 								<input id="levelId" name="levelId" type="hidden" value="${course.gradeId}">
-								<input id="subjectId" name="subjectId" type="hidden" value="${course.subjectId}">
+								<input id="oldSubjectId" name="oldSubjectId" type="hidden" value="${course.subjectId}">
 								<div class="form_item">
 									<label for="gradeId">课程分类：</label>
 									<div class="form_field">
@@ -55,11 +55,13 @@ Globals.page = "Manage_courseAdd";
 										</select>
 										<select name="subjectId" id="subjectSelect">
 										</select>
+										<span class="not-empty" title='此项为必填项'>*</span>
 									</div>
 									<div class="form_item">
 										<label for="courseName">课程名称：</label>
 										<div class="form_field">
 											<input class="form_text" id="courseName" name="courseName" type="text" value="${course.courseName}" required>
+											<span class="not-empty" title='此项为必填项'>*</span>
 										</div>
 									</div>
 									<div class="form_item">
@@ -72,6 +74,7 @@ Globals.page = "Manage_courseAdd";
 										<label for="price">课程价格：</label>
 										<div class="form_field">
 											<input placeholder="如：1000" class="form_text" name="price" id="price" type="text" value="${course.price}" required required_Number> 元
+											<span class="not-empty" title='此项为必填项'>*</span>
 										</div>
 									</div>
 									<div class="form_item">
@@ -87,12 +90,13 @@ Globals.page = "Manage_courseAdd";
 												<option <c:if test="${course.chapterCount==60}">selected="selected"</c:if> value="60">60分钟</option>
 												<option <c:if test="${course.chapterCount==90}">selected="selected"</c:if> value="90">90分钟</option>
 											</select>
+											<span class="not-empty" title='此项为必填项'>*</span>
 										</div>
 									</div>
 									<div class="form_item">
 										<label for="endTime">结束时间：</label>
 										<div class="form_field">
-											<input placeholder="格式：2014-01-01 59:59:59" class="form_text" name="endTime" id="endTime" type="text" value="<fmt:formatDate type="date" pattern="yyyy-MM-dd" value="${course.endTime}" />" required_Date>
+											<input placeholder="格式：2014-01-01" class="form_text" name="endTime" id="endTime" type="text" value="<fmt:formatDate type="date" pattern="yyyy-MM-dd" value="${course.endTime}" />" required_Date>
 										</div>
 									</div>
 									 <div class="form_item">
@@ -101,7 +105,8 @@ Globals.page = "Manage_courseAdd";
 		                                    <input <c:if test="${course.live == 1}"> checked="checked" </c:if> value="1" class="form_radio" name="live" type="radio">
 		                                    <span>是</span>
 		                                    <input <c:if test="${course.live == 0}"> checked="checked" </c:if> value="0" class="form_radio" name="live" type="radio">
-		                                    <span>否</span> 
+		                                    <span>否</span>
+		                                    <span class="not-empty" title='此项为必填项'>*</span>
 			                            </div>
 			                        </div>
 			                        <div class="form_item">
