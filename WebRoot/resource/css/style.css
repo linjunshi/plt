@@ -460,12 +460,12 @@ span.form_error, span.form_success{border-width:1px;display:inline-block;*displa
 .th_post_content {float:left;margin:0 0 15px 15px;width:1060px;}
 
 /*----------------做作业------------------*/
-.sh_work { width:960px; height:50px; border-bottom:1px #dbdbdb dashed; padding:10px 0 0 0;}
-.sh_work_img { width:60px; float:left;}
-.sh_work_con {}
-.sh_work_con h2{ width:360px;float:left; display:block; margin-right:10px; font-size:16px; color:#666; position:relative;}
-.sh_work_con h2 span { position:absolute; left:8px; top:24px; font-size:12px; color:#999;}
-.sh_work_con p{ width:130px;float:left; display:block; text-align:center; line-height:35px;}
+.sh_work { width:960px; height:50px; border-bottom:1px #dbdbdb dashed; padding:10px 0 10px 0;}
+.sh_work_img { width:60px; float:left;line-height:50px;margin-left: 10px;}
+.sh_work_con h2{ width:400px;float:left; display:block; margin-right:10px; font-size:16px; color:#666; position:relative;}
+.sh_work_con .sh_work_title{line-height:30px; text-align: left;width:400px;overflow: hidden;white-space: nowrap;text-overflow: ellipsis; }
+.sh_work_con h2 span { position:absolute; left:0px; top:30px; font-size:12px; color:#999; width:400px;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;}
+.sh_work_con p{ width:160px;float:left; display:block; text-align:center; line-height:50px;}
 .sh_work_con p a{ padding:2px 10px; background:#009871; color:#fff;}
 
 .sh_work_le{ width:55%; height:auto; float:left; display:block; margin:10px 10px 20px 20px; border-right:1px #dbdbdb solid;}
@@ -606,7 +606,7 @@ span.form_error, span.form_success{border-width:1px;display:inline-block;*displa
 .choice_school {width:800px;}
 .choice_school .boxy-content {width:90%; height:100%; border:1px #ccc solid;}
 .choice_school .group {margin:0px 0px 15px 0px;background:#dbdbdb; padding:5px; border:1px #999 solid;}
-.choice_school .group a {color:#009871;padding: 0 5px 0 5px;white-space: nowrap;}
+.choice_school .group a {color:#009871;padding: 0 5px 0 5px;white-space: nowrap;text-overflow: ellipsis;}
 .choice_school .group a.current {background-color:#009871;color:#fff;padding: 0 5px 0 5px;font-weight: bold;}
 .choice_school .group a:hover {color:#f90;}
 .choice_school .school {height:140px;overflow-y:auto;}

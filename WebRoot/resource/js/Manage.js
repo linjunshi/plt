@@ -158,7 +158,7 @@ ManageClass.prototype = {
 									var json = eval('{' + result + '}');
 									for(var i=0;i<json.length;i++) {
 										if(group.hasClass("county")) {
-											html += '<a href="javascript:void(0);" id="a_'+ json[i].id + '">' + json[i].schoolName + '</a>';
+											html += '<a href="javascript:void(0);" id="a_'+ json[i].id + '" title="' + json[i].schoolName + '">' + json[i].schoolName + '</a>';
 										}else{
 											html += '<a href="javascript:void(0);" id="a_'+ json[i].areaCode + '">' + json[i].areaName + '</a>';
 										}
