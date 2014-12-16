@@ -57,7 +57,7 @@ Globals.page = "Manage_applyTeacher";
 							<div class="form_item">
 								<label for="remark">个人简介：</label>
 								<div class="form_field">
-									<textarea id="remark" name="remark" class="xheditor-mfull" rows="60" cols="100" style="width:80%;height: 230px;" >${form.remark}</textarea>
+									<textarea id="remark" name="remark" class="xheditor-mfull xheditor {skin:'o2007silver'}" rows="60" cols="100" style="width:80%;height: 230px;" >${form.remark}</textarea>
 								</div>
 							</div>
 							<div class="form_action">

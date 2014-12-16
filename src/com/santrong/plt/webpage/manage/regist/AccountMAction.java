@@ -212,6 +212,9 @@ public class AccountMAction extends RegistBaseAction {
 			if (MyUtils.isNull(userForm.getShowName())) {
 				addError("昵称不能为空！");
 			}
+			if (MyUtils.isNull(userForm.getUsername())) {
+				addError("真实姓名不能为空！");
+			}
 			if (!ValidateTools.isIdCard(userForm.getIdCard())) {
 				addError("身份证号码不正确！");
 			}
@@ -225,6 +228,7 @@ public class AccountMAction extends RegistBaseAction {
 			UserDao userDao = new UserDao();
 			user.setShowName(userForm.getShowName());
 			user.setGender(userForm.getGender());
+			user.setUsername(userForm.getUsername());
 			user.setIdCard(userForm.getIdCard());
 			user.setPhone(userForm.getPhone());
 			user.setEmail(userForm.getEmail());

@@ -17,16 +17,27 @@ Globals.page = "Index_courseDetail";
 		<div id="container_content">
 		    <div class="detailPrimary clr">
 				<div class="detai_img">
-					<img src="${ctx}${course.thumbnail}" width="290" height="200" />
-					<a href="javascript:void(0)" id="coll_course" class="detai_coll">收藏课程</a>
+					<div>
+						<img src="${ctx}${course.thumbnail}" width="290" height="200" />
+					</div>
+					<div><a href="javascript:void(0)" id="coll_course" class="detai_coll">收藏课程</a></div>
 					<!-- <a href="javascript:void(0);" class="detai_share">分享给朋友</a> -->
+					<div class="bdsharebuttonbox detai_share">
+						<a href="#" class="bds_more" data-cmd="more"></a>
+						<a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a>
+						<a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+						<a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博"></a>
+						<a href="#" class="bds_renren" data-cmd="renren" title="分享到人人网"></a>
+						<a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+					</div>
+					<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{},"image":{"viewList":["qzone","tsina","tqq","renren","weixin"],"viewText":"分享到：","viewSize":"16"},"selectShare":{"bdContainerClass":null,"bdSelectMiniList":["qzone","tsina","tqq","renren","weixin"]}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
 					<input type="hidden" name="courseId" value="${course.id}"/>
 				</div>
 				<div class="priInfo">
 		            <h2 class="mb15">${course.courseName}</h2>
 		            <div class="pri_m ">
-		                <p >价格<b>${course.price}</b>元</p>
-		                <p><span>总课时：<em>${course.chapterCount}课时</em></span><span> 结束时间：<em class="data_time"><fmt:formatDate value="${course.endTime}" type="date" dateStyle="default"/></em></span><span> 担保期：<em>15天</em> </span></p>
+		                <p>课程价格：<b>${course.price}</b>元</p>
+		                <p><span>总课时：<em>${course.chapterCount}课时</em></span><span> 课程结束时间：<em class="data_time"><fmt:formatDate value="${course.endTime}" type="date" dateStyle="default"/></em></span><span> 担保期：<em>15天</em> </span></p>
 		            </div>
 		            <div class="detai_num clearfix">
 		                <p>已经购买人数<br/>
@@ -49,9 +60,13 @@ Globals.page = "Index_courseDetail";
 		            <div>
 		                <ul class="schoolInfo">
 		                    <li>姓名：${teacher.username}</li>
-		                    <li>性别：${teacher.gender}</li>
-		                    <li>职称：${teacher.positional}</li>
-		                    <li>毕业院校：${teacher.graduateSchool}</li>
+		                    <li>性别：<c:if test="${teacher.gender == 1}">男</c:if><c:if test="${teacher.gender == 2}">女</c:if></li>
+		                    <li>职称：<c:if test="${teacher.positional == 0}">暂无</c:if>
+		                    		<c:if test="${teacher.positional == 1}">助教</c:if>
+		                    		<c:if test="${teacher.positional == 2}">讲师</c:if>
+		                    		<c:if test="${teacher.positional == 3}">副教授</c:if>
+		                    		<c:if test="${teacher.positional == 4}">教授</c:if></li>
+		                    <li>毕业院校：<c:if test="${teacher.graduateSchool == null}">暂无</c:if>${teacher.graduateSchool}</li>
 		                    <li>所属学校：${teacher.schoolName}</li>
 		                    <li>教学科目：${teacher.subjectName}</li>
 		                    <li>开设课程数：${teacher.courseCount}</li>
@@ -70,15 +85,7 @@ Globals.page = "Index_courseDetail";
 		            </ul>
 		        </div>
 		        <div class="sec_con" id="course_summary">
-		            <h2>2014零基础课程——有机化学</h2>
-		            <p>反比例函数是初中学习函数的又一跨越，中考主要对其考察反比例函数的图象和性质，能根据已知条件确定反比例函数的解析式；能用反比例函数的知识解决有关实际问题。<br/>
-		                ▪ 本课程把考试说明中的所有要求及知识点体现的淋漓尽致，不但教你怎样数形结合来解题，而且数学中解决实际应用问题的建模思想也能让你全权掌握。<br/>
-		                ▪ 反比例函数有特点，双曲线相背离得远；<br/>
-		                k为正，图在一、三（象）限；<br/>
-		                k为负，图在二、四（象）限；<br/>
-		                图在一、三函数减，两个分支分别减；<br/>
-		                图在二、四正相反，两个分支分别添；<br/>
-		                线越长越近轴，永远与轴不沾边。${course.remark} </p>
+		          	${course.remark}
 		        </div>
 		    </div>
 		    <div class="th_catalog clr" id="course_struct">
@@ -152,8 +159,10 @@ Globals.page = "Index_courseDetail";
 				</div>
 	
 				<div class="th_con">
-					<form action="${ctx}/course/comment" method="post" id="comment_form">
-						<label><textarea name="remark" cols="2" rows="3" class="th_textarea"></textarea></label> 
+					<form action="${ctx}/course/comment" method="post" id="comment_form" class="common_form">
+						<div>
+							<textarea id="remark" name="remark" class="xheditor {skin:'o2007silver'} th_textarea" cols="2" rows="3" required></textarea>
+						</div>
 						<input type="hidden" name="courseId" value="${course.id}"/>
 						<input class="th_pt_but" type="submit"  value="确定"/>
 					</form>

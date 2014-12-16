@@ -2,7 +2,6 @@ package com.santrong.plt.webpage.course.dao;
 
 import java.util.List;
 
-import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
@@ -128,10 +127,10 @@ public interface CourseMapper {
 			+ "gradeId = #{gradeId},"
 			+ "subjectId = #{subjectId},"
 			+ "remark = #{remark},"
-			+ "saleCount = #{saleCount},"
-			+ "collectCount = #{collectCount},"
-			+ "commentCount = #{commentCount},"
-			+ "chapterCount = #{chapterCount},"
+//			+ "saleCount = #{saleCount},"
+//			+ "collectCount = #{collectCount},"
+//			+ "commentCount = #{commentCount},"
+//			+ "chapterCount = #{chapterCount},"
 			+ "ownerId = #{ownerId},"
 			+ "status = #{status},"
 			+ "cts = #{cts},"
@@ -142,10 +141,29 @@ public interface CourseMapper {
 	@Select("select * from course where id = #{id}")
 	CourseItem selectById(String id);
 	
-//	@Delete("delete from course where id = #{id}")
-	@Delete("update course set status = -1 where id = #{id}")
+	@Update("update course set status = -1 where id = #{id}")
 	int deleteById(String id);
 
 	@Select("select a.* from course a left join course_chapter b on a.id=b.courseId where b.id=#{chapterId}")
 	CourseItem selectByChapterId(String chapterId);
+	
+	/**
+	 * 当该课程的章节中新增一个直播或者课件时，修改该课程的总课时数,自动加上该直播或者课件的时长
+	 * @author huangweihua
+	 * @param  id
+	 * @param  duration
+	 * @return 
+	 */
+	@Update("update course set chapterCount = (chapterCount + ${duration}) where id = #{id}")
+	int addChapterCount(@Param("id")String id ,@Param("duration")int duration);
+	
+	/**
+	 * 当该课程的章节中删除一个直播或者课件时，修改该课程的总课时数,自动减去该直播或者课件的时长
+	 * @author huangweihua
+	 * @param  id
+	 * @param  duration
+	 * @return 
+	 */
+	@Update("update course set chapterCount = (chapterCount - ${duration}) where id = #{id}")
+	int removeChapterCount(@Param("id")String id ,@Param("duration")int duration);
 }

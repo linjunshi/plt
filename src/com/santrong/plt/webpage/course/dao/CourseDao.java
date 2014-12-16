@@ -637,4 +637,41 @@ public class CourseDao extends BaseDao {
 		return null;
 	}
 	
+	/**
+	 * 当该课程的章节中新增一个直播或者课件时，修改该课程的总课时数,自动加上该直播或者课件的时长
+	 * @author huangweihua
+	 * @param  courseId
+	 * @param  duration
+	 * @return 
+	 */
+	public int addChapterCount(String courseId ,int duration){
+		try {
+			CourseMapper mapper = this.getMapper(CourseMapper.class);
+			if (mapper != null) {
+				return mapper.addChapterCount(courseId, duration);
+			}
+		} catch (Exception e) {
+			Log.printStackTrace(e);
+		}
+		return 0;
+	}
+	
+	/**
+	 * 当该课程的章节中删除一个直播或者课件时，修改该课程的总课时数,自动减去该直播或者课件的时长
+	 * @author huangweihua
+	 * @param  courseId
+	 * @param  duration
+	 * @return 
+	 */
+	public int removeChapterCount(String courseId ,int duration){
+		try {
+			CourseMapper mapper = this.getMapper(CourseMapper.class);
+			if (mapper != null) {
+				return mapper.removeChapterCount(courseId, duration);
+			}
+		} catch (Exception e) {
+			Log.printStackTrace(e);
+		}
+		return 0;
+	}
 }

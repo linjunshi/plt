@@ -24,16 +24,22 @@ Globals.page = "Manage_index";
 					</div>
 					<c:if test="${rs == 1}">
 					<form action="${ctx}/account/reactive" method="post">
-						<input type="submit" value="重新发送激活邮件"/>
+						<div class="sh_act_request">
+							<input type="submit" value="重新发送激活邮件"/>
+						</div>
 					</form>
 					</c:if>
 					
 					<c:if test="${rs == 0}">
-					激活邮件发送成功，请登录注册邮箱激活帐号，1分钟以后可以重新发送
+					<div class="sh_act_request">
+			        	<p>激活邮件发送成功，请登录注册邮箱激活账号，<b>1</b>分钟以后可以重新发送。</p>
+			        </div>
 					</c:if>
 					
 					<c:if test="${rs == 10}">
-					帐号已经激活
+					<div class="sh_act_request">
+			        	<p>帐号已经激活!</p>
+			        </div>
 					</c:if>	
 				</div>
 			</div>

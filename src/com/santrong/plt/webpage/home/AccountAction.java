@@ -264,6 +264,7 @@ public class AccountAction extends BaseAction {
 			try{
 				// 发邮件告知
 				StringBuilder sb = new StringBuilder();
+				sb.append("用户名是").append(user.getUsername()).append("</br/>");
 				sb.append("新密码是").append(newPwd.toString()).append("</br/>");
 				MailUtils.sendMail(user.getEmail(), "课云平台帐号新密码", sb.toString());
 				

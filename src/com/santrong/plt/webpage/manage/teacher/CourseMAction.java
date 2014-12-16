@@ -125,9 +125,6 @@ public class CourseMAction extends TeacherBaseAction {
 				if (courseForm.getPrice() == null) {
 					addError("课程价格不能为空！");
 				}
-				if (courseForm.getChapterCount() == null) {
-					addError("课时数量不能为空！");
-				}
 				if (courseForm.getLive() == null) {
 					addError("是否是直播课程不能为空！");
 				}
@@ -145,7 +142,7 @@ public class CourseMAction extends TeacherBaseAction {
 					courseItem.setId(MyUtils.getGUID());
 					courseItem.setOwnerId(user.getId());
 					courseItem.setEndTime(MyUtils.stringToDate(courseForm.getEndTime(), "yyyy-MM-dd"));
-					courseItem.setChapterCount(courseForm.getChapterCount() > 0 ? courseForm.getChapterCount() : 0);
+					courseItem.setChapterCount(0);
 					courseItem.setSaleCount(0);
 					courseItem.setCollectCount(0);
 					courseItem.setCommentCount(0);
@@ -214,9 +211,6 @@ public class CourseMAction extends TeacherBaseAction {
 				}
 				if (courseForm.getPrice() == null) {
 					addError("课程价格不能为空！");
-				}
-				if (courseForm.getChapterCount() == null) {
-					addError("课时数量不能为空！");
 				}
 				if (courseForm.getLive() == null) {
 					addError("是否是直播课程不能为空！");
@@ -493,6 +487,7 @@ public class CourseMAction extends TeacherBaseAction {
 		String chapterId = request.getParameter("chapterId");
 		String resourceId = request.getParameter("resourceId");
 		String oldResourceId = request.getParameter("oldResourceId");
+		boolean result = false;
 		try {
 			if (MyUtils.isNotNull(courseId) && MyUtils.isNotNull(chapterId) && MyUtils.isNotNull(resourceId)) {
 				FileDao fileDao = new FileDao();
@@ -504,13 +499,24 @@ public class CourseMAction extends TeacherBaseAction {
 				}
 				
 				if (fileItem != null) {
+					CourseDao couserDao = new CourseDao();
 					ChapterDao chapterDao = new ChapterDao();
 					// operation="modify" 执行修改操作；否则，执行新增操作
 					if (MyUtils.isNotNull(oldResourceId)) {
+						ThreadUtils.beginTranx();
 						chapterDao.removeChapterAndResource(chapterId, oldResourceId);
+						// 当该课程的章节中删除一个直播或者课件时，修改该课程的总课时数,自动减去该直播或者课件的时长
+						FileItem oleFileItem = fileDao.selectById(oldResourceId);
+						if (oleFileItem != null) {
+							if (ValidateTools.isInt(oleFileItem.getDuration())) {
+								couserDao.removeChapterCount(courseId, MyUtils.stringToInt(oleFileItem.getDuration()));
+							}
+						}
+						ThreadUtils.commitTranx();
 					}
-					
+					// 新增操作
 					if (!chapterDao.existsChapterAndResource(chapterId, resourceId)) {
+						ThreadUtils.beginTranx();
 						ChapterToResourceItem ctrItem = new ChapterToResourceItem();
 						ctrItem.setId(MyUtils.getGUID());
 						ctrItem.setResourceId(fileItem.getId());
@@ -518,7 +524,14 @@ public class CourseMAction extends TeacherBaseAction {
 						ctrItem.setResourceType(ResourceType.Type_File);
 						ctrItem.setTitle(fileItem.getTitle());
 						ctrItem.setPriority(ResourceType.Type_File);
-						if (chapterDao.insertChapterToResource(ctrItem)) {
+						result = chapterDao.insertChapterToResource(ctrItem);
+						
+						// 当该课程的章节中新增一个直播或者课件时，修改该课程的总课时数,自动加上该直播或者课件的时长
+						if (ValidateTools.isInt(fileItem.getDuration())) {
+							couserDao.addChapterCount(courseId, MyUtils.stringToInt(fileItem.getDuration()));
+						}
+						ThreadUtils.commitTranx();
+						if (result) {
 							return "/manage/course/chapterEditor?courseId=" + courseId;
 						}
 					} else {
@@ -590,9 +603,11 @@ public class CourseMAction extends TeacherBaseAction {
 					addError("日期格式不正确！");
 				}
 				if (MyUtils.isNotNull(courseId) && MyUtils.isNotNull(chapterId)) {
+					CourseDao couserDao = new CourseDao();
 					LiveDao liveDao = new LiveDao();
 					LiveItem liveItem = new LiveItem();
 					if (MyUtils.isNotNull(resourceId)) {
+						// 获取原来的记录信息
 						liveItem = liveDao.selectById(resourceId);
 						if (liveItem != null) {
 							ThreadUtils.beginTranx();
@@ -601,6 +616,10 @@ public class CourseMAction extends TeacherBaseAction {
 								return this.redirect("/study/course");
 							}
 							
+							// 当该课程的章节中新增一个直播或者课件时，修改该课程的总课时数,自动加上该直播或者课件的时长(加上新修改的时长，减去旧的时长)
+							couserDao.addChapterCount(courseId, (liveForm.getDuration() - liveItem.getDuration()));
+							
+							// 修改直播信息
 							liveItem.setTitle(liveForm.getTitle().trim());
 							liveItem.setDuration(liveForm.getDuration());
 							liveItem.setBeginTime(MyUtils.stringToDate(
@@ -611,6 +630,7 @@ public class CourseMAction extends TeacherBaseAction {
 							liveItem.setUts(new Date());
 							liveDao.update(liveItem);
 							
+							// 修改章节和资源的关联表的标题
 							ChapterDao chapterDao = new ChapterDao();
 							ChapterToResourceItem ctrItem = chapterDao.selectChapterAndResource(chapterId, resourceId);
 							ctrItem.setTitle(liveItem.getTitle());
@@ -621,6 +641,7 @@ public class CourseMAction extends TeacherBaseAction {
 					} else {
 						ThreadUtils.beginTranx();
 						
+						// 新增直播信息
 						liveItem.setId(MyUtils.getGUID());
 						liveItem.setTitle(liveForm.getTitle().trim());
 						liveItem.setDuration(liveForm.getDuration());
@@ -634,6 +655,10 @@ public class CourseMAction extends TeacherBaseAction {
 						liveItem.setUts(new Date());
 						liveDao.insert(liveItem);
 						
+						// 当该课程的章节中新增一个直播或者课件时，修改该课程的总课时数,自动加上该直播或者课件的时长(加上新修改的时长，减去旧的时长)
+						couserDao.addChapterCount(courseId, liveForm.getDuration());
+						
+						// 新增一条章节和资源的关联表的记录
 						ChapterDao chapterDao = new ChapterDao();
 						ChapterToResourceItem ctrItem = new ChapterToResourceItem();
 						ctrItem.setId(MyUtils.getGUID());
@@ -808,6 +833,7 @@ public class CourseMAction extends TeacherBaseAction {
 	@ResponseBody
 	public String removeResourceByAsync() {
 		HttpServletRequest request = getRequest();
+		String courseId = request.getParameter("courseId");
 		String chapterId = request.getParameter("chapterId");
 		String resourceId = request.getParameter("resourceId");
 		String resourceType = request.getParameter("resourceType");
@@ -817,12 +843,25 @@ public class CourseMAction extends TeacherBaseAction {
 			if (MyUtils.isNotNull(chapterId) && MyUtils.isNotNull(resourceId) && MyUtils.isNotNull(resourceType) && ValidateTools.isInt(resourceType)) {
 				// 打开事务处理
 				ThreadUtils.beginTranx();
-				if (MyUtils.stringToInt(resourceType) == ResourceType.Type_File) {
-				
-				} else if (MyUtils.stringToInt(resourceType) == ResourceType.Type_Live) {
+				CourseDao courseDao = new CourseDao();
+				if (MyUtils.stringToInt(resourceType) == ResourceType.Type_File) {//删除课件
+					FileDao fileDao = new FileDao();
+					FileItem oleFileItem = fileDao.selectById(resourceId);
+					if (oleFileItem != null) {
+						if (ValidateTools.isInt(oleFileItem.getDuration())) {
+							// 当该课程的章节中删除一个课件时，修改该课程的总课时数,自动减去该课件的时长
+							courseDao.removeChapterCount(courseId, MyUtils.stringToInt(oleFileItem.getDuration()));
+						}
+					}
+				} else if (MyUtils.stringToInt(resourceType) == ResourceType.Type_Live) {//删除直播
 					LiveDao liveDao = new LiveDao();
-					liveDao.delete(resourceId);
-				} else if (MyUtils.stringToInt(resourceType) == ResourceType.Type_Train) {
+					LiveItem liveItem = liveDao.selectById(resourceId);
+					if (liveItem != null) {
+						// 当该课程的章节中删除一个直播时，修改该课程的总课时数,自动减去该直播的时长
+						courseDao.removeChapterCount(courseId, liveItem.getDuration());
+						liveDao.delete(resourceId);
+					}
+				} else if (MyUtils.stringToInt(resourceType) == ResourceType.Type_Train) {//删除试题
 					
 				}
 				
@@ -833,7 +872,7 @@ public class CourseMAction extends TeacherBaseAction {
 				}
 				// 提交事务
 				ThreadUtils.commitTranx();
-				if (flag == true) {
+				if (flag) {
 					return SUCCESS;
 				}
 			}

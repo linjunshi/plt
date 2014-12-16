@@ -15,7 +15,7 @@ Globals.page = "Manage_index";
 	<%@ include file="inc/top.jsp"%>
 		<div class="form_page">
 			<div id="demo_zone">
-				新密码已经发送到邮箱，自己去看，及时修改
+				新密码已经发送到您的邮箱了，请及时修改！
 			</div>
 	</div>
 

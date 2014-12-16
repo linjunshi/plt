@@ -77,7 +77,7 @@ Globals.page = "Manage_courseAdd";
 											<span class="not-empty" title='此项为必填项'>*</span>
 										</div>
 									</div>
-									<div class="form_item">
+								<%-- 	<div class="form_item">
 										<label for="chapterCount">课时数量：</label>
 										<div class="form_field">
 											<select name="chapterCount" size="1" id="chapterCount" class="inline_ele">
@@ -92,7 +92,7 @@ Globals.page = "Manage_courseAdd";
 											</select>
 											<span class="not-empty" title='此项为必填项'>*</span>
 										</div>
-									</div>
+									</div> --%>
 									<div class="form_item">
 										<label for="endTime">结束时间：</label>
 										<div class="form_field">
@@ -120,7 +120,7 @@ Globals.page = "Manage_courseAdd";
 									<div class="form_item">
 										<label>课程描述：</label>
 										<div class="form_field">
-											<textarea id="remark" name="remark" class="xheditor-mfull" rows="60" cols="100" style="width:85%;height: 230px;" >${course.remark}</textarea>
+											<textarea id="remark" name="remark" class="xheditor-mfull xheditor {skin:'o2007silver'}" rows="60" cols="100" style="width:85%;height: 230px;" >${course.remark}</textarea>
 										</div>
 									</div>
 									<div class="form_action">

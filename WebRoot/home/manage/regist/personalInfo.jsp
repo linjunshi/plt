@@ -38,9 +38,9 @@ Globals.page = "Manage_personalInfo";
 		                    <form method="post" action="${ctx}/account/personalInfo" class="form_info common_form" id="personalInfo_form">
 		                    	<input type="hidden" name="id" value="${user.id}" />
 		                        <div class="form_item">
-		                            <label for="showName">昵称：</label>
+		                            <label for="username">昵称：</label>
 		                            <div class="form_field">
-		                                <input placeholder="6-32个字符" class="form_text" id="showName" name="showName" type="text" value="${user.showName}" required/>
+		                                <input placeholder="6-32个字符" class="form_text" id="username" name="username" type="text" value="${user.username}" required/>
 		                                <span class="not-empty" title='此项为必填项'>*</span>
 		                            </div>
 		                        </div>
@@ -55,26 +55,33 @@ Globals.page = "Manage_personalInfo";
 		                            </div>
 		                        </div>
 		                        <div class="form_item">
+		                            <label for="showName">真实姓名：</label>
+		                            <div class="form_field">
+		                                <input placeholder="填写您的真实姓名" class="form_text" id="showName" name="showName" type="text" value="${user.showName}" required/>
+		                                <span class="not-empty" title='此项为必填项'>*</span>
+		                            </div>
+		                        </div>
+		                        <div class="form_item">
 		                            <label>身份证号码：</label>
 		                            <div class="form_field ">
 		                               <input placeholder="请填入您的真实身份证号码" class="form_text" id="idCard" name="idCard" type="text" value="${user.idCard}" required_Idcard>
 		                            </div>
 		                        </div>  
 		                        <div class="form_item">
-		                            <label for="realname">手机号：</label>
+		                            <label for="phone">手机号：</label>
 		                            <div class="form_field">
 		                                <input placeholder="请填入您的手机号码" class="form_text" id="phone" name="phone" type="text" value="${user.phone}" required_Phone>
 		                            </div>
 		                        </div>
-		                        <div class="form_item">
-		                            <label for="name">邮箱：</label>
+		                       <%--  <div class="form_item">
+		                            <label for="email">邮箱：</label>
 		                            <div class="form_field">
 		                                <input placeholder="请填入您的邮箱" class="form_text" id="email" name="email" type="email" value="${user.email}" required required_Mail>
 		                                <span class="not-empty" title='此项为必填项'>*</span>
 		                        	</div>
-		                        </div>
+		                        </div> --%>
 								<div class="form_item">
-										<label for="realname">上传头像：</label>
+										<label for="url">上传头像：</label>
 										<div class="form_field">
 											<img src="${user.headPhoto}" style="width:80px; height:60px;" class="small_preview" />
 											<a href="javascript:void(0);" id="changeCover">更改头像</a>
@@ -84,7 +91,7 @@ Globals.page = "Manage_personalInfo";
 		                        <div class="form_item">
 		                            <label>个人简介：</label>
 		                            <div class="form_field">
-		                                <textarea id="remark" name="remark" class="xheditor-mfull"  style="width:85%;height:230px;">${user.remark}</textarea>
+		                                <textarea id="remark" name="remark" class="xheditor-mfull xheditor {skin:'o2007silver'}"  style="width:85%;height:230px;">${user.remark}</textarea>
 		                            </div>
 		                        </div>
 		                        <div class="form_action"><input type="submit" value="保存" /></div>

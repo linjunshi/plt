@@ -17,7 +17,6 @@ public class CourseForm {
 	private String url;
 	private String gradeId;
 	private String subjectId;
-	private Integer chapterCount;
 	private String remark;
 	private Date uts;
 	
@@ -27,12 +26,6 @@ public class CourseForm {
 	}
 	public void setLive(Integer live) {
 		this.live = live;
-	}
-	public Integer getChapterCount() {
-		return chapterCount;
-	}
-	public void setChapterCount(Integer chapterCount) {
-		this.chapterCount = chapterCount;
 	}
 	public String getId() {
 		return id;

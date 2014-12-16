@@ -740,12 +740,15 @@ ManageClass.prototype = {
 			// TODO 删除一资源
 			$(".removeResource").live("click", function() {
 				var _this = $(this);
+				var courseId = $("#courseId").val();
 				var chapterId = _this.parents(".sh_add_chapter").children("input[name=chapterId]").val();
 				var resourceId = _this.parent().children("input[name=resourceId]").val();
 				var resourceType = _this.parent().children("input[name=resourceType]").val();
-				if (chapterId != "" && resourceId != "" && resourceType != "" && chapterId != null && resourceId != null && resourceType != null) {
+				if (courseId != "" && chapterId != "" && resourceId != "" && resourceType != "" && 
+					courseId != null && chapterId != null && resourceId != null && resourceType != null) {
 					// 通过get方式，提交数据到后台处理业务逻辑
-					$.get(Globals.ctx + "/manage/course/removeResource?chapterId=" + chapterId + "&resourceId=" + resourceId + "&resourceType=" + resourceType, function(result){
+					$.get(Globals.ctx + "/manage/course/removeResource?courseId=" + courseId + "&chapterId=" + chapterId 
+							+ "&resourceId=" + resourceId + "&resourceType=" + resourceType, function(result){
 						if (result == "success") {
 							location.reload();
 							$("html,body").animate({scrollTop:$("#" + chapterId).offset().top},1000);
