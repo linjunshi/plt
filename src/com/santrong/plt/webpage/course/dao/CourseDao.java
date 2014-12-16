@@ -638,40 +638,56 @@ public class CourseDao extends BaseDao {
 	}
 	
 	/**
-	 * 当该课程的章节中新增一个直播或者课件时，修改该课程的总课时数,自动加上该直播或者课件的时长
+	 * 当该课程的章节中新增一个直播或者课件时，修改该课程的总课时数,自动加1
 	 * @author huangweihua
 	 * @param  courseId
-	 * @param  duration
 	 * @return 
 	 */
-	public int addChapterCount(String courseId ,int duration){
+	public boolean addChapterCount(String courseId){
 		try {
 			CourseMapper mapper = this.getMapper(CourseMapper.class);
 			if (mapper != null) {
-				return mapper.addChapterCount(courseId, duration);
+				return mapper.addChapterCount(courseId) > 0;
 			}
 		} catch (Exception e) {
 			Log.printStackTrace(e);
 		}
-		return 0;
+		return false;
 	}
 	
 	/**
-	 * 当该课程的章节中删除一个直播或者课件时，修改该课程的总课时数,自动减去该直播或者课件的时长
+	 * 当该课程的章节中删除一个直播或者课件时，修改该课程的总课时数,自动减1
 	 * @author huangweihua
 	 * @param  courseId
-	 * @param  duration
 	 * @return 
 	 */
-	public int removeChapterCount(String courseId ,int duration){
+	public boolean removeChapterCount(String courseId){
 		try {
 			CourseMapper mapper = this.getMapper(CourseMapper.class);
 			if (mapper != null) {
-				return mapper.removeChapterCount(courseId, duration);
+				return mapper.removeChapterCount(courseId) > 0;
 			}
 		} catch (Exception e) {
 			Log.printStackTrace(e);
 		}
-		return 0;
+		return false;
+	}
+	
+	/**
+	 * 刷新课程的课时数
+	 * @param courseId
+	 * @param chapterCount
+	 * @return
+	 */
+	public boolean updateChapterCount(String courseId, int chapterCount) {
+		try {
+			CourseMapper mapper = this.getMapper(CourseMapper.class);
+			if (mapper != null) {
+				return mapper.updateChapterCount(courseId, chapterCount) > 0;
+			}
+		} catch (Exception e) {
+			Log.printStackTrace(e);
+		}
+		return false;
 	}
 }

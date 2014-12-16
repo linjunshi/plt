@@ -33,7 +33,7 @@
 			</c:if>
 			<c:if test="${sessionScope.loginUser != null}">
 				<div class="user_info_hidd">
-					<p class="user_info_sid"><img src="${ctx}${sessionScope.loginUser.headPhoto}" width="30" width="30"><span>${sessionScope.loginUser.showName}</span></p>
+					<p class="user_info_sid"><img src="${ctx}${sessionScope.loginUser.headPhoto}" width="30" width="30"><span>${sessionScope.loginUser.username}</span></p>
 					<p><a href="${ctx }/account/logout">注销</a></p>
 					<p><a href="${ctx }/study/course">管理中心</a></p>
 				</div>

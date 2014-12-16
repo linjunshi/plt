@@ -144,7 +144,7 @@ jQuery(function($) {
 		});
 
 		// 身份证类型检测
-		var re_Idcard = /^([0-9]{17}[0-9X]{1})|([0-9]{15})$/i;
+		var re_Idcard = /^([0-9]{17}[0-9X]{1})$|^([0-9]{15})$/;
 		$(this).find("[required_Idcard]").each(function() {
 			var val = $(this).val().trim();
 			if (val != "" ) {

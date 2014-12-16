@@ -41,7 +41,7 @@
 					<li><a href="${ctx}/account/personalInfo">帐号设置</a></li>
 					<li>
 					<div class="user_info_hidd_bg">
-		              <p class="user_info_sid_bg"><img src="${ctx}${sessionScope.loginUser.headPhoto}" width="40" width="40"><span>${sessionScope.loginUser.showName}</span></p>
+		              <p class="user_info_sid_bg"><img src="${ctx}${sessionScope.loginUser.headPhoto}" width="40" width="40"><span>${sessionScope.loginUser.username}</span></p>
 		            </div>
 				</ul>
 				 

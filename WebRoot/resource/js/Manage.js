@@ -295,6 +295,7 @@ ManageClass.prototype = {
 			// TODO 删除一大章节
 			$(".removeMaxChapter").live("click", function() {
 				var _this = $(this);
+				var courseId = $("#courseId").val();
 				var chapterId = _this.parents(".sh_add_chapter").children("input[name=chapterId]").val();
 				
 				// 判断章节内是否有内容，有内容不给删除
@@ -305,7 +306,7 @@ ManageClass.prototype = {
 					}else{
 						
 						// 通过POST方式，提交数据到后台处理业务逻辑
-						$.post(Globals.ctx + "/manage/course/removeChapter", {chapterId : chapterId}, function(result){
+						$.post(Globals.ctx + "/manage/course/removeChapter", {courseId : courseId, chapterId : chapterId}, function(result){
 							if (result == "success") {
 //								_this.parents("dl").remove();
 								location.reload();

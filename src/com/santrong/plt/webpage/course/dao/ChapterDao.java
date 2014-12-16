@@ -57,11 +57,30 @@ public class ChapterDao extends BaseDao {
 	public List<ChapterItem> selectAllByCourseId(String courseId) {
 		try {
 			ChapterMapper mapper = this.getMapper(ChapterMapper.class);
-			return mapper.selectAllByCourseId(courseId);
+			if (mapper != null) {
+				return mapper.selectAllByCourseId(courseId);
+			}
 		} catch (Exception e) {
 			Log.printStackTrace(e);
 		}
 		return null;
+	}
+	
+	/**
+	 * 统计课程有多少课时（章节）
+	 * @param courseId
+	 * @return
+	 */
+	public int selectCountByCourseId(String courseId) {
+		try {
+			ChapterMapper mapper = this.getMapper(ChapterMapper.class);
+			if (mapper != null) {
+				return mapper.selectCountByCourseId(courseId);
+			}
+		} catch (Exception e) {
+			Log.printStackTrace(e);
+		}
+		return 0;
 	}
 	
 	/**

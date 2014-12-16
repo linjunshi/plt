@@ -42,6 +42,7 @@ Globals.page = "Manage_personalInfo";
 		                            <div class="form_field">
 		                                <input placeholder="6-32个字符" class="form_text" id="username" name="username" type="text" value="${user.username}" required/>
 		                                <span class="not-empty" title='此项为必填项'>*</span>
+		                                <span class="form_error">（此项为登录名）</span>
 		                            </div>
 		                        </div>
 		                        <div class="form_item">
@@ -59,18 +60,21 @@ Globals.page = "Manage_personalInfo";
 		                            <div class="form_field">
 		                                <input placeholder="填写您的真实姓名" class="form_text" id="showName" name="showName" type="text" value="${user.showName}" required/>
 		                                <span class="not-empty" title='此项为必填项'>*</span>
+		                                <span class="form_error">（请填写个人的真实姓名，以便称呼）</span>
 		                            </div>
 		                        </div>
 		                        <div class="form_item">
 		                            <label>身份证号码：</label>
 		                            <div class="form_field ">
 		                               <input placeholder="请填入您的真实身份证号码" class="form_text" id="idCard" name="idCard" type="text" value="${user.idCard}" required_Idcard>
+		                               <span class="form_error">（真实身份证号码为15数字或者18位数字或者17位数字+X）</span>
 		                            </div>
 		                        </div>  
 		                        <div class="form_item">
 		                            <label for="phone">手机号：</label>
 		                            <div class="form_field">
 		                                <input placeholder="请填入您的手机号码" class="form_text" id="phone" name="phone" type="text" value="${user.phone}" required_Phone>
+		                                <span class="form_error">（手机号码为11位数字）</span>
 		                            </div>
 		                        </div>
 		                       <%--  <div class="form_item">
@@ -86,6 +90,7 @@ Globals.page = "Manage_personalInfo";
 											<img src="${user.headPhoto}" style="width:80px; height:60px;" class="small_preview" />
 											<a href="javascript:void(0);" id="changeCover">更改头像</a>
 											<input type="hidden" id="url" name="url" value="${user.url}" />
+											<!-- <span class="form_error">（图片大小最好在300K左右，长宽最佳比例为1:1，如:50 x 50）</span> -->
 										</div>
 									</div>                     
 		                        <div class="form_item">
