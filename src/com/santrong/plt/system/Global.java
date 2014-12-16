@@ -20,7 +20,7 @@ public class Global {
      * [System]
      */
     public static String Version = "";
-    public static String Title = "XXX系统";
+    public static String Title = "课云教育";
     public static String Language = "zh_CN";
     public static String PltDomain= "plttest.santrong.com";
     

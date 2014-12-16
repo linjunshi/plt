@@ -76,11 +76,11 @@ public class LiveMAction extends TeacherBaseAction {
 		
 		// 获取课程
 		CourseDao courseDao = new CourseDao();
-		CourseItem course = courseDao.selectByChapterId(chapter.getCourseId());			
+		CourseItem course = courseDao.selectById(chapter.getCourseId());			
 		
 		TeacherToolParams params = new TeacherToolParams();
-		params.setRtmpUrl("rtmp://" + Global.PltDomain + ":1980/");
-		params.setWebUrl("http://" + Global.PltDomain + "/http/basic");
+		params.setRtmpUrl(Global.PltDomain);
+		params.setWebUrl(Global.PltDomain);
 		params.setPltHost(Global.PltDomain);
 		params.setTeacherId(course.getOwnerId());
 		params.setTeacherName(course.getTeacher());
