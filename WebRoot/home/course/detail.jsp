@@ -50,8 +50,27 @@ Globals.page = "Index_courseDetail";
 		                    评价内容</p>
 		            </div>
 		            <p class="detai_numb">该课程累积购买人数为49人</p>
-		            <!-- <div class="detai_but">购买类型： <a href="#">购买整课</a><a href="#">购买部分章节</a> </div> -->
-		            <div class="detai_buy"><a href="javascript:void(0);" class="bottom_a buy">立刻购买</a><!-- <a href="#" class="bottom_b">加入购物车</a> --></div>
+		            <div class="detai_buy">
+		            	<c:if test="${hasBuy}">
+		            		已经购买，可直接学习
+		            	</c:if>
+		            	<c:if test="${!hasBuy}">
+				            <form action="https://pay3.chinabank.com.cn/PayGate?encoding=UTF-8" method="post" target="_blank" name="E_FORM" class="buy_form">
+					            <input type="hidden" name="v_mid" value="" />
+					            <input type="hidden" name="v_oid" value="" />
+					            <input type="hidden" name="v_amount" value="" />
+					            <input type="hidden" name="v_moneytype" value="" />
+								<input type="hidden" name="v_url" value="" />
+								<input type="hidden" name="v_md5info" value="" />
+								<input type="hidden" name="v_rcvname" value="" />
+								<input type="hidden" name="remark1" value="" />
+								<a href="javascript:void(0);" class="bottom_a buy">立刻购买</a>
+								<!-- <input type="image" src="http://merchant3.chinabank.com.cn/images/button_2.gif" > -->
+							</form>		            
+				            <!-- <a href="javascript:void(0);" class="bottom_a buy">立刻购买</a> -->
+				            <!-- <a href="#" class="bottom_b">加入购物车</a> -->
+			            </c:if>
+		            </div>
 		        </div>
 		        <div class="priSchool">
 		            <div>

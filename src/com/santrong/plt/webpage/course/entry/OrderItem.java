@@ -7,13 +7,31 @@ import java.util.Date;
  * @date 2014年10月20日
  * @time 下午12:05:01
  */
-public class BuyItem {
+public class OrderItem {
 	private String id;
 	private String userId;
 	private String courseId;
+	private int price;
+	private int status;
 	private Date cts;
 	private Date uts;
 	
+	public static final int Status_Notpay = 0;// 未支付
+	public static final int Status_Pay = 1;// 已支付
+	public static final int Status_Cancel = -1;// 已取消
+	
+	public int getPrice() {
+		return price;
+	}
+	public void setPrice(int price) {
+		this.price = price;
+	}
+	public int getStatus() {
+		return status;
+	}
+	public void setStatus(int status) {
+		this.status = status;
+	}
 	public String getId() {
 		return id;
 	}

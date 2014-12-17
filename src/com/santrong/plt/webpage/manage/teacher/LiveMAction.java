@@ -86,12 +86,12 @@ public class LiveMAction extends TeacherBaseAction {
 		params.setTeacherName(course.getTeacher());
 		params.setSourceId(live.getId());
 		params.setSourceTitle(live.getTitle());
-		params.setBeginTime(live.getBeginTime());
+		params.setBeginTime(MyUtils.dateToString(live.getBeginTime(), MyUtils.DF_yyyy_MM_dd_HH_mm));
 		
 		Calendar cal = Calendar.getInstance();
 		cal.setTime(live.getBeginTime());
 		cal.add(Calendar.MINUTE, live.getDuration());
-		params.setEndTime(cal.getTime());
+		params.setEndTime(MyUtils.dateToString(cal.getTime(), MyUtils.DF_yyyy_MM_dd_HH_mm));
 		
 		Gson gson = new Gson();
 		return gson.toJson(params);

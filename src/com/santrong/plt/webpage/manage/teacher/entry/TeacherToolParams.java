@@ -1,8 +1,5 @@
 package com.santrong.plt.webpage.manage.teacher.entry;
 
-import java.util.Date;
-
-import com.santrong.plt.util.MyUtils;
 
 /**
  * @author weinianjie
@@ -18,8 +15,8 @@ public class TeacherToolParams {
        private String teacherName;
        private String sourceId;
        private String sourceTitle;
-       private Date beginTime;
-       private Date endTime;
+       private String beginTime;
+       private String endTime;
        
 	public String getRtmpUrl() {
 		return rtmpUrl;
@@ -63,24 +60,16 @@ public class TeacherToolParams {
 	public void setSourceTitle(String sourceTitle) {
 		this.sourceTitle = sourceTitle;
 	}
-	public Date getBeginTime() {
+	public String getBeginTime() {
 		return beginTime;
 	}
-	public void setBeginTime(Date beginTime) {
+	public void setBeginTime(String beginTime) {
 		this.beginTime = beginTime;
 	}
-	public Date getEndTime() {
+	public String getEndTime() {
 		return endTime;
 	}
-	public void setEndTime(Date endTime) {
+	public void setEndTime(String endTime) {
 		this.endTime = endTime;
-	}
-	
-	public String getBeginTimeString() {
-		return MyUtils.dateToString(this.beginTime, MyUtils.DF_yyyy_MM_dd_HH_mm);
-	}
-	
-	public String getEndTimeString() {
-		return MyUtils.dateToString(this.endTime, MyUtils.DF_yyyy_MM_dd_HH_mm);
 	}
 }

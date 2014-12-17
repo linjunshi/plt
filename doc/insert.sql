@@ -205,6 +205,7 @@ create table course(
 	gradeId varchar(32) not null comment '所属年级',
 	subjectId varchar(32) not null comment '所属科目',
 	remark varchar(10240) comment '具体描述',
+	limitCount int(10) default 0 not null comment '限购数量',
 	saleCount int(10) default 0 not null comment '销售量',
 	collectCount int(10) default 0 not null comment '收藏量',
 	commentCount int(10) default 0 not null comment '评论数量',
@@ -253,6 +254,8 @@ create table web_order(
 	id varchar(32) not null comment 'UUID',
 	userId varchar(32) not null comment '用户ID',
 	courseId varchar(32) not null comment '课程ID',
+	price int(10) not null default 0 comment '价格',
+	status int(10) not null default 0 comment '状态',
 	cts datetime comment '创建时间',
 	uts datetime comment '修改时间',
 	primary key (id)
