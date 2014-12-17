@@ -413,7 +413,7 @@ public class CourseAction extends BaseAction {
 			chinaBank.setV_oid(order.getId());// 订单号
 			chinaBank.setV_amount("0.01");// 价格
 			chinaBank.setV_moneytype("CNY");// 货币类型
-			chinaBank.setV_url("http://www.keyyun.com");// 跳转地址
+			chinaBank.setV_url("http://" + Global.PltDomain + "/pay/chinaBank/receive");// 跳转地址
 			chinaBank.setV_md5info(chinaBank.calMd5("weinianjieblacksheepwall"));
 			chinaBank.setV_rcvname(user.getUsername());// 订单人
 			chinaBank.setRemark1(user.getId());// 订单人ID

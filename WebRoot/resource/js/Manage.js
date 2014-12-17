@@ -200,7 +200,8 @@ ManageClass.prototype = {
 							var json = eval('(' + result + ')');
 //							if(SantrongPlayer && SantrongPlayer.StartPlayEX) {
 							if(SantrongPlayer) {
-								SantrongPlayer.StartLiveManager(json.rtmpUrl, json.webUrl, json.pltHost, json.teacherId, json.teacherName, json.sourceId, json.sourceTitle, json.beginTimeString, json.endTimeString);
+//								SantrongPlayer.StartLiveManager(json.rtmpUrl, json.webUrl, json.pltHost, json.teacherId, json.teacherName, json.sourceId, json.sourceTitle, json.beginTimeString, json.endTimeString);
+								SantrongPlayer.StartLiveManager("192.168.10.163", json.webUrl, "192.168.10.163", json.teacherId, json.teacherName, json.sourceId, json.sourceTitle, json.beginTimeString, json.endTimeString);
 							}else{
 								Boxy.alert("请下载老师客户端");
 							}

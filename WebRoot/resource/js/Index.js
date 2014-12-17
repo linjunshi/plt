@@ -81,18 +81,18 @@ IndexClass.prototype = {
 				if(result.indexOf('{') != -1) {
 					// 新页面打开网银支付
 					var json = eval('(' + result + ')');
-					$(".but_form input[name=v_mid]").val(json.v_mid);
-					$(".but_form input[name=v_oid]").val(json.v_oid);
-					$(".but_form input[name=v_amount]").val(json.v_amount);
-					$(".but_form input[name=v_moneytype]").val(json.v_moneytype);
-					$(".but_form input[name=v_url]").val(json.v_url);
-					$(".but_form input[name=v_md5info]").val(json.v_md5info);
-					$(".but_form input[name=v_rcvname]").val(json.v_rcvname);
-					$(".but_form input[name=remark1]").val(json.remark1);
+					$(".buy_form input[name=v_mid]").val(json.v_mid);
+					$(".buy_form input[name=v_oid]").val(json.v_oid);
+					$(".buy_form input[name=v_amount]").val(json.v_amount);
+					$(".buy_form input[name=v_moneytype]").val(json.v_moneytype);
+					$(".buy_form input[name=v_url]").val(json.v_url);
+					$(".buy_form input[name=v_md5info]").val(json.v_md5info);
+					$(".buy_form input[name=v_rcvname]").val(json.v_rcvname);
+					$(".buy_form input[name=remark1]").val(json.remark1);
 					$(".buy_form").submit();
 					
 					// 本页面弹框问是否给钱了
-	    			Boxy.ask("钱给了么", "是", "否", function(response) {
+	    			Boxy.ask("钱给了么", ["是", "否"], function(response) {
 	    	            if (response == "是") {
 	    	            	location.reload();
 	    	            }else{

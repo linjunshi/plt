@@ -58,6 +58,17 @@ public class OrderDao extends BaseDao{
 		return false;
 	}
 	
+	
+	public OrderItem selectById(String id){
+		try {
+			OrderMapper mapper = this.getMapper(OrderMapper.class);
+			return mapper.selectById(id);
+		} catch (Exception e) {
+			Log.printStackTrace(e);
+		}
+		return null;
+	}		
+	
 	/**
 	 * 根据课程ID和用户ID获取某个订单
 	 * @param courseId

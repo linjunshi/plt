@@ -23,6 +23,9 @@ public interface OrderMapper {
 	@Select("select count(*) as cn from web_order where courseId=#{courseId} and userId=#{userId}")
 	int exists(@Param("courseId") String courseId, @Param("userId") String userId);
 	
+	@Select("select * from web_order where id=#{id}")
+	OrderItem selectById(String id);	
+	
 	@Select("select * from web_order where courseId=#{courseId} and userId=#{userId}")
 	OrderItem selectByCourseIdAndUserId(@Param("courseId") String courseId, @Param("userId") String userId);
 }

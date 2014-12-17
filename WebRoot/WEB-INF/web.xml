@@ -38,7 +38,12 @@
 	<servlet-mapping>   
 	    <servlet-name>default</servlet-name>  
 	    <url-pattern>/download/*</url-pattern>
-	</servlet-mapping>	
+	</servlet-mapping>
+	
+	<servlet-mapping>   
+	    <servlet-name>default</servlet-name>  
+	    <url-pattern>/crossdomain.xml</url-pattern>
+	</servlet-mapping>			
 
     <!-- spring配置 -->
     <servlet>  
