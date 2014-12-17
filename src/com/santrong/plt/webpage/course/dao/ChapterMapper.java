@@ -31,6 +31,14 @@ public interface ChapterMapper {
 	List<ChapterItem> selectAllByCourseId(String courseId);
 	
 	/**
+	 * 统计课程有多少课时（章节）
+	 * @param courseId
+	 * @return
+	 */
+	@Select("select count(*) from course_chapter where courseId = #{courseId} ")
+	int selectCountByCourseId(String courseId);
+	
+	/**
 	 * 删除一条大章节的记录
 	 * @param chapterId
 	 * @return

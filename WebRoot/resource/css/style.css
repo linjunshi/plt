@@ -135,7 +135,7 @@ span.form_error, span.form_success{border-width:1px;display:inline-block;*displa
 .search_form .fast_navigate a{ margin:2px 10px 0 0; color:#666; width:30px; padding:0 2px; border:1px #fff solid;}
 
 .search_form .search_navigate_bg {display:inline-block;margin-top: 5px;}
-.search_form .search_navigate_bg .search_bg {float:left; border:#f90 3px solid; border-right:none; position:relative;z-index:9999;}
+.search_form .search_navigate_bg .search_bg {float:left; border:#f90 3px solid; border-right:none; position:relative;}
 .search_form .search_navigate_bg .search_bg .search_category {position:absolute; left:0px; width:56px; z-index:2; line-height:28px; background-color:#f5f5f5; text-align:center; cursor:pointer; border:solid 1px #fff;}
 .search_form .search_navigate_bg .search_bg .select_down {position:absolute; width:6px; height:3px; left:46px; top:14px; z-index:3; background:url('../photo/select_r_bg.png') center center no-repeat;}
 .search_form .search_navigate_bg .search_bg .search_text_bg{float:left; line-height:20px; width:200px; margin-left:56px; height:20px; padding:5px 0; text-indent:4px; border:none;} 
@@ -156,7 +156,7 @@ span.form_error, span.form_success{border-width:1px;display:inline-block;*displa
 .user_info_signup_bg:hover, .user_info_login_bg:hover{color:#fff;background:#044a38;}
 .sh_user_info { position:absolute; right:10px; top:0px; width:auto;}
 .sh_user_info li{ float:left;}
-.sh_user_info li a{ float:left; display:block; padding:2px 10px; height:100px; line-height:100px; font-size:16px; color:#fff; margin-left:10px; }
+.sh_user_info li a{ float:left; display:block; padding:0px 10px; height:100px; line-height:100px; font-size:16px; color:#fff; margin-left:10px; }
 .sh_user_info li a:hover{ background:#044a38;}
 .user_info_hidd_bg p{float:left; height:30px; line-height:30px; margin:30px 10px 0 0;padding:0 10px; color:#fff;cursor:pointer; }
 .user_info_hidd_bg .user_info_sid_bg *{vertical-align:middle; margin-left:10px;}
@@ -403,18 +403,18 @@ span.form_error, span.form_success{border-width:1px;display:inline-block;*displa
 .course_list_des { padding-left:86px;}
 .course_list_des span{ line-height:24px;}
 .course_list_des a{float:right; color:#009871;background:green;}
-.course_list_des a:hover{ background:#ffffff; cursor:pointer;}
+.course_list_des a:hover{ background:#ffffff; }
 
 .th_evaluation .comm_pjxq {padding: 13px 25px; border-bottom:1px #dbdbdb dashed;}
 .th_mr { width:300px;}
 .th_mr span{ float:left; margin-right:10px;}
-.th_evaluation .th_pt { float:right;width:380px;display:block; margin-top:3px;}
+.th_evaluation .th_pt { float:right;width:1150px;display:block; margin-top:3px;}
 .th_evaluation .pt4 { font-weight:700; color:#666; margin-top:5px}
 .th_evaluation .pt5 { font-size:20px; color:#f90;margin-top:-5px}
 .th_evaluation .pt6 {margin-top:5px}
 .th_evaluation .th_con{ height:200px;}
 .th_evaluation .th_con div { width:96%; margin:10px 20px; height:145px;}
-.th_evaluation .th_con .th_textarea { width:100%; height:100px;}
+.th_evaluation .th_con .th_textarea { width:100%; min-height: 100px;}
 .th_evaluation .th_pt_but {	width:80px;	height: 30px;line-height: 30px;	position: absolute;	right: 30px;margin-buttom: 10px;background: #009871;text-align:center;	color:#fff;font-size:18px;border:0;}
 .th_evaluation .th_pt_but:hover, .th_text_but:hover{ background:#06654d;cursor: pointer;}
 

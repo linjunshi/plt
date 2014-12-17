@@ -73,7 +73,7 @@ public class ValidateTools {
 	 */
 	public static boolean isIdCard(String str) {
 		if(str != null) {
-			Pattern pat = Pattern.compile("^([0-9]{17}[0-9X]{1})|([0-9]{15})$");  
+			Pattern pat = Pattern.compile("^([0-9]{17}[0-9X]{1})$|^([0-9]{15})$");  
 			Matcher mat = pat.matcher(str);  
 			return mat.find();
 		}

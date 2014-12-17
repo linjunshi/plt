@@ -148,22 +148,29 @@ public interface CourseMapper {
 	CourseItem selectByChapterId(String chapterId);
 	
 	/**
-	 * 当该课程的章节中新增一个直播或者课件时，修改该课程的总课时数,自动加上该直播或者课件的时长
+	 * 当该课程的章节中新增一个直播或者课件时，修改该课程的总课时数,自动加1
 	 * @author huangweihua
 	 * @param  id
-	 * @param  duration
 	 * @return 
 	 */
-	@Update("update course set chapterCount = (chapterCount + ${duration}) where id = #{id}")
-	int addChapterCount(@Param("id")String id ,@Param("duration")int duration);
+	@Update("update course set chapterCount = (chapterCount + 1) where id = #{id}")
+	int addChapterCount(String id);
 	
 	/**
-	 * 当该课程的章节中删除一个直播或者课件时，修改该课程的总课时数,自动减去该直播或者课件的时长
+	 * 当该课程的章节中删除一个直播或者课件时，修改该课程的总课时数,自动减1
 	 * @author huangweihua
 	 * @param  id
-	 * @param  duration
 	 * @return 
 	 */
-	@Update("update course set chapterCount = (chapterCount - ${duration}) where id = #{id}")
-	int removeChapterCount(@Param("id")String id ,@Param("duration")int duration);
+	@Update("update course set chapterCount = (chapterCount - 1) where id = #{id}")
+	int removeChapterCount(String id);
+	
+	/**
+	 * 刷新课程的课时数
+	 * @param id
+	 * @param chapterCount
+	 * @return
+	 */
+	@Update("update course set chapterCount = #{chapterCount} where id = #{id}")
+	int updateChapterCount(@Param("id")String id,@Param("chapterCount")int chapterCount);
 }
