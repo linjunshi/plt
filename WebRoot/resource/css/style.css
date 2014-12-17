@@ -344,8 +344,10 @@ span.form_error, span.form_success{border-width:1px;display:inline-block;*displa
 .detailPrimary { width:1200px; min-height:350px; border:1px #dbdbdb solid; position:relative; }
 .detai_img { float:left; display:block;}
 .detai_img img { padding:10px;}
-.detai_img .detai_coll {position: absolute;	left:10px;	bottom:80px; color:#009871}
-.detai_img .detai_share {position: absolute;left:100px;bottom:70px;}
+.detai_img .detai_coll {position: absolute;	left:10px;	bottom:80px; color:#666;}
+.detai_img .detai_coll:hover {color:#009871}
+.detai_img .detai_coll .coll_icon { background: url('../images/bug_litter_icon.png') no-repeat -121px 0; display:inline-block;width: 16px;height: 15px;}
+.detai_img .detai_share {position: absolute;left:150px;bottom:75px;}
 .priInfo { border-left: 1px solid #dbdbdb;float: left; margin: 15px 0; padding: 0 30px; width: 570px;}
 .priInfo .mb15 { font-size:22px; color:#333; margin-bottom: 10px;}
 .priInfo .pri_m b{ color:#F90; font-size:20px; margin:0 5px; font-style:none;font-weight: normal;}
@@ -353,7 +355,7 @@ span.form_error, span.form_success{border-width:1px;display:inline-block;*displa
 .priInfo .pri_m span{ margin-right:10px;}
 .priInfo .pri_m span em {font-style: normal;font-weight: normal;}
 .priInfo .data_time { color:#F90;}
-.priInfo .detai_num { height:75px; border:1px #dbdbdb solid; border-left:0; margin-bottom:10px; background:#f9f9f9;}
+.priInfo .detai_num {width:380px; height:75px; border:1px #dbdbdb solid; border-left:0; margin-bottom:10px; background:#f9f9f9;}
 .priInfo .detai_num p { float:left; display:block; width:185px; height:75px; text-align:center; border-left:1px #dbdbdb solid;}
 .priInfo .detai_num b { color:#F90; font-size:18px;font-weight: normal;}
 .detai_but { width:566px; height:40px; border:1px #FFE0C5 solid; background:#FFFBEC; text-indent:5px; margin-top:10px;}
@@ -405,22 +407,24 @@ span.form_error, span.form_success{border-width:1px;display:inline-block;*displa
 .course_list_des a{float:right; color:#009871;background:green;}
 .course_list_des a:hover{ background:#ffffff; }
 
-.th_evaluation .comm_pjxq {padding: 13px 25px; border-bottom:1px #dbdbdb dashed;}
-.th_mr { width:300px;}
-.th_mr span{ float:left; margin-right:10px;}
+.th_evaluation .comm_pjxq {padding-top:10px;width: 1200px;}
+.th_mr { float:right;margin-right: 40px;color: #c2c0c0;}
+.th_mr span{margin-right:10px;}
 .th_evaluation .th_pt { float:right;width:1150px;display:block; margin-top:3px;}
 .th_evaluation .pt4 { font-weight:700; color:#666; margin-top:5px}
 .th_evaluation .pt5 { font-size:20px; color:#f90;margin-top:-5px}
 .th_evaluation .pt6 {margin-top:5px}
-.th_evaluation .th_con{ height:200px;}
-.th_evaluation .th_con div { width:96%; margin:10px 20px; height:145px;}
-.th_evaluation .th_con .th_textarea { width:100%; min-height: 100px;}
-.th_evaluation .th_pt_but {	width:80px;	height: 30px;line-height: 30px;	position: absolute;	right: 30px;margin-buttom: 10px;background: #009871;text-align:center;	color:#fff;font-size:18px;border:0;}
+.th_evaluation .th_con{ height:180px;border: 1px #009871 solid;margin:0 25px 15px 25px;}
+.th_evaluation .th_con div { width:100%;height:145px; }
+.th_evaluation .th_con .xheLayout { min-height: 120px;height: 100px; }
+.th_evaluation .th_con .xheLayout iframe{ min-height: 110px;height: 100px; }
+.th_evaluation .th_con .th_textarea { width:99.1%; min-height: 100px;}
+.th_evaluation .th_pt_but {	width:80px;	height: 30px;line-height: 30px;	position: relative;	float:right;margin-right:15px;background: #009871;text-align:center;	color:#fff;font-size:18px;border:0;}
 .th_evaluation .th_pt_but:hover, .th_text_but:hover{ background:#06654d;cursor: pointer;}
 
 .th_propaganda { margin-bottom:20px;}/*图片广告*/
 
-.th_lea { width:99%;  margin-bottom:5px; position:relative;}
+.th_lea { width:100%;  margin-bottom:5px; position:relative;border-top:1px #dbdbdb dashed;}
 .th_lea ul li {border-bottom:1px #dbdbdb dashed; overflow:hidden;}
 .th_img_user { float:left; margin:15px 0 15px 25px;}
 .th_mr2 { float:left; display:block; width:1040px; margin:15px 0 0 15px; overflow:hidden;}

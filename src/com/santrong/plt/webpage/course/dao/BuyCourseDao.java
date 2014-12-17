@@ -19,7 +19,9 @@ public class BuyCourseDao extends BaseDao{
 	public int insert(BuyItem buy){
 		try {
 			BuyCourseMapper mapper = this.getMapper(BuyCourseMapper.class);
-			return mapper.insert(buy);
+			if (mapper != null) {
+				return mapper.insert(buy);
+			}
 		} catch (Exception e) {
 			Log.printStackTrace(e);
 		}
@@ -36,10 +38,13 @@ public class BuyCourseDao extends BaseDao{
 	public boolean exists(String courseId, String userId){
 		try {
 			BuyCourseMapper mapper = this.getMapper(BuyCourseMapper.class);
-			return mapper.exists(courseId, userId) > 0;
+			if (mapper != null) {
+				return mapper.exists(courseId, userId) > 0;
+			}
 		} catch (Exception e) {
 			Log.printStackTrace(e);
 		}
 		return false;
 	}
+	
 }

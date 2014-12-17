@@ -271,10 +271,11 @@ public class CourseAction extends BaseAction {
 			return this.redirect("/course/" + courseId + ".html");
 		}
 		/*课程评论页面，判断用户是否登录改成使用BaseAction中的currentUser方法，拿到user后判断user是否为空来判断用户登录状态*/
+		// 获取当前用户对象信息
 		UserItem user = this.currentUser();
-		if(user == null) {
+		if (user == null) {
 			// 没登陆
-			return this.redirect("/account/login");
+			return "loginPage";
 		}
 		
 		CommentDao commentDao = new CommentDao();
@@ -362,10 +363,10 @@ public class CourseAction extends BaseAction {
 			}
 			
 			BuyCourseDao buyCourseDao = new BuyCourseDao();
-			// 如果没搜藏过
+			// 如果没购买过
 			if(!buyCourseDao.exists(courseId, user.getId())) {
 				ThreadUtils.beginTranx();
-				// 往课程收藏表插入一条记录
+				// 往课程购买表插入一条记录
 				BuyItem buy = new BuyItem();
 				buy.setId(MyUtils.getGUID());
 				buy.setUserId(user.getId());

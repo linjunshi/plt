@@ -60,7 +60,7 @@ Globals.page = "Manage_personalInfo";
 		                            <div class="form_field">
 		                                <input placeholder="填写您的真实姓名" class="form_text" id="showName" name="showName" type="text" value="${user.showName}" required/>
 		                                <span class="not-empty" title='此项为必填项'>*</span>
-		                                <span class="form_error">（请填写个人的真实姓名，以便称呼）</span>
+		                                <span class="form_error">（请填写个人的真实姓名）</span>
 		                            </div>
 		                        </div>
 		                        <div class="form_item">
@@ -77,13 +77,17 @@ Globals.page = "Manage_personalInfo";
 		                                <span class="form_error">（手机号码为11位数字）</span>
 		                            </div>
 		                        </div>
-		                       <%--  <div class="form_item">
+		                        <div class="form_item">
 		                            <label for="email">邮箱：</label>
 		                            <div class="form_field">
+		                            <c:if test="${user.email==null}">
+		                            	<input placeholder="请填入您的邮箱" class="form_text" id="email" name="email" type="email" value="${user.email}" style="">
+		                            </c:if>
 		                                <input placeholder="请填入您的邮箱" class="form_text" id="email" name="email" type="email" value="${user.email}" required required_Mail>
 		                                <span class="not-empty" title='此项为必填项'>*</span>
-		                        	</div>
-		                        </div> --%>
+		                                <span class="form_error">（邮箱格式，如：xxx@qq.com,xxx@163.com...）</span>
+		                            </div>
+		                        </div>
 								<div class="form_item">
 										<label for="url">上传头像：</label>
 										<div class="form_field">
