@@ -1,8 +1,23 @@
 package com.santrong.plt.webpage.course.dao;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
+
+import com.mysql.jdbc.StringUtils;
+import com.santrong.plt.criteria.Statement;
 import com.santrong.plt.log.Log;
+import com.santrong.plt.opt.ThreadUtils;
+import com.santrong.plt.util.BeanUtils;
+import com.santrong.plt.util.MyUtils;
 import com.santrong.plt.webpage.BaseDao;
+import com.santrong.plt.webpage.course.entry.CourseBuyQuery;
+import com.santrong.plt.webpage.course.entry.CourseCollectQuery;
+import com.santrong.plt.webpage.course.entry.CourseItem;
 import com.santrong.plt.webpage.course.entry.OrderItem;
+import com.santrong.plt.webpage.manage.student.entry.OrderQuery;
 
 /**
  * @author weinianjie
@@ -84,4 +99,5 @@ public class OrderDao extends BaseDao{
 		}
 		return null;
 	}	
+	
 }

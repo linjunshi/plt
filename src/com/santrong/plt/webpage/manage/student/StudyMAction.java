@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.santrong.plt.webpage.course.dao.CourseDao;
 import com.santrong.plt.webpage.course.entry.CourseBuyQuery;
 import com.santrong.plt.webpage.course.entry.CourseItem;
+import com.santrong.plt.webpage.course.entry.OrderItem;
 import com.santrong.plt.webpage.course.resource.train.dao.TrainDao;
 import com.santrong.plt.webpage.course.resource.train.entry.TrainQuery;
 import com.santrong.plt.webpage.manage.StudentBaseAction;
@@ -40,6 +41,7 @@ public class StudyMAction extends StudentBaseAction {
 		CourseDao courseDao = new CourseDao();
 		CourseBuyQuery query = new CourseBuyQuery();
 		query.setUserId(this.currentUser().getId());
+		query.setOrderStatus(OrderItem.Status_Pay);// 已经购买切付款的
 		query.setPageSize(12);
 		query.setPageNum(pageNum);
 		query.setCount(courseDao.selectCountByQuery(query));

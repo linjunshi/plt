@@ -11,7 +11,7 @@
                     <dd><a href="${ctx}/study/train">我的测验</a></dd>
                     <dd><a href="${ctx}/comment">我的评论</a></dd>
                     <dd><a href="${ctx}/collection">我的收藏</a></dd>
-                    <dd><a href="#" onclick="alert('开发中')">交易记录</a></dd>
+                    <dd><a href="${ctx}/order/list">交易记录</a></dd>
                 </dl>
             </div>
         </div>
