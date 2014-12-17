@@ -284,10 +284,11 @@ public class CourseAction extends BaseAction {
 			return this.redirect("/course/" + courseId + ".html");
 		}
 		/*课程评论页面，判断用户是否登录改成使用BaseAction中的currentUser方法，拿到user后判断user是否为空来判断用户登录状态*/
+		// 获取当前用户对象信息
 		UserItem user = this.currentUser();
-		if(user == null) {
+		if (user == null) {
 			// 没登陆
-			return this.redirect("/account/login");
+			return "loginPage";
 		}
 		
 		CommentDao commentDao = new CommentDao();
@@ -380,6 +381,10 @@ public class CourseAction extends BaseAction {
 				return FAIL;
 			}
 			
+			if (course.getLimitCount() <= course.getSaleCount()) {
+				return "对不起，亲！该课程已经达到限购人数了！请您去购买其他老师的课程吧！";
+			}
+			
 			// 策略：购买过的，提示已经购买；购买过但是未付款的，激活原来的购买；购买过但是取消了的，激活原来的购买；付款成功购买量才自增。
 			OrderDao orderDao = new OrderDao();
 			OrderItem order = orderDao.selectByCourseIdAndUserId(courseId, user.getId());
@@ -390,7 +395,7 @@ public class CourseAction extends BaseAction {
 					order.setStatus(OrderItem.Status_Notpay);
 					order.setUts(new Date());
 					if(orderDao.update(order) <= 0) {
-						return FAIL;
+						return "购买失败！";
 					}
 				}
 			}else {// 未曾购买

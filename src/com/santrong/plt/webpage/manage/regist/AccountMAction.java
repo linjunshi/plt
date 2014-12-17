@@ -210,10 +210,10 @@ public class AccountMAction extends RegistBaseAction {
 				return "manage/regist/personalInfo";
 			}
 			if (MyUtils.isNull(userForm.getShowName())) {
-				addError("昵称不能为空！");
+				addError("真实姓名不能为空！");
 			}
 			if (MyUtils.isNull(userForm.getUsername())) {
-				addError("真实姓名不能为空！");
+				addError("昵称不能为空！");
 			}
 			if (!ValidateTools.isIdCard(userForm.getIdCard())) {
 				addError("身份证号码不正确！");
@@ -226,9 +226,9 @@ public class AccountMAction extends RegistBaseAction {
 			}
 			//用户基本信息
 			UserDao userDao = new UserDao();
-			user.setShowName(userForm.getShowName());
-			user.setGender(userForm.getGender());
 			user.setUsername(userForm.getUsername());
+			user.setGender(userForm.getGender());
+			user.setShowName(userForm.getShowName());
 			user.setIdCard(userForm.getIdCard());
 			user.setPhone(userForm.getPhone());
 			user.setEmail(userForm.getEmail());

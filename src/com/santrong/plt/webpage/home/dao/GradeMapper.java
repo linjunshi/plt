@@ -14,19 +14,19 @@ import com.santrong.plt.webpage.home.entry.GradeView;
  */
 public interface GradeMapper {
 	
-	@Select("select * from grade order by priority desc")
+	@Select("select * from grade order by priority asc")
 	List<GradeItem> selectAll();
 	
-	@Select("select * from grade where gradeGroup=#{gradeGroup} order by priority desc")
+	@Select("select * from grade where gradeGroup=#{gradeGroup} order by priority asc")
 	List<GradeItem> selectByGradeGroup(int gradeGroup);
 	
-	@Select("select distinct gradeName, gradeGroup, gradeEnName from grade order by priority desc")
+	@Select("select distinct gradeName, gradeGroup, gradeEnName from grade order by priority asc")
 	List<GradeView> selectGrade();
 	
 	@Select("select distinct a.gradeName, a.gradeGroup, a.gradeEnName from grade a "
 			+ "left join grade_to_subject b on a.id=b.gradeId "
 			+ "left join subject c on b.subjectId=c.id "
 			+ "where c.subjectEnName=#{subjectName} "
-			+ "order by a.priority desc")
+			+ "order by a.priority asc")
 	List<GradeView> selectGradeBySubjectEnName(String subjectName);	
 }

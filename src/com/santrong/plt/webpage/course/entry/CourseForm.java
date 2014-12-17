@@ -12,6 +12,7 @@ public class CourseForm {
 	private String courseName;
 	private String teacher;
 	private Integer price;
+	private Integer limitCount;
 	private Integer live;
 	private String endTime;
 	private String url;
@@ -56,6 +57,12 @@ public class CourseForm {
 	}
 	public void setPrice(Integer price) {
 		this.price = price;
+	}
+	public Integer getLimitCount() {
+		return limitCount;
+	}
+	public void setLimitCount(Integer limitCount) {
+		this.limitCount = limitCount;
 	}
 	public String getTeacher() {
 		return teacher;

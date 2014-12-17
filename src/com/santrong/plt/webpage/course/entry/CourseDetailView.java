@@ -20,12 +20,14 @@ public class CourseDetailView {
 	private String subjectId;
 	private String url;
 	private int price;
+	private int limitCount;
 	private Date endTime;
 	private int collectCount;
 	private int saleCount;
 	private int commentCount;
 	private int chapterCount;
 	private String remark;
+	private int status;
 	private Date cts;
 	private Date uts;
 	private String subjectName;
@@ -44,7 +46,18 @@ public class CourseDetailView {
 			return "/resource/photo/course01.jpg";
 		}
 	}	
-	
+	public int getLimitCount() {
+		return limitCount;
+	}
+	public void setLimitCount(int limitCount) {
+		this.limitCount = limitCount;
+	}
+	public int getStatus() {
+		return status;
+	}
+	public void setStatus(int status) {
+		this.status = status;
+	}
 	public int getCommentCount() {
 		return commentCount;
 	}

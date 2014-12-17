@@ -77,6 +77,13 @@ Globals.page = "Manage_courseAdd";
 											<span class="not-empty" title='此项为必填项'>*</span>
 										</div>
 									</div>
+									<div class="form_item">
+										<label>限购数量：</label>
+										<div class="form_field">
+											<input placeholder="如：1000" class="form_text" name="limitCount" id="limitCount" type="text" value="${course.limitCount}" required required_Number>
+											<span class="not-empty" title='此项为必填项'>*</span>
+										</div>
+									</div>
 								<%-- 	<div class="form_item">
 										<label for="chapterCount">课时数量：</label>
 										<div class="form_field">

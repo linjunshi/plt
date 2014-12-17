@@ -106,7 +106,9 @@ IndexClass.prototype = {
 		});
 		
 		// 课程描述选项卡切换
-		$("#content_nav li").click(function(){
+		$("#content_nav li").mouseover(function(){
+			$(this).parent().children("li").removeClass("current");
+			$(this).toggleClass("current");
 			if($(this).index() == 0){
 				$("#course_summary").show();
 				$("#course_struct").show();

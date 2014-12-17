@@ -103,17 +103,17 @@ Globals.page = "Index_index";
 		    
 		    <div class="wrap_catalog_box">
 		        <div class="catalog_box_header">
-					<h2 class="catalog_box_title">高中</h2>
+					<h2 class="catalog_box_title">小学</h2>
 		            <ul class="catalog_box_nav">
-	            	    <c:forEach items="${gaozhong_subjectList}" var="subject">
-	                	<li><a href="${ctx}/course/gaozhong/${subject.subjectEnName}">${subject.subjectName}</a></li>
+	            	    <c:forEach items="${xiaoxue_subjectList}" var="subject">
+	                	<li><a href="${ctx}/course/xiaoxue/${subject.subjectEnName}">${subject.subjectName}</a></li>
 	                	</c:forEach>
 		            </ul>
-		            <a href="${ctx}/course/gaozhong" class="catalog_box_more">更多</a>
+		            <a href="${ctx}/course/xiaoxue" class="catalog_box_more">更多</a>
 				</div>
 		        <div class="img_item">
 		            <ul>
-						<c:forEach items="${gaozhong_courseList}" var="item" varStatus="st">
+						<c:forEach items="${xiaoxue_courseList}" var="item" varStatus="st">
 		                <li class="img_list<c:if test="${(st.index+1)%5 == 0}"> margin_right_clear</c:if>">
 		                    <div class="pic"><a href="${ctx}/course/${item.id}.html" target="_blank"><img src="${ctx}${item.thumbnail}" border="0" /></a></div>
 		                    <div class="img_user">
@@ -149,21 +149,21 @@ Globals.page = "Index_index";
 						</c:forEach>
 		            </ul>
 		        </div>
-		    </div>
+		   </div>
 		    
-		    <div class="wrap_catalog_box">
+		   <div class="wrap_catalog_box">
 		        <div class="catalog_box_header">
-					<h2 class="catalog_box_title">小学</h2>
+					<h2 class="catalog_box_title">高中</h2>
 		            <ul class="catalog_box_nav">
-	            	    <c:forEach items="${xiaoxue_subjectList}" var="subject">
-	                	<li><a href="${ctx}/course/xiaoxue/${subject.subjectEnName}">${subject.subjectName}</a></li>
+	            	    <c:forEach items="${gaozhong_subjectList}" var="subject">
+	                	<li><a href="${ctx}/course/gaozhong/${subject.subjectEnName}">${subject.subjectName}</a></li>
 	                	</c:forEach>
 		            </ul>
-		            <a href="${ctx}/course/xiaoxue" class="catalog_box_more">更多</a>
+		            <a href="${ctx}/course/gaozhong" class="catalog_box_more">更多</a>
 				</div>
 		        <div class="img_item">
 		            <ul>
-						<c:forEach items="${xiaoxue_courseList}" var="item" varStatus="st">
+						<c:forEach items="${gaozhong_courseList}" var="item" varStatus="st">
 		                <li class="img_list<c:if test="${(st.index+1)%5 == 0}"> margin_right_clear</c:if>">
 		                    <div class="pic"><a href="${ctx}/course/${item.id}.html" target="_blank"><img src="${ctx}${item.thumbnail}" border="0" /></a></div>
 		                    <div class="img_user">
@@ -175,6 +175,7 @@ Globals.page = "Index_index";
 		            </ul>
 		        </div>
 		    </div>
+		    
 		</div>
 	</div>
 	<%@ include file="inc/friendlylink.jsp"%>	

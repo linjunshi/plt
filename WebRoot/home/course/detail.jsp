@@ -18,9 +18,9 @@ Globals.page = "Index_courseDetail";
 		    <div class="detailPrimary clr">
 				<div class="detai_img">
 					<div>
-						<img src="${ctx}${course.thumbnail}" width="290" height="200" />
+						<img src="${ctx}${course.thumbnail}" width="290" height="230" />
 					</div>
-					<div><a href="javascript:void(0)" id="coll_course" class="detai_coll">收藏课程</a></div>
+					<div><a href="javascript:void(0)" id="coll_course" class="detai_coll"><i class="coll_icon"></i>收藏课程&nbsp;(${course.collectCount}人气)</a></div>
 					<!-- <a href="javascript:void(0);" class="detai_share">分享给朋友</a> -->
 					<div class="bdsharebuttonbox detai_share">
 						<a href="#" class="bds_more" data-cmd="more"></a>
@@ -30,26 +30,21 @@ Globals.page = "Index_courseDetail";
 						<a href="#" class="bds_renren" data-cmd="renren" title="分享到人人网"></a>
 						<a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a>
 					</div>
-					<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{},"image":{"viewList":["qzone","tsina","tqq","renren","weixin"],"viewText":"分享到：","viewSize":"16"},"selectShare":{"bdContainerClass":null,"bdSelectMiniList":["qzone","tsina","tqq","renren","weixin"]}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+					<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"16"},"share":{},"image":{"viewList":["qzone","tsina","tqq","renren","weixin"],"viewText":"分享到：","viewSize":"16"},"selectShare":{"bdContainerClass":null,"bdSelectMiniList":["qzone","tsina","tqq","renren","weixin"]}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
 					<input type="hidden" name="courseId" value="${course.id}"/>
 				</div>
 				<div class="priInfo">
 		            <h2 class="mb15">${course.courseName}</h2>
 		            <div class="pri_m ">
 		                <p>课程价格：<b>${course.price}</b>元</p>
-		                <p><span>总课时：<em>${course.chapterCount} 课时</em></span><span> 课程结束时间：<em class="data_time"><fmt:formatDate value="${course.endTime}" type="date" dateStyle="default"/></em></span><span> 担保期：<em>15 天 </em> </span></p>
+		                <p><span>总课时：<em>${course.chapterCount} 课时</em></span><span> 课程结束时间：<em class="data_time"><fmt:formatDate value="${course.endTime}" type="date" dateStyle="default"/></em></span></p>
 		            </div>
 		            <div class="detai_num clearfix">
-		                <p>已经购买人数<br/>
-		                    <b> ${course.saleCount}</b><br/>
-		                    限购100000人</p>
-		                <p>学生满意度<br/>
-		                    <b> 0%</b></p>
-		                <p>课程评价数<br/>
-		                    <b> 0</b><br/>
-		                    评价内容</p>
+		                <p>已经购买人数<br/><b> ${course.saleCount}</b><br/> 限购&nbsp;${course.limitCount}&nbsp;人</p>
+		                <!-- <p>学生满意度<br/><b> 0%</b></p> -->
+		                <p>课程评价数<br/><b> ${course.commentCount}</b><br/> 评价内容</p>
 		            </div>
-		            <p class="detai_numb">该课程累积购买人数为49人</p>
+		            <p class="detai_numb">该课程累积收藏人数为&nbsp;${course.collectCount}&nbsp;人</p>
 		            <div class="detai_buy">
 		            	<c:if test="${hasBuy}">
 		            		已经购买，可直接学习
@@ -98,7 +93,7 @@ Globals.page = "Index_courseDetail";
 		    <div class="sectionMain clr">
 		        <div class="sec_main clr">
 		            <ul id="content_nav">
-		                <li>课程详情</li>
+		                <li class="current">课程详情</li>
 		                <li>课程目录</li>
 		                <li>课程评价</li>
 		            </ul>
@@ -126,27 +121,17 @@ Globals.page = "Index_courseDetail";
 		    <div class="th_evaluation" id="course_comment">
 		        <h2>课程评价</h2>
 		        <div class="comm_pjxq clr">
-		            <div class="fl th_mr"><span class="pt4">学生满意度</span> <span class="pt5">0%</span> <span class="pt6">已有0人参与评价</span> </div>
-		            <div class="th_pt">
-		                <label class="fl " for="ricx1">
-		                    <input id="ricx1" type="radio" checked="checked" value="0" name="ricx">
-		                    全部 </label>
-		                <label class="fl " for="ricx2">
-		                    <input id="ricx2" type="radio" value="1" name="ricx">
-		                    好评 </label>
-		                <label class="fl " for="ricx3">
-		                    <input id="ricx3" type="radio" value="2" name="ricx">
-		                    中评 </label>
-		                <label class="fl " for="ricx4">
-		                    <input id="ricx4" type="radio" value="3" name="ricx">
-		                    差评 </label>
-		                <label for="ricx5">
-		                    <input id="ricx5" type="checkbox" value="1">
-		                    只看有内容的评论 </label>
-		            </div>
-		            
+		            <div class="fl th_mr"><span class="pt3">请文明上网，理性发言！</span> 总共有&nbsp;&nbsp;<span class="pt5">${course.commentCount}</span>条课程评论</div>
 		        </div>
-	
+				<div class="th_con">
+					<form action="${ctx}/course/comment" method="post" id="comment_form" class="common_form">
+						<div>
+							<textarea id="remark" name="remark" class="xheditor th_textarea" cols="2" rows="3" required></textarea>
+						</div>
+						<input type="hidden" name="courseId" value="${course.id}"/>
+						<input class="th_pt_but" type="submit"  value="确定"/>
+					</form>
+				</div>
 				<div class="th_lea clr">
 					<ul>
 						<c:forEach items="${course.commentList}" var="comment"
@@ -176,18 +161,8 @@ Globals.page = "Index_courseDetail";
 						</c:forEach>
 					</ul>
 				</div>
-	
-				<div class="th_con">
-					<form action="${ctx}/course/comment" method="post" id="comment_form" class="common_form">
-						<div>
-							<textarea id="remark" name="remark" class="xheditor {skin:'o2007silver'} th_textarea" cols="2" rows="3" required></textarea>
-						</div>
-						<input type="hidden" name="courseId" value="${course.id}"/>
-						<input class="th_pt_but" type="submit"  value="确定"/>
-					</form>
-				</div>
+				
 			</div>
-		    
 		</div>		
 	</div>
 	

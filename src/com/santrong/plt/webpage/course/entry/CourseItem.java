@@ -14,6 +14,7 @@ public class CourseItem {
 	private String courseName;
 	private String teacher;
 	private int price;
+	private int limitCount;
 	private int live;
 	private Date endTime;
 	private String url;
@@ -106,6 +107,12 @@ public class CourseItem {
 	}
 	public void setPrice(int price) {
 		this.price = price;
+	}
+	public int getLimitCount() {
+		return limitCount;
+	}
+	public void setLimitCount(int limitCount) {
+		this.limitCount = limitCount;
 	}
 	public int getCollectCount() {
 		return collectCount;
