@@ -1,5 +1,7 @@
 package com.santrong.plt;
 
+import com.santrong.plt.util.MyUtils;
+
 
 
 
@@ -13,9 +15,10 @@ package com.santrong.plt;
 public class Test {
 	
 	public static void main(String[] args) {
-
-		char c =(char)((int)(Math.floor(Math.random() * 26)) + 'a');
-		System.out.print(c);
+		String text = "http://www.baidu.combacksheepwall";
+		System.out.println(MyUtils.getMD5(text).toUpperCase());
+//		MD5 md5Tool = new MD5();
+//		System.out.println(md5Tool.getMD5ofStr(text));//网银提供的cb_md5.jar加密
 		
 	}
 }

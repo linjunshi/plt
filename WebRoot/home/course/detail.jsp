@@ -40,13 +40,32 @@ Globals.page = "Index_courseDetail";
 		                <p><span>总课时：<em>${course.chapterCount} 课时</em></span><span> 课程结束时间：<em class="data_time"><fmt:formatDate value="${course.endTime}" type="date" dateStyle="default"/></em></span></p>
 		            </div>
 		            <div class="detai_num clearfix">
-		                <p>已经购买人数<br/><b> ${course.saleCount}</b><br/> 限购100000人</p>
+		                <p>已经购买人数<br/><b> ${course.saleCount}</b><br/> 限购&nbsp;${course.limitCount}&nbsp;人</p>
 		                <!-- <p>学生满意度<br/><b> 0%</b></p> -->
 		                <p>课程评价数<br/><b> ${course.commentCount}</b><br/> 评价内容</p>
 		            </div>
-		            <p class="detai_numb">该课程累积收藏人数为${course.collectCount}人</p>
-		            <!-- <div class="detai_but">购买类型： <a href="#">购买整课</a><a href="#">购买部分章节</a> </div> -->
-		            <div class="detai_buy"><a href="javascript:void(0);" class="bottom_a buy">立刻购买</a><!-- <a href="#" class="bottom_b">加入购物车</a> --></div>
+		            <p class="detai_numb">该课程累积收藏人数为&nbsp;${course.collectCount}&nbsp;人</p>
+		            <div class="detai_buy">
+		            	<c:if test="${hasBuy}">
+		            		已经购买，可直接学习
+		            	</c:if>
+		            	<c:if test="${!hasBuy}">
+				            <form action="https://pay3.chinabank.com.cn/PayGate?encoding=UTF-8" method="post" target="_blank" name="E_FORM" class="buy_form">
+					            <input type="hidden" name="v_mid" value="" />
+					            <input type="hidden" name="v_oid" value="" />
+					            <input type="hidden" name="v_amount" value="" />
+					            <input type="hidden" name="v_moneytype" value="" />
+								<input type="hidden" name="v_url" value="" />
+								<input type="hidden" name="v_md5info" value="" />
+								<input type="hidden" name="v_rcvname" value="" />
+								<input type="hidden" name="remark1" value="" />
+								<a href="javascript:void(0);" class="bottom_a buy">立刻购买</a>
+								<!-- <input type="image" src="http://merchant3.chinabank.com.cn/images/button_2.gif" > -->
+							</form>		            
+				            <!-- <a href="javascript:void(0);" class="bottom_a buy">立刻购买</a> -->
+				            <!-- <a href="#" class="bottom_b">加入购物车</a> -->
+			            </c:if>
+		            </div>
 		        </div>
 		        <div class="priSchool">
 		            <div>
@@ -74,7 +93,7 @@ Globals.page = "Index_courseDetail";
 		    <div class="sectionMain clr">
 		        <div class="sec_main clr">
 		            <ul id="content_nav">
-		                <li>课程详情</li>
+		                <li class="current">课程详情</li>
 		                <li>课程目录</li>
 		                <li>课程评价</li>
 		            </ul>

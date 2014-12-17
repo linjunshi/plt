@@ -347,7 +347,7 @@ span.form_error, span.form_success{border-width:1px;display:inline-block;*displa
 .detai_img .detai_coll {position: absolute;	left:10px;	bottom:80px; color:#666;}
 .detai_img .detai_coll:hover {color:#009871}
 .detai_img .detai_coll .coll_icon { background: url('../images/bug_litter_icon.png') no-repeat -121px 0; display:inline-block;width: 16px;height: 15px;}
-.detai_img .detai_share {position: absolute;left:150px;bottom:75px;}
+.detai_img .detai_share {position: absolute;left:170px;bottom:75px;}
 .priInfo { border-left: 1px solid #dbdbdb;float: left; margin: 15px 0; padding: 0 30px; width: 570px;}
 .priInfo .mb15 { font-size:22px; color:#333; margin-bottom: 10px;}
 .priInfo .pri_m b{ color:#F90; font-size:20px; margin:0 5px; font-style:none;font-weight: normal;}
@@ -381,7 +381,7 @@ span.form_error, span.form_success{border-width:1px;display:inline-block;*displa
 .sec_main{ width:1200px;}
 .sec_main ul { width:100%; height:40px; line-height:40px; background:#f5f5f5;border-bottom:#CCC 1px solid;}
 .sec_main ul li{ float:left; width:200px; font-size:18px; color:#333; background:#f5f5f5; text-align:center; border-right:#CCC 1px solid; cursor:pointer;}
-.sec_main ul li:hover{ background:#009871; color:#fff;}
+.sec_main ul li:hover,.sec_main .current{ background:#009871; color:#fff;}
 .sec_con { margin:10px; margin-left:20px;}
 .sec_con h2 { font-size:18px; color:#009871; margin:5px 0;}
 .sec_con p{ line-height:30px; min-height:150px;}

@@ -106,9 +106,11 @@ public class CourseMAction extends TeacherBaseAction {
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
 	public String addCoursePost(CourseForm courseForm){
 		try {
+			// 获取当前用户对象信息
 			UserItem user = this.currentUser();
 			if (user == null) {
-				return this.redirect("account/login");
+				// 没登陆
+				return "loginPage";
 			}
 			
 			if (courseForm != null) {
@@ -124,6 +126,9 @@ public class CourseMAction extends TeacherBaseAction {
 				}
 				if (courseForm.getPrice() == null) {
 					addError("课程价格不能为空！");
+				}
+				if (courseForm.getLimitCount() == null) {
+					addError("限购数量不能为空！");
 				}
 				if (courseForm.getLive() == null) {
 					addError("是否是直播课程不能为空！");
@@ -168,6 +173,12 @@ public class CourseMAction extends TeacherBaseAction {
 	@RequestMapping(value = "/modify", method = RequestMethod.GET)
 	public String modifyCourse(String courseId){
 		try {
+			// 获取当前用户对象信息
+			UserItem user = this.currentUser();
+			if (user == null) {
+				// 没登陆
+				return "loginPage";
+			}
 			
 			CourseDao courseDao = new CourseDao();
 			CourseItem course = courseDao.selectById(courseId);
@@ -197,7 +208,12 @@ public class CourseMAction extends TeacherBaseAction {
 	@RequestMapping(value = "/modify", method = RequestMethod.POST)
 	public String modifyCoursePost(CourseForm courseForm){
 		try {
-			
+			// 获取当前用户对象信息
+			UserItem user = this.currentUser();
+			if (user == null) {
+				// 没登陆
+				return "loginPage";
+			}
 			if (courseForm != null) {
 				
 				if (MyUtils.isNull(courseForm.getGradeId())) {
@@ -211,6 +227,9 @@ public class CourseMAction extends TeacherBaseAction {
 				}
 				if (courseForm.getPrice() == null) {
 					addError("课程价格不能为空！");
+				}
+				if (courseForm.getLimitCount() == null) {
+					addError("课程限购数量不能为空！");
 				}
 				if (courseForm.getLive() == null) {
 					addError("是否是直播课程不能为空！");

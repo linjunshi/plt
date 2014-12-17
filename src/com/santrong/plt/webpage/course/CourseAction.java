@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.google.gson.Gson;
 import com.mysql.jdbc.StringUtils;
 import com.santrong.plt.log.Log;
 import com.santrong.plt.opt.ParamHelper;
@@ -26,20 +27,21 @@ import com.santrong.plt.opt.grade.GradeLevelEntry;
 import com.santrong.plt.system.Global;
 import com.santrong.plt.util.MyUtils;
 import com.santrong.plt.webpage.BaseAction;
-import com.santrong.plt.webpage.course.dao.BuyCourseDao;
 import com.santrong.plt.webpage.course.dao.ChapterDao;
 import com.santrong.plt.webpage.course.dao.CollectCourseDao;
 import com.santrong.plt.webpage.course.dao.CommentDao;
 import com.santrong.plt.webpage.course.dao.CourseDao;
-import com.santrong.plt.webpage.course.entry.BuyItem;
+import com.santrong.plt.webpage.course.dao.OrderDao;
 import com.santrong.plt.webpage.course.entry.ChapterAndResourceEntry;
 import com.santrong.plt.webpage.course.entry.ChapterDetailView;
+import com.santrong.plt.webpage.course.entry.ChinaBankPayGateParams;
 import com.santrong.plt.webpage.course.entry.CollectionItem;
 import com.santrong.plt.webpage.course.entry.CommentItem;
 import com.santrong.plt.webpage.course.entry.CommentUserView;
 import com.santrong.plt.webpage.course.entry.CourseDetailView;
 import com.santrong.plt.webpage.course.entry.CourseItem;
 import com.santrong.plt.webpage.course.entry.CourseQuery;
+import com.santrong.plt.webpage.course.entry.OrderItem;
 import com.santrong.plt.webpage.course.entry.ResourceEntry;
 import com.santrong.plt.webpage.home.dao.GradeDao;
 import com.santrong.plt.webpage.home.dao.SubjectDao;
@@ -251,9 +253,20 @@ public class CourseAction extends BaseAction {
 		// 老师名下其他课程
 		
 		
+		// 是否已购买
+		boolean hasBuy = false;
+		if(this.currentUser() != null) {
+			OrderDao orderDao = new OrderDao();
+			OrderItem order = orderDao.selectByCourseIdAndUserId(course.getId(), this.currentUser().getId());
+			if(order.getStatus() == OrderItem.Status_Pay) {
+				hasBuy = true;
+			}
+		}
+		
 		HttpServletRequest request = getRequest();
 		request.setAttribute("course", course);
 		request.setAttribute("teacher", teacher);
+		request.setAttribute("hasBuy", hasBuy);
 		
 		return "course/detail";
 	}
@@ -362,32 +375,59 @@ public class CourseAction extends BaseAction {
 				return "loginPage";
 			}
 			
-			BuyCourseDao buyCourseDao = new BuyCourseDao();
-			// 如果没购买过
-			if(!buyCourseDao.exists(courseId, user.getId())) {
-				ThreadUtils.beginTranx();
-				// 往课程购买表插入一条记录
-				BuyItem buy = new BuyItem();
-				buy.setId(MyUtils.getGUID());
-				buy.setUserId(user.getId());
-				buy.setCourseId(courseId);
-				buy.setCts(new Date());
-				buy.setUts(new Date());
-				buyCourseDao.insert(buy);
-
-				// 购买量自增
-				CourseDao courseDao = new CourseDao();
-				courseDao.addBuy(courseId);
-				ThreadUtils.commitTranx();
-			}else{
-				return "已经购买过了";
+			CourseDao courseDao = new CourseDao();
+			CourseItem course = courseDao.selectById(courseId);
+			if(course == null) {
+				return FAIL;
 			}
-
+			
+			if (course.getLimitCount() <= course.getSaleCount()) {
+				return "对不起，亲！该课程已经达到限购人数了！请您去购买其他老师的课程吧！";
+			}
+			
+			// 策略：购买过的，提示已经购买；购买过但是未付款的，激活原来的购买；购买过但是取消了的，激活原来的购买；付款成功购买量才自增。
+			OrderDao orderDao = new OrderDao();
+			OrderItem order = orderDao.selectByCourseIdAndUserId(courseId, user.getId());
+			if(order != null) {// 已经购买
+				if(order.getStatus() == OrderItem.Status_Pay) {// 已经付款
+					return "已经购买过了";
+				}else {// 未曾付款，包括超时被取消了的订单
+					order.setStatus(OrderItem.Status_Notpay);
+					order.setUts(new Date());
+					if(orderDao.update(order) <= 0) {
+						return "购买失败！";
+					}
+				}
+			}else {// 未曾购买
+				order = new OrderItem();
+				order.setId(MyUtils.getGUID());
+				order.setUserId(user.getId());
+				order.setCourseId(courseId);
+				order.setPrice(course.getPrice());
+				order.setStatus(OrderItem.Status_Notpay);
+				order.setCts(new Date());
+				order.setUts(new Date());
+				if(orderDao.insert(order) <= 0) {
+					return FAIL;
+				}
+			}
+			
+			// 构造网银在线支付参数
+			ChinaBankPayGateParams chinaBank = new ChinaBankPayGateParams();
+			chinaBank.setV_mid("23142561");// 商户号
+			chinaBank.setV_oid(order.getId());// 订单号
+			chinaBank.setV_amount("0.01");// 价格
+			chinaBank.setV_moneytype("CNY");// 货币类型
+			chinaBank.setV_url("http://www.keyyun.com");// 跳转地址
+			chinaBank.setV_md5info(chinaBank.calMd5("weinianjieblacksheepwall"));
+			chinaBank.setV_rcvname(user.getUsername());// 订单人
+			chinaBank.setRemark1(user.getId());// 订单人ID
+			
+			Gson gson = new Gson();
+			return gson.toJson(chinaBank);
 		} catch (Exception e) {
-			ThreadUtils.rollbackTranx();
 			Log.printStackTrace(e);
-			return FAIL;
 		}
-		return SUCCESS;
+		return FAIL;
 	}	
 }

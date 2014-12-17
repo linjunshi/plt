@@ -37,17 +37,18 @@ public class ServerHttpService21001 implements AbstractHttpService{
 				LiveItem live = liveDao.selectById(liveID);
 				if(live != null && live.getOwnerId().equals(userID)) {
 					
-					Date endTime = live.getEndTime();
-					if (endTime != null) {
+					Date begin = live.getBeginTime();
+					if (begin != null) {
 						Calendar cal = Calendar.getInstance();
-						cal.setTime(endTime);
+						cal.setTime(begin);
+						cal.add(Calendar.MINUTE, live.getDuration());
 						endYear = cal.get(Calendar.YEAR);
 						endMonth = cal.get(Calendar.MONTH) + 1;
 						endDay = cal.get(Calendar.DAY_OF_MONTH);
 						endHour = cal.get(Calendar.HOUR_OF_DAY);
 						endMinute = cal.get(Calendar.MINUTE);
 //						endSeconds = cal.get(Calendar.SECOND);
-					}					
+					}
 					
 					rt = 1;
 				}
