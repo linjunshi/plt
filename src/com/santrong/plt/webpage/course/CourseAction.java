@@ -258,7 +258,7 @@ public class CourseAction extends BaseAction {
 		if(this.currentUser() != null) {
 			OrderDao orderDao = new OrderDao();
 			OrderItem order = orderDao.selectByCourseIdAndUserId(course.getId(), this.currentUser().getId());
-			if(order.getStatus() == OrderItem.Status_Pay) {
+			if(order != null && order.getStatus() == OrderItem.Status_Pay) {
 				hasBuy = true;
 			}
 		}
@@ -391,25 +391,21 @@ public class CourseAction extends BaseAction {
 			if(order != null) {// 已经购买
 				if(order.getStatus() == OrderItem.Status_Pay) {// 已经付款
 					return "已经购买过了";
-				}else {// 未曾付款，包括超时被取消了的订单
-					order.setStatus(OrderItem.Status_Notpay);
-					order.setUts(new Date());
-					if(orderDao.update(order) <= 0) {
-						return "购买失败！";
-					}
+				}else {// 未曾付款，包括超时被取消了的订单，直接删除
+					orderDao.delete(order.getId());
 				}
-			}else {// 未曾购买
-				order = new OrderItem();
-				order.setId(MyUtils.getGUID());
-				order.setUserId(user.getId());
-				order.setCourseId(courseId);
-				order.setPrice(course.getPrice());
-				order.setStatus(OrderItem.Status_Notpay);
-				order.setCts(new Date());
-				order.setUts(new Date());
-				if(orderDao.insert(order) <= 0) {
-					return FAIL;
-				}
+			}
+			
+			order = new OrderItem();
+			order.setId(MyUtils.getGUID());
+			order.setUserId(user.getId());
+			order.setCourseId(courseId);
+			order.setPrice(course.getPrice());
+			order.setStatus(OrderItem.Status_Notpay);
+			order.setCts(new Date());
+			order.setUts(new Date());
+			if(orderDao.insert(order) <= 0) {
+				return FAIL;
 			}
 			
 			// 构造网银在线支付参数
@@ -418,7 +414,7 @@ public class CourseAction extends BaseAction {
 			chinaBank.setV_oid(order.getId());// 订单号
 			chinaBank.setV_amount("0.01");// 价格
 			chinaBank.setV_moneytype("CNY");// 货币类型
-			chinaBank.setV_url("http://" + Global.PltDomain + "/pay/chinaBank/receive");// 跳转地址
+			chinaBank.setV_url("http://" + Global.PltDomain + "/pay/chinabank/receive");// 跳转地址
 			chinaBank.setV_md5info(chinaBank.calMd5("weinianjieblacksheepwall"));
 			chinaBank.setV_rcvname(user.getUsername());// 订单人
 			chinaBank.setRemark1(user.getId());// 订单人ID
