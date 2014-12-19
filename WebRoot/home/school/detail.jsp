@@ -41,7 +41,14 @@ Globals.page = "Index_schoolDetail";
 			                    
 			                        <c:forEach items="${teacherList}"  var="teacher" varStatus="st">
 			                        	<li class="<c:if test="${st.count%4==0}">margin_right_clear</c:if>">
-				                        	<a href="${ctx}/teacher/${teacher.id}.html" target="_blank"><img src="${ctx}/resource/images/003.jpg " width="120" height="80"></a>
+				                        	<a href="${ctx}/teacher/${teacher.id}.html" target="_blank">
+				                        		<c:if test="${empty teacher.url}">
+				                        			<img src="${ctx}/resource/images/003.jpg" width="120" height="80">
+				                        		</c:if>
+				                        		<c:if test="${!empty teacher.url}">
+				                        			<img src="${ctx}${teacher.url}" width="120" height="80">
+				                        		</c:if>
+				                        	</a>
 				                            <p>${teacher.username}</p>
 				                        </li>
 			                        </c:forEach>

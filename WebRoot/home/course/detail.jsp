@@ -126,7 +126,7 @@ Globals.page = "Index_courseDetail";
 				<div class="th_con">
 					<form action="${ctx}/course/comment" method="post" id="comment_form" class="common_form">
 						<div>
-							<textarea id="remark" name="remark" class="xheditor th_textarea" cols="2" rows="3" required></textarea>
+							<textarea id="remark" name="remark" class="xheditor th_textarea" cols="2" rows="3"></textarea>
 						</div>
 						<input type="hidden" name="courseId" value="${course.id}"/>
 						<input class="th_pt_but" type="submit"  value="确定"/>
@@ -134,12 +134,9 @@ Globals.page = "Index_courseDetail";
 				</div>
 				<div class="th_lea clr">
 					<ul>
-						<c:forEach items="${course.commentList}" var="comment"
-							varStatus="st">
+						<c:forEach items="${course.commentList}" var="comment" varStatus="st">
 							<li>
-								<div class="th_img_user">
-									<img src="${ctx}/resource/images/003.jpg" width="80" height="80">
-								</div>
+								<div class="th_img_user"><img src="${ctx}${comment.headPhoto}" width="80" height="80"></div>
 								<div class="th_mr2">
 									<p>
 										<b>${comment.showName}</b>

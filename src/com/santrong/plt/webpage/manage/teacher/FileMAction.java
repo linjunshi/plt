@@ -65,6 +65,15 @@ public class FileMAction extends TeacherBaseAction {
 			String fileId = request.getParameter("fileId");
 			if (MyUtils.isNotNull(fileId)) {
 				FileDao fileDao = new FileDao();
+				FileItem fileItem = fileDao.selectById(fileId);
+				// 判断当前用户是否是该课程的所有者
+				if(fileItem == null) {
+					return this.redirect("/");
+				}
+				if(!fileItem.getOwnerId().equals(this.currentUser().getId())) {
+					return this.redirect("/");
+				}
+				
 				fileDao.deleteById(fileId);
 			}
 		} catch (Exception e) {

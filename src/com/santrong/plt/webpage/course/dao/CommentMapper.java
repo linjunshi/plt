@@ -16,7 +16,7 @@ import com.santrong.plt.webpage.course.entry.CommentUserView;
  */
 public interface CommentMapper {
 
-	@Select("select a.*, b.showName from course_comment a left join user b on a.userId=b.id where courseId=#{courseId} order by cts desc")
+	@Select("select a.*, b.showName, b.url from course_comment a left join user b on a.userId=b.id where courseId=#{courseId} order by cts desc")
 	List<CommentUserView> selectByCourseId(String courseId);
 	
 	/**

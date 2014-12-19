@@ -47,7 +47,7 @@ Globals.page = "Manage_index";
 				                        <tr>
 				                            <td>${st.index + 1}</td>
 				                            <td class="sh_h_im">
-				                            	<a href="${ctx}/course/${course.id}.html" target="_blank"><img src="${ctx}/resource/images/003.jpg" width="40" height="40"></a>
+				                            	<%-- <a href="${ctx}/course/${file.id}.html" target="_blank"><img src="${ctx}/resource/images/003.jpg" width="40" height="40"></a> --%>
 				                            	<p>${file.title}</p>
 				                            </td>
 				                            <td><fmt:formatDate value="${file.cts}" type="both" /></td>

@@ -7,14 +7,15 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.santrong.plt.log.Log;
 import com.santrong.plt.opt.ThreadUtils;
 import com.santrong.plt.util.MyUtils;
 import com.santrong.plt.webpage.course.dao.CommentDao;
 import com.santrong.plt.webpage.course.dao.CourseDao;
 import com.santrong.plt.webpage.course.entry.CommentCourseView;
 import com.santrong.plt.webpage.course.entry.CommentQuery;
+import com.santrong.plt.webpage.course.entry.CourseItem;
 import com.santrong.plt.webpage.manage.StudentBaseAction;
-import com.santrong.plt.webpage.teacher.entry.UserItem;
 
 /**
  * @author weinianjie
@@ -27,11 +28,6 @@ public class CommentMAction extends StudentBaseAction {
 
 	@RequestMapping("")
 	public String myComment() {
-		UserItem user = this.currentUser();
-		if(user == null) {
-			// 没登陆
-			return this.redirect("account/login");
-		}
 		
 		HttpServletRequest request = getRequest();
 		int pageNum = this.getIntParameter("page");
@@ -42,7 +38,7 @@ public class CommentMAction extends StudentBaseAction {
 		CommentDao dao = new CommentDao();
 		CommentQuery query = new CommentQuery();
 		query.setPageNum(pageNum);
-		query.setUserId(user.getId());
+		query.setUserId(this.currentUser().getId());
 		query.setCount(dao.selectCountByQuery(query));
 		List<CommentCourseView> commentList = dao.selectByQuery(query);
 		
@@ -62,18 +58,31 @@ public class CommentMAction extends StudentBaseAction {
 	 */
 	@RequestMapping(value="/cancelComment")
 	public String cancelComment(String commentId, String courseId) {
-		if (MyUtils.isNotNull(commentId) && MyUtils.isNotNull(courseId)) {
-			ThreadUtils.beginTranx();
-			
-			// 1、点击删除评论,从评论表中移除该条收藏记录;
-			CommentDao commentDao = new CommentDao();
-			commentDao.delete(commentId);
-
-			// 并修改该课程的评论数量,自动减1；
+		try {
 			CourseDao courseDao = new CourseDao();
-			courseDao.removeComment(courseId);
+			CourseItem courseItem = courseDao.selectById(courseId);
+			// 判断当前用户是否是该课程的所有者
+			if(courseItem == null) {
+				return this.redirect("/");
+			}
+			if(!courseItem.getOwnerId().equals(this.currentUser().getId())) {
+				return this.redirect("/");
+			}
 			
-			ThreadUtils.commitTranx();
+			if (MyUtils.isNotNull(commentId) && MyUtils.isNotNull(courseId)) {
+				ThreadUtils.beginTranx();
+				
+				// 1、点击删除评论,从评论表中移除该条收藏记录;
+				CommentDao commentDao = new CommentDao();
+				commentDao.delete(commentId);
+				
+				// 并修改该课程的评论数量,自动减1；
+				courseDao.removeComment(courseId);
+				
+				ThreadUtils.commitTranx();
+			}
+		} catch (Exception e) {
+			Log.printStackTrace(e);
 		}
 		return this.redirect("/comment");
 	}

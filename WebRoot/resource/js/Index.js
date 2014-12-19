@@ -195,11 +195,12 @@ IndexClass.prototype = {
 				data : {trainId : trainId , chapterId : chapterId, index : index},
 				success : function(result){
 					$(".sh_work_form").html(result);
+					$(".current_index").html(index);
 					$(".preOne, .nextOne").removeClass("sh_form_grey");
-					if(index <= 1) {
+					if(eval(index) <= 1) {
 						$(".preOne").addClass("sh_form_grey");
 					}
-					if(index >= total) {
+					if(eval(index) >= total) {
 						$(".nextOne").addClass("sh_form_grey");
 					}					
 					bindAnswer();

@@ -215,10 +215,10 @@ public class AccountAction extends BaseAction {
 	 */
 	@RequestMapping(value="/logout", method=RequestMethod.GET)
 	public String logout(HttpServletRequest request) {
-
+		
 		UserItem user = (UserItem)request.getSession().getAttribute(Global.SessionKey_LoginUser);
 		if(user == null) {
-			return SUCCESS;
+			return this.redirect("/");
 		}
 		
 		try{

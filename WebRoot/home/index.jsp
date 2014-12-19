@@ -63,7 +63,7 @@ Globals.page = "Index_index";
 	                <ul class="column_img_item clr">
 						<c:forEach items="${teacherList}" var="item" varStatus="st">
 						<li class="<c:if test="${(st.index + 1) % 6 == 0}">margin_right_clear</c:if>">
-							<a href="${ctx}/teacher/${item.id}.html" target="_blank"><img src="${ctx}/resource/images/005.jpg" /></a>
+							<a href="${ctx}/teacher/${item.id}.html" target="_blank"><img src="${ctx}${item.headPhoto}" width="100" height="100"/></a>
 							<span>${item.showName}</span>
 						</li>
 						</c:forEach>

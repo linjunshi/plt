@@ -46,7 +46,6 @@ import com.santrong.plt.webpage.course.resource.train.entry.TrainQuestionItem;
 import com.santrong.plt.webpage.course.resource.train.entry.TrainQuestionQuery;
 import com.santrong.plt.webpage.course.resource.train.entry.TrainToQuestionItem;
 import com.santrong.plt.webpage.manage.TeacherBaseAction;
-import com.santrong.plt.webpage.teacher.entry.UserItem;
 
 /**
  * @author weinianjie
@@ -106,12 +105,6 @@ public class CourseMAction extends TeacherBaseAction {
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
 	public String addCoursePost(CourseForm courseForm){
 		try {
-			// 获取当前用户对象信息
-			UserItem user = this.currentUser();
-			if (user == null) {
-				// 没登陆
-				return "loginPage";
-			}
 			
 			if (courseForm != null) {
 				
@@ -145,13 +138,13 @@ public class CourseMAction extends TeacherBaseAction {
 					BeanUtils.copyProperties(courseForm, courseItem);
 					
 					courseItem.setId(MyUtils.getGUID());
-					courseItem.setOwnerId(user.getId());
+					courseItem.setOwnerId(this.currentUser().getId());
 					courseItem.setEndTime(MyUtils.stringToDate(courseForm.getEndTime(), "yyyy-MM-dd"));
 					courseItem.setChapterCount(0);
 					courseItem.setSaleCount(0);
 					courseItem.setCollectCount(0);
 					courseItem.setCommentCount(0);
-//					courseItem.setStatus(0);//-1:删除，0:未发布，1:发布
+					courseItem.setStatus(0);//-1:删除，0:未发布，1:发布
 					courseItem.setCts(new Date());
 					courseItem.setUts(new Date());
 					if (courseDao.insert(courseItem)) {
@@ -173,22 +166,14 @@ public class CourseMAction extends TeacherBaseAction {
 	@RequestMapping(value = "/modify", method = RequestMethod.GET)
 	public String modifyCourse(String courseId){
 		try {
-			// 获取当前用户对象信息
-			UserItem user = this.currentUser();
-			if (user == null) {
-				// 没登陆
-				return "loginPage";
-			}
-			
 			CourseDao courseDao = new CourseDao();
 			CourseItem course = courseDao.selectById(courseId);
-			
 			if(course == null) {
-				this.redirect("/study/course");
+				return this.redirect("/");
 			}
-			
+			// 判断当前用户是否是该课程的所有者
 			if(!course.getOwnerId().equals(this.currentUser().getId())) {
-				this.redirect("/study/course");
+				return this.redirect("/");
 			}
 			
 			HttpServletRequest request = this.getRequest();
@@ -208,12 +193,17 @@ public class CourseMAction extends TeacherBaseAction {
 	@RequestMapping(value = "/modify", method = RequestMethod.POST)
 	public String modifyCoursePost(CourseForm courseForm){
 		try {
-			// 获取当前用户对象信息
-			UserItem user = this.currentUser();
-			if (user == null) {
-				// 没登陆
-				return "loginPage";
+			CourseDao courseDao = new CourseDao();
+			CourseItem courseItem = courseDao.selectById(courseForm.getId());
+			
+			// 判断当前用户是否是该课程的所有者
+			if(courseItem == null) {
+				return this.redirect("/");
 			}
+			if(!courseItem.getOwnerId().equals(this.currentUser().getId())) {
+				return this.redirect("/");
+			}
+			
 			if (courseForm != null) {
 				
 				if (MyUtils.isNull(courseForm.getGradeId())) {
@@ -239,8 +229,7 @@ public class CourseMAction extends TeacherBaseAction {
 				}
 
 				if(this.errorSize() == 0) {
-					CourseDao courseDao = new CourseDao();
-					CourseItem courseItem = courseDao.selectById(courseForm.getId());
+					
 					courseForm.setCourseName(courseForm.getCourseName().trim());
 					BeanUtils.copyProperties(courseForm, courseItem);
 					
@@ -291,6 +280,14 @@ public class CourseMAction extends TeacherBaseAction {
 	public String deleteCourse(String courseId){
 		try {
 			CourseDao courseDao = new CourseDao();
+			CourseItem courseItem = courseDao.selectById(courseId);
+			// 判断当前用户是否是该课程的所有者
+			if(courseItem == null) {
+				return this.redirect("/");
+			}
+			if(!courseItem.getOwnerId().equals(this.currentUser().getId())) {
+				return this.redirect("/");
+			}
 			courseDao.deleteById(courseId);
 		} catch (Exception e) {
 			Log.printStackTrace(e);
@@ -311,8 +308,12 @@ public class CourseMAction extends TeacherBaseAction {
 			CourseDao courseDao = new CourseDao();
 			CourseDetailView course = courseDao.selectDetailById(courseId);
 			
+			// 判断当前用户是否是该课程的所有者
+			if(course == null) {
+				return this.redirect("/");
+			}
 			if(!course.getOwnerId().equals(this.currentUser().getId())) {
-				this.redirect("/study/course");
+				return this.redirect("/");
 			}
 			
 			// 课程章节
@@ -382,6 +383,16 @@ public class CourseMAction extends TeacherBaseAction {
 			result = chapterDao.deleteById(chapterId);
 			// 当该课程的章节中删除一个直播或者课件时，修改该课程的总课时数,自动减1
 			CourseDao courseDao = new CourseDao();
+			CourseItem courseItem = courseDao.selectById(courseId);
+			
+			// 判断当前用户是否是该课程的所有者
+			if(courseItem == null) {
+				return "亲，对不起，我找不到该课程相关的信息！请您刷新页面后再操作！";
+			}
+			if(!courseItem.getOwnerId().equals(this.currentUser().getId())) {
+				return "亲，对不起，我找不到该课程相关的信息！请您刷新页面后再操作！";
+			}
+			
 			courseDao.removeChapterCount(courseId);
 			ThreadUtils.commitTranx();
 			
@@ -410,6 +421,16 @@ public class CourseMAction extends TeacherBaseAction {
 			if (MyUtils.isNull(chapterItem.getId())) {
 				return "修改失败，请刷新页面后重新操作！";
 			}
+			CourseDao courseDao = new CourseDao();
+			CourseItem courseItem = courseDao.selectById(chapterItem.getCourseId());
+			
+			// 判断当前用户是否是该课程的所有者
+			if(courseItem == null) {
+				return "亲，对不起，我找不到该课程章节！请您刷新页面后再操作！";
+			}
+			if(!courseItem.getOwnerId().equals(this.currentUser().getId())) {
+				return "亲，对不起，我找不到该课程章节！请您刷新页面后再操作！";
+			}
 			
 			ChapterDao chapterDao = new ChapterDao();
 			chapterItem.setRemark(chapterItem.getRemark().trim());
@@ -433,6 +454,7 @@ public class CourseMAction extends TeacherBaseAction {
 	@ResponseBody
 	public String addChapterByAsync(ChapterItem chapterItem) {
 		try {
+						
 			if (MyUtils.isNotNull(chapterItem.getRemark()) && MyUtils.isNotNull(chapterItem.getCourseId())) {
 				CourseDao courseDao = new CourseDao();
 				ChapterDao chapterDao = new ChapterDao();
@@ -620,7 +642,7 @@ public class CourseMAction extends TeacherBaseAction {
 		String chapterId = request.getParameter("chapterId");
 		String resourceId = request.getParameter("resourceId");
 		try {
-
+						
 			if (liveForm != null) {
 
 				if (MyUtils.isNull(liveForm.getTitle().trim())) {
@@ -777,6 +799,16 @@ public class CourseMAction extends TeacherBaseAction {
 		String ids = request.getParameter("ids");
 		String [] stringArr = null;
 		try {
+			CourseDao courseDao = new CourseDao();
+			CourseItem courseItem = courseDao.selectById(courseId);
+			// 判断当前用户是否是该课程的所有者
+			if(courseItem == null) {
+				return "亲，对不起，我找不到该试题信息！请您刷新页面后再操作！";
+			}
+			if(!courseItem.getOwnerId().equals(this.currentUser().getId())) {
+				return "亲，对不起，我找不到该试题信息！请您刷新页面后再操作！";
+			}
+			
 			if (MyUtils.isNotNull(ids)) {
 				stringArr = ids.split(",");
 			}
@@ -856,12 +888,22 @@ public class CourseMAction extends TeacherBaseAction {
 	@ResponseBody
 	public String removeResourceByAsync() {
 		HttpServletRequest request = getRequest();
+		String courseId = request.getParameter("courseId");
 		String chapterId = request.getParameter("chapterId");
 		String resourceId = request.getParameter("resourceId");
 		String resourceType = request.getParameter("resourceType");
 		boolean flag = false;
 		
 		try {
+			CourseDao courseDao = new CourseDao();
+			CourseItem courseItem = courseDao.selectById(courseId);
+			// 判断当前用户是否是该课程的所有者
+			if(courseItem == null) {
+				return "亲，对不起，我找不到该课程章节！请您刷新页面后再操作！";
+			}
+			if(!courseItem.getOwnerId().equals(this.currentUser().getId())) {
+				return "亲，对不起，我找不到该课程章节！请您刷新页面后再操作！";
+			}
 			if (MyUtils.isNotNull(chapterId) && MyUtils.isNotNull(resourceId) && MyUtils.isNotNull(resourceType) && ValidateTools.isInt(resourceType)) {
 				// 打开事务处理
 				ThreadUtils.beginTranx();

@@ -2,6 +2,8 @@ package com.santrong.plt.webpage.teacher.entry;
 
 import java.util.Date;
 
+import com.santrong.plt.util.MyUtils;
+
 /**
  * @author huangweihua
  * @date   2014年10月31日 
@@ -200,5 +202,13 @@ public class UserCourseView {
 	}
 	public void setPriority(int priority) {
 		this.priority = priority;
+	}
+	// 获取头像
+	public String getHeadPhoto() {
+		if(MyUtils.isNotNull(this.url)) {
+			return url;
+		}else {
+			return "/resource/photo/person01.jpg";
+		}
 	}
 }

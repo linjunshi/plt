@@ -117,7 +117,7 @@ public class TrainDao extends BaseDao{
 		
 		try{
 			Statement criteria = new Statement("resource_train", "a");
-			criteria.setFields("a.id,b.title,c.remark,d.courseName,e.cts");
+			criteria.setFields("a.id,b.title,c.remark,d.courseName,d.url,e.cts");
 			criteria.ljoin("course_chapter_to_resource", "b", "a.id", "b.resourceId");
 			criteria.ljoin("course_chapter", "c", "b.chapterId", "c.id");
 			criteria.ljoin("course", "d", "c.courseId", "d.id");
