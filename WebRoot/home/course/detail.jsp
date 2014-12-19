@@ -98,8 +98,10 @@ Globals.page = "Index_courseDetail";
 		                <li>课程评价</li>
 		            </ul>
 		        </div>
+		        
 		        <div class="sec_con" id="course_summary">
-		          	${course.remark}
+		          	<c:if test="${!empty course.remark}">${course.remark}</c:if>
+		          	<c:if test="${empty course.remark}">暂无课程详情！</c:if>
 		        </div>
 		    </div>
 		    <div class="th_catalog clr" id="course_struct">
@@ -111,7 +113,14 @@ Globals.page = "Index_courseDetail";
 		            	<dd>
 				           	<div class="course_list_des">
 					        	<span>${resource.title}---type:${resource.typeCnString}</span>
-					       		<a href="${ctx}/${resource.typeEnString}?resId=${resource.id}" target="_blank" >进入</a>
+					        	<c:if test="${resource.typeCnString == ''}">
+					        		<c:if test="resource.xxx">yijiesu</c:if>
+					        		<c:if test=""><a href="${ctx}/${resource.typeEnString}?resId=${resource.id}" target="_blank" >进入</a></c:if>
+					        		<c:if test="">weikaishi</c:if>
+					        	</c:if>
+					        	<c:if test="">
+					        		<a href="${ctx}/${resource.typeEnString}?resId=${resource.id}" target="_blank" >进入</a>
+					        	</c:if>
 				            </div>
 		            	</dd>
 		            	</c:forEach>
