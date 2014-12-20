@@ -124,7 +124,7 @@ IndexClass.prototype = {
 			if($(this).index() == 2){
 				$("#course_summary").hide();
 				$("#course_struct").hide();
-				$("#course_comment").show();				
+				$("#course_comment").show();
 				return;
 			}
 		});

@@ -18,7 +18,7 @@ Globals.page = "Index_schoolDetail";
 			    <div class="sectionMain clr">
 			        <div>
 			            <div class="sh_info_le">
-			                <div class="sh_info_img"><img src="${ctx}/resource/images/003.jpg" width="160" height="100"></div>
+			                <div class="sh_info_img"><img src="${ctx}/resource/photo/default_school.jpg" width="160" height="100"></div>
 			                <div style="text-indent:20px; font-size:18px; line-height:36px; margin-bottom:20px;">${school.schoolName}</div>
 		                    <div class="sh_list_switch">
 								<dl class="<c:if test="${query.gradeEnName == null || query.gradeEnName == ''}">current</c:if>">
@@ -42,12 +42,7 @@ Globals.page = "Index_schoolDetail";
 			                        <c:forEach items="${teacherList}"  var="teacher" varStatus="st">
 			                        	<li class="<c:if test="${st.count%4==0}">margin_right_clear</c:if>">
 				                        	<a href="${ctx}/teacher/${teacher.id}.html" target="_blank">
-				                        		<c:if test="${empty teacher.url}">
-				                        			<img src="${ctx}/resource/images/003.jpg" width="120" height="80">
-				                        		</c:if>
-				                        		<c:if test="${!empty teacher.url}">
-				                        			<img src="${ctx}${teacher.url}" width="120" height="80">
-				                        		</c:if>
+				                        		<img src="${ctx}${teacher.headPhoto}" width="120" height="80">
 				                        	</a>
 				                            <p>${teacher.username}</p>
 				                        </li>

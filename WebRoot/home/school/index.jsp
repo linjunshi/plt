@@ -25,7 +25,7 @@ Globals.page = "Index_school";
 		        <div class="schoool_box_list clr">
 		            <ul>
 		            	<c:forEach items="${schoolList}" var="school" varStatus="st">
-		                <li class="<c:if test="${(st.index+1)%5==0}">margin_right_clear</c:if>"><a href="${ctx}/school/${school.id}.html"><img src="${ctx}/resource/photo/02.jpg" width="220" height="140"></a>
+		                <li class="<c:if test="${(st.index+1)%5==0}">margin_right_clear</c:if>"><a href="${ctx}/school/${school.id}.html"><img src="${ctx}/resource/photo/default_school.jpg" width="220" height="140"></a>
 		                    <h2>${school.schoolName}</h2>
 		                </li>
 		            	</c:forEach>
