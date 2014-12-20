@@ -8,6 +8,7 @@ import java.security.MessageDigest;
 import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.UUID;
 
@@ -88,7 +89,46 @@ public class MyUtils {
 		sdf.applyPattern(pattern);
 		return sdf.format(date);
 	}
-
+	
+	/**
+     * 获取当前日期和时间
+     * @author huangweihua
+     * @param pattern 日期格式 例：yyyy-MM-dd HH:mm:ss
+     * @return String
+     */
+	public static String getNowDate(String pattern) {
+		if (pattern == null) {
+			pattern = DF_yyyy_MM_dd_HH_mm_ss;
+		}
+		Date date = new Date();
+		SimpleDateFormat sdf = new SimpleDateFormat(pattern);
+		return sdf.format(date);
+	}
+	
+	/**
+     * 比较两个日期时间的大小</br>
+     * -1:str1小于str2; 0:str1等于str2; 1:str1大于str2;
+     * @author huangweihua
+     * @param pattern 日期格式 例：yyyy-MM-dd HH:mm:ss
+     * @return int
+     */
+	public static int compareTo(String str1, String str2, String pattern){
+		if (pattern == null) {
+			pattern = DF_yyyy_MM_dd_HH_mm_ss;
+		}
+		SimpleDateFormat sdf = new SimpleDateFormat(pattern);
+		Calendar c1 = Calendar.getInstance();
+		Calendar c2 = Calendar.getInstance();
+		try {
+			c1.setTime(sdf.parse(str1));
+			c2.setTime(sdf.parse(str2));
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		int result = c1.compareTo(c2);//-1:str1小于str2; 0:str1等于str2; 1:str1大于str2;
+		return result;
+	}
+    
 	public static int stringToInt(String str) {
 		return stringToInt(str, 0);
 	}

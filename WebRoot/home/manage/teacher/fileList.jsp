@@ -46,7 +46,7 @@ Globals.page = "Manage_index";
 			                    	<c:forEach items="${fileList}" var="file" varStatus="st">
 				                        <tr>
 				                            <td>${st.index + 1}</td>
-				                            <td class="sh_h_im">
+				                            <td>
 				                            	<%-- <a href="${ctx}/course/${file.id}.html" target="_blank"><img src="${ctx}/resource/images/003.jpg" width="40" height="40"></a> --%>
 				                            	<p>${file.title}</p>
 				                            </td>

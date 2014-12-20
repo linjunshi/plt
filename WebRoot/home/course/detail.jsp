@@ -98,29 +98,36 @@ Globals.page = "Index_courseDetail";
 		                <li>课程评价</li>
 		            </ul>
 		        </div>
-		        
-		        <div class="sec_con" id="course_summary">
-		          	<c:if test="${!empty course.remark}">${course.remark}</c:if>
-		          	<c:if test="${empty course.remark}">暂无课程详情！</c:if>
-		        </div>
 		    </div>
+	       <div class="th_introduce clr" id="course_summary">
+	        	<h2>课程详情</h2>
+	          	<p>${course.remark}<c:if test="${empty course.remark}"><span class="nothing">暂无内容！</span></c:if></p>
+	        </div>
 		    <div class="th_catalog clr" id="course_struct">
 		        <h2>课程目录</h2>     
 		        <dl class="th_car_list">
+		        	<c:if test="${empty course.chapterDetailList}"><span class="nothing" style="position:relative;top: 10px;left:20px;">暂无内容！</span></c:if>
 		        	<c:forEach items="${course.chapterDetailList}" var="chapter" varStatus="st">
-		            <dt>第${st.index+1}课:${chapter.remark}</dt>
+		            <dt>第 ${st.index+1} 课：${chapter.remark}</dt>
 		            	<c:forEach items="${chapter.resourceList}" var="resource">
 		            	<dd>
 				           	<div class="course_list_des">
-					        	<span>${resource.title}---type:${resource.typeCnString}</span>
-					        	<c:if test="${resource.typeCnString == ''}">
+				        		<c:if test="${resource.typeEnString == 'file'}"><img src="${ctx}/resource/images/res_file.png" title="${resource.typeCnString}"></c:if>
+				        		<c:if test="${resource.typeEnString == 'live'}"><img src="${ctx}/resource/images/res_live.png" title="${resource.typeCnString}"></c:if>
+				        		<c:if test="${resource.typeEnString == 'doc'}"><img src="${ctx}/resource/images/res_doc.png" title="${resource.typeCnString}"></c:if>
+				        		<c:if test="${resource.typeEnString == 'train'}"><img src="${ctx}/resource/images/res_train.png" title="${resource.typeCnString}"></c:if>
+					        	<span>
+					        		${resource.title}---type:${resource.typeCnString}
+					        	</span>
+					        	<%-- <c:if test="${resource.typeEnString == 'live'}">
 					        		<c:if test="resource.xxx">yijiesu</c:if>
 					        		<c:if test=""><a href="${ctx}/${resource.typeEnString}?resId=${resource.id}" target="_blank" >进入</a></c:if>
 					        		<c:if test="">weikaishi</c:if>
 					        	</c:if>
-					        	<c:if test="">
+					        	<c:if test="${resource.typeEnString != 'live'}">
 					        		<a href="${ctx}/${resource.typeEnString}?resId=${resource.id}" target="_blank" >进入</a>
-					        	</c:if>
+					        	</c:if> --%>
+					        	<a href="${ctx}/${resource.typeEnString}?resId=${resource.id}" target="_blank" >进入</a>
 				            </div>
 		            	</dd>
 		            	</c:forEach>

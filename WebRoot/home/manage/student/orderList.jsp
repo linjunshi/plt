@@ -49,15 +49,13 @@ Globals.page = "Manage_orderList";
 				                            <td class="sh_h_im">
 				                            	<div>
 				                            		<a href="${ctx}/course/${order.courseId}.html" target="_blank"><img src="${ctx}${order.thumbnail}" width="90" height="90"></a>
-					                            	<div>
-					                            		<a href="${ctx}/course/${order.courseId}.html" target="_blank" class="sh_order_title">${order.courseName}</a>
+					                            	<div class="sh_order_title">
+					                            		<a href="${ctx}/course/${order.courseId}.html" target="_blank">${order.courseName}</a>
 					                            	</div>
-					                            	<div>
-						                            	<p class="sh_order_detail">
-						                            		授课老师：<a href="${ctx}/teacher/${order.ownerId}.html" target="_blank">${order.teacher}</a>
-						                            		&nbsp;&nbsp;共${order.chapterCount}课时
-						                            		&nbsp;&nbsp;内容简介： <a href="${ctx}/course/${order.courseId}.html" target="_blank">[详细]</a>
-						                            	</p>
+					                            	<div class="sh_order_detail">
+					                            		授课老师：<a href="${ctx}/teacher/${order.ownerId}.html" target="_blank">${order.teacher}</a>
+					                            		&nbsp;&nbsp;共${order.chapterCount}课时
+					                            		&nbsp;&nbsp;课程简介： <a href="${ctx}/course/${order.courseId}.html" target="_blank">[详细]</a>
 					                            	</div>
 					                            </div>
 				                            </td>
