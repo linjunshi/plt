@@ -18,7 +18,7 @@
 		<div id="container_content">
 			<div class="sectionMain clr">
 				<div class="sh_work_le">
-					<p>${train.title}，来自${chapter.remark}，课程名称${course.courseName}，当前第1题，一共${total}题</p>
+					<p>${train.title}，来自${chapter.remark}，课程名称：${course.courseName}，当前第 <b class="current_index">1</b> 题，一共 <b>${total}</b> 题</p>
 					<div class="sh_work_form"></div>
 					<div class="sh_form_but">
 						<a class="preOne sh_form_grey" href="javascript:void(0);">上一题</a>

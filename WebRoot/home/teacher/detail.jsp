@@ -49,7 +49,7 @@ Globals.page = "Index_teacherDetail";
 								<li class="th_items">
 									<a href="${ctx}/course/${course.id}.html"><img src="${ctx}${course.thumbnail}" width="240" height="160"></a>
 									<div class="titi">
-										<strong>${course.courseName}</strong>
+										<a href="${ctx}/course/${course.id}.html" target="_blank"><strong>${course.courseName}</strong></a>
 									</div>
 									<div class="infos">
 										${course.teacher}
@@ -58,15 +58,15 @@ Globals.page = "Index_teacherDetail";
 										${course.chapterCount}课时
 									</div>
 									<div class="course_operate">
-										<p class="pt6">${course.price}元</p>
+										<p class="pt6">${course.price} 元</p>
 										<p class="pt7">
-											<span>${course.saleCount}人购买</span><span class="right">${course.collectCount} 条评论</span>
+											<span><em>${course.saleCount}</em> 人购买</span><span class="right"><a href="${ctx}/course/${course.id}.html#course_comment" target="_blank" title="我有话说"><em>${course.collectCount}</em></a> 条评论</span>
 										</p>
 										<p class="pt8">
 											结束时间：<fmt:formatDate value="${course.endTime}" type="date"/>
 										</p>
 										<p class="pt9">
-											<a href="${ctx}/course/${course.id}.html" target="_blank">[详细]</a>
+											课程简介：<a href="${ctx}/course/${course.id}.html" target="_blank">[详细]</a>
 										</p>
 									</div>
 								</li>

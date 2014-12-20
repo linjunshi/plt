@@ -106,7 +106,7 @@ Globals.page = "Index_course";
 			        </div>
 			        <c:forEach items="${teacherList}" var="teacher">
 			        <div class="list_hd_img">
-			        	<a href="${ctx}/teacher/${teacher.id}.html" target="_blank"><img src="${ctx}/resource/images/93.jpg" width="190" height="180" border="0"></a>
+			        	<a href="${ctx}/teacher/${teacher.id}.html" target="_blank"><img src="${ctx}/${teacher.headPhoto}" width="190" height="180" border="0"></a>
 			            <p>${teacher.showName}</p>
 			        </div>
 			        </c:forEach>

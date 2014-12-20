@@ -288,7 +288,7 @@ public class CourseAction extends BaseAction {
 		UserItem user = this.currentUser();
 		if (user == null) {
 			// 没登陆
-			return "loginPage";
+			return this.redirect("/account/login");
 		}
 		
 		CommentDao commentDao = new CommentDao();
@@ -330,7 +330,7 @@ public class CourseAction extends BaseAction {
 			// 获取当前用户对象信息
 			UserItem user = this.currentUser();
 			if (user == null) {
-				// 没登陆
+				// 没登陆，注意：异步的时候才这样子写，jquery对返回的结果作了判断
 				return "loginPage";
 			}
 			
@@ -371,7 +371,7 @@ public class CourseAction extends BaseAction {
 			// 获取当前用户对象信息
 			UserItem user = this.currentUser();
 			if (user == null) {
-				// 没登陆
+				// 没登陆，注意：异步的时候才这样子写，jquery对返回的结果作了判断
 				return "loginPage";
 			}
 			

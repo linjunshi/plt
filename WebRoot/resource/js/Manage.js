@@ -305,16 +305,19 @@ ManageClass.prototype = {
 					if (dl_dd.hasClass("pt10")) {
 						alert("该大章节中有小章节，不能删除!");
 					}else{
-						
-						// 通过POST方式，提交数据到后台处理业务逻辑
-						$.post(Globals.ctx + "/manage/course/removeChapter", {courseId : courseId, chapterId : chapterId}, function(result){
-							if (result == "success") {
+						if (courseId != "" && courseId != null && chapterId != "" && chapterId != null) {
+							// 通过POST方式，提交数据到后台处理业务逻辑
+							$.post(Globals.ctx + "/manage/course/removeChapter", {courseId : courseId, chapterId : chapterId}, function(result){
+								if (result == "success") {
 //								_this.parents("dl").remove();
-								location.reload();
-							}else {
-								alert(result);
-							}
-						});
+									location.reload();
+								}else {
+									alert(result);
+								}
+							});
+						} else {
+							alert("删除失败，请刷新页面后重新操作！")
+						}
 					}
 				}
 			});
@@ -349,6 +352,7 @@ ManageClass.prototype = {
 				var dls_obj = $(this).parents(".sh_collection").find("dl.sh_add_chapter");
 				var chapter_obj = $(this).parents(".sh_add_chapter").children("input[name=chapterId]");
 				var chapterId = $(chapter_obj).val();
+				var courseId = $("#courseId").val().trim();
 				var remark = $(this).parent().children("input[name=remark]").val().trim();
 				if (remark == "") {
 					alert("章节标题不能为空！");
@@ -356,7 +360,6 @@ ManageClass.prototype = {
 					// chapterId 为空，执行新增操作；否则执行修改操作
 					if (chapterId == "") {
 						//新增操作
-						var courseId = $("input[name=courseId]").val();
 						if (courseId != "") {
 							var priority = $("input[name=priority]").val();
 							if (priority == "" || priority == 0) {
@@ -441,7 +444,7 @@ ManageClass.prototype = {
 							
 						} else {
 							// 通过POST方式，递交给后台处理与数据库交互的逻辑
-							$.post(Globals.ctx + "/manage/course/modifyChapter", {id : chapterId, remark : remark}, function(result){
+							$.post(Globals.ctx + "/manage/course/modifyChapter", {courseId : courseId, id : chapterId, remark : remark}, function(result){
 								if (result == "success") {
 									$(opera_obj).children(".show_remark").html(remark);
 									$(opera_obj).children(".show_remark").show();

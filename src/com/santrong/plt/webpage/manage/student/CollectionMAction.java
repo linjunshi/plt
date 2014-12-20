@@ -15,7 +15,6 @@ import com.santrong.plt.webpage.course.dao.CourseDao;
 import com.santrong.plt.webpage.course.entry.CourseCollectQuery;
 import com.santrong.plt.webpage.course.entry.CourseItem;
 import com.santrong.plt.webpage.manage.StudentBaseAction;
-import com.santrong.plt.webpage.teacher.entry.UserItem;
 
 /**
  * @author weinianjie
@@ -57,16 +56,23 @@ public class CollectionMAction extends StudentBaseAction {
 	@RequestMapping(value="/cancelCollect", method=RequestMethod.POST)
 	public String cancelCollect(String courseId) {
 		try {
-			UserItem userItem = this.currentUser();
+			CourseDao courseDao = new CourseDao();
+			CourseItem courseItem = courseDao.selectById(courseId);
+			// 判断当前用户是否是该课程的所有者
+			if(courseItem == null) {
+				return this.redirect("/");
+			}
+			if(!courseItem.getOwnerId().equals(this.currentUser().getId())) {
+				return this.redirect("/");
+			}
 			
 			ThreadUtils.beginTranx();
 			
 			//1、并从收藏表中移除该条收藏记录
 			CollectCourseDao ccDao = new CollectCourseDao();
-			ccDao.removeCollect(userItem.getId(), courseId);
+			ccDao.removeCollect(this.currentUser().getId(), courseId);
 			
 			//2、点击取消收藏,修改该课程的收藏数量,自动减1；
-			CourseDao courseDao = new CourseDao();
 			courseDao.removeCollection(courseId);
 			
 			ThreadUtils.commitTranx();

@@ -98,8 +98,10 @@ Globals.page = "Index_courseDetail";
 		                <li>课程评价</li>
 		            </ul>
 		        </div>
+		        
 		        <div class="sec_con" id="course_summary">
-		          	${course.remark}
+		          	<c:if test="${!empty course.remark}">${course.remark}</c:if>
+		          	<c:if test="${empty course.remark}">暂无课程详情！</c:if>
 		        </div>
 		    </div>
 		    <div class="th_catalog clr" id="course_struct">
@@ -111,7 +113,14 @@ Globals.page = "Index_courseDetail";
 		            	<dd>
 				           	<div class="course_list_des">
 					        	<span>${resource.title}---type:${resource.typeCnString}</span>
-					       		<a href="${ctx}/${resource.typeEnString}?resId=${resource.id}" target="_blank" >进入</a>
+					        	<c:if test="${resource.typeCnString == ''}">
+					        		<c:if test="resource.xxx">yijiesu</c:if>
+					        		<c:if test=""><a href="${ctx}/${resource.typeEnString}?resId=${resource.id}" target="_blank" >进入</a></c:if>
+					        		<c:if test="">weikaishi</c:if>
+					        	</c:if>
+					        	<c:if test="">
+					        		<a href="${ctx}/${resource.typeEnString}?resId=${resource.id}" target="_blank" >进入</a>
+					        	</c:if>
 				            </div>
 		            	</dd>
 		            	</c:forEach>
@@ -126,7 +135,7 @@ Globals.page = "Index_courseDetail";
 				<div class="th_con">
 					<form action="${ctx}/course/comment" method="post" id="comment_form" class="common_form">
 						<div>
-							<textarea id="remark" name="remark" class="xheditor th_textarea" cols="2" rows="3" required></textarea>
+							<textarea id="remark" name="remark" class="xheditor th_textarea" cols="2" rows="3"></textarea>
 						</div>
 						<input type="hidden" name="courseId" value="${course.id}"/>
 						<input class="th_pt_but" type="submit"  value="确定"/>
@@ -134,12 +143,9 @@ Globals.page = "Index_courseDetail";
 				</div>
 				<div class="th_lea clr">
 					<ul>
-						<c:forEach items="${course.commentList}" var="comment"
-							varStatus="st">
+						<c:forEach items="${course.commentList}" var="comment" varStatus="st">
 							<li>
-								<div class="th_img_user">
-									<img src="${ctx}/resource/images/003.jpg" width="80" height="80">
-								</div>
+								<div class="th_img_user"><img src="${ctx}${comment.headPhoto}" width="80" height="80"></div>
 								<div class="th_mr2">
 									<p>
 										<b>${comment.showName}</b>

@@ -22,7 +22,7 @@ Globals.page = "Manage_index";
 				        <h2>我的测验</h2></div>
 		                <c:forEach items="${trainList}" var="train">
 						     <div class="sh_work">
-						        <div class="sh_work_img"><img src="${ctx}/resource/images/003.jpg" width="50" height="50" /></div>
+						        <div class="sh_work_img"><img src="${ctx}${train.thumbnail}" width="50" height="50" /></div>
 						        <div class="sh_work_con">
 						          <h2><p class="sh_work_title" title="${train.title}">${train.title}</p><span>来自：${train.courseName}---${train.remark}</span></h2>
 						          <p><fmt:formatDate value="${train.cts}" type="both" /></p>

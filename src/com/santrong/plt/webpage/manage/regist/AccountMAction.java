@@ -133,9 +133,10 @@ public class AccountMAction extends RegistBaseAction {
 	@RequestMapping(value = "/changePwdPost",method=RequestMethod.POST)
 	public String changePwdPost(String oldPwd, String newPwd, String comfirmPwd) {
 		try {
-			
+			// 获取当前用户对象信息
 			UserItem user = this.currentUser();
-			if(user == null) {
+			if (user == null) {
+				// 没登陆，注意：异步的时候才这样子写，jquery对返回的结果作了判断
 				return this.redirect("/account/login");
 			}
 			
@@ -202,8 +203,10 @@ public class AccountMAction extends RegistBaseAction {
 	@RequestMapping(value="/personalInfo",method=RequestMethod.POST)
 	public String personalInfoPost(UserItem userForm) {
 		try {
+			// 获取当前用户对象信息
 			UserItem user = this.currentUser();
-			if (user== null) {
+			if (user == null) {
+				// 没登陆
 				return this.redirect("/account/login");
 			}
 			if (userForm == null) {
@@ -255,8 +258,10 @@ public class AccountMAction extends RegistBaseAction {
 	@RequestMapping("/personalInfoEdu")
 	public String personalInfoEdu() {
 		try {
+			// 获取当前用户对象信息
 			UserItem user = this.currentUser();
-			if (user== null) {
+			if (user == null) {
+				// 没登陆
 				return this.redirect("/account/login");
 			}
 			

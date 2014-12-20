@@ -2,6 +2,8 @@ package com.santrong.plt.webpage.manage.student.entry;
 
 import java.util.Date;
 
+import com.santrong.plt.util.MyUtils;
+
 /**
  * @author weinianjie
  * @date 2014年11月24日
@@ -12,8 +14,17 @@ public class TrainSimpleView {
 	private String title;
 	private String remark;// 章节描述
 	private String courseName;
+	private String url;
 	private Date cts;// 购买时间
 	
+	// 获取缩略图
+	public String getThumbnail() {
+		if(MyUtils.isNotNull(this.url)) {
+			return url;
+		}else {
+			return "/resource/photo/course01.jpg";
+		}
+	}
 	public String getId() {
 		return id;
 	}
@@ -37,6 +48,12 @@ public class TrainSimpleView {
 	}
 	public void setCourseName(String courseName) {
 		this.courseName = courseName;
+	}
+	public String getUrl() {
+		return url;
+	}
+	public void setUrl(String url) {
+		this.url = url;
 	}
 	public Date getCts() {
 		return cts;

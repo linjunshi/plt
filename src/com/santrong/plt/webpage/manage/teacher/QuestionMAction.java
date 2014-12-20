@@ -52,6 +52,14 @@ public class QuestionMAction extends TeacherBaseAction{
 	public String questionDelete(String questionId){
 		try {
 			TrainQuestionDao tqDao = new TrainQuestionDao();
+			TrainQuestionItem tqItem = tqDao.selectById(questionId);
+			// 判断当前用户是否是该课程的所有者
+			if(tqItem == null) {
+				return this.redirect("/");
+			}
+			if(!tqItem.getOwnerId().equals(this.currentUser().getId())) {
+				return this.redirect("/");
+			}
 			if (tqDao.deleteById(questionId)) {
 				return this.redirect("/manage/question/list");
 			}
@@ -77,6 +85,13 @@ public class QuestionMAction extends TeacherBaseAction{
 				//打开修改页面
 				TrainQuestionDao tqDao = new TrainQuestionDao();
 				TrainQuestionItem tqItem = tqDao.selectById(questionId);
+				// 判断当前用户是否是该课程的所有者
+				if(tqItem == null) {
+					return this.redirect("/");
+				}
+				if(!tqItem.getOwnerId().equals(this.currentUser().getId())) {
+					return this.redirect("/");
+				}
 				request.setAttribute("tqItem", tqItem);
 				request.setAttribute("addOrModify", "modify");
 			}
@@ -99,11 +114,6 @@ public class QuestionMAction extends TeacherBaseAction{
 			HttpServletRequest request = this.getRequest();
 			//打开新增页面
 			request.setAttribute("addOrModify", "add");
-			UserItem user = this.currentUser();
-			if(user == null) {
-				addError("请您先登录用户！");
-				return this.redirect("account/login");
-			}
 			
 			if (tqForm != null) {
 				
@@ -129,16 +139,17 @@ public class QuestionMAction extends TeacherBaseAction{
 				
 				if (!(errorSize() > 0)) {
 					if (MyUtils.isNull(tqForm.getId())) {
-						// id不为空，执行新增操作
+						
+						// id为空，执行新增操作
 						TrainQuestionDao tqDao = new TrainQuestionDao();
-						TrainQuestionItem tqItem = new TrainQuestionItem(); 
+						TrainQuestionItem tqItem = new TrainQuestionItem();
 						tqItem.setId(MyUtils.getGUID());
-						tqItem.setTopic(tqForm.getTopic());
+						tqItem.setTopic(tqForm.getTopic().trim());
 						tqItem.setQuestionType(tqForm.getQuestionType());
-						tqItem.setOpt1(tqForm.getOpt1());
-						tqItem.setOpt2(tqForm.getOpt2());
-						tqItem.setOpt3(tqForm.getOpt3());
-						tqItem.setOpt4(tqForm.getOpt4());
+						tqItem.setOpt1(tqForm.getOpt1().trim());
+						tqItem.setOpt2(tqForm.getOpt2().trim());
+						tqItem.setOpt3(tqForm.getOpt3().trim());
+						tqItem.setOpt4(tqForm.getOpt4().trim());
 						if (tqForm.isSingleSelection()) {//单选题
 							tqItem.setAnswer(tqForm.getAnswer());
 						} else if (tqForm.isMulChoice()) {//多选题
@@ -149,7 +160,7 @@ public class QuestionMAction extends TeacherBaseAction{
 							tqItem.setAnswer(sumAnswer);
 						}
 						tqItem.setRemark(tqForm.getRemark());
-						tqItem.setOwnerId(user.getId());
+						tqItem.setOwnerId(this.currentUser().getId());
 						tqItem.setDel(0);
 						tqItem.setCts(new Date());
 						tqItem.setUts(new Date());
@@ -159,16 +170,24 @@ public class QuestionMAction extends TeacherBaseAction{
 							return "/manage/teacher/myTrainMAdd";
 						}
 					} else {
+						
 						// id不为空，执行修改操作
 						TrainQuestionDao tqDao = new TrainQuestionDao();
 						TrainQuestionItem tqItem = tqDao.selectById(tqForm.getId());
+						// 判断当前用户是否是该课程的所有者
+						if(tqItem == null) {
+							return this.redirect("/");
+						}
+						if(!tqItem.getOwnerId().equals(this.currentUser().getId())) {
+							return this.redirect("/");
+						}
 						tqItem.setTopic(tqForm.getTopic());
 						tqItem.setQuestionType(tqForm.getQuestionType());
 						tqItem.setOpt1(tqForm.getOpt1());
 						tqItem.setOpt2(tqForm.getOpt2());
 						tqItem.setOpt3(tqForm.getOpt3());
 						tqItem.setOpt4(tqForm.getOpt4());
-						tqItem.setOwnerId(user.getId());
+						tqItem.setOwnerId(this.currentUser().getId());
 						if (tqForm.isSingleSelection()) {//单选题
 							tqItem.setAnswer(tqForm.getAnswer());
 						} else if (tqForm.isMulChoice()) {//多选题
@@ -184,6 +203,8 @@ public class QuestionMAction extends TeacherBaseAction{
 							return this.redirect("/manage/question/list");
 						}
 					}
+				} else {
+					request.setAttribute("tqItem", tqForm);
 				}
 			}
 		} catch (Exception e) {

@@ -3,7 +3,7 @@
 <%@ include file="../../../inc/common.jsp"%>
 <h2>${question.typeString}</h2>
 <div class="sh_work_rad">
-	<h3>${question.topic}</h3>
+	<h3><span class="current_index">1</span> 、${question.topic}</h3>
 
 	<c:if test="${question.singleSelection}">
 		<!-- 单选题 -->

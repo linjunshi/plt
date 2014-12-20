@@ -26,7 +26,7 @@ Globals.page = "Manage_collection";
 						    <c:forEach items="${courseList}"  var="course" varStatus="ct">
 								<li>
 									<div>
-										<a href="${ctx}/course/${course.id}.html"><img src="${ctx}/resource/images/005.jpg"></a>
+										<a href="${ctx}/course/${course.id}.html"><img src="${ctx}${course.thumbnail}" width="100" height="100"></a>
 									</div>
 									<div class="sh_coll_con">
 										<h2>
