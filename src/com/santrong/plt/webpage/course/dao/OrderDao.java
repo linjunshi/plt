@@ -53,6 +53,21 @@ public class OrderDao extends BaseDao{
 		}
 		return 0;
 	}	
+	
+	/**
+	 * 删除
+	 * @param order
+	 * @return
+	 */
+	public int delete(String id){
+		try {
+			OrderMapper mapper = this.getMapper(OrderMapper.class);
+			return mapper.delete(id);
+		} catch (Exception e) {
+			Log.printStackTrace(e);
+		}
+		return 0;
+	}	
 
 	/**
 	 * 判断是否已经购买该课程

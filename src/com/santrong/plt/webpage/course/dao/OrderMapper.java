@@ -1,5 +1,6 @@
 package com.santrong.plt.webpage.course.dao;
 
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
@@ -19,6 +20,9 @@ public interface OrderMapper {
 	
 	@Update("update web_order set status=#{status},uts=#{uts} where id=#{id}")
 	int update(OrderItem order);	
+	
+	@Delete("delete from web_order where id=#{id}")
+	int delete(String id);		
 	
 	@Select("select count(*) as cn from web_order where courseId=#{courseId} and userId=#{userId}")
 	int exists(@Param("courseId") String courseId, @Param("userId") String userId);
