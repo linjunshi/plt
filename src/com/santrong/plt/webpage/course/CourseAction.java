@@ -378,7 +378,7 @@ public class CourseAction extends BaseAction {
 			CourseDao courseDao = new CourseDao();
 			CourseItem course = courseDao.selectById(courseId);
 			if(course == null) {
-				return FAIL;
+				return "课程不存在";
 			}
 			
 			if (course.getLimitCount() <= course.getSaleCount()) {
@@ -405,7 +405,7 @@ public class CourseAction extends BaseAction {
 			order.setCts(new Date());
 			order.setUts(new Date());
 			if(orderDao.insert(order) <= 0) {
-				return FAIL;
+				return "订单创建失败";
 			}
 			
 			// 构造网银在线支付参数
