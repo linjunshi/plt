@@ -43,6 +43,9 @@ import com.santrong.plt.webpage.course.entry.CourseItem;
 import com.santrong.plt.webpage.course.entry.CourseQuery;
 import com.santrong.plt.webpage.course.entry.OrderItem;
 import com.santrong.plt.webpage.course.entry.ResourceEntry;
+import com.santrong.plt.webpage.course.entry.ResourceType;
+import com.santrong.plt.webpage.course.resource.live.dao.LiveDao;
+import com.santrong.plt.webpage.course.resource.live.entry.LiveItem;
 import com.santrong.plt.webpage.home.dao.GradeDao;
 import com.santrong.plt.webpage.home.dao.SubjectDao;
 import com.santrong.plt.webpage.home.entry.GradeView;
@@ -228,6 +231,39 @@ public class CourseAction extends BaseAction {
 				resource.setTitle(cr.getTitle());
 				resource.setId(cr.getResourceId());
 				resource.setType(cr.getResourceType());
+				
+				/*
+				 * 思路：
+				 * 1、如果是直播的话，就根据直播ID获取开始时间和时长，先用开始时间和当前时间进行比较；
+				 * 	    结果等于-1，直播状态标识为-1：未开始；
+				 *	    结果等于0，直播状态标识为0：正在直播中；
+				 * 2、结果等于1，再把开始时间和时长相加后，再和当前时间进行比较；
+				 *	    结果等于-1或0，直播状态标识为0：正在直播中；
+				 *	    结果等于1，直播状态标识为0：已经结束；
+				 */
+				if (cr.getResourceType() == ResourceType.Type_Live) {
+					LiveDao liveDao = new LiveDao();
+					LiveItem liveItem = liveDao.selectById(cr.getResourceId());
+					if (liveItem != null) {
+						int status = -1;
+						//先用开始时间和当前时间进行比较
+						//比较两个日期时间的大小 ,-1:str1小于str2; 0:str1等于str2; 1:str1大于str2;时间都要精确到分
+						int result = MyUtils.compareTo(MyUtils.getNowDate(MyUtils.DF_yyyy_MM_dd_HH_mm), 
+								MyUtils.dateToString(liveItem.getBeginTime(), MyUtils.DF_yyyy_MM_dd_HH_mm), MyUtils.DF_yyyy_MM_dd_HH_mm);
+						if (result == -1) {
+							status = -1;
+						} else if (result == 0) {
+							status = 0;
+						} else {
+							//结果等于1，再把开始时间和时长相加后，再和当前时间进行比较；
+							int result2 = MyUtils.compareTo(MyUtils.getNowDate(MyUtils.DF_yyyy_MM_dd_HH_mm), 
+									MyUtils.dateToString(MyUtils.addDateMinute(liveItem.getBeginTime(), liveItem.getDuration()),MyUtils.DF_yyyy_MM_dd_HH_mm), MyUtils.DF_yyyy_MM_dd_HH_mm);
+							status = (result2 < 0) ? 0 : 1;
+						}
+						resource.setStatus(status);//-1：未开始，0：正在直播中，1：已经结束
+					}
+				}
+				
 				cdv.getResourceList().add(resource);
 			}
 			chapterMap.put(cr.getId(), cdv);
@@ -251,7 +287,6 @@ public class CourseAction extends BaseAction {
 		UserCourseView teacher = userDao.selectTeacherByUserId(course.getOwnerId());
 		
 		// 老师名下其他课程
-		
 		
 		// 是否已购买
 		boolean hasBuy = false;

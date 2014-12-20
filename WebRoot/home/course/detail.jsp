@@ -112,22 +112,32 @@ Globals.page = "Index_courseDetail";
 		            	<c:forEach items="${chapter.resourceList}" var="resource">
 		            	<dd>
 				           	<div class="course_list_des">
-				        		<c:if test="${resource.typeEnString == 'file'}"><img src="${ctx}/resource/images/res_file.png" title="${resource.typeCnString}"></c:if>
-				        		<c:if test="${resource.typeEnString == 'live'}"><img src="${ctx}/resource/images/res_live.png" title="${resource.typeCnString}"></c:if>
-				        		<c:if test="${resource.typeEnString == 'doc'}"><img src="${ctx}/resource/images/res_doc.png" title="${resource.typeCnString}"></c:if>
-				        		<c:if test="${resource.typeEnString == 'train'}"><img src="${ctx}/resource/images/res_train.png" title="${resource.typeCnString}"></c:if>
-					        	<span>
-					        		${resource.title}---type:${resource.typeCnString}
-					        	</span>
-					        	<%-- <c:if test="${resource.typeEnString == 'live'}">
-					        		<c:if test="resource.xxx">yijiesu</c:if>
-					        		<c:if test=""><a href="${ctx}/${resource.typeEnString}?resId=${resource.id}" target="_blank" >进入</a></c:if>
-					        		<c:if test="">weikaishi</c:if>
-					        	</c:if>
-					        	<c:if test="${resource.typeEnString != 'live'}">
-					        		<a href="${ctx}/${resource.typeEnString}?resId=${resource.id}" target="_blank" >进入</a>
-					        	</c:if> --%>
-					        	<a href="${ctx}/${resource.typeEnString}?resId=${resource.id}" target="_blank" >进入</a>
+				        		<c:if test="${resource.typeEnString == 'file'}">
+				        			<img src="${ctx}/resource/images/res_file.png" title="${resource.typeCnString}">
+				        			<span>${resource.title}</span>
+				        			<div class="course_list_oper">
+						        		<a href="${ctx}/${resource.typeEnString}?resId=${resource.id}" target="_blank" title="点击进入">我要观看</a>
+						        	</div>
+				        		</c:if>
+				        		<c:if test="${resource.typeEnString == 'live'}">
+				        			<img src="${ctx}/resource/images/res_live.png" title="${resource.typeCnString}">
+				        			<span>${resource.title}</span>
+				        			<div class="course_list_oper">
+					        			<c:if test="${resource.status == -1}"><span class="live_without_start">未开始</span></c:if>
+						        		<c:if test="${resource.status == 0}"><a href="${ctx}/${resource.typeEnString}?resId=${resource.id}" target="_blank" title="点击进入">正在直播中...</a></c:if>
+						        		<c:if test="${resource.status == 1}"><span class="live_done">已结束</span></c:if>
+						        	</div>
+				        		</c:if>
+				        		<c:if test="${resource.typeEnString == 'doc'}">
+				        			<img src="${ctx}/resource/images/res_doc.png" title="${resource.typeCnString}">
+				        		</c:if>
+				        		<c:if test="${resource.typeEnString == 'train'}">
+				        			<img src="${ctx}/resource/images/res_train.png" title="${resource.typeCnString}">
+				        			<span>${resource.title}</span>
+				        			<div class="course_list_oper">
+						        		<a href="${ctx}/${resource.typeEnString}?resId=${resource.id}" target="_blank" title="点击进入">我要做题</a>
+						        	</div>
+				        		</c:if>
 				            </div>
 		            	</dd>
 		            	</c:forEach>

@@ -14,7 +14,7 @@ import com.santrong.plt.webpage.course.entry.OrderItem;
  */
 public interface OrderMapper {
 	
-	@Insert("insert into web_order values(#{id}, #{userId}, #{courseId}, #{price}, #{status} #{cts}, #{uts})")
+	@Insert("insert into web_order values(#{id}, #{userId}, #{courseId}, #{price}, #{status}, #{cts}, #{uts})")
 	int insert(OrderItem order);
 	
 	@Update("update web_order set status=#{status},uts=#{uts} where id=#{id}")

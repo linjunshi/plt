@@ -263,14 +263,14 @@ input[type="reset"]::-moz-focus-inner, input[type="button"]::-moz-focus-inner, i
 .catalog_box_nav li a:hover, .column_left_nav li a:hover{ background:url(../images/user_hover.png) no-repeat left bottom; color:#188EEE;}
 .img_item {float:left;display:block; overflow:hidden;}
 .img_item .pic img {width:234px; height:140px;}
-.img_list {float:left;display:block;width:220px; margin:20px 22px 0px 0px; padding-bottom:10px; border:1px #fff solid; overflow:hidden;}
+.img_list {float:left;display:block;width:220px; margin:20px 20px 0px 0px; padding-bottom:10px; border:2px #f5f5f5 solid; overflow:hidden;}
 .img_user h2{ width:200px; height:40px; line-height:40px; overflow:hidden; font-size:18px; text-align:center; margin-top:6px;}
 .img_counts {float:left;display:block; margin-left:10px; text-align:right;}
 .img_counts .price {float:left; width:80px;}
 .img_counts .price b{color:#f00; font-size:18px;padding-left:5px;}
 .img_counts .sales {float:left;  width:86; margin-left:30px; line-height:30px;}
 .img_counts .sales strong { font-weight:110; padding-right:5px;}
-.img_list:hover { background:#fff; box-shadow:0px 0px 5px #87cfff;border:1px #a7dcff solid;}
+.img_list:hover { background:#fff; box-shadow:0px 0px 6px #87cfff;border:2px #a7dcff solid;}
 
 /*---------------课程列表--搜索条件---------------*/
 .list_content { width:960px;float:left; margin-right:20px;}
@@ -329,8 +329,8 @@ input[type="reset"]::-moz-focus-inner, input[type="button"]::-moz-focus-inner, i
 
 .schoool_box_list { width:1200px; margin-bottom:20px;}
 .schoool_box_list ul { width:1200px; position:relative;}
-.schoool_box_list ul li { min-height:190px;}
-.schoool_box_list ul li, .sh_ke .sh_sch_ke li { width:220px;float:left; display:block; margin:0 19px 20px 0; border:2px #fff solid; padding-bottom:8px; position:relative; background:#f5f5f5; }
+.schoool_box_list ul li { min-height:150px;}
+.schoool_box_list ul li, .sh_ke .sh_sch_ke li { width:220px;float:left; display:block; margin:0 19px 20px 0; border:2px #ccc solid; padding-bottom:8px; position:relative; background:#f5f5f5; }
 .schoool_box_list ul li:hover, .sh_ke .sh_sch_ke li:hover{ border:#009871 2px solid;}
 .schoool_box_list .sch_star img, .sh_ke .sh_sch_ke .sch_star img{vertical-align:middle;}
 .schoool_box_list b, .sh_ke .sh_sch_ke b { color:#f90; font-size:18px; margin:0 5px; font-weight:normal;}
@@ -400,16 +400,20 @@ input[type="reset"]::-moz-focus-inner, input[type="button"]::-moz-focus-inner, i
 .th_car_list dt{ width:100%; height:18px; line-height:30px;font-size:18px; color:#009871;padding:10px 0; text-indent:20px;}
 /* .th_car_list dd{ width:100%;background:url(../images/ad.jpg) repeat-x left bottom;  line-height:30px; padding:5px 0;overflow:hidden;} */
 .th_car_list dd{ width:100%;border-bottom:1px dashed #dbdbdb;  line-height:30px; padding:5px 0;overflow:hidden;}
-.th_car_list dd a{ float:right; display:block; width:100px;background:url(../images/29913.gif) no-repeat 10px center; height:30px; text-align:center; color:#009871;}
-.th_car_list dd a:hover{ background:#fff url(../images/29914.gif) no-repeat 10px center; color:#06654d;}
+/* .th_car_list dd a{ float:right; display:block; width:100px;background:url(../images/29913.gif) no-repeat 10px center; height:30px; text-align:center; color:#009871;}
+.th_car_list dd a:hover{ background:#fff url(../images/29914.gif) no-repeat 10px center; color:#06654d;} */
 .th_car_list dd:hover{ background:#dbdbdb; cursor:pointer;}
 .course_list_tab p{ float:left; width:90%; margin-left:20px; height:30px; line-height:30px;}
 .course_list_tab b { margin-left:20px;}
 .course_list_des { padding-left:86px;}
+/* .course_list_des img{top: 4px;position: relative;margin-right: 5px; width:20px; height:20px;} */
 .course_list_des img{top: 4px;position: relative;margin-right: 5px; width:20px; height:20px;}
 .course_list_des span{ line-height:24px;}
-.course_list_des a{float:right; color:#009871;background:green;}
-.course_list_des a:hover{ background:#ffffff; }
+.course_list_des .course_list_oper{float:right;width: 180px;}
+.course_list_des a{float:left; color:#009871;background:url(../images/29913.gif) no-repeat 0px center; text-indent: 20px;}
+.course_list_des a:hover{ color:#f90;background:#dbdbdb url(../images/29914.gif) no-repeat 0px center;text-indent: 20px;}
+.course_list_des .live_done{ float:left; text-indent: 20px;}
+.course_list_des .live_without_start{ float:left; text-indent: 20px;}
 
 .th_evaluation .comm_pjxq {padding-top:10px;width: 1200px;}
 .th_mr { float:right;margin-right: 40px;color: #c2c0c0;}

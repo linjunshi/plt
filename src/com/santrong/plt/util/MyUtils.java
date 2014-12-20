@@ -91,6 +91,54 @@ public class MyUtils {
 	}
 	
 	/**
+	 * 获取一个日期加几分钟后的日期
+	 * @param str(String)
+	 * @param pattern(String)
+	 * @param minute(int)
+	 * @return String
+	 */
+	public static String addDateMinute(String str,String pattern, int minute) {
+		if (pattern == null) {
+			pattern = DF_yyyy_MM_dd_HH_mm_ss;
+		}
+		SimpleDateFormat sdf = new SimpleDateFormat(pattern);
+		Date date = null;
+		try {
+			date = sdf.parse(str);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		if (date == null)  
+            return null;  
+//        System.out.println("front:" + sdf.format(date)); 
+        Calendar cal = Calendar.getInstance();  
+        cal.setTime(date);  
+        cal.add(Calendar.MINUTE, minute);// 24小时制  
+        date = cal.getTime();  
+//        System.out.println("after:" + sdf.format(date));  
+        cal = null;  
+        return sdf.format(date);
+	}
+	
+	/**
+	 * 获取一个日期加几分钟后的日期
+	 * @param str(String)
+	 * @param pattern(String)
+	 * @param minute(int)
+	 * @return String
+	 */
+	public static Date addDateMinute(Date date, int minute) {
+		if (date == null)
+            return null;  
+        Calendar cal = Calendar.getInstance();  
+        cal.setTime(date);  
+        cal.add(Calendar.MINUTE, minute);// 24小时制  
+        date = cal.getTime();  
+        cal = null;  
+        return date;
+	}
+	
+	/**
      * 获取当前日期和时间
      * @author huangweihua
      * @param pattern 日期格式 例：yyyy-MM-dd HH:mm:ss
@@ -109,6 +157,8 @@ public class MyUtils {
      * 比较两个日期时间的大小</br>
      * -1:str1小于str2; 0:str1等于str2; 1:str1大于str2;
      * @author huangweihua
+     * @param str1
+     * @param str2
      * @param pattern 日期格式 例：yyyy-MM-dd HH:mm:ss
      * @return int
      */
@@ -117,18 +167,35 @@ public class MyUtils {
 			pattern = DF_yyyy_MM_dd_HH_mm_ss;
 		}
 		SimpleDateFormat sdf = new SimpleDateFormat(pattern);
-		Calendar c1 = Calendar.getInstance();
-		Calendar c2 = Calendar.getInstance();
+		Calendar cal1 = Calendar.getInstance();
+		Calendar cal2 = Calendar.getInstance();
 		try {
-			c1.setTime(sdf.parse(str1));
-			c2.setTime(sdf.parse(str2));
+			cal1.setTime(sdf.parse(str1));
+			cal2.setTime(sdf.parse(str2));
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
-		int result = c1.compareTo(c2);//-1:str1小于str2; 0:str1等于str2; 1:str1大于str2;
+		int result = cal1.compareTo(cal2);//-1:str1小于str2; 0:str1等于str2; 1:str1大于str2;
 		return result;
 	}
     
+	/**
+     * 比较两个日期时间的大小</br>
+     * -1:date1小于date2; 0:date1等于date2; 1:date1大于date2;
+     * @author huangweihua
+     * @param date1
+	 * @param date2
+     * @return int
+     */
+	public static int compareTo(Date date1, Date date2){
+		Calendar cal1 = Calendar.getInstance();
+		Calendar cal2 = Calendar.getInstance();
+		cal1.setTime(date1);
+		cal2.setTime(date2);
+		int result = cal1.compareTo(cal2);//-1:date1小于date2; 0:date1等于date2; 1:date1大于date2;
+		return result;
+	}
+	
 	public static int stringToInt(String str) {
 		return stringToInt(str, 0);
 	}

@@ -15,10 +15,10 @@ public class ResourceType {
 	@Description(cn = "课件", en = "file")
 	public static final int Type_File = 1;
 	
-	@Description(cn = "直播资源", en = "live")
+	@Description(cn = "直播", en = "live")
 	public static final int Type_Live = 2;
 	
-	@Description(cn = "学习材料", en = "doc")
+	@Description(cn = "资料", en = "doc")
 	public static final int Type_Doc = 3;
 	
 	@Description(cn = "测验", en = "train")
