@@ -1,6 +1,7 @@
 package com.santrong.plt.webpage.manage.teacher;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
@@ -641,6 +642,7 @@ public class CourseMAction extends TeacherBaseAction {
 		String courseId = request.getParameter("courseId");
 		String chapterId = request.getParameter("chapterId");
 		String resourceId = request.getParameter("resourceId");
+		Calendar cal = Calendar.getInstance();
 		try {
 						
 			if (liveForm != null) {
@@ -651,8 +653,8 @@ public class CourseMAction extends TeacherBaseAction {
 				if (MyUtils.isNotNull(liveForm.getBeginTime()) && !ValidateTools.isDateTime(liveForm.getBeginTime())) {
 					addError("日期格式不正确！");
 				}
-				if (MyUtils.isNotNull(liveForm.getEndTime()) && !ValidateTools.isDateTime(liveForm.getEndTime())) {
-					addError("日期格式不正确！");
+				if (liveForm.getDuration() ==  null || liveForm.getDuration() == 0) {
+					addError("直播时长错误！");
 				}
 				if (MyUtils.isNotNull(courseId) && MyUtils.isNotNull(chapterId)) {
 					LiveDao liveDao = new LiveDao();
@@ -670,10 +672,10 @@ public class CourseMAction extends TeacherBaseAction {
 							// 修改直播信息
 							liveItem.setTitle(liveForm.getTitle().trim());
 							liveItem.setDuration(liveForm.getDuration());
-							liveItem.setBeginTime(MyUtils.stringToDate(
-									liveForm.getBeginTime(), "yyyy-MM-dd HH:mm"));
-							liveItem.setEndTime(MyUtils.stringToDate(
-									liveForm.getEndTime(), "yyyy-MM-dd HH:mm"));
+							liveItem.setBeginTime(MyUtils.stringToDate(liveForm.getBeginTime(), "yyyy-MM-dd HH:mm"));
+							cal.setTime(liveItem.getBeginTime());
+							cal.add(Calendar.MINUTE, liveForm.getDuration());
+							liveItem.setEndTime(cal.getTime());
 							liveItem.setUrl(liveForm.getUrl());
 							liveItem.setUts(new Date());
 							liveDao.update(liveItem);
@@ -693,10 +695,10 @@ public class CourseMAction extends TeacherBaseAction {
 						liveItem.setId(MyUtils.getGUID());
 						liveItem.setTitle(liveForm.getTitle().trim());
 						liveItem.setDuration(liveForm.getDuration());
-						liveItem.setBeginTime(MyUtils.stringToDate(
-								liveForm.getBeginTime(), "yyyy-MM-dd HH:mm"));
-						liveItem.setEndTime(MyUtils.stringToDate(
-								liveForm.getEndTime(), "yyyy-MM-dd HH:mm"));
+						liveItem.setBeginTime(MyUtils.stringToDate(liveForm.getBeginTime(), "yyyy-MM-dd HH:mm"));
+						cal.setTime(liveItem.getBeginTime());
+						cal.add(Calendar.MINUTE, liveForm.getDuration());
+						liveItem.setEndTime(cal.getTime());
 						liveItem.setOwnerId(currentUser().getId());
 						liveItem.setUrl(liveForm.getUrl());
 						liveItem.setCts(new Date());

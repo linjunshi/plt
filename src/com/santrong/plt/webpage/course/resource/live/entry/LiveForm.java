@@ -11,8 +11,7 @@ public class LiveForm {
 	private String title;
 	private String url;
 	private String beginTime;
-	private String endTime;
-	private int duration;
+	private Integer duration;
 	private String groupId;
 	private String ownerId;
 
@@ -41,16 +40,10 @@ public class LiveForm {
 	public void setBeginTime(String beginTime) {
 		this.beginTime = beginTime;
 	}
-	public String getEndTime() {
-		return endTime;
-	}
-	public void setEndTime(String endTime) {
-		this.endTime = endTime;
-	}
-	public int getDuration() {
+	public Integer getDuration() {
 		return duration;
 	}
-	public void setDuration(int duration) {
+	public void setDuration(Integer duration) {
 		this.duration = duration;
 	}
 	public String getGroupId() {
