@@ -31,7 +31,7 @@
 							<a href="${basicUrl}page=${query.pageCount}" title="尾页">尾页</a>
 							</c:if>
 							页码：<b><span class="page_height_light">${query.pageNum}</span>&nbsp;/&nbsp;${query.pageCount}</b>&nbsp;页，跳到第
-							<input type="text" name="page" value="" class="page_go_input" required required_Number>&nbsp;页&nbsp;
+							<input type="text" id="page" name="page" value="" class="page_go_input"  required required_PositiveInteger required_MaxRange="${query.pageCount}" >&nbsp;页&nbsp;
 							<input type="submit" value="GO" class="page_submit_input" title="点击" >，共&nbsp;<b class="page_height_light">${query.count}</b>&nbsp;条记录
 						</form>
 					</div>

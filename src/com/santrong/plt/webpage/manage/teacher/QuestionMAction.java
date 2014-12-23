@@ -54,10 +54,7 @@ public class QuestionMAction extends TeacherBaseAction{
 			TrainQuestionDao tqDao = new TrainQuestionDao();
 			TrainQuestionItem tqItem = tqDao.selectById(questionId);
 			// 判断当前用户是否是该课程的所有者
-			if(tqItem == null) {
-				return this.redirect("/");
-			}
-			if(!tqItem.getOwnerId().equals(this.currentUser().getId())) {
+			if(tqItem == null || !tqItem.getOwnerId().equals(this.currentUser().getId())) {
 				return this.redirect("/");
 			}
 			if (tqDao.deleteById(questionId)) {
@@ -86,10 +83,7 @@ public class QuestionMAction extends TeacherBaseAction{
 				TrainQuestionDao tqDao = new TrainQuestionDao();
 				TrainQuestionItem tqItem = tqDao.selectById(questionId);
 				// 判断当前用户是否是该课程的所有者
-				if(tqItem == null) {
-					return this.redirect("/");
-				}
-				if(!tqItem.getOwnerId().equals(this.currentUser().getId())) {
+				if(tqItem == null || !tqItem.getOwnerId().equals(this.currentUser().getId())) {
 					return this.redirect("/");
 				}
 				request.setAttribute("tqItem", tqItem);
@@ -175,10 +169,7 @@ public class QuestionMAction extends TeacherBaseAction{
 						TrainQuestionDao tqDao = new TrainQuestionDao();
 						TrainQuestionItem tqItem = tqDao.selectById(tqForm.getId());
 						// 判断当前用户是否是该课程的所有者
-						if(tqItem == null) {
-							return this.redirect("/");
-						}
-						if(!tqItem.getOwnerId().equals(this.currentUser().getId())) {
+						if(tqItem == null || !tqItem.getOwnerId().equals(this.currentUser().getId())) {
 							return this.redirect("/");
 						}
 						tqItem.setTopic(tqForm.getTopic());

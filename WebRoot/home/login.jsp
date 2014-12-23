@@ -22,8 +22,6 @@ body {color: #666;font: 12px/1.8em Arial, Helvetica, sans-serif;background:#FFF;
 .loginuser {width: 330px;display: block;float: left;color: #FFF;margin:15px 0;height:30px;}
 .login {display: block;	width: 100px;text-align: right;float: left;font-size: 16px;color: #000;	height:30px;line-height:30px;}
 .text2 {display: block;	width: 150px;height:26px;text-align:left;float:left;}
-.login_forgot { margin-left:5px; font-size:12px; color:#009871; text-decoration: underline;}
-.login_forgot:hover{ color:#f90;text-decoration: underline;}
 
 .validation {display: block;width:60px;height:24px; line-height:24px;text-align: left;float: left;margin-right:3px;}
 .loginuser a{ line-height:40px;}

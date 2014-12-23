@@ -40,8 +40,9 @@ Globals.page = "Manage_personalInfo";
 		                        <div class="form_item">
 		                            <label for="username">昵称：</label>
 		                            <div class="form_field">
-		                                <input placeholder="6-32个字符" class="form_text" id="username" name="username" type="text" value="${user.username}" required/>
-		                                <span class="not-empty" title='此项为必填项'>*</span>
+		                                <input placeholder="6-32个字符" class="form_text" id="username" name="username" type="hidden" value="${user.username}"/>
+		                                <strong>${user.username}</strong>
+		                               <!--  <span class="not-empty" title='此项为必填项'>*</span> -->
 		                                <span class="form_error">（此项为登录名）</span>
 		                            </div>
 		                        </div>

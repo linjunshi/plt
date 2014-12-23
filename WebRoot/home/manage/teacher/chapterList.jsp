@@ -46,7 +46,7 @@ Globals.page = "Manage_chapterList";
 								</dt>
 								<c:forEach items="${chapter.resourceList}" var="resource">
 									<dd class="pt10">
-										<a class="sh_resource" href="${ctx}/${resource.typeEnString}?resId=${resource.id}" target="_blank" >${resource.title}---type:${resource.typeCnString}</a>
+										<a class="sh_resource" href="${ctx}/${resource.typeEnString}?resId=${resource.id}" target="_blank" >${resource.title}</a>
 										<span class="sh_operation_2">
 											<input type="hidden" id="resourceId" name="resourceId" value="${resource.id}"/>
 											<input type="hidden" id="resourceType" name="resourceType" value="${resource.type}"/>

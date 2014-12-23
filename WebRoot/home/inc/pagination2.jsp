@@ -30,7 +30,7 @@
 							</c:if>
 						 	页码：<b><span class="page_height_light">${query.pageNum}</span>&nbsp;/&nbsp;${query.pageCount}</b>&nbsp;页，跳到第
 						 	<input type="hidden" id="pageCount" name="pageCount" value="${query.pageCount}">
-							<input type="text" id="page" name="page" value="" class="page_go_input">&nbsp;页&nbsp;
-							<input type="submit" value="GO" class="page_submit_input" title="点击" >，共&nbsp;<b class="page_height_light">${query.count}</b>&nbsp;条记录
+							<input type="text" id="page" name="page" value="" class="page_go_input2">&nbsp;页&nbsp;
+							<input type="submit" value="GO" class="page_submit_input2" title="点击" >，共&nbsp;<b class="page_height_light">${query.count}</b>&nbsp;条记录
 					</div>
 				</c:if>

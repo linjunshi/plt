@@ -62,10 +62,7 @@ public class CommentMAction extends StudentBaseAction {
 			CourseDao courseDao = new CourseDao();
 			CourseItem courseItem = courseDao.selectById(courseId);
 			// 判断当前用户是否是该课程的所有者
-			if(courseItem == null) {
-				return this.redirect("/");
-			}
-			if(!courseItem.getOwnerId().equals(this.currentUser().getId())) {
+			if(courseItem == null || !courseItem.getOwnerId().equals(this.currentUser().getId())) {
 				return this.redirect("/");
 			}
 			

@@ -43,16 +43,16 @@ public class AccountAction extends BaseAction {
 	 * 注册页面提交
 	 * @param username
 	 * @param password
-	 * @param pwdagain
+	 * @param confirmPwd
 	 * @return
 	 */
 	@RequestMapping(value="/regist", method=RequestMethod.POST)
-	public String registPost(String username, String password, String pwdagain, String email) {
-		if(StringUtils.isNullOrEmpty(username) || StringUtils.isNullOrEmpty(password) || StringUtils.isNullOrEmpty(pwdagain) || StringUtils.isNullOrEmpty(email)) {
+	public String registPost(String username, String password, String confirmPwd, String email) {
+		if(StringUtils.isNullOrEmpty(username) || StringUtils.isNullOrEmpty(password) || StringUtils.isNullOrEmpty(confirmPwd) || StringUtils.isNullOrEmpty(email)) {
 			addError("请您输入的用户名、密码和确认密码！");
 			return "regist";
 		}
-		if(!password.equals(pwdagain)) {
+		if(!password.equals(confirmPwd)) {
 			addError("您输入的密码和确认密码不一致！");
 			return "regist";
 		}

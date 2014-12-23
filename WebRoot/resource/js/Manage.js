@@ -388,7 +388,7 @@ ManageClass.prototype = {
 					} else {
 						//修改操作
 						// 通过POST方式，递交给后台处理与数据库交互的逻辑
-						$.post(Globals.ctx + "/manage/course/modifyChapter", {id : chapterId, remark : remark}, function(result){
+						$.post(Globals.ctx + "/manage/course/modifyChapter", {courseId : courseId, id : chapterId, remark : remark}, function(result){
 							if (result == "success") {
 								$(opera_obj).children(".show_remark").html(remark);
 								$(opera_obj).children(".show_remark").show();
@@ -570,7 +570,7 @@ ManageClass.prototype = {
 				PageTurningFn(page);
 			});
 			
-			// TODO 填写页码，点击“GO”按钮时，跳转到指定页面
+			// TODO 填写页码，点击“GO”按钮时，跳转到指定页面(注意：章节维护页面中嵌进去的页面addResourceFile.jsp、addResourceLive.jsp)
 			var GoToPageFn = function(){
 				var page = eval($("#page").val().trim());
 				var pageCount = eval($("#pageCount").val().trim());
@@ -584,10 +584,10 @@ ManageClass.prototype = {
 					PageTurningFn(page);
 				}
 			}
-			$(".page_submit_input").live("click", function() {
+			$(".page_submit_input2").live("click", function() {
 				GoToPageFn();
 			});
-			$(".page_go_input").live("keydown", function() {
+			$(".page_go_input2").live("keydown", function() {
 				if (window.event.keyCode == "13") {//keyCode=13是回车键
 					GoToPageFn();
 				}

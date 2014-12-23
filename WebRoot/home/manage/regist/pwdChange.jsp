@@ -35,7 +35,7 @@ Globals.page = "Manage_index";
 							</c:if>
 							<form method="post" action="${ctx}/account/changePwdPost" class="form_info common_form" id="pwdChange_form">
 								<div class="form_item">
-									<label for="pwd">原始密码：</label>
+									<label for="oldPwd">原始密码：</label>
 									<div class="form_field">
 										<input placeholder="请输入您的原密码！" name="oldPwd" id="oldPwd" class="form_text" type="password" required/> 
 										<span class="not-empty" title='此项为必填项'>*</span>
@@ -43,14 +43,14 @@ Globals.page = "Manage_index";
 									</div>
 								</div>
 								<div class="form_item">
-									<label for="pwd">新密码：</label>
+									<label for="newPwd">新密码：</label>
 									<div class="form_field">
 										<input placeholder="请输入您的新密码！" name="newPwd" id="newPwd" class="form_text" type="password" required/>
 										<span class="not-empty" title='此项为必填项'>*</span>
 									</div>
 								</div>
 								<div class="form_item">
-									<label for="pwd">确认新密码：</label>
+									<label for="comfirmPwd">确认新密码：</label>
 									<div class="form_field">
 										<input placeholder="请输入您的确认新密码！" name="comfirmPwd" id="comfirmPwd" class="form_text" type="password" required equalTo="newPwd"/>
 										<span class="not-empty" title='此项为必填项'>*</span>

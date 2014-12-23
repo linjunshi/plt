@@ -48,6 +48,6 @@ public interface LiveMapper {
 			+ "left join course_chapter_to_resource b on a.id=b.resourceId "
 			+ "left join course_chapter c on b.chapterId=c.id "
 			+ "left join course d on c.courseId=d.id "
-			+ "where a.ownerId=#{userId} and a.endTime > now()")
+			+ "where a.ownerId=#{userId} and a.endTime > now() order by a.beginTime")
 	List<TeacherLiveForm> selectTeacherLive(String userId);
 }

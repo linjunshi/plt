@@ -49,15 +49,48 @@ jQuery(function($) {
 			}
 		});
 		
-		// 长度检测
-		$(this).find("[required_Length]").each(function() {
+		// 必填0或正整数
+		var re_number = /^[0-9]+$/i
+		$(this).find("[required_Number]").each(function() {
 			var val = $(this).val().trim();
-			var re_Length = $(this).attr("required_Length");
-			if (val == "" && val.length < re_Length) {
-				if (!re_Idcard.test(val)) {
-					$(this).addClass("text_warn");
-					isPass = false;
-				}
+			if (val == "" || !re_number.test(val)) {
+				$(this).addClass("text_warn");
+				$(this).val("");
+				isPass = false;
+			}
+		});
+		
+		// 必填正整数Positive Integer：1到＋∞
+		var re_number = /^[1-9]+$/i
+		$(this).find("[required_PositiveInteger]").each(function() {
+			var val = $(this).val().trim();
+			if (val == "" || !re_number.test(val)) {
+				$(this).addClass("text_warn");
+				$(this).val("");
+				isPass = false;
+			}
+		});
+		
+		// 最小长度检测
+		$(this).find("[required_MinLength]").each(function() {
+			var val = $(this).val().trim();
+			var minLength = eval($(this).attr("required_MinLength"));
+			if (val == "" || val.length < minLength) {
+				$(this).addClass("text_warn");
+				alert("您输入的长度不能小于" + minLength);
+				isPass = false;
+			}
+		});
+		
+		// 校验输入数字的范围： 小于等于required_MaxRange.val()
+		$(this).find("[required_MaxRange]").each(function() {
+			var val = eval($(this).val().trim());
+			var maxRange = eval($(this).attr("required_MaxRange"));
+			if (val != "" && val > maxRange) {
+				$(this).addClass("text_warn");
+				alert("您输入的最大数值不能大于：" + maxRange);
+				$(this).val("");
+				isPass = false;
 			}
 		});
 		
@@ -74,25 +107,14 @@ jQuery(function($) {
 			}
 		});
 
-		// 必填0或正整数
-		var re_number = /^[0-9]+$/i
-		$(this).find("[required_Number]").each(function() {
-			var val = $(this).val().trim();
-			if (val == "" || !re_number.test(val)) {
-				$(this).addClass("text_warn");
-				isPass = false;
-			}
-		});
-
 		// 日期类型检测 :yyyy-MM-dd
 		var re_Date = /^([0-9]{3}[1-9]|[0-9]{2}[1-9][0-9]{1}|[0-9]{1}[1-9][0-9]{2}|[1-9][0-9]{3})-(((0[13578]|1[02])-(0[1-9]|[12][0-9]|3[01]))|((0[469]|11)-(0[1-9]|[12][0-9]|30))|(02-(0[1-9]|[1][0-9]|2[0-8])))$/i;
 		$(this).find("[required_Date]").each(function() {
 			var val = $(this).val().trim();
-			if (val != "" ) {
-				if (!re_Date.test(val)) {
-					$(this).addClass("text_warn");
-					isPass = false;
-				}
+			if (val != "" && !re_Date.test(val)) {
+				$(this).addClass("text_warn");
+				alert("日期类型必须为:yyyy-MM-dd");
+				isPass = false;
 			}
 		});
 
@@ -100,11 +122,10 @@ jQuery(function($) {
 		var re_Time = /(0\d|1\d|2[0-3]):[0-5]\d(:([0-5]\d))?$/i;
 		$(this).find("[required_Time]").each(function() {
 			var val = $(this).val().trim();
-			if (val != "" ) {
-				if (!re_Time.test(val)) {
-					$(this).addClass("text_warn");
-					isPass = false;
-				}
+			if (val != "" && !re_Time.test(val)) {
+				$(this).addClass("text_warn");
+				alert("日期类型必须为:Hi:mm[:ss]，秒是可选填的");
+				isPass = false;
 			}
 		});
 		
@@ -112,11 +133,9 @@ jQuery(function($) {
 		var re_Time = /([0-9]{3}[1-9]|[0-9]{2}[1-9][0-9]{1}|[0-9]{1}[1-9][0-9]{2}|[1-9][0-9]{3})-(((0[13578]|1[02])-(0[1-9]|[12][0-9]|3[01]))|((0[469]|11)-(0[1-9]|[12][0-9]|30))|(02-(0[1-9]|[1][0-9]|2[0-8])))(\s(0\d|1\d|2[0-3]):[0-5]\d(:([0-5]\d)))?$/i;
 		$(this).find("[required_DateTime]").each(function() {
 			var val = $(this).val().trim();
-			if (val != "" ) {
-				if (!re_Time.test(val)) {
-					$(this).addClass("text_warn");
-					isPass = false;
-				}
+			if (val != "" && !re_Time.test(val)) {
+				$(this).addClass("text_warn");
+				isPass = false;
 			}
 		});
 		
@@ -135,11 +154,9 @@ jQuery(function($) {
 		var re_Phone = /^(0|86|17951)?(13[0-9]|15[012356789]|17[678]|18[0-9]|14[57])[0-9]{8}$/i;
 		$(this).find("[required_Phone]").each(function() {
 			var val = $(this).val().trim();
-			if (val != "" ) {
-				if (!re_Phone.test(val)) {
-					$(this).addClass("text_warn");
-					isPass = false;
-				}
+			if (val != "" && !re_Phone.test(val)) {
+				$(this).addClass("text_warn");
+				isPass = false;
 			}
 		});
 

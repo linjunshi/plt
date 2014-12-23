@@ -32,35 +32,36 @@ Globals.page = "Index_regist";
 						
 						<form action="${ctx}/account/regist" method="post" class="form_vertical common_form">
 							<div class="form_item">
-								<label for="username">用户名：</label>
+								<label for="username">用&nbsp; 户  名：</label>
 								<div class="form_field">
-									<input placeholder="6-32个字符" class="form_text" name="username" type="text" required />
+									<input placeholder="5-32个字符" class="form_text" name="username" type="text" required required_MinLength="5"/>
 									<span class="not-empty" title='此项为必填项'>*</span>
 								</div>
 							</div>
 							<div class="form_item">
-								<label for="pwd">密码：</label>
+								<label for="pwd">密&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;码：</label>
 								<div class="form_field">
 									<input name="password" id="pwd" class="form_text" type="password" required />
 									<span class="not-empty" title='此项为必填项'>*</span>
 								</div>
 							</div>
 							<div class="form_item">
-								<label for="pwd">确认密码：</label>
+								<label for="confirmPwd">确认密码：</label>
 								<div class="form_field">
-									<input name="pwdagain" id="pwd" class="form_text" type="password" required equalTo="password" />
+									<input name="confirmPwd" id="pwd" class="form_text" type="password" required equalTo="password" />
 									<span class="not-empty" title='此项为必填项'>*</span>
 								</div>
 							</div>
 							<div class="form_item">
-								<label for="pwd">邮箱：</label>
+								<label for="email">邮&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;箱：</label>
 								<div class="form_field">
 									<input name="email" class="form_text" type="text" required required_Mail />
 									<span class="not-empty" title='此项为必填项'>*</span>
+									<span class="not-empty" ><a href="${ctx}/account/forgotPwd" target="_blank" class="login_forgot">忘记密码?</a></span>
 								</div>
 							</div>				
 							<div class="form_action">
-								<input class="btn_regist" type="submit" value="提交" name="regist" />
+								<input class="btn_regist" type="submit" value="立即注册" name="regist" />
 							</div>
 						</form>
 					</div>

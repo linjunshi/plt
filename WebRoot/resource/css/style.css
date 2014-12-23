@@ -23,7 +23,7 @@ div[contenteditable=true] {-webkit-line-break: after-white-space; -webkit-nbsp-m
 .margin_right_clear {margin-right:0px !important;}
 
 /*------------------form表单样式START----------------*/
-.form_page{ width:560px; margin:0 auto; margin-bottom:20px; padding-left:80px;}
+.form_page{ width:570px; margin:0 auto; margin-bottom:20px; padding-left:80px;padding-top: 10px;}
 button,input,select,textarea{vertical-align:middle;}
 textarea{resize:none;vertical-align:top;overflow:auto;font:12px/1.5 Helvetica,Arial;width:500px;height:50px;}
 .form_text{	margin:0;font:12px/1.5 Helvetica,Arial;height:18px;width:200px;}
@@ -56,13 +56,16 @@ box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);}
 .form_info .form_item{ margin:20px 0;}
 .form_info .form_field a{color:#009871;}
 .form_info .form_field a:hover{color:#f90;}
-.form_vertical label{display:block;	float:none;width:auto;text-align:left;}
+.form_vertical .form_item{margin:20px 0;}
+.form_vertical label{display:block;	float:left;width:100px;text-align:right;}
 .form_vertical .form_field{float:none;}
 .form_vertical .form_action,.form_vertical .item_no_label{padding-left:0;}
 .form_item select{ *margin-top:5px;*vertical-align:top;}
 .form_action{clear:both;}
-.form_action .btn_regist{ width:80px; height:30px; line-height:30px; background:#009871; display:block; color:#fff; text-align:center; font-size:16px; letter-spacing:4px;border:0;}
+.form_action .btn_regist{ width:100px; height:30px; line-height:30px; background:#009871; display:block; color:#fff; text-align:center; font-size:16px; border:0;margin-left: 100px;}
 .form_action .btn_regist:HOVER{ background:#044a38;}
+.login_forgot { margin-left:5px; font-size:12px; color:#009871; text-decoration: underline;}
+.login_forgot:hover{ color:#f90;text-decoration: underline;}
 .form_action input{ width:80px; height:30px; line-height:30px; float:left; background:#009871; display:block; color:#fff; text-align:center; font-size:16px; letter-spacing:4px;border:0;margin-right:10px;margin-bottom: 20px;}
 .form_action input:HOVER{ background:#044a38;cursor: pointer;}
 .form_action a{width:80px; height:30px; line-height:30px; background:#009871; display: inline-block; color:#fff; text-align:center; font-size:16px; letter-spacing:4px; margin-right:10px;}
@@ -103,8 +106,8 @@ span.form_error, span.form_success{border-width:1px;display:inline-block;*displa
 .pagination a:hover { background:#f90; }
 .pagination .page_current { background:#999;}
 .pagination .page_current:hover { background:#999; }
-.pagination .page_go_input{width: 30px;height: 18px;line-height: 18px;color: #f90;font-weight: bold;}
-.pagination .page_submit_input{font-weight: bold;width: 30px;height: 23px;line-height: 16px;text-align:center;}
+.pagination .page_go_input,.pagination .page_go_input2{width: 30px;height: 18px;line-height: 18px;color: #f90;font-weight: bold;}
+.pagination .page_submit_input,.pagination .page_submit_input2{font-weight: bold;width: 30px;height: 23px;line-height: 16px;text-align:center;}
 .pagination .page_height_light{color:#f90;}
 input[type="reset"]::-moz-focus-inner, input[type="button"]::-moz-focus-inner, input[type="submit"]::-moz-focus-inner, input[type="file"] > input[type="button"]::-moz-focus-inner{  border:none;padding:0; }
 /*-----------------顶头部分---------------------*/
@@ -379,7 +382,7 @@ input[type="reset"]::-moz-focus-inner, input[type="button"]::-moz-focus-inner, i
 .bottom_d { float:left;width:123px; height:40px; line-height:40px;padding:3% 0; text-align:center;font-size:16px; color:#666}
 .bottom_c:hover, .bottom_d:hover { color:#009871;}
 
-.sectionMain { width:1200px; margin:20px 0;border:1px #dbdbdb solid;border-bottom-style: none;}
+.sectionMain { width:1200px; margin:20px 0;border:1px #dbdbdb solid;}
 .sec_main{ width:1200px;}
 .sec_main ul { width:100%; height:40px; line-height:40px; background:#f5f5f5;border-bottom:#CCC 1px solid;}
 .sec_main ul li{ float:left; width:200px; font-size:18px; color:#333; background:#f5f5f5; text-align:center; border-right:#CCC 1px solid; cursor:pointer;}
@@ -411,11 +414,13 @@ input[type="reset"]::-moz-focus-inner, input[type="button"]::-moz-focus-inner, i
 .course_list_des span{ line-height:24px;}
 .course_list_des .course_list_oper{float:right;width: 180px;}
 .course_list_des a{float:left; color:#009871;background:url(../images/29913.gif) no-repeat 0px center; text-indent: 20px;}
-.course_list_des a:hover{ color:#f90;background:#dbdbdb url(../images/29914.gif) no-repeat 0px center;text-indent: 20px;}
+.course_list_des a:hover{ color:#f90;background:#ffffff url(../images/29914.gif) no-repeat 0px center;text-indent: 20px;}
 .course_list_des .live_done{ float:left; text-indent: 20px;}
 .course_list_des .live_without_start{ float:left; text-indent: 20px;}
 
 .th_evaluation .comm_pjxq {padding-top:10px;width: 1200px;}
+.th_say {float:left;padding-left: 30px;font-size: 16px;margin-bottom: -10px;}
+.th_say strong{background: url(../images/user_comment.png) no-repeat 0;padding-left: 20px;}
 .th_mr { float:right;margin-right: 40px;color: #c2c0c0;}
 .th_mr span{margin-right:10px;}
 .th_evaluation .th_pt { float:right;width:1150px;display:block; margin-top:3px;}
@@ -617,7 +622,7 @@ input[type="reset"]::-moz-focus-inner, input[type="button"]::-moz-focus-inner, i
 .sh_myvod_ti{ float:left;width:960px; background:#dbdbdb; height:30px; line-height:30px; padding:5px 0 5px 10px; margin-top:10px;}
 .sh_myvod_ti span{ width:100px; display:inline-block;margin:0 10px 0 0; text-align:center; font-size:16px;}
 .sh_myvod_ti .sh_ti_sid { margin:0px 360px 0px 120px!important;}
-.sh_myvod li { width:98%; height:auto; display:block;padding:10px 0;clear:both;background:url(../images/time_img.jpg) no-repeat 120px center;}
+.sh_myvod li { width:98%; height:54px; display:block;padding:10px 0;clear:both;background:url(../images/time_img.jpg) no-repeat 120px center;}
 .sh_myvod_le {float:left;display:block;width:130px;font-size:16px;text-align:center; color:#009871; margin:5px 20px 0 0;}
 .sh_myvod_le span{font-size:13px; color:#999;}
 .sh_myvod_ri {width:820px;float:left;border-bottom:1px #ccc solid;}
@@ -633,7 +638,7 @@ input[type="reset"]::-moz-focus-inner, input[type="button"]::-moz-focus-inner, i
 .sh_add_chapter dd { margin-left:60px; border-bottom:1px #dbdbdb solid;border-left:1px #dbdbdb solid; height:40px; line-height:40px; text-indent:10px; color:#333;}
 .sh_add_chapter .pt11 a{color:#666;}
 .sh_add_opera { display:block; position:relative; height:40px; line-height:40px;}
-.sh_add_opera p { position:absolute; left:110px; top:0px;}
+.sh_add_opera p { position:absolute; left:60px; top:0px;}
 .sh_operation { display:none; position:absolute; right:0px; top:2px; width:200px;}
 .sh_operation a{ margin-right:10px; padding:2px 6px; color:#666; width:80px;}
 .sh_operation a:hover{ color:#009871; text-decoration:underline;} 

@@ -25,13 +25,27 @@ public class ValidateTools {
 	}
 	
 	/**
-	 * 校验是否是必填0或正整数
+	 * 校验是否是必填0或正整数(自然数)
 	 * @param str
 	 * @return
 	 */
 	public static boolean isInt(String str) {
 		if(str != null) {
 			Pattern pat = Pattern.compile("^[0-9]+$");  
+			Matcher mat = pat.matcher(str);  
+			return mat.find();
+		}
+		return false;
+	}
+	
+	/**
+	 * 校验是否是必填正整数
+	 * @param str
+	 * @return
+	 */
+	public static boolean isPosiInteger(String str) {
+		if(str != null) {
+			Pattern pat = Pattern.compile("^[1-9]+$");  
 			Matcher mat = pat.matcher(str);  
 			return mat.find();
 		}

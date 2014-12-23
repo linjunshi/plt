@@ -27,7 +27,7 @@ Globals.page = "Manage_liveList";
 				            <div class="sh_myvod">
 				                <ul>
 				                	<c:forEach items="${liveList}" var="live">
-				                    <li style="height:54px;">
+				                    <li>
 				                        <div class="sh_myvod_le">
 				                            <h3><fmt:formatDate value="${live.beginTime}" type="date"/></h3>
 				                            <span><fmt:formatDate value="${live.beginTime}" pattern="HH:mm"/>--<fmt:formatDate value="${live.endTime}" pattern="HH:mm"/></span>

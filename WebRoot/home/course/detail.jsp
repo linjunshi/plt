@@ -147,6 +147,7 @@ Globals.page = "Index_courseDetail";
 		    <div class="th_evaluation" id="course_comment">
 		        <h2>课程评价</h2>
 		        <div class="comm_pjxq clr">
+		        	<div class="th_say"><strong>我来说两句</strong></div>
 		            <div class="fl th_mr"><span class="pt3">请文明上网，理性发言！</span> 总共有&nbsp;&nbsp;<span class="pt5">${course.commentCount}</span>条课程评论</div>
 		        </div>
 				<div class="th_con">

@@ -244,7 +244,7 @@ public class CourseAction extends BaseAction {
 				if (cr.getResourceType() == ResourceType.Type_Live) {
 					LiveDao liveDao = new LiveDao();
 					LiveItem liveItem = liveDao.selectById(cr.getResourceId());
-					if (liveItem != null) {
+					if (liveItem != null && liveItem.getBeginTime() != null) {
 						int status = -1;
 						//先用开始时间和当前时间进行比较
 						//比较两个日期时间的大小 ,-1:str1小于str2; 0:str1等于str2; 1:str1大于str2;时间都要精确到分

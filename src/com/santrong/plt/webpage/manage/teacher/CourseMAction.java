@@ -169,11 +169,8 @@ public class CourseMAction extends TeacherBaseAction {
 		try {
 			CourseDao courseDao = new CourseDao();
 			CourseItem course = courseDao.selectById(courseId);
-			if(course == null) {
-				return this.redirect("/");
-			}
 			// 判断当前用户是否是该课程的所有者
-			if(!course.getOwnerId().equals(this.currentUser().getId())) {
+			if(course == null || !course.getOwnerId().equals(this.currentUser().getId())) {
 				return this.redirect("/");
 			}
 			
@@ -198,10 +195,7 @@ public class CourseMAction extends TeacherBaseAction {
 			CourseItem courseItem = courseDao.selectById(courseForm.getId());
 			
 			// 判断当前用户是否是该课程的所有者
-			if(courseItem == null) {
-				return this.redirect("/");
-			}
-			if(!courseItem.getOwnerId().equals(this.currentUser().getId())) {
+			if(courseItem == null || !courseItem.getOwnerId().equals(this.currentUser().getId())) {
 				return this.redirect("/");
 			}
 			
@@ -283,10 +277,7 @@ public class CourseMAction extends TeacherBaseAction {
 			CourseDao courseDao = new CourseDao();
 			CourseItem courseItem = courseDao.selectById(courseId);
 			// 判断当前用户是否是该课程的所有者
-			if(courseItem == null) {
-				return this.redirect("/");
-			}
-			if(!courseItem.getOwnerId().equals(this.currentUser().getId())) {
+			if(courseItem == null || !courseItem.getOwnerId().equals(this.currentUser().getId())) {
 				return this.redirect("/");
 			}
 			courseDao.deleteById(courseId);
@@ -310,10 +301,7 @@ public class CourseMAction extends TeacherBaseAction {
 			CourseDetailView course = courseDao.selectDetailById(courseId);
 			
 			// 判断当前用户是否是该课程的所有者
-			if(course == null) {
-				return this.redirect("/");
-			}
-			if(!course.getOwnerId().equals(this.currentUser().getId())) {
+			if(course == null || !course.getOwnerId().equals(this.currentUser().getId())) {
 				return this.redirect("/");
 			}
 			
@@ -387,10 +375,7 @@ public class CourseMAction extends TeacherBaseAction {
 			CourseItem courseItem = courseDao.selectById(courseId);
 			
 			// 判断当前用户是否是该课程的所有者
-			if(courseItem == null) {
-				return "亲，对不起，我找不到该课程相关的信息！请您刷新页面后再操作！";
-			}
-			if(!courseItem.getOwnerId().equals(this.currentUser().getId())) {
+			if(courseItem == null || !courseItem.getOwnerId().equals(this.currentUser().getId())) {
 				return "亲，对不起，我找不到该课程相关的信息！请您刷新页面后再操作！";
 			}
 			
@@ -426,10 +411,7 @@ public class CourseMAction extends TeacherBaseAction {
 			CourseItem courseItem = courseDao.selectById(chapterItem.getCourseId());
 			
 			// 判断当前用户是否是该课程的所有者
-			if(courseItem == null) {
-				return "亲，对不起，我找不到该课程章节！请您刷新页面后再操作！";
-			}
-			if(!courseItem.getOwnerId().equals(this.currentUser().getId())) {
+			if(courseItem == null || !courseItem.getOwnerId().equals(this.currentUser().getId())) {
 				return "亲，对不起，我找不到该课程章节！请您刷新页面后再操作！";
 			}
 			
@@ -650,6 +632,9 @@ public class CourseMAction extends TeacherBaseAction {
 				if (MyUtils.isNull(liveForm.getTitle().trim())) {
 					addError("请您填写直播名称！");
 				}
+				if (MyUtils.isNull(liveForm.getBeginTime())) {
+					addError("直播开始时间不允许为空！");
+				}
 				if (MyUtils.isNotNull(liveForm.getBeginTime()) && !ValidateTools.isDateTime(liveForm.getBeginTime())) {
 					addError("日期格式不正确！");
 				}
@@ -804,10 +789,7 @@ public class CourseMAction extends TeacherBaseAction {
 			CourseDao courseDao = new CourseDao();
 			CourseItem courseItem = courseDao.selectById(courseId);
 			// 判断当前用户是否是该课程的所有者
-			if(courseItem == null) {
-				return "亲，对不起，我找不到该试题信息！请您刷新页面后再操作！";
-			}
-			if(!courseItem.getOwnerId().equals(this.currentUser().getId())) {
+			if(courseItem == null || !courseItem.getOwnerId().equals(this.currentUser().getId())) {
 				return "亲，对不起，我找不到该试题信息！请您刷新页面后再操作！";
 			}
 			
@@ -900,10 +882,7 @@ public class CourseMAction extends TeacherBaseAction {
 			CourseDao courseDao = new CourseDao();
 			CourseItem courseItem = courseDao.selectById(courseId);
 			// 判断当前用户是否是该课程的所有者
-			if(courseItem == null) {
-				return "亲，对不起，我找不到该课程章节！请您刷新页面后再操作！";
-			}
-			if(!courseItem.getOwnerId().equals(this.currentUser().getId())) {
+			if(courseItem == null || !courseItem.getOwnerId().equals(this.currentUser().getId())) {
 				return "亲，对不起，我找不到该课程章节！请您刷新页面后再操作！";
 			}
 			if (MyUtils.isNotNull(chapterId) && MyUtils.isNotNull(resourceId) && MyUtils.isNotNull(resourceType) && ValidateTools.isInt(resourceType)) {
