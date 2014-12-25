@@ -19,7 +19,7 @@ import com.santrong.plt.webpage.course.resource.train.entry.TrainToQuestionItem;
  */
 public interface TrainQuestionMapper {
 
-	@Insert("insert into resource_train_question values(#{id}, #{topic}, #{questionType}, #{opt1}, #{opt2}, #{opt3}, #{opt4}, #{answer}, #{remark}, #{ownerId}, #{del}, #{cts}, #{uts})")
+	@Insert("insert into resource_train_question values(#{id}, #{topic}, #{questionType}, #{opt1}, #{opt2}, #{opt3}, #{opt4}, #{answer}, #{remark}, #{subjectId}, #{gradeId}, #{timeLimit}, #{ownerId}, #{del}, #{cts}, #{uts})")
 	int insert(TrainQuestionItem trainQuestionItem);
 	
 	@Select("select * from resource_train_question where ownerId = #{userId} and del = 0")
@@ -52,6 +52,9 @@ public interface TrainQuestionMapper {
 			+ "opt4 = #{opt4},"
 			+ "answer = #{answer},"
 			+ "remark = #{remark},"
+			+ "subjectId = #{subjectId},"
+			+ "gradeId = #{gradeId},"
+			+ "timeLimit = #{timeLimit},"
 			+ "uts = #{uts}"
 			+ " where id = #{id} ")
 	int update(TrainQuestionItem question);
