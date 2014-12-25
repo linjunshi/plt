@@ -4,7 +4,7 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 	<div  id="header">
 	  <div id="header_naw">
-	    <div id="headerinside_login"> <a href="${ctx}/" class="logo"><img src="${ctx}/resource/photo/logo.png" width="265" height="70" /></a>
+	    <div id="headerinside_login"> <a href="${ctx}/" class="logo"><img src="${ctx}/resource/photo/logo2.png" width="265" height="70" /></a>
 	        <div class="city_info">
 	            <h2><a class="city_info_name_bg" href="${ctx}/">${sessionScope.area.cityName}</a></h2>
 			            <a class="city_info_toggle_bg" href="${ctx}/changecity">切换城市</a>

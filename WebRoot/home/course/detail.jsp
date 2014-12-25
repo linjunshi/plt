@@ -106,7 +106,7 @@ Globals.page = "Index_courseDetail";
 		    <div class="th_catalog clr" id="course_struct">
 		        <h2>课程目录</h2>     
 		        <dl class="th_car_list">
-		        	<c:if test="${empty course.chapterDetailList}"><span class="nothing" style="position:relative;top: 10px;left:20px;">暂无内容！</span></c:if>
+		        	<c:if test="${empty course.chapterDetailList}"><span class="nothing">暂无内容！</span></c:if>
 		        	<c:forEach items="${course.chapterDetailList}" var="chapter" varStatus="st">
 		            <dt>第 ${st.index+1} 课：${chapter.remark}</dt>
 		            	<c:forEach items="${chapter.resourceList}" var="resource">
@@ -160,9 +160,9 @@ Globals.page = "Index_courseDetail";
 					</form>
 				</div>
 				<div class="th_lea clr">
-					<ul>
+					
 						<c:forEach items="${course.commentList}" var="comment" varStatus="st">
-							<li>
+							<ul><li>
 								<div class="th_img_user"><img src="${ctx}${comment.headPhoto}" width="80" height="80"></div>
 								<div class="th_mr2">
 									<p>
@@ -181,9 +181,10 @@ Globals.page = "Index_courseDetail";
 									<label><textarea name="th" cols="2" rows="3" class="th_te"></textarea></label>
 									<a href="javascript:void(0);" class="th_text_but">提交</a>
 								</div> -->
-							</li>
+							</li></ul>
 						</c:forEach>
-					</ul>
+						<c:if test="${empty course.commentList}"><p class="nothing">还没有评论，沙发等你来抢！</p></c:if>
+					
 				</div>
 				
 			</div>

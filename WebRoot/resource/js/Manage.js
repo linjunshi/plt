@@ -62,29 +62,44 @@ ManageClass.prototype = {
 			$("#changeCover").click(function() {
 				Boxy.load(Globals.ctx + "/component/change/cover", {title : '封面选择',
 					afterShow : function(){
-						
 						$(".selectCover").change(function() {
 							var extName = /\.[^\.]+$/.exec($(this).val());
-							if(/jpg|gif|png/i.test(extName)) {
+							if(/\.jpg$|\.gif$|\.png$|\.bmp$|\.jpeg$/i.test(extName)) {
+								 // 返回 KB，保留小数点后两位
+							    var fileSize = (this.files[0].size / 1024).toFixed(2);
+								if(fileSize > 0){
+									$("#fileSize").html(fileSize + "KB");
+									if(fileSize > 300){      
+										$(".upload_icon .wrong").html("图片大小不允许超过300KB");
+										$(".upload_icon .wrong").show();
+										$(".upload_icon .right").hide();
+										return false;
+									} else {
+										$(".upload_icon .right").html("图片可以上传");
+										$(".upload_icon .right").show();
+										$(".upload_icon .wrong").hide();
+									}
+								}
 								$(".coverUpload").ajaxSubmit({
 									success: function (data){
 										var json = eval('(' + data + ')');
 										if(json.result == '1') {
 											$(".preview").attr("src", json.url);
-											$("input[name=url]").val(json.url);
 										}else {
 											alert(json.error);
 										}
 									}
 								});
 							}else if(extName != null) {
-								alert("不支持该文件类型");
+								$(".upload_icon .wrong").html("不支持该文件类型，只能上传图片，限于.bmp、.png、.gif、.jpeg、.jpg格式");
+								$(".upload_icon .wrong").show();
+								$(".upload_icon .right").hide();
 							}
 						});
 						
 						$(".sure").click(function() {
 							var preview = $(".preview").attr("src");
-							if(preview != null && preview != '') {
+							if(preview != null && preview != '' && indexOf(preview) != "img_display.jpg") {
 								$(".small_preview").attr("src", preview)
 								$("input[name=url]").val(preview);
 								$(".close").click();
@@ -93,7 +108,7 @@ ManageClass.prototype = {
 						
 						$(".close").bindFormClose();
 					}
-				});
+				})
 			});
 			
 			if ( levelId != "") {
@@ -851,12 +866,26 @@ ManageClass.prototype = {
 			
 			// 上传头像控件
 			$("#changeCover").click(function() {
-				Boxy.load(Globals.ctx + "/component/change/cover", {title : '-',
+				Boxy.load(Globals.ctx + "/component/change/cover", {title : '上传头像',
 					afterShow : function(){
-						
 						$(".selectCover").change(function() {
 							var extName = /\.[^\.]+$/.exec($(this).val());
-							if(/jpg|gif|png/i.test(extName)) {
+							if(/\.jpg$|\.gif$|\.png$|\.bmp$|\.jpeg$/i.test(extName)) {
+								 // 返回 KB，保留小数点后两位
+							    var fileSize = (this.files[0].size / 1024).toFixed(2);
+								if(fileSize > 0){
+									$("#fileSize").html(fileSize + "KB");
+									if(fileSize > 300){      
+										$(".upload_icon .wrong").html("图片大小不允许超过300KB");
+										$(".upload_icon .wrong").show();
+										$(".upload_icon .right").hide();
+										return false;
+									} else {
+										$(".upload_icon .right").html("图片可以上传");
+										$(".upload_icon .right").show();
+										$(".upload_icon .wrong").hide();
+									}
+								}
 								$(".coverUpload").ajaxSubmit({
 									success: function (data){
 										var json = eval('(' + data + ')');
@@ -868,13 +897,15 @@ ManageClass.prototype = {
 									}
 								});
 							}else if(extName != null) {
-								alert("不支持该文件类型");
+								$(".upload_icon .wrong").html("不支持该文件类型，只能上传图片，限于.bmp、.png、.gif、.jpeg、.jpg格式");
+								$(".upload_icon .wrong").show();
+								$(".upload_icon .right").hide();
 							}
 						});
 						
 						$(".sure").click(function() {
 							var preview = $(".preview").attr("src");
-							if(preview != null && preview != '') {
+							if(preview != null && preview != '' && indexOf(preview) != "img_display.jpg") {
 								$(".small_preview").attr("src", preview)
 								$("input[name=url]").val(preview);
 								$(".close").click();

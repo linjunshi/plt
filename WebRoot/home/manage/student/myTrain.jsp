@@ -27,7 +27,7 @@ Globals.page = "Manage_index";
 						          <h2><p class="sh_work_title" title="${train.title}">${train.title}</p><span>来自：${train.courseName}---${train.remark}</span></h2>
 						          <p><fmt:formatDate value="${train.cts}" type="both" /></p>
 						          <p>良好</p>
-						          <p><a href="${ctx}/train?resId=${train.id}" target="_blank">查看作业</a></p>
+						          <p class="sh_train_but"><a href="${ctx}/train?resId=${train.id}" target="_blank">查看作业</a></p>
 						        </div>
 						      </div>
 				     	 </c:forEach>
