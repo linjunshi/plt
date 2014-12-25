@@ -24,6 +24,9 @@ import com.santrong.plt.webpage.course.resource.train.entry.TrainToQuestionItem;
  */
 public class TrainQuestionDao extends BaseDao{
 
+	//TODO 作业绑定知识点--批量（一个作业，多个知识点）
+	//TODO 作业取消绑定知识点（删除某个作业绑定的所有知识点）
+	
 	/**
 	 * 上报一条作业历史的记录
 	 * @author huangweihua

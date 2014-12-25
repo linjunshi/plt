@@ -21,6 +21,9 @@ public class TrainQuestionItem {
 	private String opt4;
 	private int answer;
 	private String remark;
+	private String subjectId;
+	private String gradeId;
+	private int timeLimit;
 	private String ownerId;
 	private int del;
 	private Date cts;
@@ -145,6 +148,24 @@ public class TrainQuestionItem {
 	}
 	public void setUts(Date uts) {
 		this.uts = uts;
+	}
+	public String getSubjectId() {
+		return subjectId;
+	}
+	public void setSubjectId(String subjectId) {
+		this.subjectId = subjectId;
+	}
+	public String getGradeId() {
+		return gradeId;
+	}
+	public void setGradeId(String gradeId) {
+		this.gradeId = gradeId;
+	}
+	public int getTimeLimit() {
+		return timeLimit;
+	}
+	public void setTimeLimit(int timeLimit) {
+		this.timeLimit = timeLimit;
 	}
 	public int[] getPageAnswer() {
 		return pageAnswer;
