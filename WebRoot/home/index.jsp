@@ -17,12 +17,15 @@ Globals.page = "Index_index";
 		<div class="container_content">
 		    <div id="main">
 		        <div class="column_left_a">
-		            <div id="hoverpage">
-		                <ul id="outer" class="oter_hover clearfix">
+		            <div class="column_sid">
+		                <ul id="outer">
 		                	<c:forEach items="${applicationScope.gradeList}" var="grade" varStatus="st">
-		                    <li <c:if test="${st.index == 0}">class="qwert"</c:if> >
-		                    	<a href="${ctx}/course/${grade.gradeEnName}" >${grade.gradeName}</a>
-	                            <ul <c:if test="${st.index == 0}">class="qwertt"</c:if> <c:if test="${st.index != 0}">class="botcc"</c:if> >
+		                     <li <c:if test="${st.index == 0}">class="outer_li"</c:if> >
+		                    	<a href="${ctx}/course/${grade.gradeEnName}" 
+		                    		<c:if test="${grade.gradeEnName == 'xiaoxue'}">class="xx_index"</c:if>
+			                    	<c:if test="${grade.gradeEnName == 'chuzhong'}">class="cz_index"</c:if>
+			                    	<c:if test="${grade.gradeEnName == 'gaozhong'}">class="gz_index"</c:if>>${grade.gradeName}</a>
+	                             <ul class="grade_course <c:if test="${st.index == 0}"> current_ul</c:if>">
 	                            	<c:forEach items="${grade.gradeSubjectList}" var="subject">
 	                            		<li><a href="${ctx}/course/${grade.gradeEnName}/${subject.subjectEnName}">${subject.subjectName}</a></li>
 	                            	</c:forEach>

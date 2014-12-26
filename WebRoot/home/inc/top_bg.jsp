@@ -38,13 +38,7 @@
 				<ul>
 					<li><a href="${ctx}/study/course" class="user_info_stud">我是学生</a></li>
 					<li><a href="${ctx}/manage/live" class="user_info_th">我是老师</a></li>
-					<li><a href="${ctx}/account/personalInfo">帐号设置</a></li>
-					<li>
-					<div class="user_info_hidd_bg">
-		              <p class="user_info_sid_bg"><img src="${ctx}${sessionScope.loginUser.headPhoto}" width="40" width="40"><span>${sessionScope.loginUser.username}</span></p>
-		            </div>
 				</ul>
-				 
 			</div>
 			</c:if>
 		</div>

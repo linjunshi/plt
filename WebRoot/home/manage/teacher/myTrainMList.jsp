@@ -8,7 +8,7 @@
 var Globals = {};
 Globals.ctx = "${ctx}";
 Globals.lang = "${lang}";
-Globals.page = "Manage_index";
+Globals.page = "Manage_myTrainMList";
 </script>
 </head>
 <body>
@@ -26,7 +26,7 @@ Globals.page = "Manage_index";
 						<table border="1" class="sh_coll_tab">
 							<colgroup>
 								<col width="60">
-								<col width="300">
+								<col width="310">
 								<col width="200">
 								<col width="200">
 								<col width="200">

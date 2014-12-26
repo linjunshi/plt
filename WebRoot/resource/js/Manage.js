@@ -357,7 +357,7 @@ ManageClass.prototype = {
 				} else {
 					$(parent_obj).children(".show_remark").show();
 					$(parent_obj).children(".hide_remark").hide();
-					$(parent_obj).children(".sh_operation").show();
+					$(parent_obj).children(".sh_operation").removeAttr("style");
 				}
 			});
 			
@@ -391,7 +391,7 @@ ManageClass.prototype = {
 									$(chapter_obj).val(json.id);
 									$(opera_obj).children(".show_remark").show();
 									$(opera_obj).children(".hide_remark").hide();
-									$(opera_obj).children(".sh_operation").show();
+									$(opera_obj).children(".sh_operation").removeAttr("style");
 									$(".sh_addop_a").show();
 									$(dls_obj).children("dd.pt11").show();
 								}
@@ -408,7 +408,7 @@ ManageClass.prototype = {
 								$(opera_obj).children(".show_remark").html(remark);
 								$(opera_obj).children(".show_remark").show();
 								$(opera_obj).children(".hide_remark").hide();
-								$(opera_obj).children(".sh_operation").show();
+								$(opera_obj).children(".sh_operation").removeAttr("style");
 							} else {
 								alert(result);
 							}
@@ -424,6 +424,7 @@ ManageClass.prototype = {
 					var dls_obj = $(this).parents(".sh_collection").find("dl.sh_add_chapter");
 					var chapter_obj = $(this).parents(".sh_add_chapter").children("input[name=chapterId]");
 					var chapterId = $(chapter_obj).val();
+					var courseId = $("#courseId").val().trim();
 					var remark = $(this).val().trim();
 					if (remark == "") {
 						alert("章节标题不能为空！");
@@ -431,7 +432,7 @@ ManageClass.prototype = {
 						
 						// chapterId 为空，执行新增操作；否则执行修改操作
 						if (chapterId == "") {
-							var courseId = $("input[name=courseId]").val();
+							//新增操作
 							if (courseId != "") {
 								var priority = $("input[name=priority]").val();
 								if (priority == "" || priority == 0) {
@@ -448,7 +449,7 @@ ManageClass.prototype = {
 										$(chapter_obj).val(json.id);
 										$(opera_obj).children(".show_remark").show();
 										$(opera_obj).children(".hide_remark").hide();
-										$(opera_obj).children(".sh_operation").show();
+										$(opera_obj).children(".sh_operation").removeAttr("style");
 										$(".sh_addop_a").show();
 										$(dls_obj).children("dd.pt11").show();
 									}
@@ -464,7 +465,7 @@ ManageClass.prototype = {
 									$(opera_obj).children(".show_remark").html(remark);
 									$(opera_obj).children(".show_remark").show();
 									$(opera_obj).children(".hide_remark").hide();
-									$(opera_obj).children(".sh_operation").show();
+									$(opera_obj).children(".sh_operation").removeAttr("style");
 								} else {
 									alert(result);
 								}

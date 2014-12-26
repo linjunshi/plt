@@ -21,20 +21,11 @@ IndexClass.prototype = {
 		
 		// 首页课程标签导航栏切换功能
 		$("#outer").children("li").each(function(){
-			if ($(this).attr("class") == "qwert") {
-				$(this).children("a").css("background","none");
-			}
 			$(this).mouseover(function(){
 				$("#outer").children("li").each(function(){
-					$(this).children("a").css("background","url(resource/images/next_button.png) no-repeat right 20px");
-					$(this).removeClass();
-					$(this).children("ul").removeClass();
-					$(this).children("ul").toggleClass("botcc");
+					$(this).children("ul").removeClass("current_ul");
 				});
-				$(this).toggleClass("qwert");
-				$(this).children("ul").removeClass();
-				$(this).children("ul").toggleClass("qwertt");
-				$(this).children("a").css("background","none");
+				$(this).children("ul").addClass("current_ul");
 			});
 		});
 	},

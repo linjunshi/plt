@@ -567,7 +567,7 @@ public class CourseMAction extends TeacherBaseAction {
 						result = chapterDao.insertChapterToResource(ctrItem);
 						
 						if (result) {
-							return "/manage/course/chapterEditor?courseId=" + courseId;
+							return "/manage/course/chapterEditor?courseId=" + courseId + "#" + chapterId;
 						}
 					} else {
 						return ERROR_PARAM;
@@ -710,7 +710,7 @@ public class CourseMAction extends TeacherBaseAction {
 		} catch (Exception e) {
 			Log.printStackTrace(e);
 		}
-		return this.redirect("/manage/course/chapterEditor?courseId=" + courseId);
+		return this.redirect("/manage/course/chapterEditor?courseId=" + courseId + "#" + chapterId);
 	}
 	
 	/**

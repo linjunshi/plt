@@ -142,7 +142,7 @@ input[type="reset"]::-moz-focus-inner, input[type="button"]::-moz-focus-inner, i
 .search_form .search_navigate_bg .search_bg {float:left; border:#f90 3px solid; border-right:none; position:relative;}
 .search_form .search_navigate_bg .search_bg .search_category {position:absolute; left:0px; width:56px; z-index:2; line-height:28px; background-color:#f5f5f5; text-align:center; cursor:pointer; border:solid 1px #fff;}
 .search_form .search_navigate_bg .search_bg .select_down {position:absolute; width:6px; height:3px; left:46px; top:14px; z-index:3; background:url('../photo/select_r_bg.png') center center no-repeat;}
-.search_form .search_navigate_bg .search_bg .search_text_bg{float:left; line-height:20px; width:200px; margin-left:56px; height:20px; padding:5px 0; text-indent:4px; border:none;} 
+.search_form .search_navigate_bg .search_bg .search_text_bg{float:left; line-height:20px; width:316px; margin-left:56px; height:20px; padding:5px 0; text-indent:4px; border:none;} 
 .search_form .search_navigate_bg .search_submit_bg {float:left; width:80px; height:36px; line-height:36px; border:none; cursor:pointer; font-size:16px;text-align:center; background:#f90;color:#fff; font-weight:800; letter-spacing:2px;}
 .search_form .search_navigate_bg .search_submit_bg:hover { color:#4d4d4d;}
 
@@ -209,7 +209,7 @@ input[type="reset"]::-moz-focus-inner, input[type="button"]::-moz-focus-inner, i
 
 /*------------------课程标签导航栏-------------------------*/
  
-#hoverpage {width:250px; height:282px;border:5px solid #009871; background:#fff;/* position:relative;*/ z-index:500; overflow:hidden; text-align:left;/*margin:0px auto;*/}
+/* #hoverpage {width:250px; height:282px;border:5px solid #009871; background:#fff;position:relative; z-index:500; overflow:hidden; text-align:left;margin:0px auto;}
 #outer {padding:0; margin:0;list-style:none;}
 
 .oter_hover { width:80px; height:100%; background:#c3eee3;position:relative; text-align:center; padding-top:15px;}
@@ -221,6 +221,24 @@ input[type="reset"]::-moz-focus-inner, input[type="button"]::-moz-focus-inner, i
 .oter_hover li a:hover{background:#fff; line-height:50px; color:#03382a;}
 .oter_hover li:hover .botcc{ display:block; color:#000; }
 .oter_hover .qwertt {position:absolute; left:80px; top:0px; width:160px; display:block; color:#000;}
+ */
+.column_left_a {float:left; width:260px; height:300px; margin-right:10px;}
+.column_sid { width:140px; height:300px; background:#009871; margin:0; padding:0;}
+.column_sid ul{float:left; margin-top:20px;}
+.column_sid li {border-bottom:1px #017d5d solid;}
+.column_sid li a{width:140px; height:30px; line-height:30px; display:block; color:#fff; font-size:16px; padding:10px 0; text-indent:70px;position:relative; }
+.column_sid li ul{ position:absolute; left:140px; top:-20px; width:120px; height:278px;padding-top:20px; overflow:hidden;border:1px #009871 solid; border-left:none;}
+.column_sid li ul li {border:none; width:59px; float:left;}
+.column_sid li ul li a{ width:59px; border:none; color:#222; text-indent:15px;}
+.column_sid li ul li a:hover{ background:none; color:#f90;}
+.xx_index{background:url(../images/frame_21.png) no-repeat 32px center;}
+.cz_index{background:url(../images/frame_22.png) no-repeat 33px center;}
+.gz_index{background:url(../images/frame_23.png) no-repeat 34px center;}
+.xx_index:hover {background:#004a38 url(../images/bg_hover_1.png) no-repeat right center;}
+.cz_index:hover {background:#004a38 url(../images/bg_hover_2.png) no-repeat right center;}
+.gz_index:hover {background:#004a38 url(../images/bg_hover_3.png) no-repeat right center;}
+.grade_course {display: none;}
+.current_ul {display:block;}
 /*------------------课程标签导航栏END-------------------------*/
 
 /*flash*/
@@ -557,7 +575,7 @@ input[type="reset"]::-moz-focus-inner, input[type="button"]::-moz-focus-inner, i
 .st_titile_r {display:inline-block; width:960px; height:40px; line-height:40px; position:relative;}
 .st_titile_r a{float:left; display:block; font-size:18px;color:#666; margin-right:20px; padding:0 10px;}
 .st_titile_r a:hover{ color:#188EEE; background:url(../images/user_hover.png) no-repeat center bottom;}
-.sh_title { font-size:18px; border-bottom:1px #009871 solid; width:97%;position:relative;}
+.sh_title { font-size:18px; border-bottom:1px #009871 solid; width:98%;position:relative;}
 .pt10{ border-top:#ccc solid 1px;}
 .sh_form_con { margin-left:100px; padding-bottom:10px;}
 
@@ -591,7 +609,7 @@ input[type="reset"]::-moz-focus-inner, input[type="button"]::-moz-focus-inner, i
 .sh_coll_tab tr td a{ margin-right:10px; padding:2px 10px; background:#009871; color:#fff;}
 .sh_coll_tab tbody tr:hover { background:#f0fffb;}
 .sh_coll_tab tfoot { height:30px; text-align:right;}
-.sh_add { position:absolute; right:10px; top:5px; font-size:14px; color:#009871;}
+.sh_add { position:absolute; right:0px; top:5px; font-size:14px; color:#009871;}
 .sh_add:hover{ color:#f90;}
 .sh_prev { position:absolute; right:80px; top:5px; font-size:14px; color:#009871;}
 .sh_prev:hover{ color:#f90;}
@@ -632,18 +650,21 @@ input[type="reset"]::-moz-focus-inner, input[type="button"]::-moz-focus-inner, i
 
 /*-----------课程--直播--老师------------*/
 .sh_myvod { width:100%; margin-bottom:20px; }
-.sh_myvod_ti{ float:left;width:960px; background:#dbdbdb; height:30px; line-height:30px; padding:5px 0 5px 10px; margin-top:10px;}
-.sh_myvod_ti span{ width:100px; display:inline-block;margin:0 10px 0 0; text-align:center; font-size:16px;}
-.sh_myvod_ti .sh_ti_sid { margin:0px 360px 0px 120px!important;}
+.sh_myvod_ti{ float:left;width:970px; background:#dbdbdb; height:30px; line-height:30px; padding:5px 0 5px 0px;}
+.sh_myvod_ti span{ width:150px; display:inline-block;margin:0 10px 0 0; text-align:center; font-size:16px;}
+.sh_myvod_ti .sh_ti_sid { margin:0px 260px 0px 0px!important;}
+.sh_myvod_ti .sh_ti_course { margin:0px 75px 0px 0px!important;}
 .sh_myvod li { width:98%; height:54px; display:block;padding:10px 0;clear:both;background:url(../images/time_img.jpg) no-repeat 120px center;}
-.sh_myvod_le {float:left;display:block;width:130px;font-size:16px;text-align:center; color:#009871; margin:5px 20px 0 0;}
+.sh_myvod_le {float:left;display:block;width:130px;font-size:16px;text-align:center; color:#009871; margin:5px 10px 0 0;}
 .sh_myvod_le span{font-size:13px; color:#999;}
 .sh_myvod_ri {width:820px;float:left;border-bottom:1px #ccc dashed;}
 .sh_myvod_ri span, .sh_myvod_ri h2, .sh_myvod_ri p{ float:left; display: block;padding:10px 0;}
-.sh_myvod_ri span, .sh_myvod_ri p{width:100px; text-align:center;}
-.sh_myvod_ri h2{ width:300px; margin-right:150px; overflow:hidden;}
-.sh_myvod_ri p a{ width:60px; padding:2px 10px; background:#009871; color:#fff; margin-left:30px;}
-.sh_myvod_ri p a:hover{ background:#044a38;cursor:pointer;}
+.sh_myvod_ri .sh_myvod_img{float:left; width:60px; text-align:center;}
+.sh_myvod_ri span{width:100px; text-align:center;}
+.sh_myvod_ri h2{ width:300px; overflow:hidden; margin-top:5px; }
+.sh_myvod_ri .sh_myvod_name{width:300px; text-align: center; overflow: hidden;white-space: nowrap;text-overflow: ellipsis;}
+.sh_myvod_ri span a{ padding:2px 10px; background:#009871; color:#fff; margin-left:40px;}
+.sh_myvod_ri span a:hover{ background:#044a38;cursor:pointer;}
 
 /*----------------------课程章节维护页---------------------------*/
 .sh_add_chapter { width:97%; display:block;border-bottom:1px #dbdbdb solid;}
@@ -687,8 +708,8 @@ input[type="reset"]::-moz-focus-inner, input[type="button"]::-moz-focus-inner, i
 .portrait_con .upload_icon {margin-top: 10px;}
 .portrait_con .right{background: url(../images/upload_icon.png) no-repeat 0px 5px;padding: 10px 35px; display: none;color:#009871;}
 .portrait_con .wrong{background: url(../images/upload_icon.png) no-repeat 0px -32px;padding: 10px 35px; display: none;color:#ff0000;}
-.soll_footer {height: 30px;padding: 5px 0;position: absolute;top: 200px;left: 375px;}
-.soll_footer a{ float:right; margin-right:20px; padding:0px 15px; height:30px; line-height:30px; background:#009871; color:#fff;}
+.soll_footer {height: 30px;padding: 5px 0;position: absolute;bottom:10px;right:20px;}
+.soll_footer a{ float:right; margin-left:10px; padding:0px 15px; height:30px; line-height:30px; background:#009871; color:#fff;}
 .soll_footer a:hover{ background:#044a38;}
 
 /*--------------------邮箱激活-------------------------*/
