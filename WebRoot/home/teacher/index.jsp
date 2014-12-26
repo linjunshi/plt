@@ -16,29 +16,30 @@ Globals.page = "Index_teacher";
 	<div id="container_box">
 		<div class="container_content">
 			<div class="list_category">
+	            
 	            <div class="cate_list">
-	            	
-	            	<c:if test="${subjectList != null}">
+                	<h3>科目：</h3>
 	                <ul>
-	                	<li>科目：</li>
-	                	<li class="${class : staticEq('all', subject)}"><a href="${ctx}/teacher/${grade}${link : full()}">全部</a></li>
-						<c:forEach items="${subjectList}" var="subjectItem">
-						<li class="${class : staticEq(subjectItem.subjectEnName, subject)}"><a href="${ctx}/teacher/${grade}/${subjectItem.subjectEnName}${link : full()}">${subjectItem.subjectName}</a></li>
-						</c:forEach>
+		            	<c:if test="${subjectList != null}">
+		                	<li class="${class : staticEq('all', subject)}"><a href="${ctx}/teacher/${grade}${link : full()}">全部</a></li>
+							<c:forEach items="${subjectList}" var="subjectItem">
+							<li class="${class : staticEq(subjectItem.subjectEnName, subject)}"><a href="${ctx}/teacher/${grade}/${subjectItem.subjectEnName}${link : full()}">${subjectItem.subjectName}</a></li>
+							</c:forEach>
+		                </c:if>
 	                </ul>
-	                </c:if>
-	                
-	                <c:if test="${gradeList != null}">
-	                <ul>
-	                	<li>类别：</li>
-	                	<li class="${class : staticEq('all', grade)}"><a href="${ctx}/teacher/all/${subject}${link : full()}">全部</a></li>
-						<c:forEach items="${gradeList}" var="gradeItem">
-						<li class="${class : staticEq(gradeItem.gradeEnName, grade)}"><a href="${ctx}/teacher/${gradeItem.gradeEnName}/${subject}${link : full()}">${gradeItem.gradeName}</a></li>
-						</c:forEach>
-	                </ul>
-	                </c:if>
-	                
 	            </div>
+	              <div class="cate_list borNone">
+	                <h3>学段：</h3>
+	                <ul>
+		                <c:if test="${gradeList != null}">
+		                	<li class="${class : staticEq('all', grade)}"><a href="${ctx}/teacher/all/${subject}${link : full()}">全部</a></li>
+							<c:forEach items="${gradeList}" var="gradeItem">
+							<li class="${class : staticEq(gradeItem.gradeEnName, grade)}"><a href="${ctx}/teacher/${gradeItem.gradeEnName}/${subject}${link : full()}">${gradeItem.gradeName}</a></li>
+							</c:forEach>
+		                </c:if>
+	                </ul>
+	            </div>
+	            
 	        </div>		
 		    <div class="tesch_box">
 		        <div class="schoool_box_list clearfix">

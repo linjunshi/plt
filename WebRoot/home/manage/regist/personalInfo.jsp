@@ -92,10 +92,10 @@ Globals.page = "Manage_personalInfo";
 								<div class="form_item">
 										<label for="url">上传头像：</label>
 										<div class="form_field">
-											<img src="${user.headPhoto}" style="width:80px; height:60px;" class="small_preview" />
+											<img src="${user.headPhoto}" style="width:80px; height:60px;border:1px #ccc solid;" class="small_preview" />
 											<a href="javascript:void(0);" id="changeCover">更改头像</a>
 											<input type="hidden" id="url" name="url" value="${user.url}" />
-											<!-- <span class="form_error">（图片大小最好在300K左右，长宽最佳比例为1:1，如:50 x 50）</span> -->
+											<span class="form_error">（图片大小不允许超过300K）</span>
 										</div>
 									</div>                     
 		                        <div class="form_item">

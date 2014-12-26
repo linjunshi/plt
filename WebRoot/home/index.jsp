@@ -131,7 +131,7 @@ Globals.page = "Index_index";
 					<h2 class="catalog_box_title">初中</h2>
 		            <ul class="catalog_box_nav">
 	            	    <c:forEach items="${chuzhong_subjectList}" var="subject">
-	                	<li><a href="${ctx}/course/xiaoxue/${subject.subjectEnName}">${subject.subjectName}</a></li>
+	                	<li><a href="${ctx}/course/chuzhong/${subject.subjectEnName}">${subject.subjectName}</a></li>
 	                	</c:forEach>
 		            </ul>
 		            <a href="${ctx}/course/chuzhong" class="catalog_box_more">更多</a>

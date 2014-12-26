@@ -17,10 +17,15 @@ Globals.page = "Index_school";
 		<div class="container_content">
 		    <div class="tesch_box">
 		        <div class="teach_sea">
-		        	<a class="${class : staticEq('all', grade)}" href="${ctx}/school">全部</a>
-			    	<c:forEach items="${applicationScope.gradeList}" var="item">
-			    	<a class="${class : staticEq(item.gradeEnName, grade)}" href="${ctx}/school/${item.gradeEnName}">${item.gradeName}</a>
-			    	</c:forEach>
+		        	<h3>学段：</h3>
+		        	<ul>
+		        		<li>
+				        	<a class="${class : staticEq('all', grade)}" href="${ctx}/school">全部</a>
+					    	<c:forEach items="${applicationScope.gradeList}" var="item">
+					    	<a class="${class : staticEq(item.gradeEnName, grade)}" href="${ctx}/school/${item.gradeEnName}">${item.gradeName}</a>
+				    	</c:forEach>
+		        		</li>
+		        	</ul>
 		        </div>
 		        <div class="schoool_box_list clr">
 		            <ul>

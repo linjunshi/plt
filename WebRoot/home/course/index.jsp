@@ -18,38 +18,39 @@ Globals.page = "Index_course";
 		    <div class="list_content">
 		        <div class="list_category">
 		            <div class="cate_list">
-		            	
-		            	<c:if test="${subjectList != null}">
-		                <ul>
-		                	<li>科目：</li>
-		                	<li class="${class : staticEq('all', subject)}"><a href="${ctx}/course/${grade}${link : full()}">全部</a></li>
-							<c:forEach items="${subjectList}" var="subjectItem">
-							<li class="${class : staticEq(subjectItem.subjectEnName, subject)}"><a href="${ctx}/course/${grade}/${subjectItem.subjectEnName}${link : full()}">${subjectItem.subjectName}</a></li>
-							</c:forEach>
+		            	<h3>科目：</h3>
+	                	<ul>
+			            	<c:if test="${subjectList != null}">
+			                	<li class="${class : staticEq('all', subject)}"><a href="${ctx}/course/${grade}${link : full()}">全部</a></li>
+								<c:forEach items="${subjectList}" var="subjectItem">
+								<li class="${class : staticEq(subjectItem.subjectEnName, subject)}"><a href="${ctx}/course/${grade}/${subjectItem.subjectEnName}${link : full()}">${subjectItem.subjectName}</a></li>
+								</c:forEach>
+			                </c:if>
 		                </ul>
-		                </c:if>
-		                
-		                <c:if test="${gradeList != null}">
+		             </div>
+		             <div class="cate_list">   
+	                	<h3>学段：</h3>
 		                <ul>
-		                	<li>类别：</li>
-		                	<li class="${class : staticEq('all', grade)}"><a href="${ctx}/course/all/${subject}${link : full()}">全部</a></li>
-							<c:forEach items="${gradeList}" var="gradeItem">
-							<li class="${class : staticEq(gradeItem.gradeEnName, grade)}"><a href="${ctx}/course/${gradeItem.gradeEnName}/${subject}${link : full()}">${gradeItem.gradeName}</a></li>
-							</c:forEach>
+			                <c:if test="${gradeList != null}">
+			                	<li class="${class : staticEq('all', grade)}"><a href="${ctx}/course/all/${subject}${link : full()}">全部</a></li>
+								<c:forEach items="${gradeList}" var="gradeItem">
+								<li class="${class : staticEq(gradeItem.gradeEnName, grade)}"><a href="${ctx}/course/${gradeItem.gradeEnName}/${subject}${link : full()}">${gradeItem.gradeName}</a></li>
+								</c:forEach>
+			                </c:if>
 		                </ul>
-		                </c:if>
+		             </div>    
+	                 <c:if test="${levelList != null}">
+		                 <div class="cate_list borNone"> 
+		                	<h3>年级：</h3>
+			                <ul>
+			                	<li class="${class : startEq('level', null)}"><a href="${ctx}/course/${grade}/${subject}${link : startRemove('level')}">全部</a></li>
+								<c:forEach items="${levelList}" var="levelItem">
+								<li class="${class : startEq('level', levelItem.levelEnName)}"><a href="${ctx}/course/${grade}/${subject}${link : startReplace('level', levelItem.levelEnName)}">${levelItem.levelName}</a></li>
+								</c:forEach>
+			                </ul>
+			              </div>
+	                  </c:if>
 		                
-		                <c:if test="${levelList != null}">
-		                <ul>
-		                	<li>年级：</li>
-		                	<li class="${class : startEq('level', null)}"><a href="${ctx}/course/${grade}/${subject}${link : startRemove('level')}">全部</a></li>
-							<c:forEach items="${levelList}" var="levelItem">
-							<li class="${class : startEq('level', levelItem.levelEnName)}"><a href="${ctx}/course/${grade}/${subject}${link : startReplace('level', levelItem.levelEnName)}">${levelItem.levelName}</a></li>
-							</c:forEach>
-		                </ul>
-		                </c:if>
-		                
-		            </div>
 		        </div>
 		        <div class="live_resul clr">
 		            <div class="result_sorting">
