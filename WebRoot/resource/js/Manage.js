@@ -99,7 +99,7 @@ ManageClass.prototype = {
 						
 						$(".sure").click(function() {
 							var preview = $(".preview").attr("src");
-							if(preview != null && preview != '' && indexOf(preview) != "img_display.jpg") {
+							if(preview != null && preview != '' && preview.indexOf("img_display.jpg") == -1) {
 								$(".small_preview").attr("src", preview)
 								$("input[name=url]").val(preview);
 								$(".close").click();
@@ -906,7 +906,7 @@ ManageClass.prototype = {
 						
 						$(".sure").click(function() {
 							var preview = $(".preview").attr("src");
-							if(preview != null && preview != '' && indexOf(preview) != "img_display.jpg") {
+							if(preview != null && preview != '' && preview.indexOf("img_display.jpg") == -1 ) {
 								$(".small_preview").attr("src", preview)
 								$("input[name=url]").val(preview);
 								$(".close").click();
