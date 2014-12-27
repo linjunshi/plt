@@ -16,7 +16,7 @@
                     <dd><a href="${ctx}/manage/course">课程管理</a></dd>
                     <dd><a href="${ctx}/manage/file">课件管理</a></dd>
                     <dd><a href="${ctx}/manage/question/list">试题管理</a></dd>
-                    <dd><a href="${ctx}/manage/question/list">知识点维护</a></dd>
+                    <dd><a href="${ctx}/manage/knowledge/list">知识点维护</a></dd>
                 </dl>
             </div>
         </div>

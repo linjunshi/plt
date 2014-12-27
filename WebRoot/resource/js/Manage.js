@@ -1,6 +1,61 @@
 // Manage模块初始化
 function ManageClass() {
 	
+	var levelId = $("#levelId").val();
+	var oldSubjectId = $("#oldSubjectId").val();
+	
+	var gradeSelectFn = function(levelId) {
+		$.get(Globals.ctx + "/data/gradeByLevelId?levelId=" + levelId, function(data) {
+			if(data != "error") {
+				var json = eval('(' + data + ')');
+				$("#gradeSelect").val(json.gradeEnName);
+				//首次触发年级联动
+				$("#gradeSelect").change();
+			}
+		})
+	}
+	
+	// 年级选择
+	$("#gradeSelect").change(function() {
+		$.get(Globals.ctx + "/data/levelByGrade?gradeEnName=" + $(this).val(), function(data) {
+			if(data != "error") {
+				var json = eval('(' + data + ')');
+				var html = '';
+				for(var i=0;i<json.length;i++) {
+					html += '<option value="' + json[i].levelId + '">' + json[i].levelName + '</option>';
+				}
+				$("#levelSelect").html(html);
+				if ( levelId != "") {
+					$("#levelSelect").val(levelId);
+				}
+				$("#levelSelect").change();
+			}
+		})
+	});
+	
+	// 学科选择
+	$("#levelSelect").change(function() {
+		$.get(Globals.ctx + "/data/subjectByLevel?gradeId=" + $(this).val(), function(data) {
+			if(data != "error") {
+				var json = eval('(' + data + ')');
+				var html = '';
+				for(var i=0;i<json.length;i++) {
+					html += '<option value="' + json[i].id + '">' + json[i].subjectName + '</option>';
+				}
+				$("#subjectSelect").html(html);
+				if ( oldSubjectId != "") {
+					$("#subjectSelect").val(oldSubjectId);
+				}
+			}
+		})
+	});
+	
+	if ( levelId != "") {
+		gradeSelectFn(levelId);
+	} else {
+		//首次触发年级联动
+		$("#gradeSelect").change();
+	}
 };
 
 //Manage模块的具体页面初始化
@@ -8,55 +63,6 @@ ManageClass.prototype = {
 		
 		//新增课程页面
 		courseAdd : function(){
-			
-			var levelId = $("#levelId").val();
-			var oldSubjectId = $("#oldSubjectId").val();
-			
-			var gradeSelectFn = function(levelId) {
-				$.get(Globals.ctx + "/data/gradeByLevelId?levelId=" + levelId, function(data) {
-					if(data != "error") {
-						var json = eval('(' + data + ')');
-						$("#gradeSelect").val(json.gradeEnName);
-						//首次触发年级联动
-						$("#gradeSelect").change();
-					}
-				})
-			}
-			
-			// 年级选择
-			$("#gradeSelect").change(function() {
-				$.get(Globals.ctx + "/data/levelByGrade?gradeEnName=" + $(this).val(), function(data) {
-					if(data != "error") {
-						var json = eval('(' + data + ')');
-						var html = '';
-						for(var i=0;i<json.length;i++) {
-							html += '<option value="' + json[i].levelId + '">' + json[i].levelName + '</option>';
-						}
-						$("#levelSelect").html(html);
-						if ( levelId != "") {
-							$("#levelSelect").val(levelId);
-						}
-						$("#levelSelect").change();
-					}
-				})
-			});
-			
-			// 学科选择
-			$("#levelSelect").change(function() {
-				$.get(Globals.ctx + "/data/subjectByLevel?gradeId=" + $(this).val(), function(data) {
-					if(data != "error") {
-						var json = eval('(' + data + ')');
-						var html = '';
-						for(var i=0;i<json.length;i++) {
-							html += '<option value="' + json[i].id + '">' + json[i].subjectName + '</option>';
-						}
-						$("#subjectSelect").html(html);
-						if ( oldSubjectId != "") {
-							$("#subjectSelect").val(oldSubjectId);
-						}
-					}
-				})
-			});
 			
 			// 封面选择
 			$("#changeCover").click(function() {
@@ -110,13 +116,6 @@ ManageClass.prototype = {
 					}
 				})
 			});
-			
-			if ( levelId != "") {
-				gradeSelectFn(levelId);
-			} else {
-				//首次触发年级联动
-				$("#gradeSelect").change();
-			}
 			
 			// 日期选择控件
 			var DatePickerFn = function(){

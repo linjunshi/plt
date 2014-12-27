@@ -43,19 +43,20 @@ Globals.page = "Manage_courseAdd";
 								<input type="hidden" name="id" value="${course.id}"/>
 								<input id="levelId" name="levelId" type="hidden" value="${course.gradeId}">
 								<input id="oldSubjectId" name="oldSubjectId" type="hidden" value="${course.subjectId}">
-								<div class="form_item">
-									<label for="gradeId">课程分类：</label>
-									<div class="form_field">
-										<select id="gradeSelect">
-											<c:forEach items="${applicationScope.gradeList}" var="grade" varStatus="st">
-											<option value="${grade.gradeEnName}">${grade.gradeName}</option>
-											</c:forEach>
-										</select>
-										<select name="gradeId" id="levelSelect">
-										</select>
-										<select name="subjectId" id="subjectSelect">
-										</select>
-										<span class="not-empty" title='此项为必填项'>*</span>
+									<div class="form_item">
+										<label for="gradeId">课程分类：</label>
+										<div class="form_field">
+											<select id="gradeSelect">
+												<c:forEach items="${applicationScope.gradeList}" var="grade" varStatus="st">
+												<option value="${grade.gradeEnName}">${grade.gradeName}</option>
+												</c:forEach>
+											</select>
+											<select name="gradeId" id="levelSelect">
+											</select>
+											<select name="subjectId" id="subjectSelect">
+											</select>
+											<span class="not-empty" title='此项为必填项'>*</span>
+										 </div>
 									</div>
 									<div class="form_item">
 										<label for="courseName">课程名称：</label>
@@ -134,7 +135,6 @@ Globals.page = "Manage_courseAdd";
 										<input class="btn_question" type="submit" value="保存" /> 
 										<a class="btn_question" href="${ctx}/manage/course">取消</a>
 									</div>
-								</div>
 							</form>
 						</div>
 					</div>

@@ -150,6 +150,7 @@ input[type="reset"]::-moz-focus-inner, input[type="button"]::-moz-focus-inner, i
 .user_info_login { position:absolute;top:30px; right:80px; color:#fff; width:60px; height:30px; line-height:30px; text-align:center; background:#009871; }
 .user_info_signup {position:absolute;top:30px; right:10px;color:#666; width:60px; height:30px; line-height:30px; text-align:center; background:#ccc;}
 .user_info_signup:hover, .user_info_login:hover{color:#fff;background:#044a38;}
+.user_info_hidd {float: right;}
 .user_info_hidd p{float:left; height:30px; line-height:30px; margin:30px 18px 0 0;}
 .user_info_hidd .user_info_sid *{vertical-align:middle; margin-left:10px;}
 .user_info_hidd .user_info_sid span{ margin-left:5px;}
@@ -234,9 +235,9 @@ input[type="reset"]::-moz-focus-inner, input[type="button"]::-moz-focus-inner, i
 .xx_index{background:url(../images/frame_21.png) no-repeat 32px center;}
 .cz_index{background:url(../images/frame_22.png) no-repeat 33px center;}
 .gz_index{background:url(../images/frame_23.png) no-repeat 34px center;}
-.xx_index:hover {background:#004a38 url(../images/bg_hover_1.png) no-repeat right center;}
-.cz_index:hover {background:#004a38 url(../images/bg_hover_2.png) no-repeat right center;}
-.gz_index:hover {background:#004a38 url(../images/bg_hover_3.png) no-repeat right center;}
+.xx_index_hover {background:#004a38 url(../images/bg_hover_1.png) no-repeat right center;}
+.cz_index_hover {background:#004a38 url(../images/bg_hover_2.png) no-repeat right center;}
+.gz_index_hover {background:#004a38 url(../images/bg_hover_3.png) no-repeat right center;}
 .grade_course {display: none;}
 .current_ul {display:block;}
 /*------------------课程标签导航栏END-------------------------*/
@@ -543,6 +544,7 @@ input[type="reset"]::-moz-focus-inner, input[type="button"]::-moz-focus-inner, i
 .sh_info_img p a{ height:30px; line-height:30px; float:left; font-size:14px;color:#222;text-decoration: underline;position: relative;}
 .sh_info_img .p1{margin-left: 30px;float: left;}
 .sh_info_img .p2{margin-right: 30px;float: right;}
+.sh_info_img .p3{margin-left: 5px;float: left;}
 .sh_info_img p a:hover{ color:#f90;}
 .sh_info_img .sh_info_us { width:160px !important; color:#222; overflow:hidden;text-align: center;font-size: 16px;font-weight: 700;}
 .sh_hone h2 a{ width:190px; height:30px; line-height:30px; display:block; padding:0;margin:0; border:0; text-align:center;background:#c7c7c7; color:#333; }
@@ -574,7 +576,7 @@ input[type="reset"]::-moz-focus-inner, input[type="button"]::-moz-focus-inner, i
 .st_shopping a:hover{ background:#044a38;}
 .st_titile_r {display:inline-block; width:960px; height:40px; line-height:40px; position:relative;}
 .st_titile_r a{float:left; display:block; font-size:18px;color:#666; margin-right:20px; padding:0 10px;}
-.st_titile_r a:hover{ color:#188EEE; background:url(../images/user_hover.png) no-repeat center bottom;}
+.st_titile_r a:hover{ color:#188EEE; background:url(../images/user_hover.png) repeat-x center bottom;}
 .sh_title { font-size:18px; border-bottom:1px #009871 solid; width:98%;position:relative;}
 .pt10{ border-top:#ccc solid 1px;}
 .sh_form_con { margin-left:100px; padding-bottom:10px;}

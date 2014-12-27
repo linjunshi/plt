@@ -21,13 +21,29 @@ IndexClass.prototype = {
 		
 		// 首页课程标签导航栏切换功能
 		$("#outer").children("li").each(function(){
-			$(this).mouseover(function(){
+			if($(this).attr("class") == "outer_li") {
+				var firstClassName = $(this).children("a").attr("class");
+				$(this).children("a").attr("class",firstClassName + "_hover");
+			}
+			$(this).live("mouseover",function(){
 				$("#outer").children("li").each(function(){
+					$(this).removeAttr("class");
+					if($(this).attr("class") != "outer_li") {
+						var newClassName = $(this).children("a").attr("class").replace("_hover","");
+						$(this).children("a").attr("class", newClassName);
+					}
 					$(this).children("ul").removeClass("current_ul");
 				});
+				$(this).toggleClass("outer_li");
+				if($(this).attr("class") == "outer_li") {
+					var className = $(this).children("a").attr("class");
+					$(this).children("a").attr("class" , className + "_hover");
+				}
 				$(this).children("ul").addClass("current_ul");
+				
 			});
 		});
+		
 	},
 	
 	// 登录页
