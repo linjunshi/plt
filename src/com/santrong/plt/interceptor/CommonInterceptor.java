@@ -41,6 +41,8 @@ public class CommonInterceptor implements HandlerInterceptor{
 				RmCode code = action.preMethod(request, response);
 				switch(code) {
 				case REQUIRE_LOGIN :
+				String uri = request.getRequestURI();
+				request.getSession().setAttribute(Global.SessionKey_AfterLoginUri, uri);
 				response.sendRedirect(request.getContextPath() + "/account/login"); // 跳到登录页面
 				return false;
 				
