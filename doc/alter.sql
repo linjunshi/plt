@@ -1,3 +1,9 @@
+-- 2014-12-29 weinianjie
+insert into grade_to_subject values('10000', '10002');
+insert into grade_to_subject values('10001', '10002');
+insert into grade_to_subject values('10002', '10002');
+insert into grade_to_subject values('10003', '10002');
+
 -- 2014-12-25 weinianjie
 alter table resource_train_question add column subjectId varchar(32) comment '所属科目' after remark;
 alter table resource_train_question add column gradeId varchar(32) comment '所属年级' after subjectId;
