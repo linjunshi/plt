@@ -99,13 +99,13 @@ IndexClass.prototype = {
 					$(".buy_form").submit();
 					
 					// 本页面弹框问是否给钱了
-	    			Boxy.ask("钱给了么", ["是", "否"], function(response) {
-	    	            if (response == "是") {
-	    	            	location.reload();
-	    	            }else{
-	    	            	alert("再买一次");
-	    	            }
-	    			});
+//	    			Boxy.ask("钱给了么", ["是", "否"], function(response) {
+//	    	            if (response == "是") {
+//	    	            	location.reload();
+//	    	            }else{
+//	    	            	alert("再买一次");
+//	    	            }
+//	    			});
 				}else {
 					alert(result);
 				}
