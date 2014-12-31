@@ -46,7 +46,8 @@ public class Global {
         if (ini.read(configFile)) {
             Version = ini.readString("System", "Version", Version);
             Title = ini.readString("System", "Title", Title);
-            Language = ini.readString("System", "Language", Language);        
+            Language = ini.readString("System", "Language", Language);
+            PltDomain = ini.readString("System", "PltDomain", PltDomain);
             
             FTPConnectMode =ini.readInt("Ftp", "FTPConnectMode", FTPConnectMode);
         }
