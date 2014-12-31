@@ -130,12 +130,16 @@ create table grade_to_subject(
 
 insert into grade_to_subject values('10000', '10000');
 insert into grade_to_subject values('10000', '10001');
+insert into grade_to_subject values('10000', '10002');
 insert into grade_to_subject values('10001', '10000');
 insert into grade_to_subject values('10001', '10001');
+insert into grade_to_subject values('10001', '10002');
 insert into grade_to_subject values('10002', '10000');
 insert into grade_to_subject values('10002', '10001');
+insert into grade_to_subject values('10002', '10002');
 insert into grade_to_subject values('10003', '10000');
 insert into grade_to_subject values('10003', '10001');
+insert into grade_to_subject values('10003', '10002');
 insert into grade_to_subject values('10004', '10000');
 insert into grade_to_subject values('10004', '10001');
 insert into grade_to_subject values('10004', '10002');

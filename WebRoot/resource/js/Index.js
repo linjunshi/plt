@@ -106,6 +106,7 @@ IndexClass.prototype = {
 	    	            	alert("我要重新再买一次");
 	    	            }
 	    			});
+
 				}else {
 					alert(result);
 				}
