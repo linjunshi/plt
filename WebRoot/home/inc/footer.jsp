@@ -2,5 +2,5 @@
 
 	<div class="clr"></div>
 	<div id="footer">
-		 <p>版权所有:XXXXXXXXXX教育科技有限公司 www.vko.cn 京ICP备12002746号 </p>
+		 <p>版权所有:深圳市三简科技有限公司 www.keyyun.com 京ICP备12002746号 </p>
 	</div>
