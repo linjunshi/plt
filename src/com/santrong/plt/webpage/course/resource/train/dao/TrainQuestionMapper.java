@@ -8,6 +8,7 @@ import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
+import com.santrong.plt.webpage.course.resource.train.entry.KnowledgeQuestionView;
 import com.santrong.plt.webpage.course.resource.train.entry.TrainQuestionItem;
 import com.santrong.plt.webpage.course.resource.train.entry.TrainToQuestionItem;
 
@@ -82,7 +83,47 @@ public interface TrainQuestionMapper {
 	@Select("select * from resource_train_to_question where trainId = #{trainId}")
 	List<TrainToQuestionItem> selectTrain2QuestionByTrainId(String trainId);
 
+	/**
+	 * 试题绑定知识点
+	 * @tablename question_to_knowledge 试题关联知识点表
+	 * @param questionId
+	 * @param knowledgeId
+	 * @return
+	 */
+	@Insert("insert into question_to_knowledge values(#{questionId}, #{knowledgeId})")
+	int addKnowledge2Question(@Param("questionId")String questionId, @Param("knowledgeId")String knowledgeId);
 	
+	/**
+	 * 判断是否存在试题已经绑定知识点
+	 * @tablename question_to_knowledge 试题关联知识点表
+	 * @param questionId
+	 * @param knowledgeId
+	 * @return
+	 */
+	@Select("select count(*) from question_to_knowledge where questionId = #{questionId}, knowledgeId = #{knowledgeId}")
+	int existsKnowledge2Question(@Param("questionId")String questionId, @Param("knowledgeId")String knowledgeId);
 	
+	/**
+	 * 移除试题已经绑定知识点的记录
+	 * @tablename question_to_knowledge 试题关联知识点表
+	 * @param questionId
+	 * @param knowledgeId
+	 * @return
+	 */
+	@Delete("delete from question_to_knowledge where questionId = #{questionId}, knowledgeId = #{knowledgeId}")
+	int removeKnowledge4Question(@Param("questionId")String questionId, @Param("knowledgeId")String knowledgeId);
 	
+	@Delete("delete from question_to_knowledge where questionId = #{questionId}")
+	int removeAllKnowledge4Question(@Param("questionId")String questionId);
+	
+	/**
+	 * 获取试题已经绑定的知识点列表
+	 * @author huangweihua
+	 * @tablename question_to_knowledge 作业关联作业习题表  
+	 * @tablename knowledge 知识点表  
+	 * @param trainId
+	 * @return
+	 */
+	@Select("select a.knowledgeName, a.subjectId, a.gradeId, b.*  from knowledge a RIGHT JOIN question_to_knowledge b on a.id = b.knowledgeId where b.questionId = #{questionId}")
+	List<KnowledgeQuestionView> selectKnowledge2QuestionByQId(String questionId);
 }

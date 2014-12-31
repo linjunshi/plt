@@ -1,6 +1,7 @@
 @charset "utf-8";
 html, body {color: #666;}
 html, body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, code, form, fieldset, legend, input, textarea, p, blockquote, th, td {margin: 0;padding: 0}
+
 body {background:url(../images/1.gif);}
 table {border-collapse: collapse; border-spacing: 0}
 fieldset, img {border: 0}
@@ -154,6 +155,8 @@ input[type="reset"]::-moz-focus-inner, input[type="button"]::-moz-focus-inner, i
 .user_info_hidd p{float:left; height:30px; line-height:30px; margin:30px 18px 0 0;}
 .user_info_hidd .user_info_sid *{vertical-align:middle; margin-left:10px;}
 .user_info_hidd .user_info_sid span{ margin-left:5px;}
+.user_info_hidd a {color: #666;}
+.user_info_hidd a:hover {color: #f90;}
 
 /*---------------登录注册部分-top_bg.jsp-------------------*/
 .user_info_login_bg { position:absolute;top:30px; right:80px; color:#4d4d4d; width:60px; height:30px; line-height:30px; text-align:center; background:#f93; }
@@ -590,6 +593,8 @@ input[type="reset"]::-moz-focus-inner, input[type="button"]::-moz-focus-inner, i
 .sh_coll_con h2 a:hvoer {color:#F90;}
 .sh_coll_con span{ color:#000; margin-right:5px;}
 .sh_coll_m{ float:left; display:block; width:200px; margin-top:10px; text-align:center; color:#f00;}
+.sh_coll_m a{color: #009871}
+.sh_coll_m a:hover{color: #f90}
 .sh_coll_but { float:right; margin:10px 10px 0 0;}
 .sh_coll_but a{ padding:3px 10px; background:#009871; color:#fff;}
 .pt15 { margin-top:0px;width:300px;}
@@ -606,8 +611,8 @@ input[type="reset"]::-moz-focus-inner, input[type="button"]::-moz-focus-inner, i
 .sh_coll_img{ float:left; display:block; width:60px; margin:10px 0 0 40px;}
 .sh_coll_th{ width:100px;float:left; margin:10px 0 0 10px;}
 .sh_coll_tab { margin-top:10px; margin-bottom:10px;text-align:center; border:#ccc 1px solid;}
-.sh_coll_tab th{ height:40px;text-align:center; font-size:16px; background:#dbdbdb; color:#009871;}
-.sh_coll_tab tr td{ line-height:30px; overflow:hidden;}
+.sh_coll_tab th{ height:40px;text-align:center; font-size:16px; background:#dbdbdb; color:#009871;border:#ccc 1px solid;}
+.sh_coll_tab tr td{ line-height:30px; overflow:hidden; border:#ccc 1px solid;}
 .sh_coll_tab tr td a{ margin-right:10px; padding:2px 10px; background:#009871; color:#fff;}
 .sh_coll_tab tbody tr:hover { background:#f0fffb;}
 .sh_coll_tab tfoot { height:30px; text-align:right;}
@@ -738,3 +743,53 @@ background: #fff url(datePicker.gif) no-repeat right;
 
 /*--------没有内容提示---------------*/
 .nothing {line-height: 30px;height: 30px;color: #c2c0c0;font-size: 16px;}
+
+/*----------------弹窗列表显示----------------------*/
+/* .keyun_popWindow {position: fixed;margin-top: 0px;margin-left: -20px;width: 800px;height: 500px;z-index: 90000;_position: absolute;_top: 0px;display: none;}
+.keyun_popWindow_box {background: #FFF;margin: 8px;position: absolute;z-index: 10;height: 100%;width: 100%;}
+.keyun_popWindow_title {margin: 10px 20px;border-bottom: 1px solid #CCC;height: 25px;}
+.keyun_popWindow_box img {cursor: pointer;}
+.keyun_popWindow_title img {float: right;cursor: pointer;}
+.keyun_popWindow_content {clear: both;padding: 20px;}
+.keyun_popWindow_bg {position: absolute;background: #009871;width: 100%;height: 100%;position: absolute;z-index: 9;padding: 8px;opacity: .4;filter: alpha(opacity=40);}
+ */
+/*-------------------知识点弹窗列表--------------------*/
+/* 
+#keyun_popWindow { width:520px;height: 100px; background:#fff;}
+.tinybox { background:#FFF; display: none; z-index:99999; border:1px solid #009871; display:none; text-align:center;} 
+.pr_title {background:#009871; height:40px; margin-bottom:15px;}
+.pr_title h2{ float:left; color:#fff; font-size:16px; line-height:40px; text-indent:10px; font-weight:700;}
+.pr_title span{ float:right; margin:5px 10px 0 0;} 
+ */ 
+ .tinybox { background:#FFF;text-align:center;width:500px;height: 320px;}
+.join_con { position: relative;top:-20px;}
+.join_left{ width:200px; height:260px;float:left;}
+.join_right{ width:200px; height:260px;float:right; }
+
+.join_list { width:200px;height:260px; background:#dbdbdb; float:left;padding:4px 3px; }
+.join_list a{ height:36px; line-height:36px; display:block; background:#dbdbdb; color:#222; text-indent:10px;}
+.join_list a:hover{ background:#009871; color:#fff;}
+
+.join_tit { width:500px; height:30px; line-height:30px;text-align: left;}
+.join_tit p{width:200px; float:left; display:inline;height:30px; font-size:16px; color:#222;  overflow:hidden;}
+.join_tit .maigin_right {margin-left: 98px;}
+.join_right_all { width:25px; height:40px; position:absolute; left:240px; top:40px; z-index:999; background:url(../images/all_right.png) no-repeat left top;display: none;}
+/* .join_right_but { width:25px; height:40px; position:absolute; left:240px; top:85px; z-index:999; background:url(../images/right_img.png) no-repeat left top;} */
+.join_right_but { width:25px; height:40px; position:absolute; left:240px; top:85px; z-index:999; background:url(../images/right_img.png) no-repeat left top;}
+.join_left_but { width:25px; height:40px; position:absolute; left:240px; top:175px; z-index:999; background:url(../images/left_img.png) no-repeat left top;}
+/* .join_left_but { width:25px; height:40px; position:absolute; left:240px; top:130px; z-index:999; background:url(../images/left_img.png) no-repeat left top;} */
+.join_left_all { width:25px; height:40px; position:absolute; left:240px; top:175px; z-index:999; background:url(../images/all_left.png) no-repeat left top;display: none;}
+.join_up_but { width:25px; height:40px; position:absolute; left:240px; top:215px; z-index:999; background:url(../images/up_img.png) no-repeat left top;display: none;}
+.join_down_but { width:25px; height:40px; position:absolute; left:240px; top:250px; z-index:999; background:url(../images/down_img.png) no-repeat left top;display: none;}
+
+.join_left_all:hover {background:url(../images/all_left_hover.png) no-repeat left top;}
+.join_left_but:hover {background:url(../images/left_img_hover.png) no-repeat left top;}
+.join_right_but:hover {background:url(../images/right_img_hover.png) no-repeat left top;}
+.join_right_all:hover {background:url(../images/all_right_hover.png) no-repeat left top;}
+.join_up_but:hover {background:url(../images/up_img_hover.png) no-repeat left top;}
+.join_down_but:hover {background:url(../images/down_img_hover.png) no-repeat left top;}
+.join_list option {padding:5px 0;display:block; background:#dbdbdb; text-indent:10px;}
+
+.join_but { width: 500px; height:40px; background:#ccc;margin-top:15px; position: absolute;bottom:10px;}
+.join_but a{line-height:40px; padding:5px 20px;  background:#009871; margin:0 15px; color:#fff;}
+.join_but a:hover{background:#f90;}

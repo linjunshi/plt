@@ -14,12 +14,12 @@ import com.santrong.plt.opt.ThreadUtils;
 import com.santrong.plt.util.BeanUtils;
 import com.santrong.plt.util.MyUtils;
 import com.santrong.plt.webpage.BaseDao;
-import com.santrong.plt.webpage.course.resource.train.entry.KnowledgeItem;
 import com.santrong.plt.webpage.course.resource.train.entry.KnowledgeGradeView;
+import com.santrong.plt.webpage.course.resource.train.entry.KnowledgeItem;
 import com.santrong.plt.webpage.course.resource.train.entry.KnowledgeQuery;
 
 /**
- * @author weinianjie
+ * @author huangweihua
  * @date 2014年12月25日
  * @time 下午4:38:20
  */
@@ -175,5 +175,87 @@ public class KnowledgeDao extends BaseDao {
 			Log.printStackTrace(e);
 		}
 		return count;
+	}
+	
+	/**
+	 * 判断是否已经存在同年级同学科同名称的知识点名称
+	 * @param knowledgeName
+	 * @param subjectId
+	 * @param gradeId
+	 * @return
+	 */
+	public boolean exists(String knowledgeName, String subjectId, String gradeId) {
+		try {
+			KnowledgeMapper mapper = this.getMapper(KnowledgeMapper.class);
+			if (mapper != null) {
+				return mapper.exists(knowledgeName, subjectId, gradeId) > 0;
+			}
+		} catch (Exception e) {
+			Log.printStackTrace(e);
+		}
+		return false;
+	}
+	
+	/**
+	 * 判断是否存在不同ID，相同年级和学科的记录
+	 * @param knowledgeItem
+	 * @return
+	 */
+	public boolean existsByName(KnowledgeItem knowledgeItem) {
+		try {
+			KnowledgeMapper mapper = this.getMapper(KnowledgeMapper.class);
+			List<KnowledgeItem> list = null;
+			if (mapper != null && knowledgeItem != null) {
+				list =  mapper.selectByName(knowledgeItem.getKnowledgeName().trim());
+				if (list != null && list.size() > 0) {
+					for(KnowledgeItem kItem : list) {
+						if (knowledgeItem.getSubjectId().equals(kItem.getSubjectId()) 
+								&& knowledgeItem.getGradeId().equals(kItem.getGradeId())
+								&& !knowledgeItem.getId().equals(kItem.getId())) {
+							return true;
+						}
+					}
+				}
+			}
+		} catch (Exception e) {
+			Log.printStackTrace(e);
+		}
+		return false;
+	}
+	
+	/**
+	 * 获取多个知识点
+	 * @param ids
+	 * @return
+	 */
+	public List<KnowledgeItem> selectByIds(String[] ids) {
+		try {
+			String _ids = MyUtils.consistIds(ids);
+			KnowledgeMapper mapper = this.getMapper(KnowledgeMapper.class);
+			if(mapper != null) {
+				return mapper.selectByIds(_ids);
+			}
+		} catch (Exception e) {
+			Log.printStackTrace(e);
+		}
+		return null;
+	}
+	
+	/**
+	 * 根据gradeId（年级）、subjectId（学科），获取知识点列表
+	 * @param gradeId
+	 * @param subjectId
+	 * @return
+	 */
+	public List<KnowledgeItem> selectByGIdAndSId(String gradeId, String subjectId) {
+		try {
+			KnowledgeMapper mapper = this.getMapper(KnowledgeMapper.class);
+			if(mapper != null) {
+				return mapper.selectByGIdAndSId(gradeId, subjectId);
+			}
+		} catch (Exception e) {
+			Log.printStackTrace(e);
+		}
+		return null;
 	}
 }

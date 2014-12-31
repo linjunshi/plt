@@ -33,9 +33,34 @@ Globals.page = "Manage_myTrainMAdd";
 								</div>
 							</c:if>
 							<form method="post" action="${ctx}/manage/question/addOrModifyQuestion" class="form_info common_form" id="question_form">
-								<input type="hidden" value="${tqItem.questionType}" />
+								<input id="id" name="id" type="hidden" value="${tqItem.id}"/>
+								<input id="levelId" name="levelId" type="hidden" value="${tqItem.gradeId}">
+								<input id="oldSubjectId" name="oldSubjectId" type="hidden" value="${tqItem.subjectId}">
 								<div class="form_item">
-									<label>题型：</label>
+									<label for="gradeId">试题分类：</label>
+									<div class="form_field">
+										<select id="gradeSelect">
+											<c:forEach items="${applicationScope.gradeList}" var="grade" varStatus="st">
+											<option value="${grade.gradeEnName}">${grade.gradeName}</option>
+											</c:forEach>
+										</select>
+										<select name="gradeId" id="levelSelect">
+										</select>
+										<select name="subjectId" id="subjectSelect">
+										</select>
+										<span class="not-empty" title='此项为必填项'>*</span>
+									 </div>
+								</div>
+								<div class="form_item">
+									<label>所属知识点：</label>
+									<div class="form_field">
+										<input id="knowledgeIds" name="knowledgeIds" type="hidden" value="${knowledgeIds}"/>
+										<input id="knowledgeNames" name="knowledgeNames" placeholder="请点击选择试题所属的知识点" type="button" value="请点击这里选择绑定知识点"/>
+										<span class="not-empty" title='此项为必填项'>*</span>
+									</div>
+								</div>
+								<div class="form_item">
+									<label>试题类型：</label>
 									<div class="form_field">
 										<input
 											<c:if test="${tqItem.questionType==1}">checked="checked"</c:if>
@@ -54,14 +79,14 @@ Globals.page = "Manage_myTrainMAdd";
 									</div>
 								</div>
 								<div class="form_item">
-									<label>标题：</label>
+									<label>题目名称：</label>
 									<div class="form_field">
-										<textarea id="topic" name="topic" required>${tqItem.topic}</textarea>
-										<p class="form_des">请匆超过100字符&nbsp;<span class="not-empty" title='此项为必填项'>*</span></p>
+										<textarea id="topic" name="topic" required_length="128" required >${tqItem.topic}</textarea>
+										<p class="form_des">请匆超过128字符&nbsp;<span class="not-empty" title='此项为必填项'>*</span></p>
 									</div>
 								</div>
 								<div class="form_item">
-									<label>选项：</label>
+									<label>试题选项：</label>
 									<div class="form_field">
 										<label class="field_te">A: </label> 
 										<input placeholder="请填入试题" class="form_tarea form_text" id="opt1" name="opt1" type="text" value="${tqItem.opt1}" required><span class="not-empty" title='此项为必填项'>*</span><br /> 
@@ -109,12 +134,11 @@ Globals.page = "Manage_myTrainMAdd";
 								<div class="form_item">
 									<label>试题详解：</label>
 									<div class="form_field">
-										<textarea id="remark" name="remark">${tqItem.remark}</textarea>
-										<p class="form_des">请匆超过200字符</p>
+										<textarea id="remark" name="remark" required_length="256">${tqItem.remark}</textarea>
+										<p class="form_des">请匆超过256字符</p>
 									</div>
 								</div>
 								<div class="form_action">
-									<input type="hidden" value="${tqItem.id}" name="id" id="id"/>
 									<input class="btn_question" type="submit" value="提交" /> 
 									<a class="btn_question" href="${ctx}/manage/question/list">取消</a>
 								</div>

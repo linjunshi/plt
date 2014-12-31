@@ -45,7 +45,9 @@
 						<option <c:if test="${live.duration==10}">selected="selected"</c:if> value="10">10分钟</option>
 						<option <c:if test="${live.duration==15}">selected="selected"</c:if> value="15">15分钟</option>
 						<option <c:if test="${live.duration==20}">selected="selected"</c:if> value="20">20分钟</option>
+						<option <c:if test="${live.duration==25}">selected="selected"</c:if> value="25">25分钟</option>
 						<option <c:if test="${live.duration==30}">selected="selected"</c:if> value="30">30分钟</option>
+						<option <c:if test="${live.duration==35}">selected="selected"</c:if> value="35">35分钟</option>
 						<option <c:if test="${live.duration==45}">selected="selected"</c:if> value="45">45分钟</option>
 						<option <c:if test="${live.duration==60}">selected="selected"</c:if> value="60">60分钟</option>
 						<option <c:if test="${live.duration==90}">selected="selected"</c:if> value="90">90分钟</option>

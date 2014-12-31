@@ -742,7 +742,7 @@ public class CourseMAction extends TeacherBaseAction {
 						questionIds += "," + ttqItem.getQuestionId();
 					}
 					if (questionIds != "") {
-						questionIds = questionIds.substring(1);
+						questionIds = questionIds.substring(1);//移除前面的多余的逗号
 					}
 					// 第一次加载页面的时候（点击修改的时候），才设置该隐藏值到页面上
 					request.setAttribute("questionIds", questionIds);

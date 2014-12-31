@@ -101,7 +101,7 @@ Globals.page = "Manage_personalInfo";
 		                        <div class="form_item">
 		                            <label>个人简介：</label>
 		                            <div class="form_field">
-		                                <textarea id="remark" name="remark" class="xheditor-mfull xheditor {skin:'o2007silver'}"  style="width:85%;height:230px;">${user.remark}</textarea>
+		                                <textarea id="xheditor_remark" name="remark" class="xheditor-mfull xheditor {skin:'o2007silver'}"  style="width:85%;height:230px;">${user.remark}</textarea>
 		                            </div>
 		                        </div>
 		                        <div class="form_action"><input type="submit" value="保存" /></div>

@@ -113,13 +113,18 @@ public class KnowledgeMAction  extends TeacherBaseAction{
 						
 						// id为空，执行新增操作
 						KnowledgeDao kDao = new KnowledgeDao();
-						KnowledgeItem knowledgeItem = new KnowledgeItem();
-						knowledgeItem.setId(MyUtils.getGUID());
-						knowledgeItem.setKnowledgeName(knowledgeForm.getKnowledgeName().trim());
-						knowledgeItem.setGradeId(knowledgeForm.getGradeId());
-						knowledgeItem.setSubjectId(knowledgeForm.getSubjectId());
-						if (kDao.insert(knowledgeItem)) {
-							addError("添加知识点成功！可以继续添加。");
+						if (!kDao.exists(knowledgeForm.getKnowledgeName().trim(), knowledgeForm.getSubjectId(), knowledgeForm.getGradeId())) {
+							KnowledgeItem knowledgeItem = new KnowledgeItem();
+							knowledgeItem.setId(MyUtils.getGUID());
+							knowledgeItem.setKnowledgeName(knowledgeForm.getKnowledgeName().trim());
+							knowledgeItem.setGradeId(knowledgeForm.getGradeId());
+							knowledgeItem.setSubjectId(knowledgeForm.getSubjectId());
+							if (kDao.insert(knowledgeItem)) {
+								addError("添加知识点成功！可以继续添加。");
+								return "/manage/teacher/knowledgeMAdd";
+							}
+						} else {
+							addError("该知识点已经存在！");
 							return "/manage/teacher/knowledgeMAdd";
 						}
 					} else {
@@ -127,6 +132,12 @@ public class KnowledgeMAction  extends TeacherBaseAction{
 						// id不为空，执行修改操作
 						KnowledgeDao kDao = new KnowledgeDao();
 						KnowledgeItem knowledgeItem = kDao.selectById(knowledgeForm.getId());
+						if (kDao.existsByName(knowledgeItem)) {
+							addError("该知识点已经存在！");
+							request.setAttribute("knowledgeItem", knowledgeForm);
+							request.setAttribute("addOrModify", "modify");
+							return "/manage/teacher/knowledgeMAdd";
+						}
 						knowledgeItem.setKnowledgeName(knowledgeForm.getKnowledgeName().trim());
 						knowledgeItem.setGradeId(knowledgeForm.getGradeId());
 						knowledgeItem.setSubjectId(knowledgeForm.getSubjectId());

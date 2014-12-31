@@ -128,7 +128,7 @@ Globals.page = "Manage_courseAdd";
 									<div class="form_item">
 										<label>课程描述：</label>
 										<div class="form_field">
-											<textarea id="remark" name="remark" class="xheditor-mfull xheditor {skin:'o2007silver'}" rows="60" cols="100" style="width:85%;height: 230px;" >${course.remark}</textarea>
+											<textarea id="xheditor_remark" name="remark" class="xheditor-mfull xheditor {skin:'o2007silver'}" rows="60" cols="100" style="width:85%;height: 230px;" >${course.remark}</textarea>
 										</div>
 									</div>
 									<div class="form_action">
