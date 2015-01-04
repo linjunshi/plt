@@ -16,6 +16,7 @@ import com.santrong.plt.webpage.course.entry.ChinaBankPayGateParams;
  */
 public class Test {
 	
+	
 	public static void main(String[] args) {
 		ChinaBankPayGateParams chinaBank = new ChinaBankPayGateParams();
 		chinaBank.setV_mid("23142561");
