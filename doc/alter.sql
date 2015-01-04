@@ -1,3 +1,10 @@
+-- 2015-01-04 weinianjie
+alter table knowledge add column level int(16) not null comment '层级' after id;
+alter table knowledge add column week int(10) default 1 comment '周' after gradeId;
+insert into knowledge values('10000', 100000000000000, '知识点', '0', '0', 0);
+
+alter table competition add column flag int(10) default 0 not null comment '竞赛类型' after beginTime; -- 0公共竞赛，1个人竞赛（个人练习）
+
 -- 2014-12-29 weinianjie
 insert into grade_to_subject values('10000', '10002');
 insert into grade_to_subject values('10001', '10002');

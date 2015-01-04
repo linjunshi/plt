@@ -15,11 +15,11 @@ import com.santrong.plt.webpage.course.resource.train.entry.KnowledgeItem;
 public interface KnowledgeMapper {
 	
 	//TODO 新增知识点
-	@Insert("insert into knowledge values( #{id}, #{knowledgeName}, #{subjectId}, #{gradeId})")
+	@Insert("insert into knowledge values( #{id}, #{level}, #{knowledgeName}, #{subjectId}, #{gradeId}, #{week})")
 	int insert(KnowledgeItem knowledgeItem);
 	
 	//TODO 修改知识点
-	@Update("update knowledge set knowledgeName = #{knowledgeName}, subjectId = #{subjectId}, gradeId = #{gradeId} where id = #{id}")
+	@Update("update knowledge set level=#{level},knowledgeName = #{knowledgeName}, subjectId = #{subjectId}, gradeId = #{gradeId},week=#{week} where id = #{id}")
 	int update(KnowledgeItem knowledgeItem);
 	
 	//TODO 删除知识点

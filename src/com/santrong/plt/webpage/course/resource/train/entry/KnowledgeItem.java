@@ -7,10 +7,24 @@ package com.santrong.plt.webpage.course.resource.train.entry;
  */
 public class KnowledgeItem {
 	private String id;
+	private int level;
 	private String knowledgeName;
 	private String subjectId;
 	private String gradeId;
+	private String week;
 	
+	public int getLevel() {
+		return level;
+	}
+	public void setLevel(int level) {
+		this.level = level;
+	}
+	public String getWeek() {
+		return week;
+	}
+	public void setWeek(String week) {
+		this.week = week;
+	}
 	public String getId() {
 		return id;
 	}

@@ -515,6 +515,8 @@ create table competition(
 	id varchar(32) not null comment 'UUID',
 	title varchar(128) not null comment '竞赛名',
 	remark varchar(1024) comment '描述',
+	beginTime date comment '竞赛开始时间',
+	flag int(10) default 0 not null comment '竞赛类型',
 	ownerId varchar(32) not null comment '所有者',
 	del int(10) comment '是否删除',
 	cts datetime comment '创建时间',
@@ -558,9 +560,11 @@ create table competition_history(
 drop table if exists knowledge;
 create table knowledge(
 	id varchar(32) not null comment 'UUID',
+	level int(16) not null comment '层级',
 	knowledgeName varchar(64) not null comment '知识点名称',
 	subjectId varchar(32) comment '所属科目',
 	gradeId varchar(32) comment '所属年级',
+	week int(10) default 1 comment '周',
 	primary key (id)
 ) engine=InnoDB default charset=utf8 collate=utf8_bin comment '知识点表';
 

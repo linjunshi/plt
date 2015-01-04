@@ -12,11 +12,18 @@ public class CompetitionItem {
 	private String title;
 	private String remark;
 	private Date beginTime;
+	private int flag;
 	private String ownerId;
 	private int del;
 	private Date cts;
 	private Date uts;
 	
+	public int getFlag() {
+		return flag;
+	}
+	public void setFlag(int flag) {
+		this.flag = flag;
+	}
 	public String getId() {
 		return id;
 	}
