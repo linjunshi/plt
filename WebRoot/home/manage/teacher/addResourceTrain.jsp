@@ -47,14 +47,16 @@
 				</tr>
 			</c:forEach>
 		</tbody>
-		<tfoot>
-			<tr>
-				<td colspan="5">
-					<c:set var="basicUrl" value="${ctx}/manage/course/addResourceTrain?courseId=${courseId}&chapterId=${chapterId}&resourceId=${resourceId}" />
-          			<%@ include file="../../inc/pagination2.jsp"%>
-				</td>
-			</tr>
-		</tfoot>
+		<c:if test="${fn:length(query.pageSequence) > 1}">
+			<tfoot>
+				<tr>
+					<td colspan="5">
+						<c:set var="basicUrl" value="${ctx}/manage/course/addResourceTrain?courseId=${courseId}&chapterId=${chapterId}&resourceId=${resourceId}" />
+	          			<%@ include file="../../inc/pagination2.jsp"%>
+					</td>
+				</tr>
+			</tfoot>
+		</c:if>
 	</table>
 	<div class="form_height">
 		<a class="selectTrainQuestion" id="selectTrainQuestion" href="javascript:void(0);">确定</a>

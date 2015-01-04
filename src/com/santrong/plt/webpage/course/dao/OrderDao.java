@@ -32,7 +32,9 @@ public class OrderDao extends BaseDao{
 	public int insert(OrderItem order){
 		try {
 			OrderMapper mapper = this.getMapper(OrderMapper.class);
-			return mapper.insert(order);
+			if (mapper != null) {
+				return mapper.insert(order);
+			}
 		} catch (Exception e) {
 			Log.printStackTrace(e);
 		}
@@ -47,7 +49,9 @@ public class OrderDao extends BaseDao{
 	public int update(OrderItem order){
 		try {
 			OrderMapper mapper = this.getMapper(OrderMapper.class);
-			return mapper.update(order);
+			if (mapper != null) {
+				return mapper.update(order);
+			}
 		} catch (Exception e) {
 			Log.printStackTrace(e);
 		}
@@ -62,7 +66,9 @@ public class OrderDao extends BaseDao{
 	public int delete(String id){
 		try {
 			OrderMapper mapper = this.getMapper(OrderMapper.class);
-			return mapper.delete(id);
+			if (mapper != null) {
+				return mapper.delete(id);
+			}
 		} catch (Exception e) {
 			Log.printStackTrace(e);
 		}
@@ -79,7 +85,9 @@ public class OrderDao extends BaseDao{
 	public boolean exists(String courseId, String userId){
 		try {
 			OrderMapper mapper = this.getMapper(OrderMapper.class);
-			return mapper.exists(courseId, userId) > 0;
+			if (mapper != null) {
+				return mapper.exists(courseId, userId) > 0;
+			}
 		} catch (Exception e) {
 			Log.printStackTrace(e);
 		}
@@ -90,7 +98,9 @@ public class OrderDao extends BaseDao{
 	public OrderItem selectById(String id){
 		try {
 			OrderMapper mapper = this.getMapper(OrderMapper.class);
-			return mapper.selectById(id);
+			if (mapper != null) {
+				return mapper.selectById(id);
+			}
 		} catch (Exception e) {
 			Log.printStackTrace(e);
 		}
@@ -106,12 +116,35 @@ public class OrderDao extends BaseDao{
 	public OrderItem selectByCourseIdAndUserId(String courseId, String userId){
 		try {
 			OrderMapper mapper = this.getMapper(OrderMapper.class);
-			return mapper.selectByCourseIdAndUserId(courseId, userId);
+			if (mapper != null) {
+				return mapper.selectByCourseIdAndUserId(courseId, userId);
+			}
 		} catch (Exception e) {
 			Log.printStackTrace(e);
 		}
 		return null;
 	}	
+	
+	/**
+	 * 根据课程ID和用户ID判断是否已经购买该课程
+	 * @param courseId
+	 * @param userId
+	 * @return
+	 */
+	public boolean existsByCourseIdAndUserId(String courseId, String userId){
+		try {
+			OrderMapper mapper = this.getMapper(OrderMapper.class);
+			if (mapper != null) {
+				OrderItem order = mapper.selectByCourseIdAndUserId(courseId, userId);
+				return (order != null && order.getStatus() == OrderItem.Status_Pay);//已经购买
+			}
+		} catch (Exception e) {
+			Log.printStackTrace(e);
+		}
+		return false;
+	}	
+	
+	
 	
 	/**
 	 * 根据具体条件查询订单总数量

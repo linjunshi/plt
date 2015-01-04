@@ -64,14 +64,16 @@ Globals.page = "Manage_myTrainMList";
 									</tr>
 								</c:forEach>
 							</tbody>
-							<tfoot>
-								<tr>
-									<td colspan="5">
-										<c:set var="basicUrl" value="${ctx}/manage/question/list" />
-			            				<%@ include file="../../inc/pagination.jsp"%>
-									</td>
-								</tr>
-							</tfoot>
+							<c:if test="${fn:length(query.pageSequence) > 1}">
+								<tfoot>
+									<tr>
+										<td colspan="5">
+											<c:set var="basicUrl" value="${ctx}/manage/question/list" />
+				            				<%@ include file="../../inc/pagination.jsp"%>
+										</td>
+									</tr>
+								</tfoot>
+							</c:if>
 						</table>
 					</div>
 				</div>

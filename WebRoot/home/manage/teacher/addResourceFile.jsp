@@ -30,7 +30,7 @@
                </tr>
            </thead>
            <tbody>
-           	<c:forEach items="${fileList}" var="file" varStatus="st">
+           		<c:forEach items="${fileList}" var="file" varStatus="st">
                  <tr>
                      <td>${st.index + 1 + (query.pageNum-1)*query.pageSize}</td>
                      <td>
@@ -47,16 +47,17 @@
 						</div>
                      </td>
                  </tr>
-           	</c:forEach>
-               
+           		</c:forEach>
               </tbody>
-           <tfoot>
-               <tr>
-                   <td colspan="6">
-                    <c:set var="basicUrl" value="${ctx}/manage/course/addResourceFile?courseId=${courseId}&chapterId=${chapterId}&oldResourceId=${oldResourceId}" />
-    				<%@ include file="../../inc/pagination2.jsp"%>
-    			</td>
-               </tr>
-           </tfoot>
+           <c:if test="${fn:length(query.pageSequence) > 1}">
+	           <tfoot>
+	               <tr>
+	                   <td colspan="6">
+	                    <c:set var="basicUrl" value="${ctx}/manage/course/addResourceFile?courseId=${courseId}&chapterId=${chapterId}&oldResourceId=${oldResourceId}" />
+	    				<%@ include file="../../inc/pagination2.jsp"%>
+	    			</td>
+	               </tr>
+	           </tfoot>
+	       </c:if>
        </table>
 </div>			            

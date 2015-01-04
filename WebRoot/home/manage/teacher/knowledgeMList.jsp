@@ -67,14 +67,16 @@ Globals.page = "Manage_knowledgeMList";
 									</tr>
 								</c:forEach>
 							</tbody>
-							<tfoot>
-								<tr>
-									<td colspan="6">
-										<c:set var="basicUrl" value="${ctx}/manage/knowledge/list" />
-			            				<%@ include file="../../inc/pagination.jsp"%>
-									</td>
-								</tr>
-							</tfoot>
+							<c:if test="${fn:length(query.pageSequence) > 1}">
+								<tfoot>
+									<tr>
+										<td colspan="6">
+											<c:set var="basicUrl" value="${ctx}/manage/knowledge/list" />
+				            				<%@ include file="../../inc/pagination.jsp"%>
+										</td>
+									</tr>
+								</tfoot>
+							</c:if>
 						</table>
 					</div>
 				</div>

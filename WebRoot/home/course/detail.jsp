@@ -160,9 +160,9 @@ Globals.page = "Index_courseDetail";
 					</form>
 				</div>
 				<div class="th_lea clr">
-					
+					<ul>
 						<c:forEach items="${course.commentList}" var="comment" varStatus="st">
-							<ul><li>
+							<li>
 								<div class="th_img_user"><img src="${ctx}${comment.headPhoto}" width="80" height="80"></div>
 								<div class="th_mr2">
 									<p>
@@ -181,8 +181,9 @@ Globals.page = "Index_courseDetail";
 									<label><textarea name="th" cols="2" rows="3" class="th_te"></textarea></label>
 									<a href="javascript:void(0);" class="th_text_but">提交</a>
 								</div> -->
-							</li></ul>
+							</li>
 						</c:forEach>
+						</ul>
 						<c:if test="${empty course.commentList}"><p class="nothing">还没有评论，沙发等你来抢！</p></c:if>
 					
 				</div>

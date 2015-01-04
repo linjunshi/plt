@@ -43,7 +43,7 @@ Globals.page = "Manage_applyTeacher";
 							<div class="form_item">
 								<label for="idChard">身份证号码：</label>
 								<div class="form_field">
-									<input name="idChard" class="form_text" type="text" value="${form.idChard}" required required_Idcard />
+									<input name="idChard" class="form_text" type="text" value="${form.idCard}" required required_Idcard />
 									<span class="not-empty" title='此项为必填项'>*</span>
 								</div>
 							</div>				

@@ -316,7 +316,7 @@ public class CourseAction extends BaseAction {
 	public String postNewReply(String courseId ,String remark) {
 		
 		if(StringUtils.isNullOrEmpty(courseId) || StringUtils.isNullOrEmpty(remark) ) {
-			return this.redirect("/course/" + courseId + ".html");
+			return this.redirect("/course/" + courseId + ".html#course_comment");
 		}
 		/*课程评论页面，判断用户是否登录改成使用BaseAction中的currentUser方法，拿到user后判断user是否为空来判断用户登录状态*/
 		// 获取当前用户对象信息
@@ -326,29 +326,32 @@ public class CourseAction extends BaseAction {
 			return this.redirect("/account/login");
 		}
 		
-		CommentDao commentDao = new CommentDao();
+		// 判断该用户是否已经买了该课程，如果没有付款成功购买，不让评论该课程
+		OrderDao orderDao = new OrderDao();
+		if (orderDao.existsByCourseIdAndUserId(courseId, user.getId())) {
+			//打开事务
+			ThreadUtils.beginTranx();
+			
+			// 往课程评论表插入一条记录
+			CommentDao commentDao = new CommentDao();
+			CommentItem commentItem = new CommentItem();
+			commentItem.setId(MyUtils.getGUID());
+			commentItem.setUserId(user.getId());
+			commentItem.setCourseId(courseId);
+			commentItem.setRemark(remark);
+			commentItem.setCts(new Date());
+			commentItem.setUts(new Date());
+			commentDao.insert(commentItem);
+			
+			// 往课程评论表插入一条记录成功后，修改课程主表course中的课程评论数量commentCount，自动加1
+			CourseDao courseDao = new CourseDao();
+			courseDao.addComment(courseId);
+			
+			//关闭事务
+			ThreadUtils.commitTranx();
+		}
 		
-		//打开事务
-		ThreadUtils.beginTranx();
-		
-		// 往课程评论表插入一条记录
-		CommentItem commentItem = new CommentItem();
-		commentItem.setId(MyUtils.getGUID());
-		commentItem.setUserId(user.getId());
-		commentItem.setCourseId(courseId);
-		commentItem.setRemark(remark);
-		commentItem.setCts(new Date());
-		commentItem.setUts(new Date());
-		commentDao.insert(commentItem);
-		
-		// 往课程评论表插入一条记录成功后，修改课程主表course中的课程评论数量commentCount，自动加1
-		CourseDao courseDao = new CourseDao();
-		courseDao.addComment(courseId);
-		
-		//关闭事务
-		ThreadUtils.commitTranx();
-
-		return this.redirect("/course/" + courseId + ".html");
+		return this.redirect("/course/" + courseId + ".html#course_comment");
 	}
 	
 	/**
