@@ -94,6 +94,17 @@ jQuery(function($) {
 			}
 		});
 		
+		// 校验输入字符的最大长度
+		$(this).find("[required_length]").each(function() {
+			var val = eval($(this).val().trim().length);
+			var length = eval($(this).attr("required_length"));
+			if (val != "" && val > length) {
+				$(this).addClass("text_warn");
+				alert("您输入的字符不能超过" + length + "个");
+				$(this).focus();
+				isPass = false;
+			}
+		});
 		// 必填IP
 		// 正则表达式别用g属性，否则第二次检测的时候会混合第一次结果导致错误
 		var re_ip = /^(\d+)\.(\d+)\.(\d+)\.(\d+)$/i

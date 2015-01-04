@@ -32,7 +32,12 @@ public class ApplyTeacherMAction extends StudentBaseAction {
 	public String teacherGet(){
 		SubjectDao subjectDao = new SubjectDao();
 		List<SubjectItem> subjectList = subjectDao.selectAll();
+		UserItem user = this.currentUser();
+		TeacherApplyForm form = new TeacherApplyForm();
+		form.setIdCard(user.getIdCard());
+		form.setPhone(user.getPhone());
 		this.getRequest().setAttribute("subjectList", subjectList);
+		this.getRequest().setAttribute("form", form);
 		return "manage/student/apply";
 	}
 	

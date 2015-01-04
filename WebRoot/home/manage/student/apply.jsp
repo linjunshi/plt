@@ -43,7 +43,7 @@ Globals.page = "Manage_applyTeacher";
 							<div class="form_item">
 								<label for="idChard">身份证号码：</label>
 								<div class="form_field">
-									<input name="idChard" class="form_text" type="text" value="${form.idChard}" required required_Idcard />
+									<input name="idChard" class="form_text" type="text" value="${form.idCard}" required required_Idcard />
 									<span class="not-empty" title='此项为必填项'>*</span>
 								</div>
 							</div>				
@@ -57,7 +57,7 @@ Globals.page = "Manage_applyTeacher";
 							<div class="form_item">
 								<label for="remark">个人简介：</label>
 								<div class="form_field">
-									<textarea id="remark" name="remark" class="xheditor-mfull xheditor {skin:'o2007silver'}" rows="60" cols="100" style="width:80%;height: 230px;" >${form.remark}</textarea>
+									<textarea id="xheditor_remark" name="remark" class="xheditor-mfull xheditor {skin:'o2007silver'}" rows="60" cols="100" style="width:80%;height: 230px;" >${form.remark}</textarea>
 								</div>
 							</div>
 							<div class="form_action">

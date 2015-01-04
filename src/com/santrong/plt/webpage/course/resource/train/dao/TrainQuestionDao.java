@@ -13,6 +13,7 @@ import com.santrong.plt.opt.ThreadUtils;
 import com.santrong.plt.util.BeanUtils;
 import com.santrong.plt.util.MyUtils;
 import com.santrong.plt.webpage.BaseDao;
+import com.santrong.plt.webpage.course.resource.train.entry.KnowledgeQuestionView;
 import com.santrong.plt.webpage.course.resource.train.entry.TrainQuestionItem;
 import com.santrong.plt.webpage.course.resource.train.entry.TrainQuestionQuery;
 import com.santrong.plt.webpage.course.resource.train.entry.TrainToQuestionItem;
@@ -371,10 +372,104 @@ public class TrainQuestionDao extends BaseDao{
 	public List<TrainToQuestionItem> selectTrain2QuestionByTrainId(String trainId) {
 		try {
 			TrainQuestionMapper mapper = this.getMapper(TrainQuestionMapper.class);
-			return mapper.selectTrain2QuestionByTrainId(trainId);
+			if (mapper != null) {
+				return mapper.selectTrain2QuestionByTrainId(trainId);
+			}
 		} catch (Exception e) {
 			Log.printStackTrace(e);
 		}
 		return null;
 	}
+	
+	/**
+	 * 试题绑定知识点
+	 * @param questionId
+	 * @param knowledgeId
+	 * @return
+	 */
+	public boolean addKnowledge2Question(String questionId, String knowledgeId) {
+		try {
+			TrainQuestionMapper mapper = this.getMapper(TrainQuestionMapper.class);
+			if (mapper != null) {
+				return mapper.addKnowledge2Question(questionId, knowledgeId) > 0;
+			}
+		} catch (Exception e) {
+			Log.printStackTrace(e);
+		}
+		return false;
+	}
+	
+	/**
+	 * 判断是否存在试题已经绑定知识点
+	 * @param questionId
+	 * @param knowledgeId
+	 * @return
+	 */
+	public boolean existsKnowledge2Question(String questionId, String knowledgeId) {
+		try {
+			TrainQuestionMapper mapper = this.getMapper(TrainQuestionMapper.class);
+			if (mapper != null) {
+				return mapper.existsKnowledge2Question(questionId, knowledgeId) > 0;
+			}
+		} catch (Exception e) {
+			Log.printStackTrace(e);
+		}
+		return false;
+	}
+	
+	/**
+	 * 移除试题绑定的所有知识点
+	 * @param questionId
+	 * @return
+	 */
+	public boolean removeAllKnowledge4Question(String questionId) {
+		try {
+			TrainQuestionMapper mapper = this.getMapper(TrainQuestionMapper.class);
+			if (mapper != null) {
+				return mapper.removeAllKnowledge4Question(questionId) > 0;
+			}
+		} catch (Exception e) {
+			Log.printStackTrace(e);
+		}
+		return false;
+	}
+	
+	/**
+	 * 移除试题绑定的知识点
+	 * @param questionId
+	 * @param knowledgeId
+	 * @return
+	 */
+	public boolean removeKnowledge4Question(String questionId, String knowledgeId) {
+		try {
+			TrainQuestionMapper mapper = this.getMapper(TrainQuestionMapper.class);
+			if (mapper != null) {
+				return mapper.removeKnowledge4Question(questionId, knowledgeId) > 0;
+			}
+		} catch (Exception e) {
+			Log.printStackTrace(e);
+		}
+		return false;
+	}
+	
+	/**
+	 * 获取试题已经绑定的知识点列表
+	 * @author huangweihua
+	 * @tablename question_to_knowledge 作业关联作业习题表
+	 * @param trainId
+	 * @return
+	 */
+	public List<KnowledgeQuestionView> selectKnowledge2QuestionByQId(String questionId) {
+		try {
+			TrainQuestionMapper mapper = this.getMapper(TrainQuestionMapper.class);
+			if (mapper != null) {
+				return mapper.selectKnowledge2QuestionByQId(questionId);
+			}
+		} catch (Exception e) {
+			Log.printStackTrace(e);
+		}
+		return null;
+	}
+	
+	
 }

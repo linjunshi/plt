@@ -10,8 +10,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.santrong.plt.log.Log;
+import com.santrong.plt.opt.ThreadUtils;
 import com.santrong.plt.util.MyUtils;
+import com.santrong.plt.webpage.course.resource.train.dao.KnowledgeDao;
 import com.santrong.plt.webpage.course.resource.train.dao.TrainQuestionDao;
+import com.santrong.plt.webpage.course.resource.train.entry.KnowledgeItem;
+import com.santrong.plt.webpage.course.resource.train.entry.KnowledgeQuestionView;
 import com.santrong.plt.webpage.course.resource.train.entry.TrainQuestionItem;
 import com.santrong.plt.webpage.course.resource.train.entry.TrainQuestionQuery;
 import com.santrong.plt.webpage.manage.TeacherBaseAction;
@@ -37,6 +41,7 @@ public class QuestionMAction extends TeacherBaseAction{
 			query.setUserId(user.getId());
 			query.setDel(0);
 			query.setCount(tqDao.selectCountByQuery(query));
+			query.setOrderBy("cts");
 			List<TrainQuestionItem> questionList = tqDao.selectByQuery(query);
 			
 			HttpServletRequest request = this.getRequest();
@@ -86,6 +91,18 @@ public class QuestionMAction extends TeacherBaseAction{
 				if(tqItem == null || !tqItem.getOwnerId().equals(this.currentUser().getId())) {
 					return this.redirect("/");
 				}
+				
+				// 获取已经绑定的知识点
+				List<KnowledgeQuestionView> k2qList = tqDao.selectKnowledge2QuestionByQId(questionId);
+				String knowledgeIds = "";
+				for (KnowledgeQuestionView kqItem : k2qList) {
+					knowledgeIds += "," + kqItem.getKnowledgeId();
+				}
+				if (knowledgeIds != "") {
+					knowledgeIds = knowledgeIds.substring(1);//移除前面的多余的逗号
+				}
+				
+				request.setAttribute("knowledgeIds", knowledgeIds);
 				request.setAttribute("tqItem", tqItem);
 				request.setAttribute("addOrModify", "modify");
 			}
@@ -106,11 +123,19 @@ public class QuestionMAction extends TeacherBaseAction{
 	public String addOrModifyQuestion(TrainQuestionItem tqForm){
 		try {
 			HttpServletRequest request = this.getRequest();
+			String knowledgeIds = request.getParameter("knowledgeIds");//原来绑定的知识点IDs
+			
 			//打开新增页面
 			request.setAttribute("addOrModify", "add");
 			
 			if (tqForm != null) {
 				
+				if (MyUtils.isNull(tqForm.getGradeId())) {
+					addError("请您选择试题所属年级！");
+				}
+				if (MyUtils.isNull(tqForm.getSubjectId())) {
+					addError("请您选择试题的所属学科！");
+				}
 				if (tqForm.getQuestionType() <= 0) {
 					addError("请您选择题目的类型！");
 				}
@@ -129,7 +154,9 @@ public class QuestionMAction extends TeacherBaseAction{
 						addError("请您勾选正确的答案！");
 					}
 				}
-				
+				if (MyUtils.isNull(knowledgeIds)) {
+					addError("亲，您还没有绑定知识点呢！");
+				}
 				
 				if (!(errorSize() > 0)) {
 					if (MyUtils.isNull(tqForm.getId())) {
@@ -138,6 +165,8 @@ public class QuestionMAction extends TeacherBaseAction{
 						TrainQuestionDao tqDao = new TrainQuestionDao();
 						TrainQuestionItem tqItem = new TrainQuestionItem();
 						tqItem.setId(MyUtils.getGUID());
+						tqItem.setGradeId(tqForm.getGradeId());//学段年级
+						tqItem.setSubjectId(tqForm.getSubjectId());//学科
 						tqItem.setTopic(tqForm.getTopic().trim());
 						tqItem.setQuestionType(tqForm.getQuestionType());
 						tqItem.setOpt1(tqForm.getOpt1().trim());
@@ -154,6 +183,7 @@ public class QuestionMAction extends TeacherBaseAction{
 							tqItem.setAnswer(sumAnswer);
 						}
 						tqItem.setRemark(tqForm.getRemark());
+						tqItem.setTimeLimit(0);//限制时间
 						tqItem.setOwnerId(this.currentUser().getId());
 						tqItem.setDel(0);
 						tqItem.setCts(new Date());
@@ -172,13 +202,40 @@ public class QuestionMAction extends TeacherBaseAction{
 						if(tqItem == null || !tqItem.getOwnerId().equals(this.currentUser().getId())) {
 							return this.redirect("/");
 						}
+						
+						// 点击绑定知识点的
+						String[] stringArr = null;
+						boolean result = false;
+						
+						ThreadUtils.beginTranx();//开始事务
+						
+						// 删除原来绑定的知识点，再重新绑定
+						if (MyUtils.isNotNull(knowledgeIds)) {
+							stringArr = knowledgeIds.split(",");
+							KnowledgeDao kDao = new KnowledgeDao();
+							List<KnowledgeItem> kList = kDao.selectByIds(stringArr);
+							for (KnowledgeItem kItem : kList) {
+								if (!kItem.getGradeId().equals(tqForm.getGradeId()) || !kItem.getSubjectId().equals(tqForm.getSubjectId())) {
+									addError("亲，您修改了知识点分类，请您重新绑定知识点！");
+									request.setAttribute("tqItem", tqForm);
+									return "/manage/teacher/myTrainMAdd";
+								}
+							}
+							tqDao.removeAllKnowledge4Question(tqForm.getId());
+							for (String knowledgeId : stringArr) {
+								tqDao.addKnowledge2Question(tqForm.getId(), knowledgeId);
+							}
+						}
+						
+						// 修改保存试题信息
+						tqItem.setGradeId(tqForm.getGradeId());//学段年级
+						tqItem.setSubjectId(tqForm.getSubjectId());//学科
 						tqItem.setTopic(tqForm.getTopic());
 						tqItem.setQuestionType(tqForm.getQuestionType());
 						tqItem.setOpt1(tqForm.getOpt1());
 						tqItem.setOpt2(tqForm.getOpt2());
 						tqItem.setOpt3(tqForm.getOpt3());
 						tqItem.setOpt4(tqForm.getOpt4());
-						tqItem.setOwnerId(this.currentUser().getId());
 						if (tqForm.isSingleSelection()) {//单选题
 							tqItem.setAnswer(tqForm.getAnswer());
 						} else if (tqForm.isMulChoice()) {//多选题
@@ -190,8 +247,14 @@ public class QuestionMAction extends TeacherBaseAction{
 						}
 						tqItem.setRemark(tqForm.getRemark());
 						tqItem.setUts(new Date());
-						if(tqDao.update(tqItem)){
+						result = tqDao.update(tqItem);
+						
+						ThreadUtils.commitTranx();//提交事务
+						if(result){
 							return this.redirect("/manage/question/list");
+						} else {
+							addError("亲，您修改失败了，请您刷新页面后重新操作！");
+							request.setAttribute("tqItem", tqForm);
 						}
 					}
 				} else {
@@ -203,4 +266,5 @@ public class QuestionMAction extends TeacherBaseAction{
 		}
 		return "/manage/teacher/myTrainMAdd";
 	}
+	
 }

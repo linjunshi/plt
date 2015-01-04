@@ -76,14 +76,16 @@ Globals.page = "Manage_courseList";
 			                    	</c:forEach>
 			                        
 		                        </tbody>
-			                    <tfoot>
-			                        <tr>
-			                            <td colspan="6">
-				                            <c:set var="basicUrl" value="${ctx}/manage/course" />
-				            				<%@ include file="../../inc/pagination.jsp"%>
-				            			</td>
-			                        </tr>
-			                    </tfoot>
+		                        <c:if test="${fn:length(query.pageSequence) > 1}">
+				                    <tfoot>
+				                        <tr>
+				                            <td colspan="6">
+					                            <c:set var="basicUrl" value="${ctx}/manage/course" />
+					            				<%@ include file="../../inc/pagination.jsp"%>
+					            			</td>
+				                        </tr>
+				                    </tfoot>
+			                    </c:if>
 			                </table>
 			            </div>
 			        </div>

@@ -3,6 +3,7 @@ function ManageClass() {
 	
 	var levelId = $("#levelId").val();
 	var oldSubjectId = $("#oldSubjectId").val();
+	var changeNum = 0;//用来监控年级联动控件是否人为触发
 	
 	var gradeSelectFn = function(levelId) {
 		$.get(Globals.ctx + "/data/gradeByLevelId?levelId=" + levelId, function(data) {
@@ -25,14 +26,14 @@ function ManageClass() {
 					html += '<option value="' + json[i].levelId + '">' + json[i].levelName + '</option>';
 				}
 				$("#levelSelect").html(html);
-				if ( levelId != "") {
+				if ( levelId != "") {//修改页面初始化默认选择年级
 					$("#levelSelect").val(levelId);
 				}
 				$("#levelSelect").change();
 			}
 		})
 	});
-	
+
 	// 学科选择
 	$("#levelSelect").change(function() {
 		$.get(Globals.ctx + "/data/subjectByLevel?gradeId=" + $(this).val(), function(data) {
@@ -43,17 +44,28 @@ function ManageClass() {
 					html += '<option value="' + json[i].id + '">' + json[i].subjectName + '</option>';
 				}
 				$("#subjectSelect").html(html);
-				if ( oldSubjectId != "") {
+				if ( oldSubjectId != "") {//修改页面初始化默认选择学科
 					$("#subjectSelect").val(oldSubjectId);
 				}
+				$("#subjectSelect").change();
 			}
 		})
+	});
+	
+	// 学科的change()事件用来清空之前绑定的知识点，让用户重新绑定知识点(myTrainMAdd.jsp)
+	$("#subjectSelect").change(function(){
+		if (changeNum > 0 && $("#knowledgeIds").length > 0) {
+			alert()
+			$("input[name=knowledgeIds]").val("");//客户端界面上清空绑定的所有知识点
+			$("input[name=knowledgeNames]").val("请点击选择试题所属的知识点");
+		}
+		++changeNum;//用来监控年级联动控件是否人为触发
 	});
 	
 	if ( levelId != "") {
 		gradeSelectFn(levelId);
 	} else {
-		//首次触发年级联动
+		//新增页面，自动首次触发年级联动控件，默认选择
 		$("#gradeSelect").change();
 	}
 };
@@ -859,6 +871,101 @@ ManageClass.prototype = {
 					$("#answer_checkbox").show();
 				}
 			});
+			
+			var kIds = $("input[name=knowledgeIds]").val();
+			if (kIds != "" && kIds != null) {
+				$("input[name=knowledgeNames]").val("已绑定知识点");
+			}
+			// TODO 打开知识点绑定列表弹窗
+			$("input[name=knowledgeNames]").click(function(){
+				var questionId = $("input[name=id]").val();
+				var knowledgeIds = $("input[name=knowledgeIds]").val();
+				var gradeId = $("#levelSelect").val();
+				var subjectId = $("#subjectSelect").val();
+				if (gradeId != "" && gradeId != null && subjectId != "" && subjectId != null) {
+					Boxy.load(Globals.ctx + "/component/bind/bingKnowledge?questionId=" + questionId 
+							+ "&knowledgeIds=" + knowledgeIds + "&gradeId=" + gradeId + "&subjectId=" + subjectId, {title : '知识点绑定列表',
+						afterShow : function(){
+							if(oListboxTo.length == 0 && knowledgeIds != "" && knowledgeIds != null){
+								var str = knowledgeIds.split(",");
+								for(var i = 0; i < str.length; i++){
+									oListboxTo.appendChild(str[i]); //
+									//i -= 1;  //每删除一个选项后，每个选项的index会被置
+								}
+							}
+							// 全部向右移动
+							$(".join_right_all").click(function(){
+								var options = oListboxFrom.options;
+								for(var i = 0; i < options.length; i++){
+									oListboxTo.appendChild(options[i]); //
+									i -= 1;  //每删除一个选项后，每个选项的index会被置
+								}
+							});
+							// 部分向右移动
+							$(".join_right_but").click(function(){
+								var options = oListboxFrom.options;
+								for(var i = 0; i < options.length; i++){
+									if(options[i].selected){
+										oListboxTo.appendChild(options[i]);
+										i -= 1;
+									}
+								}
+							});
+							// 部分向左移动
+							$(".join_left_but").click(function(){
+								var options = oListboxTo.options;
+								for(var i = 0; i < options.length; i++){
+									if(options[i].selected){
+										oListboxFrom.appendChild(options[i]);
+										i -= 1;
+									}
+								}
+							});
+							// 全部向左移动
+							$(".join_left_all").click(function(){
+								var options = oListboxTo.options;
+								for(var i = 0; i < options.length; i++){
+									oListboxForm.appendChild(options[i]); //
+									i -= 1;  //每删除一个选项后，每个选项的index会被置
+								}
+							});
+							// 向上移动
+							$(".join_up_but").click(function(){
+								if(oListbox.selectedIndex > 0){
+									var oOption = oListbox.options[oListbox.selectedIndex];
+									var oPrevOption = oListbox.options[oListbox.selectedIndex-1];
+									oListbox.insertBefore(oOption,oPrevOption);
+								}
+							});
+							// 向下移动
+							$(".join_down_but").click(function(){
+								if(oListbox.selectedIndex < oListbox.options.length-1){
+									var oOption = oListbox.options[oListbox.selectedIndex];
+									var oNextOption = oListbox.options[oListbox.selectedIndex+1];
+									oListbox.insertBefore(oNextOption,oOption);
+								}
+							});
+							$(".sure").click(function(){
+								var options = oListboxTo.options;
+								var ids = "";
+								for(var i = 0; i < options.length; i++){
+									ids += "," + oListboxTo.options[i].value;
+								}
+								if (ids != "") {
+									$("input[name=knowledgeIds]").val(ids.substr(1));
+									$("input[name=knowledgeNames]").val("已绑定知识点");
+									$(".close").click();
+								}
+							});
+							$(".close").bindFormClose();
+						}
+					});
+					
+				} else {
+					alert("亲，你还有选择知识点分类（所属的年级和学科）哦！");
+				}
+			});
+			
 		},
 		
 		//TODO 个人信息-基本页面
