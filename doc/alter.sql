@@ -1,7 +1,13 @@
+-- 2015-01-05 weinianjie
+alter table knowledge add column code int(32) not null comment '编码' after id;
+alter table knowledge add column priority int(10) comment '排序' after week;
+delete from knowledge where id='10000';
+insert into knowledge values('10000', 1000000000, 1, '知识点', '0', '0', 0, 0);
+
 -- 2015-01-04 weinianjie
 alter table knowledge add column level int(16) not null comment '层级' after id;
 alter table knowledge add column week int(10) default 1 comment '周' after gradeId;
-insert into knowledge values('10000', 100000000000000, '知识点', '0', '0', 0);
+insert into knowledge values('10000', 1000000000000000, '知识点', '0', '0', 0);
 
 alter table competition add column flag int(10) default 0 not null comment '竞赛类型' after beginTime; -- 0公共竞赛，1个人竞赛（个人练习）
 

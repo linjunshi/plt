@@ -560,11 +560,13 @@ create table competition_history(
 drop table if exists knowledge;
 create table knowledge(
 	id varchar(32) not null comment 'UUID',
+	code int(32) not null comment '编码',
 	level int(16) not null comment '层级',
 	knowledgeName varchar(64) not null comment '知识点名称',
 	subjectId varchar(32) comment '所属科目',
 	gradeId varchar(32) comment '所属年级',
 	week int(10) default 1 comment '周',
+	priority int(10) comment '排序',
 	primary key (id)
 ) engine=InnoDB default charset=utf8 collate=utf8_bin comment '知识点表';
 
