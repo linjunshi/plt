@@ -16,25 +16,6 @@ Globals.page = "Index_index";
 	<div id="container_box">
 		<div class="container_content">
 		    <div id="main">
-		        <div class="column_left_a">
-		            <div class="column_sid">
-		                <ul id="outer">
-		                	<c:forEach items="${applicationScope.gradeList}" var="grade" varStatus="st">
-		                     <li <c:if test="${st.index == 0}">class="outer_li"</c:if> >
-		                    	<a href="${ctx}/course/${grade.gradeEnName}" 
-		                    		<c:if test="${grade.gradeEnName == 'xiaoxue'}">class="xx_index"</c:if>
-			                    	<c:if test="${grade.gradeEnName == 'chuzhong'}">class="cz_index"</c:if>
-			                    	<c:if test="${grade.gradeEnName == 'gaozhong'}">class="gz_index"</c:if>>${grade.gradeName}</a>
-	                             <ul class="grade_course <c:if test="${st.index == 0}"> current_ul</c:if>">
-	                            	<c:forEach items="${grade.gradeSubjectList}" var="subject">
-	                            		<li><a href="${ctx}/course/${grade.gradeEnName}/${subject.subjectEnName}">${subject.subjectName}</a></li>
-	                            	</c:forEach>
-	                            </ul>
-		                    </li>
-		                    </c:forEach>
-		                </ul>
-		            </div>
-		        </div>
 		        <div class="column_left_b">
 			        <div id="MainPromotionBanner">
 		                <div id="SlidePlayer">
@@ -51,56 +32,30 @@ Globals.page = "Index_index";
 							TB.widget.SimpleSlide.decoration('SlidePlayer', {eventType:'mouse', effect:'scroll'});
 						</script> 
 	            	</div>
-					
-		        </div>
-		        <div class="column_left_bottom">
-		            <div class="column_left_header clr">
-						<h2 class="column_left_title">推荐老师</h2>
-		                <ul class="column_left_nav">
-		                	<c:forEach items="${gaozhong_subjectList}" var="subject">
-		                	<li><a href="${ctx}/teacher/all/${subject.subjectEnName}">${subject.subjectName}</a></li>
-		                	</c:forEach>
-		                </ul>
-		                <a href="${ctx}/teacher" class="column_left_more">更多</a>
-					</div>
-	                <ul class="column_img_item clr">
-						<c:forEach items="${teacherList}" var="item" varStatus="st">
-						<li class="<c:if test="${(st.index + 1) % 6 == 0}">margin_right_clear</c:if>">
-							<a href="${ctx}/teacher/${item.id}.html" target="_blank"><img src="${ctx}${item.headPhoto}" width="100" height="100"/></a>
-							<span>${item.showName}</span>
-						</li>
-						</c:forEach>
-	                </ul>
 		        </div>
 		        <div class="column_right_school">
-		            <div class="column_school">
-		                <div class="column_school_header">
-		                    <h2 class="column_school_title">附近学校</h2>
-		                    <a href="${ctx}/school" class="school_box_more" target="_blank">更多</a> </div>
-			                <ul class="school_nav">
-			                	<c:forEach items="${applicationScope.gradeList}" var="grade" varStatus="st">
-			                	<li class="<c:if test="${st.index== 0}">current</c:if>"><a href="${ctx}/school/${grade.gradeEnName}" target="_blank">${grade.gradeName}</a></li>
-			                	</c:forEach>
-			                </ul>
-		            </div>
-		            <div class="school_img_item">
-		            	<c:forEach items="${schoolView}" var="grade" varStatus="st">
-		                <ul class="<c:if test="${st.index > 0}">hide</c:if>">
-							<c:forEach items="${grade.schoolList}" var="school">
-		                    <li class="school_list clr">
-		                        <div class="school_user">
-		                            <h2>${school.schoolName}</h2>
-		                        </div>
-		                        <div class="school_con">
-		                            <p>老师：<i>${school.teacherCount}</i></p>
-		                            <p>课程：<i>${school.courseCount}</i></p>                           
-		                        </div>
-                        		<p class="school_mo"><a href="${ctx}/school/${school.id}.html">进入</a></p>
-		                    </li>								
-							</c:forEach>
-		                </ul>
-		                </c:forEach>
-		            </div>
+		        	<c:if test="${sessionScope.loginUser == null}">
+						<form class="formlogin common_form" action="${ctx}/account/login" method="post">
+							<div class="loginuser">
+								<label class="login"><fmt:message key="index_user_username"/>：</label>
+								<input name="username" type="text" size="20" class="text2" value="${username}" required>
+							</div>
+							<div class="loginuser">
+								<label class="login"><fmt:message key="index_user_password"/>：</label>
+								<input name="password" type="password" size="20" class="text2" required>
+								<a href="${ctx}/account/forgotPwd" target="_blank" class="login_forgot">忘记密码?</a>
+							</div>
+							<div class="loginbut">
+								<input type="submit" value="登录" class="btn-login" name="commit" />
+							</div>
+						</form>
+					</c:if>
+					<c:if test="${sessionScope.loginUser != null}">
+						<div>欢迎你，${sessionScope.loginUser.showName}</div>
+						<img src="${ctx}${sessionScope.loginUser.headPhoto}" width="30" width="30" />
+						<p><a href="${ctx }/account/logout">注销</a></p>
+						<p><a href="${ctx }/study/course">管理中心</a></p>						
+					</c:if>
 		        </div>
 		    </div>
 		    
@@ -128,57 +83,6 @@ Globals.page = "Index_index";
 		            </ul>
 		        </div>
 		    </div>
-		    
-		    <div class="wrap_catalog_box">
-		        <div class="catalog_box_header">
-					<h2 class="catalog_box_title">初中</h2>
-		            <ul class="catalog_box_nav">
-	            	    <c:forEach items="${chuzhong_subjectList}" var="subject">
-	                	<li><a href="${ctx}/course/chuzhong/${subject.subjectEnName}">${subject.subjectName}</a></li>
-	                	</c:forEach>
-		            </ul>
-		            <a href="${ctx}/course/chuzhong" class="catalog_box_more">更多</a>
-				</div>
-		        <div class="img_item">
-		            <ul>
-						<c:forEach items="${chuzhong_courseList}" var="item" varStatus="st">
-		                <li class="img_list<c:if test="${(st.index+1)%5 == 0}"> margin_right_clear</c:if>">
-		                    <div class="pic"><a href="${ctx}/course/${item.id}.html" target="_blank"><img src="${ctx}${item.thumbnail}" border="0" /></a></div>
-		                    <div class="img_user">
-		                        <h2>${item.courseName}</h2>
-		                    </div>
-		                    <div class="img_counts"><span class="price"><b>${item.price}</b>元</span><span class="sales"><strong>${item.saleCount}</strong>人购买</span></div>
-		                </li>						
-						</c:forEach>
-		            </ul>
-		        </div>
-		   </div>
-		    
-		   <div class="wrap_catalog_box">
-		        <div class="catalog_box_header">
-					<h2 class="catalog_box_title">高中</h2>
-		            <ul class="catalog_box_nav">
-	            	    <c:forEach items="${gaozhong_subjectList}" var="subject">
-	                	<li><a href="${ctx}/course/gaozhong/${subject.subjectEnName}">${subject.subjectName}</a></li>
-	                	</c:forEach>
-		            </ul>
-		            <a href="${ctx}/course/gaozhong" class="catalog_box_more">更多</a>
-				</div>
-		        <div class="img_item">
-		            <ul>
-						<c:forEach items="${gaozhong_courseList}" var="item" varStatus="st">
-		                <li class="img_list<c:if test="${(st.index+1)%5 == 0}"> margin_right_clear</c:if>">
-		                    <div class="pic"><a href="${ctx}/course/${item.id}.html" target="_blank"><img src="${ctx}${item.thumbnail}" border="0" /></a></div>
-		                    <div class="img_user">
-		                        <h2>${item.courseName}</h2>
-		                    </div>
-		                    <div class="img_counts"><span class="price"><b>${item.price}</b>元</span><span class="sales"><strong>${item.saleCount}</strong>人购买</span></div>
-		                </li>						
-						</c:forEach>
-		            </ul>
-		        </div>
-		    </div>
-		    
 		</div>
 	</div>
 	<%@ include file="inc/friendlylink.jsp"%>	

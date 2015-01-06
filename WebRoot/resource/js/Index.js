@@ -138,6 +138,25 @@ IndexClass.prototype = {
 		});
 	},
 	
+	// 题库首页
+	question : function() {
+		
+		// 选题和取消选题
+		$(".question_list .select").click(function() {
+			var _this = $(this);
+			var qid = $(this).attr("qid");
+			$.post(Globals.ctx + "/question/assembleQuestion", {qid : qid}, function(result) {
+				if(result == 'add') {
+					_this.text('取消选择');
+				}else if(result == 'remove'){
+					_this.text('选择');
+				}else {
+					alert(result);
+				}
+			});
+		});
+	},
+	
 	// 学校列表页
 	school : function() {
 
