@@ -43,10 +43,10 @@
 	        <div id="wrapper">
 	            <div>
 	                <ul>
-						<li><a href='${ctx}/'><fmt:message key="menu_index" /></a></li>
-						<li><a href='${ctx}/course?filter=live'><fmt:message key="menu_live" /></a></li>
-						<li><a href='${ctx}/school'><fmt:message key="menu_school" /></a></li>
-						<li><a href='${ctx}/teacher'><fmt:message key="menu_teacher" /></a></li>
+						<li><a href='${ctx}/'>首页</a></li>
+						<li><a href='${ctx}/video'>微课</a></li>
+						<li><a href='${ctx}/course?filter=live'>同步课堂</a></li>
+						<li><a href='${ctx}/question'>题库</a></li>
 	                </ul>
 	            </div>
 	        </div>
