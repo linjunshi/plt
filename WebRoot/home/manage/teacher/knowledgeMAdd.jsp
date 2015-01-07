@@ -52,17 +52,6 @@ Globals.page = "Manage_knowledgeMAdd";
 									 </div>
 								</div>
 								<div class="form_item">
-									<label for="level">父级节点：</label>
-									<div class="form_field">
-										<select id="level">
-											<c:forEach items="${applicationScope.gradeList}" var="grade" varStatus="st">
-											<option value="${grade.gradeEnName}">${grade.gradeName}</option>
-											</c:forEach>
-										</select>
-										<span class="not-empty" title='此项为必填项'>*</span>
-									 </div>
-								</div>
-								<div class="form_item">
 									<label for="week">所属周：</label>
 									<div class="form_field">
 										<select name="week" size="1" id="week" class="inline_ele">

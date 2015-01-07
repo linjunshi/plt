@@ -113,7 +113,7 @@ public class KnowledgeMAction  extends TeacherBaseAction{
 				if (MyUtils.isNull(knowledgeForm.getSubjectId())) {
 					addError("请您选择课程科目！");
 				}
-				if (MyUtils.isNull(knowledgeForm.getWeek())) {
+				if (knowledgeForm.getWeek() > 0) {
 					addError("请您选择周！");
 				}
 				if (!(errorSize() > 0)) {
@@ -170,6 +170,10 @@ public class KnowledgeMAction  extends TeacherBaseAction{
 		return "/manage/teacher/knowledgeMTree";
 	}
 	
+	/**
+	 * 获取知识树的所有节点，并转成JSON字符串格式
+	 * @return
+	 */
 	@RequestMapping(value="/getTreeNodes", method=RequestMethod.GET)
 	@ResponseBody
 	public String getknowledgeTreeNodes() {
@@ -189,12 +193,15 @@ public class KnowledgeMAction  extends TeacherBaseAction{
 				kTree.setSubjectId(kItem.getSubjectId());
 				kTree.setWeek(kItem.getWeek());
 				kTree.setPriority(kItem.getPriority());
+				kTree.setDataId(kItem.getId());//用来保存原来的ID
 				
 				// 扩展属性
 				if (kItem.getCode() == 1000000000) {//如果是根节点（知识点），就加根节点默认显示图片
 					kTree.setIconSkin(KnowledgeTreeView.pIconRoot);
 				}
-//				kTree.setOpen(true);//是否展开树 true or false
+				if (kItem.getLevel() < 4) {
+					kTree.setOpen(true);//是否展开树 true or false
+				}
 				kTreeList.add(kTree);
 			}
 			if (kTreeList != null && kTreeList.size() > 0) {
@@ -207,20 +214,29 @@ public class KnowledgeMAction  extends TeacherBaseAction{
 	@RequestMapping(value="/addKnowledgeTree")
 	public String addKnowledgeTree() {
 		HttpServletRequest request = this.getRequest();
-		String knowledgeId = request.getParameter("id");
 		String gradeId = request.getParameter("gradeId");
 		String subjectId = request.getParameter("subjectId");
-		String pId = request.getParameter("pId");
-		if (MyUtils.isNull(knowledgeId)) {
+		String parentName = request.getParameter("parentName");
+		String level = request.getParameter("level");
+		String dataId = request.getParameter("dataId");//原来数据库里的ID
+		String addOrEdit = request.getParameter("addOrEdit");//新增还是修改
+		KnowledgeItem knowledgeItem = null;
+		if (addOrEdit == "add") {
 			//打开新增页面
-//			request.setAttribute("addOrModify", "add");
+			knowledgeItem = new KnowledgeItem();
+			knowledgeItem.setGradeId(gradeId);
+			knowledgeItem.setSubjectId(subjectId);
+			
 		} else {
 			//打开修改页面
 			KnowledgeDao kDao = new KnowledgeDao();
-			KnowledgeItem knowledgeItem = kDao.selectById(knowledgeId);
-			request.setAttribute("knowledgeItem", knowledgeItem);
-//			request.setAttribute("addOrModify", "modify");
+			knowledgeItem = kDao.selectById(dataId);
 		}
+		request.setAttribute("knowledgeItem", knowledgeItem);
+		request.setAttribute("parentName", parentName);
+		request.setAttribute("level", level);
+		request.setAttribute("dataId", dataId);
+		request.setAttribute("addOrEdit", addOrEdit);
 		return "/manage/teacher/knowledgeMEdit";
 	}
 	
@@ -228,7 +244,39 @@ public class KnowledgeMAction  extends TeacherBaseAction{
 	@RequestMapping(value="/submitKnowledgeBySync", method=RequestMethod.POST)
 	@ResponseBody
 	public String submitKnowledgeBySync(){
-		
+		try {
+			HttpServletRequest request = this.getRequest();
+			String dataId = request.getParameter("dataId");//原来数据库里的ID
+			String gradeId = request.getParameter("gradeId");
+			String subjectId = request.getParameter("subjectId");
+			String knowledgeName = request.getParameter("name").trim();
+			int week = this.getIntParameter("week");
+			String addOrEdit = request.getParameter("addOrEdit");//新增还是修改
+			if (addOrEdit == "add") {
+				//打开新增页面
+				
+				KnowledgeDao kDao = new KnowledgeDao();
+				if (!kDao.exists(knowledgeName, gradeId, subjectId)) {
+					KnowledgeItem knowledgeItem = new KnowledgeItem();
+					knowledgeItem.setId(MyUtils.getGUID());
+					knowledgeItem.setKnowledgeName(knowledgeName);
+					knowledgeItem.setGradeId(gradeId);
+					knowledgeItem.setSubjectId(subjectId);
+					knowledgeItem.setWeek(week);
+					knowledgeItem.setPriority(1);//待完善
+					if (kDao.insert(knowledgeItem)) {
+						Gson gson = new Gson();
+						return gson.toJson(knowledgeItem);
+					}
+				}
+			} else {
+				//打开修改页面
+			}
+
+			
+		} catch (Exception e) {
+			Log.printStackTrace(e);
+		}
 		return FAIL;
 	}
 }

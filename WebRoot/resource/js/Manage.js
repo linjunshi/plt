@@ -55,7 +55,6 @@ function ManageClass() {
 	// 学科的change()事件用来清空之前绑定的知识点，让用户重新绑定知识点(myTrainMAdd.jsp)
 	$("#subjectSelect").change(function(){
 		if (changeNum > 0 && $("#knowledgeIds").length > 0) {
-			alert()
 			$("input[name=knowledgeIds]").val("");//客户端界面上清空绑定的所有知识点
 			$("input[name=knowledgeNames]").val("请点击选择试题所属的知识点");
 		}
@@ -1089,112 +1088,116 @@ ManageClass.prototype = {
 					}
 				};
 			
-				var zNodes;
+//				var zNodes = [
+//				              {"id":1000000000,"pId":0,"level":1,"name":"知识点","subjectId":"0","gradeId":"0","week":"0","priority":0,"open":true,"iconSkin":"pIconRoot"},
+//				              {"id":1001000000,"pId":1000000000,"level":2,"name":"基础知识","subjectId":"10000","gradeId":"10000","week":"1","priority":1,"open":true},
+//				              {"id":1001010000,"pId":1001000000,"level":3,"name":"汉字","subjectId":"10000","gradeId":"10000","week":"1","priority":1,"open":true},
+//				              {"id":1001010100,"pId":1001010000,"level":4,"name":"字音","subjectId":"10000","gradeId":"10000","week":"2","priority":1,"open":true},
+//				              {"id":1001010200,"pId":1001010000,"level":4,"name":"字形","subjectId":"10000","gradeId":"10000","week":"1","priority":2,"open":true},
+//				              {"id":1001020000,"pId":1001000000,"level":3,"name":"词语","subjectId":"10000","gradeId":"10000","week":"3","priority":2,"open":true},
+//				              {"id":1001020100,"pId":1001020000,"level":4,"name":"词语辨析与运用","subjectId":"10000","gradeId":"10000","week":"1","priority":1,"open":true},
+//				              {"id":1001020200,"pId":1001020000,"level":4,"name":"成语、熟语的运用","subjectId":"10000","gradeId":"10000","week":"1","priority":2,"open":true},
+//				              {"id":1001030000,"pId":1001000000,"level":3,"name":"句子","subjectId":"10000","gradeId":"10000","week":"6","priority":3,"open":true},
+//				              {"id":1001030100,"pId":1001030000,"level":4,"name":"病句解析与修改","subjectId":"10000","gradeId":"10000","week":"2","priority":1,"open":true},
+//				              {"id":1001030200,"pId":1001030000,"level":4,"name":"句子的衔接连贯","subjectId":"10000","gradeId":"10000","week":"3","priority":2,"open":true},
+//				              {"id":1001040000,"pId":1001000000,"level":3,"name":"文学文化常识","subjectId":"10000","gradeId":"10000","week":"4","priority":4,"open":true},
+//				              {"id":1002000000,"pId":1000000000,"level":2,"name":"写作","subjectId":"10000","gradeId":"10000","week":"1","priority":2,"open":true}];
+				var zNodes ;
 				function ajaxSyncGetNodes() {
-					alert("我要到后台获取JSON数据啦")
 					$.ajax({
 						url : Globals.ctx + "/manage/knowledge/getTreeNodes", 
 //						data : {liveId : liveId}, 
 						type: "GET",
+//						dataType: 'text', 
+						async : false,//设置为同步操作就可以给全局变量赋值成功 
 						success : function(result) {
 						if(result.indexOf('{') != -1) {
-							debugger;
-//							var json = eval('(' + result + ')');
-							alert(result)
-							zNodes = result;
-							$.fn.zTree.init($("#zTree"), setting, zNodes);
+							var json = eval('(' + result + ')');
+							zNodes = json;
 						}else {
 							Boxy.alert(result);
 						}
 					}});
 				}
-				/* var zNodes =[
-					{ id:1, pId:0, name:"父节点 1", open:true},
-					{ id:11, pId:1, name:"叶子节点 1-1"},
-					{ id:12, pId:1, name:"叶子节点 1-2"},
-					{ id:13, pId:1, name:"叶子节点 1-3"},
-					{ id:2, pId:0, name:"父节点 2", open:true},
-					{ id:21, pId:2, name:"叶子节点 2-1"},
-					{ id:22, pId:2, name:"叶子节点 2-2"},
-					{ id:23, pId:2, name:"叶子节点 2-3"},
-					{ id:3, pId:0, name:"父节点 3", open:true},
-					{ id:31, pId:3, name:"叶子节点 3-1"},
-					{ id:32, pId:3, name:"叶子节点 3-2"},
-					{ id:33, pId:3, name:"叶子节点 3-3"}
-				]; */
-				/*var zNodes =[
-					{ id:1000000000, pId:0, name:"知识点", open:true,level:1,iconSkin:"pIconRoot"},
-					{ id:1001000000, pId:1000000000, name:"基础知识", open:null,level:2,gradeId:10000,subjectId:10000,priority:1},
-					{ id:1001010000, pId:1001000000, name:"汉字",level:3,gradeId:10000,subjectId:10000,week:1,priority:1},
-					{ id:1001010100, pId:1001010000, name:"字音",level:4,gradeId:10000,subjectId:10000,week:2,priority:1},
-					{ id:1001010200, pId:1001010000, name:"字形", level:4,gradeId:10000,subjectId:10000,week:3,priority:2},
-					{ id:1002000000, pId:1000000000, name:"写作",open:true,level:2,gradeId:10001,subjectId:10001,week:1,priority:1},
-					{ id:1002010000, pId:1002000000, name:"叶子节点 2-1",level:3,gradeId:10001,subjectId:10001,week:1,priority:1},
-					{ id:1002020000, pId:1002000000, name:"叶子节点 2-2",level:3,gradeId:10001,subjectId:10001,week:3,priority:2},
-					{ id:1002030000, pId:1002000000, name:"叶子节点 2-3",level:3,gradeId:10001,subjectId:10001,week:2,priority:3},
-					{ id:1003000000, pId:1000000000, name:"近代史", open:true,level:2,gradeId:10002,subjectId:10002,priority:3},
-					{ id:1003010000, pId:1003000000, name:"叶子节点 3-1",level:3,gradeId:10002,subjectId:10002,week:1,priority:1},
-					{ id:1003020000, pId:1003000000, name:"叶子节点 3-2",level:3,gradeId:10002,subjectId:10002,week:2,priority:2},
-					{ id:1003030000, pId:1003000000, name:"叶子节点 3-3",level:3,gradeId:10002,subjectId:10002,week:3,priority:3}
-				]; */
-				/*var zNodes =[
-				 			{ id:100000000,level:1,name:"父节点1 - 展开", open:true,
-				 				children: [
-				 					{name:"父节点11 - 折叠",
-				 						children: [
-				 							{ name:"叶子节点111"},
-				 							{ name:"叶子节点112"},
-				 							{ name:"叶子节点113"},
-				 							{ name:"叶子节点114"}
-				 						]},
-				 					{ name:"父节点12 - 折叠",
-				 						children: [
-				 							{id:1002010000, level:3, name:"叶子节点121"},
-				 							{id:1002020000, level:3, name:"叶子节点122"},
-				 							{id:1002030000, level:3, name:"叶子节点123"},
-				 							{id:1002040000, level:3, name:"叶子节点124"}
-				 						]},
-				 					{ name:"父节点13 - 没有子节点", isParent:true}
-				 				]},
-				 			{ name:"父节点2 - 折叠",
-				 				children: [
-				 					{ name:"父节点21 - 展开", open:true,
-				 						children: [
-				 							{ name:"叶子节点211"},
-				 							{ name:"叶子节点212"},
-				 							{ name:"叶子节点213"},
-				 							{ name:"叶子节点214"}
-				 						]},
-				 					{ name:"父节点22 - 折叠",
-				 						children: [
-				 							{ name:"叶子节点221"},
-				 							{ name:"叶子节点222"},
-				 							{ name:"叶子节点223"},
-				 							{ name:"叶子节点224"}
-				 						]},
-				 					{ name:"父节点23 - 折叠",
-				 						children: [
-				 							{ name:"叶子节点231"},
-				 							{ name:"叶子节点232"},
-				 							{ name:"叶子节点233"},
-				 							{ name:"叶子节点234"}
-				 						]}
-				 				]},
-				 			{ name:"父节点3 - 没有子节点", isParent:true}
-
-				 		];*/
 				
 				// 打开新增修改知识点归类
 				var newCount = 1;
-				var boxySubmit = function(treeNode) {
-					debugger;
+				var boxySubmit = function(addOrEdit, treeNode) {
 					var gradeId = treeNode.gradeId;
 					var subjectId = treeNode.subjectId;
-					var pId = treeNode.pId;
+					var name = treeNode.name;
+					var level = treeNode.level;
+					var dataId = treeNode.dataId;
 					Boxy.load(Globals.ctx + "/manage/knowledge/addKnowledgeTree?gradeId="+ gradeId + "&subjectId=" 
-							+ subjectId + "&pId=" + pId, {title : '知识点归类',
+							+ subjectId + "&parentName=" + name + "&level=" + level + "&dataId=" + dataId
+							+ "&addOrEdit=" + addOrEdit ,{title : '知识点归类',
 						afterShow : function(){
-							debugger;
+							/*****************************select start***************************************/
+							var levelId = $("#levelId").val();
+							var oldSubjectId = $("#oldSubjectId").val();
+							var changeNum = 0;//用来监控年级联动控件是否人为触发
+							
+							var gradeSelectFn = function(levelId) {
+								$.get(Globals.ctx + "/data/gradeByLevelId?levelId=" + levelId, function(data) {
+									if(data != "error") {
+										var json = eval('(' + data + ')');
+										$("#gradeSelect").val(json.gradeEnName);
+										//首次触发年级联动
+										$("#gradeSelect").change();
+									}
+								})
+							}
+							
+							// 年级选择
+							$("#gradeSelect").change(function() {
+								$.get(Globals.ctx + "/data/levelByGrade?gradeEnName=" + $(this).val(), function(data) {
+									if(data != "error") {
+										var json = eval('(' + data + ')');
+										var html = '';
+										for(var i=0;i<json.length;i++) {
+											html += '<option value="' + json[i].levelId + '">' + json[i].levelName + '</option>';
+										}
+										$("#levelSelect").html(html);
+										if ( levelId != "") {//修改页面初始化默认选择年级
+											$("#levelSelect").val(levelId);
+										}
+										$("#levelSelect").change();
+									}
+								})
+							});
+
+							// 学科选择
+							$("#levelSelect").change(function() {
+								$.get(Globals.ctx + "/data/subjectByLevel?gradeId=" + $(this).val(), function(data) {
+									if(data != "error") {
+										var json = eval('(' + data + ')');
+										var html = '';
+										for(var i=0;i<json.length;i++) {
+											html += '<option value="' + json[i].id + '">' + json[i].subjectName + '</option>';
+										}
+										$("#subjectSelect").html(html);
+										if ( oldSubjectId != "") {//修改页面初始化默认选择学科
+											$("#subjectSelect").val(oldSubjectId);
+										}
+										$("#subjectSelect").change();
+									}
+								})
+							});
+							
+							if ( levelId != "") {//年级ID
+								gradeSelectFn(levelId);
+							} else {
+								//新增页面，自动首次触发年级联动控件，默认选择
+								$("#gradeSelect").change();
+							}
+							
+							var level = $("#level").val();
+							if (eval(level) >= 1  ) {// 知识树层级
+								$("#gradeSelect").attr("disabled", "disabled");
+								$("#levelSelect").attr("disabled", "disabled");
+								$("#subjectSelect").attr("disabled", "disabled");
+							}
+							/*****************************select end***************************************/
 							var zTree = $.fn.zTree.getZTreeObj("zTree");
 							var sNodes = zTree.getSelectedNodes();
 							if (sNodes.length > 0) {
@@ -1202,9 +1205,29 @@ ManageClass.prototype = {
 							}
 
 							$(".sure").click(function() {
-								var zTree = $.fn.zTree.getZTreeObj("zTree");
-								zTree.addNodes(treeNode, {id:100103000000, pId:treeNode.id, name:"new node" + (newCount++)});
-								$(".close").click();
+								debugger;
+								var dataId = $("#dataId").val().trim();
+								var gradeId = $("#gradeId").val().trim();
+								var subjectId = $("#subjectId").val().trim();
+								var knowledgeName = $("#knowledgeName").val().trim();
+								var addOrEdit = $("#addOrEdit").val().trim();
+								$.ajax({
+									url: Globals.ctx + "/manage/knowledge/submitKnowledgeBySync",
+				                    data: { dataId:dataId, gradeId:gradeId, subjectId:subjectId, knowledgeName:knowledgeName, addOrEdit:addOrEdit},
+				                    type: "post",
+//				                    async : false,//设置为同步操作就可以给全局变量赋值成功 
+				                    success: function (result) {
+				                    	if(result == "fail") {
+				                    		Boxy.alert("亲，对不起，操作失败了，请您刷新页面后重新操作！");
+										} else {
+											var json = eval('(' + result + ')');
+											var zTree = $.fn.zTree.getZTreeObj("zTree");
+											zTree.addNodes(treeNode, json);
+//											zTree.addNodes(treeNode, {id:100103000000, pId:treeNode.id, name:"new node" + (newCount++)});
+											$(".close").click();
+										}
+				                    }
+								});//ajax
 							});
 							
 							$(".close").bindFormClose();
@@ -1279,7 +1302,7 @@ ManageClass.prototype = {
 					sObj.after(addStr);
 					var btn = $("#addBtn_"+treeNode.tId);
 					if (btn) btn.bind("click", function(){
-						boxySubmit(treeNode);
+						boxySubmit("add", treeNode);
 						return false;
 					});
 				};
@@ -1293,6 +1316,7 @@ ManageClass.prototype = {
 				
 				$(document).ready(function(){
 					ajaxSyncGetNodes();
+					$.fn.zTree.init($("#zTree"), setting, zNodes);
 					//$("#selectAll").bind("click", selectAll);
 				});
 				

@@ -12,7 +12,7 @@ public class KnowledgeItem {
 	private String knowledgeName;
 	private String subjectId;
 	private String gradeId;
-	private String week;
+	private int week;
 	private int priority;
 	
 	public int getCode() {
@@ -27,10 +27,10 @@ public class KnowledgeItem {
 	public void setLevel(int level) {
 		this.level = level;
 	}
-	public String getWeek() {
+	public int getWeek() {
 		return week;
 	}
-	public void setWeek(String week) {
+	public void setWeek(int week) {
 		this.week = week;
 	}
 	public String getId() {

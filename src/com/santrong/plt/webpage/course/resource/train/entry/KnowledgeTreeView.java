@@ -8,12 +8,13 @@ package com.santrong.plt.webpage.course.resource.train.entry;
 public class KnowledgeTreeView {
 	private int id;
 	private int pId;
-	private int level;
 	private String name;
 	private String subjectId;
 	private String gradeId;
-	private String week;
+	private int week;
 	private int priority;
+	private int level;
+	private String dataId;//用来保存原来数据库里的id
 	
 	private boolean open;
 	private String iconSkin;
@@ -68,11 +69,11 @@ public class KnowledgeTreeView {
 		this.gradeId = gradeId;
 	}
 
-	public String getWeek() {
+	public int getWeek() {
 		return week;
 	}
 
-	public void setWeek(String week) {
+	public void setWeek(int week) {
 		this.week = week;
 	}
 
@@ -82,6 +83,14 @@ public class KnowledgeTreeView {
 
 	public void setPriority(int priority) {
 		this.priority = priority;
+	}
+
+	public String getDataId() {
+		return dataId;
+	}
+
+	public void setDataId(String dataId) {
+		this.dataId = dataId;
 	}
 
 	public boolean isOpen() {
