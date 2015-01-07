@@ -123,4 +123,5 @@ public class ComponentAction extends BaseAction {
 		}
 		return "/component/bingKnowledge";
 	}
+	
 }

@@ -563,11 +563,11 @@ ManageClass.prototype = {
 				if (resourceType == 1) {
 					var oldResourceId = $("#oldResourceId").val();
 					$.ajax({
-	                    url: Globals.ctx + "/manage/course/addResourceFile",
+						url: Globals.ctx + "/manage/course/addResourceFile",
 	                    data: { courseId:courseId, chapterId:chapterId, oldResourceId:oldResourceId, page:page},
 	                    type: "GET",
 	                    success: function (data) {
-	    					$(".sh_info_r").html(data);
+	                    	$(".sh_info_r").html(data);
 	                    }
 					});//ajax
 				} else if (resourceType == 4) {
@@ -1055,5 +1055,246 @@ ManageClass.prototype = {
 			$("#birthday").click(function(){
 				DatePickerFn();
 			});
+		},
+		
+		// TODO 知识点结构树
+		knowledgeMTree : function() {
+		
+			var setting = {
+					view: {
+						addHoverDom: addHoverDom,
+						removeHoverDom: removeHoverDom,
+						selectedMulti: false
+					},
+					edit: {
+						enable: true,
+						editNameSelectAll: true,
+						showRemoveBtn: showRemoveBtn,
+						showRenameBtn: true,
+						removeTitle: "删除",
+						renameTitle: "编辑",
+					},
+					data: {
+						simpleData: {
+							enable: true
+						}//设置使用标准还是简单的JSON格式数据结构，这里使用数组类型的简单JSON格式数据结构
+					},
+					callback: {
+						beforeDrag: beforeDrag,
+						beforeEditName: beforeEditName,
+						beforeRemove: beforeRemove,
+						beforeRename: beforeRename,
+						onRemove: onRemove,
+						onRename: onRename
+					}
+				};
+			
+				var zNodes;
+				function ajaxSyncGetNodes() {
+					alert("我要到后台获取JSON数据啦")
+					$.ajax({
+						url : Globals.ctx + "/manage/knowledge/getTreeNodes", 
+//						data : {liveId : liveId}, 
+						type: "GET",
+						success : function(result) {
+						if(result.indexOf('{') != -1) {
+							debugger;
+//							var json = eval('(' + result + ')');
+							alert(result)
+							zNodes = result;
+							$.fn.zTree.init($("#zTree"), setting, zNodes);
+						}else {
+							Boxy.alert(result);
+						}
+					}});
+				}
+				/* var zNodes =[
+					{ id:1, pId:0, name:"父节点 1", open:true},
+					{ id:11, pId:1, name:"叶子节点 1-1"},
+					{ id:12, pId:1, name:"叶子节点 1-2"},
+					{ id:13, pId:1, name:"叶子节点 1-3"},
+					{ id:2, pId:0, name:"父节点 2", open:true},
+					{ id:21, pId:2, name:"叶子节点 2-1"},
+					{ id:22, pId:2, name:"叶子节点 2-2"},
+					{ id:23, pId:2, name:"叶子节点 2-3"},
+					{ id:3, pId:0, name:"父节点 3", open:true},
+					{ id:31, pId:3, name:"叶子节点 3-1"},
+					{ id:32, pId:3, name:"叶子节点 3-2"},
+					{ id:33, pId:3, name:"叶子节点 3-3"}
+				]; */
+				/*var zNodes =[
+					{ id:1000000000, pId:0, name:"知识点", open:true,level:1,iconSkin:"pIconRoot"},
+					{ id:1001000000, pId:1000000000, name:"基础知识", open:null,level:2,gradeId:10000,subjectId:10000,priority:1},
+					{ id:1001010000, pId:1001000000, name:"汉字",level:3,gradeId:10000,subjectId:10000,week:1,priority:1},
+					{ id:1001010100, pId:1001010000, name:"字音",level:4,gradeId:10000,subjectId:10000,week:2,priority:1},
+					{ id:1001010200, pId:1001010000, name:"字形", level:4,gradeId:10000,subjectId:10000,week:3,priority:2},
+					{ id:1002000000, pId:1000000000, name:"写作",open:true,level:2,gradeId:10001,subjectId:10001,week:1,priority:1},
+					{ id:1002010000, pId:1002000000, name:"叶子节点 2-1",level:3,gradeId:10001,subjectId:10001,week:1,priority:1},
+					{ id:1002020000, pId:1002000000, name:"叶子节点 2-2",level:3,gradeId:10001,subjectId:10001,week:3,priority:2},
+					{ id:1002030000, pId:1002000000, name:"叶子节点 2-3",level:3,gradeId:10001,subjectId:10001,week:2,priority:3},
+					{ id:1003000000, pId:1000000000, name:"近代史", open:true,level:2,gradeId:10002,subjectId:10002,priority:3},
+					{ id:1003010000, pId:1003000000, name:"叶子节点 3-1",level:3,gradeId:10002,subjectId:10002,week:1,priority:1},
+					{ id:1003020000, pId:1003000000, name:"叶子节点 3-2",level:3,gradeId:10002,subjectId:10002,week:2,priority:2},
+					{ id:1003030000, pId:1003000000, name:"叶子节点 3-3",level:3,gradeId:10002,subjectId:10002,week:3,priority:3}
+				]; */
+				/*var zNodes =[
+				 			{ id:100000000,level:1,name:"父节点1 - 展开", open:true,
+				 				children: [
+				 					{name:"父节点11 - 折叠",
+				 						children: [
+				 							{ name:"叶子节点111"},
+				 							{ name:"叶子节点112"},
+				 							{ name:"叶子节点113"},
+				 							{ name:"叶子节点114"}
+				 						]},
+				 					{ name:"父节点12 - 折叠",
+				 						children: [
+				 							{id:1002010000, level:3, name:"叶子节点121"},
+				 							{id:1002020000, level:3, name:"叶子节点122"},
+				 							{id:1002030000, level:3, name:"叶子节点123"},
+				 							{id:1002040000, level:3, name:"叶子节点124"}
+				 						]},
+				 					{ name:"父节点13 - 没有子节点", isParent:true}
+				 				]},
+				 			{ name:"父节点2 - 折叠",
+				 				children: [
+				 					{ name:"父节点21 - 展开", open:true,
+				 						children: [
+				 							{ name:"叶子节点211"},
+				 							{ name:"叶子节点212"},
+				 							{ name:"叶子节点213"},
+				 							{ name:"叶子节点214"}
+				 						]},
+				 					{ name:"父节点22 - 折叠",
+				 						children: [
+				 							{ name:"叶子节点221"},
+				 							{ name:"叶子节点222"},
+				 							{ name:"叶子节点223"},
+				 							{ name:"叶子节点224"}
+				 						]},
+				 					{ name:"父节点23 - 折叠",
+				 						children: [
+				 							{ name:"叶子节点231"},
+				 							{ name:"叶子节点232"},
+				 							{ name:"叶子节点233"},
+				 							{ name:"叶子节点234"}
+				 						]}
+				 				]},
+				 			{ name:"父节点3 - 没有子节点", isParent:true}
+
+				 		];*/
+				
+				// 打开新增修改知识点归类
+				var newCount = 1;
+				var boxySubmit = function(treeNode) {
+					debugger;
+					var gradeId = treeNode.gradeId;
+					var subjectId = treeNode.subjectId;
+					var pId = treeNode.pId;
+					Boxy.load(Globals.ctx + "/manage/knowledge/addKnowledgeTree?gradeId="+ gradeId + "&subjectId=" 
+							+ subjectId + "&pId=" + pId, {title : '知识点归类',
+						afterShow : function(){
+							debugger;
+							var zTree = $.fn.zTree.getZTreeObj("zTree");
+							var sNodes = zTree.getSelectedNodes();
+							if (sNodes.length > 0) {
+								var node = sNodes[0].getParentNode();
+							}
+
+							$(".sure").click(function() {
+								var zTree = $.fn.zTree.getZTreeObj("zTree");
+								zTree.addNodes(treeNode, {id:100103000000, pId:treeNode.id, name:"new node" + (newCount++)});
+								$(".close").click();
+							});
+							
+							$(".close").bindFormClose();
+						}
+					});
+				}
+				
+				var log, className = "dark";
+				function beforeDrag (treeId, treeNodes) {
+					return false;
+				}
+				function beforeEditName (treeId, treeNode) {
+					className = (className === "dark" ? "":"dark");
+					alert("[ "+getTime()+" beforeEditName ]&nbsp;&nbsp;&nbsp;&nbsp; " + treeNode.name);
+					var zTree = $.fn.zTree.getZTreeObj("zTree");
+					zTree.selectNode(treeNode);
+					return confirm("进入节点 -- " + treeNode.name + " 的编辑状态吗？");
+				}
+				function beforeRemove (treeId, treeNode) {
+					className = (className === "dark" ? "":"dark");
+					alert("[ "+getTime()+" beforeRemove ]&nbsp;&nbsp;&nbsp;&nbsp; " + treeNode.name);
+					var zTree = $.fn.zTree.getZTreeObj("zTree");
+					zTree.selectNode(treeNode);
+					return confirm("确认删除 节点 -- " + treeNode.name + " 吗？");
+				}
+				function onRemove (e, treeId, treeNode) {
+					alert("[ "+getTime()+" onRemove ]&nbsp;&nbsp;&nbsp;&nbsp; " + treeNode.name);
+				}
+				function beforeRename (treeId, treeNode, newName, isCancel) {
+					className = (className === "dark" ? "":"dark");
+					alert((isCancel ? "<span style='color:red'>":"") + "[ "+getTime()+" beforeRename ]&nbsp;&nbsp;&nbsp;&nbsp; " + treeNode.name + (isCancel ? "</span>":""));
+					if (newName.length == 0) {
+						alert("节点名称不能为空.");
+						var zTree = $.fn.zTree.getZTreeObj("zTree");
+						setTimeout(function(){zTree.editName(treeNode)}, 10);
+						return false;
+					}
+					return true;
+				}
+				function onRename (e, treeId, treeNode, isCancel) {
+					alert((isCancel ? "<span style='color:red'>":"") + "[ "+getTime()+" onRename ]&nbsp;&nbsp;&nbsp;&nbsp; " + treeNode.name + (isCancel ? "</span>":""));
+				}
+				function showRemoveBtn (treeId, treeNode) {
+					/* return !treeNode.isFirstNode; */
+					return !treeNode.isParent;
+				}
+				/* function showRenameBtn(treeId, treeNode) {
+					return !treeNode.isLastNode;
+				} */
+//				function showLog(str) {
+//					if (!log) log = $("#log");
+//					log.append("<li class='"+className+"'>"+str+"</li>");
+//					if(log.children("li").length > 8) {
+//						log.get(0).removeChild(log.children("li")[0]);
+//					}
+//				}
+				function getTime() {
+					var now= new Date(),
+					h=now.getHours(),
+					m=now.getMinutes(),
+					s=now.getSeconds(),
+					ms=now.getMilliseconds();
+					return (h+":"+m+":"+s+ " " +ms);
+				}
+
+				function addHoverDom(treeId, treeNode) {
+					
+					var sObj = $("#" + treeNode.tId + "_span");
+					if (treeNode.editNameFlag || $("#addBtn_"+treeNode.tId).length>0) return;
+					var addStr = "<span class='button add' id='addBtn_" + treeNode.tId
+						+ "' title='新增' onfocus='this.blur();'></span>";
+					sObj.after(addStr);
+					var btn = $("#addBtn_"+treeNode.tId);
+					if (btn) btn.bind("click", function(){
+						boxySubmit(treeNode);
+						return false;
+					});
+				};
+				function removeHoverDom(treeId, treeNode) {
+					$("#addBtn_"+treeNode.tId).unbind().remove();
+				};
+			/* 	function selectAll() {
+					var zTree = $.fn.zTree.getZTreeObj("zTree");
+					zTree.setting.edit.editNameSelectAll =  $("#selectAll").attr("checked");
+				} */
+				
+				$(document).ready(function(){
+					ajaxSyncGetNodes();
+					//$("#selectAll").bind("click", selectAll);
+				});
+				
 		}
 }

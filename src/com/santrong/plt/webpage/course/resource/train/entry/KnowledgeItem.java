@@ -7,12 +7,20 @@ package com.santrong.plt.webpage.course.resource.train.entry;
  */
 public class KnowledgeItem {
 	private String id;
+	private int code;
 	private int level;
 	private String knowledgeName;
 	private String subjectId;
 	private String gradeId;
 	private String week;
+	private int priority;
 	
+	public int getCode() {
+		return code;
+	}
+	public void setCode(int code) {
+		this.code = code;
+	}
 	public int getLevel() {
 		return level;
 	}
@@ -48,5 +56,11 @@ public class KnowledgeItem {
 	}
 	public void setGradeId(String gradeId) {
 		this.gradeId = gradeId;
+	}
+	public int getPriority() {
+		return priority;
+	}
+	public void setPriority(int priority) {
+		this.priority = priority;
 	}
 }
