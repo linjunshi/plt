@@ -1,5 +1,6 @@
 package com.santrong.plt.webpage.manage.teacher;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -7,13 +8,17 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.google.gson.Gson;
 import com.santrong.plt.log.Log;
+import com.santrong.plt.opt.area.TaobaoAreaEntry;
 import com.santrong.plt.util.MyUtils;
 import com.santrong.plt.webpage.course.resource.train.dao.KnowledgeDao;
 import com.santrong.plt.webpage.course.resource.train.entry.KnowledgeGradeView;
 import com.santrong.plt.webpage.course.resource.train.entry.KnowledgeItem;
 import com.santrong.plt.webpage.course.resource.train.entry.KnowledgeQuery;
+import com.santrong.plt.webpage.course.resource.train.entry.KnowledgeTreeView;
 import com.santrong.plt.webpage.manage.TeacherBaseAction;
 
 @Controller
@@ -47,7 +52,7 @@ public class KnowledgeMAction  extends TeacherBaseAction{
 	}
 	
 	@RequestMapping(value="/delete", method=RequestMethod.POST)
-	public String questionDelete(String knowledgeId){
+	public String removeKnowledge(String knowledgeId){
 		try {
 			KnowledgeDao kDao = new KnowledgeDao();
 			if (kDao.deleteById(knowledgeId)) {
@@ -108,6 +113,9 @@ public class KnowledgeMAction  extends TeacherBaseAction{
 				if (MyUtils.isNull(knowledgeForm.getSubjectId())) {
 					addError("请您选择课程科目！");
 				}
+				if (knowledgeForm.getWeek() > 0) {
+					addError("请您选择周！");
+				}
 				if (!(errorSize() > 0)) {
 					if (MyUtils.isNull(knowledgeForm.getId())) {
 						
@@ -119,6 +127,7 @@ public class KnowledgeMAction  extends TeacherBaseAction{
 							knowledgeItem.setKnowledgeName(knowledgeForm.getKnowledgeName().trim());
 							knowledgeItem.setGradeId(knowledgeForm.getGradeId());
 							knowledgeItem.setSubjectId(knowledgeForm.getSubjectId());
+							knowledgeItem.setWeek(knowledgeForm.getWeek());
 							if (kDao.insert(knowledgeItem)) {
 								addError("添加知识点成功！可以继续添加。");
 								return "/manage/teacher/knowledgeMAdd";
@@ -141,6 +150,7 @@ public class KnowledgeMAction  extends TeacherBaseAction{
 						knowledgeItem.setKnowledgeName(knowledgeForm.getKnowledgeName().trim());
 						knowledgeItem.setGradeId(knowledgeForm.getGradeId());
 						knowledgeItem.setSubjectId(knowledgeForm.getSubjectId());
+						knowledgeItem.setWeek(knowledgeForm.getWeek());
 						if(kDao.update(knowledgeItem)){
 							return this.redirect("/manage/knowledge/list");
 						}
@@ -153,5 +163,120 @@ public class KnowledgeMAction  extends TeacherBaseAction{
 			Log.printStackTrace(e);
 		}
 		return "/manage/teacher/knowledgeMAdd";
+	}
+	
+	@RequestMapping(value="/tree", method=RequestMethod.GET)
+	public String knowledgeTreeShow() {
+		return "/manage/teacher/knowledgeMTree";
+	}
+	
+	/**
+	 * 获取知识树的所有节点，并转成JSON字符串格式
+	 * @return
+	 */
+	@RequestMapping(value="/getTreeNodes", method=RequestMethod.GET)
+	@ResponseBody
+	public String getknowledgeTreeNodes() {
+		String child = "";
+		KnowledgeDao kDao = new KnowledgeDao();
+		List<KnowledgeItem> kItemList = kDao.selectAll();
+		List<KnowledgeTreeView> kTreeList = new ArrayList<KnowledgeTreeView>();
+		if (kItemList != null && kItemList.size() > 0) {
+			for (KnowledgeItem kItem : kItemList) {
+				KnowledgeTreeView kTree = new KnowledgeTreeView();
+				// 常用固定的属性
+				kTree.setId(kItem.getCode());
+				kTree.setpId(MyUtils.getParentId(kItem.getCode()));
+				kTree.setName(kItem.getKnowledgeName());
+				kTree.setLevel(kItem.getLevel());
+				kTree.setGradeId(kItem.getGradeId());
+				kTree.setSubjectId(kItem.getSubjectId());
+				kTree.setWeek(kItem.getWeek());
+				kTree.setPriority(kItem.getPriority());
+				kTree.setDataId(kItem.getId());//用来保存原来的ID
+				
+				// 扩展属性
+				if (kItem.getCode() == 1000000000) {//如果是根节点（知识点），就加根节点默认显示图片
+					kTree.setIconSkin(KnowledgeTreeView.pIconRoot);
+				}
+				if (kItem.getLevel() < 4) {
+					kTree.setOpen(true);//是否展开树 true or false
+				}
+				kTreeList.add(kTree);
+			}
+			if (kTreeList != null && kTreeList.size() > 0) {
+				Gson gson = new Gson();
+				child = gson.toJson(kTreeList);
+			}
+		}
+		return child;
+	}
+	@RequestMapping(value="/addKnowledgeTree")
+	public String addKnowledgeTree() {
+		HttpServletRequest request = this.getRequest();
+		String gradeId = request.getParameter("gradeId");
+		String subjectId = request.getParameter("subjectId");
+		String parentName = request.getParameter("parentName");
+		String level = request.getParameter("level");
+		String dataId = request.getParameter("dataId");//原来数据库里的ID
+		String addOrEdit = request.getParameter("addOrEdit");//新增还是修改
+		KnowledgeItem knowledgeItem = null;
+		if (addOrEdit == "add") {
+			//打开新增页面
+			knowledgeItem = new KnowledgeItem();
+			knowledgeItem.setGradeId(gradeId);
+			knowledgeItem.setSubjectId(subjectId);
+			
+		} else {
+			//打开修改页面
+			KnowledgeDao kDao = new KnowledgeDao();
+			knowledgeItem = kDao.selectById(dataId);
+		}
+		request.setAttribute("knowledgeItem", knowledgeItem);
+		request.setAttribute("parentName", parentName);
+		request.setAttribute("level", level);
+		request.setAttribute("dataId", dataId);
+		request.setAttribute("addOrEdit", addOrEdit);
+		return "/manage/teacher/knowledgeMEdit";
+	}
+	
+	// 异步提交知识点新增修改记录
+	@RequestMapping(value="/submitKnowledgeBySync", method=RequestMethod.POST)
+	@ResponseBody
+	public String submitKnowledgeBySync(){
+		try {
+			HttpServletRequest request = this.getRequest();
+			String dataId = request.getParameter("dataId");//原来数据库里的ID
+			String gradeId = request.getParameter("gradeId");
+			String subjectId = request.getParameter("subjectId");
+			String knowledgeName = request.getParameter("name").trim();
+			int week = this.getIntParameter("week");
+			String addOrEdit = request.getParameter("addOrEdit");//新增还是修改
+			if (addOrEdit == "add") {
+				//打开新增页面
+				
+				KnowledgeDao kDao = new KnowledgeDao();
+				if (!kDao.exists(knowledgeName, gradeId, subjectId)) {
+					KnowledgeItem knowledgeItem = new KnowledgeItem();
+					knowledgeItem.setId(MyUtils.getGUID());
+					knowledgeItem.setKnowledgeName(knowledgeName);
+					knowledgeItem.setGradeId(gradeId);
+					knowledgeItem.setSubjectId(subjectId);
+					knowledgeItem.setWeek(week);
+					knowledgeItem.setPriority(1);//待完善
+					if (kDao.insert(knowledgeItem)) {
+						Gson gson = new Gson();
+						return gson.toJson(knowledgeItem);
+					}
+				}
+			} else {
+				//打开修改页面
+			}
+
+			
+		} catch (Exception e) {
+			Log.printStackTrace(e);
+		}
+		return FAIL;
 	}
 }

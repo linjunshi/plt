@@ -29,7 +29,7 @@ Globals.page = "Manage_orderList";
 			                    <col width="110">
 			                    <col width="120">
 			                    <col width="100">
-			                    <col width="150">
+			                    <col width="160">
 			                    </colgroup>
 			                    <thead>
 			                        <tr>

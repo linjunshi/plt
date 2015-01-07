@@ -258,4 +258,21 @@ public class KnowledgeDao extends BaseDao {
 		}
 		return null;
 	}
+	
+	/**
+	 * 获取所有知识点列表
+	 * @return
+	 */
+	public List<KnowledgeItem> selectAll() {
+		try {
+			KnowledgeMapper mapper = this.getMapper(KnowledgeMapper.class);
+			if(mapper != null) {
+				return mapper.selectAll();
+			}
+		} catch (Exception e) {
+			Log.printStackTrace(e);
+		}
+		return null;
+	}
+	
 }

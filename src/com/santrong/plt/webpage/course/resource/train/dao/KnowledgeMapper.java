@@ -18,11 +18,11 @@ import com.santrong.plt.webpage.course.resource.train.entry.KnowledgeItem;
 public interface KnowledgeMapper {
 	
 	//TODO 新增知识点
-	@Insert("insert into knowledge values( #{id}, #{level}, #{knowledgeName}, #{subjectId}, #{gradeId}, #{week})")
+	@Insert("insert into knowledge values( #{id}, #{code}, #{level}, #{knowledgeName}, #{subjectId}, #{gradeId}, #{week}, #{priority})")
 	int insert(KnowledgeItem knowledgeItem);
 	
 	//TODO 修改知识点
-	@Update("update knowledge set level=#{level},knowledgeName = #{knowledgeName}, subjectId = #{subjectId}, gradeId = #{gradeId},week=#{week} where id = #{id}")
+	@Update("update knowledge set code=#{code},level=#{level},knowledgeName = #{knowledgeName}, subjectId = #{subjectId}, gradeId = #{gradeId},week=#{week},priority=#{priority} where id = #{id}")
 	int update(KnowledgeItem knowledgeItem);
 	
 	//TODO 删除知识点
@@ -49,6 +49,9 @@ public interface KnowledgeMapper {
 	 * @param subjectId
 	 * @return
 	 */
-	@Select("select * from knowledge where gradeId = #{gradeId} and subjectId = #{subjectId}")
+	@Select("select * from knowledge where gradeId = #{gradeId} and subjectId = #{subjectId} order by code asc")
 	List<KnowledgeItem> selectByGIdAndSId(@Param("gradeId")String gradeId, @Param("subjectId")String subjectId);
+	
+	@Select("select * from knowledge order by code asc")
+	List<KnowledgeItem> selectAll();
 }

@@ -584,7 +584,9 @@ input[type="reset"]::-moz-focus-inner, input[type="button"]::-moz-focus-inner, i
 .sh_title { font-size:18px; border-bottom:1px #009871 solid; width:98%;position:relative;}
 .pt10{ border-top:#ccc solid 1px;}
 .sh_form_con { margin-left:100px; padding-bottom:10px;}
-
+/*-----------------知识点维护----------------------*/
+.form_knowledge { margin:0 0 0 50px;font-size:18px; width:400px;position:relative;}
+.sh_title_knowledge { font-size:18px; border-bottom:1px #009871 solid; width:450px;position:relative;margin: 0 15px;}
 /*--------我的收藏----试题列表---我的评价-------*/
 .sh_collection { width:100%;}
 .sh_collection ul li{ float:left;width:97%; padding:5px 0; margin:10px 0; border-bottom:1px #dbdbdb dashed;}

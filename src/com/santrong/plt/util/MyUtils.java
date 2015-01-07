@@ -376,4 +376,28 @@ public class MyUtils {
 
 		return null;
 	}
+	
+	/**
+	 * 获取父节点
+	 * @param code
+	 * @return
+	 */
+	public static int getParentId(int code) {
+		// 10 00 00 00 00 
+		String str = Integer.toString(code);
+		int pId = 0;
+		if (str.length() == 10) {
+			if ("00".equals(str.substring(2, 4))) {
+				pId = 0;
+			} else if ("00".equals(str.substring(4, 6))) {
+				pId = stringToInt(str.substring(0, 2) + "00000000");
+			} else if ("00".equals(str.substring(6, 8))) {
+				pId = stringToInt(str.substring(0, 4) + "000000");
+			} else if ("00".equals(str.substring(8, 10))) {
+				pId = stringToInt(str.substring(0, 6) + "0000");
+			}
+		}
+		return pId;
+	}
+	
 }

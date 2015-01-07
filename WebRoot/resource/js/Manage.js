@@ -55,7 +55,6 @@ function ManageClass() {
 	// 学科的change()事件用来清空之前绑定的知识点，让用户重新绑定知识点(myTrainMAdd.jsp)
 	$("#subjectSelect").change(function(){
 		if (changeNum > 0 && $("#knowledgeIds").length > 0) {
-			alert()
 			$("input[name=knowledgeIds]").val("");//客户端界面上清空绑定的所有知识点
 			$("input[name=knowledgeNames]").val("请点击选择试题所属的知识点");
 		}
@@ -563,11 +562,11 @@ ManageClass.prototype = {
 				if (resourceType == 1) {
 					var oldResourceId = $("#oldResourceId").val();
 					$.ajax({
-	                    url: Globals.ctx + "/manage/course/addResourceFile",
+						url: Globals.ctx + "/manage/course/addResourceFile",
 	                    data: { courseId:courseId, chapterId:chapterId, oldResourceId:oldResourceId, page:page},
 	                    type: "GET",
 	                    success: function (data) {
-	    					$(".sh_info_r").html(data);
+	                    	$(".sh_info_r").html(data);
 	                    }
 					});//ajax
 				} else if (resourceType == 4) {
@@ -1055,5 +1054,271 @@ ManageClass.prototype = {
 			$("#birthday").click(function(){
 				DatePickerFn();
 			});
+		},
+		
+		// TODO 知识点结构树
+		knowledgeMTree : function() {
+		
+			var setting = {
+					view: {
+						addHoverDom: addHoverDom,
+						removeHoverDom: removeHoverDom,
+						selectedMulti: false
+					},
+					edit: {
+						enable: true,
+						editNameSelectAll: true,
+						showRemoveBtn: showRemoveBtn,
+						showRenameBtn: true,
+						removeTitle: "删除",
+						renameTitle: "编辑",
+					},
+					data: {
+						simpleData: {
+							enable: true
+						}//设置使用标准还是简单的JSON格式数据结构，这里使用数组类型的简单JSON格式数据结构
+					},
+					callback: {
+						beforeDrag: beforeDrag,
+						beforeEditName: beforeEditName,
+						beforeRemove: beforeRemove,
+						beforeRename: beforeRename,
+						onRemove: onRemove,
+						onRename: onRename
+					}
+				};
+			
+//				var zNodes = [
+//				              {"id":1000000000,"pId":0,"level":1,"name":"知识点","subjectId":"0","gradeId":"0","week":"0","priority":0,"open":true,"iconSkin":"pIconRoot"},
+//				              {"id":1001000000,"pId":1000000000,"level":2,"name":"基础知识","subjectId":"10000","gradeId":"10000","week":"1","priority":1,"open":true},
+//				              {"id":1001010000,"pId":1001000000,"level":3,"name":"汉字","subjectId":"10000","gradeId":"10000","week":"1","priority":1,"open":true},
+//				              {"id":1001010100,"pId":1001010000,"level":4,"name":"字音","subjectId":"10000","gradeId":"10000","week":"2","priority":1,"open":true},
+//				              {"id":1001010200,"pId":1001010000,"level":4,"name":"字形","subjectId":"10000","gradeId":"10000","week":"1","priority":2,"open":true},
+//				              {"id":1001020000,"pId":1001000000,"level":3,"name":"词语","subjectId":"10000","gradeId":"10000","week":"3","priority":2,"open":true},
+//				              {"id":1001020100,"pId":1001020000,"level":4,"name":"词语辨析与运用","subjectId":"10000","gradeId":"10000","week":"1","priority":1,"open":true},
+//				              {"id":1001020200,"pId":1001020000,"level":4,"name":"成语、熟语的运用","subjectId":"10000","gradeId":"10000","week":"1","priority":2,"open":true},
+//				              {"id":1001030000,"pId":1001000000,"level":3,"name":"句子","subjectId":"10000","gradeId":"10000","week":"6","priority":3,"open":true},
+//				              {"id":1001030100,"pId":1001030000,"level":4,"name":"病句解析与修改","subjectId":"10000","gradeId":"10000","week":"2","priority":1,"open":true},
+//				              {"id":1001030200,"pId":1001030000,"level":4,"name":"句子的衔接连贯","subjectId":"10000","gradeId":"10000","week":"3","priority":2,"open":true},
+//				              {"id":1001040000,"pId":1001000000,"level":3,"name":"文学文化常识","subjectId":"10000","gradeId":"10000","week":"4","priority":4,"open":true},
+//				              {"id":1002000000,"pId":1000000000,"level":2,"name":"写作","subjectId":"10000","gradeId":"10000","week":"1","priority":2,"open":true}];
+				var zNodes ;
+				function ajaxSyncGetNodes() {
+					$.ajax({
+						url : Globals.ctx + "/manage/knowledge/getTreeNodes", 
+//						data : {liveId : liveId}, 
+						type: "GET",
+//						dataType: 'text', 
+						async : false,//设置为同步操作就可以给全局变量赋值成功 
+						success : function(result) {
+						if(result.indexOf('{') != -1) {
+							var json = eval('(' + result + ')');
+							zNodes = json;
+						}else {
+							Boxy.alert(result);
+						}
+					}});
+				}
+				
+				// 打开新增修改知识点归类
+				var newCount = 1;
+				var boxySubmit = function(addOrEdit, treeNode) {
+					var gradeId = treeNode.gradeId;
+					var subjectId = treeNode.subjectId;
+					var name = treeNode.name;
+					var level = treeNode.level;
+					var dataId = treeNode.dataId;
+					Boxy.load(Globals.ctx + "/manage/knowledge/addKnowledgeTree?gradeId="+ gradeId + "&subjectId=" 
+							+ subjectId + "&parentName=" + name + "&level=" + level + "&dataId=" + dataId
+							+ "&addOrEdit=" + addOrEdit ,{title : '知识点归类',
+						afterShow : function(){
+							/*****************************select start***************************************/
+							var levelId = $("#levelId").val();
+							var oldSubjectId = $("#oldSubjectId").val();
+							var changeNum = 0;//用来监控年级联动控件是否人为触发
+							
+							var gradeSelectFn = function(levelId) {
+								$.get(Globals.ctx + "/data/gradeByLevelId?levelId=" + levelId, function(data) {
+									if(data != "error") {
+										var json = eval('(' + data + ')');
+										$("#gradeSelect").val(json.gradeEnName);
+										//首次触发年级联动
+										$("#gradeSelect").change();
+									}
+								})
+							}
+							
+							// 年级选择
+							$("#gradeSelect").change(function() {
+								$.get(Globals.ctx + "/data/levelByGrade?gradeEnName=" + $(this).val(), function(data) {
+									if(data != "error") {
+										var json = eval('(' + data + ')');
+										var html = '';
+										for(var i=0;i<json.length;i++) {
+											html += '<option value="' + json[i].levelId + '">' + json[i].levelName + '</option>';
+										}
+										$("#levelSelect").html(html);
+										if ( levelId != "") {//修改页面初始化默认选择年级
+											$("#levelSelect").val(levelId);
+										}
+										$("#levelSelect").change();
+									}
+								})
+							});
+
+							// 学科选择
+							$("#levelSelect").change(function() {
+								$.get(Globals.ctx + "/data/subjectByLevel?gradeId=" + $(this).val(), function(data) {
+									if(data != "error") {
+										var json = eval('(' + data + ')');
+										var html = '';
+										for(var i=0;i<json.length;i++) {
+											html += '<option value="' + json[i].id + '">' + json[i].subjectName + '</option>';
+										}
+										$("#subjectSelect").html(html);
+										if ( oldSubjectId != "") {//修改页面初始化默认选择学科
+											$("#subjectSelect").val(oldSubjectId);
+										}
+										$("#subjectSelect").change();
+									}
+								})
+							});
+							
+							if ( levelId != "") {//年级ID
+								gradeSelectFn(levelId);
+							} else {
+								//新增页面，自动首次触发年级联动控件，默认选择
+								$("#gradeSelect").change();
+							}
+							
+							var level = $("#level").val();
+							if (eval(level) >= 1  ) {// 知识树层级
+								$("#gradeSelect").attr("disabled", "disabled");
+								$("#levelSelect").attr("disabled", "disabled");
+								$("#subjectSelect").attr("disabled", "disabled");
+							}
+							/*****************************select end***************************************/
+							var zTree = $.fn.zTree.getZTreeObj("zTree");
+							var sNodes = zTree.getSelectedNodes();
+							if (sNodes.length > 0) {
+								var node = sNodes[0].getParentNode();
+							}
+
+							$(".sure").click(function() {
+								debugger;
+								var dataId = $("#dataId").val().trim();
+								var gradeId = $("#gradeId").val().trim();
+								var subjectId = $("#subjectId").val().trim();
+								var knowledgeName = $("#knowledgeName").val().trim();
+								var addOrEdit = $("#addOrEdit").val().trim();
+								$.ajax({
+									url: Globals.ctx + "/manage/knowledge/submitKnowledgeBySync",
+				                    data: { dataId:dataId, gradeId:gradeId, subjectId:subjectId, knowledgeName:knowledgeName, addOrEdit:addOrEdit},
+				                    type: "post",
+//				                    async : false,//设置为同步操作就可以给全局变量赋值成功 
+				                    success: function (result) {
+				                    	if(result == "fail") {
+				                    		Boxy.alert("亲，对不起，操作失败了，请您刷新页面后重新操作！");
+										} else {
+											var json = eval('(' + result + ')');
+											var zTree = $.fn.zTree.getZTreeObj("zTree");
+											zTree.addNodes(treeNode, json);
+//											zTree.addNodes(treeNode, {id:100103000000, pId:treeNode.id, name:"new node" + (newCount++)});
+											$(".close").click();
+										}
+				                    }
+								});//ajax
+							});
+							
+							$(".close").bindFormClose();
+						}
+					});
+				}
+				
+				var log, className = "dark";
+				function beforeDrag (treeId, treeNodes) {
+					return false;
+				}
+				function beforeEditName (treeId, treeNode) {
+					className = (className === "dark" ? "":"dark");
+					alert("[ "+getTime()+" beforeEditName ]&nbsp;&nbsp;&nbsp;&nbsp; " + treeNode.name);
+					var zTree = $.fn.zTree.getZTreeObj("zTree");
+					zTree.selectNode(treeNode);
+					return confirm("进入节点 -- " + treeNode.name + " 的编辑状态吗？");
+				}
+				function beforeRemove (treeId, treeNode) {
+					className = (className === "dark" ? "":"dark");
+					alert("[ "+getTime()+" beforeRemove ]&nbsp;&nbsp;&nbsp;&nbsp; " + treeNode.name);
+					var zTree = $.fn.zTree.getZTreeObj("zTree");
+					zTree.selectNode(treeNode);
+					return confirm("确认删除 节点 -- " + treeNode.name + " 吗？");
+				}
+				function onRemove (e, treeId, treeNode) {
+					alert("[ "+getTime()+" onRemove ]&nbsp;&nbsp;&nbsp;&nbsp; " + treeNode.name);
+				}
+				function beforeRename (treeId, treeNode, newName, isCancel) {
+					className = (className === "dark" ? "":"dark");
+					alert((isCancel ? "<span style='color:red'>":"") + "[ "+getTime()+" beforeRename ]&nbsp;&nbsp;&nbsp;&nbsp; " + treeNode.name + (isCancel ? "</span>":""));
+					if (newName.length == 0) {
+						alert("节点名称不能为空.");
+						var zTree = $.fn.zTree.getZTreeObj("zTree");
+						setTimeout(function(){zTree.editName(treeNode)}, 10);
+						return false;
+					}
+					return true;
+				}
+				function onRename (e, treeId, treeNode, isCancel) {
+					alert((isCancel ? "<span style='color:red'>":"") + "[ "+getTime()+" onRename ]&nbsp;&nbsp;&nbsp;&nbsp; " + treeNode.name + (isCancel ? "</span>":""));
+				}
+				function showRemoveBtn (treeId, treeNode) {
+					/* return !treeNode.isFirstNode; */
+					return !treeNode.isParent;
+				}
+				/* function showRenameBtn(treeId, treeNode) {
+					return !treeNode.isLastNode;
+				} */
+//				function showLog(str) {
+//					if (!log) log = $("#log");
+//					log.append("<li class='"+className+"'>"+str+"</li>");
+//					if(log.children("li").length > 8) {
+//						log.get(0).removeChild(log.children("li")[0]);
+//					}
+//				}
+				function getTime() {
+					var now= new Date(),
+					h=now.getHours(),
+					m=now.getMinutes(),
+					s=now.getSeconds(),
+					ms=now.getMilliseconds();
+					return (h+":"+m+":"+s+ " " +ms);
+				}
+
+				function addHoverDom(treeId, treeNode) {
+					
+					var sObj = $("#" + treeNode.tId + "_span");
+					if (treeNode.editNameFlag || $("#addBtn_"+treeNode.tId).length>0) return;
+					var addStr = "<span class='button add' id='addBtn_" + treeNode.tId
+						+ "' title='新增' onfocus='this.blur();'></span>";
+					sObj.after(addStr);
+					var btn = $("#addBtn_"+treeNode.tId);
+					if (btn) btn.bind("click", function(){
+						boxySubmit("add", treeNode);
+						return false;
+					});
+				};
+				function removeHoverDom(treeId, treeNode) {
+					$("#addBtn_"+treeNode.tId).unbind().remove();
+				};
+			/* 	function selectAll() {
+					var zTree = $.fn.zTree.getZTreeObj("zTree");
+					zTree.setting.edit.editNameSelectAll =  $("#selectAll").attr("checked");
+				} */
+				
+				$(document).ready(function(){
+					ajaxSyncGetNodes();
+					$.fn.zTree.init($("#zTree"), setting, zNodes);
+					//$("#selectAll").bind("click", selectAll);
+				});
+				
 		}
 }
