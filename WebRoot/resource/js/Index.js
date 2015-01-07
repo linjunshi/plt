@@ -157,6 +157,36 @@ IndexClass.prototype = {
 		});
 	},
 	
+	// 做题页面
+	questionBegin : function() {
+		// 做题
+		$(".sh_work_form input").change(function() {
+			var type = $(this).attr("type");
+			
+			var val = 0;
+			if(type=='radio') {//单选
+				val = $(this).val()
+			}else {// 多选
+				$(".sh_work_form input[type=checkbox]:checked").each(function() {
+					val = val + $(this).val()/1;
+				});
+			}
+			
+			var index = $(this).parents(".sh_work_rad").find(".current_index").text();
+			$(".question_index").eq(index-1).find("input[name=answer]").val(val);
+			$(".question_index").eq(index-1).addClass("done");// 标识已做题
+		});
+		
+		// 提交结果
+		$(".ajax_submit").click(function() {
+	    	var form = $(this).closest("form");
+	    	if(form.length > 0){
+	    		form.submit();
+	    	}
+		});		
+		
+	},
+	
 	// 学校列表页
 	school : function() {
 

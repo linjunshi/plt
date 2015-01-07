@@ -203,6 +203,19 @@ public class TrainQuestionDao extends BaseDao{
 		return null;
 	}
 	
+	public List<TrainQuestionItem> selectByIds(String[] idList) {
+		try {
+			String ids = MyUtils.consistIds(idList);
+			TrainQuestionMapper mapper = this.getMapper(TrainQuestionMapper.class);
+			if (mapper != null) {
+				return mapper.selectByIds(ids);
+			}
+		} catch (Exception e) {
+			Log.printStackTrace(e);
+		}
+		return null;		
+	}
+	
 	/**
 	 * 查找最大的排序
 	 * @param questionId

@@ -43,6 +43,12 @@ public abstract class BaseAction {
 		return user;
 	}
 	
+	// 特殊情况下需要手工判断登录
+	public final boolean isLogin() {
+		UserItem user = (UserItem)ThreadUtils.currentHttpRequest().getSession().getAttribute(Global.SessionKey_LoginUser);
+		return user != null;
+	}	
+	
 	public final HttpServletRequest getRequest() {
 		return ThreadUtils.currentHttpRequest();
 	}
