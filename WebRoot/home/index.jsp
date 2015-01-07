@@ -54,7 +54,7 @@ Globals.page = "Index_index";
 						<div>欢迎你，${sessionScope.loginUser.showName}</div>
 						<img src="${ctx}${sessionScope.loginUser.headPhoto}" width="30" width="30" />
 						<p><a href="${ctx }/account/logout">注销</a></p>
-						<p><a href="${ctx }/study/course">管理中心</a></p>						
+						<p><a href="${ctx }/study/score">管理中心</a></p>						
 					</c:if>
 		        </div>
 		    </div>

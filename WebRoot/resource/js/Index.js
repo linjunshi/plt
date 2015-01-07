@@ -48,20 +48,6 @@ IndexClass.prototype = {
 	
 	// 登录页
 	login:function() {
-		$("input[type=submit]").click(function(){
-			
-			$("form").ajaxSubmit({
-				success : function(result) {
-					if(result == "success") {
-						window.location.href = Globals.ctx + "/";
-					}else{
-						alert(result);
-					}
-				}
-			});
-			
-			return false;
-		});
 	},
 	
 	// 课程详细页
