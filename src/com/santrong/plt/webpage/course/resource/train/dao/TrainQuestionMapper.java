@@ -29,6 +29,9 @@ public interface TrainQuestionMapper {
 	@Select("select * from resource_train_question where id = #{id}")
 	TrainQuestionItem selectById(String id);
 	
+	@Select("select * from resource_train_question where id in (${ids})")
+	List<TrainQuestionItem> selectByIds(@Param("ids")String ids);
+	
 	@Insert("select max(priority) from resource_train_to_question where questionId=#{questionId} and trainId=#{trainId}")
 	int selectMaxPriority(@Param("questionId")String questionId, @Param("trainId")String trainId);
 	
@@ -126,4 +129,5 @@ public interface TrainQuestionMapper {
 	 */
 	@Select("select a.knowledgeName, a.subjectId, a.gradeId, b.*  from knowledge a RIGHT JOIN question_to_knowledge b on a.id = b.knowledgeId where b.questionId = #{questionId} order by a.code asc")
 	List<KnowledgeQuestionView> selectKnowledge2QuestionByQId(String questionId);
+	
 }

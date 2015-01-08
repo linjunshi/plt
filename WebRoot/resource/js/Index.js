@@ -48,20 +48,6 @@ IndexClass.prototype = {
 	
 	// 登录页
 	login:function() {
-		$("input[type=submit]").click(function(){
-			
-			$("form").ajaxSubmit({
-				success : function(result) {
-					if(result == "success") {
-						window.location.href = Globals.ctx + "/";
-					}else{
-						alert(result);
-					}
-				}
-			});
-			
-			return false;
-		});
 	},
 	
 	// 课程详细页
@@ -136,6 +122,55 @@ IndexClass.prototype = {
 				return;
 			}
 		});
+	},
+	
+	// 题库首页
+	question : function() {
+		
+		// 选题和取消选题
+		$(".question_list .select").click(function() {
+			var _this = $(this);
+			var qid = $(this).attr("qid");
+			$.post(Globals.ctx + "/question/assembleQuestion", {qid : qid}, function(result) {
+				if(result == 'add') {
+					_this.text('取消选择');
+				}else if(result == 'remove'){
+					_this.text('选择');
+				}else {
+					alert(result);
+				}
+			});
+		});
+	},
+	
+	// 做题页面
+	questionBegin : function() {
+		// 做题
+		$(".sh_work_form input").change(function() {
+			var type = $(this).attr("type");
+			
+			var val = 0;
+			if(type=='radio') {//单选
+				val = $(this).val()
+			}else {// 多选
+				$(".sh_work_form input[type=checkbox]:checked").each(function() {
+					val = val + $(this).val()/1;
+				});
+			}
+			
+			var index = $(this).parents(".sh_work_rad").find(".current_index").text();
+			$(".question_index").eq(index-1).find("input[name=answer]").val(val);
+			$(".question_index").eq(index-1).addClass("done");// 标识已做题
+		});
+		
+		// 提交结果
+		$(".ajax_submit").click(function() {
+	    	var form = $(this).closest("form");
+	    	if(form.length > 0){
+	    		form.submit();
+	    	}
+		});		
+		
 	},
 	
 	// 学校列表页

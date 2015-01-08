@@ -17,7 +17,7 @@ public class TrainHistoryDao extends BaseDao{
 	/**
 	 * 上报一条作业历史的记录
 	 * @author huangweihua
-	 * @param TrainHistoryItem
+	 * @param CompetitionHistoryItem
 	 * @return int
 	 */
 	public int insert(TrainHistoryItem trainHistoryItem){

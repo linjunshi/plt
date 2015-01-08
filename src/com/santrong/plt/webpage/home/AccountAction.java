@@ -207,7 +207,8 @@ public class AccountAction extends BaseAction {
 		// 获取需要跳转的页面
 		String uri = (String)getRequest().getSession().getAttribute(Global.SessionKey_AfterLoginUri);
 		if(uri == null) {
-			uri = "/";
+//			uri = "/";
+			uri = "/study/score";
 		}
 		
 		return this.redirect(uri);

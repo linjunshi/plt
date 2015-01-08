@@ -30,6 +30,9 @@ public class TrainQuestionItem {
 	private Date uts;
 	
 	private int[] pageAnswer;
+	
+	// 是否已选择
+	private boolean assemble;
 
 	// 题目的默认类型值
 	/**
@@ -71,6 +74,12 @@ public class TrainQuestionItem {
 	public static final String[] Answers_Options					= {"A","B","C","D"};
 	
 	
+	public boolean isAssemble() {
+		return assemble;
+	}
+	public void setAssemble(boolean assemble) {
+		this.assemble = assemble;
+	}
 	public String getId() {
 		return id;
 	}

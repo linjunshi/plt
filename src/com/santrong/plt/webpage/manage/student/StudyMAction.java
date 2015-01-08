@@ -26,6 +26,15 @@ import com.santrong.plt.webpage.manage.student.entry.TrainSimpleView;
 public class StudyMAction extends StudentBaseAction {
 
 	/**
+	 * 我的知识图谱
+	 * @return
+	 */
+	@RequestMapping("/score")
+	public String score() {
+		return "manage/student/score";
+	}
+	
+	/**
 	 * 我的课程
 	 * @return
 	 */

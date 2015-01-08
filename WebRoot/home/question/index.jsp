@@ -8,7 +8,7 @@
 var Globals = {};
 Globals.ctx = "${ctx}";
 Globals.lang = "${lang}";
-Globals.page = "Index_school";
+Globals.page = "Index_question";
 </script>
 </head>
 <body>
@@ -28,14 +28,25 @@ Globals.page = "Index_school";
 		        	</ul>
 		        </div>
 		        <div class="schoool_box_list clr">
-		            <ul>
+		            <ul class="question_list">
 		            	<c:forEach items="${questionList}" var="question" varStatus="st">
-		                <li class="<c:if test="${(st.index+1)%5==0}">margin_right_clear</c:if>"><a href="${ctx}/school/${question.id}.html"><img src="${ctx}/resource/photo/default_school.jpg" width="220" height="140"></a>
+		                <li class="<c:if test="${(st.index+1)%5==0}">margin_right_clear</c:if>">
+		                	<c:if test="${question.assemble}">
+		                		<a href="javascript:void(0);" class="select" qid="${question.id}">取消选择</a>
+		                	</c:if>
+		                	<c:if test="${!question.assemble}">
+		                		<a href="javascript:void(0);" class="select" qid="${question.id}">选择</a>
+		                	</c:if>
 		                    <h2>${question.topic}</h2>
 		                </li>
 		            	</c:forEach>
 		            </ul>
 		        </div>
+		    </div>
+		    <div class="select_question_box" style="width:200px; height:200px; border:solid 1px #ccc;">
+		    <div>
+		    </div>
+		    <a href="${ctx}/question/begin">开始做题</a>
 		    </div>
 		</div>
 	</div>
