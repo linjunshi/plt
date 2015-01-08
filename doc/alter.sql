@@ -1,6 +1,6 @@
 -- 2015-01-08 weinianjie
 alter table resource_train_question add column level int(10) comment '难中易' after ownerId; 
-alter table resource_train_question change del status int(10) comment '状态' after ownerId; 
+alter table resource_train_question change del status int(10) comment '状态' after level; 
 
 -- 2015-01-05 weinianjie
 alter table knowledge add column code int(32) not null comment '编码' after id;
