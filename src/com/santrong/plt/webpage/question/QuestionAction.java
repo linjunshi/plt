@@ -47,7 +47,6 @@ public class QuestionAction extends BaseAction {
 			TrainQuestionDao tqDao = new TrainQuestionDao();
 			TrainQuestionQuery query = new TrainQuestionQuery();
 			query.setPageNum(pageNum);
-			query.setDel(0);
 			query.setCount(tqDao.selectCountByQuery(query));
 			query.setOrderBy("cts");
 			List<TrainQuestionItem> questionList = tqDao.selectByQuery(query);

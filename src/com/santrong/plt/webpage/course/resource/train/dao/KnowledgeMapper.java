@@ -29,8 +29,8 @@ public interface KnowledgeMapper {
 	@Select("select * from knowledge where id = #{id}")
 	KnowledgeItem selectById(String id);
 	
-	@Select("select count(*) from knowledge where knowledgeName = #{knowledgeName} and subjectId = #{subjectId} and gradeId = #{gradeId}")
-	int exists(@Param("knowledgeName")String knowledgeName, @Param("subjectId")String subjectId, @Param("gradeId")String gradeId);
+	@Select("select count(*) from knowledge where knowledgeName = #{knowledgeName} and gradeId = #{gradeId} and subjectId = #{subjectId} ")
+	int exists(@Param("knowledgeName")String knowledgeName, @Param("gradeId")String gradeId, @Param("subjectId")String subjectId);
 	
 	@Select("select * from knowledge where knowledgeName = #{knowledgeName}")
 	List<KnowledgeItem> selectByName(String knowledgeName);
@@ -45,11 +45,24 @@ public interface KnowledgeMapper {
 	 * @param subjectId
 	 * @return
 	 */
-	@Select("select * from knowledge where gradeId = #{gradeId} and subjectId = #{subjectId} order by code asc")
+	@Select("select * from knowledge where gradeId = #{gradeId} and subjectId = #{subjectId} order by code asc,priority asc")
 	List<KnowledgeItem> selectByGIdAndSId(@Param("gradeId")String gradeId, @Param("subjectId")String subjectId);
 	
-	@Select("select * from knowledge order by code asc")
+	@Select("select * from knowledge order by code asc, priority")
 	List<KnowledgeItem> selectAll();
+	
+	/**
+	 * 根据code范围和level树的级别，获取知识点的列表记录
+	 * @param maxCode
+	 * @param minCode
+	 * @param level
+	 * @return
+	 */
+	@Select("select * from knowledge where code <= #{maxCode} and code >= #{minCode} and level = #{level} order by code asc,priority asc")
+	List<KnowledgeItem> selectByCodeRange(@Param("maxCode")int maxCode, @Param("minCode")int minCode, @Param("level")int level);
+	
+	@Select("select max(priority) from knowledge where code <= #{maxCode} and code >= #{minCode} and level = #{level} order by code asc")
+	int selectMaxPriorityByCodeRange(@Param("maxCode")int maxCode, @Param("minCode")int minCode, @Param("level")int level);
 	
 	// 获取用户的知识图表
 	@Select("select e.* from competition_attend a "
@@ -59,5 +72,6 @@ public interface KnowledgeMapper {
 			+ "right join knowledge e on d.knowledgeId=e.id "
 			+ "where a.userId=#{userId} and e.subjectId=#{subjectId} and e.gradeId=#{gradeId} "
 			+ "order by e.week asc")
-	int selectUserKnowledgeMap(String userId, String subjectId, String gradeId);
+	int selectUserKnowledgeMap(String userId, String subjectId, String gradeId);	
+	
 }

@@ -101,12 +101,8 @@ public class TrainQuestionDao extends BaseDao{
 				System.out.println("warnings : The questionType has no corresponding value.");
 			}
 			
-			// 是否已经标识为已删除（del）
-			if (query.getDel() == TrainQuestionItem.IS_NOT_DELETE) {
-				criteria.where(eq("a.del", TrainQuestionItem.IS_NOT_DELETE));
-			}else if (query.getDel() == TrainQuestionItem.IS_DELETE) {
-				criteria.where(eq("a.del", TrainQuestionItem.IS_DELETE));
-			}
+			// 未删除
+			criteria.where(ne("a.status", TrainQuestionItem.Status_Del));
 			
 			// 排序
 			if (!StringUtils.isNullOrEmpty(query.getOrderRule())) {
@@ -172,12 +168,8 @@ public class TrainQuestionDao extends BaseDao{
 				System.out.println("warnings : The questionType has no corresponding value.");
 			}
 			
-			// 是否已经标识为已删除（del）
-			if (query.getDel() == TrainQuestionItem.IS_NOT_DELETE) {
-				criteria.where(eq("a.del", TrainQuestionItem.IS_NOT_DELETE));
-			}else if (query.getDel() == TrainQuestionItem.IS_DELETE) {
-				criteria.where(eq("a.del", TrainQuestionItem.IS_DELETE));
-			}
+			// 未删除
+			criteria.where(ne("a.status", TrainQuestionItem.Status_Del));
 			
 			Connection conn = ThreadUtils.currentConnection();
 			PreparedStatement stm = criteria.getRealStatement(conn);

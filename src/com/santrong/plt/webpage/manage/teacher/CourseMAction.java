@@ -755,7 +755,6 @@ public class CourseMAction extends TeacherBaseAction {
 			query.setPageNum(pageNum);
 //			query.setPageSize(2);//设置每页显示的记录条数
 			query.setUserId(currentUser().getId());
-			query.setDel(0);
 			query.setCount(tqDao.selectCountByQuery(query));
 			List<TrainQuestionItem> questionList = tqDao.selectByQuery(query);
 			

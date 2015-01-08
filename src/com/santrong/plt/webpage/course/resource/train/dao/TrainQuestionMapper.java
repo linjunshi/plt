@@ -127,7 +127,7 @@ public interface TrainQuestionMapper {
 	 * @param trainId
 	 * @return
 	 */
-	@Select("select a.knowledgeName, a.subjectId, a.gradeId, b.*  from knowledge a RIGHT JOIN question_to_knowledge b on a.id = b.knowledgeId where b.questionId = #{questionId}")
+	@Select("select a.knowledgeName, a.subjectId, a.gradeId, b.*  from knowledge a RIGHT JOIN question_to_knowledge b on a.id = b.knowledgeId where b.questionId = #{questionId} order by a.code asc")
 	List<KnowledgeQuestionView> selectKnowledge2QuestionByQId(String questionId);
 	
 }

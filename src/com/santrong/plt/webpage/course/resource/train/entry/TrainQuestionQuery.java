@@ -11,7 +11,6 @@ public class TrainQuestionQuery extends PageQuery{
 	
 	private String keywords;
 	private String userId;
-	private int del;
 	private int questionType;
 	
 	public String getKeywords() {
@@ -25,12 +24,6 @@ public class TrainQuestionQuery extends PageQuery{
 	}
 	public void setUserId(String userId) {
 		this.userId = userId;
-	}
-	public int getDel() {
-		return del;
-	}
-	public void setDel(int del) {
-		this.del = del;
 	}
 	public int getQuestionType() {
 		return questionType;

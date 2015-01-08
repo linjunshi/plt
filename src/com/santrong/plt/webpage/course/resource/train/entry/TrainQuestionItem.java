@@ -62,16 +62,6 @@ public class TrainQuestionItem {
 	 */
 	public static final int QUESTION_TYPE_BLANK_FILLING				=	4; //填空题 (默认值为4)
 	
-	// 是否已删除
-	/**
-	 * 默认为 IS_NOT_DELETE = 0，标识为未删除
-	 */
-	public static final int IS_NOT_DELETE 							=	0; //默认0
-	/**
-	 * IS_DELETE = 1，标识为已删除
-	 */
-	public static final int IS_DELETE								=	1; //1 标识成伪删除
-	
 	/**
 	 * 选项的{"A","B","C","D"}分别对应的数值{1,2,4,8}
 	 * 0001,0010,0100,1000

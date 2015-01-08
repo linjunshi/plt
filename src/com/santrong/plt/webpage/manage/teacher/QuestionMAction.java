@@ -39,7 +39,6 @@ public class QuestionMAction extends TeacherBaseAction{
 			TrainQuestionQuery query = new TrainQuestionQuery();
 			query.setPageNum(pageNum);
 			query.setUserId(user.getId());
-			query.setDel(0);
 			query.setCount(tqDao.selectCountByQuery(query));
 			query.setOrderBy("cts");
 			List<TrainQuestionItem> questionList = tqDao.selectByQuery(query);
