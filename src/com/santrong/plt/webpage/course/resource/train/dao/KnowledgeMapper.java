@@ -17,21 +17,17 @@ import com.santrong.plt.webpage.course.resource.train.entry.KnowledgeItem;
  */
 public interface KnowledgeMapper {
 	
-	//TODO 新增知识点
 	@Insert("insert into knowledge values( #{id}, #{code}, #{level}, #{knowledgeName}, #{subjectId}, #{gradeId}, #{week}, #{priority})")
 	int insert(KnowledgeItem knowledgeItem);
 	
-	//TODO 修改知识点
 	@Update("update knowledge set code=#{code},level=#{level},knowledgeName = #{knowledgeName}, subjectId = #{subjectId}, gradeId = #{gradeId},week=#{week},priority=#{priority} where id = #{id}")
 	int update(KnowledgeItem knowledgeItem);
 	
-	//TODO 删除知识点
 	@Delete("delete from knowledge where id = #{id}")
 	int deleteById(String id);
 	
 	@Select("select * from knowledge where id = #{id}")
 	KnowledgeItem selectById(String id);
-	//TODO 更新知识点
 	
 	@Select("select count(*) from knowledge where knowledgeName = #{knowledgeName} and subjectId = #{subjectId} and gradeId = #{gradeId}")
 	int exists(@Param("knowledgeName")String knowledgeName, @Param("subjectId")String subjectId, @Param("gradeId")String gradeId);
@@ -54,4 +50,14 @@ public interface KnowledgeMapper {
 	
 	@Select("select * from knowledge order by code asc")
 	List<KnowledgeItem> selectAll();
+	
+	// 获取用户的知识图表
+	@Select("select e.* from competition_attend a "
+			+ "left join competition_history b on a.id=b.attendId "
+			+ "left join resource_train_question c on b.questionId=c.id "
+			+ "left join question_to_knowledge d on c.id=d.questionId "
+			+ "right join knowledge e on d.knowledgeId=e.id "
+			+ "where a.userId=#{userId} and e.subjectId=#{subjectId} and e.gradeId=#{gradeId} "
+			+ "order by e.week asc")
+	int selectUserKnowledgeMap(String userId, String subjectId, String gradeId);
 }

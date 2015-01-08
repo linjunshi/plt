@@ -494,7 +494,8 @@ create table resource_train_question(
 	gradeId varchar(32) comment '所属年级',
 	timeLimit int(10) default 0 not null comment '限制时间（s）',
 	ownerId varchar(32) not null comment '所有者',
-	del int(10) comment '是否删除',
+	level int(10) comment '难中易',
+	status int(10) comment '状态',
 	cts datetime comment '创建时间',
 	uts datetime comment '修改时间',	
 	primary key (id)

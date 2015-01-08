@@ -8,7 +8,7 @@
 			<c:if test="${sessionScope.loginUser != null}">
 			<div class="sh_user_info">
 				<ul>
-					<li><a href="${ctx}/study/course" class="user_info_stud">我是学生</a></li>
+					<li><a href="${ctx}/study/score" class="user_info_stud">我是学生</a></li>
 					<li><a href="${ctx}/manage/live" class="user_info_th">我是老师</a></li>
 				</ul>
 			</div>

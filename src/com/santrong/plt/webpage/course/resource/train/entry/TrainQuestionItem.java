@@ -25,7 +25,8 @@ public class TrainQuestionItem {
 	private String gradeId;
 	private int timeLimit;
 	private String ownerId;
-	private int del;
+	private int level;
+	private int status;
 	private Date cts;
 	private Date uts;
 	
@@ -33,6 +34,15 @@ public class TrainQuestionItem {
 	
 	// 是否已选择
 	private boolean assemble;
+	
+	public static final int Level_Easy = 0;// 易
+	public static final int Level_Normal = 10;// 中
+	public static final int Level_Hard = 100;// 难
+	
+	public static final int Status_New= 0;// 新建
+	public static final int Status_Approve = 1;// 已审批
+	public static final int Status_Del = 100;// 已删除
+	
 
 	// 题目的默认类型值
 	/**
@@ -140,11 +150,17 @@ public class TrainQuestionItem {
 	public void setOwnerId(String ownerId) {
 		this.ownerId = ownerId;
 	}
-	public int getDel() {
-		return del;
+	public int getLevel() {
+		return level;
 	}
-	public void setDel(int del) {
-		this.del = del;
+	public void setLevel(int level) {
+		this.level = level;
+	}
+	public int getStatus() {
+		return status;
+	}
+	public void setStatus(int status) {
+		this.status = status;
 	}
 	public Date getCts() {
 		return cts;

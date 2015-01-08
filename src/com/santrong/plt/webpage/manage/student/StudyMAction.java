@@ -7,10 +7,14 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.santrong.plt.opt.grade.GradeDefine;
+import com.santrong.plt.opt.grade.GradeSubjectEntry;
+import com.santrong.plt.util.MyUtils;
 import com.santrong.plt.webpage.course.dao.CourseDao;
 import com.santrong.plt.webpage.course.entry.CourseBuyQuery;
 import com.santrong.plt.webpage.course.entry.CourseItem;
 import com.santrong.plt.webpage.course.entry.OrderItem;
+import com.santrong.plt.webpage.course.resource.train.dao.KnowledgeDao;
 import com.santrong.plt.webpage.course.resource.train.dao.TrainDao;
 import com.santrong.plt.webpage.course.resource.train.entry.TrainQuery;
 import com.santrong.plt.webpage.manage.StudentBaseAction;
@@ -30,7 +34,28 @@ public class StudyMAction extends StudentBaseAction {
 	 * @return
 	 */
 	@RequestMapping("/score")
-	public String score() {
+	public String score(String subject) {
+		
+		// 学科
+		String _subjectId = null;
+		String _subject = subject;
+		if(MyUtils.isNull(subject)) {
+			_subject = "yuwen"; 
+		}
+		for(GradeSubjectEntry entry : GradeDefine.getByGradeEnName("xiaoxue").getGradeSubjectList()) {
+			if(entry.getSubjectEnName().equals(_subject)) {
+				_subjectId = entry.getSubjectId();
+				break;
+			}
+		}
+		
+		// 年级
+		 String gradeId = "10000";
+		 
+		 // 根据学科和年级获取用户的知识点列表
+		 KnowledgeDao kDao = new KnowledgeDao();
+		 
+		
 		return "manage/student/score";
 	}
 	

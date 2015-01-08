@@ -185,7 +185,7 @@ public class QuestionMAction extends TeacherBaseAction{
 						tqItem.setRemark(tqForm.getRemark());
 						tqItem.setTimeLimit(0);//限制时间
 						tqItem.setOwnerId(this.currentUser().getId());
-						tqItem.setDel(0);
+						tqItem.setStatus(TrainQuestionItem.Status_New);
 						tqItem.setCts(new Date());
 						tqItem.setUts(new Date());
 						
