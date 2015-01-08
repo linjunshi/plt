@@ -180,15 +180,15 @@ public class KnowledgeDao extends BaseDao {
 	/**
 	 * 判断是否已经存在同年级同学科同名称的知识点名称
 	 * @param knowledgeName
-	 * @param subjectId
 	 * @param gradeId
+	 * @param subjectId
 	 * @return
 	 */
-	public boolean exists(String knowledgeName, String subjectId, String gradeId) {
+	public boolean exists(String knowledgeName, String gradeId, String subjectId) {
 		try {
 			KnowledgeMapper mapper = this.getMapper(KnowledgeMapper.class);
 			if (mapper != null) {
-				return mapper.exists(knowledgeName, subjectId, gradeId) > 0;
+				return mapper.exists(knowledgeName, gradeId, subjectId) > 0;
 			}
 		} catch (Exception e) {
 			Log.printStackTrace(e);
@@ -275,4 +275,34 @@ public class KnowledgeDao extends BaseDao {
 		return null;
 	}
 	
+	/**
+	 * 根据code范围和level树的级别，获取知识点的列表记录
+	 * @param maxCode
+	 * @param minCode
+	 * @param level
+	 * @return
+	 */
+	public List<KnowledgeItem> selectByCodeRange(int maxCode, int minCode, int level) {
+		try {
+			KnowledgeMapper mapper = this.getMapper(KnowledgeMapper.class);
+			if(mapper != null) {
+				return mapper.selectByCodeRange(maxCode, minCode, level);
+			}
+		} catch (Exception e) {
+			Log.printStackTrace(e);
+		}
+		return null;
+	}
+	
+	public int selectMaxPriorityByCodeRange(int maxCode, int minCode, int level) {
+		try {
+			KnowledgeMapper mapper = this.getMapper(KnowledgeMapper.class);
+			if(mapper != null) {
+				return mapper.selectMaxPriorityByCodeRange(maxCode, minCode, level);
+			}
+		} catch (Exception e) {
+			Log.printStackTrace(e);
+		}
+		return 0;
+	}
 }

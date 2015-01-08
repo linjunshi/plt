@@ -5,7 +5,7 @@ package com.santrong.plt.webpage.course.resource.train.entry;
  * @date 2015年1月7日 
  * @time 下午1:20:05
  */
-public class KnowledgeTreeView {
+public class KnowledgeTreeForm {
 	private int id;
 	private int pId;
 	private String name;
@@ -17,8 +17,11 @@ public class KnowledgeTreeView {
 	private String dataId;//用来保存原来数据库里的id
 	
 	private boolean open;
-	private String iconSkin;
+	private String iconSkin;//通过CSS样式来设置节点图片样式（展开、折叠节点时，logo可切换）
 	
+	/**
+	 * 根节点的默认icon图标样式
+	 */
 	public final static String  pIconRoot ="pIconRoot" ;
 
 	public int getId() {

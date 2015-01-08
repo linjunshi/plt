@@ -382,22 +382,106 @@ public class MyUtils {
 	 * @param code
 	 * @return
 	 */
-	public static int getParentId(int code) {
+	public static int getParentCode(int code) {
 		// 10 00 00 00 00 
 		String str = Integer.toString(code);
-		int pId = 0;
+		int pId = 1000000000;
 		if (str.length() == 10) {
 			if ("00".equals(str.substring(2, 4))) {
-				pId = 0;
+				pId = 1000000000;
 			} else if ("00".equals(str.substring(4, 6))) {
-				pId = stringToInt(str.substring(0, 2) + "00000000");
+				pId = Integer.parseInt(str.substring(0, 2) + "00000000");
 			} else if ("00".equals(str.substring(6, 8))) {
-				pId = stringToInt(str.substring(0, 4) + "000000");
+				pId = Integer.parseInt(str.substring(0, 4) + "000000");
 			} else if ("00".equals(str.substring(8, 10))) {
-				pId = stringToInt(str.substring(0, 6) + "0000");
+				pId = Integer.parseInt(str.substring(0, 6) + "0000");
+			} else {
+				pId = Integer.parseInt(str.substring(0, 8) + "00");
 			}
 		}
 		return pId;
 	}
 	
+	/**
+	 * 根据父节点，获取下级节点的最大code
+	 * @param parentCode
+	 * @return
+	 */
+	public static int getChildNodeMaxCode(int parentCode) {
+		String str = Integer.toString(parentCode);
+		int maxCode = 1099999999;
+		if (str.length() == 10) {
+			if ("00".equals(str.substring(2, 4))) {
+				maxCode = Integer.parseInt(str.substring(0, 2) + "99000000");
+			} else if ("00".equals(str.substring(4, 6))) {
+				maxCode = Integer.parseInt(str.substring(0, 4) + "990000");
+			} else if ("00".equals(str.substring(6, 8))) {
+				maxCode = Integer.parseInt(str.substring(0, 6) + "9900");
+			} else if ("00".equals(str.substring(8, 10))) {
+				maxCode = Integer.parseInt(str.substring(0, 8) + "99");
+			}
+		}
+		return maxCode;
+	}
+	
+	/**
+	 * 根据父节点，获取下级节点的最小code
+	 * @param parentCode
+	 * @return
+	 */
+	public static int getChildNodeMinCode(int parentCode) {
+		String str = Integer.toString(parentCode);
+		int minCode = 1000000000;
+		if (str.length() == 10) {
+			if ("00".equals(str.substring(2, 4))) {
+				minCode = Integer.parseInt(str.substring(0, 2) + "01000000");
+			} else if ("00".equals(str.substring(4, 6))) {
+				minCode = Integer.parseInt(str.substring(0, 4) + "010000");
+			} else if ("00".equals(str.substring(6, 8))) {
+				minCode = Integer.parseInt(str.substring(0, 6) + "0100");
+			} else if ("00".equals(str.substring(8, 10))) {
+				minCode = Integer.parseInt(str.substring(0, 8) + "01");
+			}
+		}
+		return minCode;
+	}
+	
+	/**
+	 * 获取同级的下一个节点code
+	 * @param code
+	 * @return
+	 */
+	public static int getNextNodeCode(int code) {
+		int nextCode = 1000000000;
+		String str = Integer.toString(code);
+		if (str.length() == 10) {
+			if ("00".equals(str.substring(2, 4))) {
+				nextCode = Integer.parseInt((Integer.parseInt(str.substring(0, 2)) + 1 ) + "00000000");
+			} else if ("00".equals(str.substring(4, 6))) {
+				nextCode = Integer.parseInt((Integer.parseInt(str.substring(0, 4)) + 1 ) + "000000");
+			} else if ("00".equals(str.substring(6, 8))) {
+				nextCode = Integer.parseInt((Integer.parseInt(str.substring(0, 6)) + 1 ) + "0000");
+			} else if ("00".equals(str.substring(8, 10))) {
+				nextCode = Integer.parseInt((Integer.parseInt(str.substring(0, 8)) + 1 ) + "00");
+			}
+		}
+		return nextCode;
+	}
+	
+	public static int getChildNodeNewCode(int parentCode , int childCount) {
+		int nextCode = 1000000000;
+		String str = Integer.toString(parentCode);
+		if (str.length() == 10) {
+			if ("00".equals(str.substring(2, 4))) {
+				nextCode = Integer.parseInt((Integer.parseInt(str.substring(0, 4)) + childCount + 1 ) + "000000");
+			} else if ("00".equals(str.substring(4, 6))) {
+				nextCode = Integer.parseInt((Integer.parseInt(str.substring(0, 6)) + childCount + 1 ) + "0000");
+			} else if ("00".equals(str.substring(6, 8))) {
+				nextCode = Integer.parseInt((Integer.parseInt(str.substring(0, 8)) + childCount + 1 ) + "00");
+			} else if ("00".equals(str.substring(8, 10))) {
+				nextCode = Integer.parseInt(str.substring(0, 10)) + childCount + 1 ;
+			}
+		}
+		return nextCode;
+	}
 }
