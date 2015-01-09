@@ -177,7 +177,6 @@
 	//update zTreeObj, add method of edit
 	_zTreeTools = function(setting, zTreeTools) {
 		zTreeTools.cancelEditName = function(newName) {
-			debugger;
 			var root = data.getRoot(this.setting);
 			if (!root.curEditNode) return;
 			view.cancelCurEditNode(this.setting, newName?newName:null, true);

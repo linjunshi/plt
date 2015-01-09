@@ -44,7 +44,8 @@ public interface TrainQuestionMapper {
 	@Delete("delete from resource_train_to_question where trainId = #{trainId}")
 	int removeAllQuestion4Train(String trainId);
 	
-	@Delete("delete from resource_train_question where id = #{id}")
+//	@Delete("delete from resource_train_question where id = #{id}")
+	@Update("update resource_train_question set status = 100 where id = #{id}")
 	int deleteById(String id);
 	
 	@Update("update resource_train_question set "
@@ -59,6 +60,8 @@ public interface TrainQuestionMapper {
 			+ "subjectId = #{subjectId},"
 			+ "gradeId = #{gradeId},"
 			+ "timeLimit = #{timeLimit},"
+			+ "level = #{level},"
+			+ "status = #{status},"
 			+ "uts = #{uts}"
 			+ " where id = #{id} ")
 	int update(TrainQuestionItem question);
@@ -127,7 +130,7 @@ public interface TrainQuestionMapper {
 	 * @param trainId
 	 * @return
 	 */
-	@Select("select a.knowledgeName, a.subjectId, a.gradeId, b.*  from knowledge a RIGHT JOIN question_to_knowledge b on a.id = b.knowledgeId where b.questionId = #{questionId} order by a.code asc")
+	@Select("select a.knowledgeName, a.subjectId, a.gradeId, b.*  from knowledge a RIGHT JOIN question_to_knowledge b on a.id = b.knowledgeId where b.questionId = #{questionId} order by a.code asc,a.priority")
 	List<KnowledgeQuestionView> selectKnowledge2QuestionByQId(String questionId);
 	
 }

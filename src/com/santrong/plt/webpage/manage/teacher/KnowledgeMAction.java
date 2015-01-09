@@ -74,13 +74,13 @@ public class KnowledgeMAction  extends TeacherBaseAction{
 			String knowledgeId = request.getParameter("knowledgeId");
 			if (MyUtils.isNull(knowledgeId)) {
 				//打开新增页面
-				request.setAttribute("addOrModify", "add");
+				request.setAttribute("operation", "add");
 			} else {
 				//打开修改页面
 				KnowledgeDao kDao = new KnowledgeDao();
 				KnowledgeItem knowledgeItem = kDao.selectById(knowledgeId);
 				request.setAttribute("knowledgeItem", knowledgeItem);
-				request.setAttribute("addOrModify", "modify");
+				request.setAttribute("operation", "modify");
 			}
 		} catch (Exception e) {
 			Log.printStackTrace(e);
@@ -99,7 +99,7 @@ public class KnowledgeMAction  extends TeacherBaseAction{
 		try {
 			HttpServletRequest request = this.getRequest();
 			//打开新增页面
-			request.setAttribute("addOrModify", "add");
+			request.setAttribute("operation", "add");
 			
 			if (knowledgeForm != null) {
 				
@@ -143,7 +143,7 @@ public class KnowledgeMAction  extends TeacherBaseAction{
 						if (kDao.existsByName(knowledgeItem)) {
 							addError("该知识点已经存在！");
 							request.setAttribute("knowledgeItem", knowledgeForm);
-							request.setAttribute("addOrModify", "modify");
+							request.setAttribute("operation", "modify");
 							return "/manage/teacher/knowledgeMAdd";
 						}
 						knowledgeItem.setKnowledgeName(knowledgeForm.getKnowledgeName().trim());

@@ -19,8 +19,8 @@ Globals.page = "Manage_knowledgeMAdd";
 				<%@ include file="../../inc/leftmenu_teacher.jsp"%>
 				<div class="sh_info_r">
 					<div class="sh_title">
-						<c:if test="${addOrModify == 'add'}"><h2>添加知识点</h2></c:if>
-						<c:if test="${addOrModify == 'modify'}"><h2>修改知识点</h2></c:if>
+						<c:if test="${operation == 'add'}"><h2>添加知识点</h2></c:if>
+						<c:if test="${operation == 'modify'}"><h2>修改知识点</h2></c:if>
 					</div>
 					<div class="form_questions">
 						<div id="demo_zone">

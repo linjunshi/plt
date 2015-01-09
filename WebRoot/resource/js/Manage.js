@@ -843,6 +843,7 @@ ManageClass.prototype = {
 			if (id == "") {
 				//新增页面默认选项
 				$("input[name='questionType']").eq(0).attr("checked","checked");
+				$("input[name='level']").eq(0).attr("checked","checked");
 				$("#answer_radio").show();
 				$("#answer_checkbox").hide();
 			} else {
@@ -965,6 +966,39 @@ ManageClass.prototype = {
 				}
 			});
 			
+			var ajaxSubmitQuestion = function(status){
+				var obj = new Object();
+				obj.id = $("#id").val();
+				obj.topic = $("#topic").val();
+				obj.questionType = eval($("#questionType").val());
+				obj.opt1 = $("#opt1").val();
+				obj.opt2 = $("#opt2").val();
+				obj.opt3 = $("#opt3").val();
+				obj.opt4 = $("#opt4").val();
+				obj.answer = eval($("#answer").val());
+				obj.remark = $("#remark").val();
+				obj.subjectId = $("#subjectId").val();
+				obj.gradeId = $("#gradeId").val();
+//				obj.timeLimit = $("#timeLimit").val();
+				obj.id = $("#id").val();
+				
+				var operation = $("#operation").val();//用来判断是否是审核
+				var knowledgeIds = $("#knowledgeIds").val();//原来绑定的知识点IDs
+				if (knowledgeIds == "") {
+					Boxy.alter("请选择知识点！");
+				}
+			}
+			
+			// 审核通过
+			$(".btn_approve").click(function(){
+//				ajaxSubmitQuestion(1);
+				$("#status").val(1);
+			});
+			// 审核不通过
+			$(".btn_disapprove").click(function(){
+//				ajaxSubmitQuestion(2);
+				$("#status").val(2);
+			});
 		},
 		
 		//TODO 个人信息-基本页面

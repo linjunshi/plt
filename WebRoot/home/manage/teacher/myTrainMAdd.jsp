@@ -19,8 +19,9 @@ Globals.page = "Manage_myTrainMAdd";
 				<%@ include file="../../inc/leftmenu_teacher.jsp"%>
 				<div class="sh_info_r">
 					<div class="sh_title">
-						<c:if test="${addOrModify == 'add'}"><h2>添加试题</h2></c:if>
-						<c:if test="${addOrModify == 'modify'}"><h2>修改试题</h2></c:if>
+						<c:if test="${operation == 'add'}"><h2>添加试题</h2></c:if>
+						<c:if test="${operation == 'modify'}"><h2>修改试题</h2></c:if>
+						<c:if test="${operation == 'auditing'}"><h2>审核试题</h2></c:if>
 					</div>
 					<div class="form_questions">
 						<div id="demo_zone">
@@ -34,6 +35,7 @@ Globals.page = "Manage_myTrainMAdd";
 							</c:if>
 							<form method="post" action="${ctx}/manage/question/addOrModifyQuestion" class="form_info common_form" id="question_form">
 								<input id="id" name="id" type="hidden" value="${tqItem.id}"/>
+								<input type="hidden" name="operation" id="operation" value="${operation}"/>
 								<input id="levelId" name="levelId" type="hidden" value="${tqItem.gradeId}">
 								<input id="oldSubjectId" name="oldSubjectId" type="hidden" value="${tqItem.subjectId}">
 								<div class="form_item">
@@ -56,6 +58,22 @@ Globals.page = "Manage_myTrainMAdd";
 									<div class="form_field">
 										<input id="knowledgeIds" name="knowledgeIds" type="hidden" value="${knowledgeIds}"/>
 										<input id="knowledgeNames" name="knowledgeNames" placeholder="请点击选择试题所属的知识点" type="button" value="请点击这里选择绑定知识点"/>
+										<span class="not-empty" title='此项为必填项'>*</span>
+									</div>
+								</div>
+								<div class="form_item">
+									<label>难易程度：</label>
+									<div class="form_field">
+										<input
+											<c:if test="${tqItem.level==0}">checked="checked"</c:if>
+											value="0" class="form_radio" name="level" type="radio">
+										<span class="form_ra_text">易</span> <input
+											<c:if test="${tqItem.level==10}">checked="checked"</c:if>
+											value="10" class="form_radio" name="level" type="radio">
+										<span class="form_ra_text">中</span> <input
+											<c:if test="${tqItem.level==100}">checked="checked"</c:if>
+											value="100" class="form_radio" name="level" type="radio">
+										<span class="form_ra_text">难</span>
 										<span class="not-empty" title='此项为必填项'>*</span>
 									</div>
 								</div>
@@ -139,7 +157,14 @@ Globals.page = "Manage_myTrainMAdd";
 									</div>
 								</div>
 								<div class="form_action">
-									<input class="btn_question" type="submit" value="提交" /> 
+									<c:if test="${operation == 'auditing'}">
+										<input type="hidden" id="status" name="status" value = "${tqItem.status}" title="审核状态"/>
+										<input class="btn_approve" type="submit" value="审核通过" />
+										<input class="btn_disapprove" type="submit" value="审核不通过" />
+									</c:if>
+									<c:if test="${operation != 'auditing'}">
+										<input class="btn_question" type="submit" value="提交" />
+									</c:if>
 									<a class="btn_question" href="${ctx}/manage/question/list">取消</a>
 								</div>
 							</form>

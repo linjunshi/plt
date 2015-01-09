@@ -32,10 +32,10 @@ public interface KnowledgeMapper {
 	@Select("select count(*) from knowledge where knowledgeName = #{knowledgeName} and gradeId = #{gradeId} and subjectId = #{subjectId} ")
 	int exists(@Param("knowledgeName")String knowledgeName, @Param("gradeId")String gradeId, @Param("subjectId")String subjectId);
 	
-	@Select("select * from knowledge where knowledgeName = #{knowledgeName}")
+	@Select("select * from knowledge where knowledgeName = #{knowledgeName} order by code asc")
 	List<KnowledgeItem> selectByName(String knowledgeName);
 	
-	@Select("select * from knowledge where id in (${ids})")
+	@Select("select * from knowledge where id in (${ids}) order by code asc")
 	List<KnowledgeItem> selectByIds(@Param("ids")String ids);
 	
 	/**
@@ -48,7 +48,7 @@ public interface KnowledgeMapper {
 	@Select("select * from knowledge where gradeId = #{gradeId} and subjectId = #{subjectId} order by code asc,priority asc")
 	List<KnowledgeItem> selectByGIdAndSId(@Param("gradeId")String gradeId, @Param("subjectId")String subjectId);
 	
-	@Select("select * from knowledge order by code asc, priority")
+	@Select("select * from knowledge order by code, priority")
 	List<KnowledgeItem> selectAll();
 	
 	/**
