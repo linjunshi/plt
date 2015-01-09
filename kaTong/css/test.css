@@ -1,0 +1,100 @@
+@charset "utf-8";
+/* CSS Document */
+
+html, body {
+	color: #666;
+}
+html, body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, code, form, fieldset, legend, input, textarea, p, blockquote, th, td {
+	margin: 0;
+	padding: 0
+}
+body {background:url(../images/1.gif);}
+table {
+	border-collapse: collapse;
+	border-spacing: 0
+}
+fieldset, img {
+	border: 0
+}
+address, caption, cite, code, dfn, th, var, i, s {
+	font-style: normal;
+	font-weight: normal
+}
+li {
+	list-style: none
+}
+caption, th {
+	text-align: left
+}
+h1, h2, h3, h4, h5, h6 {
+	font-size: 100%;
+	font-weight: normal
+}
+input[type=search] {
+	-webkit-appearance: none
+}
+input[type=checkbox] {
+	vertical-align: middle;
+	margin-top: -1px
+}
+a img, a span, a strong, a s {
+#cursor:hand
+}
+body, button, select, textarea, input {
+	font-family: "微软雅黑",Microsoft YaHei, Tahoma, SimSun, Verdana;
+	font-size: 14px;
+	line-height: 1.5
+}
+body {
+	word-wrap: break-word
+}
+button {
+	white-space: nowrap;
+	overflow: visible
+}
+a {
+	text-decoration: none;
+	outline: 0;
+
+blr:expression(this.onFocus=this.blur())
+}
+a:hover {
+	text-decoration: none
+}
+a:active {
+	outline: 0
+}
+a:focus {
+	-moz-outline-style: none
+}
+div[contenteditable=true] {
+	-webkit-line-break: after-white-space;
+	-webkit-nbsp-mode: space;
+	-webkit-user-modify: read-write;
+	word-wrap: break-word
+}
+.clearfix:before, .clearfix:after {
+	content: '.';
+	display: block;
+	overflow: hidden;
+	visibility: hidden;
+	font-size: 0;
+	line-height: 0;
+	width: 0;
+	height: 0
+}
+.clearfix:after {
+	clear: both
+}
+.hide {
+	display: none!important
+}
+.l {
+	float: left
+}
+.r {
+	float: right
+}/* CSS Document */
+
+.clr { clear:both; margin:0; padding:0; border:0; line-height:0; height:0; font-size:0; width:100%;}
+.mar{ margin-right:0px !important;}
