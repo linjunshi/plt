@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="inc/common.jsp"%>
 <c:set var="title" value="课云" ></c:set>
-<c:set var="keywords" value="在线教育" ></c:set>
-<c:set var="description" value="在线教育" ></c:set>
+<c:set var="keywords" value="课云教育" ></c:set>
+<c:set var="description" value="在线教育 私人定制 知识图谱" ></c:set>
 <%@ include file="inc/header_new.jsp"%>
 <script type="text/javascript">
 var Globals = {};
@@ -50,9 +50,9 @@ Globals.page = "Index_index";
 	        	<a href="${ctx}/course/${item.id}.html" target="_blank"><img src="${ctx}${item.thumbnail}" width="166" height="180"></a>
 	        	<h2>${item.courseName}</h2>
 				<p class="con_listen">购买：<b>${item.saleCount}</b></p>
-				<p class="con_but"><a href="${ctx}/course/${item.id}.html" target="_blank">&nbsp;</a></p>
-	        </li>						
-		</c:forEach>      
+				<p class="con_but"><a href="${ctx}/course/${item.id}.html" target="_blank">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a></p>
+	        </li>
+		</c:forEach>
       </ul>
     </div>
   </div>

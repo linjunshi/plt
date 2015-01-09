@@ -72,6 +72,6 @@ public interface KnowledgeMapper {
 			+ "right join knowledge e on d.knowledgeId=e.id "
 			+ "where a.userId=#{userId} and e.subjectId=#{subjectId} and e.gradeId=#{gradeId} "
 			+ "order by e.week asc")
-	int selectUserKnowledgeMap(String userId, String subjectId, String gradeId);	
+	int selectUserKnowledgeMap(String userId, String subjectId, String gradeId);
 	
 }
