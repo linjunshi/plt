@@ -235,6 +235,11 @@ function init() {
 		return $(this).validate();
 	});
 
+	// 让form_submit类具备提交能力
+	$(".form_submit").click(function() {
+		$(this).closest("form").submit();
+	});
+	
 	// IE8支持HTML5的placeholder属性
 	if (!('placeholder' in document.createElement('input'))) {
 		$('input[placeholder],textarea[placeholder]').each(function() {
