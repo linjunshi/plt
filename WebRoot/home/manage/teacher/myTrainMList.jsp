@@ -26,9 +26,10 @@ Globals.page = "Manage_myTrainMList";
 						<table border="1" class="sh_coll_tab">
 							<colgroup>
 								<col width="60">
-								<col width="310">
-								<col width="200">
-								<col width="200">
+								<col width="360">
+								<col width="100">
+								<col width="100">
+								<col width="150">
 								<col width="200">
 							</colgroup>
 							<thead>
@@ -36,6 +37,7 @@ Globals.page = "Manage_myTrainMList";
 									<th>序号</th>
 									<th>试题描述</th>
 									<th>试题类型</th>
+									<th>状态</th>
 									<th>创建时间</th>
 									<th>操作</th>
 								</tr>
@@ -46,20 +48,36 @@ Globals.page = "Manage_myTrainMList";
 										<td>${qt.index + 1 + (query.pageNum-1)*query.pageSize}</td>
 										<td>${question.topic}</td>
 										<td>${question.typeString}</td>
+										<td>
+											<c:if test="${question.status == 0}">未审核</c:if>
+											<c:if test="${question.status == 1}">已审核</c:if>
+											<c:if test="${question.status == 2}">审核不通过</c:if>
+											<c:if test="${question.status == 100}">已删除</c:if>
+										</td>
 										<td><fmt:formatDate value="${question.cts}" type="date" dateStyle="default" /></td>
-										<td class="btn_question_operation">
-										<div class="btn_question_update">
-											<form action="${ctx}/manage/question/addOrModifyQuestion" method="get">
-												<input type="hidden" value="${question.id}" name="questionId" />
-												<input type="submit" value="修改" />
-											</form>
-										</div>
-										<div class="btn_question_delete">
-											<form action="${ctx}/manage/question/delete" method="post">
-												<input type="hidden" value="${question.id}" name="questionId" />
-												<input type="submit" value="删除" />
-											</form>
-										</div>
+										<td>
+											<div class="btn_question_operation <c:if test='${question.status==0}'>status</c:if>" >
+												<c:if test="${question.status==0}">
+													<div class="btn_question_status">
+														<form action="${ctx}/manage/question/auditing" method="get">
+															<input type="hidden" value="${question.id}" name="questionId" />
+															<input type="submit" value="审核" />
+														</form>
+													</div>
+												</c:if>
+												<div class="btn_question_edit">
+													<form action="${ctx}/manage/question/addOrModifyQuestion" method="get">
+														<input type="hidden" value="${question.id}" name="questionId" />
+														<input type="submit" value="修改" />
+													</form>
+												</div>
+												<div class="btn_question_delete">
+													<form action="${ctx}/manage/question/delete" method="post">
+														<input type="hidden" value="${question.id}" name="questionId" />
+														<input type="submit" value="删除" />
+													</form>
+												</div>
+											</div>
 										</td>
 									</tr>
 								</c:forEach>
@@ -67,7 +85,7 @@ Globals.page = "Manage_myTrainMList";
 							<c:if test="${fn:length(query.pageSequence) > 1}">
 								<tfoot>
 									<tr>
-										<td colspan="5">
+										<td colspan="6">
 											<c:set var="basicUrl" value="${ctx}/manage/question/list" />
 				            				<%@ include file="../../inc/pagination.jsp"%>
 										</td>

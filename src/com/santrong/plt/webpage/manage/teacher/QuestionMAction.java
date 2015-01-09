@@ -41,6 +41,7 @@ public class QuestionMAction extends TeacherBaseAction{
 			query.setUserId(user.getId());
 			query.setCount(tqDao.selectCountByQuery(query));
 			query.setOrderBy("cts");
+			query.setOrderRule("desc");
 			List<TrainQuestionItem> questionList = tqDao.selectByQuery(query);
 			
 			HttpServletRequest request = this.getRequest();
@@ -79,11 +80,12 @@ public class QuestionMAction extends TeacherBaseAction{
 		try {
 			HttpServletRequest request = this.getRequest();
 			String questionId = request.getParameter("questionId");
+			
 			if (MyUtils.isNull(questionId)) {
 				//打开新增页面
-				request.setAttribute("addOrModify", "add");
+				request.setAttribute("operation", "add");
 			} else {
-				//打开修改页面
+				//打开修改页面或者试题审核界面
 				TrainQuestionDao tqDao = new TrainQuestionDao();
 				TrainQuestionItem tqItem = tqDao.selectById(questionId);
 				// 判断当前用户是否是该课程的所有者
@@ -103,7 +105,45 @@ public class QuestionMAction extends TeacherBaseAction{
 				
 				request.setAttribute("knowledgeIds", knowledgeIds);
 				request.setAttribute("tqItem", tqItem);
-				request.setAttribute("addOrModify", "modify");
+				request.setAttribute("operation", "modify");
+			}
+		} catch (Exception e) {
+			Log.printStackTrace(e);
+		}
+		return "/manage/teacher/myTrainMAdd";
+	}
+	
+	/**
+	 * 打开试题审核界面
+	 */
+	@RequestMapping(value="/auditing", method=RequestMethod.GET)
+	public String auditingQuestion(){
+		try {
+			HttpServletRequest request = this.getRequest();
+			String questionId = request.getParameter("questionId");
+			
+			if (MyUtils.isNotNull(questionId)) {
+				//打开修改页面或者试题审核界面
+				TrainQuestionDao tqDao = new TrainQuestionDao();
+				TrainQuestionItem tqItem = tqDao.selectById(questionId);
+				// 判断当前用户是否是该课程的所有者
+				if(tqItem == null || !tqItem.getOwnerId().equals(this.currentUser().getId())) {
+					return this.redirect("/");
+				}
+				
+				// 获取已经绑定的知识点
+				List<KnowledgeQuestionView> k2qList = tqDao.selectKnowledge2QuestionByQId(questionId);
+				String knowledgeIds = "";
+				for (KnowledgeQuestionView kqItem : k2qList) {
+					knowledgeIds += "," + kqItem.getKnowledgeId();
+				}
+				if (knowledgeIds != "") {
+					knowledgeIds = knowledgeIds.substring(1);//移除前面的多余的逗号
+				}
+				
+				request.setAttribute("knowledgeIds", knowledgeIds);
+				request.setAttribute("tqItem", tqItem);
+				request.setAttribute("operation", "auditing");
 			}
 		} catch (Exception e) {
 			Log.printStackTrace(e);
@@ -123,9 +163,16 @@ public class QuestionMAction extends TeacherBaseAction{
 		try {
 			HttpServletRequest request = this.getRequest();
 			String knowledgeIds = request.getParameter("knowledgeIds");//原来绑定的知识点IDs
+			String operation = request.getParameter("operation");//用来判断是否是审核
+			int status = this.getIntParameter("status");
 			
-			//打开新增页面
-			request.setAttribute("addOrModify", "add");
+			if ("add".equalsIgnoreCase(operation)) {//打开新增页面
+				request.setAttribute("operation", "add");
+			} else if ("modify".equalsIgnoreCase(operation)) {//打开修改页面
+				request.setAttribute("operation", "modify");
+			} else if ("auditing".equalsIgnoreCase(operation)) {//打开审核页面
+				request.setAttribute("operation", "auditing");
+			}
 			
 			if (tqForm != null) {
 				
@@ -134,6 +181,12 @@ public class QuestionMAction extends TeacherBaseAction{
 				}
 				if (MyUtils.isNull(tqForm.getSubjectId())) {
 					addError("请您选择试题的所属学科！");
+				}
+				if (MyUtils.isNull(knowledgeIds)) {
+					addError("亲，您还没有绑定知识点呢！");
+				}
+				if (tqForm.getLevel() < 0) {
+					addError("请您选择难易程度！");
 				}
 				if (tqForm.getQuestionType() <= 0) {
 					addError("请您选择题目的类型！");
@@ -153,14 +206,15 @@ public class QuestionMAction extends TeacherBaseAction{
 						addError("请您勾选正确的答案！");
 					}
 				}
-				if (MyUtils.isNull(knowledgeIds)) {
-					addError("亲，您还没有绑定知识点呢！");
-				}
 				
 				if (!(errorSize() > 0)) {
 					if (MyUtils.isNull(tqForm.getId())) {
 						
 						// id为空，执行新增操作
+						String[] stringArr = null;
+						boolean result = false;
+						
+						ThreadUtils.beginTranx();
 						TrainQuestionDao tqDao = new TrainQuestionDao();
 						TrainQuestionItem tqItem = new TrainQuestionItem();
 						tqItem.setId(MyUtils.getGUID());
@@ -184,11 +238,21 @@ public class QuestionMAction extends TeacherBaseAction{
 						tqItem.setRemark(tqForm.getRemark());
 						tqItem.setTimeLimit(0);//限制时间
 						tqItem.setOwnerId(this.currentUser().getId());
-						tqItem.setStatus(TrainQuestionItem.Status_New);
+						tqItem.setLevel(tqForm.getLevel());//易：0 ，中 ：10 ， 难：100
+						tqItem.setStatus(TrainQuestionItem.Status_New);//0:新建 ,1:已审批 ,100:已删除
 						tqItem.setCts(new Date());
 						tqItem.setUts(new Date());
+						result = tqDao.insert(tqItem);
+						// 删除原来绑定的知识点，再重新绑定
+						if (MyUtils.isNotNull(knowledgeIds)) {
+							stringArr = knowledgeIds.split(",");
+							for (String knowledgeId : stringArr) {
+								tqDao.addKnowledge2Question(tqItem.getId(), knowledgeId);
+							}
+						}
+						ThreadUtils.commitTranx();
 						
-						if (tqDao.insert(tqItem)) {
+						if (result) {
 							addError("新增试题成功！");
 							return "/manage/teacher/myTrainMAdd";
 						}
@@ -245,6 +309,8 @@ public class QuestionMAction extends TeacherBaseAction{
 							tqItem.setAnswer(sumAnswer);
 						}
 						tqItem.setRemark(tqForm.getRemark());
+						tqItem.setLevel(tqForm.getLevel());//易：0 ，中 ：10 ， 难：100
+						tqItem.setStatus(status);//0:新建 ,1:已审批 ,2:审核不通过,100:已删除
 						tqItem.setUts(new Date());
 						result = tqDao.update(tqItem);
 						
@@ -252,7 +318,7 @@ public class QuestionMAction extends TeacherBaseAction{
 						if(result){
 							return this.redirect("/manage/question/list");
 						} else {
-							addError("亲，您修改失败了，请您刷新页面后重新操作！");
+							addError("亲，您操作失败了，请您刷新页面后重新操作！");
 							request.setAttribute("tqItem", tqForm);
 						}
 					}
@@ -265,5 +331,5 @@ public class QuestionMAction extends TeacherBaseAction{
 		}
 		return "/manage/teacher/myTrainMAdd";
 	}
-	
+
 }

@@ -41,6 +41,7 @@ public class TrainQuestionItem {
 	
 	public static final int Status_New= 0;// 新建
 	public static final int Status_Approve = 1;// 已审批
+	public static final int Status_Disapprove  = 2;// 审批不通过
 	public static final int Status_Del = 100;// 已删除
 	
 
