@@ -17,6 +17,7 @@ import com.santrong.plt.webpage.BaseDao;
 import com.santrong.plt.webpage.course.resource.train.entry.KnowledgeGradeView;
 import com.santrong.plt.webpage.course.resource.train.entry.KnowledgeItem;
 import com.santrong.plt.webpage.course.resource.train.entry.KnowledgeQuery;
+import com.santrong.plt.webpage.course.resource.train.entry.KnowledgePointerView;
 
 /**
  * @author huangweihua
@@ -25,7 +26,6 @@ import com.santrong.plt.webpage.course.resource.train.entry.KnowledgeQuery;
  */
 public class KnowledgeDao extends BaseDao {
 	
-	//TODO 新增知识点
 	public boolean insert(KnowledgeItem knowledgeItem) {
 		try {
 			KnowledgeMapper mapper = this.getMapper(KnowledgeMapper.class);
@@ -38,7 +38,6 @@ public class KnowledgeDao extends BaseDao {
 		return false;
 	}
 	
-	//TODO 修改知识点
 	public boolean update(KnowledgeItem knowledgeItem) {
 		try {
 			KnowledgeMapper mapper = this.getMapper(KnowledgeMapper.class);
@@ -51,7 +50,6 @@ public class KnowledgeDao extends BaseDao {
 		return false;
 	}
 	
-	//TODO 删除知识点
 	public boolean deleteById(String id) {
 		try {
 			KnowledgeMapper mapper = this.getMapper(KnowledgeMapper.class);
@@ -64,7 +62,6 @@ public class KnowledgeDao extends BaseDao {
 		return false;
 	}
 	
-	//TODO 查询知识点
 	public KnowledgeItem selectById(String id) {
 		try {
 			KnowledgeMapper mapper = this.getMapper(KnowledgeMapper.class);
@@ -76,9 +73,7 @@ public class KnowledgeDao extends BaseDao {
 		}
 		return null;
 	}
-	//TODO 更新知识点
 	
-	//TODO 知识点分页列表
 	public List<KnowledgeGradeView> selectByQuery(KnowledgeQuery query) {
 		List<KnowledgeGradeView> list = new ArrayList<KnowledgeGradeView>();
 		try {
@@ -134,7 +129,6 @@ public class KnowledgeDao extends BaseDao {
 		return list;
 	}
 	
-	//TODO 知识点分页总数
 	public int selectCountByQuery(KnowledgeQuery query) {
 		int count = 0;
 		try {
@@ -304,5 +298,24 @@ public class KnowledgeDao extends BaseDao {
 			Log.printStackTrace(e);
 		}
 		return 0;
+	}
+	
+	/**
+	 * 获取用户的知识图谱
+	 * @param userId
+	 * @param subjectId
+	 * @param gradeId
+	 * @return
+	 */
+	public List<KnowledgePointerView> selectUserKnowledgeMap(String userId, String subjectId, String gradeId) {
+		try {
+			KnowledgeMapper mapper = this.getMapper(KnowledgeMapper.class);
+			if(mapper != null) {
+				return mapper.selectUserKnowledgeMap(userId, subjectId, gradeId);
+			}
+		} catch (Exception e) {
+			Log.printStackTrace(e);
+		}
+		return null;
 	}
 }

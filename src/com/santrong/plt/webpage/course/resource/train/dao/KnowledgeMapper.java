@@ -9,6 +9,7 @@ import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
 import com.santrong.plt.webpage.course.resource.train.entry.KnowledgeItem;
+import com.santrong.plt.webpage.course.resource.train.entry.KnowledgePointerView;
 
 /**
  * @author huangweihua
@@ -65,13 +66,13 @@ public interface KnowledgeMapper {
 	int selectMaxPriorityByCodeRange(@Param("maxCode")int maxCode, @Param("minCode")int minCode, @Param("level")int level);
 	
 	// 获取用户的知识图表
-	@Select("select e.* from competition_attend a "
-			+ "left join competition_history b on a.id=b.attendId "
+	@Select("select e.*,count(*) as total, sum(b.result) as goal from competition_attend a "
+			+ "left join competition_history b on a.id=b.attendId and a.userId=#{userId}"
 			+ "left join resource_train_question c on b.questionId=c.id "
 			+ "left join question_to_knowledge d on c.id=d.questionId "
 			+ "right join knowledge e on d.knowledgeId=e.id "
-			+ "where a.userId=#{userId} and e.subjectId=#{subjectId} and e.gradeId=#{gradeId} "
-			+ "order by e.week asc")
-	int selectUserKnowledgeMap(String userId, String subjectId, String gradeId);
+			+ "where e.subjectId=#{subjectId} and e.gradeId=#{gradeId} group by e.id "
+			+ "order by e.week asc, e.priority asc")
+	List<KnowledgePointerView> selectUserKnowledgeMap(@Param("userId")String userId, @Param("subjectId")String subjectId, @Param("gradeId")String gradeId);
 	
 }

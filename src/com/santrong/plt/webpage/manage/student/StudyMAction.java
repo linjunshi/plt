@@ -1,5 +1,6 @@
 package com.santrong.plt.webpage.manage.student;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -16,6 +17,8 @@ import com.santrong.plt.webpage.course.entry.CourseItem;
 import com.santrong.plt.webpage.course.entry.OrderItem;
 import com.santrong.plt.webpage.course.resource.train.dao.KnowledgeDao;
 import com.santrong.plt.webpage.course.resource.train.dao.TrainDao;
+import com.santrong.plt.webpage.course.resource.train.entry.KnowledgeTable;
+import com.santrong.plt.webpage.course.resource.train.entry.KnowledgePointerView;
 import com.santrong.plt.webpage.course.resource.train.entry.TrainQuery;
 import com.santrong.plt.webpage.manage.StudentBaseAction;
 import com.santrong.plt.webpage.manage.student.entry.TrainSimpleView;
@@ -54,7 +57,26 @@ public class StudyMAction extends StudentBaseAction {
 		 
 		 // 根据学科和年级获取用户的知识点列表
 		 KnowledgeDao kDao = new KnowledgeDao();
+		 List<KnowledgePointerView> knowledgePointerList = kDao.selectUserKnowledgeMap(this.currentUser().getId(), _subjectId, gradeId);
 		 
+		 List<KnowledgeTable> knowledgeTableList = new ArrayList<KnowledgeTable>();
+		 for(int i=1;i<=20;i++) {
+			 KnowledgeTable table = new KnowledgeTable();
+			 table.setWeek(i);
+			 for(int j=0;j<knowledgePointerList.size();j++) {
+				 if(knowledgePointerList.get(j).getWeek() == i) {
+					 table.getKnowledgePointerList().add(knowledgePointerList.remove(j));
+					 j--;
+				 }else {
+					 break;
+				 }
+			 }
+			 knowledgeTableList.add(table);
+		 }
+		
+		 this.getRequest().setAttribute("knowledgeTableList", knowledgeTableList);
+		 this.getRequest().setAttribute("subject", _subject);
+		 this.getRequest().setAttribute("grade", gradeId);
 		
 		return "manage/student/score";
 	}
