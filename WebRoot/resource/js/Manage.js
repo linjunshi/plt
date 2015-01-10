@@ -103,7 +103,7 @@ ManageClass.prototype = {
 										if(json.result == '1') {
 											$(".preview").attr("src", json.url);
 										}else {
-											alert(json.error);
+											Boxy.alert("<i class='error'></i><span>"+ json.error +"</span>");
 										}
 									}
 								});
@@ -154,10 +154,10 @@ ManageClass.prototype = {
 				var url = Globals.ctx + "/manage/course/publish"
 				$.post(url, {courseId : courseId}, function(result) {
 					if(result == "success") {
-						alert("发布成功");
+						Boxy.alert("<i class='right'></i><span>发布成功 !</span>");
 						location.reload();
 					}else {
-						alert(result);
+						Boxy.alert("<i class='error'></i><span>发布失败 !</span>");
 					}
 				})
 			});
@@ -214,7 +214,7 @@ ManageClass.prototype = {
 			$(".open_tool").click(function(){
 //				if(!/MSIE/.test(navigator.userAgent)) {// IE11不兼容
 				if(!$.isIE()) {
-					Boxy.alert("仅支持IE");
+					Boxy.alert("<i class='warn'></i><span>仅支持IE !</span>");
 					return;
 				}
 				
@@ -228,10 +228,10 @@ ManageClass.prototype = {
 //								SantrongPlayer.StartLiveManager(json.rtmpUrl, json.webUrl, json.pltHost, json.teacherId, json.teacherName, json.sourceId, json.sourceTitle, json.beginTimeString, json.endTimeString);
 								SantrongPlayer.StartLiveManager("192.168.10.163", json.webUrl, "192.168.10.163", json.teacherId, json.teacherName, json.sourceId, json.sourceTitle, json.beginTimeString, json.endTimeString);
 							}else{
-								Boxy.alert("请下载老师客户端");
+								Boxy.alert("<i class='info'></i><span>请下载老师客户端 !</span>");
 							}
 						}else {
-							Boxy.alert(result);
+							Boxy.alert("<i class='error'></i><span>"+ result +"</span>");
 						}
 					}});
 				}
@@ -295,12 +295,12 @@ ManageClass.prototype = {
 										if(json.result == '1') {
 											$(".preview").attr("src", json.url);
 										}else {
-											alert(json.error);
+											Boxy.alert("<i class='error'></i><span>"+ json.error +"</span>");
 										}
 									}
 								});
 							}else if(extName != null) {
-								alert("不支持该文件类型");
+								Boxy.alert("<i class='warn'></i><span>不支持该文件类型 !</span>");
 							}
 						});
 						
@@ -328,20 +328,19 @@ ManageClass.prototype = {
 				var dl_dd = _this.parents("dl").find("dd");
 				if (dl_dd.size() > 0) {
 					if (dl_dd.hasClass("pt10")) {
-						alert("该大章节中有小章节，不能删除!");
+						Boxy.alert("<i class='warn'></i><span>该大章节中有小章节，不能删除 !</span>");
 					}else{
 						if (courseId != "" && courseId != null && chapterId != "" && chapterId != null) {
 							// 通过POST方式，提交数据到后台处理业务逻辑
 							$.post(Globals.ctx + "/manage/course/removeChapter", {courseId : courseId, chapterId : chapterId}, function(result){
 								if (result == "success") {
-//								_this.parents("dl").remove();
 									location.reload();
 								}else {
-									alert(result);
+									Boxy.alert("<i class='error'></i><span>"+ result +"</span>");
 								}
 							});
 						} else {
-							alert("删除失败，请刷新页面后重新操作！")
+							Boxy.alert("<i class='error'></i><span>删除失败，请刷新页面后重新操作 !</span>");
 						}
 					}
 				}
@@ -380,7 +379,7 @@ ManageClass.prototype = {
 				var courseId = $("#courseId").val().trim();
 				var remark = $(this).parent().children("input[name=remark]").val().trim();
 				if (remark == "") {
-					alert("章节标题不能为空！");
+					Boxy.alert("<i class='warn'></i><span>章节标题不能为空 !</span>");
 				} else {
 					// chapterId 为空，执行新增操作；否则执行修改操作
 					if (chapterId == "") {
@@ -393,7 +392,7 @@ ManageClass.prototype = {
 							// 通过POST方式，递交给后台处理与数据库交互的逻辑
 							$.post(Globals.ctx + "/manage/course/addChapter", {courseId : courseId, remark : remark, priority : priority}, function(result){
 								if (result == "fail") {
-									alert("添加章节失败，请刷新页面后重新操作！");
+									Boxy.alert("<i class='error'></i><span>添加章节失败，请刷新页面后重新操作 !</span>");
 								} else {
 									$("input[name=priority]").val(parseInt(priority) + 1);
 									var json = $.parseJSON(result);
@@ -407,7 +406,7 @@ ManageClass.prototype = {
 								}
 							});
 						} else {
-							alert("添加章节失败，请刷新页面后重新操作！");
+							Boxy.alert("<i class='error'></i><span>添加章节失败，请刷新页面后重新操作 !</span>");
 						}
 						
 					} else {
@@ -420,7 +419,7 @@ ManageClass.prototype = {
 								$(opera_obj).children(".hide_remark").hide();
 								$(opera_obj).children(".sh_operation").removeAttr("style");
 							} else {
-								alert(result);
+								Boxy.alert("<i class='warn'></i><span>"+ result +"</span>");
 							}
 						});
 					}
@@ -437,7 +436,7 @@ ManageClass.prototype = {
 					var courseId = $("#courseId").val().trim();
 					var remark = $(this).val().trim();
 					if (remark == "") {
-						alert("章节标题不能为空！");
+						Boxy.alert("<i class='error'></i><span>章节标题不能为空 !</span>");
 					} else {
 						
 						// chapterId 为空，执行新增操作；否则执行修改操作
@@ -451,7 +450,7 @@ ManageClass.prototype = {
 								// 通过POST方式，递交给后台处理与数据库交互的逻辑
 								$.post(Globals.ctx + "/manage/course/addChapter", {courseId : courseId, remark : remark, priority : priority}, function(result){
 									if (result == "fail") {
-										alert("添加章节失败，请刷新页面后重新操作！");
+										Boxy.alert("<i class='error'></i><span>添加章节失败，请刷新页面后重新操作 !</span>");
 									} else {
 										$("input[name=priority]").val(parseInt(priority) + 1);
 										var json = $.parseJSON(result);
@@ -465,7 +464,7 @@ ManageClass.prototype = {
 									}
 								});
 							} else {
-								alert("添加章节失败，请刷新页面后重新操作！");
+								Boxy.alert("<i class='error'></i><span>添加章节失败，请刷新页面后重新操作 !</span>");
 							}
 							
 						} else {
@@ -477,7 +476,7 @@ ManageClass.prototype = {
 									$(opera_obj).children(".hide_remark").hide();
 									$(opera_obj).children(".sh_operation").removeAttr("style");
 								} else {
-									alert(result);
+									Boxy.alert("<i class='error'></i><span>"+ result +"</span>");
 								}
 							});
 						}
@@ -550,7 +549,7 @@ ManageClass.prototype = {
 						$(".sh_info_r").html(result);
 					});
 				} else {
-					alert("添加课件失败，请刷新页面后重新操作！");
+					Boxy.alert("<i class='error'></i><span>添加课件失败，请刷新页面后重新操作 !</span>");
 				}
 			});
 			
@@ -602,7 +601,7 @@ ManageClass.prototype = {
 				var pageCount = eval($("#pageCount").val().trim());
 				var re_number = /^[0-9]{1,}$/i;
 				if (page == "" || page == null || !re_number.test(page) || pageCount < page || page == 0) {
-					alert("请填写的页码数值范围为：1 - " + pageCount);
+					Boxy.alert("<i class='warn'></i><span>请填写的页码数值范围为：1 - " + pageCount +" !</span>");
 					$("#page").val("");
 					$("#page").addClass("text_warn");
 					return false;
@@ -631,16 +630,16 @@ ManageClass.prototype = {
 					$.get(Globals.ctx + "/manage/course/selectFile?courseId=" + courseId +"&chapterId=" + chapterId + "&resourceId=" + resourceId 
 							+ "&oldResourceId=" + oldResourceId, function(result){
 						if (result == "error_param") {
-							alert("你已经把该课件添加到当前章节了！");
+							Boxy.alert("<i class='warn'></i><span>你已经把该课件添加到当前章节了 !</span>");
 						} else if (result == "fail") {
-							alert("课件选择失败，刷新页面后，请重新操作！");
+							Boxy.alert("<i class='error'></i><span>课件选择失败，刷新页面后，请重新操作 !</span>");
 							location.reload();
 						} else {
 							location.href = Globals.ctx + result;
 						}
 					});
 				} else {
-					alert("添加课件失败，请刷新页面后重新操作！");
+					Boxy.alert("<i class='error'></i><span>添加课件失败，请刷新页面后重新操作 !</span>");
 				}
 			});
 			
@@ -656,7 +655,7 @@ ManageClass.prototype = {
 						DateTimePickerFn();
 					});
 				} else {
-					alert("添加直播失败，请刷新页面后重新操作！");
+					Boxy.alert("<i class='error'></i><span>添加直播失败，请刷新页面后重新操作 !</span>");
 				}
 			});
 			
@@ -664,7 +663,7 @@ ManageClass.prototype = {
 			$("#liveSubmit").live("click", function (){
 				var title = $("#title").val().trim();
 				if (title == "" || title == null) {
-					alert("直播名称不可以为空，请您务必填写！");
+					Boxy.alert("<i class='warn'></i><span>直播名称不可以为空，请您务必填写 !</span>");
 					$("#title").focus();
 					return false;
 				}
@@ -681,7 +680,7 @@ ManageClass.prototype = {
 						$(".sh_info_r").html(result);
 					});
 				} else {
-					alert("添加试题失败，请刷新页面后重新操作！");
+					Boxy.alert("<i class='error'></i><span>添加试题失败，请刷新页面后重新操作 !</span>");
 				}
 			});
 			
@@ -733,8 +732,8 @@ ManageClass.prototype = {
 				var chapterId = $("#chapterId").val();
 				var resourceId = $("#resourceId").val();
 				
-				if (title == "") {
-					alert("测验题目不可以为空，请您务必填写！");
+				if (title == "" || title == null) {
+					Boxy.alert("<i class='warn'></i><span>测验题目不可以为空，请您务必填写 !</span>");
 					$("#title").focus();
 					return false;
 				}
@@ -746,7 +745,7 @@ ManageClass.prototype = {
 				if (ids.length > 0) {
 					ids = ids.replace(',','');
 				} else {
-					alert("请您勾选试题！");
+					Boxy.alert("<i class='warn'></i><span>请您勾选试题 !</span>");
 					return false;
 				}
 				
@@ -754,14 +753,14 @@ ManageClass.prototype = {
 					// 通过post方式，提交数据到后台处理业务逻辑
 					$.post(Globals.ctx + "/manage/course/selectTrainList",{ids:ids, title:title,courseId:courseId,chapterId:chapterId,resourceId:resourceId},function(result){
 						if (result == "success") {
-							alert("成功添加试题！");
+							Boxy.alert("<i class='right'></i><span>成功添加试题 !</span>");
 							location.reload();
 						} else {
-							alert("添加试题失败！");
+							Boxy.alert("<i class='error'></i><span>添加试题失败 !</span>");
 						}
 					});
 				} else {
-					alert("添加试题失败，请刷新页面后重新操作！");
+					Boxy.alert("<i class='error'></i><span>添加试题失败，请刷新页面后重新操作 !</span>");
 				}
 				
 			});
@@ -784,11 +783,11 @@ ManageClass.prototype = {
 							location.reload();
 							$("html,body").animate({scrollTop:$("#" + chapterId).offset().top},1000);
 						}else {
-							alert(result);
+							Boxy.alert("<i class='error'></i><span>"+ result +"</span>");
 						}
 					});
 				} else {
-					alert("删除失败！");
+					Boxy.alert("<i class='error'></i><span>删除失败 !</span>");
 				}
 			});
 			/************************删除一资源 END******************************************/
@@ -829,7 +828,7 @@ ManageClass.prototype = {
 					});
 					
 				} else {
-					alert("修改失败！");
+					Boxy.alert("<i class='error'></i><span>修改失败 !</span>");
 				}
 			});
 			/************************修改一资源 END******************************************/
@@ -962,41 +961,16 @@ ManageClass.prototype = {
 					});
 					
 				} else {
-					alert("亲，你还有选择知识点分类（所属的年级和学科）哦！");
+					Boxy.alert("<i class='error'></i><span>亲，你还有选择知识点分类（所属的年级和学科）哦 !</span>");
 				}
 			});
 			
-			var ajaxSubmitQuestion = function(status){
-				var obj = new Object();
-				obj.id = $("#id").val();
-				obj.topic = $("#topic").val();
-				obj.questionType = eval($("#questionType").val());
-				obj.opt1 = $("#opt1").val();
-				obj.opt2 = $("#opt2").val();
-				obj.opt3 = $("#opt3").val();
-				obj.opt4 = $("#opt4").val();
-				obj.answer = eval($("#answer").val());
-				obj.remark = $("#remark").val();
-				obj.subjectId = $("#subjectId").val();
-				obj.gradeId = $("#gradeId").val();
-//				obj.timeLimit = $("#timeLimit").val();
-				obj.id = $("#id").val();
-				
-				var operation = $("#operation").val();//用来判断是否是审核
-				var knowledgeIds = $("#knowledgeIds").val();//原来绑定的知识点IDs
-				if (knowledgeIds == "") {
-					Boxy.alter("请选择知识点！");
-				}
-			}
-			
 			// 审核通过
 			$(".btn_approve").click(function(){
-//				ajaxSubmitQuestion(1);
 				$("#status").val(1);
 			});
 			// 审核不通过
 			$(".btn_disapprove").click(function(){
-//				ajaxSubmitQuestion(2);
 				$("#status").val(2);
 			});
 		},
@@ -1032,7 +1006,7 @@ ManageClass.prototype = {
 										if(json.result == '1') {
 											$(".preview").attr("src", json.url);
 										}else {
-											alert(json.error);
+											Boxy.alert("<i class='error'></i><span>"+ json.error +"</span>");
 										}
 									}
 								});
@@ -1134,8 +1108,8 @@ ManageClass.prototype = {
 						if(result.indexOf('{') != -1) {
 							var json = eval('(' + result + ')');
 							zNodes = json;
-						}else {
-							Boxy.alert(result);
+						} else {
+							Boxy.alert("<i class='error'></i><span>"+ result +"</span>");
 						}
 					}});
 				}
@@ -1146,18 +1120,18 @@ ManageClass.prototype = {
 					var subjectId = treeNode.subjectId;
 					var level = treeNode.level;//从0 开始，节点自带的
 					var dataId = treeNode.dataId;
-					var name = treeNode.name;//新增的时候默认当前节点为新增子节点的父节点
+					var parentId = treeNode.dataId;//新增的时候默认当前节点为新增子节点的父节点
 					if (addOrEdit == "edit") {//修改的时候获取父节点的JSON对象
 						var zTree = $.fn.zTree.getZTreeObj("zTree");
 						var sNodes = zTree.getSelectedNodes();
 						if (sNodes.length > 0) {
 							var node = sNodes[0].getParentNode();
-							name = node.name;
+							parentId = node.dataId;
 						}
 					}
 					// 弹出知识点归类的页面
 					Boxy.load(Globals.ctx + "/manage/knowledge/addKnowledgeTree?gradeId="+ gradeId + "&subjectId=" 
-							+ subjectId + "&parentName=" + name + "&level=" + level + "&dataId=" + dataId
+							+ subjectId + "&parentId=" + parentId + "&level=" + level + "&dataId=" + dataId
 							+ "&addOrEdit=" + addOrEdit ,{title : '知识点归类',
 						afterShow : function(){
 							/*****************************select start***************************************/
@@ -1212,7 +1186,7 @@ ManageClass.prototype = {
 								})
 							});
 							
-							if ( levelId != "") {//年级ID
+							if ( levelId != "" && eval(levelId) != 0) {//年级ID
 								gradeSelectFn(levelId);
 							} else {
 								//新增页面，自动首次触发年级联动控件，默认选择
@@ -1248,9 +1222,9 @@ ManageClass.prototype = {
 													zTree.addNodes(treeNode, json);// 新增子节点
 													$(".close").click();
 												} else if(result == "fail") {
-													Boxy.alert("亲，对不起，操作失败了，请您刷新页面后重新操作！");
+													Boxy.alert("<i class='error'></i><span>亲，对不起，操作失败了，请您刷新页面后重新操作 !</span>");
 												} else {
-													Boxy.alert(result);
+													Boxy.alert("<i class='warn'></i><span>"+ result +"</span>");
 												}
 											} else {
 												if (result.indexOf('{') != -1) {
@@ -1259,15 +1233,15 @@ ManageClass.prototype = {
 													$("#" + treeNode.tId + "_a").attr("title",json.name);;// 如：<a id='zTree_21_a' title="json.name"></a>
 													$(".close").click();
 												} else if(result == "fail") {
-													Boxy.alert("亲，对不起，操作失败了，请您刷新页面后重新操作！");
+													Boxy.alert("<i class='error'></i><span>亲，对不起，操作失败了，请您刷新页面后重新操作 !</span>");
 												} else {
-													Boxy.alert(result);
+													Boxy.alert("<i class='warn'></i><span>"+ result +"</span>");
 												}
 											}
 										}
 									});//ajax
 								} else {
-									Boxy.alert("亲，请您选择年级和科目。");
+									Boxy.alert("<i class='warn'></i><span>亲，请您选择年级和科目 !</span>");
 								}
 							});
 							
@@ -1293,7 +1267,7 @@ ManageClass.prototype = {
 					var isRemove = false;
 					className = (className === "dark" ? "":"dark");
 					$.fn.zTree.getZTreeObj("zTree").selectNode(treeNode);
-					if(confirm("确认要删除 节点 -- " + treeNode.name + " 吗？")) {
+					if(confirm("确认要删除节点【" + treeNode.name + "】吗？")){
 						$.ajax({
 							url : Globals.ctx + "/manage/knowledge/remove", 
 							data : {knowledgeId : treeNode.dataId}, 
@@ -1304,7 +1278,7 @@ ManageClass.prototype = {
 								if (result == "success") {
 									isRemove = true;
 								}
-						}});
+							}});
 					}
 					return isRemove;
 				}
@@ -1313,9 +1287,8 @@ ManageClass.prototype = {
 				}
 				function beforeRename (treeId, treeNode, newName, isCancel) {
 					className = (className === "dark" ? "":"dark");
-//					alert((isCancel ? "<span style='color:red'>":"") + "[ "+getTime()+" beforeRename ]&nbsp;&nbsp;&nbsp;&nbsp; " + treeNode.name + (isCancel ? "</span>":""));
 					if (newName.length == 0) {
-						alert("节点名称不能为空.");
+						Boxy.alert("<i class='warn'></i><span>节点名称不能为空 !</span>");
 						var zTree = $.fn.zTree.getZTreeObj("zTree");
 						setTimeout(function(){zTree.editName(treeNode)}, 10);
 						return false;
@@ -1323,7 +1296,6 @@ ManageClass.prototype = {
 					return true;
 				}
 				function onRename (e, treeId, treeNode, isCancel) {
-//					alert((isCancel ? "<span style='color:red'>":"") + "[ "+getTime()+" onRename ]&nbsp;&nbsp;&nbsp;&nbsp; " + treeNode.name + (isCancel ? "</span>":""));
 				}
 				function showRemoveBtn (treeId, treeNode) {
 					/* return !treeNode.isFirstNode; */
@@ -1333,21 +1305,6 @@ ManageClass.prototype = {
 //					return !treeNode.isLastNode;
 					return true;
 				}
-//				function showLog(str) {
-//					if (!log) log = $("#log");
-//					log.append("<li class='"+className+"'>"+str+"</li>");
-//					if(log.children("li").length > 8) {
-//						log.get(0).removeChild(log.children("li")[0]);
-//					}
-//				}
-//				function getTime() {
-//					var now= new Date(),
-//					h=now.getHours(),
-//					m=now.getMinutes(),
-//					s=now.getSeconds(),
-//					ms=now.getMilliseconds();
-//					return (h+":"+m+":"+s+ " " +ms);
-//				}
 
 				function addHoverDom(treeId, treeNode) {
 					var sObj = $("#" + treeNode.tId + "_span");
@@ -1368,15 +1325,9 @@ ManageClass.prototype = {
 				function removeHoverDom(treeId, treeNode) {
 					$("#addBtn_"+treeNode.tId).unbind().remove();
 				};
-			/* 	function selectAll() {
-					var zTree = $.fn.zTree.getZTreeObj("zTree");
-					zTree.setting.edit.editNameSelectAll =  $("#selectAll").attr("checked");
-				} */
-				
 				$(document).ready(function(){
 					ajaxSyncGetNodes();
 					$.fn.zTree.init($("#zTree"), setting, zNodes);
-					//$("#selectAll").bind("click", selectAll);
 				});
 				
 		}

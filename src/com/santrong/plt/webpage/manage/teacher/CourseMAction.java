@@ -882,7 +882,7 @@ public class CourseMAction extends TeacherBaseAction {
 			CourseItem courseItem = courseDao.selectById(courseId);
 			// 判断当前用户是否是该课程的所有者
 			if(courseItem == null || !courseItem.getOwnerId().equals(this.currentUser().getId())) {
-				return "亲，对不起，我找不到该课程章节！请您刷新页面后再操作！";
+				return "亲，对不起，我找不到该课程章节！请您刷新页面后再操作 ！";
 			}
 			if (MyUtils.isNotNull(chapterId) && MyUtils.isNotNull(resourceId) && MyUtils.isNotNull(resourceType) && ValidateTools.isInt(resourceType)) {
 				// 打开事务处理
