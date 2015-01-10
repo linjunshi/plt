@@ -177,33 +177,33 @@ public class QuestionMAction extends TeacherBaseAction{
 			if (tqForm != null) {
 				
 				if (MyUtils.isNull(tqForm.getGradeId())) {
-					addError("请您选择试题所属年级！");
+					addError("请您选择试题所属年级 ！");
 				}
 				if (MyUtils.isNull(tqForm.getSubjectId())) {
-					addError("请您选择试题的所属学科！");
+					addError("请您选择试题的所属学科 ！");
 				}
 				if (MyUtils.isNull(knowledgeIds)) {
-					addError("亲，您还没有绑定知识点呢！");
+					addError("亲，您还没有绑定知识点呢 ！");
 				}
 				if (tqForm.getLevel() < 0) {
-					addError("请您选择难易程度！");
+					addError("请您选择难易程度 ！");
 				}
 				if (tqForm.getQuestionType() <= 0) {
-					addError("请您选择题目的类型！");
+					addError("请您选择题目的类型 ！");
 				}
 				if (MyUtils.isNull(tqForm.getOpt1().trim())) {
-					addError("请您填写内容！");
+					addError("请您填写内容 ！");
 				}
 				if (MyUtils.isNull(tqForm.getTopic())) {
-					addError("请您填写试题的题目！");
+					addError("请您填写试题的题目 ！");
 				}
 				if (tqForm.isSingleSelection()) {//单选题
 					if (tqForm.getAnswer() <= 0) {
-						addError("请您勾选正确的答案！");
+						addError("请您勾选正确的答案 ！");
 					}
 				} else if (tqForm.isMulChoice()) {//多选题
 					if (!(tqForm.getPageAnswer() != null)) {
-						addError("请您勾选正确的答案！");
+						addError("请您勾选正确的答案 ！");
 					}
 				}
 				
@@ -253,7 +253,7 @@ public class QuestionMAction extends TeacherBaseAction{
 						ThreadUtils.commitTranx();
 						
 						if (result) {
-							addError("新增试题成功！");
+							addError("新增试题成功 ！");
 							return "/manage/teacher/myTrainMAdd";
 						}
 					} else {
@@ -279,7 +279,7 @@ public class QuestionMAction extends TeacherBaseAction{
 							List<KnowledgeItem> kList = kDao.selectByIds(stringArr);
 							for (KnowledgeItem kItem : kList) {
 								if (!kItem.getGradeId().equals(tqForm.getGradeId()) || !kItem.getSubjectId().equals(tqForm.getSubjectId())) {
-									addError("亲，您修改了知识点分类，请您重新绑定知识点！");
+									addError("亲，您修改了知识点分类，请您重新绑定知识点 ！");
 									request.setAttribute("tqItem", tqForm);
 									return "/manage/teacher/myTrainMAdd";
 								}

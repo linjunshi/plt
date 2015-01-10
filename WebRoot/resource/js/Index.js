@@ -59,9 +59,9 @@ IndexClass.prototype = {
 			var url = Globals.ctx + "/course/coll_course"
 			$.post(url, {courseId : courseId}, function(result) {
 				if(result == "success") {
-					alert("收藏成功");
+					Boxy.alert("<i class='right'></i><span>收藏成功 !</span>");
 				}else {
-					alert("收藏失败");
+					Boxy.alert("<i class='error'></i><span>收藏失败 !</span>");
 				}
 			})
 		});
@@ -85,16 +85,16 @@ IndexClass.prototype = {
 					$(".buy_form").submit();
 					
 					// 本页面弹框问是否给钱了
-	    			Boxy.ask("亲，付款成功了么", ["是", "否"], function(response) {
-	    	            if (response == "是") {
+	    			Boxy.ask("<i class='ask'></i><span>亲，您已经付款成功了么?</span>", ["是的", "还没呢"], function(response) {
+	    	            if (response == "是的") {
 	    	            	location.reload();
 	    	            }else{
-	    	            	alert("我要重新再买一次");
+	    	            	Boxy.alert("<i class='info'></i><span>我要重新再买一次 !!!</span>");
 	    	            }
 	    			});
 
 				}else {
-					alert(result);
+					Boxy.alert("<i class='error'></i><span>"+ result +"</span>");
 				}
 			});
 		});
@@ -137,7 +137,7 @@ IndexClass.prototype = {
 				}else if(result == 'remove'){
 					_this.text('选择');
 				}else {
-					alert(result);
+					Boxy.alert("<i class='error'></i><span>"+ result +"</span>");
 				}
 			});
 		});
@@ -279,7 +279,7 @@ IndexClass.prototype = {
 						if(result == 'success') {
 							location.reload();
 						}else {
-							alert(result);
+							Boxy.alert("<i class='error'></i><span>"+ result +"</span>");
 						}
 	    			}
 	    		});
@@ -298,7 +298,7 @@ IndexClass.prototype = {
 					if(result == 'success') {
 						location.reload();
 					}else {
-						alert(result);
+						Boxy.alert("<i class='error'></i><span>"+ result +"</span>");
 					}
 				}
 			});

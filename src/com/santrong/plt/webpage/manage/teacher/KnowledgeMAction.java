@@ -104,16 +104,16 @@ public class KnowledgeMAction  extends TeacherBaseAction{
 			if (knowledgeForm != null) {
 				
 				if (MyUtils.isNull(knowledgeForm.getKnowledgeName().trim())) {
-					addError("知识点名称不允许为空！");
+					addError("知识点名称不允许为空 ！");
 				}
 				if (MyUtils.isNull(knowledgeForm.getGradeId())) {
-					addError("请您选择课程级别！");
+					addError("请您选择课程级别 ！");
 				}
 				if (MyUtils.isNull(knowledgeForm.getSubjectId())) {
-					addError("请您选择课程科目！");
+					addError("请您选择课程科目 ！");
 				}
 				if (knowledgeForm.getWeek() > 0) {
-					addError("请您选择周！");
+					addError("请您选择周 ！");
 				}
 				if (!(errorSize() > 0)) {
 					if (MyUtils.isNull(knowledgeForm.getId())) {
@@ -128,11 +128,11 @@ public class KnowledgeMAction  extends TeacherBaseAction{
 							knowledgeItem.setSubjectId(knowledgeForm.getSubjectId());
 							knowledgeItem.setWeek(knowledgeForm.getWeek());
 							if (kDao.insert(knowledgeItem)) {
-								addError("添加知识点成功！可以继续添加。");
+								addError("添加知识点成功 ！可以继续添加。");
 								return "/manage/teacher/knowledgeMAdd";
 							}
 						} else {
-							addError("该知识点已经存在！");
+							addError("该知识点已经存在 ！");
 							return "/manage/teacher/knowledgeMAdd";
 						}
 					} else {
@@ -141,7 +141,7 @@ public class KnowledgeMAction  extends TeacherBaseAction{
 						KnowledgeDao kDao = new KnowledgeDao();
 						KnowledgeItem knowledgeItem = kDao.selectById(knowledgeForm.getId());
 						if (kDao.existsByName(knowledgeItem)) {
-							addError("该知识点已经存在！");
+							addError("该知识点已经存在 ！");
 							request.setAttribute("knowledgeItem", knowledgeForm);
 							request.setAttribute("operation", "modify");
 							return "/manage/teacher/knowledgeMAdd";
@@ -211,16 +211,19 @@ public class KnowledgeMAction  extends TeacherBaseAction{
 		return child;
 	}
 	
-	@RequestMapping(value="/addKnowledgeTree")
+	@RequestMapping(value="/addKnowledgeTree",method=RequestMethod.GET)
 	public String addKnowledgeTree() {
 		HttpServletRequest request = this.getRequest();
 		String gradeId = request.getParameter("gradeId");
 		String subjectId = request.getParameter("subjectId");
-		String parentName = request.getParameter("parentName");
+		String parentId = request.getParameter("parentId");
 		String level = request.getParameter("level");
 		String dataId = request.getParameter("dataId");//原来数据库里的ID
 		String addOrEdit = request.getParameter("addOrEdit");//新增还是修改
+		KnowledgeDao kDao = new KnowledgeDao();
+		KnowledgeItem parentItem = kDao.selectById(parentId);
 		KnowledgeItem knowledgeItem = null;
+		
 		if ("add".equalsIgnoreCase(addOrEdit)) {
 			//打开新增页面
 			knowledgeItem = new KnowledgeItem();
@@ -229,11 +232,10 @@ public class KnowledgeMAction  extends TeacherBaseAction{
 			
 		} else {
 			//打开修改页面
-			KnowledgeDao kDao = new KnowledgeDao();
 			knowledgeItem = kDao.selectById(dataId);
 		}
 		request.setAttribute("knowledgeItem", knowledgeItem);
-		request.setAttribute("parentName", parentName);
+		request.setAttribute("parentName", parentItem.getKnowledgeName());
 		request.setAttribute("level", level);
 		request.setAttribute("dataId", dataId);
 		request.setAttribute("addOrEdit", addOrEdit);
@@ -254,20 +256,20 @@ public class KnowledgeMAction  extends TeacherBaseAction{
 			String addOrEdit = request.getParameter("addOrEdit");//新增还是修改
 			
 			if (MyUtils.isNull(knowledgeName)) {
-				return "知识点名称不允许为空！";
+				return "知识点名称不允许为空 ！";
 			}
 			if (MyUtils.isNull(gradeId) || "null".equalsIgnoreCase(gradeId)) {
-				return "请您选择课程级别！";
+				return "请您选择课程级别 ！";
 			}
 			if (MyUtils.isNull(subjectId) || "null".equalsIgnoreCase(subjectId)) {
-				return "请您选择课程科目！";
+				return "请您选择课程科目 ！";
 			}
 			if (!(week > 0)) {
-				return "请您选择周！";
+				return "请您选择周 ！";
 			}
 			KnowledgeDao kDao = new KnowledgeDao();
 			if (kDao.exists(knowledgeName, gradeId, subjectId)) {
-				return "亲，该知识点已经存在了哦！";
+				return "亲，该知识点已经存在了哦 ！";
 			}
 			if ("add".equalsIgnoreCase(addOrEdit)) {
 				//打开新增页面
