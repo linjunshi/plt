@@ -275,21 +275,22 @@ public class FileUtils {
         	return "找不到文件";
         }
         
-        // 辨别出升级文件
+        // 辨别出文件
         for(FileItem file : files) {
     		if (!file.isFormField()) {// 如果是不是普通文本类型封装成的FileItem
     			fileName = file.getName();
     			fileName = fileName.substring(fileName.lastIndexOf(File.separator) + 1);
     			if(!StringUtils.isNullOrEmpty(fileName)) {
     				//TODO 文件类型判断
-    				fileName = guid + "." + fileName.split("\\.")[1];
+    				int length = fileName.split("\\.").length;
+    				fileName = guid + "." + fileName.split("\\.")[length - 1];//获取后缀名
     		        remoteFile = file;
 		            break;
     			}
     		}
         }
     
-        // 取不到升级文件
+        // 取不到文件
         if(remoteFile == null){
         	return "找不到文件";
         }

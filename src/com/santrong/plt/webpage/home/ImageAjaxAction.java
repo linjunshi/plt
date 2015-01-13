@@ -34,4 +34,20 @@ public class ImageAjaxAction extends BaseAction {
 		sb.append("}");
 		return sb.toString();
 	}
+	
+	// 富文本框文件上传
+	@RequestMapping(value="/upload2")
+    @ResponseBody
+    public String upload2() {
+    	StringBuilder sb = new StringBuilder();
+		sb.append("{'err':");	
+		String result = FileUtils.uploadRemoteFile(this.getRequest());
+		if(MyUtils.isNotNull(result) && result.startsWith("url")) {
+			sb.append("''").append(",").append("'msg':").append("'").append(result.split(":")[1]).append("'");
+		}else {
+			sb.append("'" + result + "'").append(",").append("'msg':").append("''");
+		}
+		sb.append("}");	
+		return sb.toString();
+	}
 }

@@ -154,6 +154,10 @@ Globals.page = "Index_courseDetail";
 					<form action="${ctx}/course/comment" method="post" id="comment_form" class="common_form">
 						<div>
 							<textarea id="xheditor_remark" name="remark" class="xheditor th_textarea" cols="2" rows="3"></textarea>
+							<textarea id="xheditor_remark" name="remark" class="xheditor-mfull xheditor {skin:'o2007silver'}"  style="width:85%;height:230px;">${user.remark}</textarea>
+                            <script type="text/javascript">
+							 	$('#xheditor_remark').xheditor({upImgUrl:'${ctx}/image/upload2', html5Upload:false, upMultiple:1, upImgExt:'jpg,jpeg,gif,png,bmp'});
+							</script>
 						</div>
 						<input type="hidden" name="courseId" value="${course.id}"/>
 						<input class="th_pt_but" type="submit"  value="确定"/>

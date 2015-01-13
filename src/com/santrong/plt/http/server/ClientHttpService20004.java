@@ -67,15 +67,16 @@ public class ClientHttpService20004 implements AbstractHttpService{
 								if ((answer&answers[i]) == answers[i]) {
 									isKey = 1;
 								}
-								if (MyUtils.isNotNull(tqItem.getOpt1()) && answerOptions[i].equals("A")) {
-									optionContent = tqItem.getOpt1();
-								} else if (MyUtils.isNotNull(tqItem.getOpt2()) && answerOptions[i].equals("B")) {
-									optionContent = tqItem.getOpt2();
-								} else if (MyUtils.isNotNull(tqItem.getOpt3()) && answerOptions[i].equals("C")) {
-									optionContent = tqItem.getOpt3();
-								} else if (MyUtils.isNotNull(tqItem.getOpt4()) && answerOptions[i].equals("D")) {
-									optionContent = tqItem.getOpt4();
-								}
+//								if (MyUtils.isNotNull(tqItem.getOpt1()) && answerOptions[i].equals("A")) {
+//									optionContent = tqItem.getOpt1();
+//								} else if (MyUtils.isNotNull(tqItem.getOpt2()) && answerOptions[i].equals("B")) {
+//									optionContent = tqItem.getOpt2();
+//								} else if (MyUtils.isNotNull(tqItem.getOpt3()) && answerOptions[i].equals("C")) {
+//									optionContent = tqItem.getOpt3();
+//								} else if (MyUtils.isNotNull(tqItem.getOpt4()) && answerOptions[i].equals("D")) {
+//									optionContent = tqItem.getOpt4();
+//								}
+								optionContent = "";
 								sb.append("<Item type=\"string\" option=\"").append(answerOptions[i]).append("\" IsKey=\"").append(isKey).append("\">").append(optionContent).append("</Item>");
 								isKey = 0;
 							}

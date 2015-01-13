@@ -6,10 +6,10 @@ import java.util.List;
 
 /**
  * @author huangweihua
- * @date   2014年11月6日 
- * @time   下午3:44:18
+ * @date   2015年1月13日 
+ * @time   下午8:17:24
  */
-public class TrainQuestionItem {
+public class TrainQuestionForm {
 
 //	resource_train_question 作业习题
 	private String id;
@@ -26,6 +26,7 @@ public class TrainQuestionItem {
 	private Date cts;
 	private Date uts;
 	
+	private int answer2;
 	private int[] pageAnswer;//用来保存表单多选题的答案值
 	
 	// 是否已选择
@@ -157,6 +158,12 @@ public class TrainQuestionItem {
 	}
 	public static int[] getAnswers() {
 		return Answers;
+	}
+	public int getAnswer2() {
+		return answer2;
+	}
+	public void setAnswer2(int answer2) {
+		this.answer2 = answer2;
 	}
 	public int[] getPageAnswer() {
 		return pageAnswer;

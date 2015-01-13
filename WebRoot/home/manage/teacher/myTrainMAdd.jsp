@@ -39,7 +39,7 @@ Globals.page = "Manage_myTrainMAdd";
 								<input id="levelId" name="levelId" type="hidden" value="${tqItem.gradeId}">
 								<input id="oldSubjectId" name="oldSubjectId" type="hidden" value="${tqItem.subjectId}">
 								<div class="form_item">
-									<label for="gradeId">试题分类：</label>
+									<label for="gradeId">试题分类<span class="not-empty" title='此项为必填项'>*</span>：</label>
 									<div class="form_field">
 										<select id="gradeSelect">
 											<c:forEach items="${applicationScope.gradeList}" var="grade" varStatus="st">
@@ -50,19 +50,17 @@ Globals.page = "Manage_myTrainMAdd";
 										</select>
 										<select name="subjectId" id="subjectSelect">
 										</select>
-										<span class="not-empty" title='此项为必填项'>*</span>
 									 </div>
 								</div>
 								<div class="form_item">
-									<label>所属知识点：</label>
+									<label>所属知识点<span class="not-empty" title='此项为必填项'>*</span>：</label>
 									<div class="form_field">
 										<input id="knowledgeIds" name="knowledgeIds" type="hidden" value="${knowledgeIds}"/>
 										<input id="knowledgeNames" name="knowledgeNames" placeholder="请点击选择试题所属的知识点" type="button" value="请点击这里选择绑定知识点"/>
-										<span class="not-empty" title='此项为必填项'>*</span>
 									</div>
 								</div>
 								<div class="form_item">
-									<label>难易程度：</label>
+									<label>难易程度<span class="not-empty" title='此项为必填项'>*</span>：</label>
 									<div class="form_field">
 										<input
 											<c:if test="${tqItem.level==0}">checked="checked"</c:if>
@@ -74,11 +72,10 @@ Globals.page = "Manage_myTrainMAdd";
 											<c:if test="${tqItem.level==100}">checked="checked"</c:if>
 											value="100" class="form_radio" name="level" type="radio">
 										<span class="form_ra_text">难</span>
-										<span class="not-empty" title='此项为必填项'>*</span>
 									</div>
 								</div>
 								<div class="form_item">
-									<label>试题类型：</label>
+									<label>试题类型<span class="not-empty" title='此项为必填项'>*</span>：</label>
 									<div class="form_field">
 										<input
 											<c:if test="${tqItem.questionType==1}">checked="checked"</c:if>
@@ -93,31 +90,19 @@ Globals.page = "Manage_myTrainMAdd";
 											<c:if test="${tqItem.questionType==4}">checked="checked"</c:if>
 											value="4" class="form_radio" name="questionType" type="radio">
 										<span class="form_ra_text">填空题</span>
-										<span class="not-empty" title='此项为必填项'>*</span>
 									</div>
 								</div>
 								<div class="form_item">
-									<label>题目名称：</label>
+									<label>题目名称<span class="not-empty" title='此项为必填项'>*</span>：</label>
 									<div class="form_field">
-										<textarea id="topic" name="topic" required_length="128" required >${tqItem.topic}</textarea>
-										<p class="form_des">请匆超过128字符&nbsp;<span class="not-empty" title='此项为必填项'>*</span></p>
+										<textarea id="xheditor_topic" name="topic" rows="60" cols="100" style="width:85%;height: 230px;" >${tqItem.topic}</textarea>
+										<script type="text/javascript">
+										 	$('#xheditor_topic').xheditor({upImgUrl:'${ctx}/image/upload2', html5Upload:false, upMultiple:1, upImgExt:'jpg,jpeg,gif,png,bmp', tools:'mfull',skin:'o2007silver'});
+										</script>
 									</div>
 								</div>
 								<div class="form_item">
-									<label>试题选项：</label>
-									<div class="form_field">
-										<label class="field_te">A: </label> 
-										<input placeholder="请填入试题" class="form_tarea form_text" id="opt1" name="opt1" type="text" value="${tqItem.opt1}" required><span class="not-empty" title='此项为必填项'>*</span><br /> 
-										<label class="field_te ma">B: </label> 
-										<input placeholder="请填入试题" class="form_tarea form_text" id="opt2" name="opt2" type="text" value="${tqItem.opt2}"><br /> 
-										<label class="field_te ma">C: </label>
-										<input placeholder="请填入试题" class="form_tarea form_text" id="opt3" name="opt3" type="text" value="${tqItem.opt3}"><br /> 
-										<label class="field_te ma">D: </label> 
-										<input placeholder="请填入试题" class="form_tarea form_text" id="opt4" name="opt4" type="text" value="${tqItem.opt4}"><br />
-									</div>
-								</div>
-								<div class="form_item">
-									<label>正确答案：</label>
+									<label>正确答案<span class="not-empty" title='此项为必填项'>*</span>：</label>
 									<div class="form_field" id="answer_radio">
 										<input value="1" class="form_radio" name="answer" type="radio"
 											<c:if test="${tqItem.containA}">checked="checked"</c:if> />
@@ -131,7 +116,6 @@ Globals.page = "Manage_myTrainMAdd";
 										<input value="8" class="form_radio" name="answer" type="radio"
 											<c:if test="${tqItem.containD}">checked="checked"</c:if> />
 										<span class="form_ra_text">Ｄ</span>
-										<span class="not-empty" title='此项为必填项'>*</span>
 									</div>
 									<div class="form_field" id="answer_checkbox">
 										<input value="1" class="form_radio" name="pageAnswer" type="checkbox"
@@ -146,7 +130,14 @@ Globals.page = "Manage_myTrainMAdd";
 										<input value="8" class="form_radio" name="pageAnswer" type="checkbox"
 											<c:if test="${tqItem.containD}">checked="checked"</c:if> />
 										<span class="form_ra_text">Ｄ</span>
-										<span class="not-empty" title='此项为必填项'>*</span>
+									</div>
+									<div class="form_field" id="answer2_radio">
+										<input value="1" class="form_radio" name="answer2" type="radio"
+											<c:if test="${tqItem.containA}">checked="checked"</c:if> />
+										<span class="form_ra_text">对</span> 
+										<input value="2" class="form_radio" name="answer2" type="radio"
+											<c:if test="${tqItem.containB}">checked="checked"</c:if> />
+										<span class="form_ra_text">错</span> 
 									</div>
 								</div>
 								<div class="form_item">

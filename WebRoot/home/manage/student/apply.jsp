@@ -57,7 +57,10 @@ Globals.page = "Manage_applyTeacher";
 							<div class="form_item">
 								<label for="remark">个人简介：</label>
 								<div class="form_field">
-									<textarea id="xheditor_remark" name="remark" class="xheditor-mfull xheditor {skin:'o2007silver'}" rows="60" cols="100" style="width:80%;height: 230px;" >${form.remark}</textarea>
+									<textarea id="xheditor_remark" name="remark" rows="60" cols="100" style="width:80%;height: 230px;" >${form.remark}</textarea>
+	                                <script type="text/javascript">
+									 	$('#xheditor_remark').xheditor({upImgUrl:'${ctx}/image/upload2', html5Upload:false, upMultiple:1, upImgExt:'jpg,jpeg,gif,png,bmp', tools:'mfull',skin:'o2007silver'});
+									</script>
 								</div>
 							</div>
 							<div class="form_action">

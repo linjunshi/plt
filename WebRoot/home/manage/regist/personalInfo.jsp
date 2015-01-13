@@ -101,7 +101,10 @@ Globals.page = "Manage_personalInfo";
 		                        <div class="form_item">
 		                            <label>个人简介：</label>
 		                            <div class="form_field">
-		                                <textarea id="xheditor_remark" name="remark" class="xheditor-mfull xheditor {skin:'o2007silver'}"  style="width:85%;height:230px;">${user.remark}</textarea>
+		                                <textarea id="xheditor_remark" name="remark" style="width:85%;height:230px;">${user.remark}</textarea>
+		                                <script type="text/javascript">
+										 	$('#xheditor_remark').xheditor({upImgUrl:'${ctx}/image/upload2', html5Upload:false, upMultiple:1, upImgExt:'jpg,jpeg,gif,png,bmp', tools:'mfull',skin:'o2007silver'});
+										</script>
 		                            </div>
 		                        </div>
 		                        <div class="form_action"><input type="submit" value="保存" /></div>

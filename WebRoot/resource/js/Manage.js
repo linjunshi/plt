@@ -845,6 +845,7 @@ ManageClass.prototype = {
 				$("input[name='level']").eq(0).attr("checked","checked");
 				$("#answer_radio").show();
 				$("#answer_checkbox").hide();
+				$("#answer2_radio").hide();
 			} else {
 				//修改页面默认选项
 				var questionType = "1";
@@ -853,21 +854,35 @@ ManageClass.prototype = {
 					if (questionType == "1" && $(this).attr("checked") == "checked") {
 						$("#answer_radio").show();
 						$("#answer_checkbox").hide();
+						$("#answer2_radio").hide();
 					} else if (questionType == "2" && $(this).attr("checked") == "checked") {
 						$("#answer_radio").hide();
 						$("#answer_checkbox").show();
+						$("#answer2_radio").hide();
+					} else if (questionType == "3" && $(this).attr("checked") == "checked") {
+						$("#answer_radio").hide();
+						$("#answer_checkbox").hide();
+						$("#answer2_radio").show();
 					}
 				});
 			}
 			
 			//改变选择类型，显示相应类型的控件
 			$("input[name='questionType']").change(function(){
-				if ($(this).val() == 1) {
+				if (eval($(this).val()) == 1) {
 					$("#answer_radio").show();
 					$("#answer_checkbox").hide();
-				} else if ($(this).val() == 2) {
+					$("#answer2_radio").hide();
+				} else if (eval($(this).val()) == 2) {
 					$("#answer_radio").hide();
 					$("#answer_checkbox").show();
+					$("#answer2_radio").hide();
+				} else if (eval($(this).val()) == 3) {
+					$("#answer_radio").hide();
+					$("#answer_checkbox").hide();
+					$("#answer2_radio").show();
+				} else if (eval($(this).val()) == 4){
+					Boxy.alert("<i class='warn'></i><span>暂时不支持该功能 !</span>");
 				}
 			});
 			

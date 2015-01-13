@@ -16,6 +16,7 @@ import com.santrong.plt.webpage.course.resource.train.dao.KnowledgeDao;
 import com.santrong.plt.webpage.course.resource.train.dao.TrainQuestionDao;
 import com.santrong.plt.webpage.course.resource.train.entry.KnowledgeItem;
 import com.santrong.plt.webpage.course.resource.train.entry.KnowledgeQuestionView;
+import com.santrong.plt.webpage.course.resource.train.entry.TrainQuestionForm;
 import com.santrong.plt.webpage.course.resource.train.entry.TrainQuestionItem;
 import com.santrong.plt.webpage.course.resource.train.entry.TrainQuestionQuery;
 import com.santrong.plt.webpage.manage.TeacherBaseAction;
@@ -159,7 +160,7 @@ public class QuestionMAction extends TeacherBaseAction{
 	 * @return
 	 */
 	@RequestMapping(value="/addOrModifyQuestion", method=RequestMethod.POST)
-	public String addOrModifyQuestion(TrainQuestionItem tqForm){
+	public String addOrModifyQuestion(TrainQuestionForm tqForm){
 		try {
 			HttpServletRequest request = this.getRequest();
 			String knowledgeIds = request.getParameter("knowledgeIds");//原来绑定的知识点IDs
@@ -191,9 +192,6 @@ public class QuestionMAction extends TeacherBaseAction{
 				if (tqForm.getQuestionType() <= 0) {
 					addError("请您选择题目的类型 ！");
 				}
-				if (MyUtils.isNull(tqForm.getOpt1().trim())) {
-					addError("请您填写内容 ！");
-				}
 				if (MyUtils.isNull(tqForm.getTopic())) {
 					addError("请您填写试题的题目 ！");
 				}
@@ -203,6 +201,10 @@ public class QuestionMAction extends TeacherBaseAction{
 					}
 				} else if (tqForm.isMulChoice()) {//多选题
 					if (!(tqForm.getPageAnswer() != null)) {
+						addError("请您勾选正确的答案 ！");
+					}
+				} else if (tqForm.isTrueOrFlase()) {//判断题
+					if (tqForm.getAnswer2() <= 0) {
 						addError("请您勾选正确的答案 ！");
 					}
 				}
@@ -222,10 +224,6 @@ public class QuestionMAction extends TeacherBaseAction{
 						tqItem.setSubjectId(tqForm.getSubjectId());//学科
 						tqItem.setTopic(tqForm.getTopic().trim());
 						tqItem.setQuestionType(tqForm.getQuestionType());
-						tqItem.setOpt1(tqForm.getOpt1().trim());
-						tqItem.setOpt2(tqForm.getOpt2().trim());
-						tqItem.setOpt3(tqForm.getOpt3().trim());
-						tqItem.setOpt4(tqForm.getOpt4().trim());
 						if (tqForm.isSingleSelection()) {//单选题
 							tqItem.setAnswer(tqForm.getAnswer());
 						} else if (tqForm.isMulChoice()) {//多选题
@@ -234,6 +232,8 @@ public class QuestionMAction extends TeacherBaseAction{
 								sumAnswer = sumAnswer + tqForm.getPageAnswer()[i];
 							}
 							tqItem.setAnswer(sumAnswer);
+						} else if (tqForm.isTrueOrFlase()){//判断题
+							tqItem.setAnswer(tqForm.getAnswer2());
 						}
 						tqItem.setRemark(tqForm.getRemark());
 						tqItem.setTimeLimit(0);//限制时间
@@ -295,10 +295,6 @@ public class QuestionMAction extends TeacherBaseAction{
 						tqItem.setSubjectId(tqForm.getSubjectId());//学科
 						tqItem.setTopic(tqForm.getTopic());
 						tqItem.setQuestionType(tqForm.getQuestionType());
-						tqItem.setOpt1(tqForm.getOpt1());
-						tqItem.setOpt2(tqForm.getOpt2());
-						tqItem.setOpt3(tqForm.getOpt3());
-						tqItem.setOpt4(tqForm.getOpt4());
 						if (tqForm.isSingleSelection()) {//单选题
 							tqItem.setAnswer(tqForm.getAnswer());
 						} else if (tqForm.isMulChoice()) {//多选题
@@ -307,6 +303,8 @@ public class QuestionMAction extends TeacherBaseAction{
 								sumAnswer = sumAnswer + tqForm.getPageAnswer()[i];
 							}
 							tqItem.setAnswer(sumAnswer);
+						} else if (tqForm.isTrueOrFlase()){//判断题
+							tqItem.setAnswer(tqForm.getAnswer2());
 						}
 						tqItem.setRemark(tqForm.getRemark());
 						tqItem.setLevel(tqForm.getLevel());//易：0 ，中 ：10 ， 难：100
