@@ -82,7 +82,7 @@ Globals.page = "Manage_orderList";
 													<a href="javascript:void(0);" onclick="alert('开发中')" class="cancelOrder" title="未付款的交易可以取消订单">取消订单</a>
 												</c:if>
 				                            	<c:if test="${order.status == 1}">
-					                            	<a href="${ctx}/course/${order.courseId}.html#remark" target="_blank">追加评论</a>
+					                            	<a href="${ctx}/course/${order.courseId}.html#course_comment" target="_blank">追加评论</a>
 												</c:if>
 												<c:if test="${order.status == -1}">
 													<a href="javascript:void(0);" class="redo_buy">重新购买</a>
