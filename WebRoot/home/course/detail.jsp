@@ -124,7 +124,7 @@ Globals.page = "Index_courseDetail";
 				        			<span>${resource.title}</span>
 				        			<div class="course_list_oper">
 					        			<c:if test="${resource.status == -1}"><span class="live_without_start">未开始</span></c:if>
-						        		<c:if test="${resource.status == 0}"><a href="${ctx}/${resource.typeEnString}?resId=${resource.id}" target="_blank" title="点击进入">正在直播中...</a></c:if>
+						        		<c:if test="${resource.status == 0}"><a class="liveJump" href="javascript:void(0);" live_id="${resource.id}" title="点击进入">正在直播中...</a></c:if>
 						        		<c:if test="${resource.status == 1}"><span class="live_done">已结束</span></c:if>
 						        	</div>
 				        		</c:if>

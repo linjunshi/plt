@@ -122,6 +122,24 @@ IndexClass.prototype = {
 				return;
 			}
 		});
+		
+		// 点击观看直播，判断是否已经购买课程
+		$(".liveJump").click(function(){
+			var courseId = $("input[name=courseId]").val();
+			var liveID = $(this).attr("live_id");
+			if (liveID != "" && liveID != null &&  courseId != "" && courseId != null ) {
+				$.post(Globals.ctx + "/live/isPay?courseId=" + courseId + "&resId=" + liveID, function(result) {
+					if (result == "success") {
+							window.open(Globals.ctx + "/live?courseId=" + courseId + "&resId=" + liveID, '_blank');
+//							window.open(Globals.ctx + "/live?courseId=" + courseId + "&resId=" + liveID, '_newtab');// Chrome
+						} else {
+							Boxy.alert("<i class='warn'></i><span>请您先购买该课程 !</span>");
+						}
+					});
+			} else {
+				Boxy.alert("<i class='warn'></i><span>请刷新页面后，重新操作 !</span>");
+			}
+		});
 	},
 	
 	// 题库首页

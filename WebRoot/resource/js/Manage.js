@@ -1186,7 +1186,7 @@ ManageClass.prototype = {
 								})
 							});
 							
-							if ( levelId != "" && eval(levelId) != 0) {//年级ID
+							if ( levelId != "" && levelId != 0) {//年级ID
 								gradeSelectFn(levelId);
 							} else {
 								//新增页面，自动首次触发年级联动控件，默认选择
