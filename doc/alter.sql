@@ -1,3 +1,6 @@
+-- 2015-01-13 weinianjie
+alter table resource_train_question change topic topic varchar(2048) not null comment '题目';
+
 -- 2015-01-08 weinianjie
 alter table resource_train_question add column level int(10) comment '难中易' after ownerId; 
 alter table resource_train_question change del status int(10) comment '状态' after level; 

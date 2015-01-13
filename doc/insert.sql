@@ -482,7 +482,7 @@ create table resource_train_history(
 drop table if exists resource_train_question;
 create table resource_train_question(
 	id varchar(32) not null comment 'UUID',
-	topic varchar(128) not null comment '题目',
+	topic varchar(2048) not null comment '题目',
 	questionType int(10) default 0 not null comment '题目类型',
 	opt1 varchar(128) not null comment '选项1',
 	opt2 varchar(128) comment '选项2',
