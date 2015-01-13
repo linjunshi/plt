@@ -1,6 +1,12 @@
 -- 2015-01-13 weinianjie
 alter table resource_train_question change topic topic varchar(2048) not null comment '题目';
 
+update resource_train_question set topic=concat_ws('',topic,'<br/>','A:',opt1,'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;','B:',opt2,'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;','C:',opt3,'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;','D:',opt4);
+alter table resource_train_question drop column opt1;
+alter table resource_train_question drop column opt2;
+alter table resource_train_question drop column opt3;
+alter table resource_train_question drop column opt4;
+
 -- 2015-01-08 weinianjie
 alter table resource_train_question add column level int(10) comment '难中易' after ownerId; 
 alter table resource_train_question change del status int(10) comment '状态' after level; 

@@ -48,16 +48,18 @@ div[contenteditable=true] {-webkit-line-break: after-white-space;-webkit-nbsp-mo
 .con_login .con_user{height:30px; line-height:30px; border:3px #7abf04 solid; margin-bottom:15px; border-radius:10px; width:200px; text-indent:10px;}
 .con_login .con_user_but { padding:5px 15px; background:#096; color:#fff; margin:10px 10px 0 0; border-radius:6px;}
 .con_login .con_user_but:hover{ background:#09f;}
+/*--------------------里面抬头部分-------------------------------*/
+.menu {background:#fff url(../images/top_bg.png) no-repeat center top;}
+.menu_top { width:1000px; height:230px;margin:0 auto;position: relative;}
+.menu_top .logo{ position:absolute; left:0px; top:30px;}
 /*--------------中间-------------*/
 .content { width:1000px; margin:0 auto;}
 .con_column { width:1000px; height:60px; margin:20px 0;}
 .con_column h2{ float:left;font-size:30px; color:#09F; line-height:60px;}
 .con_column ul{ float:right;}
 .con_column ul li { float:left;}
-
 .con_column ul li a{ float:right; display:block;width:100px; height:60px; background:url(../images/list_bg.png) left top; text-align:center; line-height:60px; font-size:20px; text-indent:5px;}
 .con_column ul li a:hover{ background:url(../images/list_bg_hover.png); color:#ab44da;}
-
 .con_col_list{ margin-top:20px; text-align:center;}
 .con_col_list ul{ float:left;}
 .con_col_list ul li{ float:left; display:block; width:168px; height:270px; margin:0 36px 25px 0; background:#ebebeb;  position:relative;}
@@ -68,11 +70,11 @@ div[contenteditable=true] {-webkit-line-break: after-white-space;-webkit-nbsp-mo
 .con_col_list .con_but { width:70px; height:28px; display:block;position:absolute; right:5px; bottom:5px; background:url(../images/bottom_school.png) no-repeat right bottom; cursor:pointer;}
 .con_col_list ul li:hover{ box-shadow:0px 0px 8px #09F;}
 
-/*--------------------知识图谱-----------------*/
+/*--------------------时间轴-----------------*/
 
 .time_shaft{ width:800px; margin:20px auto;}
 .time_main{ background:url(../images/time_img_a.jpg) repeat-y 10px top; display:block;padding-top:10px; }
-.time_title{ width:100px; display:block; float:left; font-size:18px; text-align:center; }
+.time_title{ width:100px; display:block; float:left; font-size:18px; text-align:center;}
 .time_list{ width:600px; display:block; float:left; margin:5px 10px 0 50px;}
 .time_list li { width:500px; display:block; margin:0 0 10px 0;}
 .time_list li p{  margin-right:20px; display:inline-block;}
@@ -80,10 +82,19 @@ div[contenteditable=true] {-webkit-line-break: after-white-space;-webkit-nbsp-mo
 .time_menu { height:30px;line-height:30px;}
 .time_menu h2{ float:left; width:100px; text-align:center; font-size:22px; color:#f90;}
 .time_menu p{ float:left; width:500px; margin-left:50px; font-size:16px; color:#09f;}
-
-
-.footer { width:100%; height:218px; background:url(../images/mainbg.png) no-repeat center top;}
-
+/*--------------------试题列表-----------------*/
+.question_bg {width:1000px; height:670px;background:#ccc url(../images/word_bg.png) no-repeat left top; margin:0 auto;}
+.que_but_list{ position:relative; margin-top:20px;}
+.que_but_a{ width:110px; height:138px; padding:90px 20px 0 20px; position:absolute; left:190px; top:120px; background:url(../images/work_but.png) no-repeat left top; text-align:center;color:#063;} 
+.que_but_b{ width:110px; height:138px; padding:90px 20px 0 20px; position:absolute; left:465px; top:120px; background:url(../images/work_but.png) no-repeat left top; text-align:center;color:#063;}
+.que_but_c{ width:110px; height:138px; padding:90px 20px 0 20px; position:absolute; left:726px; top:120px; background:url(../images/work_but.png) no-repeat left top; text-align:center;color:#063;}
+.que_but_d{ width:110px; height:138px; padding:90px 20px 0 20px; position:absolute; left:300px; top:290px; background:url(../images/work_but.png) no-repeat left top; text-align:center;color:#063;}
+.que_but_e{ width:110px; height:138px; padding:90px 20px 0 20px; position:absolute; left:630px; top:290px; background:url(../images/work_but.png) no-repeat left top; text-align:center;color:#063; }
+.que_but_a:hover,.que_but_b:hover, .que_but_c:hover, .que_but_d:hover, .que_but_e:hover{background:url(../images/work_but_hover.png) no-repeat left top; text-align:center;color:#000;padding:88px 20px 0 18px;}
+.que_but_page { position: relative; }
+.que_but_page a { position:absolute;bottom:20px; right:20px;background:url(../images/page.png) no-repeat left top; z-index:999; width:76px; height:93px; display:block; line-height:120px; text-align:center; font-size:16px; color:#fff; font-weight:700;}
+.que_but_page a:hover{ color:#000;background:url(../images/page_hover.png) no-repeat left top;}
+/*--------------------页脚-----------------*/
 .footer { width:100%; height:218px; background:url(../images/mainbg.png) no-repeat center top;}
 
 
