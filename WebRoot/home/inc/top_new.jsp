@@ -10,7 +10,7 @@
 		</div>
 		<div class="hea_nav">
 			<a href="${ctx}/" class="a_a">首页</a> <a href="${ctx}/video"
-				class="a_b">微课</a> <a href="${ctx}/course?filter=live" class="a_c">直播课</a>
+				class="a_b">微课</a> <a href="${ctx}/course" class="a_c">直播课</a>
 			<a href="${ctx}/question" class="a_d">题库</a>
 		</div>
 	</div>
