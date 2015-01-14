@@ -41,4 +41,18 @@
 .con_col_list .con_but { width:70px; height:28px; display:block;position:absolute; right:5px; bottom:5px; background:url(../images/bottom_school.png) no-repeat right bottom; cursor:pointer;}
 .con_col_list ul li:hover{ box-shadow:0px 0px 8px #09F;}
 
+/*--------------------时间轴-----------------*/
+
+.time_shaft{ width:800px; margin:20px auto;}
+.time_main{ background:url(../images/time_img_a.jpg) repeat-y 10px top; display:block;padding-top:10px; }
+.time_title{ width:100px; display:block; float:left; font-size:18px; text-align:center; }
+.time_list{ width:600px; display:block; float:left; margin:5px 10px 0 50px;}
+.time_list li { width:500px; display:block; margin:0 0 10px 0;}
+.time_list li p{  margin-right:20px; display:inline-block;}
+.time_list li p span *{ vertical-align:middle; margin-right:5px;}
+.time_menu { height:30px;line-height:30px;}
+.time_menu h2{ float:left; width:100px; text-align:center; font-size:22px; color:#f90;}
+.time_menu p{ float:left; width:500px; margin-left:50px; font-size:16px; color:#09f;}
+
+
 .footer { width:100%; height:218px; background:url(../images/mainbg.png) no-repeat center top;}
