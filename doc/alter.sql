@@ -1,4 +1,20 @@
 -- 2015-01-13 weinianjie
+alter table resource_train_question add column answer2 varchar(256) comment '答案' after answer;
+update resource_train_question set answer2='A';
+alter table resource_train_question drop column answer;
+alter table resource_train_question change answer2 answer varchar(256) comment '答案';
+
+alter table resource_train_history add column answer2 varchar(256) comment '答案' after answer;
+update resource_train_history set answer2='A';
+alter table resource_train_history drop column answer;
+alter table resource_train_history change answer2 answer varchar(256) comment '答案';
+
+alter table competition_history add column answer2 varchar(256) comment '答案' after answer;
+update competition_history set answer2='A';
+alter table competition_history drop column answer;
+alter table competition_history change answer2 answer varchar(256) comment '答案';
+
+-- 2015-01-13 weinianjie
 alter table resource_train_question change topic topic varchar(2048) not null comment '题目';
 
 update resource_train_question set topic=concat_ws('',topic,'<br/>','A:',opt1,'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;','B:',opt2,'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;','C:',opt3,'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;','D:',opt4);
