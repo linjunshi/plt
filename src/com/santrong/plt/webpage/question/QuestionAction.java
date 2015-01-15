@@ -174,7 +174,8 @@ public class QuestionAction extends BaseAction {
 		if(questionList != null && questionList.size() == answer.length && questionList.size() > 0) {
 			int total = questionList.size();
 			for(int i=0;i<total;i++) {
-				int result = questionList.get(i).getAnswer() == answer[i]? 1 : 0;
+				int result = 0;
+//				result = questionList.get(i).getAnswer() == answer[i]? 1 : 0;
 				if(answer[i] != 0) {
 					doneCount++;
 					if(result == 0) {
@@ -182,7 +183,7 @@ public class QuestionAction extends BaseAction {
 					}
 				}				
 				TrainQuestionIndex qIndex = new TrainQuestionIndex();
-				qIndex.setAnswer(answer[i]);
+//				qIndex.setAnswer(answer[i]);
 				qIndex.setResult(result);
 				indexList.add(qIndex);
 			}
@@ -220,7 +221,7 @@ public class QuestionAction extends BaseAction {
 						history.setId(MyUtils.getGUID());
 						history.setAttendId(attend.getId());
 						history.setQuestionId(qid[i]);
-						history.setAnswer(answer[i]);
+//						history.setAnswer(answer[i]);
 						history.setResult(indexList.get(i).getResult());
 						history.setCts(new Date());
 						history.setCts(new Date());
@@ -272,7 +273,7 @@ public class QuestionAction extends BaseAction {
 			CompetitionDao historyDao = new CompetitionDao();
 			historyList = historyDao.selectUserHistory(this.currentUser().getId(), cid);// 有历史记录会进入答题结果状态，情况历史记录才能进入答题状态
 			for(CompetitionHistoryItem item:historyList) {
-				if(item.getAnswer() != 0) {
+				if(item.getAnswer() != null) {
 					doneCount++;
 					if(item.getResult() == 0) {
 						wrongCount++;

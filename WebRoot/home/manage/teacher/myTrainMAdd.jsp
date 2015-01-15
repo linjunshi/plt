@@ -139,6 +139,9 @@ Globals.page = "Manage_myTrainMAdd";
 											<c:if test="${tqItem.containB}">checked="checked"</c:if> />
 										<span class="form_ra_text">错</span> 
 									</div>
+									<div class="form_field"  id="answer_input">
+										<input class="form_text" id="answer3" name="answer3" type="text" value="${tqItem.answer}" required />
+									</div>
 								</div>
 								<div class="form_item">
 									<label>试题详解：</label>

@@ -227,12 +227,20 @@ IndexClass.prototype = {
 				var type = $(this).attr("type");
 				
 				var val = 0;
-				if(type=='radio') {//单选
-					val = $(this).val()
-				}else {// 多选
+				if(type == 'radio') {//单选题
+					val = $(this).val();
+				} else if(type == 'checkbox'){// 多选题
+					val = "";
 					$(".sh_work_form input[type=checkbox]:checked").each(function() {
-						val = val + $(this).val()/1;
+//						val = val + $(this).val()/1;
+						val = val + "," + $(this).val();
 					});
+					if (val != "") {
+						
+						alert(val);
+					}
+				} else{// 填空题
+					val = $(this).val().trim();
 				}
 				
 				$(".question_index").eq(index-1).find("input[name=answer]").val(val);

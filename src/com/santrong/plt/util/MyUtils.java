@@ -378,6 +378,23 @@ public class MyUtils {
 	}
 	
 	/**
+	 * 组装用逗号隔开的字符串
+	 * @param int[] nums
+	 * @return String
+	 */
+	public static String consistNums(int[] nums) {
+		StringBuilder sb = new StringBuilder();
+		for (int num : nums) {
+			sb.append(",").append(num);
+		}
+		if (sb.length() > 0) {
+			sb.deleteCharAt(0);
+			return sb.toString();
+		}
+		return null;
+	}
+	
+	/**
 	 * 获取父节点
 	 * @param code
 	 * @return

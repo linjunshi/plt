@@ -196,7 +196,7 @@ public class QuestionMAction extends TeacherBaseAction{
 					addError("请您填写试题的题目 ！");
 				}
 				if (tqForm.isSingleSelection()) {//单选题
-					if (tqForm.getAnswer() <= 0) {
+					if (tqForm.getAnswer() == null) {
 						addError("请您勾选正确的答案 ！");
 					}
 				} else if (tqForm.isMulChoice()) {//多选题
@@ -204,8 +204,12 @@ public class QuestionMAction extends TeacherBaseAction{
 						addError("请您勾选正确的答案 ！");
 					}
 				} else if (tqForm.isTrueOrFlase()) {//判断题
-					if (tqForm.getAnswer2() <= 0) {
+					if (tqForm.getAnswer2() == null) {
 						addError("请您勾选正确的答案 ！");
+					}
+				} else if (tqForm.isBlankFilling()) {//填空题
+					if (MyUtils.isNull(tqForm.getAnswer3().trim())) {
+						addError("请您填写正确的答案 ！");
 					}
 				}
 				
@@ -224,17 +228,17 @@ public class QuestionMAction extends TeacherBaseAction{
 						tqItem.setSubjectId(tqForm.getSubjectId());//学科
 						tqItem.setTopic(tqForm.getTopic().trim());
 						tqItem.setQuestionType(tqForm.getQuestionType());
+						
 						if (tqForm.isSingleSelection()) {//单选题
 							tqItem.setAnswer(tqForm.getAnswer());
 						} else if (tqForm.isMulChoice()) {//多选题
-							int sumAnswer = 0;
-							for (int i = 0; i < tqForm.getPageAnswer().length; i++) {
-								sumAnswer = sumAnswer + tqForm.getPageAnswer()[i];
-							}
-							tqItem.setAnswer(sumAnswer);
+							tqItem.setAnswer(MyUtils.consistNums(tqForm.getPageAnswer()));//拼接字符串
 						} else if (tqForm.isTrueOrFlase()){//判断题
 							tqItem.setAnswer(tqForm.getAnswer2());
+						} else if (tqForm.isBlankFilling()){//填空题
+							tqItem.setAnswer(tqForm.getAnswer3().trim());
 						}
+						
 						tqItem.setRemark(tqForm.getRemark());
 						tqItem.setTimeLimit(0);//限制时间
 						tqItem.setOwnerId(this.currentUser().getId());
@@ -298,13 +302,11 @@ public class QuestionMAction extends TeacherBaseAction{
 						if (tqForm.isSingleSelection()) {//单选题
 							tqItem.setAnswer(tqForm.getAnswer());
 						} else if (tqForm.isMulChoice()) {//多选题
-							int sumAnswer = 0;
-							for (int i = 0; i < tqForm.getPageAnswer().length; i++) {
-								sumAnswer = sumAnswer + tqForm.getPageAnswer()[i];
-							}
-							tqItem.setAnswer(sumAnswer);
+							tqItem.setAnswer(MyUtils.consistNums(tqForm.getPageAnswer()));//拼接字符串
 						} else if (tqForm.isTrueOrFlase()){//判断题
 							tqItem.setAnswer(tqForm.getAnswer2());
+						} else if (tqForm.isBlankFilling()){//填空题
+							tqItem.setAnswer(tqForm.getAnswer3().trim());
 						}
 						tqItem.setRemark(tqForm.getRemark());
 						tqItem.setLevel(tqForm.getLevel());//易：0 ，中 ：10 ， 难：100
@@ -323,6 +325,18 @@ public class QuestionMAction extends TeacherBaseAction{
 				} else {
 					request.setAttribute("tqItem", tqForm);
 				}
+			}
+			if (MyUtils.isNotNull(tqForm.getId())) {//提交错误的时候，初始化修改表单页面的数据
+				// 获取已经绑定的知识点
+				TrainQuestionDao tqDao = new TrainQuestionDao();
+				List<KnowledgeQuestionView> k2qList = tqDao.selectKnowledge2QuestionByQId(tqForm.getId());
+				for (KnowledgeQuestionView kqItem : k2qList) {
+					knowledgeIds += "," + kqItem.getKnowledgeId();
+				}
+				if (knowledgeIds != "") {
+					knowledgeIds = knowledgeIds.substring(1);//移除前面的多余的逗号
+				}
+				request.setAttribute("knowledgeIds", knowledgeIds);
 			}
 		} catch (Exception e) {
 			Log.printStackTrace(e);

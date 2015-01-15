@@ -6,13 +6,13 @@ package com.santrong.plt.webpage.course.resource.train.entry;
  * @time 下午4:06:42
  */
 public class TrainQuestionIndex {
-	private int answer;
+	private String answer;
 	private int result;
 
-	public int getAnswer() {
+	public String getAnswer() {
 		return answer;
 	}
-	public void setAnswer(int answer) {
+	public void setAnswer(String answer) {
 		this.answer = answer;
 	}
 	public int getResult() {
@@ -24,7 +24,7 @@ public class TrainQuestionIndex {
 	
 	// 是否已做题，是否做对题
 	public String getClassString() {
-		if(answer != 0) {
+		if(answer != null) {
 			if(result == 0) {
 				return "wrong";
 			}

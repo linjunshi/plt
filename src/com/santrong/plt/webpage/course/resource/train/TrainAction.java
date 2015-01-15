@@ -78,7 +78,7 @@ public class TrainAction extends StudentBaseAction {
 		List<TrainHistoryItem> historyList = historyDao.selectUserHistory(this.currentUser().getId(), resId, chapter.getId());// 有历史记录会进入答题结果状态，情况历史记录才能进入答题状态
 		for(TrainHistoryItem item:historyList) {
 			module = "result";
-			if(item.getAnswer() != 0) {
+			if(item.getAnswer() != null) {
 				doneCount++;
 				if(item.getResult() == 0) {
 					wrongCount++;

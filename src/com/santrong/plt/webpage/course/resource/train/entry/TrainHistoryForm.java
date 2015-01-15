@@ -10,7 +10,7 @@ public class TrainHistoryForm {
 
 	private String chapterId;
 	private String trainId;
-	private Integer[] answer;
+	private String[] answer;
 	
 	public String getChapterId() {
 		return chapterId;
@@ -24,10 +24,10 @@ public class TrainHistoryForm {
 	public void setTrainId(String trainId) {
 		this.trainId = trainId;
 	}
-	public Integer[] getAnswer() {
+	public String[] getAnswer() {
 		return answer;
 	}
-	public void setAnswer(Integer[] answer) {
+	public void setAnswer(String[] answer) {
 		this.answer = answer;
 	}
 }

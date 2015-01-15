@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import com.santrong.plt.util.MyUtils;
+
 /**
  * @author huangweihua
  * @date   2014年11月6日 
@@ -15,7 +17,7 @@ public class TrainQuestionItem {
 	private String id;
 	private String topic;
 	private int questionType;
-	private int answer;
+	private String answer;
 	private String remark;
 	private String subjectId;
 	private String gradeId;
@@ -95,10 +97,10 @@ public class TrainQuestionItem {
 	public void setQuestionType(int questionType) {
 		this.questionType = questionType;
 	}
-	public int getAnswer() {
+	public String getAnswer() {
 		return answer;
 	}
-	public void setAnswer(int answer) {
+	public void setAnswer(String answer) {
 		this.answer = answer;
 	}
 	public String getRemark() {
@@ -199,7 +201,7 @@ public class TrainQuestionItem {
 	 * @return boolean
 	 */
 	public boolean getContainA() {
-		return ((answer & Answers[0]) == Answers[0]);
+		return ((getSumAnswer() & Answers[0]) == Answers[0]);
 	}
 
 	/**
@@ -207,7 +209,7 @@ public class TrainQuestionItem {
 	 * @return boolean
 	 */
 	public boolean getContainB() {
-		return ((answer & Answers[1]) == Answers[1]);
+		return ((getSumAnswer() & Answers[1]) == Answers[1]);
 	}
 
 	/**
@@ -215,7 +217,7 @@ public class TrainQuestionItem {
 	 * @return boolean
 	 */
 	public boolean getContainC() {
-		return ((answer & Answers[2]) == Answers[2]);
+		return ((getSumAnswer() & Answers[2]) == Answers[2]);
 	}
 
 	/**
@@ -223,9 +225,51 @@ public class TrainQuestionItem {
 	 * @return boolean
 	 */
 	public boolean getContainD() {
-		return ((answer & Answers[3]) == Answers[3]);
+		return ((getSumAnswer() & Answers[3]) == Answers[3]);
 	}
 	
+	/**
+	 * 通过算法计算出答案的总和<br>
+	 * 适用范围：单选题、多选题、判断题
+	 * @author huangweihua
+	 * @param answer
+	 * @return int
+	 */
+	public int getSumAnswer() {
+		int sum = 0;
+		String[] answerArray = getAnswerArray();
+		if (answerArray != null && answerArray.length > 0) {
+			for (String str : answerArray) {
+				sum += MyUtils.stringToInt(str);
+			}
+		}
+		return sum;
+	}
+	
+	/**
+	 * 把答案转成字符串数组的格式<br>
+	 * 目前答案保存格式为 1,2,4,8<br>
+	 * 适用范围：单选题、多选题、判断题
+	 * @author huangweihua
+	 * @param answer
+	 * @return String[]
+	 */
+	public String[] getAnswerArray() {
+		String[] answerArray = null;
+		if (MyUtils.isNotNull(this.answer)) {
+			if (this.questionType == QUESTION_TYPE_SINGLE_SELECTION 
+				|| this.questionType == QUESTION_TYPE_MULTIPLE_CHOICE
+				|| this.questionType == QUESTION_TYPE_JUDGE_TRUE_OR_FLASE) {
+				answerArray = this.answer.split(","); 
+			}
+		}
+		return answerArray;
+	}
+	
+	/**
+	 * 返回试题的类型
+	 * @return String
+	 */
 	public String getTypeString() {
 		switch(this.questionType) {
 		case QUESTION_TYPE_SINGLE_SELECTION :
@@ -240,10 +284,15 @@ public class TrainQuestionItem {
 		return "";
 	}
 	
+	/**
+	 * 把答案的总和通过位运算后，获取答案选项对应的字母{"A","B","C","D"。。。}<br>
+	 * 适用范围：单选题、多选题、判断题
+	 * @return List<\String>
+	 */
 	public List<String> getAnswerString() {
 		List<String> list = new ArrayList<String>();
-		for(int i=0;i<Answers.length;i++) {
-			if((answer & Answers[i]) == Answers[i]) {
+		for(int i = 0; i < Answers.length; i++) {
+			if((getSumAnswer() & Answers[i]) == Answers[i]) {
 				list.add(Answers_Options[i]);
 			}
 		}

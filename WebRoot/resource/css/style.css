@@ -491,13 +491,14 @@ input[type="reset"]::-moz-focus-inner, input[type="button"]::-moz-focus-inner, i
 .sh_work_le h2{font-size:16px; color:#009871; padding:3px 0; margin-bottom:5px;}
 .sh_work_le .current_index {color:#f90;font-size: 16px;}
 .sh_work_form .current_index {color:#666;font-size: 16px;}
-.sh_work_form{ padding:10px 0; margin-right:10px;}
-.sh_work_form .sh_work_rad { margin-bottom:10px;}
-.sh_work_form .sh_work_rad p{display:block; padding:5px 0 5PX 10px;}
-.sh_work_form .sh_work_rad span{ margin-left:10px;}
+.sh_work_form{ padding:10px 0 0 0; margin-right:10px;}
+.sh_work_form .sh_work_rad { margin-bottom:0px;}
+.sh_work_form .sh_work_rad p{display:block; padding:5px 0 10PX 10px;margin-top: 20px;}
+.sh_work_form .sh_work_rad span{ margin-left:0px;}
+.sh_work_form .sh_work_rad p label{padding: 5px 10px; background: #009871; margin-right: 5px; color: #fff; font-weight: bold; vertical-align: middle;}
 .sh_work_form .sh_work_rad .sh_work_answer { color:#f90;}
 .sh_work_form .sh_work_rad P b{  font-style:none; color:#f00;}
-.sh_form_but { margin:20px 0 0 10px; display:block;}
+.sh_form_but { margin:15px 0 0 10px; display:block;}
 .sh_form_but a{ padding:2px 10px; background:#009871; color:#fff; margin-right:10px; text-decoration:none;}
 .sh_form_but a:hover{background: #f90;}
 .sh_form_but .sh_form_grey,.sh_form_but .sh_form_grey:hover { background:#ccc; cursor:default;}

@@ -38,9 +38,10 @@ public class ClientHttpService20008 implements AbstractHttpService{
 			if (MyUtils.isNotNull(liveID) && MyUtils.isNotNull(userId) && MyUtils.isNotNull(questionId) && MyUtils.isNotNull(result)
 					 && MyUtils.isNotNull(type) && MyUtils.isNotNull(isTrue)) {
 				
-//				TODO 如果是选择题的话，才执行下面的操作
+//				TODO 如果是选择题、判断题的话，才执行下面的操作
 				int tqType = MyUtils.stringToInt(type, 0);
-				if (tqType == TrainQuestionItem.QUESTION_TYPE_SINGLE_SELECTION || tqType == TrainQuestionItem.QUESTION_TYPE_MULTIPLE_CHOICE) {
+				if (tqType == TrainQuestionItem.QUESTION_TYPE_SINGLE_SELECTION || tqType == TrainQuestionItem.QUESTION_TYPE_MULTIPLE_CHOICE
+						|| tqType == TrainQuestionItem.QUESTION_TYPE_JUDGE_TRUE_OR_FLASE) {
 
 					// 获取直播所在的章节
 					ChapterDao chapterDao = new ChapterDao();
@@ -57,7 +58,7 @@ public class ClientHttpService20008 implements AbstractHttpService{
 							thItem.setQuestionId(questionId);
 							thItem.setTrainId(liveID);
 							thItem.setDel(0);//伪标记默认值为0,1标记为已删除
-							thItem.setAnswer(MyUtils.stringToInt(result, 0));
+							thItem.setAnswer(result);//TODO 要求传过来的字符串格式：1,2,4,8
 							thItem.setResult(MyUtils.stringToInt(isTrue, 0));//正确与否1yes,0no
 							thItem.setCts(new Date());
 							thItem.setUts(new Date());

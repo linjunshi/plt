@@ -4,46 +4,32 @@
 <h2>${question.typeString}</h2>
 <div class="sh_work_rad">
 	<h3><span class="current_index">1</span> 、${question.topic}</h3>
-
-	<c:if test="${question.singleSelection}">
+	<p> 
+		<span>请作答：</span>
+		<c:if test="${question.singleSelection}">
 		<!-- 单选题 -->
-		<p>
-			<input name=answer type="radio" value="1" class="sh_work_de" /> <label>A</label>
-			<span>${question.opt1}</span>
-		</p>
-		<p>
-			<input name="answer" type="radio" value="2" class="sh_work_de" /> <label>B</label>
-			<span>${question.opt2}</span>
-		</p>
-		<p>
-			<input name="answer" type="radio" value="4" class="sh_work_de" /> <label>C</label>
-			<span>${question.opt3}</span>
-		</p>
-		<p>
-			<input name="answer" type="radio" value="8" class="sh_work_de" /> <label>D</label>
-			<span>${question.opt4}</span>
-		</p>
-	</c:if>
-	<c:if test="${!question.singleSelection}">
+			<label><input name="answer" type="radio" value="1" class="sh_work_de" /> A</label>
+			<label><input name="answer" type="radio" value="2" class="sh_work_de" /> B</label>
+			<label><input name="answer" type="radio" value="4" class="sh_work_de" /> C</label>
+			<label><input name="answer" type="radio" value="8" class="sh_work_de" /> D</label>
+		</c:if>
+		<c:if test="${question.mulChoice}">
 		<!-- 多选题 -->
-		<p>
-			<input name="answer" type="checkbox" value="1" class="sh_work_de" />
-			<label>A</label> <span>${question.opt1}</span>
-		</p>
-		<p>
-			<input name="answer" type="checkbox" value="2" class="sh_work_de" />
-			<label>B</label> <span>${question.opt2}</span>
-		</p>
-		<p>
-			<input name="answer" type="checkbox" value="4" class="sh_work_de" />
-			<label>C</label> <span>${question.opt3}</span>
-		</p>
-		<p>
-			<input name="answer" type="checkbox" value="8" class="sh_work_de" />
-			<label>D</label> <span>${question.opt4}</span>
-		</p>
-	</c:if>
-
+			<label><input name="answer" type="checkbox" value="1" class="sh_work_de" /> A</label>
+			<label><input name="answer" type="checkbox" value="2" class="sh_work_de" /> B</label>
+			<label><input name="answer" type="checkbox" value="4" class="sh_work_de" /> C</label>
+			<label><input name="answer" type="checkbox" value="8" class="sh_work_de" /> D</label>
+		</c:if>
+		<c:if test="${question.trueOrFlase}">
+		<!-- 判断题 -->
+			<label><input name="answer" type="radio" value="1" class="sh_work_de" /> 对</label>
+			<label><input name="answer" type="radio" value="2" class="sh_work_de" /> 错</label>
+		</c:if>
+		<c:if test="${question.blankFilling}">
+		<!-- 填空题 -->
+			<input class="form_text" name="answer" type="text" value="${tqItem.answer}" />
+		</c:if>
+	</p>
 	<c:if test="${history != null}">
 		<p class="sh_work_answer">
 			回答：<span><c:forEach items="${history.answerString}" var="item">${item}</c:forEach></span>

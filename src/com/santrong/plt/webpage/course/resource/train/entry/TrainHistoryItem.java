@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import com.santrong.plt.util.MyUtils;
+
 /**
  * @author huangweihua
  * @date   2014年11月6日 
@@ -17,7 +19,7 @@ public class TrainHistoryItem {
 	private String chapterId;
 	private String trainId;
 	private String questionId;
-	private int answer;
+	private String answer;
 	private int result;
 	private int del;
 	private Date cts;
@@ -62,10 +64,10 @@ public class TrainHistoryItem {
 	public void setQuestionId(String questionId) {
 		this.questionId = questionId;
 	}
-	public int getAnswer() {
+	public String getAnswer() {
 		return answer;
 	}
-	public void setAnswer(int answer) {
+	public void setAnswer(String answer) {
 		this.answer = answer;
 	}
 	public int getResult() {
@@ -93,11 +95,47 @@ public class TrainHistoryItem {
 		this.uts = uts;
 	}
 	
+	/**
+	 * 通过算法计算出答案的总和<br>
+	 * 适用范围：单选题、多选题、判断题
+	 * @author huangweihua
+	 * @param answer
+	 * @return int
+	 */
+	public int getSumAnswer() {
+		int sum = 0;
+		String[] answerArray = getAnswerArray();
+		if (answerArray.length > 0) {
+			for (String str : answerArray) {
+				sum += MyUtils.stringToInt(str);
+			}
+		}
+		return sum;
+	}
 	
+	/**
+	 * 把答案转成字符串数组的格式<br>
+	 * 目前答案保存格式为 1,2,4,8<br>
+	 * 适用范围：单选题、多选题、判断题
+	 * @author huangweihua
+	 * @param answer
+	 * @return String[]
+	 */
+	public String[] getAnswerArray() {
+		String[] answerArray = null;
+		answerArray = this.answer.split(","); 
+		return answerArray;
+	}
+	
+	/**
+	 * 把答案的总和通过位运算后，获取答案选项对应的字母{"A","B","C","D"。。。}<br>
+	 * 适用范围：单选题、多选题、判断题
+	 * @return List<\String>
+	 */
 	public List<String> getAnswerString() {
 		List<String> list = new ArrayList<String>();
 		for(int i=0;i<TrainQuestionItem.Answers.length;i++) {
-			if((answer & TrainQuestionItem.Answers[i]) == TrainQuestionItem.Answers[i]) {
+			if((getSumAnswer() & TrainQuestionItem.Answers[i]) == TrainQuestionItem.Answers[i]) {
 				list.add(TrainQuestionItem.Answers_Options[i]);
 			}
 		}

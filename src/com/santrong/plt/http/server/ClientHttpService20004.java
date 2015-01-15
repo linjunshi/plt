@@ -56,8 +56,8 @@ public class ClientHttpService20004 implements AbstractHttpService{
 //					option: 选择题的选项头，其他题型不用填 ;
 //					IsKey: 是否正确答案，1正确 0错误, 填空题 都写1;
 //					Text：选择题表示选项内容 ,判断题如果有选项内容 则填 没有就不填,填空题 直接写填空的答案
-					if (tqItem.isSingleSelection() || tqItem.isMulChoice()) {
-						int answer = tqItem.getAnswer(); 
+					if (tqItem.isSingleSelection() || tqItem.isMulChoice() || tqItem.isTrueOrFlase()) {
+						int answer = tqItem.getSumAnswer(); 
 						int[] answers = TrainQuestionItem.Answers;
 						String[] answerOptions = TrainQuestionItem.Answers_Options;
 						int isKey = 0;
@@ -76,13 +76,10 @@ public class ClientHttpService20004 implements AbstractHttpService{
 //								} else if (MyUtils.isNotNull(tqItem.getOpt4()) && answerOptions[i].equals("D")) {
 //									optionContent = tqItem.getOpt4();
 //								}
-								optionContent = "";
 								sb.append("<Item type=\"string\" option=\"").append(answerOptions[i]).append("\" IsKey=\"").append(isKey).append("\">").append(optionContent).append("</Item>");
 								isKey = 0;
 							}
 						}
-					} else if (tqItem.isTrueOrFlase()){
-						
 					} else if (tqItem.isBlankFilling()){
 						
 					}
