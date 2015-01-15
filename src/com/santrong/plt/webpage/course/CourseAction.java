@@ -46,17 +46,11 @@ import com.santrong.plt.webpage.course.entry.ResourceEntry;
 import com.santrong.plt.webpage.course.entry.ResourceType;
 import com.santrong.plt.webpage.course.resource.live.dao.LiveDao;
 import com.santrong.plt.webpage.course.resource.live.entry.LiveItem;
-import com.santrong.plt.webpage.home.dao.GradeDao;
 import com.santrong.plt.webpage.home.dao.SubjectDao;
-import com.santrong.plt.webpage.home.entry.GradeView;
 import com.santrong.plt.webpage.home.entry.SubjectItem;
-import com.santrong.plt.webpage.school.dao.SchoolDao;
-import com.santrong.plt.webpage.school.entry.SchoolItem;
-import com.santrong.plt.webpage.school.entry.SchoolQuery;
 import com.santrong.plt.webpage.teacher.dao.UserDao;
 import com.santrong.plt.webpage.teacher.entry.UserCourseView;
 import com.santrong.plt.webpage.teacher.entry.UserItem;
-import com.santrong.plt.webpage.teacher.entry.UserQuery;
 
 /**
  * @author weinianjie
@@ -73,18 +67,7 @@ public class CourseAction extends BaseAction {
 	 */
 	@RequestMapping(value="")
 	public String index() {
-		return catagory("all", "all");
-	}
-	
-	
-	/**
-	 * 按年级搜索的课程
-	 * @param grade
-	 * @return
-	 */
-	@RequestMapping("/{grade}")
-	public String catagory(@PathVariable String grade) {
-		return catagory(grade, "all");
+		return catagory("all");
 	}
 	
 	/**
@@ -93,36 +76,17 @@ public class CourseAction extends BaseAction {
 	 * @param subject
 	 * @return
 	 */
-	@RequestMapping("/{grade}/{subject}")
-	public String catagory(@PathVariable String grade, @PathVariable String subject) {
+	@RequestMapping("/{subject}")
+	public String catagory(@PathVariable String subject) {
 		HttpServletRequest request = getRequest();
 		AreaEntry area = (AreaEntry)(request.getSession().getAttribute(Global.SessionKey_Area));
 		
 		// 条件-科目
 		SubjectDao subjectDao = new SubjectDao();
-		List<SubjectItem> subjectList = null;
-		if(grade.equals("all")) {
-			subjectList = subjectDao.selectAll();
-		}else {
-			subjectList = subjectDao.selectByGradeEnName(grade);
-		}
-		
-		// 条件-类别
-		GradeDao gradeDao = new GradeDao();
-		List<GradeView> gradeList = null;
-		if(subject.equals("all")) {
-			gradeList = gradeDao.selectGrade();
-		}else {
-			gradeList = gradeDao.selectGradeBySubjectEnName(subject);
-		}
+		List<SubjectItem> subjectList = subjectDao.selectByGradeEnName("xiaoxue");
 		
 		// 条件-年级
-		List<GradeLevelEntry> levelList = null;
-		if(!grade.equals("all")) {
-			levelList = GradeDefine.getByGradeEnName(grade).getGradeLevelList();
-		}		
-		
-		
+		List<GradeLevelEntry> levelList = GradeDefine.getByGradeEnName("xiaoxue").getGradeLevelList();
 		
 		// 获取参数
 		ParamHelper param = new ParamHelper();
@@ -138,11 +102,9 @@ public class CourseAction extends BaseAction {
 		courseQuery.setStatus(CourseItem.Status_Publish);
 		courseQuery.setPageNum(page);
 		courseQuery.setAreaCode(area.getCityCode());
+		courseQuery.setGradeEnName("xiaoxue");
 		if(MyUtils.isNotNull(subject) && !subject.equals("all")) {
 			courseQuery.setSubjectEnName(subject);
-		}
-		if(MyUtils.isNotNull(grade) && !grade.equals("all")) {
-			courseQuery.setGradeEnName(grade);
 		}
 		if(MyUtils.isNotNull(param.getKeyword())) {
 			courseQuery.setKeywords(param.getKeyword());
@@ -161,38 +123,19 @@ public class CourseAction extends BaseAction {
 		courseQuery.setCount(courseDao.selectCountByQuery(courseQuery));
 		List<CourseItem> courseList = courseDao.selectByQuery(courseQuery);
 		
-		// 学校列表
-		SchoolDao schoolDao = new SchoolDao();
-		SchoolQuery schoolQuery = new SchoolQuery();
-		schoolQuery.setAreaCode(area.getCityCode());
-		schoolQuery.setPageSize(4);
-		List<SchoolItem> schoolList = schoolDao.selectByQuery(schoolQuery);
-		
-		// 老师列表
-		UserDao userDao = new UserDao();
-		UserQuery userQuery = new UserQuery();
-		userQuery.setAreaCode(area.getCityCode());
-		userQuery.setRole(UserItem.Role_Teacher);
-		userQuery.setPageSize(4);
-		List<UserItem> teacherList = userDao.selectByQuery(userQuery);
-		
 		request.setAttribute("query", courseQuery);
 		
 		// 参数组
-		request.setAttribute("grade", grade);
 		request.setAttribute("subject", subject);
 //		request.setAttribute("param", param);
 		ThreadUtils.setParam(param);
 		
 		// 搜索条件
 		request.setAttribute("subjectList", subjectList);
-		request.setAttribute("gradeList", gradeList);
 		request.setAttribute("levelList", levelList);		
 		
 		// 主内容
 		request.setAttribute("courseList", courseList);
-		request.setAttribute("schoolList", schoolList);
-		request.setAttribute("teacherList", teacherList);
 		
 		return "course/index";
 	}

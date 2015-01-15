@@ -1,4 +1,4 @@
--- 2015-01-14 weinianjie
+-- 2015-01-14 weinianjie  (2015-01-15 hwcloud)
 alter table resource_train_question add column answer2 varchar(256) comment '答案' after answer;
 update resource_train_question set answer2='1';
 alter table resource_train_question drop column answer;
