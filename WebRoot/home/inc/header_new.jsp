@@ -7,6 +7,9 @@
 <meta name="keywords" content="${keywords}" />
 <meta name="description" content="${description}" />
 <link rel="stylesheet" type="text/css" href="${ctx}/resource/css/new.css" />
+<link rel="stylesheet" type="text/css" href="${ctx}/resource/css/boxy.css" />
 <script type="text/javascript" src="${ctx}/resource/js/lang/message.${lang}.js"></script>
 <script type="text/javascript" src="${ctx}/resource/js/jquery.min.js"></script>
+<script type="text/javascript" src="${ctx}/resource/js/jquery.form.js"></script>
+<script type="text/javascript" src="${ctx}/resource/js/jquery.boxy.js"></script>
 <script type="text/javascript" src="${ctx}/resource/js/event.js"></script>

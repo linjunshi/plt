@@ -21,9 +21,9 @@
 				</div>
 				<div class="hea_nav">
 					<a href="${ctx}/" class="a_a">首页</a>
-					<a href="${ctx}/video" class="a_b">微课</a>
+					<a href="${ctx}/course" class="a_b">学堂</a>
 					<a href="${ctx}/course" class="a_c">直播课</a>
-					<a href="${ctx}/question" class="a_d">题库</a>
+					<a href="${ctx}/war" class="a_d">挑战</a>
 				</div>
 				<div class="gun_img">
 					<img src="${ctx}/resource/images/gun_img.jpg" width="620" height="300">
@@ -79,7 +79,8 @@
 							</p>
 							<p class="con_but">
 								<a href="${ctx}/course/${item.id}.html" target="_blank">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
-							</p></li>
+							</p>
+						</li>
 					</c:forEach>
 				</ul>
 			</div>

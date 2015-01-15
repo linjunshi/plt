@@ -1,4 +1,4 @@
-package com.santrong.plt.webpage.question;
+package com.santrong.plt.webpage.war;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -33,50 +33,28 @@ import com.santrong.plt.webpage.course.resource.train.entry.TrainQuestionQuery;
  * @time 上午10:54:59
  */
 @Controller
-@RequestMapping("/question")
-public class QuestionAction extends BaseAction {
+@RequestMapping("/war")
+public class WarAction extends BaseAction {
 
 	@RequestMapping("")
 	public String index() {
-		try {
-			int pageNum = this.getIntParameter("page");
-			if(pageNum == 0) {
-				pageNum = 1;
-			}
-			
-			TrainQuestionDao tqDao = new TrainQuestionDao();
-			TrainQuestionQuery query = new TrainQuestionQuery();
-			query.setPageNum(pageNum);
-			query.setCount(tqDao.selectCountByQuery(query));
-			query.setOrderBy("cts");
-			List<TrainQuestionItem> questionList = tqDao.selectByQuery(query);
-			
-			// 从session中获知已选择题目
-			HttpServletRequest request = this.getRequest();
-			@SuppressWarnings("unchecked")
-			HashSet<String> map = (HashSet<String>)request.getSession().getAttribute(Global.SessionKey_Assemble_Question);
-			if(map == null) {
-				map = new HashSet<String>();
-			}
-			Iterator<String> iter = map.iterator();
-			while(iter.hasNext()) {
-				String qid = iter.next();
-				for(int i=0;i<questionList.size();i++) {
-					if(questionList.get(i).getId().equals(qid)) {
-						questionList.get(i).setAssemble(true);
-						break;
-					}
-				}
-			}
-			
-			request.setAttribute("questionList", questionList);
-			request.setAttribute("query", query);
-		} catch (Exception e) {
-			Log.printStackTrace(e);
-		}
-		
-		return "question/index";
+		return "war/index";
 	}
+	
+	@RequestMapping("person")
+	public String person() {
+		return "war/person_w";
+	}
+	
+	@RequestMapping("group")
+	public String group() {
+		return "war/group_w";
+	}
+	
+	@RequestMapping("game")
+	public String game() {
+		return "war/game_w";
+	}	
 	
 	// 选题或者取消选题
 	@SuppressWarnings("unchecked")
