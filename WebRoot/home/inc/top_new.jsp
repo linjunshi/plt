@@ -9,9 +9,10 @@
 			<img src="${ctx}/resource/images/logo.png" width="260" height="52">
 		</div>
 		<div class="hea_nav">
-			<a href="${ctx}/" class="a_a">首页</a> <a href="${ctx}/video"
-				class="a_b">微课</a> <a href="${ctx}/course?filter=live" class="a_c">直播课</a>
-			<a href="${ctx}/question" class="a_d">题库</a>
+			<a href="${ctx}/" class="a_a">首页</a>
+			<a href="${ctx}/course" class="a_b">学堂</a>
+			<a href="${ctx}/course" class="a_c">直播课</a>
+			<a href="${ctx}/war" class="a_d">挑战</a>
 		</div>
 	</div>
 </div>

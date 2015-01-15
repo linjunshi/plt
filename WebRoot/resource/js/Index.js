@@ -142,20 +142,15 @@ IndexClass.prototype = {
 		});
 	},
 	
-	// 题库首页
-	question : function() {
+	// 挑战页面
+	war : function() {
 		
 		// 选题和取消选题
-		$(".question_list .select").click(function() {
-			var _this = $(this);
-			var qid = $(this).attr("qid");
-			$.post(Globals.ctx + "/question/assembleQuestion", {qid : qid}, function(result) {
-				if(result == 'add') {
-					_this.text('取消选择');
-				}else if(result == 'remove'){
-					_this.text('选择');
-				}else {
-					Boxy.alert("<i class='error'></i><span>"+ result +"</span>");
+		$(".egg").click(function() {
+			var channel = $(this).attr("rel");
+			Boxy.load(Globals.ctx + "/war/" + channel, {title : '选择频道',
+				afterShow : function(){
+					
 				}
 			});
 		});

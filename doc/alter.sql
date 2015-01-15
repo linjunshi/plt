@@ -1,16 +1,16 @@
 -- 2015-01-14 weinianjie
 alter table resource_train_question add column answer2 varchar(256) comment '答案' after answer;
-update resource_train_question set answer2='A';
+update resource_train_question set answer2='1';
 alter table resource_train_question drop column answer;
 alter table resource_train_question change answer2 answer varchar(256) comment '答案';
 
 alter table resource_train_history add column answer2 varchar(256) comment '答案' after answer;
-update resource_train_history set answer2='A';
+update resource_train_history set answer2='1';
 alter table resource_train_history drop column answer;
 alter table resource_train_history change answer2 answer varchar(256) comment '答案';
 
 alter table competition_history add column answer2 varchar(256) comment '答案' after answer;
-update competition_history set answer2='A';
+update competition_history set answer2='1';
 alter table competition_history drop column answer;
 alter table competition_history change answer2 answer varchar(256) comment '答案';
 
