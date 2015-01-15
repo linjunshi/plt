@@ -23,7 +23,7 @@ public class DirDefine {
 		// 部署环境
 		}else{
 			ShellDir = "/opt/AIO/Service/webservice/webapp/shell";
-			UpdateFileDir = "/RecData/upload";
+			UpdateFileDir = "/file/upload";
 		}
 		
 	}

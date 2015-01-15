@@ -1,4 +1,19 @@
--- 2015-01-14 weinianjie
+-- 2015-01-15 weinianjie
+drop table if exists lesson_unit;
+create table lesson_unit(
+	id varchar(32) not null comment 'UUID',
+	unitName varchar(128) not null comment '单元名称',
+	gradeId varchar(32) comment '年级ID',
+	subjectId varchar(32) comment '科目ID',
+	term int(10) comment '上下学期',
+	priority int(10) default 0 not null comment '优先级', 
+	primary key (gradeId, subjectId)
+) engine=InnoDB default charset=utf8 collate=utf8_bin comment '单元表';
+
+alter table resource_train_question add column unitId varchar(32) comment '所属单元' after gradeId;
+alter table knowledge add column unitId varchar(32) comment '所属单元' after gradeId;
+
+-- 2015-01-14 weinianjie  (2015-01-15 hwcloud)
 alter table resource_train_question add column answer2 varchar(256) comment '答案' after answer;
 update resource_train_question set answer2='1';
 alter table resource_train_question drop column answer;
