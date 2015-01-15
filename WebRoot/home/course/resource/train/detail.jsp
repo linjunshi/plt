@@ -26,8 +26,7 @@
 							href="javascript:void(0);">下一题</a>
 					</div>
 				</div>
-				<form action="${ctx}/train/question" method="post"
-					class="sh_work_right">
+				<form action="${ctx}/train/question" method="post" class="sh_work_right">
 					<input type="hidden" name="trainId" value="${train.id}" /> <input
 						type="hidden" name="chapterId" value="${chapter.id}" /> <input
 						type="hidden" name="module" value="${module}" /> <input
@@ -39,7 +38,7 @@
 						</div>
 					</c:if>
 					<div class="clr">
-						<ul>
+						<ul class="question_index_list">
 							<c:forEach items="${indexList}" var="qIndex" varStatus="st">
 								<li class="question_index ${qIndex.classString}"><span>${st.count}</span><input
 									type="hidden" name="answer" value="${qIndex.answer}" /></li>

@@ -67,7 +67,7 @@ public interface TrainQuestionMapper {
 			+ "where b.trainId=#{trainId} order by b.priority limit ${index}, 1")
 	TrainQuestionItem selectByTrainIdAndIndex(@Param("trainId")String trainId, @Param("index")int index);	
 	
-	@Select("select a.* from resource_train_question a left join resource_train_to_question b on a.id=b.questionId where b.trainId=#{trainId}")
+	@Select("select a.* from resource_train_question a left join resource_train_to_question b on a.id=b.questionId where b.trainId=#{trainId} order by b.priority")
 	List<TrainQuestionItem> selectByTrainId(String trainId);	
 	
 	@Select("select count(*) from resource_train_question a "

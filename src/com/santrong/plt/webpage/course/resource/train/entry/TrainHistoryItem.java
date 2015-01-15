@@ -96,6 +96,38 @@ public class TrainHistoryItem {
 	}
 	
 	/**
+	 * 答案中是否包含选项 A
+	 * @return boolean
+	 */
+	public boolean getContainA() {
+		return ((getSumAnswer() & TrainQuestionItem.Answers[0]) == TrainQuestionItem.Answers[0]);
+	}
+
+	/**
+	 * 答案中是否包含选项 B
+	 * @return boolean
+	 */
+	public boolean getContainB() {
+		return ((getSumAnswer() & TrainQuestionItem.Answers[1]) == TrainQuestionItem.Answers[1]);
+	}
+
+	/**
+	 * 答案中是否包含选项 C
+	 * @return boolean
+	 */
+	public boolean getContainC() {
+		return ((getSumAnswer() & TrainQuestionItem.Answers[2]) == TrainQuestionItem.Answers[2]);
+	}
+
+	/**
+	 * 答案中是否包含选项 D
+	 * @return boolean
+	 */
+	public boolean getContainD() {
+		return ((getSumAnswer() & TrainQuestionItem.Answers[3]) == TrainQuestionItem.Answers[3]);
+	}
+	
+	/**
 	 * 通过算法计算出答案的总和<br>
 	 * 适用范围：单选题、多选题、判断题
 	 * @author huangweihua
@@ -134,7 +166,7 @@ public class TrainHistoryItem {
 	 */
 	public List<String> getAnswerString() {
 		List<String> list = new ArrayList<String>();
-		for(int i=0;i<TrainQuestionItem.Answers.length;i++) {
+		for(int i = 0; i < TrainQuestionItem.Answers.length; i++) {
 			if((getSumAnswer() & TrainQuestionItem.Answers[i]) == TrainQuestionItem.Answers[i]) {
 				list.add(TrainQuestionItem.Answers_Options[i]);
 			}

@@ -860,7 +860,6 @@ ManageClass.prototype = {
 				$("#answer3").removeAttr("required");//移除填空题答案输入框的必填属性
 			}
 			var answer_input_show = function(){//只显示填空题
-				debugger;
 				$("#answer_radio").hide();
 				$("#answer_checkbox").hide();
 				$("#answer2_radio").hide();
@@ -983,7 +982,7 @@ ManageClass.prototype = {
 								for(var i = 0; i < options.length; i++){
 									ids += "," + oListboxTo.options[i].value;
 								}
-								if (ids != "") {
+								if (ids != "" && ids.length > 0) {
 									$("input[name=knowledgeIds]").val(ids.substr(1));
 									$("input[name=knowledgeNames]").val("已绑定知识点");
 									$(".close").click();

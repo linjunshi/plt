@@ -161,7 +161,7 @@ public class TrainAction extends StudentBaseAction {
 				historydao.deleteUserHistory(this.currentUser().getId(), form.getTrainId(), form.getChapterId());			
 				
 				for(int i=0;i<questionList.size();i++) {
-					int result = questionList.get(i).getAnswer() == form.getAnswer()[i]? 1 : 0;
+					int result = questionList.get(i).getAnswer().equalsIgnoreCase(form.getAnswer()[i])? TrainHistoryItem.ANSWER_IS_RIGHT : TrainHistoryItem.ANSWER_IS_WRONG;
 					TrainHistoryItem history = new TrainHistoryItem();
 					history.setId(MyUtils.getGUID());
 					history.setTrainId(form.getTrainId());

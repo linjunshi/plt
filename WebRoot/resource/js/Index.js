@@ -1,6 +1,6 @@
 // Index模块初始化
 function IndexClass() {
-	
+
 };
 
 //index模块的具体页面初始化
@@ -157,7 +157,7 @@ IndexClass.prototype = {
 	},
 	
 	// 做题页面
-	questionBegin : function() {
+	questionBegin : function() {alert("做题页面")
 		// 做题
 		$(".sh_work_form input").change(function() {
 			var type = $(this).attr("type");
@@ -201,13 +201,33 @@ IndexClass.prototype = {
 			
 			// 答题模式，还原选择
 			if(module == 'answer') {
-				var val = $(".question_index").eq(index-1).find("input[name=answer]").val()/1;
-				console.info("--"+val);
-				var bit = 2;
-				for(var i=0;i<4;i++) {// ABCD
-					var key = Math.pow(bit, i);
-					if((val&key)==key) {
-						$(".sh_work_form input[value="+key+"]").attr("checked", "checked");
+				var questionType = $("input[name=questionType]").val()/1;
+				var val = $(".question_index").eq(index-1).find("input[name=answer]").val();
+				if (questionType == 4) {// 填空题
+					$(".sh_work_form input[name=answer]").val(val);
+				} else {// 单选题、判断题、多选题
+					console.info("--" + val);
+					var bit = 2;
+					var optionCount = 4; //选项的个数ABCD和对错
+					if (questionType == 3) {
+						var optionCount = 2;//选项只有 对、错
+					} else if (questionType == 2){//多选题 原来格式是1,2,4,8的字符串格式，这里要把他取出来再相加求和
+						if (val != "" && val.length > 0) {
+							var arr = val.split(",");
+							val = 0;
+							for (var int = 0; int < arr.length; int++) {
+								val += eval(arr[int]);
+							}
+						} else {
+							val = 0;
+						}
+					}
+					val = val/1;
+					for(var i = 0; i < optionCount; i++) {// ABCD
+						var key = Math.pow(bit, i);
+						if((val&key) == key) {//通过位运算，默认设置勾选状态
+							$(".sh_work_form input[value="+key+"]").attr("checked", "checked");
+						}
 					}
 				}
 			}
@@ -220,19 +240,16 @@ IndexClass.prototype = {
 			// 事件
 			$(".sh_work_form input").change(function() {
 				var type = $(this).attr("type");
-				
 				var val = 0;
 				if(type == 'radio') {//单选题
 					val = $(this).val();
 				} else if(type == 'checkbox'){// 多选题
 					val = "";
 					$(".sh_work_form input[type=checkbox]:checked").each(function() {
-//						val = val + $(this).val()/1;
 						val = val + "," + $(this).val();
 					});
-					if (val != "") {
-						
-						alert(val);
+					if (val != "" && val.length > 0) {
+						val = val.substr(1);
 					}
 				} else{// 填空题
 					val = $(this).val().trim();
@@ -247,10 +264,14 @@ IndexClass.prototype = {
 		
 		// 作业序号事件
 		$(".question_index").click(function() {
+			$(".sh_work_right ul li.current").each(function(){
+				$(this).toggleClass("current");// 移除之前点击过的序号 样式current
+			});
+			$(this).addClass("current");// 当前点击的序号，添加样式current
+			
 			var total = $("input[name=total]").val();
 			var index = $(this).find("span").text();
 			$("input[name=index]").val(index);
-			
 			var trainId = $("input[name=trainId]").val();
 			var chapterId = $("input[name=chapterId]").val();
 			$.ajax({
