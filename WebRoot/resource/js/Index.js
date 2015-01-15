@@ -204,7 +204,7 @@ IndexClass.prototype = {
 				var questionType = $("input[name=questionType]").val()/1;
 				var val = $(".question_index").eq(index-1).find("input[name=answer]").val();
 				if (questionType == 4) {// 填空题
-					$(".sh_work_form input[name=answer]").val(val);
+					$(".sh_work_form textarea[name=answer]").text(val);
 				} else {// 单选题、判断题、多选题
 					console.info("--" + val);
 					var bit = 2;
@@ -235,6 +235,7 @@ IndexClass.prototype = {
 			// 结果模式，禁用控件
 			if(module == 'result') {
 				$(".sh_work_form input").attr("disabled",true);
+				$(".sh_work_form textarea").attr("disabled",true);
 			}
 			
 			// 事件
@@ -260,15 +261,41 @@ IndexClass.prototype = {
 					$(".question_index").eq(index-1).addClass("done");// 标识已做题
 				}
 			});
+			
+			// 事件 // 填空题
+			$(".sh_work_form textarea").change(function() {
+				var type = $(this).attr("type");
+				var val = 0;
+				if(type == 'radio') {//单选题
+					val = $(this).val();
+				} else if(type == 'checkbox'){// 多选题
+					val = "";
+					$(".sh_work_form input[type=checkbox]:checked").each(function() {
+						val = val + "," + $(this).val();
+					});
+					if (val != "" && val.length > 0) {
+						val = val.substr(1);
+					}
+				} else{// 填空题
+					val = $(this).val().trim();
+				}
+				
+				$(".question_index").eq(index-1).find("input[name=answer]").val(val);
+				if(module == 'answer') {
+					$(".question_index").eq(index-1).addClass("done");// 标识已做题
+				}
+			});
 		}
 		
 		// 作业序号事件
 		$(".question_index").click(function() {
-			$(".sh_work_right ul li.current").each(function(){
-				$(this).toggleClass("current");// 移除之前点击过的序号 样式current
-			});
-			$(this).addClass("current");// 当前点击的序号，添加样式current
-			
+			var module = $("input[name=module]").val();
+			if(module == 'answer') {
+				$(".sh_work_right ul li.current").each(function(){
+					$(this).toggleClass("current");// 移除之前点击过的序号 样式current
+				});
+				$(this).addClass("current");// 当前点击的序号，添加样式current
+			}
 			var total = $("input[name=total]").val();
 			var index = $(this).find("span").text();
 			$("input[name=index]").val(index);

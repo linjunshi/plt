@@ -25,8 +25,10 @@ public class TrainQuestionIndex {
 	// 是否已做题，是否做对题
 	public String getClassString() {
 		if(answer != null) {
-			if(result == 0) {
+			if(result == TrainHistoryItem.ANSWER_IS_WRONG) {
 				return "wrong";
+			} else if (result == TrainHistoryItem.ANSWER_IS_RIGHT) {
+				return "right";
 			}
 			return "done";
 		}

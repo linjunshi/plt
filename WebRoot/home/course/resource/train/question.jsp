@@ -27,7 +27,8 @@
 		</c:if>
 		<c:if test="${question.blankFilling}">
 		<!-- 填空题 -->
-			<input class="form_text" name="answer" type="text" value="${history.answer}" />
+			<%-- <input class="form_text" name="answer" type="text" value="${history.answer}" /> --%>
+			<textarea id="answer" name="answer" >${history.answer}</textarea>
 		</c:if>
 	</p>
 	<c:if test="${history != null}">

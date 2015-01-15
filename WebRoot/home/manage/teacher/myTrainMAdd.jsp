@@ -140,7 +140,7 @@ Globals.page = "Manage_myTrainMAdd";
 										<span class="form_ra_text">错</span> 
 									</div>
 									<div class="form_field"  id="answer_input">
-										<input class="form_text" id="answer3" name="answer3" type="text" value="${tqItem.answer}" required />
+										<textarea id="answer3" name="answer3" required>${tqItem.answer}</textarea>
 									</div>
 								</div>
 								<div class="form_item">

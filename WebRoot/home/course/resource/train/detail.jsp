@@ -46,16 +46,21 @@
 						</ul>
 					</div>
 					<div class="sh_work_color">
-						<p>
-							未答<em class="pt13">&nbsp;</em>
-						</p>
-						<p>
-							已答<em class="pt15">&nbsp;</em>
-						</p>
+						<c:if test="${module == 'answer'}">
+							<p>
+								未答<em class="pt13">&nbsp;</em>
+							</p>
+							<p>
+								已答<em class="pt15">&nbsp;</em>
+							</p>
+						</c:if>
 						<c:if test="${module == 'result'}">
-						<p>
-							错误<em class="pt14">&nbsp;</em>
-						</p>
+							<p>
+								正确<em class="pt16">&nbsp;</em>
+							</p>
+							<p>
+								错误<em class="pt14">&nbsp;</em>
+							</p>
 						</c:if>
 					</div>
 					<div class="sh_form_but">

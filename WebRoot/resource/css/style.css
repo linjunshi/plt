@@ -514,11 +514,13 @@ input[type="reset"]::-moz-focus-inner, input[type="button"]::-moz-focus-inner, i
 .sh_work_right ul li:hover,.sh_work_right ul li.current{background: #009871;color: #fff;border:1px #009871 solid;}
 .sh_work_right ul .done { background:#fff;}
 .sh_work_right ul .wrong {background:#f00;}
+.sh_work_right ul .right {background:#479144;}
 
 .sh_work_color p{ width:60px; display:inline-block; margin:10px 0 0 10px;}
 .pt13{padding:0px 6px; background:#ccc; margin-left:5px;border:1px #999 solid;}
 .pt14{padding:0px 6px; background:#f00; margin-left:5px;border:1px #900 solid;}
 .pt15{padding:0px 6px; background:#fff; margin-left:5px;border:1px #999 solid;}
+.pt16{padding:0px 6px; background:#479144; margin-left:5px;border:1px #999 solid;}
 
 
 /*--------------------老师详细-----------------------*/
