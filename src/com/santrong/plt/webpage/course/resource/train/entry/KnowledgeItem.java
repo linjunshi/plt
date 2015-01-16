@@ -15,6 +15,18 @@ public class KnowledgeItem {
 	private int week;
 	private int priority;
 	
+//	code编码规范
+//	xxx xx xx xxx
+//	1.小学1，初中2，高中3
+//	2.一年级1，二年级2。。。。
+//	3.语文1，数学2，英语3。。。
+//	4~5.一级知识点01开始
+//	6~7.二级知识点01开始
+//	8~10.三级知识点001开始
+//	
+//	level映射
+//	111 01 00 000定义为1
+	
 	public int getCode() {
 		return code;
 	}
