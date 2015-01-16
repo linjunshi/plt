@@ -1237,13 +1237,13 @@ ManageClass.prototype = {
 								var dataId = $("#dataId").val().trim();
 								var gradeId = $("#levelSelect").val();
 								var subjectId = $("#subjectSelect").val();
-								var week = $("#week").val().trim();
+//								var week = $("#week").val().trim();
 								var knowledgeName = $("#knowledgeName").val().trim();
 								var addOrEdit = $("#addOrEdit").val().trim();
 								if (gradeId != null && gradeId != "" && subjectId != null && subjectId != "" ) {
 									$.ajax({
 										url: Globals.ctx + "/manage/knowledge/submitKnowledgeBySync",
-										data: { dataId:dataId, gradeId:gradeId, subjectId:subjectId, knowledgeName:knowledgeName,week:week, addOrEdit:addOrEdit},
+										data: { dataId:dataId, gradeId:gradeId, subjectId:subjectId, knowledgeName:knowledgeName, addOrEdit:addOrEdit},
 										type: "post",
 //				                    async : false,//设置为同步操作就可以给全局变量赋值成功 
 										success: function (result) {

@@ -62,14 +62,14 @@ public class StudyMAction extends StudentBaseAction {
 		 List<KnowledgeTable> knowledgeTableList = new ArrayList<KnowledgeTable>();
 		 for(int i=1;i<=20;i++) {
 			 KnowledgeTable table = new KnowledgeTable();
-			 table.setWeek(i);
+//			 table.setWeek(i);
 			 for(int j=0;j<knowledgePointerList.size();j++) {
-				 if(knowledgePointerList.get(j).getWeek() == i) {
-					 table.getKnowledgePointerList().add(knowledgePointerList.remove(j));
-					 j--;
-				 }else {
-					 break;
-				 }
+//				 if(knowledgePointerList.get(j).getWeek() == i) {
+//					 table.getKnowledgePointerList().add(knowledgePointerList.remove(j));
+//					 j--;
+//				 }else {
+//					 break;
+//				 }
 			 }
 			 knowledgeTableList.add(table);
 		 }

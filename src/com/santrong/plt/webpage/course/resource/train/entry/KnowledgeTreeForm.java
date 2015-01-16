@@ -11,7 +11,7 @@ public class KnowledgeTreeForm {
 	private String name;
 	private String subjectId;
 	private String gradeId;
-	private int week;
+	private String unitId;
 	private int priority;
 	private int level;
 	private String dataId;//用来保存原来数据库里的id
@@ -27,87 +27,66 @@ public class KnowledgeTreeForm {
 	public int getId() {
 		return id;
 	}
-
 	public void setId(int id) {
 		this.id = id;
 	}
-
 	public int getpId() {
 		return pId;
 	}
-
 	public void setpId(int pId) {
 		this.pId = pId;
 	}
-
 	public int getLevel() {
 		return level;
 	}
-
 	public void setLevel(int level) {
 		this.level = level;
 	}
-
 	public String getName() {
 		return name;
 	}
-
 	public void setName(String name) {
 		this.name = name;
 	}
-
 	public String getSubjectId() {
 		return subjectId;
 	}
-
 	public void setSubjectId(String subjectId) {
 		this.subjectId = subjectId;
 	}
-
 	public String getGradeId() {
 		return gradeId;
 	}
-
 	public void setGradeId(String gradeId) {
 		this.gradeId = gradeId;
 	}
-
-	public int getWeek() {
-		return week;
+	public String getUnitId() {
+		return unitId;
 	}
-
-	public void setWeek(int week) {
-		this.week = week;
+	public void setUnitId(String unitId) {
+		this.unitId = unitId;
 	}
-
 	public int getPriority() {
 		return priority;
 	}
-
 	public void setPriority(int priority) {
 		this.priority = priority;
 	}
-
 	public String getDataId() {
 		return dataId;
 	}
-
 	public void setDataId(String dataId) {
 		this.dataId = dataId;
 	}
-
 	public boolean isOpen() {
 		return open;
 	}
-
 	public void setOpen(boolean open) {
 		this.open = open;
 	}
-
 	public String getIconSkin() {
 		return iconSkin;
 	}
-
 	public void setIconSkin(String iconSkin) {
 		this.iconSkin = iconSkin;
 	}

@@ -52,34 +52,6 @@ Globals.page = "Manage_knowledgeMAdd";
 									 </div>
 								</div>
 								<div class="form_item">
-									<label for="week">所属周：</label>
-									<div class="form_field">
-										<select name="week" size="1" id="week" class="inline_ele">
-											<option <c:if test="${knowledgeItem.week==1}">selected="selected"</c:if> value="1">第一周</option>
-											<option <c:if test="${knowledgeItem.week==2}">selected="selected"</c:if> value="2">第二周</option>
-											<option <c:if test="${knowledgeItem.week==3}">selected="selected"</c:if> value="3">第三周</option>
-											<option <c:if test="${knowledgeItem.week==4}">selected="selected"</c:if> value="4">第四周</option>
-											<option <c:if test="${knowledgeItem.week==5}">selected="selected"</c:if> value="5">第五周</option>
-											<option <c:if test="${knowledgeItem.week==6}">selected="selected"</c:if> value="6">第六周</option>
-											<option <c:if test="${knowledgeItem.week==7}">selected="selected"</c:if> value="7">第七周</option>
-											<option <c:if test="${knowledgeItem.week==8}">selected="selected"</c:if> value="8">第八周</option>
-											<option <c:if test="${knowledgeItem.week==9}">selected="selected"</c:if> value="9">第九周</option>
-											<option <c:if test="${knowledgeItem.week==10}">selected="selected"</c:if> value="10">第十周</option>
-											<option <c:if test="${knowledgeItem.week==11}">selected="selected"</c:if> value="11">第十一周</option>
-											<option <c:if test="${knowledgeItem.week==12}">selected="selected"</c:if> value="12">第十二周</option>
-											<option <c:if test="${knowledgeItem.week==13}">selected="selected"</c:if> value="13">第十三周</option>
-											<option <c:if test="${knowledgeItem.week==14}">selected="selected"</c:if> value="14">第十四周</option>
-											<option <c:if test="${knowledgeItem.week==15}">selected="selected"</c:if> value="15">第十五周</option>
-											<option <c:if test="${knowledgeItem.week==16}">selected="selected"</c:if> value="16">第十六周</option>
-											<option <c:if test="${knowledgeItem.week==17}">selected="selected"</c:if> value="17">第十七周</option>
-											<option <c:if test="${knowledgeItem.week==18}">selected="selected"</c:if> value="18">第十八周</option>
-											<option <c:if test="${knowledgeItem.week==19}">selected="selected"</c:if> value="19">第十九周</option>
-											<option <c:if test="${knowledgeItem.week==20}">selected="selected"</c:if> value="20">第二十周</option>
-										</select>
-										<span class="not-empty" title='此项为必填项'>*</span>
-									</div>
-								</div>
-								<div class="form_item">
 									<label for="knowledgeName">知识点名称：</label>
 									<div class="form_field">
 										<input class="form_text" id="knowledgeName" name="knowledgeName" type="text" value="${knowledgeItem.knowledgeName}" required>

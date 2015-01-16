@@ -112,9 +112,9 @@ public class KnowledgeMAction  extends TeacherBaseAction{
 				if (MyUtils.isNull(knowledgeForm.getSubjectId())) {
 					addError("请您选择课程科目 ！");
 				}
-				if (knowledgeForm.getWeek() > 0) {
-					addError("请您选择周 ！");
-				}
+//				if (knowledgeForm.getWeek() > 0) {
+//					addError("请您选择周 ！");
+//				}
 				if (!(errorSize() > 0)) {
 					if (MyUtils.isNull(knowledgeForm.getId())) {
 						
@@ -126,7 +126,7 @@ public class KnowledgeMAction  extends TeacherBaseAction{
 							knowledgeItem.setKnowledgeName(knowledgeForm.getKnowledgeName().trim());
 							knowledgeItem.setGradeId(knowledgeForm.getGradeId());
 							knowledgeItem.setSubjectId(knowledgeForm.getSubjectId());
-							knowledgeItem.setWeek(knowledgeForm.getWeek());
+//							knowledgeItem.setWeek(knowledgeForm.getWeek());
 							if (kDao.insert(knowledgeItem)) {
 								addError("添加知识点成功 ！可以继续添加。");
 								return "/manage/teacher/knowledgeMAdd";
@@ -149,7 +149,7 @@ public class KnowledgeMAction  extends TeacherBaseAction{
 						knowledgeItem.setKnowledgeName(knowledgeForm.getKnowledgeName().trim());
 						knowledgeItem.setGradeId(knowledgeForm.getGradeId());
 						knowledgeItem.setSubjectId(knowledgeForm.getSubjectId());
-						knowledgeItem.setWeek(knowledgeForm.getWeek());
+//						knowledgeItem.setWeek(knowledgeForm.getWeek());
 						if(kDao.update(knowledgeItem)){
 							return this.redirect("/manage/knowledge/list");
 						}
@@ -190,7 +190,7 @@ public class KnowledgeMAction  extends TeacherBaseAction{
 				kTree.setLevel(kItem.getLevel());
 				kTree.setGradeId(kItem.getGradeId());
 				kTree.setSubjectId(kItem.getSubjectId());
-				kTree.setWeek(kItem.getWeek());
+//				kTree.setWeek(kItem.getWeek());
 				kTree.setPriority(kItem.getPriority());
 				kTree.setDataId(kItem.getId());//用来保存原来的ID
 				
@@ -252,7 +252,7 @@ public class KnowledgeMAction  extends TeacherBaseAction{
 			String gradeId = request.getParameter("gradeId");
 			String subjectId = request.getParameter("subjectId");
 			String knowledgeName = request.getParameter("knowledgeName").trim();
-			int week = this.getIntParameter("week");
+//			int week = this.getIntParameter("week");
 			String addOrEdit = request.getParameter("addOrEdit");//新增还是修改
 			
 			if (MyUtils.isNull(knowledgeName)) {
@@ -264,9 +264,9 @@ public class KnowledgeMAction  extends TeacherBaseAction{
 			if (MyUtils.isNull(subjectId) || "null".equalsIgnoreCase(subjectId)) {
 				return "请您选择课程科目 ！";
 			}
-			if (!(week > 0)) {
-				return "请您选择周 ！";
-			}
+//			if (!(week > 0)) {
+//				return "请您选择周 ！";
+//			}
 			KnowledgeDao kDao = new KnowledgeDao();
 			if (kDao.exists(knowledgeName, gradeId, subjectId)) {
 				return "亲，该知识点已经存在了哦 ！";
@@ -282,7 +282,7 @@ public class KnowledgeMAction  extends TeacherBaseAction{
 					kItem.setKnowledgeName(knowledgeName);
 					kItem.setGradeId(gradeId);
 					kItem.setSubjectId(subjectId);
-					kItem.setWeek(week);
+//					kItem.setWeek(week);
 					kItem.setPriority(getMaxPriority(pkItem.getCode(), pkItem.getLevel()) + 1);//待完善
 					if (kDao.insert(kItem)) {
 						// 把新增的节点，转成JSON对象传给前端，并动态添加节点
@@ -293,7 +293,7 @@ public class KnowledgeMAction  extends TeacherBaseAction{
 						kTreeView.setLevel(kItem.getLevel());
 						kTreeView.setGradeId(kItem.getGradeId());
 						kTreeView.setSubjectId(kItem.getSubjectId());
-						kTreeView.setWeek(kItem.getWeek());
+//						kTreeView.setWeek(kItem.getWeek());
 						kTreeView.setPriority(kItem.getPriority());
 						kTreeView.setDataId(kItem.getId());
 						if (kItem.getLevel() < 4) {
@@ -313,7 +313,7 @@ public class KnowledgeMAction  extends TeacherBaseAction{
 						pkItem.setSubjectId(subjectId);
 					}
 					pkItem.setKnowledgeName(knowledgeName);
-					pkItem.setWeek(week);
+//					pkItem.setWeek(week);
 					if (kDao.update(pkItem)) {
 						KnowledgeTreeForm kTreeView = new KnowledgeTreeForm();
 						kTreeView.setId(pkItem.getCode());
@@ -322,7 +322,7 @@ public class KnowledgeMAction  extends TeacherBaseAction{
 						kTreeView.setLevel(pkItem.getLevel());
 						kTreeView.setGradeId(gradeId);
 						kTreeView.setSubjectId(subjectId);
-						kTreeView.setWeek(week);
+//						kTreeView.setWeek(week);
 						kTreeView.setPriority(pkItem.getPriority());
 						kTreeView.setDataId(pkItem.getId());
 						if (pkItem.getLevel() < 4) {

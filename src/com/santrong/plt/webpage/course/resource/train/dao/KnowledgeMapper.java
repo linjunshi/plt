@@ -18,10 +18,10 @@ import com.santrong.plt.webpage.course.resource.train.entry.KnowledgePointerView
  */
 public interface KnowledgeMapper {
 	
-	@Insert("insert into knowledge values( #{id}, #{code}, #{level}, #{knowledgeName}, #{subjectId}, #{gradeId}, #{week}, #{priority})")
+	@Insert("insert into knowledge values( #{id}, #{code}, #{level}, #{knowledgeName}, #{subjectId}, #{gradeId}, #{unitId}, #{priority})")
 	int insert(KnowledgeItem knowledgeItem);
 	
-	@Update("update knowledge set code=#{code},level=#{level},knowledgeName = #{knowledgeName}, subjectId = #{subjectId}, gradeId = #{gradeId},week=#{week},priority=#{priority} where id = #{id}")
+	@Update("update knowledge set code=#{code},level=#{level},knowledgeName = #{knowledgeName}, subjectId = #{subjectId}, gradeId = #{gradeId},unitId=#{unitId},priority=#{priority} where id = #{id}")
 	int update(KnowledgeItem knowledgeItem);
 	
 	@Delete("delete from knowledge where id = #{id}")
@@ -72,7 +72,7 @@ public interface KnowledgeMapper {
 			+ "left join question_to_knowledge d on c.id=d.questionId "
 			+ "right join knowledge e on d.knowledgeId=e.id "
 			+ "where e.subjectId=#{subjectId} and e.gradeId=#{gradeId} group by e.id "
-			+ "order by e.week asc, e.priority asc")
+			+ "order by e.unitId asc, e.priority asc")
 	List<KnowledgePointerView> selectUserKnowledgeMap(@Param("userId")String userId, @Param("subjectId")String subjectId, @Param("gradeId")String gradeId);
 	
 }
