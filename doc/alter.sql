@@ -1,4 +1,7 @@
 -- 2015-01-15 weinianjie
+alter table knowledge drop column week;
+
+-- 2015-01-15 weinianjie
 drop table if exists lesson_unit;
 create table lesson_unit(
 	id varchar(32) not null comment 'UUID',
