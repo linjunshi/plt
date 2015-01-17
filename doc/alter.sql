@@ -1,6 +1,22 @@
 -- 2015-01-15 weinianjie
 alter table knowledge drop column week;
 
+alter table subject add column id2 varchar(32);
+update subject set id2=id;
+update subject set id=replace(uuid(),'-','');
+
+
+alter table grade add column id2 varchar(32);
+update grade set id2=id;
+update grade set id=replace(uuid(),'-','');
+
+
+update grade_to_subject,grade set grade_to_subject.gradeId=grade.id where grade_to_subject.gradeId=grade.id2;
+update grade_to_subject,subject set grade_to_subject.subjectId=subject.id where grade_to_subject.subjectId=subject.id2;
+
+alter table subject drop column id2;
+alter table grade drop column id2;
+
 -- 2015-01-15 weinianjie
 drop table if exists lesson_unit;
 create table lesson_unit(

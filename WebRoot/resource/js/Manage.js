@@ -1339,6 +1339,7 @@ ManageClass.prototype = {
 				}
 
 				function addHoverDom(treeId, treeNode) {
+//					debugger;
 					var sObj = $("#" + treeNode.tId + "_span");
 					if (treeNode.editNameFlag || $("#addBtn_"+treeNode.tId).length>0) return;
 					var addStr = "<span class='button add' id='addBtn_" + treeNode.tId

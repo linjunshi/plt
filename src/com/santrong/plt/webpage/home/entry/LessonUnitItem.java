@@ -13,8 +13,14 @@ public class LessonUnitItem {
 	private int term;
 	private int priority;
 	
-	public static final int Term_Up = 0;
-	public static final int Term_Donw = 1;
+	/**
+	 * 上学期:1
+	 */
+	public static final int Term_Up = 1;
+	/**
+	 * 下学期:2
+	 */
+	public static final int Term_Donw = 2;
 	
 	public String getId() {
 		return id;
@@ -52,4 +58,15 @@ public class LessonUnitItem {
 	public void setPriority(int priority) {
 		this.priority = priority;
 	}
+	
+	public String getTermCnName() {
+		switch (this.term) {
+		case Term_Up:
+			return "上学期";
+		case Term_Donw:
+			return "下学期";
+		}
+		return "";
+	}
+	
 }

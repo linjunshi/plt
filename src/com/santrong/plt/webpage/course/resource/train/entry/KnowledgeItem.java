@@ -26,7 +26,7 @@ public class KnowledgeItem {
 //	9~10.三级知识点001开始
 //	
 //	level映射
-//	111 01 00 000定义为1
+//	1111 01 00 00定义为1
 	
 	public int getCode() {
 		return code;
