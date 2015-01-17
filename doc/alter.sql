@@ -10,7 +10,7 @@ create table lesson_unit(
 	subjectId varchar(32) comment '科目ID',
 	term int(10) comment '上下学期',
 	priority int(10) default 0 not null comment '优先级', 
-	primary key (gradeId, subjectId)
+	primary key (id)
 ) engine=InnoDB default charset=utf8 collate=utf8_bin comment '单元表';
 
 alter table resource_train_question add column unitId varchar(32) comment '所属单元' after gradeId;
