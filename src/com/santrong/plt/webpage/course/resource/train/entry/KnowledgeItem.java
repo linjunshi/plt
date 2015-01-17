@@ -12,7 +12,7 @@ public class KnowledgeItem {
 	private String knowledgeName;
 	private String subjectId;
 	private String gradeId;
-	private int week;
+	private String unitId;
 	private int priority;
 	
 //	code编码规范
@@ -26,7 +26,7 @@ public class KnowledgeItem {
 //	9~10.三级知识点001开始
 //	
 //	level映射
-//	111 01 00 000定义为1
+//	1111 01 00 00定义为1
 	
 	public int getCode() {
 		return code;
@@ -39,12 +39,6 @@ public class KnowledgeItem {
 	}
 	public void setLevel(int level) {
 		this.level = level;
-	}
-	public int getWeek() {
-		return week;
-	}
-	public void setWeek(int week) {
-		this.week = week;
 	}
 	public String getId() {
 		return id;
@@ -69,6 +63,12 @@ public class KnowledgeItem {
 	}
 	public void setGradeId(String gradeId) {
 		this.gradeId = gradeId;
+	}
+	public String getUnitId() {
+		return unitId;
+	}
+	public void setUnitId(String unitId) {
+		this.unitId = unitId;
 	}
 	public int getPriority() {
 		return priority;

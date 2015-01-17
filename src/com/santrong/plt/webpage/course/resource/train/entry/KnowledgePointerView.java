@@ -13,7 +13,7 @@ public class KnowledgePointerView {
 	private String knowledgeName;
 	private String subjectId;
 	private String gradeId;
-	private int week;
+	private String unitId;
 	private int priority;
 	
 	private int total;// 总回答数
@@ -43,11 +43,11 @@ public class KnowledgePointerView {
 	public void setLevel(int level) {
 		this.level = level;
 	}
-	public int getWeek() {
-		return week;
+	public String getUnitId() {
+		return unitId;
 	}
-	public void setWeek(int week) {
-		this.week = week;
+	public void setUnitId(String unitId) {
+		this.unitId = unitId;
 	}
 	public String getId() {
 		return id;

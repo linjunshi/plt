@@ -13,7 +13,7 @@ public class KnowledgeGradeView {
 	private String knowledgeName;
 	private String subjectId;
 	private String gradeId;
-	private String week;
+	private String unitId;
 	// grade 年级表
 	private String gradeName;
 	private String levelName;
@@ -53,11 +53,11 @@ public class KnowledgeGradeView {
 	public void setGradeId(String gradeId) {
 		this.gradeId = gradeId;
 	}
-	public String getWeek() {
-		return week;
+	public String getUnitId() {
+		return unitId;
 	}
-	public void setWeek(String week) {
-		this.week = week;
+	public void setUnitId(String unitId) {
+		this.unitId = unitId;
 	}
 	public String getGradeName() {
 		return gradeName;

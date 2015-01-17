@@ -31,7 +31,7 @@
 							</div>
 							<div class="time_main 	clr">
 								<c:forEach items="${knowledgeTableList}" var="table">
-									<h2 class="time_title">${table.week}周</h2>
+									<h2 class="time_title"><%-- ${table.week} --%>周</h2>
 									<ul class="time_list">
 										<c:forEach items="${table.knowledgePointerList}" var="pointer">
 											<li>

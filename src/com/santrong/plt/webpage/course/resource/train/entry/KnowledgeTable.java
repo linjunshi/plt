@@ -9,14 +9,14 @@ import java.util.List;
  * @time 下午5:36:40
  */
 public class KnowledgeTable {
-	private int week;
+	private String unitId;
 	private List<KnowledgePointerView> knowledgePointerList = new ArrayList<KnowledgePointerView>();
 	
-	public int getWeek() {
-		return week;
+	public String getUnitId() {
+		return unitId;
 	}
-	public void setWeek(int week) {
-		this.week = week;
+	public void setUnitId(String unitId) {
+		this.unitId = unitId;
 	}
 	public List<KnowledgePointerView> getKnowledgePointerList() {
 		return knowledgePointerList;
