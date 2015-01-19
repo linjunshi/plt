@@ -2,10 +2,10 @@ package com.santrong.plt.webpage.home.entry;
 
 /**
  * @author weinianjie
- * @date 2015年1月15日
- * @time 下午3:34:06
+ * @date 2015年1月19日 
+ * @time 下午3:35:45
  */
-public class LessonUnitItem {
+public class LessonUnitEntry {
 	private String id;
 	private String unitName;
 	private String subjectId;
@@ -13,14 +13,7 @@ public class LessonUnitItem {
 	private int term;
 	private int priority;
 	
-	/**
-	 * 上学期:1
-	 */
-	public static final int Term_Up = 1;
-	/**
-	 * 下学期:2
-	 */
-	public static final int Term_Down = 2;
+	private String termUnitCnName;
 	
 	public String getId() {
 		return id;
@@ -58,12 +51,17 @@ public class LessonUnitItem {
 	public void setPriority(int priority) {
 		this.priority = priority;
 	}
-	
+	public String getTermUnitCnName() {
+		return termUnitCnName;
+	}
+	public void setTermUnitCnName(String termUnitCnName) {
+		this.termUnitCnName = termUnitCnName;
+	}
 	public String getTermCnName() {
 		switch (this.term) {
-		case Term_Up:
+		case LessonUnitItem.Term_Up:
 			return "上学期";
-		case Term_Down:
+		case LessonUnitItem.Term_Down:
 			return "下学期";
 		}
 		return "";

@@ -32,4 +32,21 @@ public class LessonUnitDao extends BaseDao {
 		return null;
 	}	
 	
+	/**
+	 * 通过年级和科目，获取单元和学期的列表记录
+	 * @param gradeId
+	 * @param subjectId
+	 * @return List<LessonUnitItem>
+	 */
+	public List<LessonUnitItem> selectTermUnitByGIdAndSId(String gradeId, String subjectId) {
+		try {
+			LessonUnitMapper mapper = this.getMapper(LessonUnitMapper.class);
+			if(mapper != null) {
+				return mapper.selectTermUnitByGIdAndSId(gradeId, subjectId);
+			}
+		} catch (Exception e) {
+			Log.printStackTrace(e);
+		}
+		return null;
+	}	
 }

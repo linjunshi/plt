@@ -183,6 +183,9 @@ public class QuestionMAction extends TeacherBaseAction{
 				if (MyUtils.isNull(tqForm.getSubjectId())) {
 					addError("请您选择试题的所属学科 ！");
 				}
+				if (MyUtils.isNull(tqForm.getUnitId())) {
+					addError("请您选择试题的所属单元 ！");
+				}
 				if (MyUtils.isNull(knowledgeIds)) {
 					addError("亲，您还没有绑定知识点呢 ！");
 				}
@@ -226,6 +229,7 @@ public class QuestionMAction extends TeacherBaseAction{
 						tqItem.setId(MyUtils.getGUID());
 						tqItem.setGradeId(tqForm.getGradeId());//学段年级
 						tqItem.setSubjectId(tqForm.getSubjectId());//学科
+						tqItem.setUnitId(tqForm.getUnitId());//单元
 						tqItem.setTopic(tqForm.getTopic().trim());
 						tqItem.setQuestionType(tqForm.getQuestionType());
 						
@@ -282,7 +286,9 @@ public class QuestionMAction extends TeacherBaseAction{
 							KnowledgeDao kDao = new KnowledgeDao();
 							List<KnowledgeItem> kList = kDao.selectByIds(stringArr);
 							for (KnowledgeItem kItem : kList) {
-								if (!kItem.getGradeId().equals(tqForm.getGradeId()) || !kItem.getSubjectId().equals(tqForm.getSubjectId())) {
+								if (!kItem.getGradeId().equals(tqForm.getGradeId()) 
+										|| !kItem.getSubjectId().equals(tqForm.getSubjectId()) 
+										|| !kItem.getUnitId().equals(tqForm.getUnitId())) {
 									addError("亲，您修改了知识点分类，请您重新绑定知识点 ！");
 									request.setAttribute("tqItem", tqForm);
 									return "/manage/teacher/myTrainMAdd";
@@ -297,6 +303,7 @@ public class QuestionMAction extends TeacherBaseAction{
 						// 修改保存试题信息
 						tqItem.setGradeId(tqForm.getGradeId());//学段年级
 						tqItem.setSubjectId(tqForm.getSubjectId());//学科
+						tqItem.setUnitId(tqForm.getUnitId());//单元
 						tqItem.setTopic(tqForm.getTopic());
 						tqItem.setQuestionType(tqForm.getQuestionType());
 						if (tqForm.isSingleSelection()) {//单选题
