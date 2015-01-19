@@ -145,6 +145,8 @@ public class CourseMAction extends TeacherBaseAction {
 					courseItem.setSaleCount(0);
 					courseItem.setCollectCount(0);
 					courseItem.setCommentCount(0);
+					courseItem.setPlayCount(0);
+					courseItem.setCourseType(CourseItem.CourseType_Normal);
 					courseItem.setStatus(0);//-1:删除，0:未发布，1:发布
 					courseItem.setCts(new Date());
 					courseItem.setUts(new Date());

@@ -25,6 +25,8 @@ public class CourseItem {
 	private int saleCount;
 	private int commentCount;
 	private int chapterCount;
+	private int playCount;
+	private int courseType;
 	private String remark;
 	/**
 	 * -1:删除，0:未发布，1:发布
@@ -38,6 +40,9 @@ public class CourseItem {
 	public static final int Status_Normal = 0;
 	public static final int Status_Publish = 1;
 	
+	public static final int CourseType_Normal = 0;// 普通类型
+	public static final int CourseType_Weike = 1;// 微课类型
+	
 	// 获取缩略图
 	public String getThumbnail() {
 		if(MyUtils.isNotNull(this.url)) {
@@ -47,7 +52,12 @@ public class CourseItem {
 		}
 	}		
 	
-	
+	public int getPlayCount() {
+		return playCount;
+	}
+	public void setPlayCount(int playCount) {
+		this.playCount = playCount;
+	}
 	public int getStatus() {
 		return status;
 	}
@@ -161,5 +171,11 @@ public class CourseItem {
 	}
 	public void setUts(Date uts) {
 		this.uts = uts;
+	}
+	public int getCourseType() {
+		return courseType;
+	}
+	public void setCourseType(int courseType) {
+		this.courseType = courseType;
 	}
 }

@@ -285,7 +285,7 @@ public class KnowledgeMAction  extends TeacherBaseAction{
 				KnowledgeTreeForm item = new KnowledgeTreeForm();
 				// 常用固定的属性
 				item.setId(String.valueOf(kItem.getCode()));
-				if (kItem.getLevel() == 2) {
+				if (kItem.getLevel() == 1) {
 					item.setpId(kItem.getUnitId());
 				} else {
 					item.setpId(String.valueOf(MyUtils.getParentCode(kItem.getCode())));

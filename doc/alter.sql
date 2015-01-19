@@ -1,21 +1,22 @@
+-- 2015-01-19 weinianjie
+create table resource_video(
+	id varchar(32) not null comment 'UUID',
+	title varchar(128) not null comment '文件名称',
+	url varchar(255) comment '资源路径',
+	size bigint default 0 not null comment '资源大小',
+	duration varchar(32) default '' comment '录制时长',
+	ownerId varchar(32) not null comment '所有者ID',
+	remark varchar(1024) comment '备注',
+	cts datetime comment '创建时间',
+	uts datetime comment '修改时间',
+	primary key (id)
+) engine=InnoDB default charset=utf8 collate=utf8_bin comment '视频文件表';
+
+alter table course add column courseType int(10) default 0 not null comment '课程类型' after chapterCount;
+alter table course add column playCount int(10) default 0 not null comment '播放次数' after chapterCount;
+
 -- 2015-01-15 weinianjie
 alter table knowledge drop column week;
-
-alter table subject add column id2 varchar(32);
-update subject set id2=id;
-update subject set id=replace(uuid(),'-','');
-
-
-alter table grade add column id2 varchar(32);
-update grade set id2=id;
-update grade set id=replace(uuid(),'-','');
-
-
-update grade_to_subject,grade set grade_to_subject.gradeId=grade.id where grade_to_subject.gradeId=grade.id2;
-update grade_to_subject,subject set grade_to_subject.subjectId=subject.id where grade_to_subject.subjectId=subject.id2;
-
-alter table subject drop column id2;
-alter table grade drop column id2;
 
 -- 2015-01-15 weinianjie
 drop table if exists lesson_unit;

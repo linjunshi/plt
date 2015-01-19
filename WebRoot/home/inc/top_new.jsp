@@ -10,7 +10,7 @@
 		</div>
 		<div class="hea_nav">
 			<a href="${ctx}/" class="a_a">首页</a>
-			<a href="${ctx}/course" class="a_b">学堂</a>
+			<a href="${ctx}/weike" class="a_b">学堂</a>
 			<a href="${ctx}/course" class="a_c">直播课</a>
 			<a href="${ctx}/war" class="a_d">挑战</a>
 		</div>

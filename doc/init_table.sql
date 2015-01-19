@@ -153,6 +153,8 @@ create table course(
 	collectCount int(10) default 0 not null comment '收藏量',
 	commentCount int(10) default 0 not null comment '评论数量',
 	chapterCount int(10) default 0 not null comment '课时数量',
+	playCount int(10) default 0 not null comment '播放次数',
+	courseType int(10) default 0 not null comment '课程类型',
 	ownerId varchar(32) not null comment '所有者',
 	status int(10) not null default 0 comment '状态',
 	cts datetime comment '创建时间',
@@ -219,6 +221,21 @@ create table course_chapter_to_resource(
 	priority int(10) comment '排序',
 	primary key (id)
 ) engine=InnoDB default charset=utf8 collate=utf8_bin comment '章节关联资源表';
+
+-- 视频文件表 --
+drop table if exists resource_video;
+create table resource_video(
+	id varchar(32) not null comment 'UUID',
+	title varchar(128) not null comment '文件名称',
+	url varchar(255) comment '资源路径',
+	size bigint default 0 not null comment '资源大小',
+	duration varchar(32) default '' comment '录制时长',
+	ownerId varchar(32) not null comment '所有者ID',
+	remark varchar(1024) comment '备注',
+	cts datetime comment '创建时间',
+	uts datetime comment '修改时间',
+	primary key (id)
+) engine=InnoDB default charset=utf8 collate=utf8_bin comment '视频文件表';
 
 -- 点播文件表 --
 drop table if exists resource_file;
@@ -438,7 +455,6 @@ create table knowledge(
 	subjectId varchar(32) comment '所属科目',
 	gradeId varchar(32) comment '所属年级',
 	unitId varchar(32) comment '所属单元',
-	week int(10) default 1 comment '周',
 	priority int(10) comment '排序',
 	primary key (id)
 ) engine=InnoDB default charset=utf8 collate=utf8_bin comment '知识点表';
