@@ -38,10 +38,12 @@ Globals.page = "Manage_myTrainMAdd";
 								<input type="hidden" name="operation" id="operation" value="${operation}"/>
 								<input id="levelId" name="levelId" type="hidden" value="${tqItem.gradeId}">
 								<input id="oldSubjectId" name="oldSubjectId" type="hidden" value="${tqItem.subjectId}">
+								<input id="oldUnitId" name="oldUnitId" type="hidden" value="${tqItem.unitId}">
+								<input id="gradeIdSelected" name="gradeIdSelected" type="hidden" value="">
 								<div class="form_item">
 									<label for="gradeId">试题分类<span class="not-empty" title='此项为必填项'>*</span>：</label>
 									<div class="form_field">
-										<select id="gradeSelect">
+										<select id="gradeSelect" style="display:none;">
 											<c:forEach items="${applicationScope.gradeList}" var="grade" varStatus="st">
 											<option value="${grade.gradeEnName}">${grade.gradeName}</option>
 											</c:forEach>
@@ -49,6 +51,8 @@ Globals.page = "Manage_myTrainMAdd";
 										<select name="gradeId" id="levelSelect">
 										</select>
 										<select name="subjectId" id="subjectSelect">
+										</select>
+										<select name="unitId" id="unitSelect">
 										</select>
 									 </div>
 								</div>

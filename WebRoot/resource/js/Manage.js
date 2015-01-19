@@ -1,8 +1,9 @@
 // Manage模块初始化
 function ManageClass() {
 	
-	var levelId = $("#levelId").val();
-	var oldSubjectId = $("#oldSubjectId").val();
+	var levelId = $("#levelId").val();//年级Id
+	var oldSubjectId = $("#oldSubjectId").val();//科目Id
+	var oldUnitId = $("#oldUnitId").val();//单元Id
 	var changeNum = 0;//用来监控年级联动控件是否人为触发
 	
 	var gradeSelectFn = function(levelId) {
@@ -22,7 +23,7 @@ function ManageClass() {
 			if(data != "error") {
 				var json = eval('(' + data + ')');
 				var html = '';
-				for(var i=0;i<json.length;i++) {
+				for(var i = 0; i < json.length; i++) {
 					html += '<option value="' + json[i].levelId + '">' + json[i].levelName + '</option>';
 				}
 				$("#levelSelect").html(html);
@@ -36,11 +37,12 @@ function ManageClass() {
 
 	// 学科选择
 	$("#levelSelect").change(function() {
+		$("#gradeIdSelected").val($(this).val());//保存当前选择的年级id
 		$.get(Globals.ctx + "/data/subjectByLevel?gradeId=" + $(this).val(), function(data) {
 			if(data != "error") {
 				var json = eval('(' + data + ')');
 				var html = '';
-				for(var i=0;i<json.length;i++) {
+				for(var i = 0; i < json.length; i++) {
 					html += '<option value="' + json[i].id + '">' + json[i].subjectName + '</option>';
 				}
 				$("#subjectSelect").html(html);
@@ -52,8 +54,27 @@ function ManageClass() {
 		})
 	});
 	
-	// 学科的change()事件用来清空之前绑定的知识点，让用户重新绑定知识点(myTrainMAdd.jsp)
+	// 学期单元选择控件
 	$("#subjectSelect").change(function(){
+		var gradeIdSelected = $("#gradeIdSelected").val();//获取当前选择的年级id
+		$.get(Globals.ctx + "/data/unitByGradeAndSubject?gradeId=" + gradeIdSelected + "&subjectId=" + $(this).val(), function(data) {
+			if(data != "error") {
+				var json = eval('(' + data + ')');
+				var html = '';
+				for(var i = 0; i < json.length; i++) {
+					html += '<option value="' + json[i].id + '">' + json[i].termUnitCnName + '</option>';
+				}
+				$("#unitSelect").html(html);
+				if ( oldUnitId != "") {//修改页面初始化默认选择学科
+					$("#unitSelect").val(oldUnitId);
+				}
+				$("#unitSelect").change();
+			}
+		})
+	});
+	
+	// 学科的change()事件用来清空之前绑定的知识点，让用户重新绑定知识点(myTrainMAdd.jsp)
+	$("#unitSelect").change(function(){
 		if (changeNum > 0 && $("#knowledgeIds").length > 0) {
 			$("input[name=knowledgeIds]").val("");//客户端界面上清空绑定的所有知识点
 			$("input[name=knowledgeNames]").val("请点击选择试题所属的知识点");
@@ -913,9 +934,10 @@ ManageClass.prototype = {
 				var knowledgeIds = $("input[name=knowledgeIds]").val();
 				var gradeId = $("#levelSelect").val();
 				var subjectId = $("#subjectSelect").val();
-				if (gradeId != "" && gradeId != null && subjectId != "" && subjectId != null) {
-					Boxy.load(Globals.ctx + "/component/bind/bingKnowledge?questionId=" + questionId 
-							+ "&knowledgeIds=" + knowledgeIds + "&gradeId=" + gradeId + "&subjectId=" + subjectId, {title : '知识点绑定列表',
+				var unitId = $("#unitSelect").val();
+				if (gradeId != "" && gradeId != null && subjectId != "" && subjectId != null && unitId != "" && unitId != null) {
+					Boxy.load(Globals.ctx + "/component/bind/bingKnowledge?questionId=" + questionId + "&knowledgeIds=" + knowledgeIds 
+							+ "&gradeId=" + gradeId + "&subjectId=" + subjectId + "&unitId=" + unitId, {title : '知识点绑定列表',
 						afterShow : function(){
 							if(oListboxTo.length == 0 && knowledgeIds != "" && knowledgeIds != null){
 								var str = knowledgeIds.split(",");
@@ -1107,7 +1129,7 @@ ManageClass.prototype = {
 					},
 					edit: {
 						enable: true,
-						editNameSelectAll: true,
+						editNameSelectAll: true,//打开编辑的时候，选中被编辑文本
 						showRemoveBtn: showRemoveBtn,
 						showRenameBtn: showRenameBtn,
 						removeTitle: "删除",
@@ -1148,11 +1170,15 @@ ManageClass.prototype = {
 				
 				// TODO 打开新增修改知识点归类
 				var boxySubmit = function(addOrEdit, treeNode) {
-					var gradeId = treeNode.gradeId;
-					var subjectId = treeNode.subjectId;
-					var level = treeNode.level;//从0 开始，节点自带的
+					var gradeId = treeNode.gradeId;//年级
+					var subjectId = treeNode.subjectId;//科目
+					var code = treeNode.code;//学期单元的编码
+					var unitId = treeNode.unitId;//单元id
+					var type = treeNode.type;//标识树每个层级的类型
+					var level = treeNode.level;//从0 开始，zTree控件自带的
 					var dataId = treeNode.dataId;
 					var parentId = treeNode.dataId;//新增的时候默认当前节点为新增子节点的父节点
+					
 					if (addOrEdit == "edit") {//修改的时候获取父节点的JSON对象
 						var zTree = $.fn.zTree.getZTreeObj("zTree");
 						var sNodes = zTree.getSelectedNodes();
@@ -1163,87 +1189,28 @@ ManageClass.prototype = {
 					}
 					// 弹出知识点归类的页面
 					Boxy.load(Globals.ctx + "/manage/knowledge/addKnowledgeTree?gradeId="+ gradeId + "&subjectId=" 
-							+ subjectId + "&parentId=" + parentId + "&level=" + level + "&dataId=" + dataId
+							+ subjectId + "&type="+ type + "&unitId="+ unitId + "&code=" + code + "&level=" + level + "&dataId=" + dataId
 							+ "&addOrEdit=" + addOrEdit ,{title : '知识点归类',
 						afterShow : function(){
-							/*****************************select start***************************************/
-							var levelId = $("#levelId").val();
-							var oldSubjectId = $("#oldSubjectId").val();
-							var changeNum = 0;//用来监控年级联动控件是否人为触发
-							
-							var gradeSelectFn = function(levelId) {
-								$.get(Globals.ctx + "/data/gradeByLevelId?levelId=" + levelId, function(data) {
-									if(data != "error") {
-										var json = eval('(' + data + ')');
-										$("#gradeSelect").val(json.gradeEnName);
-										//首次触发年级联动
-										$("#gradeSelect").change();
-									}
-								})
-							}
-							
-							// 年级选择
-							$("#gradeSelect").change(function() {
-								$.get(Globals.ctx + "/data/levelByGrade?gradeEnName=" + $(this).val(), function(data) {
-									if(data != "error") {
-										var json = eval('(' + data + ')');
-										var html = '';
-										for(var i=0;i<json.length;i++) {
-											html += '<option value="' + json[i].levelId + '">' + json[i].levelName + '</option>';
-										}
-										$("#levelSelect").html(html);
-										if ( levelId != "") {//修改页面初始化默认选择年级
-											$("#levelSelect").val(levelId);
-										}
-										$("#levelSelect").change();
-									}
-								})
-							});
-
-							// 学科选择
-							$("#levelSelect").change(function() {
-								$.get(Globals.ctx + "/data/subjectByLevel?gradeId=" + $(this).val(), function(data) {
-									if(data != "error") {
-										var json = eval('(' + data + ')');
-										var html = '';
-										for(var i=0;i<json.length;i++) {
-											html += '<option value="' + json[i].id + '">' + json[i].subjectName + '</option>';
-										}
-										$("#subjectSelect").html(html);
-										if ( oldSubjectId != "") {//修改页面初始化默认选择学科
-											$("#subjectSelect").val(oldSubjectId);
-										}
-										$("#subjectSelect").change();
-									}
-								})
-							});
-							
-							if ( levelId != "" && levelId != 0) {//年级ID
-								gradeSelectFn(levelId);
-							} else {
-								//新增页面，自动首次触发年级联动控件，默认选择
-								$("#gradeSelect").change();
-							}
-							
-							var level = $("#level").val();
-							if (eval(level) >= 1  ) {// 知识树层级
-								$("#gradeSelect").attr("disabled", "disabled");
-								$("#levelSelect").attr("disabled", "disabled");
-								$("#subjectSelect").attr("disabled", "disabled");
-							}
-							/*****************************select end***************************************/
 
 							$(".sure").click(function() {
 								var dataId = $("#dataId").val().trim();
-								var gradeId = $("#levelSelect").val();
-								var subjectId = $("#subjectSelect").val();
-//								var week = $("#week").val().trim();
+								var unitId = $("#unitId").val();
+								var type = $("#type").val();
+								var code = $("#code").val();
+								var level = $("#level").val();
+								var gradeId = $("#gradeId").val();
+								var subjectId = $("#subjectId").val();
 								var knowledgeName = $("#knowledgeName").val().trim();
 								var addOrEdit = $("#addOrEdit").val().trim();
+								if (knowledgeName == null || knowledgeName == "") {
+									Boxy.alert("<i class='warn'></i><span>亲，请填写知识点名称 !</span>");
+								}
 								if (gradeId != null && gradeId != "" && subjectId != null && subjectId != "" ) {
 									$.ajax({
 										url: Globals.ctx + "/manage/knowledge/submitKnowledgeBySync",
-										data: { dataId:dataId, gradeId:gradeId, subjectId:subjectId, knowledgeName:knowledgeName, addOrEdit:addOrEdit},
+										data: { dataId:dataId, unitId:unitId, type:type, code:code, level:level, 
+											gradeId:gradeId, subjectId:subjectId, knowledgeName:knowledgeName, addOrEdit:addOrEdit},
 										type: "post",
 //				                    async : false,//设置为同步操作就可以给全局变量赋值成功 
 										success: function (result) {
@@ -1262,7 +1229,7 @@ ManageClass.prototype = {
 												if (result.indexOf('{') != -1) {
 													var json = eval('(' + result + ')');
 													$("#" + treeNode.tId + "_span").html(json.name);// 如：<span id='zTree_21_span'>json.name</span>
-													$("#" + treeNode.tId + "_a").attr("title",json.name);;// 如：<a id='zTree_21_a' title="json.name"></a>
+													$("#" + treeNode.tId + "_a").attr("title",json.name);// 如：<a id='zTree_21_a' title="json.name"></a>
 													$(".close").click();
 												} else if(result == "fail") {
 													Boxy.alert("<i class='error'></i><span>亲，对不起，操作失败了，请您刷新页面后重新操作 !</span>");
@@ -1287,11 +1254,13 @@ ManageClass.prototype = {
 					return false;
 				}
 				function beforeEditName (treeId, treeNode) {
-					className = (className === "dark" ? "":"dark");
-					var zTree = $.fn.zTree.getZTreeObj("zTree");
-					zTree.selectNode(treeNode);
-					boxySubmit("edit", treeNode);//弹窗修改当前节点
-					return true;
+					if (treeNode.type == 6) {//只有知识点的类型才提供修改的操作
+						className = (className === "dark" ? "":"dark");
+						var zTree = $.fn.zTree.getZTreeObj("zTree");
+						zTree.selectNode(treeNode);
+						boxySubmit("edit", treeNode);//弹窗修改当前节点
+						return true;
+					}
 				}
 				
 				//用于捕获节点被删除之前的事件回调函数，并且根据返回值确定是否允许删除操作,默认值：null
@@ -1331,29 +1300,30 @@ ManageClass.prototype = {
 				}
 				function showRemoveBtn (treeId, treeNode) {
 					/* return !treeNode.isFirstNode; */
-					return !treeNode.isParent;
+					return !treeNode.isParent;//如果设置了isParent=true,那么都不显示删除按钮
 				}
 				function showRenameBtn(treeId, treeNode) {
-//					return !treeNode.isLastNode;
-					return true;
+//					return !treeNode.isLastNode;//最后节点不能显示修改按钮
+					//只有单元和知识点的类型才提供新增的操作
+					return (eval(treeNode.type) == 6);
 				}
 
 				function addHoverDom(treeId, treeNode) {
-//					debugger;
-					var sObj = $("#" + treeNode.tId + "_span");
-					if (treeNode.editNameFlag || $("#addBtn_"+treeNode.tId).length>0) return;
-					var addStr = "<span class='button add' id='addBtn_" + treeNode.tId
-						+ "' title='新增' onfocus='this.blur();'></span>";
-					sObj.after(addStr);
-					var btn = $("#addBtn_"+treeNode.tId);
-					if (btn) btn.bind("click", function(){
-						if (eval(treeNode.level + 1) < 5) {
-							boxySubmit("add", treeNode);//弹窗新增节点
-						} else {
-							confirm("亲，只能允许添加到这个级别了！");
-						}
-						return false;
-					});
+					if (treeNode.type == 5 || treeNode.type == 6) {//只有单元和知识点的类型才提供新增的操作
+						var sObj = $("#" + treeNode.tId + "_span");
+						if (treeNode.editNameFlag || $("#addBtn_"+treeNode.tId).length>0) return;
+						var addStr = "<span class='button add' id='addBtn_" + treeNode.tId + "' title='新增' onfocus='this.blur();'></span>";
+						sObj.after(addStr);
+						var btn = $("#addBtn_"+treeNode.tId);
+						if (btn) btn.bind("click", function(){
+							if (eval(treeNode.level + 1) < 8) {//知识点限制只能新增三级。  注意：treeNode.level 从0开始的
+								boxySubmit("add", treeNode);//弹窗新增节点
+							} else {
+								Boxy.alert("<i class='warn'></i><span>亲，很抱歉，知识点级别最多为三级，只能允许添加到这个级别了!</span>");
+							}
+							return false;
+						});
+					}
 				};
 				function removeHoverDom(treeId, treeNode) {
 					$("#addBtn_"+treeNode.tId).unbind().remove();

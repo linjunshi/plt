@@ -165,7 +165,8 @@ public class CourseMAction extends TeacherBaseAction {
 		}
 		return "/manage/teacher/courseAdd";
 	}
-		
+	
+	
 	@RequestMapping(value = "/modify", method = RequestMethod.GET)
 	public String modifyCourse(String courseId){
 		try {
@@ -184,6 +185,7 @@ public class CourseMAction extends TeacherBaseAction {
 		}
 		return "/manage/teacher/courseAdd";
 	}
+	
 	
 	/**
 	 * 修改课程信息页面

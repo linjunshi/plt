@@ -21,6 +21,7 @@ public class TrainQuestionItem {
 	private String remark;
 	private String subjectId;
 	private String gradeId;
+	private String unitId;
 	private int timeLimit;
 	private String ownerId;
 	private int level;
@@ -150,6 +151,12 @@ public class TrainQuestionItem {
 	}
 	public void setGradeId(String gradeId) {
 		this.gradeId = gradeId;
+	}
+	public String getUnitId() {
+		return unitId;
+	}
+	public void setUnitId(String unitId) {
+		this.unitId = unitId;
 	}
 	public int getTimeLimit() {
 		return timeLimit;

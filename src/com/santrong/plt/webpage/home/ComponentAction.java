@@ -82,14 +82,15 @@ public class ComponentAction extends BaseAction {
 			String knowledgeIds = request.getParameter("knowledgeIds");
 			String gradeId = request.getParameter("gradeId");
 			String subjectId = request.getParameter("subjectId");
+			String unitId = request.getParameter("unitId");
 			
 			List<KnowledgeItem> knowledgeList = null;
 					
-			if (MyUtils.isNotNull(gradeId) && MyUtils.isNotNull(subjectId)) {
+			if (MyUtils.isNotNull(gradeId) && MyUtils.isNotNull(subjectId) && MyUtils.isNotNull(unitId)) {
 				// 如果questionId为空，那么就执行新增操作，否则执行修改操作
 				KnowledgeDao kDao = new KnowledgeDao();
 				// 新增或者修改
-				knowledgeList = kDao.selectByGIdAndSId(gradeId, subjectId);
+				knowledgeList = kDao.selectByGIdAndSIdAndUId(gradeId, subjectId, unitId);
 				if (MyUtils.isNotNull(questionId)) {
 					// 修改
 					// TODO hasIds == 1,表明 knowledgeIds不为空（已经绑定），即是没有修改年级和学科的情况

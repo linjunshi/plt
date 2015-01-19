@@ -67,7 +67,7 @@ Globals.page = "Index_weike";
 						</c:forEach>                    
 					</ul>
 				</div>
-		        <c:set var="basicUrl" value="${ctx}/course/${subject}${link : full()}" />
+		        <c:set var="basicUrl" value="${ctx}/weike/${subject}${link : full()}" />
 		       	<%@ include file="../inc/pagination_new.jsp"%>				
 			</div>
 		</div>

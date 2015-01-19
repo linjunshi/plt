@@ -17,138 +17,11 @@ public class KnowledgeTreeForm {
 	private int level;
 	private String dataId;//用来保存原来数据库里的id
 	private int type;
-	private String code;
+	private String code;//用来保存编码规则，见 com/santrong/plt/util/TreeCode.java
 	
 	private boolean open;
 	private boolean isParent;
 	private String iconSkin;//通过CSS样式来设置节点图片样式（展开、折叠节点时，logo可切换）
-	
-	/**
-	 * 根节点的默认icon图标样式
-	 */
-	public final static String  pIconRoot ="pIconRoot" ;
-
-	/**
-	 * 学段：xiaoxue chuzhong gaozhong
-	 */
-	public final static int type_studySection = 1;// 学段：xiaoxue chuzhong gaozhong
-	/**
-	 * 年级:xiaoxue 1-6
-	 */
-	public final static int type_level = 2;// 年级:xiaoxue 1-6
-	/**
-	 * 学科
-	 */
-	public final static int type_subject = 3;// 学科
-	/**
-	 * 学期
-	 */
-	public final static int type_term = 4;// 学期
-	/**
-	 * 单元
-	 */
-	public final static int type_unit = 5;// 单元
-	/**
-	 * 知识点
-	 */
-	public final static int type_knowledge = 6;// 知识点
-	
-//	 	TODO 编码规则
-//		code编码规范
-//		xxxx xx xx xx
-//		1.小学1，初中2，高中3
-//		2.一年级1，二年级2。。。。
-//		3.语文1，数学2，英语3。。。
-//		4.上学期1，下学期2
-//		5~6.一级知识点01开始
-//		7~8.二级知识点01开始
-//		9~10.三级知识点01开始
-//		
-//		level映射
-//		1111 01 00 00定义为1
-	
-	/**
-	 * {"小学", "初中", "高中"}
-	 */
-	public final static String[] gradeNames = {"小学", "初中", "高中"};
-	/**
-	 * {"xiaoxue", "chuzhong", "gaozhong"}
-	 */
-	public final static String[] gradeEnNames = {"xiaoxue", "chuzhong", "gaozhong"};
-	/**
-	 * {"1", "2", "3"}
-	 */
-	public final static String[] gradeCodes = {"1", "2", "3"};
-	
-	/**
-	 * {"一年级", "二年级", "三年级", "四年级", "五年级", "六年级"}
-	 */
-	public final static String[] levelNames = {"一年级", "二年级", "三年级", "四年级", "五年级", "六年级"};
-	/**
-	 * {"level1", "level2", "level3","level4", "level5", "level6"}
-	 */
-	public final static String[] levelEnNames = {"level1", "level2", "level3","level4", "level5", "level6"};
-	/**
-	 * {"1", "2", "3", "4", "5", "6"}
-	 */
-	public final static String[] levelCodes = {"1", "2", "3", "4", "5", "6"};
-	
-	
-	/**
-	 * {"语文", "数学", "英语", "物理", "化学", "生物", "地理", "政治"}
-	 */
-	public final static String[] subjectNames = {"语文", "数学", "英语", "物理", "化学", "生物", "地理", "政治"};
-	/**
-	 * {"yuwen", "shuxue", "yingyu","wuli", "huaxue", "shengwu", "dili", "zhengzhi"}
-	 */
-	public final static String[] subjectEnNames = {"yuwen", "shuxue", "yingyu","wuli", "huaxue", "shengwu", "dili", "zhengzhi"};
-	/**
-	 * {"1", "2", "3", "4", "5", "6", "7", "8"}
-	 */
-	public final static String[] subjectCodes = {"1", "2", "3", "4", "5", "6", "7", "8"};
-	
-	/**
-	 * {"上学期", "下学期"}
-	 */
-	public final static String[] termNames = {"上学期", "下学期"};
-	/**
-	 * {"termup", "termdown"}
-	 */
-	public final static String[] termEnNames = {"termup", "termdown"};
-	/**
-	 * {"1", "2"}
-	 */
-	public final static String[] termCodes = {"1", "2"};
-	
-	
-	public String getGradeCode(String gradeEnName){
-		for (int i = 0; i < gradeEnNames.length; i++) {
-			if (gradeEnName.equalsIgnoreCase(gradeEnNames[i])) {
-				return gradeCodes[i];
-			}
-		}
-		return "1";
-	}
-	
-	public String getLevelCode(String levelEnName){
-		for (int i = 0; i < levelEnNames.length; i++) {
-			if (levelEnName.equalsIgnoreCase(levelEnNames[i])) {
-				return levelCodes[i];
-			}
-		}
-		return "1";
-	}
-	
-	public String getSubjectCode(String subjectEnName){
-		for (int i = 0; i < subjectEnNames.length; i++) {
-			if (subjectEnName.equalsIgnoreCase(subjectEnNames[i])) {
-				return subjectCodes[i];
-			}
-		}
-		return "1";
-	}
-	
-	
 	
 	public String getId() {
 		return id;
@@ -261,6 +134,4 @@ public class KnowledgeTreeForm {
 	public void setIconSkin(String iconSkin) {
 		this.iconSkin = iconSkin;
 	}
-
-	
 }

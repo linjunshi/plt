@@ -281,6 +281,8 @@ public class CourseDao extends BaseDao {
 				criteria.where(eq("b.status", "?"));
 				criteria.setIntParam(query.getOrderStatus());
 			}
+			// 普通课程
+			criteria.where(eq("a.courseType", "0"));			
 			
 			// 排序
 			if(!StringUtils.isNullOrEmpty(query.getOrderBy())) {
@@ -342,6 +344,8 @@ public class CourseDao extends BaseDao {
 				criteria.where(eq("b.status", "?"));
 				criteria.setIntParam(query.getOrderStatus());
 			}
+			// 普通课程
+			criteria.where(eq("a.courseType", "0"));			
 			
 			Connection conn = ThreadUtils.currentConnection();
 			PreparedStatement stm = criteria.getRealStatement(conn);

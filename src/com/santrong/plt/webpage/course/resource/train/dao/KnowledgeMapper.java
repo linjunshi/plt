@@ -30,8 +30,8 @@ public interface KnowledgeMapper {
 	@Select("select * from knowledge where id = #{id}")
 	KnowledgeItem selectById(String id);
 	
-	@Select("select count(*) from knowledge where knowledgeName = #{knowledgeName} and gradeId = #{gradeId} and subjectId = #{subjectId} ")
-	int exists(@Param("knowledgeName")String knowledgeName, @Param("gradeId")String gradeId, @Param("subjectId")String subjectId);
+	@Select("select count(*) from knowledge where knowledgeName = #{knowledgeName} and gradeId = #{gradeId} and subjectId = #{subjectId} and unitId = #{unitId} ")
+	int exists(@Param("knowledgeName")String knowledgeName, @Param("gradeId")String gradeId, @Param("subjectId")String subjectId, @Param("unitId")String unitId);
 	
 	@Select("select * from knowledge where knowledgeName = #{knowledgeName} order by code asc")
 	List<KnowledgeItem> selectByName(String knowledgeName);
@@ -48,6 +48,17 @@ public interface KnowledgeMapper {
 	 */
 	@Select("select * from knowledge where gradeId = #{gradeId} and subjectId = #{subjectId} order by code asc,priority asc")
 	List<KnowledgeItem> selectByGIdAndSId(@Param("gradeId")String gradeId, @Param("subjectId")String subjectId);
+	
+	/**
+	 * 根据gradeId（年级）、subjectId（学科）、unitId（单元），获取多个知识点
+	 * @author huangweihua
+	 * @param gradeId
+	 * @param subjectId
+	 * @param unitId
+	 * @return
+	 */
+	@Select("select * from knowledge where gradeId = #{gradeId} and subjectId = #{subjectId} and unitId = #{unitId} order by code asc,priority asc")
+	List<KnowledgeItem> selectByGIdAndSIdAndUId(@Param("gradeId")String gradeId, @Param("subjectId")String subjectId, @Param("unitId")String unitId);
 	
 	@Select("select * from knowledge order by code, priority")
 	List<KnowledgeItem> selectAll();

@@ -15,19 +15,6 @@ public class KnowledgeItem {
 	private String unitId;
 	private int priority;
 	
-//	code编码规范
-//	xxxx xx xx xx
-//	1.小学1，初中2，高中3
-//	2.一年级1，二年级2。。。。
-//	3.语文1，数学2，英语3。。。
-//	4.上学期1，下学期2
-//	5~6.一级知识点01开始
-//	7~8.二级知识点01开始
-//	9~10.三级知识点001开始
-//	
-//	level映射
-//	1111 01 00 00定义为1
-	
 	public int getCode() {
 		return code;
 	}
