@@ -12,14 +12,11 @@ public class CompetitionItem {
 	private String title;
 	private String remark;
 	private Date beginTime;
-	private int flag; // 0正常竞赛，1个人练习
+	private int flag; // 暂时不用
 	private String ownerId;
 	private int del;
 	private Date cts;
 	private Date uts;
-	
-	public static final int Flag_Group = 0;
-	public static final int Flag_Person = 1;
 	
 	public int getFlag() {
 		return flag;

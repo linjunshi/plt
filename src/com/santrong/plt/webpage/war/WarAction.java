@@ -25,7 +25,6 @@ import com.santrong.plt.webpage.competition.entry.CompetitionItem;
 import com.santrong.plt.webpage.course.resource.train.dao.TrainQuestionDao;
 import com.santrong.plt.webpage.course.resource.train.entry.TrainQuestionIndex;
 import com.santrong.plt.webpage.course.resource.train.entry.TrainQuestionItem;
-import com.santrong.plt.webpage.course.resource.train.entry.TrainQuestionQuery;
 
 /**
  * @author weinianjie
@@ -178,7 +177,7 @@ public class WarAction extends BaseAction {
 					competition.setOwnerId(this.currentUser().getId());
 					competition.setTitle("个人练习");
 					competition.setRemark("个人练习");
-					competition.setFlag(CompetitionItem.Flag_Person);
+					competition.setFlag(0);
 					competition.setDel(0);
 					competition.setCts(new Date());
 					competition.setUts(new Date());
