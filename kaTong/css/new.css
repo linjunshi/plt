@@ -25,6 +25,13 @@
 .menu {background:#fff url(../images/top_bg.png) no-repeat center top;}
 .menu_top { width:1000px; height:230px;margin:0 auto;position: relative;}
 .menu_top .logo{ position:absolute; left:0px; top:30px;}
+
+.user_info_hidd { margin:25px 0 0 10px;}
+.user_info_hidd p{float:left; height:30px; line-height:30px; margin:10px 10px 0 5px;padding:0 10px;}
+.user_info_hidd .user_info_sid *{vertical-align:middle; margin-left:10px;}
+.user_info_hidd .user_info_sid span{ margin-left:5px;}
+.user_info_hidd a:hover{ color:#f90;}
+
 /*--------------中间-------------*/
 .content { width:1000px; margin:0 auto;}
 .con_column { width:1000px; height:60px; margin:20px 0;}
@@ -77,6 +84,23 @@
 .filter_ul li a{ height:24px; line-height:24px; float:left; display:block; text-align:center; padding:0 5px; margin:3px 10px; color:#333;}
 .filter_ul li a:hover { background:#D0A66D; color:#fff;}
 
+/*--------------------试题列表2-----------------*/
+.con_quest { width:1000px; height:922px; margin:0 auto; background:url(../images/02.png) no-repeat left top; position:relative; padding-top:30px;}
+.con_que { width:960px; height:120px; margin:20px 0px 0px 20px; background:url(../images/xin_img.png) no-repeat left 0px;}
+.con_que h2{float:left; display:block; background: url(../images/shuxue.png) no-repeat left top; width:200px; line-height:120px;}
+.con_que p{ float:left; display:block; margin-right:20px; font-size:30px; color:#FF0; margin:0 50px; line-height:120px;}
+.con_pue_sid { text-align:center; vertical-align:middle; margin:30px 0;}
+.que_but { margin:50px 0 0 100px;}
+.que_but p{ float:left; display:block; margin:0 20px;}
+.answer { width:800px; float:left;display:block; margin:20px 0 0 115px;}
+.answer h2{ font-size:40px; color:#f00;}
+.answer p{ margin-top:20px; font-size:22px; color:#090;}
+.buttom_a { position:absolute;right:40px; bottom:80px;}
+
+
+
+
+
 .live_resul {width:960px; margin:0 auto;}
 .result_sorting { border-bottom:1px #D0A66D solid; background:#fff3e3; height:30px;}
 .result_sorting a{ padding:0 10px;height:30px; line-height:30px; margin-left:10px; border:1px #D0A66D solid; background:#fff; color:#666;}
@@ -98,5 +122,23 @@
 .paging a { width:16px; height:16px; margin-right:10px; background:#D0A66D; padding:2px 10px; color:#fff;}
 .paging a:hover{background:#A6703D;}
 
+
+/*--------------------题库-----------------*/
+.bank_list{ width:900px; margin:0 auto;padding:20px 0 0 40px;}
+
+.bank_radio { width:1000px;}
+.radio_tit { margin:5px 0; color:#093; font-size:16px;}
+.form_item .form_sid { margin:10px 0;}
+.form_item .form_sid p{text-align:left; display:block;}
+.form_item .form_sid span{text-align:left; margin-left:10PX;}
+.form_item .form_answer{ height:30px; line-height:30px; margin-bottom:10px;}
+.form_item .form_answer dl dt{ float:left; display:block; margin-right:15px; color:#f90; font-size:16px;}
+.form_item .form_answer dl dd p{ float:left;margin:0px 25px 0 0; color:#333; padding:0;}
+.bank_but { margin:10px 0;}
+.bank_but a{ padding:2px 10px; background:#32b898; color:#fff;}
+.bank_but a:hover{background:#1f8970;}
+.bank_det p{ margin:5px 0;}
+.bank_det b{ color:#F00; margin:0 10px;}
+.blanks_text { border:none; border-bottom:1px solid #666; width:150px; color:#f00; margin:0 3px;}
 /*--------------------页脚-----------------*/
 .footer { width:100%; height:218px; background:url(../images/mainbg.png) no-repeat center top;}
