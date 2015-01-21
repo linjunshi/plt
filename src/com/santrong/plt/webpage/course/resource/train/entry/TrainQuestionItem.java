@@ -73,6 +73,10 @@ public class TrainQuestionItem {
 	 */
 	public static final String[] Answers_Options					= {"A","B","C","D"};
 	
+	/**
+	 * 选项的{"对","错"}分别对应的数值{1,2}
+	 */
+	public static final String[] Answers_TrueOrFalse				= {"对","错"};
 	
 	public boolean isAssemble() {
 		return assemble;
@@ -298,11 +302,20 @@ public class TrainQuestionItem {
 	 */
 	public List<String> getAnswerString() {
 		List<String> list = new ArrayList<String>();
-		for(int i = 0; i < Answers.length; i++) {
-			if((getSumAnswer() & Answers[i]) == Answers[i]) {
-				list.add(Answers_Options[i]);
+		if (this.questionType == QUESTION_TYPE_MULTIPLE_CHOICE || this.questionType == QUESTION_TYPE_SINGLE_SELECTION) {//选择题
+			for(int i = 0; i < Answers.length; i++) {
+				if(((this.questionType == QUESTION_TYPE_SINGLE_SELECTION ? MyUtils.stringToInt(this.answer) : getSumAnswer()) & Answers[i]) == Answers[i]) {
+					list.add(Answers_Options[i]);
+				}
+			}
+		} else if(this.questionType == QUESTION_TYPE_JUDGE_TRUE_OR_FLASE){//判断题
+			for (int i = 0; i < Answers_TrueOrFalse.length; i++) {
+				if ((MyUtils.stringToInt(this.answer) & Answers[i]) == Answers[i]) {
+					list.add(Answers_TrueOrFalse[i]);
+				}
 			}
 		}
 		return list;
 	}
+	
 }

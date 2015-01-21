@@ -186,6 +186,66 @@ IndexClass.prototype = {
 		
 	},
 	
+	// 个人挑战的测试页面
+	personExams : function() {
+		
+		// 通过改变图片的样式，标识当前已经选择的选项
+		$(".singleSelection a").click(function(){
+			$(".singleSelection a.current").each(function(){
+				var option = $(this).attr("option");
+				$(this).children("img").attr("src",Globals.ctx + "/resource/images/" + option + ".png");
+				$(this).css("cursor","hand");
+				$(this).removeClass("current");
+			});
+			var option = $(this).attr("option");
+			$(this).children("img").attr("src",Globals.ctx + "/resource/images/" + option + "_hover_1.png");
+			$(this).css("cursor","normal");
+			$(this).addClass("current");
+			$("#answer").val($(this).attr("answer"));
+		});
+		
+		// 鼠标移过字母时，切换图片的样式
+		$(".singleSelection a").hover( 
+			function () {
+				var option = $(this).attr("option");
+				$(this).children("img").attr("src",Globals.ctx + "/resource/images/" + option + "_hover_1.png");
+				$(this).css("cursor","hand");
+			},
+			function () {
+				if (!$(this).hasClass("current") ) {//如果有current样式就不切换图片的名称
+					var option = $(this).attr("option");
+					$(this).children("img").attr("src",Globals.ctx + "/resource/images/" + option + ".png");
+					$(this).css("cursor","normal");
+				}
+			}
+		);
+		
+		// 提交测试题的数据
+		$(".submit").click(function(){
+			var answer = $("#answer").val();
+			var questionId = $("#questionId").val();
+			var questionType = $("#questionType").val();
+			if (answer != null && answer != "") {
+				$.ajax({
+					type : 'GET',
+					url : Globals.ctx + '/war/addExamToHistory',
+					data : {answer : answer , questionId : questionId, questionType : questionType},
+					success : function(result){
+						if (result == "success") {
+							$(".answer").show();
+							$(".button_submit").hide();
+							$(".button_next").show();
+						} else {
+							Boxy.alert("<i class='warn'></i><span>"+result+"</span>");
+						}
+					}
+				});
+			} else {
+				Boxy.alert("<i class='warn'></i><span>嘿嘿，您还没有作答呢 ！</span>");
+			}
+		});
+	},
+	
 	// 学校列表页
 	school : function() {
 

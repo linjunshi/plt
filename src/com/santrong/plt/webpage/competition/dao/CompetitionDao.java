@@ -99,4 +99,59 @@ public class CompetitionDao extends BaseDao {
 		}
 		return null;
 	}
+	
+	/**
+	 * 当前用户是否已经有做过试题的记录了
+	 * @param userId
+	 * @param competitionId
+	 * @return
+	 */
+	public boolean existDoneExamByUserId(String userId, String competitionId) {
+		try {
+			CompetitionMapper mapper = this.getMapper(CompetitionMapper.class);
+			if (mapper != null) {
+				return mapper.existDoneExamByUserId(userId, competitionId) > 0;
+			}
+		} catch (Exception e) {
+			Log.printStackTrace(e);
+		}
+		return false;
+	}
+	
+	/**
+	 * 获取当前用户已经有做过试题的记录
+	 * @param userId
+	 * @param competitionId
+	 * @return
+	 */
+	public CompetitionAttendItem selectAttendByUserId(String userId, String competitionId) {
+		try {
+			CompetitionMapper mapper = this.getMapper(CompetitionMapper.class);
+			if (mapper != null) {
+				return mapper.selectAttendByUserId(userId, competitionId);
+			}
+		} catch (Exception e) {
+			Log.printStackTrace(e);
+		}
+		return null;
+	}
+	
+	/**
+	 * 是否已经存在历史记录了
+	 * @param attendId
+	 * @param questionId
+	 * @return
+	 */
+	public boolean existHistory(String attendId, String questionId) {
+		try {
+			CompetitionMapper mapper = this.getMapper(CompetitionMapper.class);
+			if (mapper != null) {
+				return mapper.existHistory(attendId, questionId) > 0;
+			}
+		} catch (Exception e) {
+			Log.printStackTrace(e);
+		}
+		return false;
+	}
+	
 }

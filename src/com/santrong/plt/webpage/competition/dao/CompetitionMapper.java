@@ -35,4 +35,14 @@ public interface CompetitionMapper {
 	
 	@Select("select a.* from resource_train_question a left join competition_to_question b on a.id=b.questionId where b.competitionId=#{competitionId}")
 	List<TrainQuestionItem> selectQuestionsByCompetitionId(String competitionId);
+	
+	@Select("select count(*) from competition_attend where userId = #{userId} and competitionId = #{competitionId}")
+	int existDoneExamByUserId(@Param("userId")String userId, @Param("competitionId")String competitionId);
+	
+	@Select("select * from competition_attend where userId = #{userId} and competitionId = #{competitionId}")
+	CompetitionAttendItem selectAttendByUserId(@Param("userId")String userId, @Param("competitionId")String competitionId);
+	
+	@Select("select count(*) from competition_history where attendId = #{attendId} and questionId = #{questionId}")
+	int existHistory(@Param("attendId")String attendId, @Param("questionId")String questionId);
+	
 }

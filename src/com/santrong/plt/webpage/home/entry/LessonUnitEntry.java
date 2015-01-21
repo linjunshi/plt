@@ -14,6 +14,9 @@ public class LessonUnitEntry {
 	private int priority;
 	
 	private String termUnitCnName;
+	private String subjectName;
+	private String subjectEnName;
+	private String levelName;
 	
 	public String getId() {
 		return id;
@@ -56,6 +59,24 @@ public class LessonUnitEntry {
 	}
 	public void setTermUnitCnName(String termUnitCnName) {
 		this.termUnitCnName = termUnitCnName;
+	}
+	public String getSubjectName() {
+		return subjectName;
+	}
+	public void setSubjectName(String subjectName) {
+		this.subjectName = subjectName;
+	}
+	public String getSubjectEnName() {
+		return subjectEnName;
+	}
+	public void setSubjectEnName(String subjectEnName) {
+		this.subjectEnName = subjectEnName;
+	}
+	public String getLevelName() {
+		return levelName;
+	}
+	public void setLevelName(String levelName) {
+		this.levelName = levelName;
 	}
 	public String getTermCnName() {
 		switch (this.term) {
