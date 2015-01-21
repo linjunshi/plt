@@ -106,16 +106,7 @@ Globals.page = "Manage_weikeAdd";
 											<input placeholder="格式：2014-01-01" class="form_text" name="endTime" id="endTime" type="text" value="<fmt:formatDate type="date" pattern="yyyy-MM-dd" value="${course.endTime}" />" required_Date>
 										</div>
 									</div>
-									 <div class="form_item">
-		                            	<label>是否直播课：</label>
-			                            <div class="form_field">
-		                                    <input <c:if test="${course.live == 1}"> checked="checked" </c:if> value="1" class="form_radio" name="live" type="radio">
-		                                    <span>是</span>
-		                                    <input <c:if test="${course.live == 0}"> checked="checked" </c:if> value="0" class="form_radio" name="live" type="radio">
-		                                    <span>否</span>
-		                                    <span class="not-empty" title='此项为必填项'>*</span>
-			                            </div>
-			                        </div>
+									<input type="hidden" name="live" value="0" />
 			                        <div class="form_item">
 										<label for="realname">课程封面：</label>
 										<div class="form_field">

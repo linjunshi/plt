@@ -15,6 +15,7 @@ import com.santrong.plt.util.BeanUtils;
 import com.santrong.plt.util.MyUtils;
 import com.santrong.plt.webpage.BaseDao;
 import com.santrong.plt.webpage.course.entry.CourseItem;
+import com.santrong.plt.webpage.course.entry.CourseView;
 import com.santrong.plt.webpage.course.entry.WeikeDetailView;
 import com.santrong.plt.webpage.course.entry.WeikeQuery;
 
@@ -41,6 +42,19 @@ public class WeikeDao extends BaseDao {
 		}
 		return null;
 	}
+	
+	// 根据年级和地区获取课程，首页
+	public List<CourseView> selectForIndexList(int gradeGroup, String areaCode) {
+		try {
+			WeikeMapper mapper = this.getMapper(WeikeMapper.class);
+			if(mapper != null) {
+				return mapper.selectForIndexList(gradeGroup, AreaUtils.lostTail(areaCode) + "%");
+			}
+		} catch (Exception e) {
+			Log.printStackTrace(e);
+		}
+		return null;
+	}	
 	
 	/**
 	 * 根据具体搜索条件查询课程
