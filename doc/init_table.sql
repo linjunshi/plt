@@ -147,6 +147,7 @@ create table course(
 	endTime datetime comment '结束时间',
 	gradeId varchar(32) not null comment '所属年级',
 	subjectId varchar(32) not null comment '所属科目',
+	unitId varchar(32) comment '所属单元',
 	remark varchar(10240) comment '具体描述',
 	limitCount int(10) default 0 not null comment '限购数量',
 	saleCount int(10) default 0 not null comment '销售量',
@@ -452,8 +453,6 @@ create table knowledge(
 	code int(32) not null comment '编码',
 	level int(16) not null comment '层级',
 	knowledgeName varchar(64) not null comment '知识点名称',
-	subjectId varchar(32) comment '所属科目',
-	gradeId varchar(32) comment '所属年级',
 	unitId varchar(32) comment '所属单元',
 	priority int(10) comment '排序',
 	primary key (id)
@@ -466,6 +465,14 @@ create table question_to_knowledge(
 	knowledgeId varchar(32) not null comment '知识点ID',
 	primary key (questionId, knowledgeId)
 ) engine=InnoDB default charset=utf8 collate=utf8_bin comment '习题关联知识点表';
+
+-- 课程关联知识点表 --
+drop table if exists course_to_knowledge;
+create table course_to_knowledge(
+	courseId varchar(32) not null comment '课程ID',
+	knowledgeId varchar(32) not null comment '知识点ID',
+	primary key (courseId, knowledgeId)
+) engine=InnoDB default charset=utf8 collate=utf8_bin comment '课程关联知识点表';
 
 -- 表 --
 -- drop table if exists course;

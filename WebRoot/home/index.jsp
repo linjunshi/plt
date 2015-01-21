@@ -60,7 +60,7 @@
 				<h2>最新视频</h2>
 				<ul>
 					<c:forEach items="${xiaoxue_subjectList}" var="subject">
-						<li><a href="${ctx}/course/${subject.subjectEnName}">${subject.subjectName}</a></li>
+						<li><a href="${ctx}/${xiaoxue_courseType}/${subject.subjectEnName}">${subject.subjectName}</a></li>
 					</c:forEach>
 				</ul>
 			</div>
@@ -68,14 +68,14 @@
 				<ul>
 					<c:forEach items="${xiaoxue_courseList}" var="item" varStatus="st">
 						<li class="<c:if test="${(st.index+1)%5 == 0}">mar</c:if>"><a
-							href="${ctx}/course/${item.id}.html" target="_blank"><img
+							href="${ctx}/${xiaoxue_courseType}/${item.id}.html" target="_blank"><img
 								src="${ctx}${item.thumbnail}" width="166" height="180"></a>
 							<h2>${item.courseName}</h2>
 							<p class="con_listen">
 								购买：<b>${item.saleCount}</b>
 							</p>
 							<p class="con_but">
-								<a href="${ctx}/${_courseType}/${item.id}.html" target="_blank">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+								<a href="${ctx}/${xiaoxue_courseType}/${item.id}.html" target="_blank">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
 							</p>
 						</li>
 					</c:forEach>

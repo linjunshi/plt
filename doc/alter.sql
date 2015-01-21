@@ -1,6 +1,17 @@
 -- 2015-01-21 weinianjie weinianjie  (2015-01-21 hwcloud)
 alter table resource_train_question change topic topic text not null comment '题目';
 
+alter table knowledge drop column gradeId;
+alter table knowledge drop column subjectId;
+alter table course add column unitId varchar(32) comment '所属单元' after subjectId;
+drop table if exists course_to_knowledge;
+create table course_to_knowledge(
+	courseId varchar(32) not null comment '课程ID',
+	knowledgeId varchar(32) not null comment '知识点ID',
+	primary key (courseId, knowledgeId)
+) engine=InnoDB default charset=utf8 collate=utf8_bin comment '课程关联知识点表';
+
+
 -- 2015-01-20 
 alter table competition_attend change competitionId competitionId varchar(32) comment '竞赛ID';
 
