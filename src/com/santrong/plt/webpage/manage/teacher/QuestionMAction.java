@@ -263,6 +263,9 @@ public class QuestionMAction extends TeacherBaseAction{
 						if (result) {
 							addError("新增试题成功 ！");
 							return "/manage/teacher/myTrainMAdd";
+						} else {
+							addError("新增试题失败！");
+							request.setAttribute("tqItem", tqForm);
 						}
 					} else {
 						
