@@ -1,8 +1,6 @@
 -- 2015-01-21 weinianjie weinianjie  (2015-01-21 hwcloud)
 alter table resource_train_question change topic topic text not null comment '题目';
 
-alter table knowledge drop column gradeId;
-alter table knowledge drop column subjectId;
 alter table course add column unitId varchar(32) comment '所属单元' after subjectId;
 drop table if exists course_to_knowledge;
 create table course_to_knowledge(

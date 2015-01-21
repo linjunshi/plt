@@ -453,6 +453,8 @@ create table knowledge(
 	code int(32) not null comment '编码',
 	level int(16) not null comment '层级',
 	knowledgeName varchar(64) not null comment '知识点名称',
+	subjectId varchar(32) comment '所属科目',
+	gradeId varchar(32) comment '所属年级',	
 	unitId varchar(32) comment '所属单元',
 	priority int(10) comment '排序',
 	primary key (id)
