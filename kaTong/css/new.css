@@ -96,9 +96,20 @@
 .answer h2{ font-size:40px; color:#f00;}
 .answer p{ margin-top:20px; font-size:22px; color:#090;}
 .buttom_a { position:absolute;right:40px; bottom:80px;}
-
-
-
+.quest_a  { width:52px; height:55px; display:block; background:url(../images/a.png) no-repeat left top;}
+.quest_b  { width:52px; height:55px; display:block; background:url(../images/b.png) no-repeat left top;}
+.quest_c  { width:52px; height:55px; display:block; background:url(../images/c.png) no-repeat left top;}
+.quest_d  { width:52px; height:55px; display:block; background:url(../images/d.png) no-repeat left top;}
+.quest_e  { width:195px; height:70px; display:block; background:url(../images/dui.png) no-repeat left top;}
+.quest_f  { width:195px; height:70px; display:block; background:url(../images/cuo.png) no-repeat left top;}
+.quest_a:hover, .select  { width:52px; height:55px; display:block; background:url(../images/a_1.png) no-repeat left top;}
+.quest_b:hover, .select_a { width:52px; height:55px; display:block; background:url(../images/b_1.png) no-repeat left top;}
+.quest_c:hover  { width:52px; height:55px; display:block; background:url(../images/c_1.png) no-repeat left top;}
+.quest_d:hover  { width:52px; height:55px; display:block; background:url(../images/d_1.png) no-repeat left top;}
+.quest_e:hover {width:195px; height:70px; display:block; background:url(../images/dui_hover.png) no-repeat left top;}
+.quest_f:hover  { width:195px; height:70px; display:block; background:url(../images/cuo_hover.png) no-repeat left top;}
+.tian_text { width:200px; height:40px; line-height:40px; border:none; border-bottom:1px #000 solid; font-size:40px; margin-top:10px; text-align:center;}
+.que_but label{ font-size:22px;margin-top:40px;}
 
 
 .live_resul {width:960px; margin:0 auto;}
