@@ -1,4 +1,7 @@
--- 2015-01-20 weinianjie  (2015-01-20 hwcloud)
+-- 2015-01-21 weinianjie weinianjie  (2015-01-21 hwcloud)
+alter table resource_train_question change topic topic text not null comment '题目';
+
+-- 2015-01-20 
 alter table competition_attend change competitionId competitionId varchar(32) comment '竞赛ID';
 
 -- 2015-01-19 weinianjie
