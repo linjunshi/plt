@@ -88,6 +88,24 @@ public class TrainQuestionDao extends BaseDao{
 				criteria.setStringParam(query.getUserId());
 			}
 			
+			// 所属年级
+			if (MyUtils.isNotNull(query.getGradeId())) {
+				criteria.where(eq("a.gradeId","?"));
+				criteria.setStringParam(query.getGradeId());
+			}
+			
+			// 所属科目
+			if (MyUtils.isNotNull(query.getSubjectId())) {
+				criteria.where(eq("a.subjectId","?"));
+				criteria.setStringParam(query.getSubjectId());
+			}
+			
+			// 所属单元
+			if (MyUtils.isNotNull(query.getUnitId())) {
+				criteria.where(eq("a.unitId","?"));
+				criteria.setStringParam(query.getUnitId());
+			}
+						
 			// 题目类型
 			if (query.isSingleSelection()) {
 				criteria.where(eq("a.questionType", TrainQuestionItem.QUESTION_TYPE_SINGLE_SELECTION));//单选题 (默认值为1)
@@ -153,6 +171,24 @@ public class TrainQuestionDao extends BaseDao{
 			if (MyUtils.isNotNull(query.getUserId())) {
 				criteria.where(eq("a.ownerId", "?"));
 				criteria.setStringParam(query.getUserId());
+			}
+			
+			// 所属年级
+			if (MyUtils.isNotNull(query.getGradeId())) {
+				criteria.where(eq("a.gradeId","?"));
+				criteria.setStringParam(query.getGradeId());
+			}
+			
+			// 所属科目
+			if (MyUtils.isNotNull(query.getSubjectId())) {
+				criteria.where(eq("a.subjectId","?"));
+				criteria.setStringParam(query.getSubjectId());
+			}
+			
+			// 所属单元
+			if (MyUtils.isNotNull(query.getUnitId())) {
+				criteria.where(eq("a.unitId","?"));
+				criteria.setStringParam(query.getUnitId());
 			}
 			
 			// 题目类型

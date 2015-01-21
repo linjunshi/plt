@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.santrong.plt.log.Log;
 import com.santrong.plt.webpage.BaseDao;
+import com.santrong.plt.webpage.home.entry.LessonUnitEntry;
 import com.santrong.plt.webpage.home.entry.LessonUnitItem;
 
 public class LessonUnitDao extends BaseDao {
@@ -48,5 +49,22 @@ public class LessonUnitDao extends BaseDao {
 			Log.printStackTrace(e);
 		}
 		return null;
-	}	
+	}
+	
+	/**
+	 * 通过单元反查，年级、科目等信息
+	 * @param id
+	 * @return
+	 */
+	public LessonUnitEntry selectGSUById(String unitId) {
+		try {
+			LessonUnitMapper mapper = this.getMapper(LessonUnitMapper.class);
+			if(mapper != null) {
+				return mapper.selectGSUById(unitId);
+			}
+		} catch (Exception e) {
+			Log.printStackTrace(e);
+		}
+		return null;
+	}
 }

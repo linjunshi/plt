@@ -11,6 +11,9 @@ public class TrainQuestionQuery extends PageQuery{
 	
 	private String keywords;
 	private String userId;
+	private String gradeId;
+	private String subjectId;
+	private String unitId;
 	private int questionType;
 	
 	public String getKeywords() {
@@ -24,6 +27,24 @@ public class TrainQuestionQuery extends PageQuery{
 	}
 	public void setUserId(String userId) {
 		this.userId = userId;
+	}
+	public String getGradeId() {
+		return gradeId;
+	}
+	public void setGradeId(String gradeId) {
+		this.gradeId = gradeId;
+	}
+	public String getSubjectId() {
+		return subjectId;
+	}
+	public void setSubjectId(String subjectId) {
+		this.subjectId = subjectId;
+	}
+	public String getUnitId() {
+		return unitId;
+	}
+	public void setUnitId(String unitId) {
+		this.unitId = unitId;
 	}
 	public int getQuestionType() {
 		return questionType;

@@ -23,8 +23,13 @@ import com.santrong.plt.webpage.competition.entry.CompetitionAttendItem;
 import com.santrong.plt.webpage.competition.entry.CompetitionHistoryItem;
 import com.santrong.plt.webpage.competition.entry.CompetitionItem;
 import com.santrong.plt.webpage.course.resource.train.dao.TrainQuestionDao;
+import com.santrong.plt.webpage.course.resource.train.entry.AnswersOptionsEntry;
 import com.santrong.plt.webpage.course.resource.train.entry.TrainQuestionIndex;
 import com.santrong.plt.webpage.course.resource.train.entry.TrainQuestionItem;
+import com.santrong.plt.webpage.course.resource.train.entry.TrainQuestionQuery;
+import com.santrong.plt.webpage.home.dao.LessonUnitDao;
+import com.santrong.plt.webpage.home.entry.LessonUnitEntry;
+import com.santrong.plt.webpage.teacher.entry.UserItem;
 
 /**
  * @author weinianjie
@@ -279,6 +284,110 @@ public class WarAction extends BaseAction {
 		return "question/end";
 	}
 	
+	/**
+	 * 打开个人挑战的试题页面
+	 * @return
+	 */
+	@RequestMapping(value = "/exams", method = RequestMethod.GET)
+	public String person_exams(String subjectId) {
+		try {
+			HttpServletRequest request = this.getRequest();
+			
+			// 获取当前用户对象信息
+			UserItem user = this.currentUser();
+			if (user == null) {
+				// 没登陆，注意：异步的时候才这样子写，jquery对返回的结果作了判断
+				return "loginPage";
+			}
+			
+			int pageNum = this.getIntParameter("page");
+			if(pageNum == 0) {
+				pageNum = 1;
+			}
+			
+			TrainQuestionDao tqDao = new TrainQuestionDao();
+			TrainQuestionQuery query = new TrainQuestionQuery();
+			query.setPageNum(pageNum);
+			query.setPageSize(1);//只显示一条
+			query.setSubjectId(subjectId);//通过科目查询
+			query.isSingleSelection();//只查询单选题
+			query.setOrderBy("cts");
+			query.setOrderBy("gradeId");
+			query.setOrderBy("level");
+			query.setCount(tqDao.selectCountByQuery(query));
+			List<TrainQuestionItem> questionList = tqDao.selectByQuery(query);
+			
+			// 反查获取科目、年级、学期、单元
+			if (questionList != null && questionList.size() == 1) {
+				LessonUnitDao luDao = new LessonUnitDao();
+				LessonUnitEntry luEntry = new LessonUnitEntry();
+				for (TrainQuestionItem tqItem : questionList) {
+					luEntry = luDao.selectGSUById(tqItem.getUnitId());
+				}
+				request.setAttribute("luEntry", luEntry);
+			}
+			
+			// 获取选项 获取选项数值
+			List<AnswersOptionsEntry> optionsList = new ArrayList<AnswersOptionsEntry>();
+			for (int i = 0; i < TrainQuestionItem.Answers_Options.length; i++) {
+				AnswersOptionsEntry entry = new AnswersOptionsEntry();
+				entry.setOption(TrainQuestionItem.Answers_Options[i].toLowerCase());
+				entry.setAnswer(String.valueOf(TrainQuestionItem.Answers[i]));
+				optionsList.add(entry);
+			}
+			request.setAttribute("optionsList", optionsList);
+			
+			
+			request.setAttribute("questionList", questionList);
+			request.setAttribute("subjectId", subjectId);
+			request.setAttribute("query", query);
+		} catch (Exception e) {
+			Log.printStackTrace(e);
+		}
+		
+		return "war/person_exams";
+	}
+	
+	@RequestMapping("/addExamToHistory")
+	@ResponseBody
+	public String addExamToHistory() {
+		HttpServletRequest request = this.getRequest();
+		String answer = request.getParameter("answer");
+		String questionId = request.getParameter("questionId");
+//		String questionType = request.getParameter("questionType");
+		
+		if (MyUtils.isNotNull(answer) && MyUtils.isNotNull(questionId)) {
+			ThreadUtils.beginTranx();
+			CompetitionDao competitionDao = new CompetitionDao();
+			CompetitionAttendItem attend = new CompetitionAttendItem();
+			if (!competitionDao.existDoneExamByUserId(this.currentUser().getId(), null)) {
+				// 插入虚拟
+				attend.setId(MyUtils.getGUID());
+				attend.setCompetitionId(null);
+				attend.setUserId(this.currentUser().getId());
+				attend.setCts(new Date());
+				competitionDao.insertAttend(attend);
+			} else {
+				attend = competitionDao.selectAttendByUserId(this.currentUser().getId(), null);
+			}
+			
+			if (!competitionDao.existHistory(attend.getId(), questionId)) {
+				// 插入做题历史
+				CompetitionHistoryItem history = new CompetitionHistoryItem();				
+				history.setId(MyUtils.getGUID());
+				history.setAttendId(attend.getId());
+				history.setQuestionId(questionId);
+				history.setAnswer(answer);
+				history.setResult(0);
+				history.setCts(new Date());
+				history.setCts(new Date());
+				competitionDao.insertHistory(history);
+			}
+			ThreadUtils.commitTranx();
+			return SUCCESS;
+		}
+		return FAIL;
+	}
 }
 
 
