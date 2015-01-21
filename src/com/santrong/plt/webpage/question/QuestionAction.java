@@ -161,7 +161,7 @@ public class QuestionAction extends BaseAction {
 	 * @return
 	 */
 	@RequestMapping(value = "/begin", method = RequestMethod.POST)
-	public String begin(String cid, String[] qid, Integer[] answer) {
+	public String begin(String cid, String[] qid, String[] answer) {
 		int doneCount = 0;
 		int wrongCount = 0;
 		
@@ -175,15 +175,15 @@ public class QuestionAction extends BaseAction {
 			int total = questionList.size();
 			for(int i=0;i<total;i++) {
 				int result = 0;
-//				result = questionList.get(i).getAnswer() == answer[i]? 1 : 0;
-				if(answer[i] != 0) {
+				result = questionList.get(i).getAnswer().equalsIgnoreCase(answer[i])? 1 : 0;
+				if(MyUtils.isNotNull(answer[i])) {
 					doneCount++;
 					if(result == 0) {
 						wrongCount++;
 					}
 				}				
 				TrainQuestionIndex qIndex = new TrainQuestionIndex();
-//				qIndex.setAnswer(answer[i]);
+				qIndex.setAnswer(answer[i]);
 				qIndex.setResult(result);
 				indexList.add(qIndex);
 			}
@@ -221,10 +221,10 @@ public class QuestionAction extends BaseAction {
 						history.setId(MyUtils.getGUID());
 						history.setAttendId(attend.getId());
 						history.setQuestionId(qid[i]);
-//						history.setAnswer(answer[i]);
+						history.setAnswer(answer[i]);
 						history.setResult(indexList.get(i).getResult());
 						history.setCts(new Date());
-						history.setCts(new Date());
+						history.setUts(new Date());
 						competitionDao.insertHistory(history);
 					}
 					

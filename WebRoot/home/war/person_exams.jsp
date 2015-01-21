@@ -22,24 +22,28 @@ Globals.page = "Index_personExams";
 				<p>（${luEntry.unitName}）</p>
 			</div>
 			<c:forEach items="${questionList}" var="question" varStatus="st">
-				<div class="con_pue_sid">
+				<div class="con_pue_sid">questionType
 					<p>${question.topic}</p>
 				</div>
-				<div class="que_but singleSelection">
+				<div class="que_but selectControl">
 					<p><img src="${ctx}/resource/images/questiontype_${question.questionType}.png" /></p>
 					<c:forEach items="${optionsList}" var="oList" varStatus="ot">
 						<p>
+							<!-- 选择题、判断题 -->
 							<a href="javascript:void(0);" option="${oList.option}" answer="${oList.answer}">
-								<img src="${ctx}/resource/images/${oList.option}.png" width="52" height="55" border="0"
-								 />
+								<img src="${ctx}/resource/images/${oList.option}.png" border="0"/>
 							</a>
+							
 						</p>
 					</c:forEach>
+					<!-- 填空题 -->
+					<c:if test="${question.blankFilling}">
+					 	<p><input id="answer1" name="answer1" type="text" class="tian_text" /><label></label></p>
+					</c:if>
 				</div>
 				<c:if test="${question.singleSelection}"></c:if>
 				<c:if test="${question.mulChoice}"></c:if>
 				<c:if test="${question.trueOrFlase}"></c:if>
-				<c:if test="${question.blankFilling}"></c:if>
 				<div class="answer clearfix">
 					<h2>
 						答案：<b><c:if test="${question.blankFilling}">${question.answer}</c:if>

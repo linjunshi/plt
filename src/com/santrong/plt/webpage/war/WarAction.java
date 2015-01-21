@@ -24,6 +24,7 @@ import com.santrong.plt.webpage.competition.entry.CompetitionHistoryItem;
 import com.santrong.plt.webpage.competition.entry.CompetitionItem;
 import com.santrong.plt.webpage.course.resource.train.dao.TrainQuestionDao;
 import com.santrong.plt.webpage.course.resource.train.entry.AnswersOptionsEntry;
+import com.santrong.plt.webpage.course.resource.train.entry.TrainHistoryItem;
 import com.santrong.plt.webpage.course.resource.train.entry.TrainQuestionIndex;
 import com.santrong.plt.webpage.course.resource.train.entry.TrainQuestionItem;
 import com.santrong.plt.webpage.course.resource.train.entry.TrainQuestionQuery;
@@ -297,7 +298,7 @@ public class WarAction extends BaseAction {
 			UserItem user = this.currentUser();
 			if (user == null) {
 				// 没登陆，注意：异步的时候才这样子写，jquery对返回的结果作了判断
-				return "loginPage";
+				return this.redirectLogin();
 			}
 			
 			int pageNum = this.getIntParameter("page");
@@ -310,7 +311,7 @@ public class WarAction extends BaseAction {
 			query.setPageNum(pageNum);
 			query.setPageSize(1);//只显示一条
 			query.setSubjectId(subjectId);//通过科目查询
-			query.isSingleSelection();//只查询单选题
+//			query.setQuestionType(1);;//只查询单选题
 			query.setOrderBy("cts");
 			query.setOrderBy("gradeId");
 			query.setOrderBy("level");
@@ -321,22 +322,33 @@ public class WarAction extends BaseAction {
 			if (questionList != null && questionList.size() == 1) {
 				LessonUnitDao luDao = new LessonUnitDao();
 				LessonUnitEntry luEntry = new LessonUnitEntry();
+				int questionType = 1;
 				for (TrainQuestionItem tqItem : questionList) {
 					luEntry = luDao.selectGSUById(tqItem.getUnitId());
+					questionType = tqItem.getQuestionType();
 				}
 				request.setAttribute("luEntry", luEntry);
+				
+				// 获取选项 获取选项数值
+				List<AnswersOptionsEntry> optionsList = new ArrayList<AnswersOptionsEntry>();
+				if (questionType == TrainQuestionItem.QUESTION_TYPE_JUDGE_TRUE_OR_FLASE) {//判断题
+					for (int i = 0; i < TrainQuestionItem.Answers_En_TrueOrFalse.length; i++) {
+						AnswersOptionsEntry entry = new AnswersOptionsEntry();
+						entry.setOption(TrainQuestionItem.Answers_En_TrueOrFalse[i].toLowerCase());
+						entry.setAnswer(String.valueOf(TrainQuestionItem.Answers[i]));
+						optionsList.add(entry);
+					}
+				} else if (questionType == TrainQuestionItem.QUESTION_TYPE_SINGLE_SELECTION
+					|| questionType == TrainQuestionItem.QUESTION_TYPE_MULTIPLE_CHOICE) {//选择题
+					for (int i = 0; i < TrainQuestionItem.Answers_Options.length; i++) {
+						AnswersOptionsEntry entry = new AnswersOptionsEntry();
+						entry.setOption(TrainQuestionItem.Answers_Options[i].toLowerCase());
+						entry.setAnswer(String.valueOf(TrainQuestionItem.Answers[i]));
+						optionsList.add(entry);
+					}
+				}
+				request.setAttribute("optionsList", optionsList);
 			}
-			
-			// 获取选项 获取选项数值
-			List<AnswersOptionsEntry> optionsList = new ArrayList<AnswersOptionsEntry>();
-			for (int i = 0; i < TrainQuestionItem.Answers_Options.length; i++) {
-				AnswersOptionsEntry entry = new AnswersOptionsEntry();
-				entry.setOption(TrainQuestionItem.Answers_Options[i].toLowerCase());
-				entry.setAnswer(String.valueOf(TrainQuestionItem.Answers[i]));
-				optionsList.add(entry);
-			}
-			request.setAttribute("optionsList", optionsList);
-			
 			
 			request.setAttribute("questionList", questionList);
 			request.setAttribute("subjectId", subjectId);
@@ -348,20 +360,20 @@ public class WarAction extends BaseAction {
 		return "war/person_exams";
 	}
 	
+	// 添加试题测试历史记录
 	@RequestMapping("/addExamToHistory")
 	@ResponseBody
 	public String addExamToHistory() {
 		HttpServletRequest request = this.getRequest();
 		String answer = request.getParameter("answer");
 		String questionId = request.getParameter("questionId");
-//		String questionType = request.getParameter("questionType");
 		
 		if (MyUtils.isNotNull(answer) && MyUtils.isNotNull(questionId)) {
 			ThreadUtils.beginTranx();
 			CompetitionDao competitionDao = new CompetitionDao();
 			CompetitionAttendItem attend = new CompetitionAttendItem();
 			if (!competitionDao.existDoneExamByUserId(this.currentUser().getId(), null)) {
-				// 插入虚拟
+				// 插入虚拟报名测试表
 				attend.setId(MyUtils.getGUID());
 				attend.setCompetitionId(null);
 				attend.setUserId(this.currentUser().getId());
@@ -372,16 +384,33 @@ public class WarAction extends BaseAction {
 			}
 			
 			if (!competitionDao.existHistory(attend.getId(), questionId)) {
-				// 插入做题历史
-				CompetitionHistoryItem history = new CompetitionHistoryItem();				
-				history.setId(MyUtils.getGUID());
-				history.setAttendId(attend.getId());
-				history.setQuestionId(questionId);
-				history.setAnswer(answer);
-				history.setResult(0);
-				history.setCts(new Date());
-				history.setCts(new Date());
-				competitionDao.insertHistory(history);
+				TrainQuestionDao tqDao = new TrainQuestionDao();
+				TrainQuestionItem tqItem = tqDao.selectById(questionId);
+				if (tqItem != null) {
+					int result = tqItem.getAnswer().equalsIgnoreCase(answer) ? TrainHistoryItem.ANSWER_IS_RIGHT : TrainHistoryItem.ANSWER_IS_WRONG;
+					// 插入做题历史
+					CompetitionHistoryItem history = new CompetitionHistoryItem();				
+					history.setId(MyUtils.getGUID());
+					history.setAttendId(attend.getId());
+					history.setQuestionId(questionId);
+					history.setAnswer(answer);
+					history.setResult(result);
+					history.setCts(new Date());
+					history.setUts(new Date());
+					competitionDao.insertHistory(history);
+				}
+			} else {
+				TrainQuestionDao tqDao = new TrainQuestionDao();
+				TrainQuestionItem tqItem = tqDao.selectById(questionId);
+				if (tqItem != null) {
+					int result = tqItem.getAnswer().equalsIgnoreCase(answer) ? TrainHistoryItem.ANSWER_IS_RIGHT : TrainHistoryItem.ANSWER_IS_WRONG;
+					// 修改做题历史
+					CompetitionHistoryItem history = competitionDao.selectHistoryByAttendId(attend.getId(), questionId);
+					history.setAnswer(answer);
+					history.setResult(result);
+					history.setUts(new Date());
+					competitionDao.updateHistory(history);
+				}
 			}
 			ThreadUtils.commitTranx();
 			return SUCCESS;

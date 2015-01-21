@@ -74,9 +74,13 @@ public class TrainQuestionItem {
 	public static final String[] Answers_Options					= {"A","B","C","D"};
 	
 	/**
-	 * 选项的{"对","错"}分别对应的数值{1,2}
+	 * 选项的{"正确","错误"}分别对应的数值{1,2}
 	 */
-	public static final String[] Answers_TrueOrFalse				= {"对","错"};
+	public static final String[] Answers_TrueOrFalse				= {"正确","错误"};
+	/**
+	 * 选项的{"true","false"}分别对应的数值{1,2}
+	 */
+	public static final String[] Answers_En_TrueOrFalse				= {"true","false"};
 	
 	public boolean isAssemble() {
 		return assemble;
@@ -302,9 +306,12 @@ public class TrainQuestionItem {
 	 */
 	public List<String> getAnswerString() {
 		List<String> list = new ArrayList<String>();
-		if (this.questionType == QUESTION_TYPE_MULTIPLE_CHOICE || this.questionType == QUESTION_TYPE_SINGLE_SELECTION) {//选择题
+		if (this.questionType == QUESTION_TYPE_MULTIPLE_CHOICE 
+				|| this.questionType == QUESTION_TYPE_SINGLE_SELECTION) {//选择题
 			for(int i = 0; i < Answers.length; i++) {
-				if(((this.questionType == QUESTION_TYPE_SINGLE_SELECTION ? MyUtils.stringToInt(this.answer) : getSumAnswer()) & Answers[i]) == Answers[i]) {
+				if(((this.questionType == QUESTION_TYPE_SINGLE_SELECTION 
+						? MyUtils.stringToInt(this.answer) 
+								: getSumAnswer()) & Answers[i]) == Answers[i]) {
 					list.add(Answers_Options[i]);
 				}
 			}

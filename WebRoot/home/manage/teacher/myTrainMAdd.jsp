@@ -138,10 +138,10 @@ Globals.page = "Manage_myTrainMAdd";
 									<div class="form_field" id="answer2_radio">
 										<input value="1" class="form_radio" name="answer2" type="radio"
 											<c:if test="${tqItem.containA}">checked="checked"</c:if> />
-										<span class="form_ra_text">对</span> 
+										<span class="form_ra_text">正确</span> 
 										<input value="2" class="form_radio" name="answer2" type="radio"
 											<c:if test="${tqItem.containB}">checked="checked"</c:if> />
-										<span class="form_ra_text">错</span> 
+										<span class="form_ra_text">错误</span> 
 									</div>
 									<div class="form_field"  id="answer_input">
 										<textarea id="answer3" name="answer3" required>${tqItem.answer}</textarea>

@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import com.santrong.plt.webpage.competition.entry.CompetitionAttendItem;
 import com.santrong.plt.webpage.competition.entry.CompetitionHistoryItem;
@@ -44,5 +45,17 @@ public interface CompetitionMapper {
 	
 	@Select("select count(*) from competition_history where attendId = #{attendId} and questionId = #{questionId}")
 	int existHistory(@Param("attendId")String attendId, @Param("questionId")String questionId);
+	
+	@Select("select * from competition_history where attendId = #{attendId} and questionId = #{questionId}")
+	CompetitionHistoryItem selectHistoryByAttendId(@Param("attendId")String attendId, @Param("questionId")String questionId);
+	
+	@Update("update competition_history set "
+			+ "attendId = #{attendId},"
+			+ "questionId = #{questionId},"
+			+ "answer = #{answer},"
+			+ "result = #{result},"
+			+ "uts = #{uts} "
+			+ " where id = #{id}")
+	int updateHistory(CompetitionHistoryItem competitionHistoryItem);
 	
 }

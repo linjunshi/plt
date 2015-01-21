@@ -65,6 +65,10 @@ public abstract class BaseAction {
 		return Redirect + getContext() + url;
 	}
 	
+	public final String redirectLogin() {
+		return this.redirect("/account/login");
+	}	
+	
 	@SuppressWarnings("unchecked")
 	public final void addError(String msg) {
 		if(MyUtils.isNotNull(msg)) {

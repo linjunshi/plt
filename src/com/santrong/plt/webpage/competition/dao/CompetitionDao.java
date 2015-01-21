@@ -154,4 +154,27 @@ public class CompetitionDao extends BaseDao {
 		return false;
 	}
 	
+	public CompetitionHistoryItem selectHistoryByAttendId(String attendId, String questionId){
+		try {
+			CompetitionMapper mapper = this.getMapper(CompetitionMapper.class);
+			if (mapper != null) {
+				return mapper.selectHistoryByAttendId(attendId, questionId);
+			}
+		} catch (Exception e) {
+			Log.printStackTrace(e);
+		}
+		return null;
+	}
+	
+	public boolean updateHistory(CompetitionHistoryItem competitionHistoryItem){
+		try {
+			CompetitionMapper mapper = this.getMapper(CompetitionMapper.class);
+			if (mapper != null) {
+				return mapper.updateHistory(competitionHistoryItem) > 0;
+			}
+		} catch (Exception e) {
+			Log.printStackTrace(e);
+		}
+		return false;
+	}
 }

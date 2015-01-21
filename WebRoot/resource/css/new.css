@@ -50,6 +50,13 @@ div[contenteditable=true] {-webkit-line-break: after-white-space;-webkit-nbsp-mo
 .con_login .con_user_but:hover{ background:#09f;}
 .con_login .con_not_psd {color: #09f;}
 .con_login .con_not_psd:hover{text-decoration: underline;}
+
+.user_info_hidd { margin:25px 0 0 10px;}
+.user_info_hidd p{float:left; height:30px; line-height:30px; margin:10px 10px 0 5px;padding:0 10px;}
+.user_info_hidd .user_info_sid *{vertical-align:middle; margin-left:10px;}
+.user_info_hidd .user_info_sid span{ margin-left:5px;}
+.user_info_hidd a{ color: #09F; margin-left: 20px;}
+.user_info_hidd a:hover{ color: #f90;}
 /*--------------------里面抬头部分-------------------------------*/
 .menu {background:#fff url(../images/top_bg.png) no-repeat center top;}
 .menu_top { width:1000px; height:230px;margin:0 auto;position: relative;}
@@ -123,7 +130,8 @@ div[contenteditable=true] {-webkit-line-break: after-white-space;-webkit-nbsp-mo
 .answer p{ margin-top:20px; font-size:22px; color:#090;}
 .button_submit { position: absolute;right: 40px; bottom: 200px;display: block;}
 .button_next { position: absolute;right: 40px; bottom: 100px;display: none;}
-.single_radio_hidden {display: none;}
+.tian_text { width:350px; height:40px; line-height:40px; border:none; border-bottom:1px #000 solid; font-size:16px; margin-top:10px; text-align:center;}
+.que_but label{ font-size: 22px; margin-top:40px;}
 
 .live_resul {width:960px; margin:0 auto;}
 .result_sorting { border-bottom:1px #D0A66D solid; background:#fff3e3; height:30px;}

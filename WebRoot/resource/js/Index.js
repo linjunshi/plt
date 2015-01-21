@@ -190,29 +190,40 @@ IndexClass.prototype = {
 	personExams : function() {
 		
 		// 通过改变图片的样式，标识当前已经选择的选项
-		$(".singleSelection a").click(function(){
-			$(".singleSelection a.current").each(function(){
-				var option = $(this).attr("option");
-				$(this).children("img").attr("src",Globals.ctx + "/resource/images/" + option + ".png");
-				$(this).css("cursor","hand");
-				$(this).removeClass("current");
-			});
+		$(".selectControl a").click(function(){
+			debugger;
 			var option = $(this).attr("option");
+			var questionType = $("#questionType").val();
+			if (questionType/1 != 2) {//不是多选题，就不用清除所有的
+				$(".selectControl a.selected").each(function(){
+					var _option = $(this).attr("option");
+					$(this).children("img").attr("src",Globals.ctx + "/resource/images/" + _option + ".png");
+					$(this).css("cursor","normal");
+					$(this).removeClass("selected");
+				});
+			} else {//多选题
+				if ($(this).hasClass("selected")) {//如果有selected样式就不切换图片的名称
+					$(this).children("img").attr("src",Globals.ctx + "/resource/images/" + option + ".png");
+					$(this).css("cursor","normal");
+					$(this).removeClass("selected");//移除已经选择的样式标识
+					return false;
+				}
+			}
 			$(this).children("img").attr("src",Globals.ctx + "/resource/images/" + option + "_hover_1.png");
-			$(this).css("cursor","normal");
-			$(this).addClass("current");
+			$(this).css("cursor","hand");
+			$(this).addClass("selected");
 			$("#answer").val($(this).attr("answer"));
 		});
 		
 		// 鼠标移过字母时，切换图片的样式
-		$(".singleSelection a").hover( 
+		$(".selectControl a").hover( 
 			function () {
 				var option = $(this).attr("option");
 				$(this).children("img").attr("src",Globals.ctx + "/resource/images/" + option + "_hover_1.png");
 				$(this).css("cursor","hand");
 			},
 			function () {
-				if (!$(this).hasClass("current") ) {//如果有current样式就不切换图片的名称
+				if (!$(this).hasClass("selected")) {//如果有selected样式就不切换图片的名称
 					var option = $(this).attr("option");
 					$(this).children("img").attr("src",Globals.ctx + "/resource/images/" + option + ".png");
 					$(this).css("cursor","normal");
@@ -220,11 +231,27 @@ IndexClass.prototype = {
 			}
 		);
 		
+		// 保存选择题、判断题到页面的隐藏字段里去
+		var setAnswersFn = function(questionType) {
+			var answers = "";
+			$(".selectControl a.selected").each(function(){
+				answers += "," + $(this).attr("answer");
+			});
+			if (answers != "" && answers.length > 0) {
+				$("input[name=answer]").val(answers.substr(1));
+			}
+		} 
+		
 		// 提交测试题的数据
 		$(".submit").click(function(){
+			var questionType = $("#questionType").val();
+			if (questionType/1 != 4) {//如果不为填空题的话
+				setAnswersFn(questionType);
+			} else {
+				$("#answer").val($("#answer1").val());//填空题
+			}
 			var answer = $("#answer").val();
 			var questionId = $("#questionId").val();
-			var questionType = $("#questionType").val();
 			if (answer != null && answer != "") {
 				$.ajax({
 					type : 'GET',
