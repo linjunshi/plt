@@ -1,3 +1,6 @@
+-- 2015-01-20 weinianjie  (2015-01-20 hwcloud)
+alter table competition_attend change competitionId competitionId varchar(32) comment '竞赛ID';
+
 -- 2015-01-19 weinianjie
 create table resource_video(
 	id varchar(32) not null comment 'UUID',
@@ -33,7 +36,7 @@ create table lesson_unit(
 alter table resource_train_question add column unitId varchar(32) comment '所属单元' after gradeId;
 alter table knowledge add column unitId varchar(32) comment '所属单元' after gradeId;
 
--- 2015-01-14 weinianjie  (2015-01-15 hwcloud)
+-- 2015-01-14 weinianjie
 alter table resource_train_question add column answer2 varchar(256) comment '答案' after answer;
 update resource_train_question set answer2='1';
 alter table resource_train_question drop column answer;

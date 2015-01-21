@@ -147,4 +147,12 @@ public class WeikeMAction extends TeacherBaseAction {
 		
 		return this.redirect("/manage/weike/modify?courseId=" + courseForm.getId());
 	}
+	
+	@RequestMapping("/add")
+	public String insert() {
+		//TODO 添加课程
+		//TODO 添加章节
+		//TODO 添加章节关联视频
+		return "";
+	}
 }

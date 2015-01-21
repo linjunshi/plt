@@ -1,7 +1,6 @@
 @charset "utf-8";
 html, body {color: #666;}
 html, body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, code, form, fieldset, legend, input, textarea, p, blockquote, th, td {margin: 0;padding: 0}
-body {background:url(../images/1.gif);}
 table {border-collapse: collapse;border-spacing: 0}
 fieldset, img {border: 0}
 address, caption, cite, code, dfn, th, var, i, s {font-style: normal;font-weight: normal}

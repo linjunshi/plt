@@ -427,7 +427,7 @@ drop table if exists competition_attend;
 create table competition_attend(
 	id varchar(32) not null comment 'UUID',
 	userId varchar(32) not null comment '用户ID',
-	competitionId varchar(32) not null comment '竞赛ID',
+	competitionId varchar(32) comment '竞赛ID',
 	cts datetime comment '创建时间',
 	primary key (id)
 ) engine=InnoDB default charset=utf8 collate=utf8_bin comment '竞赛报名表';
