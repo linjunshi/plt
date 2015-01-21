@@ -18,6 +18,7 @@ import com.santrong.plt.util.MyUtils;
 import com.santrong.plt.webpage.BaseAction;
 import com.santrong.plt.webpage.course.dao.WeikeDao;
 import com.santrong.plt.webpage.course.entry.CourseItem;
+import com.santrong.plt.webpage.course.entry.WeikeDetailView;
 import com.santrong.plt.webpage.course.entry.WeikeQuery;
 import com.santrong.plt.webpage.home.dao.SubjectDao;
 import com.santrong.plt.webpage.home.entry.SubjectItem;
@@ -110,12 +111,24 @@ public class WeikeAction extends BaseAction {
 		return "weike/index";
 	}
 	
-	
-	@RequestMapping("/add")
-	public String insert() {
-		//TODO 添加课程
-		//TODO 添加章节
-		//TODO 添加章节关联视频
-		return "";
-	}
+	/**
+	 * 课程详细页面
+	 * @param id
+	 * @return
+	 */
+	@RequestMapping("/{id}.html")
+	public String detail(@PathVariable String id) {
+		
+		// 课程详细
+		WeikeDao weikeDao = new WeikeDao();
+		WeikeDetailView course = weikeDao.selectByCourseId(id);
+		if(course == null) {
+			return "404";
+		}
+		
+		HttpServletRequest request = getRequest();
+		request.setAttribute("course", course);
+		
+		return "weike/detail";
+	}	
 }

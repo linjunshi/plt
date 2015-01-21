@@ -373,7 +373,7 @@ create table resource_train_history(
 drop table if exists resource_train_question;
 create table resource_train_question(
 	id varchar(32) not null comment 'UUID',
-	topic varchar(2048) not null comment '题目',
+	topic text not null comment '题目',
 	questionType int(10) default 0 not null comment '题目类型',
 	answer varchar(256) comment '答案',
 	remark varchar(256) comment '详解',
@@ -427,7 +427,7 @@ drop table if exists competition_attend;
 create table competition_attend(
 	id varchar(32) not null comment 'UUID',
 	userId varchar(32) not null comment '用户ID',
-	competitionId varchar(32) not null comment '竞赛ID',
+	competitionId varchar(32) comment '竞赛ID',
 	cts datetime comment '创建时间',
 	primary key (id)
 ) engine=InnoDB default charset=utf8 collate=utf8_bin comment '竞赛报名表';

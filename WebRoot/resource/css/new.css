@@ -1,7 +1,6 @@
 @charset "utf-8";
 html, body {color: #666;}
 html, body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, code, form, fieldset, legend, input, textarea, p, blockquote, th, td {margin: 0;padding: 0}
-body {background:url(../images/1.gif);}
 table {border-collapse: collapse;border-spacing: 0}
 fieldset, img {border: 0}
 address, caption, cite, code, dfn, th, var, i, s {font-style: normal;font-weight: normal}
@@ -121,7 +120,7 @@ div[contenteditable=true] {-webkit-line-break: after-white-space;-webkit-nbsp-mo
 .con_que h2.yuwen{float:left; display:block; background: url(../images/yuwen.png) no-repeat left top; width:200px; line-height:120px;}
 .con_que h2.shuxue{float:left; display:block; background: url(../images/shuxue.png) no-repeat left top; width:200px; line-height:120px;}
 .con_que h2.yingyu{float:left; display:block; background: url(../images/yingyu.png) no-repeat left top; width:200px; line-height:120px;}
-.con_que p{ float:left; display:block; margin-right:20px; font-size:30px; color:#FF0; margin:0 20px; line-height:120px;}
+.con_que p{ float:left; display:block; font-size:30px; color:#FF0; line-height:120px;}
 .con_pue_sid { text-align:center; vertical-align:middle; margin:30px 0; height: 250px;}
 .que_but { margin:50px 0 0 100px;}
 .que_but p{ float:left; display:block; margin:0 20px;}

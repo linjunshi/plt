@@ -7,7 +7,7 @@ import java.util.Date;
  * @date 2015年1月19日
  * @time 下午3:00:24
  */
-public class WeikeDetailItem {
+public class WeikeDetailView {
 	private String id;
 	private String title;
 	private String url;
@@ -17,6 +17,15 @@ public class WeikeDetailItem {
 	private String remark;
 	private Date cts;
 	private Date uts;
+	
+	private String fileUrl;					// 视频文件地址
+	
+	public String getFileUrl() {
+		return fileUrl;
+	}
+	public void setFileUrl(String fileUrl) {
+		this.fileUrl = fileUrl;
+	}
 	public String getId() {
 		return id;
 	}

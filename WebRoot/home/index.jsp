@@ -60,7 +60,7 @@
 				<h2>最新视频</h2>
 				<ul>
 					<c:forEach items="${xiaoxue_subjectList}" var="subject">
-						<li><a href="${ctx}/course/xiaoxue/${subject.subjectEnName}">${subject.subjectName}</a></li>
+						<li><a href="${ctx}/course/${subject.subjectEnName}">${subject.subjectName}</a></li>
 					</c:forEach>
 				</ul>
 			</div>
@@ -75,7 +75,7 @@
 								购买：<b>${item.saleCount}</b>
 							</p>
 							<p class="con_but">
-								<a href="${ctx}/course/${item.id}.html" target="_blank">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+								<a href="${ctx}/${_courseType}/${item.id}.html" target="_blank">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
 							</p>
 						</li>
 					</c:forEach>

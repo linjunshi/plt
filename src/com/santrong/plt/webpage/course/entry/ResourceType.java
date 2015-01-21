@@ -24,6 +24,9 @@ public class ResourceType {
 	@Description(cn = "测验", en = "train")
 	public static final int Type_Train = 4;
 	
+	@Description(cn = "视频", en = "video")
+	public static final int Type_Video = 5;	
+	
 	static{
 
 	}
