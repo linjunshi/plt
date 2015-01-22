@@ -47,7 +47,7 @@ Globals.page = "Manage_weikeAdd";
 									<div class="form_item">
 										<label for="gradeId">课程分类：</label>
 										<div class="form_field">
-											<select id="gradeSelect">
+											<select id="gradeSelect" style="display:none;">
 												<c:forEach items="${applicationScope.gradeList}" var="grade" varStatus="st">
 												<option value="${grade.gradeEnName}">${grade.gradeName}</option>
 												</c:forEach>
