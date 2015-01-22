@@ -42,6 +42,8 @@ Globals.page = "Manage_weikeAdd";
 								<input type="hidden" name="id" value="${course.id}"/>
 								<input id="levelId" name="levelId" type="hidden" value="${course.gradeId}">
 								<input id="oldSubjectId" name="oldSubjectId" type="hidden" value="${course.subjectId}">
+								<input id="oldUnitId" name="oldUnitId" type="hidden" value="${course.unitId}">
+								<input id="gradeIdSelected" name="gradeIdSelected" type="hidden" value="">
 									<div class="form_item">
 										<label for="gradeId">课程分类：</label>
 										<div class="form_field">
@@ -50,12 +52,18 @@ Globals.page = "Manage_weikeAdd";
 												<option value="${grade.gradeEnName}">${grade.gradeName}</option>
 												</c:forEach>
 											</select>
-											<select name="gradeId" id="levelSelect">
-											</select>
-											<select name="subjectId" id="subjectSelect">
-											</select>
+											<select name="gradeId" id="levelSelect"></select>
+											<select name="subjectId" id="subjectSelect"></select>
+											<select name="unitId" id="unitSelect"></select>
 											<span class="not-empty" title='此项为必填项'>*</span>
 										 </div>
+									</div>
+									<div class="form_item">
+										<label>所属知识点<span class="not-empty" title='此项为必填项'>*</span>：</label>
+										<div class="form_field">
+											<input id="knowledgeIds" name="knowledgeIds" type="hidden" value="${knowledgeIds}"/>
+											<input id="knowledgeNames" name="knowledgeNames" placeholder="请点击选择试题所属的知识点" type="button" value="请点击这里选择绑定知识点"/>
+										</div>
 									</div>
 									<div class="form_item">
 										<label for="courseName">课程名称：</label>

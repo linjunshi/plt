@@ -20,6 +20,7 @@ import com.santrong.plt.webpage.course.entry.CourseDetailView;
 import com.santrong.plt.webpage.course.entry.CourseItem;
 import com.santrong.plt.webpage.course.entry.CourseQuery;
 import com.santrong.plt.webpage.course.entry.CourseView;
+import com.santrong.plt.webpage.course.entry.WeikeKnowledgeView;
 
 /**
  * @author weinianjie
@@ -711,4 +712,100 @@ public class CourseDao extends BaseDao {
 		}
 		return false;
 	}
+	
+	/**
+	 * 获取微课已经绑定的知识点列表
+	 * @author huangweihua
+	 * @tablename course_to_knowledge 课程关联知识点表
+	 * @param courseId
+	 * @return
+	 */
+	public List<WeikeKnowledgeView> selectCourse2KnowledgeByCouseId(String courseId) {
+		try {
+			CourseMapper mapper = this.getMapper(CourseMapper.class);
+			if (mapper != null) {
+				return mapper.selectCourse2KnowledgeByCouseId(courseId);
+			}
+		} catch (Exception e) {
+			Log.printStackTrace(e);
+		}
+		return null;
+	}
+	
+	/**
+	 * 判断微课是否已经绑定知识点
+	 * @tablename course_to_knowledge 课程关联知识点表
+	 * @param courseId
+	 * @param knowledgeId
+	 * @return
+	 */
+	public boolean existsKnowledge2Course(String courseId, String knowledgeId){
+		try {
+			CourseMapper mapper = this.getMapper(CourseMapper.class);
+			if (mapper != null) {
+				return mapper.existsKnowledge2Course(courseId, knowledgeId) > 0;
+			}
+		} catch (Exception e) {
+			Log.printStackTrace(e);
+		}
+		return false;
+	}
+	
+	/**
+	 * 微课绑定知识点
+	 * @tablename course_to_knowledge 课程关联知识点表
+	 * @param courseId
+	 * @param knowledgeId
+	 * @return
+	 */
+	public boolean addKnowledge2Course(String courseId, String knowledgeId){
+		try {
+			CourseMapper mapper = this.getMapper(CourseMapper.class);
+			if (mapper != null) {
+				return mapper.addKnowledge2Course(courseId, knowledgeId) > 0;
+			}
+		} catch (Exception e) {
+			Log.printStackTrace(e);
+		}
+		return false;
+	}
+	
+	/**
+	 * 移除一条微课绑定知识点的记录
+	 * @tablename course_to_knowledge 课程关联知识点表
+	 * @param courseId
+	 * @param knowledgeId
+	 * @return
+	 */
+	public boolean removeKnowledge4Course(String courseId, String knowledgeId){
+		try {
+			CourseMapper mapper = this.getMapper(CourseMapper.class);
+			if (mapper != null) {
+				return mapper.removeKnowledge4Course(courseId, knowledgeId) > 0;
+			}
+		} catch (Exception e) {
+			Log.printStackTrace(e);
+		}
+		return false;
+	}
+	
+	/**
+	 * 移除所有的微课绑定知识点的记录
+	 * @tablename course_to_knowledge 课程关联知识点表
+	 * @param courseId
+	 * @param knowledgeId
+	 * @return
+	 */
+	public boolean removeAllKnowledge4Course(String courseId){
+		try {
+			CourseMapper mapper = this.getMapper(CourseMapper.class);
+			if (mapper != null) {
+				return mapper.removeAllKnowledge4Course(courseId) > 0;
+			}
+		} catch (Exception e) {
+			Log.printStackTrace(e);
+		}
+		return false;
+	}
+	
 }

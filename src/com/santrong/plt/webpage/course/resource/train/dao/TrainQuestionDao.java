@@ -496,8 +496,9 @@ public class TrainQuestionDao extends BaseDao{
 	/**
 	 * 获取试题已经绑定的知识点列表
 	 * @author huangweihua
-	 * @tablename question_to_knowledge 作业关联作业习题表
-	 * @param trainId
+	 * @tablename question_to_knowledge 试题关联知识点表
+	 * @tablename knowledge 知识点表  
+	 * @param questionId
 	 * @return
 	 */
 	public List<KnowledgeQuestionView> selectKnowledge2QuestionByQId(String questionId) {

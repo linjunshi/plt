@@ -21,6 +21,7 @@ public class CourseItem {
 	private String ownerId;
 	private String gradeId;
 	private String subjectId;
+	private String unitId;
 	private int collectCount;
 	private int saleCount;
 	private int commentCount;
@@ -111,6 +112,12 @@ public class CourseItem {
 	}
 	public void setSubjectId(String subjectId) {
 		this.subjectId = subjectId;
+	}
+	public String getUnitId() {
+		return unitId;
+	}
+	public void setUnitId(String unitId) {
+		this.unitId = unitId;
 	}
 	public int getPrice() {
 		return price;

@@ -191,7 +191,6 @@ IndexClass.prototype = {
 		
 		// 通过改变图片的样式，标识当前已经选择的选项
 		$(".selectControl a").click(function(){
-			debugger;
 			var option = $(this).attr("option");
 			var questionType = $("#questionType").val();
 			if (questionType/1 != 2) {//不是多选题，就不用清除所有的
@@ -212,7 +211,7 @@ IndexClass.prototype = {
 			$(this).children("img").attr("src",Globals.ctx + "/resource/images/" + option + "_hover_1.png");
 			$(this).css("cursor","hand");
 			$(this).addClass("selected");
-			$("#answer").val($(this).attr("answer"));
+			$("#answer").val($(this).attr("answer").trim());
 		});
 		
 		// 鼠标移过字母时，切换图片的样式
@@ -248,9 +247,9 @@ IndexClass.prototype = {
 			if (questionType/1 != 4) {//如果不为填空题的话
 				setAnswersFn(questionType);
 			} else {
-				$("#answer").val($("#answer1").val());//填空题
+				$("#answer").val($("#answer1").val().trim());//填空题
 			}
-			var answer = $("#answer").val();
+			var answer = $("#answer").val().trim();
 			var questionId = $("#questionId").val();
 			if (answer != null && answer != "") {
 				$.ajax({

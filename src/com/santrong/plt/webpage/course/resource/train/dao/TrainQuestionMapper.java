@@ -122,9 +122,9 @@ public interface TrainQuestionMapper {
 	/**
 	 * 获取试题已经绑定的知识点列表
 	 * @author huangweihua
-	 * @tablename question_to_knowledge 作业关联作业习题表  
+	 * @tablename question_to_knowledge 试题关联知识点表
 	 * @tablename knowledge 知识点表  
-	 * @param trainId
+	 * @param questionId
 	 * @return
 	 */
 	@Select("select a.knowledgeName, a.subjectId, a.gradeId, b.*  from knowledge a RIGHT JOIN question_to_knowledge b on a.id = b.knowledgeId where b.questionId = #{questionId} order by a.code asc,a.priority")

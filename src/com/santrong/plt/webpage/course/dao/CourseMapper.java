@@ -2,6 +2,7 @@ package com.santrong.plt.webpage.course.dao;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
@@ -10,6 +11,7 @@ import org.apache.ibatis.annotations.Update;
 import com.santrong.plt.webpage.course.entry.CourseDetailView;
 import com.santrong.plt.webpage.course.entry.CourseItem;
 import com.santrong.plt.webpage.course.entry.CourseView;
+import com.santrong.plt.webpage.course.entry.WeikeKnowledgeView;
 
 /**
  * @author weinianjie
@@ -109,7 +111,7 @@ public interface CourseMapper {
 	 * @param courseItem
 	 * @return
 	 */
-	@Insert("insert into course values(#{id},#{courseName},#{teacher},#{price},#{url},#{live},#{endTime},#{gradeId},#{subjectId},#{remark},#{limitCount},#{saleCount},#{collectCount},#{commentCount},#{chapterCount},#{playCount},#{courseType},#{ownerId},#{status},#{cts},#{uts})")
+	@Insert("insert into course values(#{id},#{courseName},#{teacher},#{price},#{url},#{live},#{endTime},#{gradeId},#{subjectId},#{unitId},#{remark},#{limitCount},#{saleCount},#{collectCount},#{commentCount},#{chapterCount},#{playCount},#{courseType},#{ownerId},#{status},#{cts},#{uts})")
 	int insert(CourseItem courseItem);
 	
 	/**
@@ -127,6 +129,7 @@ public interface CourseMapper {
 			+ "endTime = #{endTime},"
 			+ "gradeId = #{gradeId},"
 			+ "subjectId = #{subjectId},"
+			+ "unitId = #{unitId},"
 			+ "remark = #{remark},"
 //			+ "saleCount = #{saleCount},"
 //			+ "collectCount = #{collectCount},"
@@ -174,4 +177,29 @@ public interface CourseMapper {
 	 */
 	@Update("update course set chapterCount = #{chapterCount} where id = #{id}")
 	int updateChapterCount(@Param("id")String id,@Param("chapterCount")int chapterCount);
+	
+	/**
+	 * 获取微课已经绑定的知识点列表
+	 * @author huangweihua
+	 * @tablename course_to_knowledge 课程关联知识点表  
+	 * @tablename knowledge 知识点表  
+	 * @param courseId
+	 * @return
+	 */
+	@Select("select a.knowledgeName, a.subjectId, a.gradeId, a.unitId, b.* from knowledge a RIGHT JOIN course_to_knowledge b on a.id = b.knowledgeId where b.courseId = #{courseId} order by a.code asc,a.priority")
+	List<WeikeKnowledgeView> selectCourse2KnowledgeByCouseId(String courseId);
+	
+	
+	@Select("select count(*) from course_to_knowledge where courseId = #{knowledgeId} and knowledgeId = #{knowledgeId}")
+	int existsKnowledge2Course(@Param("courseId")String courseId, @Param("knowledgeId")String knowledgeId);
+	
+	@Insert("insert into course_to_knowledge values(#{courseId}, #{knowledgeId})")
+	int addKnowledge2Course(@Param("courseId")String courseId, @Param("knowledgeId")String knowledgeId);
+	
+	@Delete("delete from course_to_knowledge where courseId = #{courseId} and knowledgeId = #{knowledgeId}")
+	int removeKnowledge4Course(@Param("courseId")String courseId, @Param("knowledgeId")String knowledgeId);
+
+	@Delete("delete from course_to_knowledge where courseId = #{courseId}")
+	int removeAllKnowledge4Course(String courseId);
+	
 }

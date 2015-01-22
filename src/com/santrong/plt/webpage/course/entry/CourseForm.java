@@ -18,6 +18,7 @@ public class CourseForm {
 	private String url;
 	private String gradeId;
 	private String subjectId;
+	private String unitId;
 	private String remark;
 	private Date uts;
 	
@@ -51,6 +52,12 @@ public class CourseForm {
 	}
 	public void setSubjectId(String subjectId) {
 		this.subjectId = subjectId;
+	}
+	public String getUnitId() {
+		return unitId;
+	}
+	public void setUnitId(String unitId) {
+		this.unitId = unitId;
 	}
 	public Integer getPrice() {
 		return price;

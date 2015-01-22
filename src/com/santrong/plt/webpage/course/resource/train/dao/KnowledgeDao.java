@@ -203,8 +203,7 @@ public class KnowledgeDao extends BaseDao {
 				list =  mapper.selectByName(knowledgeItem.getKnowledgeName().trim());
 				if (list != null && list.size() > 0) {
 					for(KnowledgeItem kItem : list) {
-						if (knowledgeItem.getSubjectId().equals(kItem.getSubjectId()) 
-								&& knowledgeItem.getGradeId().equals(kItem.getGradeId())
+						if (knowledgeItem.getUnitId().equals(kItem.getUnitId()) 
 								&& !knowledgeItem.getId().equals(kItem.getId())) {
 							return true;
 						}
@@ -254,16 +253,15 @@ public class KnowledgeDao extends BaseDao {
 	}
 	
 	/**
-	 * 根据gradeId（年级）、subjectId（学科）、unitId（单元），获取知识点列表
-	 * @param gradeId
-	 * @param subjectId
+	 * 根据unitId（单元），获取知识点列表
+	 * @param unitId
 	 * @return
 	 */
-	public List<KnowledgeItem> selectByGIdAndSIdAndUId(String gradeId, String subjectId, String unitId) {
+	public List<KnowledgeItem> selectByUnitId(String unitId) {
 		try {
 			KnowledgeMapper mapper = this.getMapper(KnowledgeMapper.class);
 			if(mapper != null) {
-				return mapper.selectByGIdAndSIdAndUId(gradeId, subjectId, unitId);
+				return mapper.selectByUnitId(unitId);
 			}
 		} catch (Exception e) {
 			Log.printStackTrace(e);

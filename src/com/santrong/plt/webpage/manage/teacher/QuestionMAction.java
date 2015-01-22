@@ -289,9 +289,7 @@ public class QuestionMAction extends TeacherBaseAction{
 							KnowledgeDao kDao = new KnowledgeDao();
 							List<KnowledgeItem> kList = kDao.selectByIds(stringArr);
 							for (KnowledgeItem kItem : kList) {
-								if (!kItem.getGradeId().equals(tqForm.getGradeId()) 
-										|| !kItem.getSubjectId().equals(tqForm.getSubjectId()) 
-										|| !kItem.getUnitId().equals(tqForm.getUnitId())) {
+								if (!kItem.getUnitId().equals(tqForm.getUnitId())) {
 									addError("亲，您修改了知识点分类，请您重新绑定知识点 ！");
 									request.setAttribute("tqItem", tqForm);
 									return "/manage/teacher/myTrainMAdd";

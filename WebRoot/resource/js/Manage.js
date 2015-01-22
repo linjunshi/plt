@@ -93,6 +93,177 @@ function ManageClass() {
 //Manage模块的具体页面初始化
 ManageClass.prototype = {
 		
+		//新增微课页面
+		weikeAdd : function(){
+			
+			var kIds = $("input[name=knowledgeIds]").val();
+			if (kIds != "" && kIds != null) {
+				$("input[name=knowledgeNames]").val("已绑定知识点");
+			}
+			// TODO 打开知识点绑定列表弹窗
+			$("input[name=knowledgeNames]").click(function(){
+				var courseId = $("input[name=id]").val();
+				var knowledgeIds = $("input[name=knowledgeIds]").val();
+//				var gradeId = $("#levelSelect").val();
+//				var subjectId = $("#subjectSelect").val();
+				var unitId = $("#unitSelect").val();
+				if (unitId != "" && unitId != null) {
+					Boxy.load(Globals.ctx + "/component/bind/bingKnowledge?courseId=" + courseId + "&knowledgeIds=" + knowledgeIds 
+							+ "&unitId=" + unitId, {title : '知识点绑定列表',
+						afterShow : function(){
+							if(oListboxTo.length == 0 && knowledgeIds != "" && knowledgeIds != null){
+								var str = knowledgeIds.split(",");
+								for(var i = 0; i < str.length; i++){
+									oListboxTo.appendChild(str[i]); //
+									//i -= 1;  //每删除一个选项后，每个选项的index会被置
+								}
+							}
+							// 全部向右移动
+							$(".join_right_all").click(function(){
+								var options = oListboxFrom.options;
+								for(var i = 0; i < options.length; i++){
+									oListboxTo.appendChild(options[i]); //
+									i -= 1;  //每删除一个选项后，每个选项的index会被置
+								}
+							});
+							// 部分向右移动
+							$(".join_right_but").click(function(){
+								var options = oListboxFrom.options;
+								for(var i = 0; i < options.length; i++){
+									if(options[i].selected){
+										oListboxTo.appendChild(options[i]);
+										i -= 1;
+									}
+								}
+							});
+							// 部分向左移动
+							$(".join_left_but").click(function(){
+								var options = oListboxTo.options;
+								for(var i = 0; i < options.length; i++){
+									if(options[i].selected){
+										oListboxFrom.appendChild(options[i]);
+										i -= 1;
+									}
+								}
+							});
+							// 全部向左移动
+							$(".join_left_all").click(function(){
+								var options = oListboxTo.options;
+								for(var i = 0; i < options.length; i++){
+									oListboxForm.appendChild(options[i]); //
+									i -= 1;  //每删除一个选项后，每个选项的index会被置
+								}
+							});
+							// 向上移动
+							$(".join_up_but").click(function(){
+								if(oListbox.selectedIndex > 0){
+									var oOption = oListbox.options[oListbox.selectedIndex];
+									var oPrevOption = oListbox.options[oListbox.selectedIndex-1];
+									oListbox.insertBefore(oOption,oPrevOption);
+								}
+							});
+							// 向下移动
+							$(".join_down_but").click(function(){
+								if(oListbox.selectedIndex < oListbox.options.length-1){
+									var oOption = oListbox.options[oListbox.selectedIndex];
+									var oNextOption = oListbox.options[oListbox.selectedIndex+1];
+									oListbox.insertBefore(oNextOption,oOption);
+								}
+							});
+							$(".sure").click(function(){
+								var options = oListboxTo.options;
+								var ids = "";
+								for(var i = 0; i < options.length; i++){
+									ids += "," + oListboxTo.options[i].value;
+								}
+								if (ids != "" && ids.length > 0) {
+									$("input[name=knowledgeIds]").val(ids.substr(1));
+									$("input[name=knowledgeNames]").val("已绑定知识点");
+									$(".close").click();
+								}
+							});
+							$(".close").bindFormClose();
+						}
+					});
+					
+				} else {
+					Boxy.alert("<i class='error'></i><span>亲，你还有选择知识点分类（所属的单元）哦 !</span>");
+				}
+			});
+			
+			// 封面选择
+			$("#changeCover").click(function() {
+				Boxy.load(Globals.ctx + "/component/change/cover", {title : '封面选择',
+					afterShow : function(){
+						$(".selectCover").change(function() {
+							var extName = /\.[^\.]+$/.exec($(this).val());
+							if(/\.jpg$|\.gif$|\.png$|\.bmp$|\.jpeg$/i.test(extName)) {
+								 // 返回 KB，保留小数点后两位
+							    var fileSize = (this.files[0].size / 1024).toFixed(2);
+								if(fileSize > 0){
+									$("#fileSize").html(fileSize + "KB");
+									if(fileSize > 300){      
+										$(".upload_icon .wrong").html("图片大小不允许超过300KB");
+										$(".upload_icon .wrong").show();
+										$(".upload_icon .right").hide();
+										return false;
+									} else {
+										$(".upload_icon .right").html("图片可以上传");
+										$(".upload_icon .right").show();
+										$(".upload_icon .wrong").hide();
+									}
+								}
+								$(".coverUpload").ajaxSubmit({
+									success: function (data){
+										var json = eval('(' + data + ')');
+										if(json.result == '1') {
+											$(".preview").attr("src", json.url);
+										}else {
+											Boxy.alert("<i class='error'></i><span>"+ json.error +"</span>");
+										}
+									}
+								});
+							}else if(extName != null) {
+								$(".upload_icon .wrong").html("不支持该文件类型，只能上传图片，限于.bmp、.png、.gif、.jpeg、.jpg格式");
+								$(".upload_icon .wrong").show();
+								$(".upload_icon .right").hide();
+							}
+						});
+						
+						$(".sure").click(function() {
+							var preview = $(".preview").attr("src");
+							if(preview != null && preview != '' && preview.indexOf("img_display.jpg") == -1) {
+								$(".small_preview").attr("src", preview)
+								$("input[name=url]").val(preview);
+								$(".close").click();
+							}
+						});
+						
+						$(".close").bindFormClose();
+					}
+				})
+			});
+			
+			// 日期选择控件
+			var DatePickerFn = function(){
+
+				var endTime = $("#endTime").val();
+			    
+				$('#endTime').datetimepicker({
+					dayOfWeekStart : 1,//一周从星期几开始：1为星期一，2为星期二...7为星期日
+					lang : 'zh',//语言为简体中文
+					timepicker : false,//timepicker 时间控件隐藏
+					format : 'Y-m-d',//默认格式显示，format:	'Y/m/d H:i',
+//					disabledDates:[year + '/' + month +  '/' + '27'],//不显示指定的日期，不能触发点击事件
+//					startDate :	input_value,//从那一天开始，默认选择日期
+					value : endTime, //文本框内默认显示的日期
+//					step : 30,//timepicker 设置时间的间隔，以分钟为单位
+				});
+			}
+			DatePickerFn();
+			
+		},
+		
 		//新增课程页面
 		courseAdd : function(){
 			
@@ -932,12 +1103,12 @@ ManageClass.prototype = {
 			$("input[name=knowledgeNames]").click(function(){
 				var questionId = $("input[name=id]").val();
 				var knowledgeIds = $("input[name=knowledgeIds]").val();
-				var gradeId = $("#levelSelect").val();
-				var subjectId = $("#subjectSelect").val();
+//				var gradeId = $("#levelSelect").val();
+//				var subjectId = $("#subjectSelect").val();
 				var unitId = $("#unitSelect").val();
-				if (gradeId != "" && gradeId != null && subjectId != "" && subjectId != null && unitId != "" && unitId != null) {
+				if (unitId != "" && unitId != null) {
 					Boxy.load(Globals.ctx + "/component/bind/bingKnowledge?questionId=" + questionId + "&knowledgeIds=" + knowledgeIds 
-							+ "&gradeId=" + gradeId + "&subjectId=" + subjectId + "&unitId=" + unitId, {title : '知识点绑定列表',
+							+ "&unitId=" + unitId, {title : '知识点绑定列表',
 						afterShow : function(){
 							if(oListboxTo.length == 0 && knowledgeIds != "" && knowledgeIds != null){
 								var str = knowledgeIds.split(",");
@@ -1015,7 +1186,7 @@ ManageClass.prototype = {
 					});
 					
 				} else {
-					Boxy.alert("<i class='error'></i><span>亲，你还有选择知识点分类（所属的年级和学科）哦 !</span>");
+					Boxy.alert("<i class='error'></i><span>亲，你还有选择知识点分类（所属的单元）哦 !</span>");
 				}
 			});
 			

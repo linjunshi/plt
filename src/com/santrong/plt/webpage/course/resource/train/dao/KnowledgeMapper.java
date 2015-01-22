@@ -50,15 +50,13 @@ public interface KnowledgeMapper {
 	List<KnowledgeItem> selectByGIdAndSId(@Param("gradeId")String gradeId, @Param("subjectId")String subjectId);
 	
 	/**
-	 * 根据gradeId（年级）、subjectId（学科）、unitId（单元），获取多个知识点
+	 * 根据unitId（单元），获取多个知识点
 	 * @author huangweihua
-	 * @param gradeId
-	 * @param subjectId
 	 * @param unitId
 	 * @return
 	 */
-	@Select("select * from knowledge where gradeId = #{gradeId} and subjectId = #{subjectId} and unitId = #{unitId} order by code asc,priority asc")
-	List<KnowledgeItem> selectByGIdAndSIdAndUId(@Param("gradeId")String gradeId, @Param("subjectId")String subjectId, @Param("unitId")String unitId);
+	@Select("select * from knowledge where unitId = #{unitId} order by code asc,priority asc")
+	List<KnowledgeItem> selectByUnitId(String unitId);
 	
 	@Select("select * from knowledge order by code, priority")
 	List<KnowledgeItem> selectAll();

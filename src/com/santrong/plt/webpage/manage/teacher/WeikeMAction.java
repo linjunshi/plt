@@ -11,13 +11,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.santrong.plt.log.Log;
+import com.santrong.plt.opt.ThreadUtils;
 import com.santrong.plt.util.MyUtils;
 import com.santrong.plt.util.ValidateTools;
 import com.santrong.plt.webpage.course.dao.CourseDao;
 import com.santrong.plt.webpage.course.dao.WeikeDao;
 import com.santrong.plt.webpage.course.entry.CourseForm;
 import com.santrong.plt.webpage.course.entry.CourseItem;
+import com.santrong.plt.webpage.course.entry.WeikeKnowledgeView;
 import com.santrong.plt.webpage.course.entry.WeikeQuery;
+import com.santrong.plt.webpage.course.resource.train.dao.KnowledgeDao;
+import com.santrong.plt.webpage.course.resource.train.entry.KnowledgeItem;
 import com.santrong.plt.webpage.manage.TeacherBaseAction;
 
 /**
@@ -75,7 +79,18 @@ public class WeikeMAction extends TeacherBaseAction {
 				return this.redirect("/");
 			}
 			
+			// 获取微课已经绑定的知识点
+			List<WeikeKnowledgeView> w2kList = courseDao.selectCourse2KnowledgeByCouseId(courseId);
+			String knowledgeIds = "";
+			for (WeikeKnowledgeView wkItem : w2kList) {
+				knowledgeIds += "," + wkItem.getKnowledgeId();
+			}
+			if (knowledgeIds != "") {
+				knowledgeIds = knowledgeIds.substring(1);//移除前面的多余的逗号
+			}
+			
 			HttpServletRequest request = this.getRequest();
+			request.setAttribute("knowledgeIds", knowledgeIds);
 			request.setAttribute("course", course);
 			request.setAttribute("fn", "modify");
 		} catch (Exception e) {
@@ -93,6 +108,9 @@ public class WeikeMAction extends TeacherBaseAction {
 	@RequestMapping(value = "/modify", method = RequestMethod.POST)
 	public String modifyCoursePost(CourseForm courseForm){
 		try {
+			HttpServletRequest request = this.getRequest();
+			String knowledgeIds = request.getParameter("knowledgeIds");//原来绑定的知识点IDs
+			
 			CourseDao courseDao = new CourseDao();
 			CourseItem courseItem = courseDao.selectById(courseForm.getId());
 			
@@ -108,6 +126,9 @@ public class WeikeMAction extends TeacherBaseAction {
 				}
 				if (MyUtils.isNull(courseForm.getSubjectId())) {
 					addError("请您选择课程科目！");
+				}
+				if (MyUtils.isNull(courseForm.getUnitId())) {
+					addError("请您选择学期单元！");
 				}
 				if (MyUtils.isNull(courseForm.getCourseName())) {
 					addError("课程名称不能为空！");
@@ -127,19 +148,46 @@ public class WeikeMAction extends TeacherBaseAction {
 
 				if(this.errorSize() == 0) {
 					
+					// 点击绑定知识点的
+					String[] stringArr = null;
+					boolean result = false;
+					
+					ThreadUtils.beginTranx();//开始事务
+					
+					// 删除原来绑定的知识点，再重新绑定
+					if (MyUtils.isNotNull(knowledgeIds)) {
+						stringArr = knowledgeIds.split(",");
+						KnowledgeDao kDao = new KnowledgeDao();
+						List<KnowledgeItem> kList = kDao.selectByIds(stringArr);
+						for (KnowledgeItem kItem : kList) {
+							if (!kItem.getUnitId().equals(courseForm.getUnitId())) {
+								addError("亲，您修改了知识点分类，请您重新绑定知识点 ！");
+								request.setAttribute("tqItem", courseForm);
+								return "/manage/teacher/myTrainMAdd";
+							}
+						}
+						courseDao.removeAllKnowledge4Course(courseForm.getId());
+						for (String knowledgeId : stringArr) {
+							courseDao.addKnowledge2Course(courseForm.getId(), knowledgeId);
+						}
+					}
+					
 					courseForm.setCourseName(courseForm.getCourseName().trim());
 					BeanUtils.copyProperties(courseForm, courseItem);
-					
 					courseItem.setEndTime(MyUtils.stringToDate(courseForm.getEndTime(), "yyyy-MM-dd"));
 					courseItem.setUts(new Date());
-					if (courseDao.update(courseItem)) {
+					result = courseDao.update(courseItem);
+					
+					ThreadUtils.commitTranx();//提交事务
+					
+					if (result) {
 						addError("修改课程成功！");
 					} else {
 						addError("修改课程失败，请刷新页面后重新操作！");
 					}
 				}
-				this.getRequest().setAttribute("course", courseForm);
-				this.getRequest().setAttribute("fn", "modify");		
+				request.setAttribute("course", courseForm);
+				request.setAttribute("fn", "modify");
 			}
 		} catch (Exception e) {
 			Log.printStackTrace(e);
