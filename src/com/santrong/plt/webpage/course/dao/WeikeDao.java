@@ -230,4 +230,39 @@ public class WeikeDao extends BaseDao {
 		
 		return count;
 	}
+	
+	/**
+	 * 获取同一单元的微课
+	 * @param unitId
+	 * @return
+	 */
+	public List<CourseItem> selectWeikeByUnitId(String unitId) {
+		try {
+			WeikeMapper mapper = this.getMapper(WeikeMapper.class);
+			if(mapper != null) {
+				return mapper.selectWeikeByUnitId(unitId);
+			}
+		} catch (Exception e) {
+			Log.printStackTrace(e);
+		}
+		return null;
+	}
+	
+	/**
+	 * 获取同年级同学科的微课
+	 * @param gradeId
+	 * @param subjectId
+	 * @return
+	 */
+	public List<CourseItem> selectWeikeByGIdAndSId(String gradeId, String subjectId) {
+		try {
+			WeikeMapper mapper = this.getMapper(WeikeMapper.class);
+			if(mapper != null) {
+				return mapper.selectWeikeByGIdAndSId(gradeId, subjectId);
+			}
+		} catch (Exception e) {
+			Log.printStackTrace(e);
+		}
+		return null;
+	}
 }

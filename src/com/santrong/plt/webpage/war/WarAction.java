@@ -286,19 +286,27 @@ public class WarAction extends BaseAction {
 	}
 	
 	/**
-	 * 打开个人挑战的试题页面
+	 * 打开个人练习的试题页面
 	 * @return
 	 */
 	@RequestMapping(value = "/exams", method = RequestMethod.GET)
-	public String person_exams(String subjectId) {
+	public String person_exams() {
 		try {
 			HttpServletRequest request = this.getRequest();
+			String gradeId = request.getParameter("gradeId");
+			String subjectId = request.getParameter("subjectId");
+			String unitId = request.getParameter("unitId");
+			String type = request.getParameter("type");// personExams 个人练习,unitExams 课后单元练习
 			
 			// 获取当前用户对象信息
 			UserItem user = this.currentUser();
 			if (user == null) {
 				// 没登陆，注意：异步的时候才这样子写，jquery对返回的结果作了判断
 				return this.redirectLogin();
+			}
+			
+			if (MyUtils.isNull(type)) {
+				type = "personExams";//个人练习
 			}
 			
 			int pageNum = this.getIntParameter("page");
@@ -310,8 +318,10 @@ public class WarAction extends BaseAction {
 			TrainQuestionQuery query = new TrainQuestionQuery();
 			query.setPageNum(pageNum);
 			query.setPageSize(1);//只显示一条
+			query.setGradeId(gradeId);//通过年级查询
 			query.setSubjectId(subjectId);//通过科目查询
-//			query.setQuestionType(1);;//只查询单选题
+			query.setUnitId(unitId);//通过单元查询
+//			query.setQuestionType(1);//只查询单选题
 			query.setOrderBy("cts");
 			query.setOrderBy("gradeId");
 			query.setOrderBy("level");
@@ -351,7 +361,10 @@ public class WarAction extends BaseAction {
 			}
 			
 			request.setAttribute("questionList", questionList);
+			request.setAttribute("gradeId", gradeId);
 			request.setAttribute("subjectId", subjectId);
+			request.setAttribute("unitId", unitId);
+			request.setAttribute("type", type);
 			request.setAttribute("query", query);
 		} catch (Exception e) {
 			Log.printStackTrace(e);
@@ -382,7 +395,7 @@ public class WarAction extends BaseAction {
 			} else {
 				attend = competitionDao.selectAttendByUserId(this.currentUser().getId(), null);
 			}
-			
+			// 疑问？ 是否要记录每一道做答的历史记录，包括以前可能做过该道题的历史记录？
 			if (!competitionDao.existHistory(attend.getId(), questionId)) {
 				TrainQuestionDao tqDao = new TrainQuestionDao();
 				TrainQuestionItem tqItem = tqDao.selectById(questionId);

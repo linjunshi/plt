@@ -272,6 +272,11 @@ IndexClass.prototype = {
 		});
 	},
 	
+	// 微课详细页面
+	weikeDetail : function() {
+		
+	},
+	
 	// 学校列表页
 	school : function() {
 

@@ -174,15 +174,14 @@ public class KnowledgeDao extends BaseDao {
 	/**
 	 * 判断是否已经存在同年级同学科同名称的知识点名称
 	 * @param knowledgeName
-	 * @param gradeId
-	 * @param subjectId
+	 * @param unitId
 	 * @return
 	 */
-	public boolean exists(String knowledgeName, String gradeId, String subjectId , String unitId) {
+	public boolean exists(String knowledgeName, String unitId) {
 		try {
 			KnowledgeMapper mapper = this.getMapper(KnowledgeMapper.class);
 			if (mapper != null) {
-				return mapper.exists(knowledgeName, gradeId, subjectId, unitId) > 0;
+				return mapper.exists(knowledgeName, unitId) > 0;
 			}
 		} catch (Exception e) {
 			Log.printStackTrace(e);

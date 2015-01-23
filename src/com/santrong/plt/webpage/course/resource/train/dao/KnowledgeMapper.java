@@ -30,8 +30,8 @@ public interface KnowledgeMapper {
 	@Select("select * from knowledge where id = #{id}")
 	KnowledgeItem selectById(String id);
 	
-	@Select("select count(*) from knowledge where knowledgeName = #{knowledgeName} and gradeId = #{gradeId} and subjectId = #{subjectId} and unitId = #{unitId} ")
-	int exists(@Param("knowledgeName")String knowledgeName, @Param("gradeId")String gradeId, @Param("subjectId")String subjectId, @Param("unitId")String unitId);
+	@Select("select count(*) from knowledge where knowledgeName = #{knowledgeName} and unitId = #{unitId} ")
+	int exists(@Param("knowledgeName")String knowledgeName,  @Param("unitId")String unitId);
 	
 	@Select("select * from knowledge where knowledgeName = #{knowledgeName} order by code asc")
 	List<KnowledgeItem> selectByName(String knowledgeName);

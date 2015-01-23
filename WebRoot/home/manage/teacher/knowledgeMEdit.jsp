@@ -16,7 +16,7 @@
 				<input type="hidden" id="subjectId" name="subjectId" value="${knowledgeItem.subjectId}">
 				<input type="hidden" id="unitId" name="unitId" value="${knowledgeItem.unitId}">
 				<input type="hidden" id="type" name="type" value="${type}">
-				<input type="hidden" id="level" name="level" value="${level}">
+				<%-- <input type="hidden" id="level" name="level" value="${level}"> --%>
 				<input type="hidden" id="code" name="code" value="${knowledgeItem.code}">
 				<input type="hidden" name="dataId" id="dataId" value="${dataId}"/>
 				<input type="hidden" name="addOrEdit" id="addOrEdit" value="${addOrEdit}"/>
