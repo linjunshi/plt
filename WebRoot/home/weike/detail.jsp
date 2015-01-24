@@ -39,7 +39,7 @@ Globals.page = "Index_weikeDetail";
 	<div class="content clearfix">
 		<div class="questions_list">
 		
-			<div style="width:100%; height:600px; border:solid 1px red;">
+			<div style="width:100%; height:600px; background:black;">
 		        <div id="flashContent">
 		            <p>
 		                To view this page ensure that Adobe Flash Player version 

@@ -134,7 +134,7 @@ Globals.page = "Manage_weikeAdd";
 									</div>
 									<div class="form_action">
 										<input class="btn_question" type="submit" value="保存" /> 
-										<a class="btn_question" href="${ctx}/manage/course">取消</a>
+										<a class="btn_question" href="${ctx}/manage/weike">取消</a>
 									</div>
 							</form>
 						</div>

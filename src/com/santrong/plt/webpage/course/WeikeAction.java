@@ -129,6 +129,11 @@ public class WeikeAction extends BaseAction {
 		HttpServletRequest request = getRequest();
 		request.setAttribute("course", course);
 		
+		String type = request.getParameter("type");
+		if(type != null && type.equals("html5")) {
+			return "weike/html5";
+		}
+		
 		return "weike/detail";
 	}	
 }

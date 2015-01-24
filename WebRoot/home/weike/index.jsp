@@ -43,7 +43,6 @@ Globals.page = "Index_weike";
 					<a class="sort ${class : sortWithout()}" href="${ctx}/weike/${subject}${link : sortWithout()}"><span class="ico"></span><span>默认排序</span></a>
 					<a class="sort ${class : sort('price')}" href="${ctx}/weike/${subject}${link : sort('price')}"><span class="ico"></span><span>价格排序</span></a>
 					<a class="sort ${class : sort('saleCount')}" href="${ctx}/weike/${subject}${link : sort('saleCount')}"><span class="ico"></span><span>销量排序</span></a>
-					<a class="select ${class : select('live')}" href="${ctx}/weike/${subject}${link : containSwitch('live')}"><span class="ico"></span><span>直播课</span></a>
 				</div>
 				<div class="result_list">
 					<ul>
