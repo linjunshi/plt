@@ -123,7 +123,7 @@ public class KnowledgeMAction  extends TeacherBaseAction{
 						
 						// id为空，执行新增操作
 						KnowledgeDao kDao = new KnowledgeDao();
-						if (!kDao.exists(knowledgeForm.getKnowledgeName().trim(), knowledgeForm.getSubjectId(), knowledgeForm.getGradeId(), knowledgeForm.getUnitId())) {
+						if (!kDao.exists(knowledgeForm.getKnowledgeName().trim(), knowledgeForm.getUnitId())) {
 							KnowledgeItem knowledgeItem = new KnowledgeItem();
 							knowledgeItem.setId(MyUtils.getGUID());
 							knowledgeItem.setKnowledgeName(knowledgeForm.getKnowledgeName().trim());
@@ -177,26 +177,25 @@ public class KnowledgeMAction  extends TeacherBaseAction{
 	 */
 	@RequestMapping(value="/getTreeNodes", method=RequestMethod.GET)
 	@ResponseBody
-	public String getknowledgeTreeNodes() {
+	public String initTreeNodes() {
 		
 		List<KnowledgeTreeForm> kTreeList = new ArrayList<KnowledgeTreeForm>();
 		List<KnowledgeTreeForm> levelTreeList = new ArrayList<KnowledgeTreeForm>();
 		List<KnowledgeTreeForm> subjectTreeList = new ArrayList<KnowledgeTreeForm>();
 		List<KnowledgeTreeForm> termTreeList = new ArrayList<KnowledgeTreeForm>();
 		List<KnowledgeTreeForm> unitTreeList = new ArrayList<KnowledgeTreeForm>();
-		List<KnowledgeTreeForm> knowledgeTreeList = new ArrayList<KnowledgeTreeForm>();
 		
 		// 小学 根节点
-		KnowledgeTreeForm item1 = new KnowledgeTreeForm();
-		item1.setId(TreeCode.gradeEnNames[0]);
-		item1.setpId("");
-		item1.setName(TreeCode.gradeNames[0]);
-		item1.setType(TreeCode.type_studySection);//类型为 学段：xiaoxue
-		item1.setIconSkin(TreeCode.pIconRoot);
-		item1.setCode(TreeCode.getGradeCode(TreeCode.gradeEnNames[0]));// 1
-		item1.setOpen(true);
-		item1.setParent(true);
-		kTreeList.add(item1);
+//		KnowledgeTreeForm item1 = new KnowledgeTreeForm();
+//		item1.setId(TreeCode.gradeEnNames[0]);
+//		item1.setpId("");
+//		item1.setName(TreeCode.gradeNames[0]);
+//		item1.setType(TreeCode.type_studySection);//类型为 学段：xiaoxue
+//		item1.setIconSkin(TreeCode.pIconRoot);
+//		item1.setCode(TreeCode.getGradeCode(TreeCode.gradeEnNames[0]));// 1
+//		item1.setOpen(true);
+//		item1.setParent(true);
+//		kTreeList.add(item1);
 		
 		// 年级
 		List<GradeLevelEntry>  levelList = GradeDefine.getByGradeEnName(TreeCode.gradeEnNames[0]).getGradeLevelList();
@@ -283,45 +282,61 @@ public class KnowledgeMAction  extends TeacherBaseAction{
 			}
 		}
 		
-		// 知识点
-		KnowledgeDao kDao = new KnowledgeDao();
-		List<KnowledgeItem> kItemList = kDao.selectAll();
-		if (kItemList != null && kItemList.size() > 0) {
-			for (KnowledgeItem kItem : kItemList) {
-				KnowledgeTreeForm item = new KnowledgeTreeForm();
-				// 常用固定的属性
-				item.setId(String.valueOf(kItem.getCode()));
-				if (kItem.getLevel() == 1) {//知识点树结构的第一级
-					item.setpId(kItem.getUnitId());
-				} else {
-					item.setpId(String.valueOf(TreeCode.getParentCode(kItem.getCode())));
-				}
-				item.setName(kItem.getKnowledgeName());
-				item.setLevel(kItem.getLevel());
-				item.setGradeId(kItem.getGradeId());
-				item.setSubjectId(kItem.getSubjectId());
-				item.setUnitId(kItem.getUnitId());//单元id
-				item.setPriority(kItem.getPriority());
-				item.setDataId(kItem.getId());//用来保存原来的ID
-				
-				// 扩展属性
-				item.setOpen(false);//是否展开树 true or false
-				item.setType(TreeCode.type_knowledge);//类型为 知识点
-				knowledgeTreeList.add(item);
-			}
-		}
-		
 		kTreeList.addAll(levelTreeList);
 		kTreeList.addAll(subjectTreeList);
 		kTreeList.addAll(termTreeList);
 		kTreeList.addAll(unitTreeList);
-		kTreeList.addAll(knowledgeTreeList);
 
 		Gson gson = new Gson();
 		String fk = gson.toJson(kTreeList);
-		Log.debug("sheep================:" + fk);
+//		Log.debug("sheep================:" + fk);
 		return fk;
 		
+	}
+	
+	/**
+	 * 点击单元级别的时候，异步加载该单元下的所有知识点
+	 * @return
+	 */
+	@RequestMapping(value="/loadingKnowledgeByAsync",method=RequestMethod.GET)
+	@ResponseBody
+	public String loadingKnowledgeByAsync(){
+		HttpServletRequest request = this.getRequest();
+		String unitId = request.getParameter("unitId");
+		List<KnowledgeTreeForm> kTreeList = new ArrayList<KnowledgeTreeForm>();
+		List<KnowledgeTreeForm> knowledgeTreeList = new ArrayList<KnowledgeTreeForm>();
+		if (MyUtils.isNotNull(unitId)) {
+			// 知识点
+			KnowledgeDao kDao = new KnowledgeDao();
+			List<KnowledgeItem> kItemList = kDao.selectByUnitId(unitId);
+			if (kItemList != null && kItemList.size() > 0) {
+				for (KnowledgeItem kItem : kItemList) {
+					KnowledgeTreeForm item = new KnowledgeTreeForm();
+					// 常用固定的属性
+					item.setId(String.valueOf(kItem.getCode()));
+					if (kItem.getLevel() == 1) {//知识点树结构的第一级
+						item.setpId(kItem.getUnitId());
+					} else {
+						item.setpId(String.valueOf(TreeCode.getParentCode(kItem.getCode())));
+					}
+					item.setName(kItem.getKnowledgeName());
+					item.setLevel(kItem.getLevel());
+					item.setGradeId(kItem.getGradeId());
+					item.setSubjectId(kItem.getSubjectId());
+					item.setUnitId(kItem.getUnitId());//单元id
+					item.setPriority(kItem.getPriority());
+					item.setDataId(kItem.getId());//用来保存原来的ID
+					
+					// 扩展属性
+					item.setOpen(false);//是否展开树 true or false
+					item.setType(TreeCode.type_knowledge);//类型为 知识点
+					knowledgeTreeList.add(item);
+				}
+			}
+		}
+		kTreeList.addAll(knowledgeTreeList);
+		Gson gson = new Gson();
+		return gson.toJson(kTreeList);
 	}
 	
 	// 打开添加知识点的弹窗页面
@@ -332,26 +347,28 @@ public class KnowledgeMAction  extends TeacherBaseAction{
 		String subjectId = request.getParameter("subjectId");
 		String unitId = request.getParameter("unitId");
 		int type = this.getIntParameter("type");
-		int level = this.getIntParameter("level");
+//		int level = this.getIntParameter("level");
 		int code = this.getIntParameter("code");
 		String dataId = request.getParameter("dataId");//原来数据库里的ID
 		String addOrEdit = request.getParameter("addOrEdit");//新增还是修改
-		KnowledgeDao kDao = new KnowledgeDao();
-		KnowledgeItem knowledgeItem = null;
-		
-		if ("add".equalsIgnoreCase(addOrEdit)) {
-			//打开新增页面
-			knowledgeItem = new KnowledgeItem();
-			knowledgeItem.setGradeId(gradeId);
-			knowledgeItem.setSubjectId(subjectId);
-			knowledgeItem.setUnitId(unitId);
-			knowledgeItem.setCode(code);
-		} else {
-			//打开修改页面
-			knowledgeItem = kDao.selectById(dataId);
+		if (type == TreeCode.type_unit || type == TreeCode.type_knowledge) {
+			KnowledgeDao kDao = new KnowledgeDao();
+			KnowledgeItem knowledgeItem = null;
+			
+			if ("add".equalsIgnoreCase(addOrEdit)) {
+				//打开新增页面
+				knowledgeItem = new KnowledgeItem();
+				knowledgeItem.setGradeId(gradeId);
+				knowledgeItem.setSubjectId(subjectId);
+				knowledgeItem.setUnitId(unitId);
+				knowledgeItem.setCode(code);
+			} else {
+				//打开修改页面
+				knowledgeItem = kDao.selectById(dataId);
+			}
+			request.setAttribute("knowledgeItem", knowledgeItem);
 		}
-		request.setAttribute("knowledgeItem", knowledgeItem);
-		request.setAttribute("level", level);
+//		request.setAttribute("level", level);
 		request.setAttribute("type", type);
 		request.setAttribute("dataId", dataId);
 		request.setAttribute("addOrEdit", addOrEdit);
@@ -359,9 +376,9 @@ public class KnowledgeMAction  extends TeacherBaseAction{
 	}
 	
 	// 异步提交知识点新增修改记录
-	@RequestMapping(value="/submitKnowledgeBySync", method=RequestMethod.POST)
+	@RequestMapping(value="/submitKnowledgeByAsync", method=RequestMethod.POST)
 	@ResponseBody
-	public String submitKnowledgeBySync(){
+	public String submitKnowledgeByAsync(){
 		try {
 			HttpServletRequest request = this.getRequest();
 			String dataId = request.getParameter("dataId");//原来数据库里的ID
@@ -369,7 +386,7 @@ public class KnowledgeMAction  extends TeacherBaseAction{
 			String subjectId = request.getParameter("subjectId");
 			String unitId = request.getParameter("unitId");
 			int type = this.getIntParameter("type");
-			int level = this.getIntParameter("level");
+//			int level = this.getIntParameter("level");
 			int code = this.getIntParameter("code");
 			String knowledgeName = request.getParameter("knowledgeName").trim();
 			String addOrEdit = request.getParameter("addOrEdit");//新增还是修改
@@ -379,7 +396,7 @@ public class KnowledgeMAction  extends TeacherBaseAction{
 			if (MyUtils.isNull(knowledgeName)) {
 				return "知识点名称不允许为空 ！";
 			}
-			if (kDao.exists(knowledgeName, gradeId, subjectId, unitId)) {
+			if (kDao.exists(knowledgeName, unitId)) {
 				return "亲，该知识点已经存在了哦 ！";
 			}
 			if ("add".equalsIgnoreCase(addOrEdit)) {
@@ -417,7 +434,7 @@ public class KnowledgeMAction  extends TeacherBaseAction{
 					kTreeView.setId(String.valueOf(kItem.getCode()));
 					kTreeView.setpId(pId);
 					kTreeView.setName(knowledgeName);
-					kTreeView.setLevel(level + 1);// 页面树的level
+//					kTreeView.setLevel(level + 1);// 页面树的level
 					kTreeView.setGradeId(kItem.getGradeId());
 					kTreeView.setSubjectId(kItem.getSubjectId());
 					kTreeView.setType(TreeCode.type_knowledge);//改节点标识为知识点类型
@@ -441,7 +458,7 @@ public class KnowledgeMAction  extends TeacherBaseAction{
 							kTreeView.setId(String.valueOf(pkItem.getCode()));
 							kTreeView.setpId(TreeCode.getParentCode2(pkItem.getCode()));
 							kTreeView.setName(knowledgeName);
-							kTreeView.setLevel(pkItem.getLevel());
+//							kTreeView.setLevel(pkItem.getLevel());
 							kTreeView.setGradeId(gradeId);
 							kTreeView.setSubjectId(subjectId);
 							kTreeView.setUnitId(unitId);

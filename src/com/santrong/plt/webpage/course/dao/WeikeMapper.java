@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
+import com.santrong.plt.webpage.course.entry.CourseItem;
 import com.santrong.plt.webpage.course.entry.CourseView;
 import com.santrong.plt.webpage.course.entry.WeikeDetailView;
 
@@ -30,4 +31,12 @@ public interface WeikeMapper {
 			+ "where c.gradeGroup=#{gradeGroup} and e.areaCode like #{areaCode} and a.status = 1 and a.courseType = 1 "
 			+ "order by a.cts limit 10")
 	List<CourseView> selectForIndexList(@Param("gradeGroup")int gradeGroup, @Param("areaCode")String areaCode);	
+	
+	@Select("select * from course where unitId = #{unitId} and status = 1 and courseType = 1 order by cts desc limit 8")
+	List<CourseItem> selectWeikeByUnitId(String unitId);
+	
+	@Select("select * from course where gradeId = #{gradeId} and subjectId = #{subjectId} and status = 1 and courseType = 1 order by cts desc limit 8")
+	List<CourseItem> selectWeikeByGIdAndSId(@Param("gradeId")String gradeId, @Param("subjectId")String subjectId);
+	
+	
 }

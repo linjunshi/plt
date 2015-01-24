@@ -16,7 +16,7 @@ public class KnowledgeTreeForm {
 	private int priority;
 	private int level;
 	private String dataId;//用来保存原来数据库里的id
-	private int type;
+	private int type;//用来标识树不同级别的类型（见TreeCode.java）
 	private String code;//用来保存编码规则，见 com/santrong/plt/util/TreeCode.java
 	
 	private boolean open;

@@ -415,8 +415,8 @@ ManageClass.prototype = {
 					$.ajax({url : Globals.ctx + "/manage/live/openTool", data : {liveId : liveId}, success : function(result) {
 						if(result.indexOf('{') != -1) {
 							var json = eval('(' + result + ')');
-//							if(SantrongPlayer && SantrongPlayer.StartPlayEX) {
-							if(SantrongPlayer) {
+							if(SantrongPlayer && SantrongPlayer.StartPlayEX) {
+//							if(SantrongPlayer) {
 //								SantrongPlayer.StartLiveManager(json.rtmpUrl, json.webUrl, json.pltHost, json.teacherId, json.teacherName, json.sourceId, json.sourceTitle, json.beginTimeString, json.endTimeString);
 								SantrongPlayer.StartLiveManager("192.168.10.163", json.webUrl, "192.168.10.163", json.teacherId, json.teacherName, json.sourceId, json.sourceTitle, json.beginTimeString, json.endTimeString);
 							}else{
@@ -1063,7 +1063,7 @@ ManageClass.prototype = {
 			if (id == "") {
 				//新增页面默认选项
 				$("input[name='questionType']").eq(0).attr("checked","checked");
-				$("input[name='level']").eq(0).attr("checked","checked");
+				$("input[name='level']").eq(0).attr("checked","checked");//难易程度
 				answer_radio_show();
 			} else {
 				//修改页面默认选项
@@ -1293,10 +1293,19 @@ ManageClass.prototype = {
 		knowledgeMTree : function() {
 		
 			var setting = {
+					async: {
+						enable: true,
+						type: "get",
+						dataType: "text",
+//						autoParam: [],
+//						dataFilter: null,
+						url: getUrl
+					},
 					view: {
 						addHoverDom: addHoverDom,
 						removeHoverDom: removeHoverDom,
-						selectedMulti: false
+						selectedMulti: false,
+						expandSpeed: ""
 					},
 					edit: {
 						enable: true,
@@ -1317,11 +1326,16 @@ ManageClass.prototype = {
 						beforeRemove: beforeRemove,
 						beforeRename: beforeRename,
 						onRemove: onRemove,
-						onRename: onRename
+						onRename: onRename,
+						beforeAsync: beforeAsync,
+						beforeExpand: beforeExpand,
+						onAsyncSuccess: onAsyncSuccess,
+						onAsyncError: onAsyncError
 					}
 				};
 			
 				var zNodes ;
+				// 向后台服务发送请求，获取初始化树的节点JSON对象
 				function ajaxSyncGetNodes() {
 					$.ajax({
 						url : Globals.ctx + "/manage/knowledge/getTreeNodes", 
@@ -1346,7 +1360,6 @@ ManageClass.prototype = {
 					var code = treeNode.code;//学期单元的编码
 					var unitId = treeNode.unitId;//单元id
 					var type = treeNode.type;//标识树每个层级的类型
-					var level = treeNode.level;//从0 开始，zTree控件自带的
 					var dataId = treeNode.dataId;
 					var parentId = treeNode.dataId;//新增的时候默认当前节点为新增子节点的父节点
 					
@@ -1358,9 +1371,9 @@ ManageClass.prototype = {
 							parentId = node.dataId;
 						}
 					}
-					// 弹出知识点归类的页面
+					// 弹出知识点归类的页面 
 					Boxy.load(Globals.ctx + "/manage/knowledge/addKnowledgeTree?gradeId="+ gradeId + "&subjectId=" 
-							+ subjectId + "&type="+ type + "&unitId="+ unitId + "&code=" + code + "&level=" + level + "&dataId=" + dataId
+							+ subjectId + "&type="+ type + "&unitId="+ unitId + "&code=" + code + "&dataId=" + dataId
 							+ "&addOrEdit=" + addOrEdit ,{title : '知识点归类',
 						afterShow : function(){
 
@@ -1369,7 +1382,6 @@ ManageClass.prototype = {
 								var unitId = $("#unitId").val();
 								var type = $("#type").val();
 								var code = $("#code").val();
-								var level = $("#level").val();
 								var gradeId = $("#gradeId").val();
 								var subjectId = $("#subjectId").val();
 								var knowledgeName = $("#knowledgeName").val().trim();
@@ -1379,11 +1391,11 @@ ManageClass.prototype = {
 								}
 								if (gradeId != null && gradeId != "" && subjectId != null && subjectId != "" ) {
 									$.ajax({
-										url: Globals.ctx + "/manage/knowledge/submitKnowledgeBySync",
-										data: { dataId:dataId, unitId:unitId, type:type, code:code, level:level, 
+										url: Globals.ctx + "/manage/knowledge/submitKnowledgeByAsync",
+										data: { dataId:dataId, unitId:unitId, type:type, code:code,
 											gradeId:gradeId, subjectId:subjectId, knowledgeName:knowledgeName, addOrEdit:addOrEdit},
 										type: "post",
-//				                    async : false,//设置为同步操作就可以给全局变量赋值成功 
+//				                    	async : false,//设置为同步操作就可以给全局变量赋值成功 
 										success: function (result) {
 											if (addOrEdit == "add") {
 												if (result.indexOf('{') != -1) {
@@ -1420,13 +1432,13 @@ ManageClass.prototype = {
 					});
 				}
 				
-				var log, className = "dark";
+//				var log, className = "dark";
 				function beforeDrag (treeId, treeNodes) {
 					return false;
 				}
 				function beforeEditName (treeId, treeNode) {
 					if (treeNode.type == 6) {//只有知识点的类型才提供修改的操作
-						className = (className === "dark" ? "":"dark");
+//						className = (className === "dark" ? "":"dark");
 						var zTree = $.fn.zTree.getZTreeObj("zTree");
 						zTree.selectNode(treeNode);
 						boxySubmit("edit", treeNode);//弹窗修改当前节点
@@ -1437,7 +1449,7 @@ ManageClass.prototype = {
 				//用于捕获节点被删除之前的事件回调函数，并且根据返回值确定是否允许删除操作,默认值：null
 				function beforeRemove (treeId, treeNode) {
 					var isRemove = false;
-					className = (className === "dark" ? "":"dark");
+//					className = (className === "dark" ? "":"dark");
 					$.fn.zTree.getZTreeObj("zTree").selectNode(treeNode);
 					if(confirm("确认要删除节点【" + treeNode.name + "】吗？")){
 						$.ajax({
@@ -1458,7 +1470,7 @@ ManageClass.prototype = {
 					//用于捕获删除节点之后的事件回调函数 null
 				}
 				function beforeRename (treeId, treeNode, newName, isCancel) {
-					className = (className === "dark" ? "":"dark");
+//					className = (className === "dark" ? "":"dark");
 					if (newName.length == 0) {
 						Boxy.alert("<i class='warn'></i><span>节点名称不能为空 !</span>");
 						var zTree = $.fn.zTree.getZTreeObj("zTree");
@@ -1480,17 +1492,20 @@ ManageClass.prototype = {
 				}
 
 				function addHoverDom(treeId, treeNode) {
-					if (treeNode.type == 5 || treeNode.type == 6) {//只有单元和知识点的类型才提供新增的操作
+					if (treeNode.type/1 == 5 || treeNode.type/1 == 6) {//只有单元和知识点的类型才提供新增的操作
 						var sObj = $("#" + treeNode.tId + "_span");
-						if (treeNode.editNameFlag || $("#addBtn_"+treeNode.tId).length>0) return;
+						if (treeNode.editNameFlag || $("#addBtn_"+treeNode.tId).length > 0) return;
 						var addStr = "<span class='button add' id='addBtn_" + treeNode.tId + "' title='新增' onfocus='this.blur();'></span>";
 						sObj.after(addStr);
 						var btn = $("#addBtn_"+treeNode.tId);
 						if (btn) btn.bind("click", function(){
-							if (eval(treeNode.level + 1) < 8) {//知识点限制只能新增三级。  注意：treeNode.level 从0开始的
+							if (eval(treeNode.level + 1) < 7) {//知识点限制只能新增三级。  注意：treeNode.level 从0开始的
+								if (treeNode.isParent) {
+									beforeExpand(treeId, treeNode);//TODO 如果是父节点的，先异步加载下级节点数据，并展开下级节点
+								}
 								boxySubmit("add", treeNode);//弹窗新增节点
 							} else {
-								Boxy.alert("<i class='warn'></i><span>亲，很抱歉，知识点级别最多为三级，只能允许添加到这个级别了!</span>");
+								Boxy.alert("<i class='warn'></i><span>亲，很抱歉，知识点只允许添加到当前级别了!如需继续添加节点，请反馈给网站管理员。</span>");
 							}
 							return false;
 						});
@@ -1499,6 +1514,54 @@ ManageClass.prototype = {
 				function removeHoverDom(treeId, treeNode) {
 					$("#addBtn_"+treeNode.tId).unbind().remove();
 				};
+				// TODO 异步加载知识点数据
+				function getUrl(treeId, treeNode) {
+					if (treeNode.unitId.length > 0 && treeNode.children.length == 0) {//单元级别,如果第一次加载后，有字节点了就不请求后台服务取数据了
+						return Globals.ctx + "/manage/knowledge/loadingKnowledgeByAsync?unitId=" + treeNode.unitId;
+					}
+				}
+				function beforeAsync(treeId, treeNode){
+					return treeNode.type/1 == 5;// 单元级别
+				}
+				function beforeExpand(treeId, treeNode) {
+					if (treeNode.type/1 == 5 || treeNode.type/1 == 6){
+						if (treeNode.unitId.length > 0 && treeNode.children == undefined) {//单元级别,如果第一次加载后，有字节点了就不请求后台服务取数据了
+							if (!treeNode.isAjaxing) {
+								ajaxGetNodes(treeNode, "refresh");
+								return true;
+							} else {
+								Boxy.alert("<i class='warn'></i><span>正在下载数据中，请稍后展开节点。。。</span>");
+								return false;
+							}
+						}
+					} else {
+						return true;//所有的级别都可以展开节点
+					}
+				}
+				function onAsyncSuccess(event, treeId, treeNode, msg) {
+					if (!msg || msg.length == 0) {
+						return;
+					}
+					var zTree = $.fn.zTree.getZTreeObj("zTree");
+					treeNode.icon = "";
+					zTree.updateNode(treeNode);
+					zTree.selectNode(treeNode.children[0]);
+				}
+				function onAsyncError(event, treeId, treeNode, XMLHttpRequest, textStatus, errorThrown) {
+					var zTree = $.fn.zTree.getZTreeObj("zTree");
+					Boxy.alert("<i class='warn'></i><span>异步获取数据出现异常。</span>");
+					treeNode.icon = "";
+					zTree.updateNode(treeNode);
+				}
+				function ajaxGetNodes(treeNode, reloadType) {//ajax加载图片
+					var zTree = $.fn.zTree.getZTreeObj("zTree");
+					if (reloadType == "refresh") {
+						treeNode.icon = Globals.ctx + " resource/images/ztree/loading.gif";
+						zTree.updateNode(treeNode);
+					}
+					zTree.reAsyncChildNodes(treeNode, reloadType, true);
+				}
+
 				$(document).ready(function(){
 					ajaxSyncGetNodes();
 					$.fn.zTree.init($("#zTree"), setting, zNodes);
