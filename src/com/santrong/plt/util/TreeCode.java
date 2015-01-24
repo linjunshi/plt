@@ -22,6 +22,7 @@ public class TreeCode {
 	 */
 	public final static String  pIconRoot ="pIconRoot" ;
 
+	// TODO 标识树不同层级的类型
 	/**
 	 * 学段：xiaoxue chuzhong gaozhong
 	 */

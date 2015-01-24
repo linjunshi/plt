@@ -385,7 +385,7 @@ public class WarAction extends BaseAction {
 			ThreadUtils.beginTranx();
 			CompetitionDao competitionDao = new CompetitionDao();
 			CompetitionAttendItem attend = new CompetitionAttendItem();
-			if (!competitionDao.existDoneExamByUserId(this.currentUser().getId(), null)) {
+			if (!competitionDao.existDoneExamByUserId(this.currentUser().getId())) {
 				// 插入虚拟报名测试表
 				attend.setId(MyUtils.getGUID());
 				attend.setCompetitionId(null);
@@ -393,10 +393,10 @@ public class WarAction extends BaseAction {
 				attend.setCts(new Date());
 				competitionDao.insertAttend(attend);
 			} else {
-				attend = competitionDao.selectAttendByUserId(this.currentUser().getId(), null);
+				attend = competitionDao.selectAttendByUserId(this.currentUser().getId());
 			}
 			// 疑问？ 是否要记录每一道做答的历史记录，包括以前可能做过该道题的历史记录？
-			if (!competitionDao.existHistory(attend.getId(), questionId)) {
+//			if (!competitionDao.existHistory(attend.getId(), questionId)) {
 				TrainQuestionDao tqDao = new TrainQuestionDao();
 				TrainQuestionItem tqItem = tqDao.selectById(questionId);
 				if (tqItem != null) {
@@ -412,19 +412,19 @@ public class WarAction extends BaseAction {
 					history.setUts(new Date());
 					competitionDao.insertHistory(history);
 				}
-			} else {
-				TrainQuestionDao tqDao = new TrainQuestionDao();
-				TrainQuestionItem tqItem = tqDao.selectById(questionId);
-				if (tqItem != null) {
-					int result = tqItem.getAnswer().equalsIgnoreCase(answer) ? TrainHistoryItem.ANSWER_IS_RIGHT : TrainHistoryItem.ANSWER_IS_WRONG;
-					// 修改做题历史
-					CompetitionHistoryItem history = competitionDao.selectHistoryByAttendId(attend.getId(), questionId);
-					history.setAnswer(answer);
-					history.setResult(result);
-					history.setUts(new Date());
-					competitionDao.updateHistory(history);
-				}
-			}
+//			} else {
+//				TrainQuestionDao tqDao = new TrainQuestionDao();
+//				TrainQuestionItem tqItem = tqDao.selectById(questionId);
+//				if (tqItem != null) {
+//					int result = tqItem.getAnswer().equalsIgnoreCase(answer) ? TrainHistoryItem.ANSWER_IS_RIGHT : TrainHistoryItem.ANSWER_IS_WRONG;
+//					// 修改做题历史
+//					CompetitionHistoryItem history = competitionDao.selectHistoryByAttendId(attend.getId(), questionId);
+//					history.setAnswer(answer);
+//					history.setResult(result);
+//					history.setUts(new Date());
+//					competitionDao.updateHistory(history);
+//				}
+//			}
 			ThreadUtils.commitTranx();
 			return SUCCESS;
 		}

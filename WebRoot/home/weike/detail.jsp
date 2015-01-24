@@ -63,7 +63,7 @@ Globals.page = "Index_weikeDetail";
 							<a href="${ctx}/weike/${otherWeike.id}.html">${otherWeike.courseName}</a>
 						</p>
 					</c:forEach>
-					<div class="right_but"><a href="${ctx}/war/exams?type=${type}&unitId=${weike.unitId}">课后练习</a></div>
+					<div class="right_but"><a href="${ctx}/war/exams?type=${type}&unitId=${weike.unitId}" target="_blank">课后练习</a></div>
 				</div>
 			</div>
 			<div class="clr"></div>

@@ -37,16 +37,16 @@ public interface CompetitionMapper {
 	@Select("select a.* from resource_train_question a left join competition_to_question b on a.id=b.questionId where b.competitionId=#{competitionId}")
 	List<TrainQuestionItem> selectQuestionsByCompetitionId(String competitionId);
 	
-	@Select("select count(*) from competition_attend where userId = #{userId} and competitionId = #{competitionId}")
-	int existDoneExamByUserId(@Param("userId")String userId, @Param("competitionId")String competitionId);
+	@Select("select count(*) from competition_attend where userId = #{userId} and competitionId is null")
+	int existDoneExamByUserId(@Param("userId")String userId);
 	
-	@Select("select * from competition_attend where userId = #{userId} and competitionId = #{competitionId}")
-	CompetitionAttendItem selectAttendByUserId(@Param("userId")String userId, @Param("competitionId")String competitionId);
+	@Select("select * from competition_attend where userId = #{userId} and competitionId is null limit 1")
+	CompetitionAttendItem selectAttendByUserId(@Param("userId")String userId);
 	
 	@Select("select count(*) from competition_history where attendId = #{attendId} and questionId = #{questionId}")
 	int existHistory(@Param("attendId")String attendId, @Param("questionId")String questionId);
 	
-	@Select("select * from competition_history where attendId = #{attendId} and questionId = #{questionId}")
+	@Select("select * from competition_history where attendId = #{attendId} and questionId = #{questionId} limit 1")
 	CompetitionHistoryItem selectHistoryByAttendId(@Param("attendId")String attendId, @Param("questionId")String questionId);
 	
 	@Update("update competition_history set "

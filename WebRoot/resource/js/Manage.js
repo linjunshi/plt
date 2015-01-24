@@ -1335,6 +1335,7 @@ ManageClass.prototype = {
 				};
 			
 				var zNodes ;
+				// 向后台服务发送请求，获取初始化树的节点JSON对象
 				function ajaxSyncGetNodes() {
 					$.ajax({
 						url : Globals.ctx + "/manage/knowledge/getTreeNodes", 
@@ -1359,7 +1360,6 @@ ManageClass.prototype = {
 					var code = treeNode.code;//学期单元的编码
 					var unitId = treeNode.unitId;//单元id
 					var type = treeNode.type;//标识树每个层级的类型
-//					var level = treeNode.level;//从0 开始，zTree控件自带的
 					var dataId = treeNode.dataId;
 					var parentId = treeNode.dataId;//新增的时候默认当前节点为新增子节点的父节点
 					
@@ -1373,7 +1373,7 @@ ManageClass.prototype = {
 					}
 					// 弹出知识点归类的页面 
 					Boxy.load(Globals.ctx + "/manage/knowledge/addKnowledgeTree?gradeId="+ gradeId + "&subjectId=" 
-							+ subjectId + "&type="+ type + "&unitId="+ unitId + "&code=" + code + "&dataId=" + dataId //+ "&level=" + level 
+							+ subjectId + "&type="+ type + "&unitId="+ unitId + "&code=" + code + "&dataId=" + dataId
 							+ "&addOrEdit=" + addOrEdit ,{title : '知识点归类',
 						afterShow : function(){
 
@@ -1382,7 +1382,6 @@ ManageClass.prototype = {
 								var unitId = $("#unitId").val();
 								var type = $("#type").val();
 								var code = $("#code").val();
-//								var level = $("#level").val();
 								var gradeId = $("#gradeId").val();
 								var subjectId = $("#subjectId").val();
 								var knowledgeName = $("#knowledgeName").val().trim();
@@ -1393,10 +1392,10 @@ ManageClass.prototype = {
 								if (gradeId != null && gradeId != "" && subjectId != null && subjectId != "" ) {
 									$.ajax({
 										url: Globals.ctx + "/manage/knowledge/submitKnowledgeByAsync",
-										data: { dataId:dataId, unitId:unitId, type:type, code:code, //level:level, 
+										data: { dataId:dataId, unitId:unitId, type:type, code:code,
 											gradeId:gradeId, subjectId:subjectId, knowledgeName:knowledgeName, addOrEdit:addOrEdit},
 										type: "post",
-//				                    async : false,//设置为同步操作就可以给全局变量赋值成功 
+//				                    	async : false,//设置为同步操作就可以给全局变量赋值成功 
 										success: function (result) {
 											if (addOrEdit == "add") {
 												if (result.indexOf('{') != -1) {
@@ -1433,13 +1432,13 @@ ManageClass.prototype = {
 					});
 				}
 				
-				var log, className = "dark";
+//				var log, className = "dark";
 				function beforeDrag (treeId, treeNodes) {
 					return false;
 				}
 				function beforeEditName (treeId, treeNode) {
 					if (treeNode.type == 6) {//只有知识点的类型才提供修改的操作
-						className = (className === "dark" ? "":"dark");
+//						className = (className === "dark" ? "":"dark");
 						var zTree = $.fn.zTree.getZTreeObj("zTree");
 						zTree.selectNode(treeNode);
 						boxySubmit("edit", treeNode);//弹窗修改当前节点
@@ -1450,7 +1449,7 @@ ManageClass.prototype = {
 				//用于捕获节点被删除之前的事件回调函数，并且根据返回值确定是否允许删除操作,默认值：null
 				function beforeRemove (treeId, treeNode) {
 					var isRemove = false;
-					className = (className === "dark" ? "":"dark");
+//					className = (className === "dark" ? "":"dark");
 					$.fn.zTree.getZTreeObj("zTree").selectNode(treeNode);
 					if(confirm("确认要删除节点【" + treeNode.name + "】吗？")){
 						$.ajax({
@@ -1471,7 +1470,7 @@ ManageClass.prototype = {
 					//用于捕获删除节点之后的事件回调函数 null
 				}
 				function beforeRename (treeId, treeNode, newName, isCancel) {
-					className = (className === "dark" ? "":"dark");
+//					className = (className === "dark" ? "":"dark");
 					if (newName.length == 0) {
 						Boxy.alert("<i class='warn'></i><span>节点名称不能为空 !</span>");
 						var zTree = $.fn.zTree.getZTreeObj("zTree");
@@ -1554,7 +1553,7 @@ ManageClass.prototype = {
 					treeNode.icon = "";
 					zTree.updateNode(treeNode);
 				}
-				function ajaxGetNodes(treeNode, reloadType) {
+				function ajaxGetNodes(treeNode, reloadType) {//ajax加载图片
 					var zTree = $.fn.zTree.getZTreeObj("zTree");
 					if (reloadType == "refresh") {
 						treeNode.icon = Globals.ctx + " resource/images/ztree/loading.gif";
