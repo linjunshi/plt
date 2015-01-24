@@ -18,6 +18,8 @@ public class AreaService {
 	
 	private static final String taobaoServiceAddr = "http://ip.taobao.com/service/getIpInfo.php";
 	
+	private static IPSeeker ipSeeker = null;
+	
 	/**
 	 * 用淘宝服务解析IP对应的行政区划
 	 * @param clientIp
@@ -55,11 +57,13 @@ public class AreaService {
 		area.setCityName(Global.City);
 		area.setCityCode(Global.AreaCode);
 		try{
-			String dataFilePath = AreaService.class.getClassLoader().getResource("") + "qqwry.dat";
-	        if (dataFilePath.startsWith("file:/")) {
-	        	dataFilePath = dataFilePath.substring(5);
-	        }
-			IPSeeker ipSeeker = new IPSeeker(new File(dataFilePath));
+			if(ipSeeker == null) {
+				String dataFilePath = AreaService.class.getClassLoader().getResource("") + "qqwry.dat";
+		        if (dataFilePath.startsWith("file:/")) {
+		        	dataFilePath = dataFilePath.substring(5);
+		        }
+				ipSeeker = new IPSeeker(new File(dataFilePath));
+			}
 			String country = ipSeeker.getCountry(clientIp);
 			if(country != null && !country.endsWith("局域网")) {
 				String city;

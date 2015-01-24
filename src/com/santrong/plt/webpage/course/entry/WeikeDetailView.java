@@ -14,7 +14,7 @@ public class WeikeDetailView {
 	private String fileUrl;					// 视频文件地址
 
 	private String id;
-	private String title;
+	private String courseName;
 	private String url;
 	private long size;
 	private String duration;
@@ -64,12 +64,12 @@ public class WeikeDetailView {
 		this.id = id;
 	}
 
-	public String getTitle() {
-		return title;
+	public String getCourseName() {
+		return courseName;
 	}
 
-	public void setTitle(String title) {
-		this.title = title;
+	public void setCourseName(String courseName) {
+		this.courseName = courseName;
 	}
 
 	public String getUrl() {

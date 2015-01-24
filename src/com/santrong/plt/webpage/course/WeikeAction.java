@@ -165,11 +165,6 @@ public class WeikeAction extends BaseAction {
 		request.setAttribute("type", type);
 		request.setAttribute("weike", weike);
 		
-		String player = request.getParameter("player");
-		if(player != null && player.equals("html5")) {
-			return "weike/html5";
-		}
-		
 		return "weike/detail";
 	}
 	
