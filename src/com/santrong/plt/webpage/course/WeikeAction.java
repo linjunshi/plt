@@ -17,6 +17,7 @@ import com.santrong.plt.opt.area.AreaEntry;
 import com.santrong.plt.opt.grade.GradeDefine;
 import com.santrong.plt.opt.grade.GradeLevelEntry;
 import com.santrong.plt.system.Global;
+import com.santrong.plt.util.ClientUtils;
 import com.santrong.plt.util.MyUtils;
 import com.santrong.plt.util.TreeCode;
 import com.santrong.plt.webpage.BaseAction;
@@ -164,6 +165,7 @@ public class WeikeAction extends BaseAction {
 		
 		request.setAttribute("type", type);
 		request.setAttribute("weike", weike);
+		request.setAttribute("isMobile", ClientUtils.isMobile(request));
 		
 		return "weike/detail";
 	}
