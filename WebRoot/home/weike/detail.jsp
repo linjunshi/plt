@@ -34,6 +34,7 @@ Globals.page = "Index_weikeDetail";
 							<a href="${ctx}/weike/${otherWeike.id}.html" target="_blank">${otherWeike.courseName}</a>
 						</p>
 					</c:forEach>
+					<c:if test="${empty weikeList}"><p class="nothing"><a href="javascript:void(0);">暂无相关的微课！</a></p></c:if>
 					<div class="right_but"><a href="${ctx}/war/exams?type=${type}&weikeId=${weike.id}" target="_blank">课后练习</a></div>
 				</div>
 			</div>
