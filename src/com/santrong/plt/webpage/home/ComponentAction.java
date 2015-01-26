@@ -102,6 +102,7 @@ public class ComponentAction extends BaseAction {
 						//  获取【已绑定】的知识点列表
 						List<KnowledgeQuestionView> bingKnowledgeList = tqDao.selectKnowledge2QuestionByQId(questionId);
 						
+						
 						//  获取【未绑定】的知识点列表
 						if (bingKnowledgeList != null && bingKnowledgeList.size() > 0 && knowledgeList != null && knowledgeList.size() > 0) {
 							int allCount = 0 ;
