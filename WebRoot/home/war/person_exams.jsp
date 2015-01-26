@@ -60,9 +60,15 @@ Globals.page = "Index_personExams";
 				<c:if test="${fn:length(query.pageSequence) > 1}">
 					<c:if test="${query.pageNum < query.pageCount}">
 						<div class="button_next">
-							<a href="<c:if test="${type == 'personExams'}">${ctx}/war/exams?type=${type}&subjectId=${subjectId}&page=${query.pageNum + 1}</c:if>
-								<c:if test="${type == 'unitExams'}">${ctx}/war/exams?type=${type}&unitId=${unitId}&page=${query.pageNum + 1}</c:if>"
-							><img src="${ctx}/resource/images/button_next.png"></a>
+							<a href="<c:if test="${type == 'personExams'}">${ctx}/war/exams?type=${type}&subjectId=${subjectId}&page=${query.pageNum + 1}</c:if>">
+							<img src="${ctx}/resource/images/button_next.png"></a>
+						</div>
+					</c:if>
+				</c:if>
+				<c:if test="${type == 'classExams'}">
+					<c:if test="${pageCount != pageNum}">
+						<div class="button_next">
+							<a href="${ctx}/war/exams?type=${type}&weikeId=${weikeId}&page=${pageNum + 1}"><img src="${ctx}/resource/images/button_next.png"></a>
 						</div>
 					</c:if>
 				</c:if>

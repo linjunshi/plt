@@ -132,7 +132,7 @@ public class WeikeAction extends BaseAction {
 		
 		HttpServletRequest request = getRequest();
 		
-		String type = "unitExams";//单元测试，personExams 个人练习
+		String type = "classExams";//classExams 课后练习, personExams 个人练习,unitExams 单元练习
 		
 		// 课程详细
 		WeikeDao weikeDao = new WeikeDao();
@@ -150,11 +150,15 @@ public class WeikeAction extends BaseAction {
 			request.setAttribute("luEntry", luEntry);
 			
 			// 其他相关的微课
-			List<CourseItem> weikeList = weikeDao.selectWeikeByUnitId(weike.getUnitId());//获取同一单元的微课
-			if (weikeList == null || weikeList.size() == 0) {
-				weikeList = weikeDao.selectWeikeByGIdAndSId(weike.getGradeId(), weike.getSubjectId());//获取同年级和同学科的微课
-			}
+			List<CourseItem> weikeList = weikeDao.selectWeikeBySameKnowledges(id, 0, 10);//获取当前微课中，含有相同知识点的微课(默认设置查询第一页（从0开始）、查询条数:10)
 			request.setAttribute("weikeList", weikeList);
+			
+			// 同单元的微课
+			List<CourseItem> weikeUnitList = weikeDao.selectWeikeByUnitId(weike.getUnitId());//获取同一单元的微课
+			request.setAttribute("weikeUnitList", weikeUnitList);
+//			if (weikeList == null || weikeList.size() == 0) {
+//				weikeList = weikeDao.selectWeikeByGIdAndSId(weike.getGradeId(), weike.getSubjectId());//获取同年级和同学科的微课
+//			}
 		}
 		
 		// 课程评价

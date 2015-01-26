@@ -37,9 +37,9 @@ public class CourseItem {
 	private Date uts;
 	
 	
-	public static final int Status_Del = -1;
-	public static final int Status_Normal = 0;
-	public static final int Status_Publish = 1;
+	public static final int Status_Del = -1;//删除
+	public static final int Status_Normal = 0;//未发布
+	public static final int Status_Publish = 1;//发布
 	
 	public static final int CourseType_Normal = 0;// 普通类型
 	public static final int CourseType_Weike = 1;// 微课类型

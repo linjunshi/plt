@@ -125,9 +125,31 @@ public interface TrainQuestionMapper {
 	 * @tablename question_to_knowledge 试题关联知识点表
 	 * @tablename knowledge 知识点表  
 	 * @param questionId
-	 * @return
+	 * @return List<KnowledgeQuestionView>
 	 */
 	@Select("select a.knowledgeName, a.subjectId, a.gradeId, b.*  from knowledge a RIGHT JOIN question_to_knowledge b on a.id = b.knowledgeId where b.questionId = #{questionId} order by a.code asc,a.priority")
 	List<KnowledgeQuestionView> selectKnowledge2QuestionByQId(String questionId);
+	
+	/**
+	 * 获取当前微课中，含有相同知识点的试题(可以设置查询条数)
+	 * @author huangweihua
+	 * @param weikeId 微课的ID
+	 * @param index （limit index,pageSize，指记录开始的index，从0开始，表示第一条记录；pageCount是指从第index+1条开始，取pageCount条。）
+	 * @param pageSize 查询条数
+	 * @return List<TrainQuestionItem>
+	 */
+	@Select("select d.* from resource_train_question d where d.id in ("
+			+ "select DISTINCT c.questionId from question_to_knowledge c where c.knowledgeId in ("
+			+ "select a.knowledgeId from course_to_knowledge a LEFT JOIN course b on a.courseId = b.id where id = #{weikeId}"
+			+ ")"
+			+ ") and d.status = 1 order by d.level ,d.cts desc limit ${index}, ${pageSize}")
+	List<TrainQuestionItem> selectQuestionBySameKnowledges(@Param("weikeId")String weikeId, @Param("index")int index, @Param("pageSize")int pageSize);
+	
+	@Select("select count(*) from resource_train_question d where d.id in ("
+			+ "select DISTINCT c.questionId from question_to_knowledge c where c.knowledgeId in ("
+			+ "select a.knowledgeId from course_to_knowledge a LEFT JOIN course b on a.courseId = b.id where id = #{weikeId}"
+			+ ")"
+			+ ") and d.status = 1")
+	int selectCountByWeikeId(String weikeId);
 	
 }
