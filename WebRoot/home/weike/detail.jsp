@@ -70,10 +70,10 @@ Globals.page = "Index_weikeDetail";
 					<h2>其他相关微课</h2>
 					<c:forEach items="${weikeList}" var="otherWeike" varStatus="wt">
 						<p>
-							<a href="${ctx}/weike/${otherWeike.id}.html">${otherWeike.courseName}</a>
+							<a href="${ctx}/weike/${otherWeike.id}.html" target="_blank">${otherWeike.courseName}</a>
 						</p>
 					</c:forEach>
-					<div class="right_but"><a href="${ctx}/war/exams?type=${type}&unitId=${weike.unitId}" target="_blank">课后练习</a></div>
+					<div class="right_but"><a href="${ctx}/war/exams?type=${type}&weikeId=${weike.id}" target="_blank">课后练习</a></div>
 				</div>
 			</div>
 			<div class="clr"></div>

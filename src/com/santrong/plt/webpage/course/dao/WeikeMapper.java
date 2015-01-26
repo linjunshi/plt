@@ -38,5 +38,18 @@ public interface WeikeMapper {
 	@Select("select * from course where gradeId = #{gradeId} and subjectId = #{subjectId} and status = 1 and courseType = 1 order by cts desc limit 8")
 	List<CourseItem> selectWeikeByGIdAndSId(@Param("gradeId")String gradeId, @Param("subjectId")String subjectId);
 	
+	/**
+	 * 获取当前微课中，含有相同知识点的微课(可以设置查询条数)
+	 * @param weikeId 微课的ID
+	 * @param index 第几页 （limit index,pageSize，指记录开始的index，从0开始，表示第一条记录；pageSize是指从第index+1条开始，取pageSize条。）
+	 * @param pageSize 查询条数
+	 * @return
+	 */
+	@Select("select d.* from course d where d.id in ("
+			+ "select DISTINCT c.courseId from course_to_knowledge c where c.knowledgeId in ("
+			+ "select a.knowledgeId from course_to_knowledge a LEFT JOIN course b on a.courseId = b.id where id = #{weikeId}"
+			+ ") and c.courseId != #{weikeId}"
+			+ ") and status = 1 and courseType = 1 ORDER BY d.cts desc limit ${index},${pageSize}")
+	List<CourseItem> selectWeikeBySameKnowledges(@Param("weikeId")String weikeId, @Param("index")int index, @Param("pageSize")int pageSize);
 	
 }

@@ -513,5 +513,41 @@ public class TrainQuestionDao extends BaseDao{
 		return null;
 	}
 	
+	/**
+	 * 获取当前微课中，含有相同知识点的试题(可以设置查询条数)
+	 * @author huangweihua
+	 * @param weikeId 微课的ID
+	 * @param index （limit index,pageSize，指记录开始的index，从0开始，表示第一条记录；pageSize是指从第index+1条开始，取pageSize条。）
+	 * @param pageSize 查询条数
+	 * @return List<TrainQuestionItem>
+	 */
+	public List<TrainQuestionItem> selectQuestionBySameKnowledges(String weikeId, int index, int pageSize) {
+		try {
+			TrainQuestionMapper mapper = this.getMapper(TrainQuestionMapper.class);
+			if(mapper != null) {
+				return mapper.selectQuestionBySameKnowledges(weikeId, index, pageSize);
+			}
+		} catch (Exception e) {
+			Log.printStackTrace(e);
+		}
+		return null;
+	}
 	
+	/**
+	 * 获取当前微课中，含有相同知识点的试题(可以设置查询条数)的总数记录
+	 * @author huangweihua
+	 * @param weikeId 微课的ID
+	 * @return int
+	 */
+	public int selectCountByWeikeId(String weikeId) {
+		try {
+			TrainQuestionMapper mapper = this.getMapper(TrainQuestionMapper.class);
+			if(mapper != null) {
+				return mapper.selectCountByWeikeId(weikeId);
+			}
+		} catch (Exception e) {
+			Log.printStackTrace(e);
+		}
+		return 0;
+	}
 }

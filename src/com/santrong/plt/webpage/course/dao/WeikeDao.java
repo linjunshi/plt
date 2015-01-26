@@ -231,6 +231,33 @@ public class WeikeDao extends BaseDao {
 		return count;
 	}
 	
+	
+	
+	/**
+	 * 获取当前微课中，含有相同知识点的微课(可以设置查询条数)
+	 * @param weikeId 微课的ID
+	 * @param index 第几页 （limit index,pageSize，指记录开始的index，从0开始，表示第一条记录；pageCount是指从第index+1条开始，取pageCount条。）
+	 * @param pageSize 查询条数
+	 * @return
+	 */
+	public List<CourseItem> selectWeikeBySameKnowledges(String weikeId, int index, int pageSize) {
+		try {
+			WeikeMapper mapper = this.getMapper(WeikeMapper.class);
+			if(mapper != null) {
+				if (index < 0) {
+					index = 0;
+				}
+				if (pageSize <= 0) {
+					pageSize = 1;
+				}
+				return mapper.selectWeikeBySameKnowledges(weikeId, index, pageSize);
+			}
+		} catch (Exception e) {
+			Log.printStackTrace(e);
+		}
+		return null;
+	}
+	
 	/**
 	 * 获取同一单元的微课
 	 * @param unitId

@@ -296,7 +296,8 @@ public class WarAction extends BaseAction {
 			String gradeId = request.getParameter("gradeId");
 			String subjectId = request.getParameter("subjectId");
 			String unitId = request.getParameter("unitId");
-			String type = request.getParameter("type");// personExams 个人练习,unitExams 课后单元练习
+			String weikeId = request.getParameter("weikeId");
+			String type = request.getParameter("type");// personExams 个人练习,unitExams 单元练习,classExams 课后练习
 			
 			// 获取当前用户对象信息
 			UserItem user = this.currentUser();
@@ -305,28 +306,45 @@ public class WarAction extends BaseAction {
 				return this.redirectLogin();
 			}
 			
-			if (MyUtils.isNull(type)) {
-				type = "personExams";//个人练习
-			}
-			
 			int pageNum = this.getIntParameter("page");
 			if(pageNum == 0) {
 				pageNum = 1;
 			}
 			
+			if (MyUtils.isNull(type)) {
+				type = "personExams";//个人练习
+			}
+			
 			TrainQuestionDao tqDao = new TrainQuestionDao();
-			TrainQuestionQuery query = new TrainQuestionQuery();
-			query.setPageNum(pageNum);
-			query.setPageSize(1);//只显示一条
-			query.setGradeId(gradeId);//通过年级查询
-			query.setSubjectId(subjectId);//通过科目查询
-			query.setUnitId(unitId);//通过单元查询
-//			query.setQuestionType(1);//只查询单选题
-			query.setOrderBy("cts");
-			query.setOrderBy("gradeId");
-			query.setOrderBy("level");
-			query.setCount(tqDao.selectCountByQuery(query));
-			List<TrainQuestionItem> questionList = tqDao.selectByQuery(query);
+			List<TrainQuestionItem> questionList = null;
+			if (type.equalsIgnoreCase("personExams")) {//个人练习
+				
+				TrainQuestionQuery query = new TrainQuestionQuery();
+				query.setPageNum(pageNum);
+				query.setPageSize(1);//只显示一条
+				query.setGradeId(gradeId);//通过年级查询
+				query.setSubjectId(subjectId);//通过科目查询
+				query.setUnitId(unitId);//通过单元查询
+//				query.setQuestionType(1);//只查询单选题
+				query.setOrderBy("cts");
+//				query.setOrderBy("gradeId");
+//				query.setOrderBy("level");
+				query.setCount(tqDao.selectCountByQuery(query));
+				questionList = tqDao.selectByQuery(query);
+				
+				request.setAttribute("query", query);
+				
+			} else if (type.equalsIgnoreCase("classExams")) {//classExams 课后练习
+				if (MyUtils.isNotNull(weikeId)) {
+					int pageCount = 0;
+					pageCount = tqDao.selectCountByWeikeId(weikeId);
+					questionList = tqDao.selectQuestionBySameKnowledges(weikeId, (pageNum - 1), 1);
+					
+					request.setAttribute("pageNum", pageNum);
+					request.setAttribute("pageCount", pageCount);
+					request.setAttribute("weikeId", weikeId);
+				}
+			}
 			
 			// 反查获取科目、年级、学期、单元
 			if (questionList != null && questionList.size() == 1) {
@@ -365,7 +383,6 @@ public class WarAction extends BaseAction {
 			request.setAttribute("subjectId", subjectId);
 			request.setAttribute("unitId", unitId);
 			request.setAttribute("type", type);
-			request.setAttribute("query", query);
 		} catch (Exception e) {
 			Log.printStackTrace(e);
 		}
