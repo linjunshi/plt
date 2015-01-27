@@ -17,7 +17,7 @@ Globals.page = "Index_weikeDetail";
 		 <div class="questions_list ">	
 		    <div class="pinglun clearfix">
 		    <div class="location">
-		    <c:if test="${luEntry}">
+		    <c:if test="${!empty luEntry}">
 			    <span>${luEntry.levelName} > </span><span>${luEntry.subjectName} > </span><span>${luEntry.termCnName}  > </span><span>${luEntry.unitName}</span>
 		    </c:if>
 		    <c:if test="${empty luEntry}"><span>&nbsp;</span></c:if>
