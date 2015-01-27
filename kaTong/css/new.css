@@ -151,5 +151,46 @@
 .bank_det p{ margin:5px 0;}
 .bank_det b{ color:#F00; margin:0 10px;}
 .blanks_text { border:none; border-bottom:1px solid #666; width:150px; color:#f00; margin:0 3px;}
+
+/*--------------------评论-----------------*/
+.pinglun{ }
+.location{ margin-left:20px; margin-bottom:4px}
+.location a{ padding:2px 4px; font-size:16px; color:#666;}
+.location a:hover { color:#f90;}
+.ping_title{height:60px;line-height:60px; text-align:center;  font-size:35px; background:url(../images/title_bg.png) no-repeat 15px center; color:#442100; letter-spacing:2px; display:block;}
+.ping_left{ float:left; width:700px; display:block; height:450px; background: url(../images/live_bg.png) no-repeat left top; margin:0px 0 10px 20px;}
+
+.ping_left .ping_item{ margin:40px 0 0 20px; display:none;}
+.ping_left .ping_item a{ color:#fff; text-align:center;width:209px; height:37px;line-height:37px; display:block; font-size:16px; float:left; margin-right:15px; text-indent:10px;}
+.ping_left .school_a {background:url(../images/school_hover.png) no-repeat left top;}
+.ping_left .vod_a {background:url(../images/vod_hover.png) no-repeat left top;}
+.ping_left .ke_a {background:url(../images/ke_hover.png) no-repeat left top;}
+.ping_left .school_a:hover {background:url(../images/school_a.png) no-repeat left top;}
+.ping_left .vod_a:hover {background:url(../images/vod_a.png) no-repeat left top;}
+.ping_left .ke_a:hover {background:url(../images/ke_a.png) no-repeat left top;}
+
+.ping_left .ping_li{ width:640px; height:360px; float:left; display:block; background:#000; margin:50px 0 0 32px;}
+.ping_right{ float:right; display: block; width:230px; height:auto; background:url(../images/right_bg.png) no-repeat left top; margin:0 26px 20px 0px;}
+.right_sid {height:300px;}
+.right_sid h2{ width:230px; height:34px; line-height:34px;font-size:26px; color:#222;text-align:center;margin:35px 0 0 0;}
+.right_sid p { height:36px; line-height:36px;}
+.right_sid p a{ margin:0px 0 0 50px; color:#222; font-size:16px;}
+.right_but a{ background:url(../images/yun.png) no-repeat left top; width:230px; height:102px; display:block;text-align:center; line-height:102px; color:#fff; font-size:40px;}
+.right_but a:hover{ color:#000;}
+
+.ping_footer{ width:1000px;height:100%;}
+.ping_foot_left { float:left;display:block; width:700px; height:100%; background:#e7cfaa; margin:0 0 0 20px; padding:10px 0;}
+.ping_fo_ti{width:200px; height:40px; text-align:center; font-size:26px; letter-spacing:2px; color:#000;background:url(../images/ti_bg.png ) no-repeat 30px top; }
+.ping_foo_con{ width:680px; height:100%; background:#fff; margin:0 0 0 10px;}
+.ping_fo_c{ padding:10px 0 10px 20px; margin:0 0 5px 0; border-bottom:1px #ccc dashed; position:relative;}
+.ping_fo_c img{ float:left; display:block;}
+.ping_fo_c p{ float:left; margin-left:15px; width:500px;}
+.pi_time { position:absolute; right:50px; bottom:10px;}
+.ping_form { width:660px; padding:10px; background:#fff; margin-left:10px;}
+.ping_form a{ padding:5px 10px;display:block; width:40px; height:20px; text-align:center; background:#F90; margin:10px 0 0 10px; color:#fff;}
+.ping_tarea { width:640px; height:80px; margin-left:10px;}
+
+.ping_foot_right{ float:right; width:230px;margin:0 26px 20px 0px;}
 /*--------------------页脚-----------------*/
 .footer { width:100%; height:218px; background:url(../images/mainbg.png) no-repeat center top;}
+
