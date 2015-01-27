@@ -16,10 +16,15 @@ Globals.page = "Index_personExams";
 		<%@ include file="../inc/top_new.jsp"%>
 		<div class="con_quest">
 			<div class="con_que">
-				<h2 class="${luEntry.subjectEnName}">&nbsp;</h2>
-				<p>${luEntry.levelName}</p>
-				<p>${luEntry.termCnName}</p>
-				<p>（${luEntry.unitName}）</p>
+				<c:if test="${luEntry}">
+					<h2 class="${luEntry.subjectEnName}">&nbsp;</h2>
+					<p>${luEntry.levelName}</p>
+					<p>${luEntry.termCnName}</p>
+					<p>${luEntry.unitName}</p>
+				</c:if>
+				<c:if test="${empty luEntry}">
+					<p class="nothing">暂无相关的习题！</p>
+				</c:if>
 			</div>
 			<c:forEach items="${questionList}" var="question" varStatus="st">
 				<div class="con_pue_sid">

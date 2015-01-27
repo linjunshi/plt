@@ -116,11 +116,11 @@ div[contenteditable=true] {-webkit-line-break: after-white-space;-webkit-nbsp-mo
 /*--------------------试题列表2-----------------*/
 .con_quest { width:1000px; height:922px; margin:0 auto; background:url(../images/02.png) no-repeat left top; position:relative; padding-top:30px;}
 .con_que { width:960px; height:120px; margin:20px 0px 0px 20px; background:url(../images/xin_img.png) no-repeat left 0px;}
-.con_que h2{float:left; display:block; background: url(../images/shuxue.png) no-repeat left top; width:200px; line-height:120px;}
 .con_que h2.yuwen{float:left; display:block; background: url(../images/yuwen.png) no-repeat left top; width:200px; line-height:120px;}
 .con_que h2.shuxue{float:left; display:block; background: url(../images/shuxue.png) no-repeat left top; width:200px; line-height:120px;}
 .con_que h2.yingyu{float:left; display:block; background: url(../images/yingyu.png) no-repeat left top; width:200px; line-height:120px;}
 .con_que p{ float:left; display:block; font-size:30px; color:#FF0; line-height:120px;margin-left: 20px;}
+.con_que p.nothing{ margin-left: 350px;color:#FF0;}
 .con_pue_sid { text-align:center; vertical-align:middle; margin:30px 0; height: 250px;}
 .que_but { margin:50px 0 0 100px;}
 .que_but p{ float:left; display:block; margin:0 20px;}
@@ -181,7 +181,7 @@ div[contenteditable=true] {-webkit-line-break: after-white-space;-webkit-nbsp-mo
 .ping_fo_co{ width: 930px;padding:10px 0 10px 25px; margin:5px 0; border-bottom:1px #FFCC99 dashed; position:relative;}
 .ping_fo_co img{ float:left; display:block;padding: 2px;border: 1px #FFCC99 solid;background: #fff; border-radius:50px;}
 .ping_fo_co p{ float:left; margin-left:15px; width:600px;}
-.ping_fo_co .nothing{text-align: center;}
+.ping_fo_co .nothing{text-align: center;margin-left:150px;}
 .pi_time { position:absolute; right:50px; bottom:10px;}
 .ping_tarea { width:900px; height:60px; margin-left:20px;}
 .ping_form a{ padding:0 10px; margin-left:10px;}
