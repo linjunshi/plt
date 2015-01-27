@@ -263,11 +263,11 @@ public class WeikeDao extends BaseDao {
 	 * @param unitId
 	 * @return
 	 */
-	public List<CourseItem> selectWeikeByUnitId(String unitId) {
+	public List<CourseItem> selectWeikeByUnitId(String unitId, int index, int pageSize) {
 		try {
 			WeikeMapper mapper = this.getMapper(WeikeMapper.class);
 			if(mapper != null) {
-				return mapper.selectWeikeByUnitId(unitId);
+				return mapper.selectWeikeByUnitId(unitId, index, pageSize);
 			}
 		} catch (Exception e) {
 			Log.printStackTrace(e);
@@ -281,11 +281,11 @@ public class WeikeDao extends BaseDao {
 	 * @param subjectId
 	 * @return
 	 */
-	public List<CourseItem> selectWeikeByGIdAndSId(String gradeId, String subjectId) {
+	public List<CourseItem> selectWeikeByGIdAndSId(String gradeId, String subjectId, int index, int pageSize) {
 		try {
 			WeikeMapper mapper = this.getMapper(WeikeMapper.class);
 			if(mapper != null) {
-				return mapper.selectWeikeByGIdAndSId(gradeId, subjectId);
+				return mapper.selectWeikeByGIdAndSId(gradeId, subjectId, index, pageSize);
 			}
 		} catch (Exception e) {
 			Log.printStackTrace(e);

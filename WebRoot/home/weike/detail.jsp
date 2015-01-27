@@ -14,49 +14,51 @@ Globals.page = "Index_weikeDetail";
 <body>
 	<div class="header">
 		<%@ include file="../inc/top_new.jsp"%>
-		<div class="con_quest">
-			<div class="pinglun">
-				<div class="ping_title">
-					<%-- <h2>${luEntry.levelName}&nbsp;&nbsp;${luEntry.subjectName}&nbsp;&nbsp;${luEntry.termCnName}&nbsp;&nbsp;（${luEntry.unitName}）</h2> --%>
-					<h2>${weike.courseName}</h2>
-				</div>
-				<div class="ping_left">
-					<div class="ping_li">
-						<video autoplay="autoplay" controls="controls" style="width:100%; height:100%; background:black;">
-							<source src="${ctx}${weike.fileUrl}">
-						</video>			
-					</div>
-				</div>
-				<div class="ping_right">
-					<h2>其他相关微课</h2>
-					<c:forEach items="${weikeList}" var="otherWeike" varStatus="wt">
-						<p>
-							<a href="${ctx}/weike/${otherWeike.id}.html" target="_blank">${otherWeike.courseName}</a>
-						</p>
-					</c:forEach>
-					<c:if test="${empty weikeList}"><p class="nothing"><a href="javascript:void(0);">暂无相关的微课！</a></p></c:if>
-					<div class="right_but"><a href="${ctx}/war/exams?type=${type}&weikeId=${weike.id}" target="_blank">课后练习</a></div>
-				</div>
-			</div>
-			<div class="clr"></div>
-			<div class="ping_footer">
-				<div class="ping_fo_ti">评论</div>
-				
-				<c:forEach items="${weike.commentList}" var="comment" varStatus="ct">
-					<div class="ping_fo_co clearfix">
+		 <div class="questions_list ">
+		    <div class="pinglun clearfix">
+		    <div class="location">
+		    <span>${luEntry.levelName} > </span><span>${luEntry.subjectName} > </span><span>${luEntry.termCnName}  > </span><span>${luEntry.unitName}</span></div>
+		      <div class="ping_title">${weike.courseName}</div>
+		      <div class="ping_left">
+		      	<div class="ping_item"><a href="#" class="school_a">学前预习</a><a href="#" class="vod_a">课程播放</a><a href="#" class="ke_a mar">课后习题</a></div>
+		        <div class="ping_li">
+		        	<video autoplay="autoplay" controls="controls" style="width:100%; height:100%; background:black;">
+						<source src="${ctx}${weike.fileUrl}">
+					</video>	
+		        </div>
+		      </div>
+		      <div class="ping_right">
+		        <div class="right_sid">
+		          <h2>其他相关微课</h2>
+		          <c:forEach items="${weikeList}" var="otherWeike" varStatus="wt">
+						<p><a href="${ctx}/weike/${otherWeike.id}.html" target="_blank">${otherWeike.courseName}</a></p>
+				  </c:forEach>
+				  <c:if test="${empty weikeList}"><p class="nothing"><a href="javascript:void(0);">暂无相关的微课！</a></p></c:if>
+		        </div>
+		        <div class="right_but"><a href="${ctx}/war/exams?type=${type}&weikeId=${weike.id}" target="_blank">课后练习</a></div>
+		      </div>
+		    </div>
+		    <div class="clr"></div>
+		    <div class="ping_footer clearfix">
+		      <div class="ping_foot_left">
+		        <div class="ping_fo_ti">评论</div>
+		        <ul class="ping_foo_con">
+		           <c:forEach items="${weike.commentList}" var="comment" varStatus="ct">
+		           <li class="ping_fo_c clearfix">
 						<img src="${ctx}${comment.headPhoto}" width="80" height="80">
 						<p>${comment.showName}</p>
 						<p>${comment.remark}</p>
 						<span class="pi_time"><fmt:formatDate value="${comment.cts}" type="both"/></span>
-					</div>
-				</c:forEach>
-				<c:if test="${empty weike.commentList}"><div class="ping_fo_co clearfix"><p class="nothing">还没有评论，沙发等你来抢！</p></div></c:if>
-				<div class="ping_comment_title">
+		           </li>
+		           </c:forEach>
+		           <c:if test="${empty weike.commentList}"><li class="ping_fo_c clearfix"><p class="nothing">还没有评论，沙发等你来抢！</p></li></c:if>
+		        </ul>
+		        <div class="ping_comment_title">
 					<div class="ping_say"><strong>我来说两句</strong></div>
 		            <div class="ping_mr"><span class="pt3">请文明上网，理性发言！</span> 总共有&nbsp;&nbsp;<span class="pt5">${weike.commentCount}</span>条课程评论</div>
 				</div>
-				<div id="comment" class="ping_form">
-					<form action="${ctx}/weike/comment" method="post" id="comment_form" class="common_form">
+		        <div id="comment" class="ping_form">
+		          <form action="${ctx}/weike/comment" method="post" id="comment_form" class="common_form">
 						<textarea name="remark" cols="" rows="" class="ping_tarea"></textarea>
 						<!-- <div>
 							<textarea id="xheditor_remark" name="remark" class="xheditor th_textarea" cols="2" rows="3"></textarea>
@@ -67,9 +69,16 @@ Globals.page = "Index_weikeDetail";
 						<input type="hidden" name="weikeId" value="${weike.id}"/>
 						<input class="ping_submit" type="submit"  value="提交"/>
 					</form>
-				</div>
-			</div>
-		</div>
+		        </div>
+		      </div>
+		      <div class="ping_foot_right">
+		        <c:forEach items="${weikeUnitList}" var="unitWeike" varStatus="wt">
+					<a href="${ctx}/weike/${unitWeike.id}.html" target="_blank"><img src="${ctx}${unitWeike.thumbnail}" width="230" title="${unitWeike.courseName}"></a>
+			    </c:forEach>
+			    <c:if test="${empty weikeUnitList}"><p class="nothing"><a href="javascript:void(0);">暂无同单元的相关微课！</a></p></c:if>
+		      </div>
+		    </div>
+		  </div>
 	</div>
 </body>
 </html>

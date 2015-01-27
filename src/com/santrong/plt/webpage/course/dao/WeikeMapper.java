@@ -32,11 +32,11 @@ public interface WeikeMapper {
 			+ "order by a.cts limit 10")
 	List<CourseView> selectForIndexList(@Param("gradeGroup")int gradeGroup, @Param("areaCode")String areaCode);	
 	
-	@Select("select * from course where unitId = #{unitId} and status = 1 and courseType = 1 order by cts desc limit 8")
-	List<CourseItem> selectWeikeByUnitId(String unitId);
+	@Select("select * from course where unitId = #{unitId} and status = 1 and courseType = 1 order by cts desc limit ${index},${pageSize}")
+	List<CourseItem> selectWeikeByUnitId(@Param("unitId")String unitId, @Param("index")int index, @Param("pageSize")int pageSize);
 	
-	@Select("select * from course where gradeId = #{gradeId} and subjectId = #{subjectId} and status = 1 and courseType = 1 order by cts desc limit 8")
-	List<CourseItem> selectWeikeByGIdAndSId(@Param("gradeId")String gradeId, @Param("subjectId")String subjectId);
+	@Select("select * from course where gradeId = #{gradeId} and subjectId = #{subjectId} and status = 1 and courseType = 1 order by cts desc limit ${index},${pageSize}")
+	List<CourseItem> selectWeikeByGIdAndSId(@Param("gradeId")String gradeId, @Param("subjectId")String subjectId, @Param("index")int index, @Param("pageSize")int pageSize);
 	
 	/**
 	 * 获取当前微课中，含有相同知识点的微课(可以设置查询条数)

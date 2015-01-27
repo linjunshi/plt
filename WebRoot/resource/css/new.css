@@ -155,7 +155,66 @@ div[contenteditable=true] {-webkit-line-break: after-white-space;-webkit-nbsp-mo
 .paging a:hover{background:#A6703D;}
 
 /*--------------------微课详细页面-----------------*/
-.pinglun{ margin-top:20px;}
+.pinglun{ }
+.location{ margin-left:20px; margin-bottom:4px}
+.location a{ padding:2px 4px; font-size:16px; color:#666;}
+.location a:hover { color:#f90;}
+.ping_title{height:60px;line-height:60px; text-align:center;  font-size:35px; background:url(../images/title_bg.png) no-repeat 15px center; color:#442100; letter-spacing:2px; display:block;}
+.ping_left{ float:left; width:700px; display:block; height:450px; background: url(../images/live_bg.png) no-repeat left top; margin:0px 0 10px 20px;}
+
+.ping_left .ping_item{ margin:40px 0 0 20px; display:none;}
+.ping_left .ping_item a{ color:#fff; text-align:center;width:209px; height:37px;line-height:37px; display:block; font-size:16px; float:left; margin-right:15px; text-indent:10px;}
+.ping_left .school_a {background:url(../images/school_hover.png) no-repeat left top;}
+.ping_left .vod_a {background:url(../images/vod_hover.png) no-repeat left top;}
+.ping_left .ke_a {background:url(../images/ke_hover.png) no-repeat left top;}
+.ping_left .school_a:hover {background:url(../images/school_a.png) no-repeat left top;}
+.ping_left .vod_a:hover {background:url(../images/vod_a.png) no-repeat left top;}
+.ping_left .ke_a:hover {background:url(../images/ke_a.png) no-repeat left top;}
+
+.ping_left .ping_li{ width:640px; height:360px; float:left; display:block; background:#000; margin:50px 0 0 32px;}
+.ping_right{ float:right; display: block; width:230px; height:auto; background:url(../images/right_bg.png) no-repeat left top; margin:0 26px 20px 0px;}
+.right_sid {height:300px;}
+.right_sid h2{ width:230px; height:34px; line-height:34px;font-size:26px; color:#222;text-align:center;margin:35px 0 0 0;}
+.right_sid p { height:36px; line-height:36px;}
+.right_sid p a{ margin:0px 0 0 60px; color:#222; font-size:16px;}
+.right_sid p a:hover{text-decoration: underline;}
+.right_but a{ background:url(../images/yun.png) no-repeat left top; width:230px; height:102px; display:block;text-align:center; line-height:102px; color:#fff; font-size:40px;}
+.right_but a:hover{ color:#000;}
+
+.ping_footer{ width:1000px;height:100%;}
+.ping_foot_left { float:left;display:block; width:700px; height:100%; background:#e7cfaa; margin:0 0 0 20px; padding:10px 0;}
+.ping_fo_ti{width:200px; height:40px; text-align:center; font-size:26px; letter-spacing:2px; color:#000;background:url(../images/ti_bg.png ) no-repeat 30px top; }
+
+.ping_say {float:left;padding-left: 30px;font-size: 16px;margin-top: 20px;}
+.ping_say strong{background: url(../images/user_comment.png) no-repeat 0;padding-left: 20px;}
+.ping_mr { float:right;margin-right: 40px;color: #c2c0c0;margin-top: 15px;}
+.ping_mr span{margin-right:10px;}
+.ping_comment_title .pt3{color:#999; height:24px; line-height:24px;}
+.ping_comment_title .pt4 { font-weight:700; color:#c2c0c0; margin-top:5px}
+.ping_comment_title .pt5 { font-size:20px; color:#f90;margin-top:-5px}
+.ping_comment_title .pt6 {margin-top:5px}
+
+.ping_foo_con{ width:680px; height:100%; background:#fff; margin:0 0 0 10px;}
+.ping_fo_c{ padding:10px 0 10px 20px; margin:0 0 5px 0; border-bottom:1px #ccc dashed; position:relative;}
+.ping_fo_c img{ float:left; display:block;padding: 2px;border: 1px #FFCC99 solid;background: #fff; border-radius:50px;}
+.ping_fo_c p{ float:left; margin-left:15px; width:500px;}
+.ping_fo_c .nothing{text-align: center;margin-left:70px;}
+.pi_time { position:absolute; right:50px; bottom:10px;}
+.ping_form { width:660px; padding:30px 10px 50px 10px; background:#fff; margin-left:10px;margin-top: 10px;}
+.ping_form a{ padding:5px 10px;display:block; width:40px; height:20px; text-align:center; background:#F90; margin:10px 0 0 10px; color:#fff;}
+.ping_tarea { width:624px; height:80px; margin-left:10px;padding: 2px 8px;}
+
+.ping_form a{ padding:0 10px; margin-left:10px;}
+
+.ping_form .ping_submit {width:80px;height: 30px;line-height: 30px;	position: relative;	float:right;margin:10px 8px 0 0;background: #f90; border-radius:3px;text-align:center;color:#fff;font-size:18px;border:0;}
+.ping_form .ping_submit:hover{ background:#09f;cursor: pointer;}
+
+.ping_foot_right{ float:right; width:230px;margin:0 26px 20px 0px;}
+.ping_foot_right img{ margin-top: 10px;}
+.ping_foot_right img:hover{ box-shadow: 0px 0px 8px #09F;}
+
+
+/* .pinglun{ margin-top:20px;}
 .ping_title{ width:1000px; height:104px; text-align:center; line-height:120px; font-size:30px; background:url(../images/title_bg.png) no-repeat center center; color:#F90;}
 .ping_title h2{margin-left: -210px;} 
 .ping_left{ float:left; width:700px; display:block; height:450px; background: url(../images/live_bg.png) no-repeat left top; margin:0px 0 10px 20px;}
@@ -187,7 +246,7 @@ div[contenteditable=true] {-webkit-line-break: after-white-space;-webkit-nbsp-mo
 .ping_form a{ padding:0 10px; margin-left:10px;}
 
 .ping_form .ping_submit {width:80px;height: 30px;line-height: 30px;	position: relative;	float:right;margin:10px 40px 0 0;background: #f90; border-radius:3px;text-align:center;color:#fff;font-size:18px;border:0;}
-.ping_form .ping_submit:hover{ background:#09f;cursor: pointer;}
+.ping_form .ping_submit:hover{ background:#09f;cursor: pointer;} */
 /*--------没有内容提示---------------*/
 .nothing {line-height: 30px;height: 30px;color: #c2c0c0;font-size: 16px;}
 /*--------------------页脚-----------------*/
