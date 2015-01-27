@@ -198,23 +198,23 @@ public class QuestionMAction extends TeacherBaseAction{
 				if (MyUtils.isNull(tqForm.getTopic())) {
 					addError("请您填写试题的题目 ！");
 				}
-				if (tqForm.isSingleSelection()) {//单选题
-					if (tqForm.getAnswer() == null) {
-						addError("请您勾选正确的答案 ！");
-					}
-				} else if (tqForm.isMulChoice()) {//多选题
-					if (!(tqForm.getPageAnswer() != null)) {
-						addError("请您勾选正确的答案 ！");
-					}
-				} else if (tqForm.isTrueOrFlase()) {//判断题
-					if (tqForm.getAnswer2() == null) {
-						addError("请您勾选正确的答案 ！");
-					}
-				} else if (tqForm.isBlankFilling()) {//填空题
-					if (MyUtils.isNull(tqForm.getAnswer3().trim())) {
-						addError("请您填写正确的答案 ！");
-					}
-				}
+//				if (tqForm.isSingleSelection()) {//单选题
+//					if (tqForm.getAnswer() == null) {
+//						addError("请您勾选正确的答案 ！");
+//					}
+//				} else if (tqForm.isMulChoice()) {//多选题
+//					if (!(tqForm.getPageAnswer() != null)) {
+//						addError("请您勾选正确的答案 ！");
+//					}
+//				} else if (tqForm.isTrueOrFlase()) {//判断题
+//					if (tqForm.getAnswer2() == null) {
+//						addError("请您勾选正确的答案 ！");
+//					}
+//				} else if (tqForm.isBlankFilling()) {//填空题
+//					if (MyUtils.isNull(tqForm.getAnswer3().trim())) {
+//						addError("请您填写正确的答案 ！");
+//					}
+//				}
 				
 				if (!(errorSize() > 0)) {
 					if (MyUtils.isNull(tqForm.getId())) {

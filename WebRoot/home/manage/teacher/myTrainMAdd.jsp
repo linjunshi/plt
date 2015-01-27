@@ -106,7 +106,7 @@ Globals.page = "Manage_myTrainMAdd";
 									</div>
 								</div>
 								<div class="form_item">
-									<label>正确答案<span class="not-empty" title='此项为必填项'>*</span>：</label>
+									<label>正确答案<!-- <span class="not-empty" title='此项为必填项'>*</span> -->：</label>
 									<div class="form_field" id="answer_radio">
 										<input value="1" class="form_radio" name="answer" type="radio"
 											<c:if test="${tqItem.containA}">checked="checked"</c:if> />
