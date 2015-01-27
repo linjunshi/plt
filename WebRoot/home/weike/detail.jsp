@@ -14,10 +14,14 @@ Globals.page = "Index_weikeDetail";
 <body>
 	<div class="header">
 		<%@ include file="../inc/top_new.jsp"%>
-		 <div class="questions_list ">
+		 <div class="questions_list ">	
 		    <div class="pinglun clearfix">
 		    <div class="location">
-		    <span>${luEntry.levelName} > </span><span>${luEntry.subjectName} > </span><span>${luEntry.termCnName}  > </span><span>${luEntry.unitName}</span></div>
+		    <c:if test="${luEntry}">
+			    <span>${luEntry.levelName} > </span><span>${luEntry.subjectName} > </span><span>${luEntry.termCnName}  > </span><span>${luEntry.unitName}</span>
+		    </c:if>
+		    <c:if test="${empty luEntry}"><span>&nbsp;</span></c:if>
+			</div>
 		      <div class="ping_title">${weike.courseName}</div>
 		      <div class="ping_left">
 		      	<div class="ping_item"><a href="#" class="school_a">学前预习</a><a href="#" class="vod_a">课程播放</a><a href="#" class="ke_a mar">课后习题</a></div>
@@ -41,7 +45,7 @@ Globals.page = "Index_weikeDetail";
 		    <div class="clr"></div>
 		    <div class="ping_footer clearfix">
 		      <div class="ping_foot_left">
-		        <div class="ping_fo_ti">评论</div>
+		        <div class="ping_fo_ti">评&nbsp;论</div>
 		        <ul class="ping_foo_con">
 		           <c:forEach items="${weike.commentList}" var="comment" varStatus="ct">
 		           <li class="ping_fo_c clearfix">
@@ -55,7 +59,7 @@ Globals.page = "Index_weikeDetail";
 		        </ul>
 		        <div class="ping_comment_title">
 					<div class="ping_say"><strong>我来说两句</strong></div>
-		            <div class="ping_mr"><span class="pt3">请文明上网，理性发言！</span> 总共有&nbsp;&nbsp;<span class="pt5">${weike.commentCount}</span>条课程评论</div>
+		            <div class="ping_mr"><span class="pt3">请文明上网，理性发言！</span> 已经有&nbsp;&nbsp;<span class="pt5">${weike.commentCount}</span>人评论了</div>
 				</div>
 		        <div id="comment" class="ping_form">
 		          <form action="${ctx}/weike/comment" method="post" id="comment_form" class="common_form">
@@ -75,7 +79,6 @@ Globals.page = "Index_weikeDetail";
 		        <c:forEach items="${weikeUnitList}" var="unitWeike" varStatus="wt">
 					<a href="${ctx}/weike/${unitWeike.id}.html" target="_blank"><img src="${ctx}${unitWeike.thumbnail}" width="230" title="${unitWeike.courseName}"></a>
 			    </c:forEach>
-			    <c:if test="${empty weikeUnitList}"><p class="nothing"><a href="javascript:void(0);">暂无同单元的相关微课！</a></p></c:if>
 		      </div>
 		    </div>
 		  </div>
