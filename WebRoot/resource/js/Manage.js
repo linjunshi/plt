@@ -1035,28 +1035,28 @@ ManageClass.prototype = {
 				$("#answer_checkbox").hide();
 				$("#answer2_radio").hide();
 				$("#answer_input").hide();
-				$("#answer3").removeAttr("required");//移除填空题答案输入框的必填属性
+//				$("#answer3").removeAttr("required");//移除填空题答案输入框的必填属性
 			}
 			var answer_checkbox_show = function(){//只显示多选题
 				$("#answer_radio").hide();
 				$("#answer_checkbox").show();
 				$("#answer2_radio").hide();
 				$("#answer_input").hide();
-				$("#answer3").removeAttr("required");//移除填空题答案输入框的必填属性
+//				$("#answer3").removeAttr("required");//移除填空题答案输入框的必填属性
 			}
 			var answer2_radio_show = function(){//只显示判断题
 				$("#answer_radio").hide();
 				$("#answer_checkbox").hide();
 				$("#answer2_radio").show();
 				$("#answer_input").hide();
-				$("#answer3").removeAttr("required");//移除填空题答案输入框的必填属性
+//				$("#answer3").removeAttr("required");//移除填空题答案输入框的必填属性
 			}
 			var answer_input_show = function(){//只显示填空题
 				$("#answer_radio").hide();
 				$("#answer_checkbox").hide();
 				$("#answer2_radio").hide();
 				$("#answer_input").show();
-				$("#answer3").attr("required","required");//添加填空题答案输入框的必填属性
+//				$("#answer3").attr("required","required");//添加填空题答案输入框的必填属性
 			}
 			
 			var id = $("#id").val();
