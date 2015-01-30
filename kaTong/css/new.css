@@ -17,6 +17,11 @@
 .hea_nav .a_c:hover{ background:url(../images/c_hover.png);color:#fff;}
 .hea_nav .a_d:hover{ background:url(../images/d_hover.png);color:#fff;}
 
+.hea_new { position:absolute; right:0; top:0;}
+.hea_new a{ padding:0 10px;}
+.hea_new a:hover{ color:#f00;}
+
+
 .con_login{position: absolute;left: 750px;top: 390px; }
 .con_login .con_user{height:30px; line-height:30px; border:3px #7abf04 solid; margin-bottom:15px; border-radius:10px; width:200px; text-indent:10px;}
 .con_login .con_user_but { padding:5px 15px; background:#096; color:#fff; margin:10px 10px 0 0; border-radius:6px;}
@@ -42,13 +47,13 @@
 .con_column ul li a:hover{ background:url(../images/list_bg_hover.png); color:#ab44da;}
 .con_col_list{ margin-top:20px; text-align:center;}
 .con_col_list ul{ float:left;}
-.con_col_list ul li{ float:left; display:block; width:168px; height:270px; margin:0 36px 25px 0; background:#ebebeb;  position:relative;}
-.con_col_list h2{ width:168px; font-size:18px; color:#000;}
+.con_col_list ul li{ float:left; display:block; width:180px; height:190px; margin:0 20px 25px 0; background:#ebebeb;  position:relative; border:1px #f1f1f1 solid;}
+.con_col_list h2{ width:180px; font-size:18px; color:#000; margin-top:5px;}
 .con_col_list p{ height:30px; line-height:22px;}
 .con_col_list .con_listen { position:absolute; left:5px; bottom:5px;}
 .con_col_list .con_listen b{ color:#f00;}
 .con_col_list .con_but { width:70px; height:28px; display:block;position:absolute; right:5px; bottom:5px; background:url(../images/bottom_school.png) no-repeat right bottom; cursor:pointer;}
-.con_col_list ul li:hover{ box-shadow:0px 0px 8px #09F;}
+.con_col_list ul li:hover{ box-shadow:0px 0px 8px #09F; border:1px #09F solid;}
 /*--------------------时间轴-----------------*/
 .time_shaft{ width:800px; margin:20px auto;}
 .time_main{ background:url(../images/time_img_a.jpg) repeat-y 10px top; display:block;padding-top:10px; }
@@ -89,7 +94,11 @@
 .con_que { width:960px; height:120px; margin:20px 0px 0px 20px; background:url(../images/xin_img.png) no-repeat left 0px;}
 .con_que h2{float:left; display:block; background: url(../images/shuxue.png) no-repeat left top; width:200px; line-height:120px;}
 .con_que p{ float:left; display:block; margin-right:20px; font-size:30px; color:#FF0; margin:0 50px; line-height:120px;}
-.con_pue_sid { text-align:center; vertical-align:middle; margin:30px 0;}
+.con_pue_sid { text-align:center;vertical-align:middle; margin:30px auto;width:600px;}
+.con_pue_sid h2{ text-align:left; font-size:26px; color:#f90;}
+.con_pue_sid p{ padding:5px 0; font-size:16px;}
+.con_pue_s p{ float:left; display:block; width:290px; overflow:hidden;height:40px; line-height:40px; vertical-align:middle; margin-top:10px;}
+.con_pue_s p img{ vertical-align:middle; margin-right:5px;}
 .que_but { margin:50px 0 0 100px;}
 .que_but p{ float:left; display:block; margin:0 20px;}
 .answer { width:800px; float:left;display:block; margin:20px 0 0 115px;}
@@ -256,6 +265,22 @@
 .school_con .notguomai:hover{ background:#f30;}
 .sc_co_title { font-size:16px; color:#333;}
 /*--------------------页脚-----------------*/
+#portrait_up { width:450px;height:auto; margin:0 auto; border:1px #ccc solid; background:#fff;}
+.pr_title {background:#c79f63; height:40px; margin-bottom:15px;}
+.pr_title h2{ float:left; color:#fff; font-size:16px; line-height:40px; text-indent:10px; font-weight:700;}
+.pr_title span{ float:right; margin:5px 10px 0 0;} 
+
+.pr_sid { width:100%; height:70px; padding:20px 0;}
+.pr_sid a{ float:left; margin-right:20px;}
+.pr_sid  .sid_d{ background:url(../images/07_a.png) no-repeat left top; width:130px; height:61px; display:block;}
+.pr_sid  .sid_e{ background:url(../images/08_a.png) no-repeat left top; width:130px; height:61px; display:block;}
+.pr_sid  .sid_f{ background:url(../images/09_a.png) no-repeat left top; width:130px; height:61px; display:block;}
+.pr_sid  .sid_d:hover{ background:url(../images/07_a_hover.png) no-repeat left top; width:130px; height:61px; display:block;}
+.pr_sid  .sid_e:hover{ background:url(../images/08_a_hover.png) no-repeat left top; width:130px; height:61px; display:block;}
+.pr_sid  .sid_f:hover{ background:url(../images/09_a_hover.png) no-repeat left top; width:130px; height:61px; display:block;}
+
+
+
 
 .footer { width:100%; height:218px; background:url(../images/mainbg.png) no-repeat center top;}
 
