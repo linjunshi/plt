@@ -362,7 +362,7 @@ public class CourseAction extends BaseAction {
 				return "课程不存在";
 			}
 			
-			if (course.getLimitCount() <= course.getSaleCount()) {
+			if (course.getCourseType() == CourseItem.Status_Normal && course.getLimitCount() <= course.getSaleCount()) {
 				return "对不起，亲！该课程已经达到限购人数了！请您去购买其他老师的课程吧！";
 			}
 			

@@ -1,5 +1,9 @@
 package com.santrong.plt.webpage.home.entry;
 
+import java.util.List;
+
+import com.santrong.plt.webpage.course.entry.WeikeOrderView;
+
 /**
  * @author weinianjie
  * @date 2015年1月15日
@@ -22,6 +26,14 @@ public class LessonUnitItem {
 	 */
 	public static final int Term_Down = 2;
 	
+	private List<WeikeOrderView> weikeList;
+	
+	public List<WeikeOrderView> getWeikeList() {
+		return weikeList;
+	}
+	public void setWeikeList(List<WeikeOrderView> weikeList) {
+		this.weikeList = weikeList;
+	}
 	public String getId() {
 		return id;
 	}

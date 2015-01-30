@@ -12,7 +12,7 @@
 					    <c:set var="basicUrl" value="${basicUrl}?" />
 					    </c:otherwise>   
 					</c:choose>
-					<div class="paging">
+					<div class="pagination">
 						<form action="${basicUrl}" method="get" class="common_form">
 							<c:if test="${query.pageNum > 1}">
 							<a href="${basicUrl}page=1" title="首页">首页</a>

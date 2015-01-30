@@ -8,6 +8,7 @@ import org.apache.ibatis.annotations.Select;
 import com.santrong.plt.webpage.course.entry.CourseItem;
 import com.santrong.plt.webpage.course.entry.CourseView;
 import com.santrong.plt.webpage.course.entry.WeikeDetailView;
+import com.santrong.plt.webpage.course.entry.WeikeOrderView;
 
 /**
  * @author weinianjie
@@ -52,4 +53,17 @@ public interface WeikeMapper {
 			+ ") and status = 1 and courseType = 1 ORDER BY d.cts desc limit ${index},${pageSize}")
 	List<CourseItem> selectWeikeBySameKnowledges(@Param("weikeId")String weikeId, @Param("index")int index, @Param("pageSize")int pageSize);
 	
+	/**
+	 * 获取当前用户的单元微课与订单情况
+	 * @param unitId
+	 * @param userId
+	 * @return
+	 */
+	@Select("select e.*,d.id videoId,d.url fileUrl,d.size,d.duration,g.id as orderId,g.userId,g.status as orderStatus "
+			+ "from (select a.* from course a where a.courseType = 1 and a.status = 1 and a.unitId = #{unitId})e "
+			+ "left join (select f.* from web_order f where f.userId = #{userId}) g ON e.id = g.courseId "
+			+ "left join course_chapter b on e.id = b.courseId "
+			+ "left join course_chapter_to_resource c on b.id = c.chapterId "
+			+ "left join resource_video d on c.resourceId = d.id ")
+	List<WeikeOrderView> selectWeikeOrderByUnitId(@Param("unitId")String unitId, @Param("userId")String userId);			
 }

@@ -17,6 +17,7 @@ import com.santrong.plt.webpage.BaseDao;
 import com.santrong.plt.webpage.course.entry.CourseItem;
 import com.santrong.plt.webpage.course.entry.CourseView;
 import com.santrong.plt.webpage.course.entry.WeikeDetailView;
+import com.santrong.plt.webpage.course.entry.WeikeOrderView;
 import com.santrong.plt.webpage.course.entry.WeikeQuery;
 
 /**
@@ -292,4 +293,22 @@ public class WeikeDao extends BaseDao {
 		}
 		return null;
 	}
+	
+	/**
+	 * 获取当前用户的单元微课与订单情况
+	 * @param unitId
+	 * @param userId
+	 * @return
+	 */
+	public List<WeikeOrderView> selectWeikeOrderByUnitId(String unitId, String userId){
+		try {
+			WeikeMapper mapper = this.getMapper(WeikeMapper.class);
+			if (mapper != null) {
+				return mapper.selectWeikeOrderByUnitId(unitId, userId);
+			}
+		} catch (Exception e) {
+			Log.printStackTrace(e);
+		}
+		return null;
+	} 
 }

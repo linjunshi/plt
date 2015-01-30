@@ -12,14 +12,18 @@ import com.santrong.plt.opt.grade.GradeDefine;
 import com.santrong.plt.opt.grade.GradeSubjectEntry;
 import com.santrong.plt.util.MyUtils;
 import com.santrong.plt.webpage.course.dao.CourseDao;
+import com.santrong.plt.webpage.course.dao.WeikeDao;
 import com.santrong.plt.webpage.course.entry.CourseBuyQuery;
 import com.santrong.plt.webpage.course.entry.CourseItem;
+import com.santrong.plt.webpage.course.entry.WeikeOrderView;
 import com.santrong.plt.webpage.course.entry.OrderItem;
 import com.santrong.plt.webpage.course.resource.train.dao.KnowledgeDao;
 import com.santrong.plt.webpage.course.resource.train.dao.TrainDao;
 import com.santrong.plt.webpage.course.resource.train.entry.KnowledgeTable;
 import com.santrong.plt.webpage.course.resource.train.entry.KnowledgePointerView;
 import com.santrong.plt.webpage.course.resource.train.entry.TrainQuery;
+import com.santrong.plt.webpage.home.dao.LessonUnitDao;
+import com.santrong.plt.webpage.home.entry.LessonUnitItem;
 import com.santrong.plt.webpage.manage.StudentBaseAction;
 import com.santrong.plt.webpage.manage.student.entry.TrainSimpleView;
 
@@ -143,4 +147,37 @@ public class StudyMAction extends StudentBaseAction {
 		request.setAttribute("query", query);
 		return "manage/student/myTrain";
 	}
+	
+	@RequestMapping("/center")
+	public String personalCenter(){
+		return "manage/student/personalCenter";
+	}
+	
+	@RequestMapping("/syllabus")
+	public String mySyllabus(){
+		HttpServletRequest request = getRequest();
+		String gradeId = "10000";
+		String subjectId = request.getParameter("subjectId");
+		if (MyUtils.isNull(subjectId)) {
+			subjectId = "10000";//语文
+		}
+		List<LessonUnitItem> lessonUnitList = new ArrayList<LessonUnitItem>();
+		LessonUnitDao luDao = new LessonUnitDao();
+		List<LessonUnitItem> unitList = luDao.selectTermUnitByGIdAndSId(gradeId, subjectId);
+		if (unitList != null && unitList.size() > 0) {
+			for (LessonUnitItem luItem : unitList) {
+				WeikeDao weikeDao = new WeikeDao();
+				//"j407932252m5l14va06360x629w28v05"
+				List<WeikeOrderView> weikeOrderList = weikeDao.selectWeikeOrderByUnitId(luItem.getId(), this.currentUser().getId());
+				luItem.setWeikeList(weikeOrderList);
+				lessonUnitList.add(luItem);
+			}
+		}
+		
+		request.setAttribute("lessonUnitList", lessonUnitList);
+		request.setAttribute("subjectId", subjectId);
+		return "manage/student/syllabus";
+	}
+	
+	
 }
