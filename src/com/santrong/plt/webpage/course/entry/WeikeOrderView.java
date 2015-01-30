@@ -1,34 +1,33 @@
 package com.santrong.plt.webpage.course.entry;
 
 import java.util.Date;
-import java.util.List;
 
 import com.santrong.plt.util.MyUtils;
 
 /**
- * @author weinianjie
- * @date 2015年1月19日
- * @time 下午3:00:24
+ * @author huangweihua
+ * @date 2015年1月29日 
+ * @time 下午4:52:20
  */
-public class WeikeDetailView {
-	private String fileUrl;					// 视频文件地址
-	private long size;
-	private String duration;
-	
+public class WeikeOrderView {
+	// course 课程表
 	private String id;
 	private String courseName;
+	private String teacher;
+	private int price;
+	private int live;
+	private Date endTime;
 	private String url;
 	private String ownerId;
 	private String gradeId;
 	private String subjectId;
 	private String unitId;
-	private int price;
-	private int limitCount;
-	private Date endTime;
 	private int collectCount;
 	private int saleCount;
 	private int commentCount;
 	private int chapterCount;
+	private int playCount;
+	private int courseType;
 	private String remark;
 	/**
 	 * -1:删除，0:未发布，1:发布
@@ -37,9 +36,17 @@ public class WeikeDetailView {
 	private Date cts;
 	private Date uts;
 	
-	private List<CommentUserView> commentList;
+	// resource_video 微课视频表
+	private String videoId;
+	private String fileUrl;
+	private String duration;//时长
+	private long size;//大小
 	
-	
+	// web_order 课程订单表
+	private String orderId;
+	private String userId;
+	private int orderStatus;//0未支付,1已支付,-1已取消
+
 	// 获取缩略图
 	public String getThumbnail() {
 		if(MyUtils.isNotNull(this.url)) {
@@ -47,13 +54,6 @@ public class WeikeDetailView {
 		}else {
 			return "/resource/photo/course01.jpg";
 		}
-	}
-	
-	public String getFileUrl() {
-		return fileUrl;
-	}
-	public void setFileUrl(String fileUrl) {
-		this.fileUrl = fileUrl;
 	}
 
 	public String getId() {
@@ -72,28 +72,44 @@ public class WeikeDetailView {
 		this.courseName = courseName;
 	}
 
+	public String getTeacher() {
+		return teacher;
+	}
+
+	public void setTeacher(String teacher) {
+		this.teacher = teacher;
+	}
+
+	public int getPrice() {
+		return price;
+	}
+
+	public void setPrice(int price) {
+		this.price = price;
+	}
+
+	public int getLive() {
+		return live;
+	}
+
+	public void setLive(int live) {
+		this.live = live;
+	}
+
+	public Date getEndTime() {
+		return endTime;
+	}
+
+	public void setEndTime(Date endTime) {
+		this.endTime = endTime;
+	}
+
 	public String getUrl() {
 		return url;
 	}
 
 	public void setUrl(String url) {
 		this.url = url;
-	}
-
-	public long getSize() {
-		return size;
-	}
-
-	public void setSize(long size) {
-		this.size = size;
-	}
-
-	public String getDuration() {
-		return duration;
-	}
-
-	public void setDuration(String duration) {
-		this.duration = duration;
 	}
 
 	public String getOwnerId() {
@@ -128,30 +144,6 @@ public class WeikeDetailView {
 		this.unitId = unitId;
 	}
 
-	public int getPrice() {
-		return price;
-	}
-
-	public void setPrice(int price) {
-		this.price = price;
-	}
-
-	public int getLimitCount() {
-		return limitCount;
-	}
-
-	public void setLimitCount(int limitCount) {
-		this.limitCount = limitCount;
-	}
-
-	public Date getEndTime() {
-		return endTime;
-	}
-
-	public void setEndTime(Date endTime) {
-		this.endTime = endTime;
-	}
-
 	public int getCollectCount() {
 		return collectCount;
 	}
@@ -182,6 +174,22 @@ public class WeikeDetailView {
 
 	public void setChapterCount(int chapterCount) {
 		this.chapterCount = chapterCount;
+	}
+
+	public int getPlayCount() {
+		return playCount;
+	}
+
+	public void setPlayCount(int playCount) {
+		this.playCount = playCount;
+	}
+
+	public int getCourseType() {
+		return courseType;
+	}
+
+	public void setCourseType(int courseType) {
+		this.courseType = courseType;
 	}
 
 	public String getRemark() {
@@ -216,11 +224,60 @@ public class WeikeDetailView {
 		this.uts = uts;
 	}
 
-	public List<CommentUserView> getCommentList() {
-		return commentList;
+	public String getVideoId() {
+		return videoId;
 	}
 
-	public void setCommentList(List<CommentUserView> commentList) {
-		this.commentList = commentList;
+	public void setVideoId(String videoId) {
+		this.videoId = videoId;
 	}
+
+	public String getFileUrl() {
+		return fileUrl;
+	}
+
+	public void setFileUrl(String fileUrl) {
+		this.fileUrl = fileUrl;
+	}
+
+	public String getDuration() {
+		return duration;
+	}
+
+	public void setDuration(String duration) {
+		this.duration = duration;
+	}
+
+	public long getSize() {
+		return size;
+	}
+
+	public void setSize(long size) {
+		this.size = size;
+	}
+
+	public String getOrderId() {
+		return orderId;
+	}
+
+	public void setOrderId(String orderId) {
+		this.orderId = orderId;
+	}
+
+	public String getUserId() {
+		return userId;
+	}
+
+	public void setUserId(String userId) {
+		this.userId = userId;
+	}
+
+	public int getOrderStatus() {
+		return orderStatus;
+	}
+
+	public void setOrderStatus(int orderStatus) {
+		this.orderStatus = orderStatus;
+	}
+
 }

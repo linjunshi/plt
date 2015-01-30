@@ -260,7 +260,7 @@ public class UserDetailView {
 		if(MyUtils.isNotNull(this.url)) {
 			return url;
 		}else {
-			return "/resource/photo/person01.jpg";
+			return "/resource/photo/touxiang.png";
 		}
 	}
 }

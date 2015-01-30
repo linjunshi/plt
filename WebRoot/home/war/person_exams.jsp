@@ -16,7 +16,7 @@ Globals.page = "Index_personExams";
 		<%@ include file="../inc/top_new.jsp"%>
 		<div class="con_quest">
 			<div class="con_que">
-				<c:if test="${luEntry}">
+				<c:if test="${!empty luEntry}">
 					<h2 class="${luEntry.subjectEnName}">&nbsp;</h2>
 					<p>${luEntry.levelName}</p>
 					<p>${luEntry.termCnName}</p>

@@ -21,7 +21,7 @@ public interface LessonUnitMapper {
 	@Select("select * from lesson_unit group by gradeId,subjectId,term order by gradeId asc,subjectId asc,term asc,priority asc")
 	List<LessonUnitItem> selectAllTerm();
 	
-	@Select("select * from lesson_unit where gradeId = #{gradeId} and subjectId = #{subjectId} order by gradeId asc,subjectId asc,term asc,priority asc")
+	@Select("select * from lesson_unit where gradeId = #{gradeId} and subjectId = #{subjectId} order by term asc,priority asc")
 	List<LessonUnitItem> selectTermUnitByGIdAndSId(@Param("gradeId")String gradeId, @Param("subjectId")String subjectId);
 	
 	/**
