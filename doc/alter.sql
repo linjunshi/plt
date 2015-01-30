@@ -1,4 +1,7 @@
--- 2015-01-21 weinianjie weinianjie  (2015-01-21 hwcloud)
+-- 2015-01-30 weinianjie
+alter table user add column gradeId varchar(32) comment '年级ID' after subjectId;
+
+-- 2015-01-21 weinianjie (2015-01-21 hwcloud)
 alter table resource_train_question change topic topic text not null comment '题目';
 
 alter table course add column unitId varchar(32) comment '所属单元' after subjectId;
