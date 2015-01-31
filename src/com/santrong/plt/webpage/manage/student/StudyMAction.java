@@ -156,7 +156,7 @@ public class StudyMAction extends StudentBaseAction {
 	@RequestMapping("/syllabus")
 	public String mySyllabus(){
 		HttpServletRequest request = getRequest();
-		String gradeId = "10000";
+		String gradeId = this.currentUser().getGradeId();//获取当前用户所属年级
 		String subjectId = request.getParameter("subjectId");
 		if (MyUtils.isNull(subjectId)) {
 			subjectId = "10000";//语文

@@ -19,6 +19,7 @@ public class UserItem {
 	private int role;
 	private String schoolId;
 	private String subjectId;
+	private String gradeId;
 	private String email;
 	private String phone;
 	private String idCard;
@@ -83,6 +84,12 @@ public class UserItem {
 	}
 	public String getSubjectId() {
 		return subjectId;
+	}
+	public String getGradeId() {
+		return gradeId;
+	}
+	public void setGradeId(String gradeId) {
+		this.gradeId = gradeId;
 	}
 	public void setSubjectId(String subjectId) {
 		this.subjectId = subjectId;

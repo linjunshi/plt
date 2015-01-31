@@ -37,6 +37,7 @@ Globals.page = "Manage_personalInfo";
 							</c:if>
 		                    <form method="post" action="${ctx}/account/personalInfo" class="form_info common_form" id="personalInfo_form">
 		                    	<input type="hidden" name="id" value="${user.id}" />
+		                    	<input id="levelId" name="levelId" type="hidden" value="${user.gradeId}">
 		                        <div class="form_item">
 		                            <label for="username">昵称：</label>
 		                            <div class="form_field">
@@ -56,6 +57,19 @@ Globals.page = "Manage_personalInfo";
 	                                    <span class="not-empty" title='此项为必填项'>*</span>
 		                            </div>
 		                        </div>
+		                        <div class="form_item">
+									<label for="gradeId">所属年级：</label>
+									<div class="form_field">
+										<select id="gradeSelect" style="display: none;">
+											<c:forEach items="${applicationScope.gradeList}" var="grade" varStatus="st">
+											<option value="${grade.gradeEnName}">${grade.gradeName}</option>
+											</c:forEach>
+										</select>
+										<select name="gradeId" id="levelSelect"></select>
+										<span class="not-empty" title='此项为必填项'>*</span>
+										 <span class="form_error">（系统自动根据您当前所属年级推荐相关的课程、微课等信息）</span>
+									 </div>
+								</div>
 		                        <div class="form_item">
 		                            <label for="showName">真实姓名：</label>
 		                            <div class="form_field">

@@ -22,6 +22,7 @@ public class UserDetailView {
 	private int role;
 	private String schoolId;
 	private String subjectId;
+	private String gradeId;
 	private String email;
 	private String phone;
 	private String idCard;
@@ -135,6 +136,14 @@ public class UserDetailView {
 		this.subjectId = subjectId;
 	}
 	
+	public String getGradeId() {
+		return gradeId;
+	}
+
+	public void setGradeId(String gradeId) {
+		this.gradeId = gradeId;
+	}
+
 	public String getEmail() {
 		return email;
 	}

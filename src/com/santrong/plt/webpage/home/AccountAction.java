@@ -47,7 +47,11 @@ public class AccountAction extends BaseAction {
 	 * @return
 	 */
 	@RequestMapping(value="/regist", method=RequestMethod.POST)
-	public String registPost(String username, String password, String confirmPwd, String email) {
+	public String registPost(String gradeId, String username, String password, String confirmPwd, String email) {
+		if (MyUtils.isNull(gradeId)) {
+			addError("请您选择目前所属年级！");
+			return "regist";
+		}
 		if(StringUtils.isNullOrEmpty(username) || StringUtils.isNullOrEmpty(password) || StringUtils.isNullOrEmpty(confirmPwd) || StringUtils.isNullOrEmpty(email)) {
 			addError("请您输入的用户名、密码和确认密码！");
 			return "regist";
@@ -82,6 +86,7 @@ public class AccountAction extends BaseAction {
 			user.setRole(UserItem.Role_Regist);
 			user.setSchoolId(null);
 			user.setSubjectId(null);
+			user.setGradeId(gradeId);
 			user.setEmail(email);
 			user.setPhone(null);
 			user.setRegistIp(MyUtils.getRequestAddrIp(getRequest(), "127.0.0.1"));
@@ -128,7 +133,7 @@ public class AccountAction extends BaseAction {
 			Log.printStackTrace(e);
 		}
 		
-		return this.redirect("/study/course");
+		return this.redirect("/study/center");
 	}	
 	
 	/**
@@ -208,7 +213,7 @@ public class AccountAction extends BaseAction {
 		String uri = (String)getRequest().getSession().getAttribute(Global.SessionKey_AfterLoginUri);
 		if(uri == null) {
 //			uri = "/";
-			uri = "/study/score";
+			uri = "/study/center";
 		}
 		
 		return this.redirect(uri);

@@ -20,6 +20,7 @@ public class UserCourseView {
 	private int role;
 	private String schoolId;
 	private String subjectId;
+	private String gradeId;
 	private String registIp;
 	private Date registTime;
 	private String lastLoginIp;
@@ -94,6 +95,12 @@ public class UserCourseView {
 	}
 	public void setSubjectId(String subjectId) {
 		this.subjectId = subjectId;
+	}
+	public String getGradeId() {
+		return gradeId;
+	}
+	public void setGradeId(String gradeId) {
+		this.gradeId = gradeId;
 	}
 	public String getRegistIp() {
 		return registIp;

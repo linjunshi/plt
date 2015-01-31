@@ -31,6 +31,19 @@ Globals.page = "Index_regist";
 						</c:if>
 						
 						<form action="${ctx}/account/regist" method="post" class="form_vertical common_form">
+							<input id="levelId" name="levelId" type="hidden" value="">
+							<div class="form_item">
+								<label for="gradeId">所属年级：</label>
+								<div class="form_field">
+									<select id="gradeSelect" style="display: none;">
+										<c:forEach items="${applicationScope.gradeList}" var="grade" varStatus="st">
+										<option value="${grade.gradeEnName}">${grade.gradeName}</option>
+										</c:forEach>
+									</select>
+									<select name="gradeId" id="levelSelect"></select>
+									<span class="not-empty" title='此项为必填项'>*</span>
+								 </div>
+							</div>
 							<div class="form_item">
 								<label for="username">用&nbsp; 户  名：</label>
 								<div class="form_field">
@@ -59,7 +72,7 @@ Globals.page = "Index_regist";
 									<span class="not-empty" title='此项为必填项'>*</span>
 									<span class="not-empty" ><a href="${ctx}/account/forgotPwd" target="_blank" class="login_forgot">忘记密码?</a></span>
 								</div>
-							</div>				
+							</div>	
 							<div class="form_action">
 								<input class="btn_regist" type="submit" value="立即注册" name="regist" />
 							</div>

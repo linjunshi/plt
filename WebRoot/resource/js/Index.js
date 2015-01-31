@@ -11,6 +11,43 @@ IndexClass.prototype = {
 	
 	// 注册页
 	regist : function() {
+		var levelId = $("#levelId").val();//年级Id
+		
+		var gradeSelectFn = function(levelId) {
+			$.get(Globals.ctx + "/data/gradeByLevelId?levelId=" + levelId, function(data) {
+				if(data != "error") {
+					var json = eval('(' + data + ')');
+					$("#gradeSelect").val(json.gradeEnName);
+					//首次触发年级联动
+					$("#gradeSelect").change();
+				}
+			})
+		}
+		
+		// 年级选择
+		$("#gradeSelect").change(function() {
+			$.get(Globals.ctx + "/data/levelByGrade?gradeEnName=" + $(this).val(), function(data) {
+				if(data != "error") {
+					var json = eval('(' + data + ')');
+					var html = '';
+					for(var i = 0; i < json.length; i++) {
+						html += '<option value="' + json[i].levelId + '">' + json[i].levelName + '</option>';
+					}
+					$("#levelSelect").html(html);
+					if ( levelId != "") {//修改页面初始化默认选择年级
+						$("#levelSelect").val(levelId);
+					}
+				}
+			})
+		});
+
+		
+		if ( levelId != "") {
+			gradeSelectFn(levelId);
+		} else {
+			//新增页面，自动首次触发年级联动控件，默认选择
+			$("#gradeSelect").change();
+		}
 	},
 	
 	// 首页
@@ -148,7 +185,8 @@ IndexClass.prototype = {
 		// 选题和取消选题
 		$(".egg").click(function() {
 			var channel = $(this).attr("rel");
-			Boxy.load(Globals.ctx + "/war/" + channel, {title : '选择频道',
+			var title = $(this).html();
+			Boxy.load(Globals.ctx + "/war/" + channel, {title : title,
 				afterShow : function(){
 					
 				}

@@ -213,10 +213,16 @@ public class AccountMAction extends RegistBaseAction {
 				return "manage/regist/personalInfo";
 			}
 			if (MyUtils.isNull(userForm.getShowName())) {
-				addError("真实姓名不能为空！");
+				addError("真实姓名不允许为空！");
+			}
+			if (userForm.getGender() == 0) {
+				addError("性别不允许为空！");
+			}
+			if (MyUtils.isNull(userForm.getGradeId())) {
+				addError("年级不允许为空！");
 			}
 			if (MyUtils.isNull(userForm.getUsername())) {
-				addError("昵称不能为空！");
+				addError("昵称不允许为空！");
 			}
 			if (!ValidateTools.isIdCard(userForm.getIdCard())) {
 				addError("身份证号码不正确！");
@@ -227,28 +233,33 @@ public class AccountMAction extends RegistBaseAction {
 			if (!ValidateTools.isEmail(userForm.getEmail())) {
 				addError("邮箱地址格式不正确！");
 			}
-			//用户基本信息
-			UserDao userDao = new UserDao();
-			user.setUsername(userForm.getUsername());
-			user.setGender(userForm.getGender());
-			user.setShowName(userForm.getShowName());
-			user.setIdCard(userForm.getIdCard());
-			user.setPhone(userForm.getPhone());
-			user.setEmail(userForm.getEmail());
-			user.setUrl(userForm.getUrl());
-			user.setRemark(userForm.getRemark());
-			user.setUts(new Date());
-			if (userDao.update(user) > 0) {
-				getRequest().getSession().setAttribute(Global.SessionKey_LoginUser, user);
+			if (errorSize() < 0) {
+				//用户基本信息
+				UserDao userDao = new UserDao();
+				user.setGradeId(userForm.getGradeId());
+				user.setUsername(userForm.getUsername());
+				user.setGender(userForm.getGender());
+				user.setShowName(userForm.getShowName());
+				user.setIdCard(userForm.getIdCard());
+				user.setPhone(userForm.getPhone());
+				user.setEmail(userForm.getEmail());
+				user.setUrl(userForm.getUrl());
+				user.setRemark(userForm.getRemark());
+				user.setUts(new Date());
+				if (userDao.update(user) > 0) {
+					getRequest().getSession().setAttribute(Global.SessionKey_LoginUser, user);
 //					addError("恭喜您，已成功个人信息！");
-			} else {
-				addError("对不起，您修改个人信息失败了！");
+				} else {
+					addError("对不起，您修改个人信息失败了！");
+				}
 			}
 			
+			HttpServletRequest request = this.getRequest();
+			request.setAttribute("user", userForm);
 		} catch (Exception e) {
 			Log.printStackTrace(e);
 		}
-		return this.redirect("/account/personalInfo");
+		return "manage/regist/personalInfo";
 	}
 	
 	/**
