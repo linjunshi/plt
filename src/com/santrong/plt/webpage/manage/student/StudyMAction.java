@@ -148,11 +148,19 @@ public class StudyMAction extends StudentBaseAction {
 		return "manage/student/myTrain";
 	}
 	
+	/**
+	 * 个人中心
+	 * @return
+	 */
 	@RequestMapping("/center")
 	public String personalCenter(){
 		return "manage/student/personalCenter";
 	}
 	
+	/**
+	 * 课程大纲
+	 * @return
+	 */
 	@RequestMapping("/syllabus")
 	public String mySyllabus(){
 		HttpServletRequest request = getRequest();
@@ -166,12 +174,12 @@ public class StudyMAction extends StudentBaseAction {
 		}
 		List<LessonUnitItem> lessonUnitList = new ArrayList<LessonUnitItem>();
 		LessonUnitDao luDao = new LessonUnitDao();
-		List<LessonUnitItem> unitList = luDao.selectTermUnitByGIdAndSId(gradeId, subjectId);
+		List<LessonUnitItem> unitList = luDao.selectTermUnitByGIdAndSId(gradeId, subjectId);// 获取单元列表
 		if (unitList != null && unitList.size() > 0) {
 			for (LessonUnitItem luItem : unitList) {
 				WeikeDao weikeDao = new WeikeDao();
 				//"j407932252m5l14va06360x629w28v05"
-				List<WeikeOrderView> weikeOrderList = weikeDao.selectWeikeOrderByUnitId(luItem.getId(), this.currentUser().getId());
+				List<WeikeOrderView> weikeOrderList = weikeDao.selectWeikeOrderByUnitId(luItem.getId(), this.currentUser().getId());// 获取单元所属微课
 				luItem.setWeikeList(weikeOrderList);
 				lessonUnitList.add(luItem);
 			}
