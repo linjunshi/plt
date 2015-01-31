@@ -49,7 +49,7 @@
 						<div class="user_info_hidd">
 							<h2 class="user_info_sid"><img src="${ctx}${sessionScope.loginUser.headPhoto}" width="50" height="50"><span>欢迎你，${sessionScope.loginUser.showName}</span></h2>
 							<p><a href="${ctx }/account/logout">注销</a></p>
-							<p><a href="${ctx }/study/score">管理中心</a></p>
+							<p><a href="${ctx }/study/syllabus">学习中心</a></p>
 						</div>
 					</c:if>
 				</div>

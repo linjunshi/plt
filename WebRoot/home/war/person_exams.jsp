@@ -23,7 +23,7 @@ Globals.page = "Index_personExams";
 					<p>${luEntry.unitName}</p>
 				</c:if>
 				<c:if test="${empty luEntry}">
-					<p class="nothing">暂无相关的习题！</p>
+					<p class="nothing">暂无相关的习题或者还未绑定相关知识点！</p>
 				</c:if>
 			</div>
 			<c:forEach items="${questionList}" var="question" varStatus="st">

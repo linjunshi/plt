@@ -158,6 +158,9 @@ public class StudyMAction extends StudentBaseAction {
 		HttpServletRequest request = getRequest();
 		String gradeId = this.currentUser().getGradeId();//获取当前用户所属年级
 		String subjectId = request.getParameter("subjectId");
+		if (MyUtils.isNull(gradeId)) {
+			gradeId = "10000";//一年级
+		}
 		if (MyUtils.isNull(subjectId)) {
 			subjectId = "10000";//语文
 		}

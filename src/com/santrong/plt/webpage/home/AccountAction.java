@@ -133,7 +133,7 @@ public class AccountAction extends BaseAction {
 			Log.printStackTrace(e);
 		}
 		
-		return this.redirect("/study/center");
+		return this.redirect("/study/syllabus");
 	}	
 	
 	/**
@@ -213,7 +213,7 @@ public class AccountAction extends BaseAction {
 		String uri = (String)getRequest().getSession().getAttribute(Global.SessionKey_AfterLoginUri);
 		if(uri == null) {
 //			uri = "/";
-			uri = "/study/center";
+			uri = "/study/syllabus";
 		}
 		
 		return this.redirect(uri);
