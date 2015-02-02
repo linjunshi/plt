@@ -199,6 +199,18 @@ create table course_collection(
 	primary key (userId, courseId)
 ) engine=InnoDB default charset=utf8 collate=utf8_bin comment '课程收藏表';
 
+-- 课程参与历史表 --
+drop table if exists course_attend_history;
+create table course_attend_history(
+	id varchar(32) not null comment 'UUID',
+	userId varchar(32) not null comment '用户ID',
+	courseId varchar(32) not null comment '课程ID',
+	attendType int(10) not null comment '参与类型',
+	cts datetime comment '创建时间',
+	uts datetime comment '修改时间',	
+	primary key (id)
+) engine=InnoDB default charset=utf8 collate=utf8_bin comment '课程参与历史表';
+
 -- 章节表 --
 drop table if exists course_chapter;
 create table course_chapter(
@@ -475,6 +487,36 @@ create table course_to_knowledge(
 	knowledgeId varchar(32) not null comment '知识点ID',
 	primary key (courseId, knowledgeId)
 ) engine=InnoDB default charset=utf8 collate=utf8_bin comment '课程关联知识点表';
+
+-- 剧本表 --
+drop table if exists story;
+create table story(
+	id varchar(32) not null comment 'UUID',
+	storyName varchar(128) not null comment '剧本名称',
+	url varchar(256) comment '封面',
+	duration varchar(32) comment '时长',
+	subjectId varchar(32) not null comment '所属科目',
+	remark varchar(10240) comment '具体描述',
+	limitCount int(10) default 0 not null comment '角色数量',
+	storyType int(10) default 0 not null comment '课程类型',
+	ownerId varchar(32) not null comment '所有者',
+	status int(10) not null default 0 comment '状态',
+	cts datetime comment '创建时间',
+	uts datetime comment '修改时间',
+	primary key (id)
+) engine=InnoDB default charset=utf8 collate=utf8_bin comment '剧本表';
+
+-- 剧本参与历史表 --
+drop table if exists story_attend_history;
+create table story_attend_history(
+	id varchar(32) not null comment 'UUID',
+	userId varchar(32) not null comment '用户ID',
+	storyId varchar(32) not null comment '剧本ID',
+	attendType int(10) not null comment '参与类型',
+	cts datetime comment '创建时间',
+	uts datetime comment '修改时间',	
+	primary key (id)
+) engine=InnoDB default charset=utf8 collate=utf8_bin comment '剧本参与历史表';
 
 -- 表 --
 -- drop table if exists course;

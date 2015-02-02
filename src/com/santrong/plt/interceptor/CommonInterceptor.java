@@ -10,7 +10,6 @@ import org.springframework.web.servlet.ModelAndView;
 import com.santrong.plt.log.Log;
 import com.santrong.plt.opt.ThreadUtils;
 import com.santrong.plt.opt.area.AreaEntry;
-import com.santrong.plt.opt.area.AreaService;
 import com.santrong.plt.system.Global;
 import com.santrong.plt.webpage.BaseAction;
 import com.santrong.plt.webpage.BaseAction.RmCode;
@@ -78,10 +77,13 @@ public class CommonInterceptor implements HandlerInterceptor{
 				
 				// 获取用户地理信息
 				if(request.getSession().getAttribute(Global.SessionKey_Area) == null) {
-					String clientIp = "183.17.255.255";//MyUtils.getRequestAddrIp(request, null);
-					AreaService areaService= new AreaService();
+//					String clientIp = "183.16.39.108";//MyUtils.getRequestAddrIp(request, null);
+//					AreaService areaService= new AreaService();
 //					AreaEntry area = areaService.getAreaByTaobao(clientIp);
-					AreaEntry area = areaService.getIpAreaByCz88(clientIp);
+//					AreaEntry area = areaService.getIpAreaByCz88(clientIp);
+					AreaEntry area = new AreaEntry();
+					area.setCityName("深圳");
+					area.setCityCode("440300");					
 					request.getSession().setAttribute(Global.SessionKey_Area, area);
 				}				
 			}

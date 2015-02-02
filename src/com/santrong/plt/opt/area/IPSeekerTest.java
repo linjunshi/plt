@@ -28,8 +28,9 @@ public class IPSeekerTest {
 		IPSeeker ipSeeker = new IPSeeker(new File("E:/workspace/plt/data/QQWry.Dat"));
 		System.out.println(ipSeeker.getCountry("8.8.8.8"));
 		System.out.println(ipSeeker.getCountry("192.168.10.178"));
-		System.out.println(ipSeeker.getCountry("183.17.255.255"));
+		System.out.println(ipSeeker.getCountry("183.17.255.255"));//183.17.255.255
 		System.out.println(ipSeeker.getCountry("61.49.106.113"));
+		System.out.println(ipSeeker.getCountry("183.16.39.108"));
 		System.out.println(ipSeeker.getArea("61.49.106.113"));
 		System.out.println(ipSeeker.getDetailedIpInfo("61.49.106.113"));
 	}
