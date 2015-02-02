@@ -94,10 +94,12 @@
 .con_que { width:960px; height:120px; margin:20px 0px 0px 20px; background:url(../images/xin_img.png) no-repeat left 0px;}
 .con_que h2{float:left; display:block; background: url(../images/shuxue.png) no-repeat left top; width:200px; line-height:120px;}
 .con_que p{ float:left; display:block; margin-right:20px; font-size:30px; color:#FF0; margin:0 50px; line-height:120px;}
-.con_pue_sid { text-align:center;vertical-align:middle; margin:30px auto;width:600px;}
+.con_pue_sid {vertical-align:middle; margin:20px auto;width:760px; height:400px; background:url(../images/35.png) no-repeat 40px 40px;padding-left:70px;}
 .con_pue_sid h2{ text-align:left; font-size:26px; color:#f90;}
 .con_pue_sid p{ padding:5px 0; font-size:16px;}
-.con_pue_s p{ float:left; display:block; width:290px; overflow:hidden;height:40px; line-height:40px; vertical-align:middle; margin-top:10px;}
+.con_pue_sid .con_sid_img { width:700px; height:; display:block; margin-top:30px;}
+.con_pue_s { margin-top:20px;}
+.con_pue_s p{ float:left; display:block; width:260px; overflow:hidden;height:40px; line-height:40px; vertical-align:middle; margin-top:10px; color:#fff;}
 .con_pue_s p img{ vertical-align:middle; margin-right:5px;}
 .que_but { margin:50px 0 0 100px;}
 .que_but p{ float:left; display:block; margin:0 20px;}
