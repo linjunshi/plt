@@ -14,6 +14,7 @@ import com.santrong.plt.util.BeanUtils;
 import com.santrong.plt.util.MyUtils;
 import com.santrong.plt.webpage.BaseDao;
 import com.santrong.plt.webpage.friend.entry.UserQuery;
+import com.santrong.plt.webpage.friend.entry.UserRelationItem;
 import com.santrong.plt.webpage.teacher.entry.UserItem;
 
 /**
@@ -23,6 +24,22 @@ import com.santrong.plt.webpage.teacher.entry.UserItem;
  */
 public class UserRelationDao extends BaseDao {
 
+
+	/**
+	 * 查询好友申请的最新消息
+	 * @param userId
+	 * @return
+	 */
+	public List<UserRelationItem> selectMsgList(String userId) {
+		try{
+			UserRelationMapper mapper = this.getMapper(UserRelationMapper.class);
+			return mapper.selectMsgList(userId);
+		}catch(Exception e) {
+			Log.printStackTrace(e);
+		}
+		return null;
+	}
+	
 	/**
 	 * 用户搜索
 	 * @param query

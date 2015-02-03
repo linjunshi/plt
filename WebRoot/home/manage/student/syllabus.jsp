@@ -25,8 +25,10 @@ Globals.page = "Manage_syllabus";
 	
 		<c:forEach items="${lessonUnitList}" var="lessonUnit" varStatus="st">
 			<div class="school_con<c:if test="${st.first}"> school_con_hover</c:if><c:if test="${st.last}"> school_con_last</c:if> clearfix">
-				<h2><c:if test="${lessonUnit.term == 1}">上学期</c:if>
-					<c:if test="${lessonUnit.term == 2}">下学期</c:if> -> ${lessonUnit.unitName}</h2>
+				<h2>${grade.levelName}
+					<c:if test="${lessonUnit.term == 1}">上学期</c:if>
+					<c:if test="${lessonUnit.term == 2}">下学期</c:if>
+					 -> ${lessonUnit.unitName}</h2>
 				<p>&nbsp;</p>
 				<ul <c:if test="${st.index == 0}">class='current'</c:if>>
 					<c:forEach items="${lessonUnit.weikeList}" var="weike" varStatus="st">

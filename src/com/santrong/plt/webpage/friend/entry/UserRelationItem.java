@@ -16,6 +16,10 @@ public class UserRelationItem {
 	private Date cts;
 	private Date uts;
 	
+	// 额外
+	private String showName1;
+	private String showName2;
+	
 	public static int Result_Apply = 0;// 申请
 	public static int Result_Agree = 1;// 同意
 	public static int Result_Refuse = 2;// 拒绝
@@ -34,6 +38,18 @@ public class UserRelationItem {
 	}
 	public void setUserId2(String userId2) {
 		this.userId2 = userId2;
+	}
+	public String getShowName1() {
+		return showName1;
+	}
+	public void setShowName1(String showName1) {
+		this.showName1 = showName1;
+	}
+	public String getShowName2() {
+		return showName2;
+	}
+	public void setShowName2(String showName2) {
+		this.showName2 = showName2;
 	}
 	public String getApplyMsg() {
 		return applyMsg;

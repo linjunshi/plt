@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.santrong.plt.opt.grade.GradeDefine;
+import com.santrong.plt.opt.grade.GradeLevelEntry;
 import com.santrong.plt.opt.grade.GradeSubjectEntry;
 import com.santrong.plt.util.MyUtils;
 import com.santrong.plt.webpage.course.dao.CourseDao;
@@ -23,6 +24,8 @@ import com.santrong.plt.webpage.course.resource.train.entry.KnowledgePointerView
 import com.santrong.plt.webpage.course.resource.train.entry.KnowledgeTable;
 import com.santrong.plt.webpage.course.resource.train.entry.TrainQuery;
 import com.santrong.plt.webpage.friend.dao.UserRelationDao;
+import com.santrong.plt.webpage.friend.entry.FriendMsgItem;
+import com.santrong.plt.webpage.friend.entry.UserRelationItem;
 import com.santrong.plt.webpage.home.dao.LessonUnitDao;
 import com.santrong.plt.webpage.home.entry.LessonUnitItem;
 import com.santrong.plt.webpage.manage.StudentBaseAction;
@@ -158,9 +161,30 @@ public class StudyMAction extends StudentBaseAction {
 		
 		// 我的好友申请
 		UserRelationDao userRelationDao = new UserRelationDao();
-		
+		List<UserRelationItem> relationList = userRelationDao.selectMsgList(this.currentUser().getId());
+		List<FriendMsgItem> friendMsgList = new ArrayList<FriendMsgItem>();
+		if(relationList != null) {// 转换数据结构
+			for(UserRelationItem u:relationList) {
+					FriendMsgItem item = new FriendMsgItem();
+					if(MyUtils.isNotNull(u.getShowName1())) {// 作为发起人
+						item.setUserId(u.getUserId2());
+						item.setShowName(u.getShowName2());
+						item.setMsg(u.getReturnMsg());
+						item.setType(0);
+					}else {// 作为接受人
+						item.setUserId(u.getUserId1());
+						item.setShowName(u.getShowName1());
+						item.setMsg(u.getApplyMsg());
+						item.setType(1);
+					}
+					item.setResult(u.getResult());
+					friendMsgList.add(item);
+			}
+		}
 		
 		this.getRequest().setAttribute("flag", "center");
+		this.getRequest().setAttribute("friendMsgList", friendMsgList);
+		
 		return "manage/student/personalCenter";
 	}
 	
@@ -192,6 +216,10 @@ public class StudyMAction extends StudentBaseAction {
 			}
 		}
 		
+		// 获取年级具体对象
+		GradeLevelEntry grade = GradeDefine.getLevelByLevelId(gradeId);
+		
+		request.setAttribute("grade", grade);
 		request.setAttribute("lessonUnitList", lessonUnitList);
 		request.setAttribute("subjectId", subjectId);
 		return "manage/student/syllabus";

@@ -41,9 +41,15 @@ Globals.page = "Manage_personalCenter";
 				<h2>全部动态</h2>
 			</div>
 			<div class="qu_no_info">
-				<p>
-					你还没有任何动态<a href="#">去群里看看</a>
-				</p>
+			<c:if test="${fn:length(friendMsgList) == 0}">
+				<p>你还没有任何动态<a href="#">去群里看看</a></p>
+			</c:if>
+			<c:if test="${fn:length(friendMsgList) > 0}">
+				<c:forEach items="${friendMsgList}" var="msg">
+					<p>${msg.showName}</p>
+				</c:forEach>
+			</c:if>
+				
 			</div>
 		</div>
 	</div>

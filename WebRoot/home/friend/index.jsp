@@ -25,7 +25,7 @@ Globals.page = "Index_friend";
 								<div class="result_con">
 									<h3 >${user.showName}</h3>
 									<p class="pt1">${user.levelString}</p>
-									<p class="pt2"><a href="javascript:void(0);">加好友</a></p>
+									<p class="pt2"><a href="javascript:alert('待定');">加好友</a></p>
 								</div>
 							</li>
 						</c:forEach>                    
