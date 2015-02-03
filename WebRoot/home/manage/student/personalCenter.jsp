@@ -15,25 +15,7 @@ Globals.page = "Manage_personalCenter";
 <div class="header">
 	<%@ include file="../../inc/top_new.jsp"%>
 	<div class="content clearfix">
-		<div class="qu_left">
-			<div class="qu_user_pho">
-				<img src="${ctx}${sessionScope.loginUser.headPhoto}" width="140" height="140">
-			</div>
-			<div class="qu_item">
-				<ul>
-					<li><a href="${ctx}/study/course" class="pt4">我的课程</a></li>
-					<li><a href="${ctx}/manage/competition" class="pt5">我的练习</a></li>
-					<li><a href="${ctx}/collection" class="pt6">我的收藏</a></li>
-					<li><a href="${ctx}/comment" class="pt7">我的评论</a></li>
-					<li><a href="#" class="pt8">居本故事</a></li>
-					<li><a href="#" class="pt9">朋友圈</a></li>
-					<li>---------------------------------</li>
-					<li><a href="#" class="pt10">学习统计</a></li>
-					<li>---------------------------------</li>
-					<li><a href="${ctx}/account/personalInfo" class="pt11">个人设置</a></li>
-				</ul>
-			</div>
-		</div>
+		<%@ include file="../../inc/leftmenu_student2.jsp"%>
 		<div class="qu_right">
 			<div class="qu_right_it">
 				<h2>${sessionScope.loginUser.showName}</h2>

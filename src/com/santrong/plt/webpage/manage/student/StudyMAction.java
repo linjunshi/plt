@@ -154,6 +154,8 @@ public class StudyMAction extends StudentBaseAction {
 	 */
 	@RequestMapping("/center")
 	public String personalCenter(){
+		HttpServletRequest request = getRequest();
+		request.setAttribute("flag", "center");
 		return "manage/student/personalCenter";
 	}
 	

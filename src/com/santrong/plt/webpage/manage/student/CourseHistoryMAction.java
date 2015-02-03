@@ -1,4 +1,4 @@
-package com.santrong.plt.webpage.story;
+package com.santrong.plt.webpage.manage.student;
 
 import java.util.List;
 
@@ -10,24 +10,25 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.santrong.plt.log.Log;
-import com.santrong.plt.webpage.BaseAction;
-import com.santrong.plt.webpage.story.dao.StoryAttendHistoryDao;
-import com.santrong.plt.webpage.story.dao.StoryDao;
-import com.santrong.plt.webpage.story.entry.StoryItem;
-import com.santrong.plt.webpage.story.entry.StoryQuery;
+import com.santrong.plt.webpage.course.dao.CourseAttendHistoryDao;
+import com.santrong.plt.webpage.course.dao.WeikeDao;
+import com.santrong.plt.webpage.course.entry.CourseItem;
+import com.santrong.plt.webpage.course.entry.CourseOrderAttendView;
+import com.santrong.plt.webpage.course.entry.WeikeQuery;
+import com.santrong.plt.webpage.manage.StudentBaseAction;
 import com.santrong.plt.webpage.teacher.entry.UserItem;
 
 /**
- * @author weinianjie
- * @date 2015年2月2日
- * @time 上午11:33:49
+ * @author huaweihua
+ * @date 2015年2月2日 
+ * @time 下午4:14:00
  */
 @Controller
-@RequestMapping("/story")
-public class StoryAction extends BaseAction {
+@RequestMapping("/history")
+public class CourseHistoryMAction extends StudentBaseAction {
 
 	/**
-	 * 剧本故事
+	 * 浏览历史记录
 	 * @return
 	 */
 	@RequestMapping("/list")
@@ -46,25 +47,26 @@ public class StoryAction extends BaseAction {
 				pageNum = 1;
 			}
 			
-			StoryDao storyDao = new StoryDao();
-			StoryQuery query = new StoryQuery();
-			query.setUserId(this.currentUser().getId());//当前用户
-//			query.setOwnerId(this.currentUser().getId());
-			query.setPageSize(9);
+			WeikeDao weikeDao = new WeikeDao();
+			WeikeQuery query = new WeikeQuery();
+			query.setUserId(this.currentUser().getId());
+			query.setPageSize(1);
+			query.setShowSize(3);
 			query.setPageNum(pageNum);
-			query.setCount(storyDao.selectCountHistoryByQuery(query));
+			query.setStatus(CourseItem.Status_Publish);//已经发布的
+			query.setCount(weikeDao.selectCountHistoryByQuery(query));
 			query.setOrderBy("b.uts");
 			query.setOrderRule("desc");
-			List<StoryItem> storyList = storyDao.selectStoryHistoryByQuery(query);
+			List<CourseOrderAttendView> weikeList = weikeDao.selectCourseHistoryByQuery(query);
 			
-			request.setAttribute("storyList", storyList);
+			request.setAttribute("weikeList", weikeList);
 			request.setAttribute("query", query);
-			request.setAttribute("flag", "story");
+			request.setAttribute("flag", "history");
 			
 		} catch (Exception e) {
 			Log.printStackTrace(e);
 		}
-		return "manage/student/storyList";
+		return "manage/student/historyList";
 	}
 	
 	@RequestMapping(value="/removeAttendHistory", method=RequestMethod.POST)
@@ -73,8 +75,8 @@ public class StoryAction extends BaseAction {
 		try {
 			HttpServletRequest request = getRequest();
 			String attendId = request.getParameter("attendId");
-			StoryAttendHistoryDao sahDao = new StoryAttendHistoryDao();
-			if (sahDao.delete(attendId)) {
+			CourseAttendHistoryDao cahDao = new CourseAttendHistoryDao();
+			if (cahDao.removeAttendHistory(attendId)) {
 				return SUCCESS;
 			}
 		} catch (Exception e) {

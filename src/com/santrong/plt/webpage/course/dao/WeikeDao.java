@@ -15,6 +15,7 @@ import com.santrong.plt.util.BeanUtils;
 import com.santrong.plt.util.MyUtils;
 import com.santrong.plt.webpage.BaseDao;
 import com.santrong.plt.webpage.course.entry.CourseItem;
+import com.santrong.plt.webpage.course.entry.CourseOrderAttendView;
 import com.santrong.plt.webpage.course.entry.CourseView;
 import com.santrong.plt.webpage.course.entry.WeikeDetailView;
 import com.santrong.plt.webpage.course.entry.WeikeOrderView;
@@ -311,4 +312,120 @@ public class WeikeDao extends BaseDao {
 		}
 		return null;
 	} 
+	
+	/**
+	 * 获取当前用户的浏览过的微课列表
+	 * @param query
+	 * @return
+	 */
+	public 	List<CourseOrderAttendView> selectCourseHistoryByQuery(WeikeQuery query) {
+		List<CourseOrderAttendView> list = new ArrayList<CourseOrderAttendView>();
+		
+		try{
+			Statement criteria = new Statement("course", "a");
+			criteria.setFields("a.*, b.id attendId, b.attendType, e.id as orderId, e.userId ,e.status orderStatus");
+			criteria.rjoin("course_attend_history", "b", "a.id", "b.courseId");
+			criteria.ljoin("(select c.* from web_order c where c.userId = '" + query.getUserId() + "')", "e", "a.id", "e.courseId");
+
+			// 关键词
+			if(!StringUtils.isNullOrEmpty(query.getKeywords())) {
+				criteria.where(or(
+						like("a.courseName", "?")));
+				criteria.setStringParam("%" + query.getKeywords() + "%");
+			}
+			// 当前用户
+			if(MyUtils.isNotNull(query.getUserId())) {
+				criteria.where(eq("b.userId", "?"));
+				criteria.setStringParam(query.getUserId());
+			}
+			// 状态
+			criteria.where(eq("a.status", "?"));
+			criteria.setIntParam(query.getStatus());
+			
+			// 查看参与状态
+//			criteria.where(eq("b.attendType", "?"));
+//			criteria.setIntParam(query.getAttendType());
+			// 微课
+			criteria.where(eq("a.courseType", CourseItem.CourseType_Weike));			
+			// 排序
+			if(!StringUtils.isNullOrEmpty(query.getOrderBy())) {
+				if("desc".equalsIgnoreCase(query.getOrderRule())) {
+					if (query.getOrderBy().indexOf('.') != -1 && query.getOrderBy().split("\\.")[0].equals("b")) {
+						criteria.desc(query.getOrderBy());
+					} else{
+						criteria.desc("a." + query.getOrderBy());
+					}
+				}else {
+					if (query.getOrderBy().indexOf('.') != -1 && query.getOrderBy().split("\\.")[0].equals("b")) {
+						criteria.asc(query.getOrderBy());
+					} else{
+						criteria.asc("a." + query.getOrderBy());
+					}
+				}
+			}
+			// 分页
+			criteria.limit(query.getLimitBegin(), query.getLimitEnd());
+			
+			Connection conn = ThreadUtils.currentConnection();
+			PreparedStatement stm = criteria.getRealStatement(conn);
+			ResultSet rs = stm.executeQuery();
+			while(rs.next()){
+				CourseOrderAttendView item = new CourseOrderAttendView();
+				BeanUtils.Rs2Bean(rs, item);
+				list.add(item);
+			}
+			
+		}catch(Exception e){
+			Log.printStackTrace(e);
+		}
+		
+		return list;
+	}	
+	
+	/**
+	 * 根据搜索条件查询课程总数
+	 * @param query
+	 * @return
+	 */
+	public 	int selectCountHistoryByQuery(WeikeQuery query) {
+		int count = 0;
+		
+		try{
+			Statement criteria = new Statement("course", "a");
+			criteria.setFields("count(*) cn");
+			criteria.rjoin("course_attend_history", "b", "a.id", "b.courseId");
+			
+			// 关键词
+			if(!StringUtils.isNullOrEmpty(query.getKeywords())) {
+				criteria.where(or(
+						like("a.courseName", "?")));
+				criteria.setStringParam("%" + query.getKeywords() + "%");
+			}
+			// 当前用户
+			if(MyUtils.isNotNull(query.getUserId())) {
+				criteria.where(eq("b.userId", "?"));
+				criteria.setStringParam(query.getUserId());
+			}
+			// 状态
+			criteria.where(eq("a.status", "?"));
+			criteria.setIntParam(query.getStatus());
+			
+			// 查看参与状态
+//			criteria.where(eq("b.attendType", "?"));
+//			criteria.setIntParam(query.getAttendType());
+			// 微课
+			criteria.where(eq("a.courseType", CourseItem.CourseType_Weike));			
+			
+			Connection conn = ThreadUtils.currentConnection();
+			PreparedStatement stm = criteria.getRealStatement(conn);
+			ResultSet rs = stm.executeQuery();
+			rs.next();
+			count = rs.getInt("cn");
+			
+		}catch(Exception e){
+			Log.printStackTrace(e);
+		}
+		
+		return count;
+	}	
 }

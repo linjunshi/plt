@@ -188,6 +188,7 @@ public class AccountMAction extends RegistBaseAction {
 			
 			HttpServletRequest request = getRequest();
 			request.setAttribute("user", user);
+			request.setAttribute("flag", "personalInfo");
 			
 		} catch (Exception e) {
 			Log.printStackTrace(e);
@@ -256,6 +257,7 @@ public class AccountMAction extends RegistBaseAction {
 			
 			HttpServletRequest request = this.getRequest();
 			request.setAttribute("user", userForm);
+			request.setAttribute("flag", "personalInfo");
 		} catch (Exception e) {
 			Log.printStackTrace(e);
 		}
@@ -281,6 +283,7 @@ public class AccountMAction extends RegistBaseAction {
 			
 			HttpServletRequest request = getRequest();
 			request.setAttribute("userEducation", userEducationItem);
+			request.setAttribute("flag", "personalInfoEdu");
 			
 		} catch (Exception e) {
 			Log.printStackTrace(e);
@@ -345,7 +348,7 @@ public class AccountMAction extends RegistBaseAction {
 			
 			HttpServletRequest request = getRequest();
 			request.setAttribute("userExtends", userExtendsItem);
-			
+			request.setAttribute("flag", "personalInfoExtend");
 		} catch (Exception e) {
 			Log.printStackTrace(e);
 		}
