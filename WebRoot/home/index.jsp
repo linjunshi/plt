@@ -20,7 +20,7 @@
 					<img src="${ctx}/resource/images/logo.png" width="260" height="52">
 				</div>
 				<c:if test="${sessionScope.loginUser != null}">
-					<div class="hea_new"><a href="${ctx}/study/syllabus">学习中心</a>|<a href="${ctx}/study/center">个人空间</a>|<a href="${ctx}/account/personalInfo">${sessionScope.loginUser.showName}</a></div>
+					<div class="hea_new"><span>${sessionScope.loginUser.showName}</span>|<a href="${ctx}/study/syllabus">学习中心</a>|<a href="${ctx}/study/center">个人空间</a>|<a href="${ctx }/account/logout">注销</a></div>
 				</c:if>				
 				<div class="hea_nav">
 					<a href="${ctx}/" class="a_a">首页</a>
@@ -51,8 +51,7 @@
 					<c:if test="${sessionScope.loginUser != null}">
 						<div class="user_info_hidd">
 							<h2 class="user_info_sid"><img src="${ctx}${sessionScope.loginUser.headPhoto}" width="50" height="50"><span>欢迎你，${sessionScope.loginUser.showName}</span></h2>
-							<p><a href="${ctx }/account/logout">注销</a></p>
-							<p><a href="${ctx }/study/syllabus">学习中心</a></p>
+							<p><a href="${ctx }/friend">找找朋友</a></p>
 						</div>
 					</c:if>
 				</div>

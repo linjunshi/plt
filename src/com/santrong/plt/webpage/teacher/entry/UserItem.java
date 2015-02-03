@@ -2,6 +2,8 @@ package com.santrong.plt.webpage.teacher.entry;
 
 import java.util.Date;
 
+import com.santrong.plt.opt.grade.GradeDefine;
+import com.santrong.plt.opt.grade.GradeLevelEntry;
 import com.santrong.plt.util.MyUtils;
 
 /**
@@ -195,5 +197,14 @@ public class UserItem {
 		}else {
 			return "/resource/photo/touxiang.png";
 		}
+	}
+	
+	// 获取年级
+	public String getLevelString() {
+		GradeLevelEntry entry = GradeDefine.getLevelByLevelId(this.gradeId);
+		if(entry != null) {
+			return entry.getLevelName();
+		}
+		return "";
 	}
 }

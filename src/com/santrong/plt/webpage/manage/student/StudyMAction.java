@@ -15,13 +15,14 @@ import com.santrong.plt.webpage.course.dao.CourseDao;
 import com.santrong.plt.webpage.course.dao.WeikeDao;
 import com.santrong.plt.webpage.course.entry.CourseBuyQuery;
 import com.santrong.plt.webpage.course.entry.CourseItem;
-import com.santrong.plt.webpage.course.entry.WeikeOrderView;
 import com.santrong.plt.webpage.course.entry.OrderItem;
+import com.santrong.plt.webpage.course.entry.WeikeOrderView;
 import com.santrong.plt.webpage.course.resource.train.dao.KnowledgeDao;
 import com.santrong.plt.webpage.course.resource.train.dao.TrainDao;
-import com.santrong.plt.webpage.course.resource.train.entry.KnowledgeTable;
 import com.santrong.plt.webpage.course.resource.train.entry.KnowledgePointerView;
+import com.santrong.plt.webpage.course.resource.train.entry.KnowledgeTable;
 import com.santrong.plt.webpage.course.resource.train.entry.TrainQuery;
+import com.santrong.plt.webpage.friend.dao.UserRelationDao;
 import com.santrong.plt.webpage.home.dao.LessonUnitDao;
 import com.santrong.plt.webpage.home.entry.LessonUnitItem;
 import com.santrong.plt.webpage.manage.StudentBaseAction;
@@ -154,6 +155,12 @@ public class StudyMAction extends StudentBaseAction {
 	 */
 	@RequestMapping("/center")
 	public String personalCenter(){
+		
+		// 我的好友申请
+		UserRelationDao userRelationDao = new UserRelationDao();
+		
+		
+		this.getRequest().setAttribute("flag", "center");
 		return "manage/student/personalCenter";
 	}
 	

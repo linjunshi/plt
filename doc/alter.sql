@@ -1,3 +1,17 @@
+-- 2015-02-03 weinianjie
+
+drop table if exists user_relation;
+create table user_relation(
+	userId1 varchar(32) not null comment '发起用户',
+	userId2 varchar(32) not null comment '接收用户',
+	applyMsg varchar(256) comment '申请消息',
+	returnMsg varchar(256) comment '反馈消息',
+	result int(10) not null comment '结果',
+	cts datetime comment '创建时间',
+	uts datetime comment '修改时间',	
+	primary key (userId1, userId2)
+) engine=InnoDB default charset=utf8 collate=utf8_bin comment '用户关系表';
+
 -- 2015-02-02 weinianjie
 drop table if exists course_attend_history;
 create table course_attend_history(
