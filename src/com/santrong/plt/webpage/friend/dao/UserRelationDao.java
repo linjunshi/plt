@@ -72,6 +72,21 @@ public class UserRelationDao extends BaseDao {
 	}
 	
 	/**
+	 * 更新关系
+	 * @param item
+	 * @return
+	 */
+	public int update(UserRelationItem item) {
+		try{
+			UserRelationMapper mapper = this.getMapper(UserRelationMapper.class);
+			return mapper.update(item);
+		}catch(Exception e) {
+			Log.printStackTrace(e);
+		}
+		return 0;		
+	}
+	
+	/**
 	 * 用户搜索
 	 * @param query
 	 * @return

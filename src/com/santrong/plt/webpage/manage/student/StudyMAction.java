@@ -23,9 +23,6 @@ import com.santrong.plt.webpage.course.resource.train.dao.TrainDao;
 import com.santrong.plt.webpage.course.resource.train.entry.KnowledgePointerView;
 import com.santrong.plt.webpage.course.resource.train.entry.KnowledgeTable;
 import com.santrong.plt.webpage.course.resource.train.entry.TrainQuery;
-import com.santrong.plt.webpage.friend.dao.UserRelationDao;
-import com.santrong.plt.webpage.friend.entry.FriendMsgItem;
-import com.santrong.plt.webpage.friend.entry.UserRelationItem;
 import com.santrong.plt.webpage.home.dao.LessonUnitDao;
 import com.santrong.plt.webpage.home.entry.LessonUnitItem;
 import com.santrong.plt.webpage.manage.StudentBaseAction;
@@ -150,43 +147,6 @@ public class StudyMAction extends StudentBaseAction {
 		request.setAttribute("trainList", trainList);
 		request.setAttribute("query", query);
 		return "manage/student/myTrain";
-	}
-	
-	/**
-	 * 个人中心
-	 * @return
-	 */
-	@RequestMapping("/center")
-	public String personalCenter(){
-		// 我的好友申请
-		UserRelationDao userRelationDao = new UserRelationDao();
-		List<UserRelationItem> relationList = userRelationDao.selectMsgList(this.currentUser().getId());
-		List<FriendMsgItem> friendMsgList = new ArrayList<FriendMsgItem>();
-		if(relationList != null) {// 转换数据结构
-			for(UserRelationItem u:relationList) {
-					FriendMsgItem item = new FriendMsgItem();
-					if(this.currentUser().getId().equals(u.getUserId1())) {// 作为发起人
-						item.setUserId(u.getUserId2());
-						item.setShowName(u.getShowName2());
-						item.setMsg(u.getReturnMsg());
-						item.setType(0);
-					}else {// 作为接受人
-						item.setUserId(u.getUserId1());
-						item.setShowName(u.getShowName1());
-						item.setMsg(u.getApplyMsg());
-						item.setType(1);
-					}
-					item.setResult(u.getResult());
-					friendMsgList.add(item);
-			}
-		}
-		
-
-		
-		HttpServletRequest request = getRequest();
-		request.setAttribute("flag", "center");
-		request.setAttribute("friendMsgList", friendMsgList);		
-		return "manage/student/personalCenter";
 	}
 	
 	/**

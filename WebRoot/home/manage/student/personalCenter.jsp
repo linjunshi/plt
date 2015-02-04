@@ -51,7 +51,7 @@ Globals.page = "Manage_personalCenter";
 					<div class="qu_no_info">
 						<p>
 						<a href="javascript:alert('待定')">${msg.showName}</a>
-						<c:if test="${msg.type == 1}">请求添加你为好友<a href="javascript:(0)" class="agree">同意</a>|<a href="javascript:(0)" class="refuse">拒绝</a></c:if>
+						<c:if test="${msg.type == 1}">请求添加你为好友<a href="${ctx}/personal/require?userId=${msg.userId}&type=1">同意</a>|<a href="${ctx}/personal/require?userId=${msg.userId}&type=2">拒绝</a></c:if>
 						<c:if test="${msg.type == 0}">${msg.action}</c:if>
 						<span>消息：${msg.msg}</span>
 						</p>
