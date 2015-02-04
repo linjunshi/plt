@@ -37,7 +37,10 @@ Globals.page = "Manage_storyList";
 						<ul class="sh_sch_ke ">
 						
 							<c:forEach items="${storyList}" var="story" varStatus="st">
-								${story.storyName}
+								<li <c:if test="${st.index %4 == 0}">class="maigin_right"</c:if> >
+									<a href="#" target="_blank"><img src="${ctx}" title="${story.storyName}" width="220" height="140"></a>
+									<h2>${story.storyName}</h2>
+								</li>
 							</c:forEach>
 
 						</ul>
