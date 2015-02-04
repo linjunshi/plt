@@ -43,4 +43,16 @@ public class FriendMsgItem {
 	public void setType(int type) {
 		this.type = type;
 	}
+	
+	// 获取行为
+	public String getAction() {
+		if(this.type == 0) {
+			if(this.result == UserRelationItem.Result_Agree) {
+				return "同意了你的好友请求";
+			}else if(this.result == UserRelationItem.Result_Refuse) {
+				return "拒绝了你的好友请求";
+			}
+		}
+		return "";
+	}
 }

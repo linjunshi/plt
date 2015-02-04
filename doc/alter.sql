@@ -1,5 +1,4 @@
--- 2015-02-03 weinianjie
-
+-- 2015-02-03 weinianjie (2015-02-03 hwcloud)
 drop table if exists user_relation;
 create table user_relation(
 	userId1 varchar(32) not null comment '发起用户',
@@ -52,7 +51,7 @@ create table story_attend_history(
 	primary key (id)
 ) engine=InnoDB default charset=utf8 collate=utf8_bin comment '剧本参与历史表';
 
--- 2015-01-31 weinianjie (2015-01-31 hwcloud)
+-- 2015-01-31 weinianjie
 alter table user add column gradeId varchar(32) comment '年级ID' after subjectId;
 
 -- 2015-01-21 weinianjie

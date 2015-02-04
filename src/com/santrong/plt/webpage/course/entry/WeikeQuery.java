@@ -17,6 +17,8 @@ public class WeikeQuery extends PageQuery{
 	private String userId;
 	private String schoolId;
 	private int status;
+	private int attendType;
+	
 
 	public int getStatus() {
 		return status;
@@ -88,5 +90,13 @@ public class WeikeQuery extends PageQuery{
 
 	public void setGradeEnName(String gradeEnName) {
 		this.gradeEnName = gradeEnName;
+	}
+
+	public int getAttendType() {
+		return attendType;
+	}
+
+	public void setAttendType(int attendType) {
+		this.attendType = attendType;
 	}
 }

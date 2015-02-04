@@ -231,15 +231,15 @@ div[contenteditable=true] {-webkit-line-break: after-white-space;-webkit-nbsp-mo
 .qu_item .pt10 { background:url(../images/icon1.png) no-repeat 45px center;}
 .qu_item .pt11 { background:url(../images/icon1.png) no-repeat 45px center;}
 .qu_item .pt12 { background:url(../images/icon1.png) no-repeat 45px center;}
-.qu_item .pt4:hover { background:#8f6239 url(../images/icon1_hover.png) no-repeat 45px center;}
-.qu_item .pt5:hover { background:#8f6239 url(../images/icon1_hover.png) no-repeat 45px center;}
-.qu_item .pt6:hover { background:#8f6239 url(../images/icon1_hover.png) no-repeat 45px center;}
-.qu_item .pt7:hover { background:#8f6239 url(../images/icon1_hover.png) no-repeat 45px center;}
-.qu_item .pt8:hover { background:#8f6239 url(../images/icon1_hover.png) no-repeat 45px center;}
-.qu_item .pt9:hover { background:#8f6239 url(../images/icon1_hover.png) no-repeat 45px center;}
-.qu_item .pt10:hover { background:#8f6239 url(../images/icon1_hover.png) no-repeat 45px center;}
-.qu_item .pt11:hover { background:#8f6239 url(../images/icon1_hover.png) no-repeat 45px center;}
-.qu_item .pt12:hover { background:#8f6239 url(../images/icon1_hover.png) no-repeat 45px center;}
+.qu_item .pt4:hover,.qu_item .pt4_hover { background:#8f6239 url(../images/icon1_hover.png) no-repeat 45px center;color:#fff;}
+.qu_item .pt5:hover,.qu_item .pt5_hover { background:#8f6239 url(../images/icon1_hover.png) no-repeat 45px center;color:#fff;}
+.qu_item .pt6:hover,.qu_item .pt6_hover { background:#8f6239 url(../images/icon1_hover.png) no-repeat 45px center;color:#fff;}
+.qu_item .pt7:hover,.qu_item .pt7_hover { background:#8f6239 url(../images/icon1_hover.png) no-repeat 45px center;color:#fff;}
+.qu_item .pt8:hover,.qu_item .pt8_hover { background:#8f6239 url(../images/icon1_hover.png) no-repeat 45px center;color:#fff;}
+.qu_item .pt9:hover,.qu_item .pt9_hover { background:#8f6239 url(../images/icon1_hover.png) no-repeat 45px center;color:#fff;}
+.qu_item .pt10:hover,.qu_item .pt10_hover { background:#8f6239 url(../images/icon1_hover.png) no-repeat 45px center;color:#fff;}
+.qu_item .pt11:hover,.qu_item .pt11_hover { background:#8f6239 url(../images/icon1_hover.png) no-repeat 45px center;color:#fff;}
+.qu_item .pt12:hover,.qu_item .pt12_hover { background:#8f6239 url(../images/icon1_hover.png) no-repeat 45px center;color:#fff;}
 
 .qu_right { width:760px; float:left;}
 .qu_right .qu_right_it {margin-top:10px; margin-bottom:30px; height:120px;}
@@ -262,6 +262,27 @@ div[contenteditable=true] {-webkit-line-break: after-white-space;-webkit-nbsp-mo
 .qu_no_info { padding:10px 0;border:1px #f90 solid; background:#ffd391; color:#333; text-align: center;}
 .qu_no_info a{ padding:0 10px; color: #1682e6;}
 .qu_no_info a:hover{text-decoration: underline;}
+
+/*--------------------我看过的-----------------*/
+.sh_ke{ margin:0 0px 10px 0; overflow:hidden;}
+.sh_ke h2{ float:left;font-size:18px; height:40px; line-height:40px; text-indent:10px;color:#009871;}
+.catalog_box_more{ float:right; margin-right:10px; line-height:40px; color:#666;}
+.catalog_box_more:hover { color:#188EEE;}
+.sh_ke .sh_sch_ke h2{ width:220px; height:26px; line-height:26px; font-size:16px; color:#333; overflow:hidden; text-align:left;}
+.sh_ke .sh_sch_ke li {width:220px;float:left; display:block; margin:0 25px 20px 0; border:2px #fff solid; padding-bottom:8px; background:#f1f1f1; position:relative; }
+.sh_ke .sh_sch_ke li:hover{ border:#af6900 2px solid;}
+
+.sh_ke .sh_sch_ke b { color:#f90; font-size:16px; margin:0 5px; font-weight:normal;}
+.sch_unm { color:#009871;font-size:14px; margin-right:10px; font-weight:normal;}
+.sch_unm a{color:#af6900;}
+.sch_unm a:hover{color:#188eee;text-decoration: underline;}
+.sh_ke .sh_sch_ke {border-top:1px solid #ccc; padding:20px 0 0 10px; display: inline-block;width: 760px;}
+.sh_ke .sh_sch_ke p{ text-align:left; margin-top:3px; text-indent:5px; line-height:150%;}
+.sh_sch_but { position:absolute; right:5px; bottom:5px;}
+.sh_sch_but .col_sh{ padding:2px 10px; background:#f90; color:#fff;}
+.sh_sch_but .col_sh:hover{padding:2px 10px; background:#188eee; color:#fff;}
+.sh_sch_but .col_st{ padding:2px 10px; background:#ccc; color:#fff;}
+
 
 /*--------------------课程详简-----------------*/
 .school_but {}

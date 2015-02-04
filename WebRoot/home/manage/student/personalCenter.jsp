@@ -40,17 +40,24 @@ Globals.page = "Manage_personalCenter";
 			<div class="qu_info">
 				<h2>全部动态</h2>
 			</div>
-			<div class="qu_no_info">
+			
 			<c:if test="${fn:length(friendMsgList) == 0}">
-				<p>你还没有任何动态<a href="#">去群里看看</a></p>
+				<div class="qu_no_info">
+					<p>你还没有任何动态<a href="#">去群里看看</a></p>
+				</div>
 			</c:if>
 			<c:if test="${fn:length(friendMsgList) > 0}">
 				<c:forEach items="${friendMsgList}" var="msg">
-					<p>${msg.showName}</p>
+					<div class="qu_no_info">
+						<p>
+						<a href="javascript:(0)">${msg.showName}</a>
+						<c:if test="${msg.type == 1}">请求添加你为好友<a href="javascript:(0)">同意</a>|<a href="javascript:(0)">拒绝</a></c:if>
+						<c:if test="${msg.type == 0}">${msg.action}</c:if>
+						<span>消息：${msg.msg}</span>
+						</p>
+					</div>
 				</c:forEach>
 			</c:if>
-				
-			</div>
 		</div>
 	</div>
 </div>

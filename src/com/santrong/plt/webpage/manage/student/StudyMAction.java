@@ -158,7 +158,6 @@ public class StudyMAction extends StudentBaseAction {
 	 */
 	@RequestMapping("/center")
 	public String personalCenter(){
-		
 		// 我的好友申请
 		UserRelationDao userRelationDao = new UserRelationDao();
 		List<UserRelationItem> relationList = userRelationDao.selectMsgList(this.currentUser().getId());
@@ -166,7 +165,7 @@ public class StudyMAction extends StudentBaseAction {
 		if(relationList != null) {// 转换数据结构
 			for(UserRelationItem u:relationList) {
 					FriendMsgItem item = new FriendMsgItem();
-					if(MyUtils.isNotNull(u.getShowName1())) {// 作为发起人
+					if(this.currentUser().getId().equals(u.getUserId1())) {// 作为发起人
 						item.setUserId(u.getUserId2());
 						item.setShowName(u.getShowName2());
 						item.setMsg(u.getReturnMsg());
@@ -182,9 +181,11 @@ public class StudyMAction extends StudentBaseAction {
 			}
 		}
 		
-		this.getRequest().setAttribute("flag", "center");
-		this.getRequest().setAttribute("friendMsgList", friendMsgList);
+
 		
+		HttpServletRequest request = getRequest();
+		request.setAttribute("flag", "center");
+		request.setAttribute("friendMsgList", friendMsgList);		
 		return "manage/student/personalCenter";
 	}
 	

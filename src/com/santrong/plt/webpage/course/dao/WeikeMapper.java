@@ -65,5 +65,6 @@ public interface WeikeMapper {
 			+ "left join course_chapter b on e.id = b.courseId "
 			+ "left join course_chapter_to_resource c on b.id = c.chapterId "
 			+ "left join resource_video d on c.resourceId = d.id limit 8 ")
-	List<WeikeOrderView> selectWeikeOrderByUnitId(@Param("unitId")String unitId, @Param("userId")String userId);			
+	List<WeikeOrderView> selectWeikeOrderByUnitId(@Param("unitId")String unitId, @Param("userId")String userId);
+	
 }

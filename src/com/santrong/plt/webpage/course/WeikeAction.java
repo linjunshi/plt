@@ -22,10 +22,12 @@ import com.santrong.plt.util.MyUtils;
 import com.santrong.plt.util.TreeCode;
 import com.santrong.plt.webpage.BaseAction;
 import com.santrong.plt.webpage.course.dao.CommentDao;
+import com.santrong.plt.webpage.course.dao.CourseAttendHistoryDao;
 import com.santrong.plt.webpage.course.dao.CourseDao;
 import com.santrong.plt.webpage.course.dao.WeikeDao;
 import com.santrong.plt.webpage.course.entry.CommentItem;
 import com.santrong.plt.webpage.course.entry.CommentUserView;
+import com.santrong.plt.webpage.course.entry.CourseAttendHistoryItem;
 import com.santrong.plt.webpage.course.entry.CourseItem;
 import com.santrong.plt.webpage.course.entry.WeikeDetailView;
 import com.santrong.plt.webpage.course.entry.WeikeQuery;
@@ -141,6 +143,23 @@ public class WeikeAction extends BaseAction {
 
 		if(weike ==  null) {
 			return "404";
+		}
+		
+		// 添加微课浏览历史记录
+		CourseAttendHistoryDao cahDao = new CourseAttendHistoryDao();
+		if (cahDao.exists(currentUser().getId(), id)) {
+			CourseAttendHistoryItem cahItem = cahDao.select(currentUser().getId(), id);
+			cahItem.setUts(new Date());
+			cahDao.update(cahItem);
+		} else {
+			CourseAttendHistoryItem cahItem = new CourseAttendHistoryItem();
+			cahItem.setId(MyUtils.getGUID());
+			cahItem.setUserId(currentUser().getId());
+			cahItem.setCourseId(id);
+			cahItem.setAttendType(CourseAttendHistoryItem.Type_View);
+			cahItem.setCts(new Date());
+			cahItem.setUts(new Date());
+			cahDao.insert(cahItem);
 		}
 		
 		if (MyUtils.isNotNull(weike.getUnitId())) {
