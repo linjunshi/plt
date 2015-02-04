@@ -312,7 +312,51 @@ IndexClass.prototype = {
 	
 	// 微课详细页面
 	weikeDetail : function() {
+		//收藏
+		$(".coll_course").click(function(){
+			var courseId = $("input[name=weikeId]").val();
+			var url = Globals.ctx + "/course/coll_course"
+			$.post(url, {courseId : courseId}, function(result) {
+				if(result == "success") {
+					Boxy.alert("<i class='right'></i><span>收藏成功 !</span>");
+				}else {
+					Boxy.alert("<i class='error'></i><span>收藏失败 !</span>");
+				}
+			})
+		});
 		
+		// 购买
+		$(".buy").click(function(){
+			var courseId = $("input[name=weikeId]").val();
+			var url = Globals.ctx + "/course/buy"
+			$.post(url, {courseId : courseId}, function(result) {
+				if(result.indexOf('{') != -1) {
+					// 新页面打开网银支付
+					var json = eval('(' + result + ')');
+					$(".buy_form input[name=v_mid]").val(json.v_mid);
+					$(".buy_form input[name=v_oid]").val(json.v_oid);
+					$(".buy_form input[name=v_amount]").val(json.v_amount);
+					$(".buy_form input[name=v_moneytype]").val(json.v_moneytype);
+					$(".buy_form input[name=v_url]").val(json.v_url);
+					$(".buy_form input[name=v_md5info]").val(json.v_md5info);
+					$(".buy_form input[name=v_rcvname]").val(json.v_rcvname);
+					$(".buy_form input[name=remark1]").val(json.remark1);
+					$(".buy_form").submit();
+					
+					// 本页面弹框问是否给钱了
+	    			Boxy.ask("<i class='ask'></i><span>亲，您已经付款成功了么?</span>", ["是的", "还没呢"], function(response) {
+	    	            if (response == "是的") {
+	    	            	location.reload();
+	    	            }else{
+	    	            	Boxy.alert("<i class='info'></i><span>我要重新再买一次 !!!</span>");
+	    	            }
+	    			});
+
+				}else {
+					Boxy.alert("<i class='error'></i><span>"+ result +"</span>");
+				}
+			});
+		});
 	},
 	
 	// 学校列表页

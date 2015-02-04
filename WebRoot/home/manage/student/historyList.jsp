@@ -60,7 +60,7 @@ Globals.page = "Manage_historyList";
 											<input type="hidden" name="remark1" value="" />
 											<p class="sh_sch_but">
 												<input type="hidden" name="weikeId" value="${weike.id}"/>
-												<a href="javascript:void(0);" target="_blank" class="col_sh buy">购买</a>
+												<a href="javascript:void(0);" target="_blank" class="col_sh buy" title="点击此按钮，到下一步网银支付后，就可以开始学习了。">购买</a>
 											</p>
 										</form>	
 									</c:if>

@@ -47,7 +47,7 @@ Globals.page = "Manage_syllabus";
 										<input type="hidden" name="v_rcvname" value="" />
 										<input type="hidden" name="remark1" value="" />
 										<input type="hidden" name="weikeId" value="${weike.id}"/>
-										<a href="javascript:void(0);" target="_blank" class="notguomai buy">购买</a>
+										<a href="javascript:void(0);" target="_blank" class="notguomai buy"  title="点击此按钮，到下一步网银支付后，就可以开始学习了。">购买</a>
 									</form>		           
 								</c:if>
 							</p>
