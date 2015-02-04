@@ -24,8 +24,8 @@ public interface UserRelationMapper {
 	List<UserRelationItem> selectMsgList(String userId);
 	
 	@Select("select b.* from user_relation a "
-			+ "right join user b on a.userId1=b.id or a.userId2=b.id "
-			+ "where b.id=#{userId} and a.result=1")
+			+ "right join user b on (a.userId1=b.id and a.userId2=#{userId}) or (a.userId2=b.id and a.userId1=#{userId}) "
+			+ "where a.result=1")
 	List<UserItem> selectFriendList(String userId);
 	
 	@Select("select * from user_relation where (userId1=#{userId1} and userId2=#{userId2}) or (userId1=#{userId2} and userId2=#{userId1})")
