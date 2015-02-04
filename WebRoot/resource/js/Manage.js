@@ -1616,6 +1616,14 @@ ManageClass.prototype = {
 			});
 		},
 		
+		// 个人中心
+		personalCenter : function() {
+			// 同意
+			$(".agree").click(function() {
+				
+			});
+		},
+		
 		// 我看过的
 		historyList : function(){
 			

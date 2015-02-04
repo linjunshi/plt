@@ -41,6 +41,37 @@ public class UserRelationDao extends BaseDao {
 	}
 	
 	/**
+	 * 根据两用户查询关系
+	 * @param userId1
+	 * @param userId2
+	 * @return
+	 */
+	public UserRelationItem selectByTwoUser(String userId1, String userId2) {
+		try{
+			UserRelationMapper mapper = this.getMapper(UserRelationMapper.class);
+			return mapper.selectByTwoUser(userId1, userId2);
+		}catch(Exception e) {
+			Log.printStackTrace(e);
+		}
+		return null;		
+	}
+	
+	/**
+	 * 新增关系
+	 * @param item
+	 * @return
+	 */
+	public int insert(UserRelationItem item) {
+		try{
+			UserRelationMapper mapper = this.getMapper(UserRelationMapper.class);
+			return mapper.insert(item);
+		}catch(Exception e) {
+			Log.printStackTrace(e);
+		}
+		return 0;	
+	}
+	
+	/**
 	 * 用户搜索
 	 * @param query
 	 * @return

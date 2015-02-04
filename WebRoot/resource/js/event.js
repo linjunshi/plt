@@ -25,6 +25,23 @@ jQuery(function($) {
 		});
 		_ajax(_opt);
 	};
+	
+    // 弹出进行中
+    $.showFloatExcuting = function() {
+		var w_width = $(window).width();
+		var w_height = $(window).height();
+		var html = '<img id="floatExcuting" src="/resource/photo/excuting.gif" class="boxy-content" style="position:fixed; left:' + w_width/2 + 'px; top:' + w_height/2 + 'px;">';
+		html += '<div id="floatExcuting_layer" class="boxy-modal-blackout" style="z-index: 1996; opacity: 0.2; width: ' + w_width + 'px; height: ' + w_height + 'px;"></div>';
+		if($("#floatExcuting").size() < 1) {
+			$('body').append(html);
+		}
+    };
+	
+	// 取消进行中
+	$.hideFloatExcuting = function() {
+		$("#floatExcuting").remove();
+		$("#floatExcuting_layer").remove();
+	};
 
 	// 数据校验
 	$.fn.validate = function() {
@@ -192,6 +209,58 @@ jQuery(function($) {
 	        return true;
 	    else
 	        return false;
+	};	
+	
+	// 让form使用ajax提交
+	$.fn.bindFormClick = function(options) {
+		options = $.extend({
+//			url : null,//不能设置默认的URL，否则jquery使用$.extend合并参数的时候会发现options.url存在，则最终结果会是null
+			tip : true,
+			isGoodCall : true,//是否只有返回success才回调afterSubmit
+			beforeSubmit : function(){},
+			afterSubmit : function(){}
+		}, options||{});
+		
+		$(this).unbind("click").click(function(){
+	    	var form = $(this).closest("form");
+	    	if(form.length > 0){
+	    		
+    			var rs = options.beforeSubmit(form, options);
+    			if(rs == false) {
+    				return;
+    			}
+	    		
+    			var isComplete = false;
+	    		form.ajaxSubmit({
+	    			url : options.url,//如果url参数为空，jquery form会调用form的action地址作为url
+		    		beforeSubmit : function(){
+		    			var rt = form.validate();
+		    			if(rt != false) {
+			        		setTimeout(function() {
+			        			if(!isComplete) {
+			        				$.showFloatExcuting();
+			        			}
+			        		}, 360);//360ms没有完成请求则显示loading
+		    			}
+		    			return rt;
+		    		},
+		    		success : function(result) {
+		    			isComplete = true;
+		    			$.hideFloatExcuting();
+		    			if(options.tip) {
+		    				Boxy.alert(Message.dynamic(result));
+		    			}
+		    			if(result == "success") {
+		    				$(".close").click();
+		    			}
+		    			if((options.isGoodCall && result == "success") || !options.isGoodCall){
+		    				options.afterSubmit(form, result);
+		    			}
+		    		}
+		    	});
+	    	}
+	    	return false;
+		});
 	};	
 	
 	// 同步显示和隐藏
