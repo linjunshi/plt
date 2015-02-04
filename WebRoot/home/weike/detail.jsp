@@ -115,6 +115,26 @@ Globals.page = "Index_weikeDetail";
 		        </div>
 		      </div>
 		      <div class="ping_foot_right">
+		      	<div class="ping_f_bot">
+			      	<c:if test="${hasBuy}">
+	            		<a href="javascript:void(0);" class="hasBuy" title="亲，您已经购买，可直接观看">已经购买</a>
+	            		<a href="javascript:void(0);" class="coll_course" title="点击此按钮，收藏改课程。">收藏</a>
+	            	</c:if>
+	            	<c:if test="${!hasBuy}">
+			            <form action="https://pay3.chinabank.com.cn/PayGate?encoding=UTF-8" method="post" target="_blank" name="E_FORM" class="buy_form">
+				            <input type="hidden" name="v_mid" value="" />
+				            <input type="hidden" name="v_oid" value="" />
+				            <input type="hidden" name="v_amount" value="" />
+				            <input type="hidden" name="v_moneytype" value="" />
+							<input type="hidden" name="v_url" value="" />
+							<input type="hidden" name="v_md5info" value="" />
+							<input type="hidden" name="v_rcvname" value="" />
+							<input type="hidden" name="remark1" value="" />
+							<a href="javascript:void(0);" class="buy" title="点击此按钮，到下一步网银支付后，就可以开始学习了。">立刻购买</a>
+							<a href="javascript:void(0);" class="coll_course" title="点击此按钮，收藏改课程。">收藏</a>
+						</form>		            
+		            </c:if>
+		      	</div>
 		        <c:forEach items="${weikeUnitList}" var="unitWeike" varStatus="wt">
 					<a href="${ctx}/weike/${unitWeike.id}.html" target="_blank"><img src="${ctx}${unitWeike.thumbnail}" width="230" title="${unitWeike.courseName}"></a>
 			    </c:forEach>

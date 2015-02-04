@@ -69,15 +69,15 @@ box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);}
 .form_item select{ *margin-top:5px;*vertical-align:top;}
 .form_action{clear:both;}
 .form_action .btn_regist{border-radius: 3px; width:100px; height:30px; line-height:30px; background:#f90; display:block; color:#fff; text-align:center; font-size:16px; border:0;margin-left: 100px;}
-.form_action .btn_regist:HOVER{ background:#8f6239;}
+.form_action .btn_regist:HOVER{ background:#188EEE;}
 .login_forgot { margin-left:5px; font-size:12px; color:#dac189; text-decoration: underline;}
 .login_forgot:hover{ color:#f90;text-decoration: underline;}
-.form_action input{border-radius: 3px;  width:80px; height:30px; line-height:30px; float:left; background:#f90; display:block; color:#fff; text-align:center; font-size:16px; letter-spacing:4px;border:0;margin-right:10px;margin-bottom: 20px;}
-.form_action input:HOVER{ background:#8f6239;cursor: pointer;}
+.form_action input{border-radius: 3px; width:80px; height:30px; line-height:30px; float:left; background:#f90; display:block; color:#fff; text-align:center; font-size:16px; letter-spacing:4px;border:0;margin-right:10px;margin-bottom: 20px;}
+.form_action input:HOVER{ background:#188EEE;cursor: pointer;}
 .form_action .btn_approve{width:90px;}
 .form_action .btn_disapprove{width:110px;}
 .form_action a{border-radius: 3px; width:80px; height:30px; line-height:30px; background:#dac189; display: inline-block; color:#fff; text-align:center; font-size:16px; letter-spacing:4px; margin-right:10px;}
-.form_action a:hover{ background:#8f6239;}
+.form_action a:hover{ background:#188EEE;}
 .form_des{color: #999;font-size:12px;margin-left:5px;}
 p.form_des{	margin:0;}
 .code_pic{display:inline-block;*display:inline;*zoom:1;}
@@ -287,6 +287,10 @@ span.form_error, span.form_success,span.form_tips{border-width:1px;display:inlin
 .ping_foot_right{ float:right; width:230px;margin:0 26px 20px 0px;}
 .ping_foot_right img{ margin-top: 10px;}
 .ping_foot_right img:hover{ box-shadow: 0px 0px 8px #09F;}
+.ping_f_bot { width:230px; margin:5px 0 15px 0;}
+.ping_f_bot a{float: left; padding:5px 20px; background:#f90; color:#fff; margin-right: 15px; letter-spacing:3px;font-weight: bold;font-size: 16px;border-radius: 3px;}
+.ping_f_bot a:hover{ background:#188EEE;}
+.ping_f_bot .hasBuy,.ping_f_bot .hasBuy:hover{padding:5px 20px; background:#c2c0c0; color:#fff;}
 
 /*--------------------个人中心-----------------*/
 

@@ -24,11 +24,13 @@ import com.santrong.plt.webpage.BaseAction;
 import com.santrong.plt.webpage.course.dao.CommentDao;
 import com.santrong.plt.webpage.course.dao.CourseAttendHistoryDao;
 import com.santrong.plt.webpage.course.dao.CourseDao;
+import com.santrong.plt.webpage.course.dao.OrderDao;
 import com.santrong.plt.webpage.course.dao.WeikeDao;
 import com.santrong.plt.webpage.course.entry.CommentItem;
 import com.santrong.plt.webpage.course.entry.CommentUserView;
 import com.santrong.plt.webpage.course.entry.CourseAttendHistoryItem;
 import com.santrong.plt.webpage.course.entry.CourseItem;
+import com.santrong.plt.webpage.course.entry.OrderItem;
 import com.santrong.plt.webpage.course.entry.WeikeDetailView;
 import com.santrong.plt.webpage.course.entry.WeikeQuery;
 import com.santrong.plt.webpage.home.dao.LessonUnitDao;
@@ -145,23 +147,6 @@ public class WeikeAction extends BaseAction {
 			return "404";
 		}
 		
-		// 添加微课浏览历史记录
-		CourseAttendHistoryDao cahDao = new CourseAttendHistoryDao();
-		if (cahDao.exists(currentUser().getId(), id)) {
-			CourseAttendHistoryItem cahItem = cahDao.select(currentUser().getId(), id);
-			cahItem.setUts(new Date());
-			cahDao.update(cahItem);
-		} else {
-			CourseAttendHistoryItem cahItem = new CourseAttendHistoryItem();
-			cahItem.setId(MyUtils.getGUID());
-			cahItem.setUserId(currentUser().getId());
-			cahItem.setCourseId(id);
-			cahItem.setAttendType(CourseAttendHistoryItem.Type_View);
-			cahItem.setCts(new Date());
-			cahItem.setUts(new Date());
-			cahDao.insert(cahItem);
-		}
-		
 		if (MyUtils.isNotNull(weike.getUnitId())) {
 			// 所属年级、学科、单元
 			LessonUnitDao luDao = new LessonUnitDao();
@@ -186,9 +171,40 @@ public class WeikeAction extends BaseAction {
 		List<CommentUserView> commentList = commentDao.selectByCourseId(id);
 		weike.setCommentList(commentList);
 		
+		UserItem user = this.currentUser();
+		if (user != null) {
+			// 添加微课浏览历史记录
+			CourseAttendHistoryDao cahDao = new CourseAttendHistoryDao();
+			if (cahDao.exists(user.getId(), id)) {
+				CourseAttendHistoryItem cahItem = cahDao.select(user.getId(), id);
+				cahItem.setUts(new Date());
+				cahDao.update(cahItem);
+			} else {
+				CourseAttendHistoryItem cahItem = new CourseAttendHistoryItem();
+				cahItem.setId(MyUtils.getGUID());
+				cahItem.setUserId(user.getId());
+				cahItem.setCourseId(id);
+				cahItem.setAttendType(CourseAttendHistoryItem.Type_View);
+				cahItem.setCts(new Date());
+				cahItem.setUts(new Date());
+				cahDao.insert(cahItem);
+			}
+		}
+		
+		// 是否已购买
+		boolean hasBuy = false;
+		if(user != null) {
+			OrderDao orderDao = new OrderDao();
+			OrderItem order = orderDao.selectByCourseIdAndUserId(weike.getId(), user.getId());
+			if(order != null && order.getStatus() == OrderItem.Status_Pay) {
+				hasBuy = true;
+			}
+		}
+				
 		request.setAttribute("type", type);
 		request.setAttribute("weike", weike);
 		request.setAttribute("isMobile", ClientUtils.isMobile(request));
+		request.setAttribute("hasBuy", hasBuy);
 		
 		return "weike/detail";
 	}
