@@ -41,6 +41,21 @@ public class UserRelationDao extends BaseDao {
 	}
 	
 	/**
+	 * 查询用户的好友列表，TODO 分页
+	 * @param userId
+	 * @return
+	 */
+	public List<UserItem> selectFriendList(String userId) {
+		try{
+			UserRelationMapper mapper = this.getMapper(UserRelationMapper.class);
+			return mapper.selectFriendList(userId);
+		}catch(Exception e) {
+			Log.printStackTrace(e);
+		}
+		return null;		
+	}
+	
+	/**
 	 * 根据两用户查询关系
 	 * @param userId1
 	 * @param userId2

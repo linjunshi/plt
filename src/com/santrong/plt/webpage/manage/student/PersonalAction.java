@@ -14,6 +14,7 @@ import com.santrong.plt.webpage.friend.dao.UserRelationDao;
 import com.santrong.plt.webpage.friend.entry.FriendMsgItem;
 import com.santrong.plt.webpage.friend.entry.UserRelationItem;
 import com.santrong.plt.webpage.manage.StudentBaseAction;
+import com.santrong.plt.webpage.teacher.entry.UserItem;
 
 /**
  * @author weinianjie
@@ -65,7 +66,7 @@ public class PersonalAction extends StudentBaseAction {
 	 * @param type
 	 * @return
 	 */
-	@RequestMapping("require")
+	@RequestMapping("/require")
 	public String require(String userId, Integer type) {
 		if(MyUtils.isNull(userId) || type == null) {
 			return "500";
@@ -83,6 +84,16 @@ public class PersonalAction extends StudentBaseAction {
 		}
 		
 		return this.redirect("/personal/center");
+	}
+	
+	@RequestMapping("/friend")
+	public String friend() {
+		
+		UserRelationDao dao = new UserRelationDao();
+		List<UserItem> userList = dao.selectFriendList(this.currentUser().getId());
+		
+		this.getRequest().setAttribute("userList", userList);
+		return "manage/student/personal/friend";
 	}
 	
 }

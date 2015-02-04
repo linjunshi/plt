@@ -8,6 +8,7 @@ import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
 import com.santrong.plt.webpage.friend.entry.UserRelationItem;
+import com.santrong.plt.webpage.teacher.entry.UserItem;
 
 /**
  * @author weinianjie
@@ -21,6 +22,11 @@ public interface UserRelationMapper {
 			+ "left join user c on a.userId2=c.id "
 			+ "where (a.userId1=#{userId} and result != 0) or (a.userId2=#{userId} and result = 0) order by uts desc limit 6")//作为主动方，申请的信息忽略，作为被动方，非申请的信息忽略
 	List<UserRelationItem> selectMsgList(String userId);
+	
+	@Select("select b.* from user_relation a "
+			+ "right join user b on a.userId1=b.id or a.userId2=b.id "
+			+ "where b.id=#{userId} and a.result=1")
+	List<UserItem> selectFriendList(String userId);
 	
 	@Select("select * from user_relation where (userId1=#{userId1} and userId2=#{userId2}) or (userId1=#{userId2} and userId2=#{userId1})")
 	UserRelationItem selectByTwoUser(@Param("userId1")String userId1, @Param("userId2")String userId2);

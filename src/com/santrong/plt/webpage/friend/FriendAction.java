@@ -49,7 +49,7 @@ public class FriendAction extends BaseAction {
 	}
 	
 	// 请求好友Get
-	@RequestMapping(value = "require", method = RequestMethod.GET)
+	@RequestMapping(value = "/require", method = RequestMethod.GET)
 	public String requireGet(String userId) {
 		if(this.currentUser() == null) {
 			return this.redirectLogin();// 同步返回登录页的方式
@@ -61,7 +61,7 @@ public class FriendAction extends BaseAction {
 	
 	
 	// 请求好友Post
-	@RequestMapping(value = "require", method = RequestMethod.POST)
+	@RequestMapping(value = "/require", method = RequestMethod.POST)
 	@ResponseBody
 	public String requirePost(String userId, String remark) {
 		if(this.currentUser() == null) {
