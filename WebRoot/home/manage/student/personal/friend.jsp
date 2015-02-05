@@ -40,6 +40,7 @@ Globals.page = "Manage_historyList";
 								<li <c:if test="${st.index %4 == 0}">class="maigin_right"</c:if> >
 									<a href="javascript:void(0)" target="_blank"><img src="${ctx}${user.headPhoto}" title="${user.showName}" width="220" height="140"></a>
 									<h2>${user.showName}</h2>
+									<p><a href="${ctx}/personal/cancelFriend?userId=${user.id}">取消好友</a></p>
 								</li>
 							</c:forEach>
 

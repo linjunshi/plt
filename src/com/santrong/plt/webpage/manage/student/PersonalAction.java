@@ -86,6 +86,31 @@ public class PersonalAction extends StudentBaseAction {
 		return this.redirect("/personal/center");
 	}
 	
+	/**
+	 * 解除好友关系
+	 * @param userId
+	 * @return
+	 */
+	@RequestMapping("/cancelFriend")
+	public String cancelFriend(String userId) {
+		if(MyUtils.isNull(userId)) {
+			return "500";
+		}
+		
+		UserRelationDao dao = new UserRelationDao();
+		if(dao.delete(this.currentUser().getId(), userId) <= 0) {
+			return "500";
+		}
+		
+		return this.redirect("/personal/friend");
+	}	
+	
+	
+	
+	/**
+	 * 我的好友
+	 * @return
+	 */
 	@RequestMapping("/friend")
 	public String friend() {
 		

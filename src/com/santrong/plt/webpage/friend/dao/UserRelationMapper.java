@@ -2,6 +2,7 @@ package com.santrong.plt.webpage.friend.dao;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
@@ -36,4 +37,7 @@ public interface UserRelationMapper {
 	
 	@Update("update user_relation set applyMsg=#{applyMsg},returnMsg=#{returnMsg},result=#{result},uts=#{uts} where userId1=#{userId1} and userId2=#{userId2}")
 	int update(UserRelationItem item);
+	
+	@Delete("delete from user_relation where (userId1=#{userId1} and userId2=#{userId2}) or (userId1=#{userId2} and userId2=#{userId1})")
+	int delete(@Param("userId1")String userId1, @Param("userId2")String userId2);
 }
