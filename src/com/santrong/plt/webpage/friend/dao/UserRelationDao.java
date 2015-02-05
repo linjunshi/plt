@@ -72,6 +72,22 @@ public class UserRelationDao extends BaseDao {
 	}
 	
 	/**
+	 * 解除用户关系
+	 * @param userId1
+	 * @param userId2
+	 * @return
+	 */
+	public int delete(String userId1, String userId2) {
+		try{
+			UserRelationMapper mapper = this.getMapper(UserRelationMapper.class);
+			return mapper.delete(userId1, userId2);
+		}catch(Exception e) {
+			Log.printStackTrace(e);
+		}
+		return 0;		
+	}	
+	
+	/**
 	 * 新增关系
 	 * @param item
 	 * @return
