@@ -356,7 +356,7 @@ span.form_error, span.form_success,span.form_tips{border-width:1px;display:inlin
 .sh_ke .sh_sch_ke {border-top:1px solid #ccc; padding:20px 0 0 10px; display: inline-block;width: 760px;}
 .sh_ke .sh_sch_ke p{ text-align:left; margin-top:3px; text-indent:5px; line-height:150%;}
 .sh_sch_but { position:absolute; right:5px; bottom:5px;}
-.sh_sch_but .col_sh{ padding:2px 10px; background:#f90; color:#fff;}
+.sh_sch_but .col_sh{ padding:2px 10px; background:#f90; color:#fff;border: 0px;cursor:pointer;}
 .sh_sch_but .col_sh:hover{padding:2px 10px; background:#188eee; color:#fff;}
 .sh_sch_but .col_st{ padding:2px 10px; background:#ccc; color:#fff;}
 

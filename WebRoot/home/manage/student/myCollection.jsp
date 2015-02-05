@@ -1,9 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="../../inc/common.jsp"%>
-<c:set var="title" value="三简在线教育平台" ></c:set>
-<c:set var="keywords" value="456" ></c:set>
-<c:set var="description" value="789" ></c:set>
-<%@ include file="../../inc/header.jsp"%>
+<c:set var="title" value="课云" ></c:set>
+<c:set var="keywords" value="课云教育" ></c:set>
+<c:set var="description" value="在线教育 私人定制 知识图谱" ></c:set>
+<%@ include file="../../inc/header_new.jsp"%>
 <script type="text/javascript">
 var Globals = {};
 Globals.ctx = "${ctx}";
@@ -12,50 +12,56 @@ Globals.page = "Manage_collection";
 </script>
 </head>
 <body>
-	<%@ include file="../../inc/top_bg.jsp"%>
-	<div id="container_box">
-		<div id="container_content">
-			<div class="sectionMain clr">
-				<%@ include file="../../inc/leftmenu_student.jsp"%>
-				<div class="sh_info_r">
-					<div class="sh_title">
+<div class="header">
+	<%@ include file="../../inc/top_new.jsp"%>
+		<div class="content clearfix">
+			<%@ include file="../../inc/leftmenu_student2.jsp"%>
+			<div class="qu_right">
+				<div class="qu_right_it">
+					<h2>王小</h2>
+					<p>你是我的小苹果</p>
+					<p>
+						财富：012<a href="#">充值</a><span>积分：2365</span>
+					</p>
+					<p>
+						<a href="#">好友<b>12</b></a>｜<a href="#">关注<b>12</b></a>|<a
+							href="#">粉丝<b>12</b></a>
+					</p>
+					<p class="qu_but">
+						<a href="#">按钮</a>
+					</p>
+				</div>
+				<div class="qu_ri_school">
+					<div class="sh_ke clearfix">
 						<h2>我的收藏</h2>
-					</div>
-					<div class="sh_collection">
-						<ul>
-						    <c:forEach items="${courseList}"  var="course" varStatus="ct">
-								<li>
-									<div>
-										<a href="${ctx}/course/${course.id}.html"><img src="${ctx}${course.thumbnail}" width="100" height="100"></a>
-									</div>
-									<div class="sh_coll_con">
-										<h2>
-											<a href="${ctx}/course/${course.id}.html">${course.courseName}</a>
-										</h2>
-										<p>主讲老师：${course.teacher}</p>
-										<p>课程结束时间：<fmt:formatDate value="${course.endTime}" type="date" dateStyle="default"/></p>
-										<p>评论人数：${course.commentCount}</p>
-									</div>
-									<div class="sh_coll_m">
-										<p><b>${course.price}</b>元</p>
-									</div>
-									<div class="sh_coll_but">
-										<form action="${ctx}/collection/cancelCollect" method="post" id="cancelCollect" >
-											<!-- <a href="javascript:void(0)" id="cancelCollect">取消收藏</a> -->
-											<input type="hidden" name="courseId" value="${course.id}"/>
-											<input type="submit" value="取消收藏" />
-										</form>
-									</div>
+						<!-- <a href="#" class="catalog_box_more">换一换</a> -->
+						<ul class="sh_sch_ke ">
+						
+							<c:forEach items="${weikeList}" var="weike" varStatus="st">
+								<li <c:if test="${st.index %4 == 0}">class="maigin_right"</c:if> >
+									<a href="${ctx}/weike/${weike.id}.html" target="_blank"><img src="${ctx}${weike.thumbnail}" title="${weike.courseName}" width="220" height="140"></a>
+									<h2>${weike.courseName}</h2>
+									<p>
+										<span class="sch_unm"><b>${weike.price}</b>元</span>
+									</p>
+									<form action="${ctx}/collection/cancelCollect" method="post" id="cancelCollect" >
+										<p class="sh_sch_but">
+											<input type="hidden" name="weikeId" value="${weike.id}"/>
+											<input type="hidden" name="page" value="${query.pageNum - 1}"/>
+											<input type="submit" value="取消收藏" class="col_sh"/>
+										</p>
+									</form>
 								</li>
 							</c:forEach>
+
 						</ul>
-			            <c:set var="basicUrl" value="${ctx}/collection" />
-		            	<%@ include file="../../inc/pagination.jsp"%>						
+						<c:set var="basicUrl" value="${ctx}/collection" />
+		       			<%@ include file="../../inc/pagination_new.jsp"%>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-	<%@ include file="../../inc/friendlylink.jsp"%>
+<div class="footer"></div>
 </body>
 </html>
