@@ -50,8 +50,8 @@ public class CourseHistoryMAction extends StudentBaseAction {
 			WeikeDao weikeDao = new WeikeDao();
 			WeikeQuery query = new WeikeQuery();
 			query.setUserId(this.currentUser().getId());
-			query.setPageSize(1);
-			query.setShowSize(3);
+			query.setPageSize(9);
+			query.setShowSize(4);
 			query.setPageNum(pageNum);
 			query.setStatus(CourseItem.Status_Publish);//已经发布的
 			query.setCount(weikeDao.selectCountHistoryByQuery(query));
