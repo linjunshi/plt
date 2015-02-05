@@ -228,11 +228,10 @@ span.form_error, span.form_success,span.form_tips{border-width:1px;display:inlin
 .result_con .yuan,.result_price .yuan{ color:#F00; font-size:18px; }
 .result_con .yuan span,.result_price .yuan span { color:#666; font-size:14px;padding-left:5px;}
 
-
 /*--------------------微课详细页面-----------------*/
 .pinglun{ }
-.location{ margin-left:20px; margin-bottom:4px}
-.location a{ padding:2px 4px; font-size:16px; color:#666;}
+.location{ margin-left:20px; margin-bottom:4px; margin-top: 15px;color:#442100;}
+.location a{ padding:2px 4px; font-size:16px; color:#442100;}
 .location a:hover { color:#f90;}
 .ping_title{height:60px;line-height:60px; text-align:center;  font-size:35px; background:url(../images/title_bg.png) no-repeat 15px center; color:#442100; letter-spacing:2px; display:block;}
 .ping_left{ float:left; width:700px; display:block; height:450px; background: url(../images/live_bg.png) no-repeat left top; margin:0px 0 10px 20px;}
@@ -422,7 +421,7 @@ span.form_error, span.form_success,span.form_tips{border-width:1px;display:inlin
 
 /*------------------分页----------------*/
 .pagination {text-align:center; width:100%; height:30px; line-height:30px; margin: 5px 0;}
-.pagination a { width:16px; height:16px; margin-right:10px; padding:2px 10px; background:#D0A66D; color:#fff;}
+.pagination a { width:16px; height:16px; margin-right:2px; padding:2px 10px; background:#D0A66D; color:#fff;}
 .pagination a:hover { background:#A6703D; }
 .pagination .page_current { background:#A6703D;}
 .pagination .page_current:hover { background:#A6703D; }
