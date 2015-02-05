@@ -118,6 +118,7 @@ public class PersonalAction extends StudentBaseAction {
 		List<UserItem> userList = dao.selectFriendList(this.currentUser().getId());
 		
 		this.getRequest().setAttribute("userList", userList);
+		this.getRequest().setAttribute("flag", "friend");
 		return "manage/student/personal/friend";
 	}
 	
