@@ -46,7 +46,7 @@ Globals.page = "Manage_courseList";
 			                    	
 			                    	<c:forEach items="${courseList}" var="course" varStatus="ct">
 				                        <tr>
-				                            <td>${ct.index + 1}</td>
+				                            <td>${ct.index + 1 + (query.pageNum-1)*query.pageSize}</td>
 				                            <td class="sh_h_im">
 				                            	<a href="${ctx}/course/${course.id}.html" target="_blank"><img src="${ctx}${course.thumbnail}" width="90" height="90"></a>
 				                            	<a href="${ctx}/course/${course.id}.html" target="_blank">${course.courseName}</a>

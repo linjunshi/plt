@@ -45,7 +45,7 @@ Globals.page = "Manage_weikeList";
 			                    	
 			                    	<c:forEach items="${courseList}" var="course" varStatus="ct">
 				                        <tr>
-				                            <td>${ct.index + 1}</td>
+				                            <td>${ct.index + 1 + (query.pageNum-1)*query.pageSize}</td>
 				                            <td class="sh_h_im">
 				                            	<a href="${ctx}/course/${course.id}.html" target="_blank"><img src="${ctx}${course.thumbnail}" width="90" height="90"></a>
 				                            	<a href="${ctx}/course/${course.id}.html" target="_blank">${course.courseName}</a>
@@ -65,7 +65,7 @@ Globals.page = "Manage_weikeList";
 				                            	</c:if>
 					                        </td>
 				                            <td class="btn_question_operation">
-					                            	<a href="${ctx}/manage/weike/modify?courseId=${course.id}">修改</a>
+					                            <a href="${ctx}/manage/weike/modify?courseId=${course.id}&page=${query.pageNum}">修改</a>
 				                            </td>
 				                        </tr>
 			                    	</c:forEach>

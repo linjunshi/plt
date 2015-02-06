@@ -40,6 +40,7 @@ Globals.page = "Manage_weikeAdd";
 							<c:if test="${fn == 'modify'}">action="${ctx}/manage/weike/modify"</c:if> 
 							class="form_info common_form" id="course_form">
 								<input type="hidden" name="id" value="${course.id}"/>
+								<input id="page" name="page" type="hidden" value="${pageNum}"/>
 								<input id="levelId" name="levelId" type="hidden" value="${course.gradeId}">
 								<input id="oldSubjectId" name="oldSubjectId" type="hidden" value="${course.subjectId}">
 								<input id="oldUnitId" name="oldUnitId" type="hidden" value="${course.unitId}">
@@ -134,7 +135,7 @@ Globals.page = "Manage_weikeAdd";
 									</div>
 									<div class="form_action">
 										<input class="btn_question" type="submit" value="保存" /> 
-										<a class="btn_question" href="${ctx}/manage/weike">取消</a>
+										<a class="btn_question" href="${ctx}/manage/weike?page=${pageNum}">取消</a>
 									</div>
 							</form>
 						</div>

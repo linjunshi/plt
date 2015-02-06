@@ -72,6 +72,10 @@ public class WeikeMAction extends TeacherBaseAction {
 	@RequestMapping(value = "/modify", method = RequestMethod.GET)
 	public String modifyCourse(String courseId){
 		try {
+			int pageNum = this.getIntParameter("page");
+			if(pageNum == 0) {
+				pageNum = 1;
+			}
 			CourseDao courseDao = new CourseDao();
 			CourseItem course = courseDao.selectById(courseId);
 			// 判断当前用户是否是该课程的所有者
@@ -93,6 +97,7 @@ public class WeikeMAction extends TeacherBaseAction {
 			request.setAttribute("knowledgeIds", knowledgeIds);
 			request.setAttribute("course", course);
 			request.setAttribute("fn", "modify");
+			request.setAttribute("pageNum", pageNum);
 		} catch (Exception e) {
 			Log.printStackTrace(e);
 		}
@@ -110,6 +115,11 @@ public class WeikeMAction extends TeacherBaseAction {
 		try {
 			HttpServletRequest request = this.getRequest();
 			String knowledgeIds = request.getParameter("knowledgeIds");//原来绑定的知识点IDs
+			int pageNum = this.getIntParameter("page");
+			if(pageNum == 0) {
+				pageNum = 1;
+			}
+			request.setAttribute("pageNum", pageNum);
 			
 			CourseDao courseDao = new CourseDao();
 			CourseItem courseItem = courseDao.selectById(courseForm.getId());
