@@ -35,6 +35,7 @@ Globals.page = "Manage_myTrainMAdd";
 							</c:if>
 							<form method="post" action="${ctx}/manage/question/addOrModifyQuestion" class="form_info common_form" id="question_form">
 								<input id="id" name="id" type="hidden" value="${tqItem.id}"/>
+								<input id="page" name="page" type="hidden" value="${pageNum}"/>
 								<input type="hidden" name="operation" id="operation" value="${operation}"/>
 								<input id="levelId" name="levelId" type="hidden" value="${tqItem.gradeId}">
 								<input id="oldSubjectId" name="oldSubjectId" type="hidden" value="${tqItem.subjectId}">
@@ -163,7 +164,7 @@ Globals.page = "Manage_myTrainMAdd";
 									<c:if test="${operation != 'auditing'}">
 										<input class="btn_question" type="submit" value="提交" />
 									</c:if>
-									<a class="btn_question" href="${ctx}/manage/question/list">取消</a>
+									<a class="btn_question" href="${ctx}/manage/question/list?page=${pageNum}">取消</a>
 								</div>
 							</form>
 						</div>

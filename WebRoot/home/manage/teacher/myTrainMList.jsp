@@ -60,6 +60,7 @@ Globals.page = "Manage_myTrainMList";
 												<c:if test="${question.status==0}">
 													<div class="btn_question_status">
 														<form action="${ctx}/manage/question/auditing" method="get">
+															<input type="hidden" value="${query.pageNum}" name="page" />
 															<input type="hidden" value="${question.id}" name="questionId" />
 															<input type="submit" value="审核" />
 														</form>
@@ -67,12 +68,14 @@ Globals.page = "Manage_myTrainMList";
 												</c:if>
 												<div class="btn_question_edit">
 													<form action="${ctx}/manage/question/addOrModifyQuestion" method="get">
+														<input type="hidden" value="${query.pageNum}" name="page" />
 														<input type="hidden" value="${question.id}" name="questionId" />
 														<input type="submit" value="修改" />
 													</form>
 												</div>
 												<div class="btn_question_delete">
 													<form action="${ctx}/manage/question/delete" method="post">
+														<input type="hidden" value="${query.pageNum}" name="page" />
 														<input type="hidden" value="${question.id}" name="questionId" />
 														<input type="submit" value="删除" />
 													</form>
