@@ -18,7 +18,7 @@ Globals.page = "Manage_historyList";
 			<%@ include file="../../../inc/leftmenu_student2.jsp"%>
 			<div class="qu_right">
 				<div class="qu_right_it">
-					<h2>王小</h2>
+					<h2>${sessionScope.loginUser.showName}</h2>
 					<p>你是我的小苹果</p>
 					<p>
 						财富：012<a href="#">充值</a><span>积分：2365</span>
@@ -32,23 +32,22 @@ Globals.page = "Manage_historyList";
 					</p>
 				</div>
 				<div class="qu_ri_school">
-					<div class="sh_ke clearfix">
-						<h2>我的好友</h2>
-						<ul class="sh_sch_ke ">
-						
-							<c:forEach items="${userList}" var="user" varStatus="st">
-								<li <c:if test="${st.index %4 == 0}">class="maigin_right"</c:if> >
-									<a href="javascript:void(0)" target="_blank"><img src="${ctx}${user.headPhoto}" title="${user.showName}" width="220" height="140"></a>
-									<h2>${user.showName}</h2>
-									<p><a href="${ctx}/personal/cancelFriend?userId=${user.id}">取消好友</a></p>
-								</li>
-							</c:forEach>
-
-						</ul>
-						<c:set var="basicUrl" value="${ctx}/personal/friend" />
-		       			<%@ include file="../../../inc/pagination_new.jsp"%>
-					</div>
-				</div>
+			        <div class="sh_ke">
+			          <h2>我的好友</h2>
+			          <!-- <a href="#" class="catalog_box_more">增加</a> -->
+			          <ul class="sh_sch_ky">
+			          	<c:forEach items="${userList}" var="user" varStatus="st">
+							<li <c:if test="${st.index %4 == 0}">class="maigin_right"</c:if> >
+								<a href="javascript:void(0)" target="_blank"><img src="${ctx}${user.headPhoto}" title="${user.showName}" width="160" height="110"></a>
+								<h2>${user.showName}</h2>
+								<p><a href="${ctx}/personal/cancelFriend?userId=${user.id}">取消好友</a></p>
+							</li>
+						</c:forEach>
+			          </ul>
+					  <c:set var="basicUrl" value="${ctx}/personal/friend" />
+		       		  <%@ include file="../../../inc/pagination_new.jsp"%>
+			        </div>
+			      </div>
 			</div>
 		</div>
 	</div>

@@ -18,7 +18,7 @@ Globals.page = "Manage_storyList";
 			<%@ include file="../../inc/leftmenu_student2.jsp"%>
 			<div class="qu_right">
 				<div class="qu_right_it">
-					<h2>王小</h2>
+					<h2>${sessionScope.loginUser.showName}</h2>
 					<p>你是我的小苹果</p>
 					<p>
 						财富：012<a href="#">充值</a><span>积分：2365</span>
