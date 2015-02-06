@@ -1338,7 +1338,7 @@ ManageClass.prototype = {
 				// 向后台服务发送请求，获取初始化树的节点JSON对象
 				function ajaxSyncGetNodes() {
 					$.ajax({
-						url : Globals.ctx + "/manage/knowledge/getTreeNodes", 
+						url : Globals.ctx + "/super/knowledge/getTreeNodes", 
 //						data : {liveId : liveId}, 
 						type: "GET",
 //						dataType: 'text', 
@@ -1372,7 +1372,7 @@ ManageClass.prototype = {
 						}
 					}
 					// 弹出知识点归类的页面 
-					Boxy.load(Globals.ctx + "/manage/knowledge/addKnowledgeTree?gradeId="+ gradeId + "&subjectId=" 
+					Boxy.load(Globals.ctx + "/super/knowledge/addKnowledgeTree?gradeId="+ gradeId + "&subjectId=" 
 							+ subjectId + "&type="+ type + "&unitId="+ unitId + "&code=" + code + "&dataId=" + dataId
 							+ "&addOrEdit=" + addOrEdit ,{title : '知识点归类',
 						afterShow : function(){
@@ -1391,7 +1391,7 @@ ManageClass.prototype = {
 								}
 								if (gradeId != null && gradeId != "" && subjectId != null && subjectId != "" ) {
 									$.ajax({
-										url: Globals.ctx + "/manage/knowledge/submitKnowledgeByAsync",
+										url: Globals.ctx + "/super/knowledge/submitKnowledgeByAsync",
 										data: { dataId:dataId, unitId:unitId, type:type, code:code,
 											gradeId:gradeId, subjectId:subjectId, knowledgeName:knowledgeName, addOrEdit:addOrEdit},
 										type: "post",
@@ -1453,7 +1453,7 @@ ManageClass.prototype = {
 					$.fn.zTree.getZTreeObj("zTree").selectNode(treeNode);
 					if(confirm("确认要删除节点【" + treeNode.name + "】吗？")){
 						$.ajax({
-							url : Globals.ctx + "/manage/knowledge/remove", 
+							url : Globals.ctx + "/super/knowledge/remove", 
 							data : {knowledgeId : treeNode.dataId}, 
 							type: "post",
 							dataType: 'text', 
@@ -1517,7 +1517,7 @@ ManageClass.prototype = {
 				// TODO 异步加载知识点数据
 				function getUrl(treeId, treeNode) {
 					if (treeNode.unitId.length > 0 && treeNode.children.length == 0) {//单元级别,如果第一次加载后，有字节点了就不请求后台服务取数据了
-						return Globals.ctx + "/manage/knowledge/loadingKnowledgeByAsync?unitId=" + treeNode.unitId;
+						return Globals.ctx + "/super/knowledge/loadingKnowledgeByAsync?unitId=" + treeNode.unitId;
 					}
 				}
 				function beforeAsync(treeId, treeNode){

@@ -11,7 +11,7 @@ import com.santrong.plt.webpage.manage.StudentBaseAction;
  * @time 上午10:34:09
  */
 @Controller
-@RequestMapping("/manage/competition")
+@RequestMapping("/competition/list")
 public class CompetitionMAction extends StudentBaseAction {
 
 	/**
@@ -20,6 +20,7 @@ public class CompetitionMAction extends StudentBaseAction {
 	 */
 	@RequestMapping("")
 	public String home() {
+		this.getRequest().setAttribute("flag", "competition");
 		return "manage/student/competition";
 	}
 	

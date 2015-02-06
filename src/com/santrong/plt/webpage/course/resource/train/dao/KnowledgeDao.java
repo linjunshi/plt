@@ -14,10 +14,10 @@ import com.santrong.plt.opt.ThreadUtils;
 import com.santrong.plt.util.BeanUtils;
 import com.santrong.plt.util.MyUtils;
 import com.santrong.plt.webpage.BaseDao;
-import com.santrong.plt.webpage.course.resource.train.entry.KnowledgeGradeView;
-import com.santrong.plt.webpage.course.resource.train.entry.KnowledgeItem;
-import com.santrong.plt.webpage.course.resource.train.entry.KnowledgeQuery;
-import com.santrong.plt.webpage.course.resource.train.entry.KnowledgePointerView;
+import com.santrong.plt.webpage.manage.superman.entry.KnowledgeGradeView;
+import com.santrong.plt.webpage.manage.superman.entry.KnowledgeItem;
+import com.santrong.plt.webpage.manage.superman.entry.KnowledgePointerView;
+import com.santrong.plt.webpage.manage.superman.entry.KnowledgeQuery;
 
 /**
  * @author huangweihua

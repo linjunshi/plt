@@ -8,9 +8,9 @@ import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
-import com.santrong.plt.webpage.course.resource.train.entry.KnowledgeQuestionView;
 import com.santrong.plt.webpage.course.resource.train.entry.TrainQuestionItem;
 import com.santrong.plt.webpage.course.resource.train.entry.TrainToQuestionItem;
+import com.santrong.plt.webpage.manage.superman.entry.KnowledgeQuestionView;
 
 
 /**

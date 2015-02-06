@@ -57,6 +57,10 @@ public class CommonInterceptor implements HandlerInterceptor{
 				response.sendRedirect(request.getContextPath() + "/apply/teacher"); // 跳到老师申请页面		
 				return false;
 				
+				case REQUIRE_SUPERMAN_AUTH :
+				response.sendRedirect(request.getContextPath() + "/deny"); // 跳到没有权限页面				
+				return false;				
+				
 				case REQUIRE_AUTH :
 				response.sendRedirect(request.getContextPath() + "/deny"); // 跳到没有权限页面				
 				return false;

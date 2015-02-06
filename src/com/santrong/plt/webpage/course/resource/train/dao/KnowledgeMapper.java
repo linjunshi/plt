@@ -8,8 +8,8 @@ import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
-import com.santrong.plt.webpage.course.resource.train.entry.KnowledgeItem;
-import com.santrong.plt.webpage.course.resource.train.entry.KnowledgePointerView;
+import com.santrong.plt.webpage.manage.superman.entry.KnowledgeItem;
+import com.santrong.plt.webpage.manage.superman.entry.KnowledgePointerView;
 
 /**
  * @author huangweihua

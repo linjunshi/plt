@@ -14,12 +14,12 @@ import com.santrong.plt.opt.ThreadUtils;
 import com.santrong.plt.util.MyUtils;
 import com.santrong.plt.webpage.course.resource.train.dao.KnowledgeDao;
 import com.santrong.plt.webpage.course.resource.train.dao.TrainQuestionDao;
-import com.santrong.plt.webpage.course.resource.train.entry.KnowledgeItem;
-import com.santrong.plt.webpage.course.resource.train.entry.KnowledgeQuestionView;
 import com.santrong.plt.webpage.course.resource.train.entry.TrainQuestionForm;
 import com.santrong.plt.webpage.course.resource.train.entry.TrainQuestionItem;
 import com.santrong.plt.webpage.course.resource.train.entry.TrainQuestionQuery;
 import com.santrong.plt.webpage.manage.TeacherBaseAction;
+import com.santrong.plt.webpage.manage.superman.entry.KnowledgeItem;
+import com.santrong.plt.webpage.manage.superman.entry.KnowledgeQuestionView;
 import com.santrong.plt.webpage.teacher.entry.UserItem;
 
 @Controller

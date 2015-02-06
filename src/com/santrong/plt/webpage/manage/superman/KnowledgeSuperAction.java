@@ -1,4 +1,4 @@
-package com.santrong.plt.webpage.manage.teacher;
+package com.santrong.plt.webpage.manage.superman;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,17 +18,17 @@ import com.santrong.plt.opt.grade.GradeSubjectEntry;
 import com.santrong.plt.util.MyUtils;
 import com.santrong.plt.util.TreeCode;
 import com.santrong.plt.webpage.course.resource.train.dao.KnowledgeDao;
-import com.santrong.plt.webpage.course.resource.train.entry.KnowledgeGradeView;
-import com.santrong.plt.webpage.course.resource.train.entry.KnowledgeItem;
-import com.santrong.plt.webpage.course.resource.train.entry.KnowledgeQuery;
-import com.santrong.plt.webpage.course.resource.train.entry.KnowledgeTreeForm;
 import com.santrong.plt.webpage.home.dao.LessonUnitDao;
 import com.santrong.plt.webpage.home.entry.LessonUnitItem;
-import com.santrong.plt.webpage.manage.TeacherBaseAction;
+import com.santrong.plt.webpage.manage.SuperManBaseAction;
+import com.santrong.plt.webpage.manage.superman.entry.KnowledgeGradeView;
+import com.santrong.plt.webpage.manage.superman.entry.KnowledgeItem;
+import com.santrong.plt.webpage.manage.superman.entry.KnowledgeQuery;
+import com.santrong.plt.webpage.manage.superman.entry.KnowledgeTreeForm;
 
 @Controller
-@RequestMapping("/manage/knowledge")
-public class KnowledgeMAction  extends TeacherBaseAction{
+@RequestMapping("/super/knowledge")
+public class KnowledgeSuperAction  extends SuperManBaseAction{
 	
 	@RequestMapping("/list")
 	public String knowledgeList() {
@@ -53,7 +53,7 @@ public class KnowledgeMAction  extends TeacherBaseAction{
 		} catch (Exception e) {
 			Log.printStackTrace(e);
 		}
-		return "/manage/teacher/knowledgeMList";
+		return "/manage/superman/knowledgeMList";
 	}
 	
 	@RequestMapping(value="/delete", method=RequestMethod.POST)
@@ -91,7 +91,7 @@ public class KnowledgeMAction  extends TeacherBaseAction{
 		} catch (Exception e) {
 			Log.printStackTrace(e);
 		}
-		return "/manage/teacher/knowledgeMAdd";
+		return "/manage/superman/knowledgeMAdd";
 	}
 	
 	/**
@@ -131,11 +131,11 @@ public class KnowledgeMAction  extends TeacherBaseAction{
 							knowledgeItem.setSubjectId(knowledgeForm.getSubjectId());
 							if (kDao.insert(knowledgeItem)) {
 								addError("添加知识点成功 ！可以继续添加。");
-								return "/manage/teacher/knowledgeMAdd";
+								return "/manage/superman/knowledgeMAdd";
 							}
 						} else {
 							addError("该知识点已经存在 ！");
-							return "/manage/teacher/knowledgeMAdd";
+							return "/manage/superman/knowledgeMAdd";
 						}
 					} else {
 						
@@ -146,7 +146,7 @@ public class KnowledgeMAction  extends TeacherBaseAction{
 							addError("该知识点已经存在 ！");
 							request.setAttribute("knowledgeItem", knowledgeForm);
 							request.setAttribute("operation", "modify");
-							return "/manage/teacher/knowledgeMAdd";
+							return "/manage/superman/knowledgeMAdd";
 						}
 						knowledgeItem.setKnowledgeName(knowledgeForm.getKnowledgeName().trim());
 						knowledgeItem.setGradeId(knowledgeForm.getGradeId());
@@ -163,12 +163,12 @@ public class KnowledgeMAction  extends TeacherBaseAction{
 		} catch (Exception e) {
 			Log.printStackTrace(e);
 		}
-		return "/manage/teacher/knowledgeMAdd";
+		return "/manage/superman/knowledgeMAdd";
 	}
 	
 	@RequestMapping(value="/tree", method=RequestMethod.GET)
 	public String knowledgeTreeShow() {
-		return "/manage/teacher/knowledgeMTree";
+		return "/manage/superman/knowledgeMTree";
 	}
 	
 	/**
@@ -372,7 +372,7 @@ public class KnowledgeMAction  extends TeacherBaseAction{
 		request.setAttribute("type", type);
 		request.setAttribute("dataId", dataId);
 		request.setAttribute("addOrEdit", addOrEdit);
-		return "/manage/teacher/knowledgeMEdit";
+		return "/manage/superman/knowledgeMEdit";
 	}
 	
 	// 异步提交知识点新增修改记录

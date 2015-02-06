@@ -38,9 +38,11 @@ public class UserItem {
 	
 	public final static int Role_Regist = 1; // 1
 	public final static int Role_Student = 2; // 10
-	public final  static int Role_Teacher = 4; // 110
-	public final  static int Role_School = 6; // 1000
-	public final  static int Role_God = 64; // 100000
+	public final  static int Role_Teacher = 4; // 100
+	public final  static int Role_School = 8; // 1000
+	public final  static int Role_SuperMan = 16; // 10000
+	public final  static int Role_XXX = 32; // 100000//待用
+	public final  static int Role_God = 64; // 1000000//主要用于研发人员级别的数据观察和操作
 
 	public String getIdCard() {
 		return idCard;
@@ -184,6 +186,10 @@ public class UserItem {
 	public boolean isSchool() {
 		return (role & Role_School) == Role_School;
 	}
+	
+	public boolean isSuperMan() {
+		return (role & Role_SuperMan) == Role_SuperMan;
+	}	
 	
 	public boolean isGod() {
 		return (role & Role_God) == Role_God;

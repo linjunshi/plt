@@ -1,3 +1,6 @@
+-- 2015-02-06 weinianjie
+update user set role=127 where username='admin';
+
 -- 2015-02-03 weinianjie (2015-02-03 hwcloud)
 drop table if exists user_relation;
 create table user_relation(
