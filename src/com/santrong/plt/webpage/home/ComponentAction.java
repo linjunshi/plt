@@ -17,10 +17,10 @@ import com.santrong.plt.webpage.course.dao.CourseDao;
 import com.santrong.plt.webpage.course.entry.WeikeKnowledgeView;
 import com.santrong.plt.webpage.course.resource.train.dao.KnowledgeDao;
 import com.santrong.plt.webpage.course.resource.train.dao.TrainQuestionDao;
-import com.santrong.plt.webpage.course.resource.train.entry.KnowledgeItem;
-import com.santrong.plt.webpage.course.resource.train.entry.KnowledgeQuestionView;
 import com.santrong.plt.webpage.home.dao.AreaDao;
 import com.santrong.plt.webpage.home.entry.AreaItem;
+import com.santrong.plt.webpage.manage.superman.entry.KnowledgeItem;
+import com.santrong.plt.webpage.manage.superman.entry.KnowledgeQuestionView;
 import com.santrong.plt.webpage.school.dao.SchoolDao;
 import com.santrong.plt.webpage.school.entry.SchoolItem;
 

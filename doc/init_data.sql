@@ -2,7 +2,7 @@
 set names utf8;
 
 -- 用户 --
-insert into user values('10000', 'admin', 'admin', md5('admin'), '', 0, 71, 10000, 10000, 'weinianjie@163.com', '18665955410', null, null, null, null, null, now(), now());
+insert into user values('10000', 'admin', 'admin', md5('admin'), '', 0, 127, 10000, 10000, 'weinianjie@163.com', '18665955410', null, null, null, null, null, now(), now());
 insert into user values('10001', 'teacher1', 'teacher1', md5('admin'), '', 1, 3, 10000, 10000, '304468211@qq.com', '18665955411', null, null, null, null, null, now(), now());
 insert into user values('10002', 'teacher2', 'teacher2', md5('admin'), '', 1, 3, 10000, 10000, '', '18665955412', null, null, null, null, null, now(), now());
 insert into user values('10003', 'teacher3', 'teacher3', md5('admin'), '', 1, 3, 10000, 10000, '', '18665955413', null, null, null, null, null, now(), now());

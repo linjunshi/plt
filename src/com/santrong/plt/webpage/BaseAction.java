@@ -30,6 +30,7 @@ public abstract class BaseAction {
 		REQUIRE_REGIST_AUTH,// 需要注册权限
 		REQUIRE_STUDENT_AUTH,// 需要学生权限
 		REQUIRE_TEACHER_AUTH,// 需要老师权限
+		REQUIRE_SUPERMAN_AUTH,// 需要管理员权限
 		REQUIRE_AUTH// 需要权限
 	}
 	

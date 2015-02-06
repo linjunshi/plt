@@ -1,4 +1,4 @@
-package com.santrong.plt.webpage.course.resource.train.entry;
+package com.santrong.plt.webpage.manage.superman.entry;
 
 import com.santrong.plt.opt.SimpleQuery;
 

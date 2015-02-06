@@ -20,7 +20,7 @@ Globals.page = "Manage_knowledgeMList";
 				<div class="sh_info_r">
 					<div class="sh_title">
 						<h2>知识点列表</h2>
-						<a href="${ctx}/manage/knowledge/addOrModifyKnowledge" class="sh_add">+新增</a>
+						<a href="${ctx}/super/knowledge/addOrModifyKnowledge" class="sh_add">+新增</a>
 					</div>
 					<div class="sh_collection">
 						<table border="1" class="sh_coll_tab">
@@ -52,13 +52,13 @@ Globals.page = "Manage_knowledgeMList";
 										<td>${knowledge.subjectName}</td>
 										<td class="btn_question_operation">
 										<div class="btn_question_update">
-											<form action="${ctx}/manage/knowledge/addOrModifyKnowledge" method="get">
+											<form action="${ctx}/super/knowledge/addOrModifyKnowledge" method="get">
 												<input type="hidden" value="${knowledge.id}" name="knowledgeId" />
 												<input type="submit" value="修改" />
 											</form>
 										</div>
 										<div class="btn_question_delete">
-											<form action="${ctx}/manage/knowledge/delete" method="post">
+											<form action="${ctx}/super/knowledge/delete" method="post">
 												<input type="hidden" value="${knowledge.id}" name="knowledgeId" />
 												<input type="submit" value="删除" />
 											</form>
@@ -71,7 +71,7 @@ Globals.page = "Manage_knowledgeMList";
 								<tfoot>
 									<tr>
 										<td colspan="6">
-											<c:set var="basicUrl" value="${ctx}/manage/knowledge/list" />
+											<c:set var="basicUrl" value="${ctx}/super/knowledge/list" />
 				            				<%@ include file="../../inc/pagination.jsp"%>
 										</td>
 									</tr>

@@ -32,7 +32,7 @@ Globals.page = "Manage_knowledgeMAdd";
 									</c:forEach>
 								</div>
 							</c:if>
-							<form method="post" action="${ctx}/manage/knowledge/addOrModifyKnowledge" class="form_info common_form" id="knowledge_form">
+							<form method="post" action="${ctx}/super/knowledge/addOrModifyKnowledge" class="form_info common_form" id="knowledge_form">
 								<input type="hidden" value="${knowledgeItem.id}" name="id" id="id"/>
 								<input id="levelId" name="levelId" type="hidden" value="${knowledgeItem.gradeId}">
 								<input id="oldSubjectId" name="oldSubjectId" type="hidden" value="${knowledgeItem.subjectId}">
@@ -60,7 +60,7 @@ Globals.page = "Manage_knowledgeMAdd";
 								</div>
 								<div class="form_action">
 									<input class="btn_question" type="submit" value="提交" /> 
-									<a class="btn_question" href="${ctx}/manage/knowledge/list">取消</a>
+									<a class="btn_question" href="${ctx}/super/knowledge/list">取消</a>
 								</div>
 							</form>
 						</div>

@@ -21,8 +21,8 @@ import com.santrong.plt.webpage.course.entry.CourseItem;
 import com.santrong.plt.webpage.course.entry.WeikeKnowledgeView;
 import com.santrong.plt.webpage.course.entry.WeikeQuery;
 import com.santrong.plt.webpage.course.resource.train.dao.KnowledgeDao;
-import com.santrong.plt.webpage.course.resource.train.entry.KnowledgeItem;
 import com.santrong.plt.webpage.manage.TeacherBaseAction;
+import com.santrong.plt.webpage.manage.superman.entry.KnowledgeItem;
 
 /**
  * @author weinianjie
