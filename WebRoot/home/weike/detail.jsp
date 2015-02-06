@@ -135,9 +135,17 @@ Globals.page = "Index_weikeDetail";
 						</form>		            
 		            </c:if>
 		      	</div>
-		        <c:forEach items="${weikeUnitList}" var="unitWeike" varStatus="wt">
-					<a href="${ctx}/weike/${unitWeike.id}.html" target="_blank"><img src="${ctx}${unitWeike.thumbnail}" width="230" title="${unitWeike.courseName}"></a>
-			    </c:forEach>
+		        <div class="ping_fot_tm">
+		          <ul>
+			        <c:forEach items="${weikeUnitList}" var="unitWeike" varStatus="wt">
+			            <li>
+			              <p><a href="${ctx}/weike/${unitWeike.id}.html" target="_blank"><img src="${ctx}${unitWeike.thumbnail}" width="228" height="120" title="${unitWeike.courseName}"></a></p>
+			              <p class="pi_text">${unitWeike.courseName}</p>
+			            </li>
+				    </c:forEach>
+		          </ul>
+		        </div>
+					
 		      </div>
 		    </div>
 		  </div>

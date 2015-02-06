@@ -10,6 +10,8 @@ import com.santrong.plt.opt.SimpleQuery;
 public class CourseCollectQuery extends SimpleQuery {
 	private String userId;
 	private String courseId;
+	private int status;
+	private int courseType;
 
 	public String getCourseId() {
 		return courseId;
@@ -25,5 +27,21 @@ public class CourseCollectQuery extends SimpleQuery {
 
 	public void setUserId(String userId) {
 		this.userId = userId;
+	}
+
+	public int getStatus() {
+		return status;
+	}
+
+	public void setStatus(int status) {
+		this.status = status;
+	}
+
+	public int getCourseType() {
+		return courseType;
+	}
+
+	public void setCourseType(int courseType) {
+		this.courseType = courseType;
 	}
 }

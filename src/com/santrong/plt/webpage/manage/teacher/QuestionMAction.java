@@ -56,6 +56,10 @@ public class QuestionMAction extends TeacherBaseAction{
 	
 	@RequestMapping(value="/delete", method=RequestMethod.POST)
 	public String questionDelete(String questionId){
+		int pageNum = this.getIntParameter("page");
+		if(pageNum == 0) {
+			pageNum = 1;
+		}
 		try {
 			TrainQuestionDao tqDao = new TrainQuestionDao();
 			TrainQuestionItem tqItem = tqDao.selectById(questionId);
@@ -64,12 +68,12 @@ public class QuestionMAction extends TeacherBaseAction{
 				return this.redirect("/");
 			}
 			if (tqDao.deleteById(questionId)) {
-				return this.redirect("/manage/question/list");
+				return this.redirect("/manage/question/list?page="+pageNum);
 			}
 		} catch (Exception e) {
 			Log.printStackTrace(e);
 		}
-		return this.redirect("/manage/question/list");
+		return this.redirect("/manage/question/list?page="+pageNum);
 	}
 
 	/**
@@ -78,6 +82,10 @@ public class QuestionMAction extends TeacherBaseAction{
 	 */
 	@RequestMapping(value="/addOrModifyQuestion", method=RequestMethod.GET)
 	public String addOrModifyQuestion(){
+		int pageNum = this.getIntParameter("page");
+		if(pageNum == 0) {
+			pageNum = 1;
+		}
 		try {
 			HttpServletRequest request = this.getRequest();
 			String questionId = request.getParameter("questionId");
@@ -108,6 +116,7 @@ public class QuestionMAction extends TeacherBaseAction{
 				request.setAttribute("tqItem", tqItem);
 				request.setAttribute("operation", "modify");
 			}
+			request.setAttribute("pageNum", pageNum);
 		} catch (Exception e) {
 			Log.printStackTrace(e);
 		}
@@ -119,6 +128,10 @@ public class QuestionMAction extends TeacherBaseAction{
 	 */
 	@RequestMapping(value="/auditing", method=RequestMethod.GET)
 	public String auditingQuestion(){
+		int pageNum = this.getIntParameter("page");
+		if(pageNum == 0) {
+			pageNum = 1;
+		}
 		try {
 			HttpServletRequest request = this.getRequest();
 			String questionId = request.getParameter("questionId");
@@ -146,6 +159,7 @@ public class QuestionMAction extends TeacherBaseAction{
 				request.setAttribute("tqItem", tqItem);
 				request.setAttribute("operation", "auditing");
 			}
+			request.setAttribute("pageNum", pageNum);
 		} catch (Exception e) {
 			Log.printStackTrace(e);
 		}
@@ -166,6 +180,11 @@ public class QuestionMAction extends TeacherBaseAction{
 			String knowledgeIds = request.getParameter("knowledgeIds");//原来绑定的知识点IDs
 			String operation = request.getParameter("operation");//用来判断是否是审核
 			int status = this.getIntParameter("status");
+			int pageNum = this.getIntParameter("page");
+			if(pageNum == 0) {
+				pageNum = 1;
+			}
+			request.setAttribute("pageNum", pageNum);
 			
 			if ("add".equalsIgnoreCase(operation)) {//打开新增页面
 				request.setAttribute("operation", "add");
@@ -324,7 +343,7 @@ public class QuestionMAction extends TeacherBaseAction{
 						
 						ThreadUtils.commitTranx();//提交事务
 						if(result){
-							return this.redirect("/manage/question/list");
+							return this.redirect("/manage/question/list?page="+pageNum);
 						} else {
 							addError("亲，您操作失败了，请您刷新页面后重新操作！");
 							request.setAttribute("tqItem", tqForm);

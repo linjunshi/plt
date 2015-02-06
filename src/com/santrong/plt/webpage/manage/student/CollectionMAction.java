@@ -36,12 +36,17 @@ public class CollectionMAction extends StudentBaseAction {
 		CourseDao dao = new CourseDao();
 		CourseCollectQuery query = new CourseCollectQuery();
 		query.setUserId(this.currentUser().getId());
+		query.setPageSize(9);
+		query.setShowSize(4);
 		query.setPageNum(pageNum);
+		query.setStatus(CourseItem.Status_Publish);//已经发布
+		query.setCourseType(CourseItem.CourseType_Weike);//微课
 		query.setCount(dao.selectCountByQuery(query));
-		List<CourseItem> courseList = dao.selectByQuery(query);
+		List<CourseItem> weikeList = dao.selectByQuery(query);
 		
-		request.setAttribute("courseList", courseList);
+		request.setAttribute("weikeList", weikeList);
 		request.setAttribute("query", query);
+		request.setAttribute("flag", "collection");
 		
 		return "manage/student/myCollection";
 	}
@@ -50,14 +55,18 @@ public class CollectionMAction extends StudentBaseAction {
 	 * 1、点击取消收藏,从收藏表中移除该条收藏记录;</br>
 	 * 2、并修改该课程的收藏数量,自动减1；
 	 * @author huangweihua
-	 * @param courseId
+	 * @param weikeId
 	 * @return
 	 */
 	@RequestMapping(value="/cancelCollect", method=RequestMethod.POST)
-	public String cancelCollect(String courseId) {
+	public String cancelCollect(String weikeId) {
+		int pageNum = this.getIntParameter("page");
+		if(pageNum == 0) {
+			pageNum = 1;
+		}
 		try {
 			CourseDao courseDao = new CourseDao();
-			CourseItem courseItem = courseDao.selectById(courseId);
+			CourseItem courseItem = courseDao.selectById(weikeId);
 			// 判断当前用户是否是该课程的所有者
 			if(courseItem == null || !courseItem.getOwnerId().equals(this.currentUser().getId())) {
 				return this.redirect("/");
@@ -67,10 +76,10 @@ public class CollectionMAction extends StudentBaseAction {
 			
 			//1、并从收藏表中移除该条收藏记录
 			CollectCourseDao ccDao = new CollectCourseDao();
-			ccDao.removeCollect(this.currentUser().getId(), courseId);
+			ccDao.removeCollect(this.currentUser().getId(), weikeId);
 			
 			//2、点击取消收藏,修改该课程的收藏数量,自动减1；
-			courseDao.removeCollection(courseId);
+			courseDao.removeCollection(weikeId);
 			
 			ThreadUtils.commitTranx();
 			
@@ -78,6 +87,6 @@ public class CollectionMAction extends StudentBaseAction {
 			ThreadUtils.rollbackTranx();
 			Log.printStackTrace(e);
 		}
-		return this.redirect("/collection");
+		return this.redirect("/collection?page=" + pageNum);
 	}
 }

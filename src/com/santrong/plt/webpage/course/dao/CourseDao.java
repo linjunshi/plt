@@ -392,6 +392,16 @@ public class CourseDao extends BaseDao {
 					criteria.asc("a." + query.getOrderBy());
 				}
 			}
+			// 状态，等于0是未发布状态
+			if(query.getStatus() > 0) {
+				criteria.where(eq("b.status", "?"));
+				criteria.setIntParam(query.getStatus());
+			}else{
+				// 未删除
+				criteria.where(ne("b.status", "-1"));				
+			}
+			// 微课
+			criteria.where(eq("b.courseType", CourseItem.CourseType_Weike));
 			
 			// 分页
 			criteria.limit(query.getLimitBegin(), query.getLimitEnd());
@@ -435,6 +445,17 @@ public class CourseDao extends BaseDao {
 				criteria.where(eq("a.courseId", "?"));
 				criteria.setStringParam(query.getCourseId());
 			}	
+			// 状态，等于0是未发布状态
+			if(query.getStatus() > 0) {
+				criteria.where(eq("b.status", "?"));
+				criteria.setIntParam(query.getStatus());
+			}else{
+				// 未删除
+				criteria.where(ne("b.status", CourseItem.Status_Del));				
+			}
+			// 微课
+			criteria.where(eq("b.courseType", query.getCourseType()));
+			
 			Connection conn = ThreadUtils.currentConnection();
 			PreparedStatement stm = criteria.getRealStatement(conn);
 			ResultSet rs = stm.executeQuery();

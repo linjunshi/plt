@@ -338,15 +338,20 @@ public class WeikeDao extends BaseDao {
 				criteria.where(eq("b.userId", "?"));
 				criteria.setStringParam(query.getUserId());
 			}
-			// 状态
-			criteria.where(eq("a.status", "?"));
-			criteria.setIntParam(query.getStatus());
+			// 状态，等于0是未发布状态
+			if(query.getStatus() > 0) {
+				criteria.where(eq("a.status", "?"));
+				criteria.setIntParam(query.getStatus());
+			}else{
+				// 未删除
+				criteria.where(ne("a.status", CourseItem.Status_Del));				
+			}
+			// 微课
+			criteria.where(eq("a.courseType", CourseItem.CourseType_Weike));
 			
 			// 查看参与状态
 //			criteria.where(eq("b.attendType", "?"));
 //			criteria.setIntParam(query.getAttendType());
-			// 微课
-			criteria.where(eq("a.courseType", CourseItem.CourseType_Weike));			
 			// 排序
 			if(!StringUtils.isNullOrEmpty(query.getOrderBy())) {
 				if("desc".equalsIgnoreCase(query.getOrderRule())) {
@@ -406,15 +411,19 @@ public class WeikeDao extends BaseDao {
 				criteria.where(eq("b.userId", "?"));
 				criteria.setStringParam(query.getUserId());
 			}
-			// 状态
-			criteria.where(eq("a.status", "?"));
-			criteria.setIntParam(query.getStatus());
-			
+			// 状态，等于0是未发布状态
+			if(query.getStatus() > 0) {
+				criteria.where(eq("a.status", "?"));
+				criteria.setIntParam(query.getStatus());
+			}else{
+				// 未删除
+				criteria.where(ne("a.status", CourseItem.Status_Del));				
+			}
+			// 微课
+			criteria.where(eq("a.courseType", CourseItem.CourseType_Weike));			
 			// 查看参与状态
 //			criteria.where(eq("b.attendType", "?"));
 //			criteria.setIntParam(query.getAttendType());
-			// 微课
-			criteria.where(eq("a.courseType", CourseItem.CourseType_Weike));			
 			
 			Connection conn = ThreadUtils.currentConnection();
 			PreparedStatement stm = criteria.getRealStatement(conn);
