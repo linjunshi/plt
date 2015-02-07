@@ -8,7 +8,7 @@
 var Globals = {};
 Globals.ctx = "${ctx}";
 Globals.lang = "${lang}";
-Globals.page = "Manage_myTrainMAdd";
+Globals.page = "Manage_approveTrainQEdit";
 </script>
 </head>
 <body>
@@ -19,8 +19,7 @@ Globals.page = "Manage_myTrainMAdd";
 				<%@ include file="../../inc/leftmenu_teacher.jsp"%>
 				<div class="sh_info_r">
 					<div class="sh_title">
-						<c:if test="${operation == 'add'}"><h2>添加试题</h2></c:if>
-						<c:if test="${operation == 'modify'}"><h2>修改试题</h2></c:if>
+						<h2>审核试题</h2>
 					</div>
 					<div class="form_questions">
 						<div id="demo_zone">
@@ -32,7 +31,7 @@ Globals.page = "Manage_myTrainMAdd";
 									</c:forEach>
 								</div>
 							</c:if>
-							<form method="post" action="${ctx}/manage/question/addOrModifyQuestion" class="form_info common_form" id="question_form">
+							<form method="post" action="${ctx}/super/question/approveQuestion" class="form_info common_form" id="question_form">
 								<input id="id" name="id" type="hidden" value="${tqItem.id}"/>
 								<input id="page" name="page" type="hidden" value="${pageNum}"/>
 								<input type="hidden" name="operation" id="operation" value="${operation}"/>
@@ -155,8 +154,10 @@ Globals.page = "Manage_myTrainMAdd";
 									</div>
 								</div>
 								<div class="form_action">
-									<input class="btn_question" type="submit" value="提交" />
-									<a class="btn_question" href="${ctx}/manage/question/list?page=${pageNum}">取消</a>
+									<input type="hidden" id="status" name="status" value = "${tqItem.status}" title="审核状态"/>
+									<input class="btn_approve" type="submit" value="审核通过" />
+									<input class="btn_disapprove" type="submit" value="审核不通过" />
+									<a class="btn_question" href="${ctx}/super/question/approve?page=${pageNum}">取消</a>
 								</div>
 							</form>
 						</div>

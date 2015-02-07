@@ -39,7 +39,7 @@ public class QuestionMAction extends TeacherBaseAction{
 			TrainQuestionDao tqDao = new TrainQuestionDao();
 			TrainQuestionQuery query = new TrainQuestionQuery();
 			query.setPageNum(pageNum);
-			query.setUserId(user.getId());
+			query.setUserId(user.getId());//当前用户录的题目
 			query.setCount(tqDao.selectCountByQuery(query));
 			query.setOrderBy("cts");
 			query.setOrderRule("desc");
@@ -48,6 +48,7 @@ public class QuestionMAction extends TeacherBaseAction{
 			HttpServletRequest request = this.getRequest();
 			request.setAttribute("questionList", questionList);
 			request.setAttribute("query", query);
+			request.setAttribute("flag", "question_list");
 		} catch (Exception e) {
 			Log.printStackTrace(e);
 		}
@@ -116,49 +117,7 @@ public class QuestionMAction extends TeacherBaseAction{
 				request.setAttribute("tqItem", tqItem);
 				request.setAttribute("operation", "modify");
 			}
-			request.setAttribute("pageNum", pageNum);
-		} catch (Exception e) {
-			Log.printStackTrace(e);
-		}
-		return "/manage/teacher/myTrainMAdd";
-	}
-	
-	/**
-	 * 打开试题审核界面
-	 */
-	@RequestMapping(value="/auditing", method=RequestMethod.GET)
-	public String auditingQuestion(){
-		int pageNum = this.getIntParameter("page");
-		if(pageNum == 0) {
-			pageNum = 1;
-		}
-		try {
-			HttpServletRequest request = this.getRequest();
-			String questionId = request.getParameter("questionId");
-			
-			if (MyUtils.isNotNull(questionId)) {
-				//打开修改页面或者试题审核界面
-				TrainQuestionDao tqDao = new TrainQuestionDao();
-				TrainQuestionItem tqItem = tqDao.selectById(questionId);
-				// 判断当前用户是否是该课程的所有者
-				if(tqItem == null || !tqItem.getOwnerId().equals(this.currentUser().getId())) {
-					return this.redirect("/");
-				}
-				
-				// 获取已经绑定的知识点
-				List<KnowledgeQuestionView> k2qList = tqDao.selectKnowledge2QuestionByQId(questionId);
-				String knowledgeIds = "";
-				for (KnowledgeQuestionView kqItem : k2qList) {
-					knowledgeIds += "," + kqItem.getKnowledgeId();
-				}
-				if (knowledgeIds != "") {
-					knowledgeIds = knowledgeIds.substring(1);//移除前面的多余的逗号
-				}
-				
-				request.setAttribute("knowledgeIds", knowledgeIds);
-				request.setAttribute("tqItem", tqItem);
-				request.setAttribute("operation", "auditing");
-			}
+			request.setAttribute("flag", "question_list");
 			request.setAttribute("pageNum", pageNum);
 		} catch (Exception e) {
 			Log.printStackTrace(e);
@@ -179,7 +138,6 @@ public class QuestionMAction extends TeacherBaseAction{
 			HttpServletRequest request = this.getRequest();
 			String knowledgeIds = request.getParameter("knowledgeIds");//原来绑定的知识点IDs
 			String operation = request.getParameter("operation");//用来判断是否是审核
-			int status = this.getIntParameter("status");
 			int pageNum = this.getIntParameter("page");
 			if(pageNum == 0) {
 				pageNum = 1;
@@ -190,8 +148,6 @@ public class QuestionMAction extends TeacherBaseAction{
 				request.setAttribute("operation", "add");
 			} else if ("modify".equalsIgnoreCase(operation)) {//打开修改页面
 				request.setAttribute("operation", "modify");
-			} else if ("auditing".equalsIgnoreCase(operation)) {//打开审核页面
-				request.setAttribute("operation", "auditing");
 			}
 			
 			if (tqForm != null) {
@@ -266,7 +222,7 @@ public class QuestionMAction extends TeacherBaseAction{
 						tqItem.setTimeLimit(0);//限制时间
 						tqItem.setOwnerId(this.currentUser().getId());
 						tqItem.setLevel(tqForm.getLevel());//易：0 ，中 ：10 ， 难：100
-						tqItem.setStatus(TrainQuestionItem.Status_New);//0:新建 ,1:已审批 ,100:已删除
+						tqItem.setStatus(TrainQuestionItem.Status_New);//0:新建==待审核 ,1:已审批 ,2:审批不通过，100:已删除
 						tqItem.setCts(new Date());
 						tqItem.setUts(new Date());
 						result = tqDao.insert(tqItem);
@@ -337,7 +293,12 @@ public class QuestionMAction extends TeacherBaseAction{
 						}
 						tqItem.setRemark(tqForm.getRemark());
 						tqItem.setLevel(tqForm.getLevel());//易：0 ，中 ：10 ， 难：100
-						tqItem.setStatus(status);//0:新建 ,1:已审批 ,2:审核不通过,100:已删除
+						
+						// 如果是审核不通过的试题，修改了表单信息之后，该试题的状态就修改成待审核状态。
+						if (tqItem.getStatus() == TrainQuestionItem.Status_Disapprove) {
+							tqItem.setStatus(TrainQuestionItem.Status_New);//0:新建==待审核 ,1:已审核 ,2:审核不通过，100:已删除
+						}
+						
 						tqItem.setUts(new Date());
 						result = tqDao.update(tqItem);
 						

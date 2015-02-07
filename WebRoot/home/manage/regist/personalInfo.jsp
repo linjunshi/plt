@@ -11,14 +11,14 @@ Globals.lang = "${lang}";
 Globals.page = "Manage_personalInfo";
 </script>
 <style type="text/css">
-.system_tip { width:350px; line-height:26px; margin:10px auto; margin-left:100px; border:solid 1px #F5D8A7; border-radius:2px; background-color:#FFF6DB;padding-left: 10px;  }
+.system_tip {position: relative;float: left; width:350px; line-height:26px;min-height:26px; margin:0px 200px 10px 100px; border:solid 1px #F5D8A7; border-radius:2px; background-color:#FFF6DB;padding-left: 10px;  }
 </style>
 </head>
 <body>
 <div class="header">
 	<%@ include file="../../inc/top_new.jsp"%>
 	<div class="content clearfix">
-		<%@ include file="../../inc/leftmenu_student2.jsp"%>
+		<%@ include file="../../inc/leftmenu.jsp"%>
 		<div class="qu_right">
 			<div class="qu_right_it">
 				<h2>${sessionScope.loginUser.showName}</h2>
@@ -42,15 +42,16 @@ Globals.page = "Manage_personalInfo";
 	            </nav>
 	            <div class="sh_form_con">
 	                <div id="demo_zone">
-	                	<c:if test="${tipError != null && fn:length(tipError)  > 0}">
+	                    <form method="post" action="${ctx}/account/personalInfo" class="form_info common_form" id="personalInfo_form">
+           		        <c:if test="${tipError != null && fn:length(tipError)  > 0}">
 							<div class="system_tip">
 								<c:forEach items="${tipError}" var="tip">
 								<p>${tip.msg}</p>
 								</c:forEach>
 							</div>
 						</c:if>
-	                    <form method="post" action="${ctx}/account/personalInfo" class="form_info common_form" id="personalInfo_form">
 	                    	<input type="hidden" name="id" value="${user.id}" />
+	                    	<input type="hidden" id="personalInfo" name="personalInfo" value="personalInfo" />
 	                    	<input id="levelId" name="levelId" type="hidden" value="${user.gradeId}">
 	                        <div class="form_item">
 	                            <label for="username">昵称：</label>

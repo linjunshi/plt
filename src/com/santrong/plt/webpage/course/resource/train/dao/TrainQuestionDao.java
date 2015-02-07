@@ -15,6 +15,7 @@ import com.santrong.plt.util.MyUtils;
 import com.santrong.plt.webpage.BaseDao;
 import com.santrong.plt.webpage.course.resource.train.entry.TrainQuestionItem;
 import com.santrong.plt.webpage.course.resource.train.entry.TrainQuestionQuery;
+import com.santrong.plt.webpage.course.resource.train.entry.TrainQuestionUserView;
 import com.santrong.plt.webpage.course.resource.train.entry.TrainToQuestionItem;
 import com.santrong.plt.webpage.manage.superman.entry.KnowledgeQuestionView;
 
@@ -206,6 +207,162 @@ public class TrainQuestionDao extends BaseDao{
 			
 			// 未删除
 			criteria.where(ne("a.status", TrainQuestionItem.Status_Del));
+			
+			Connection conn = ThreadUtils.currentConnection();
+			PreparedStatement stm = criteria.getRealStatement(conn);
+			ResultSet rs = stm.executeQuery();
+			rs.next();
+			count = rs.getInt("cn");
+			
+		} catch (Exception e) {
+			Log.printStackTrace(e);
+		}
+		return count;
+	}
+	
+	/**
+	 * 查询所有人未审核的题目(分页)
+	 * @author huangweihua
+	 * @param TrainQuestionQuery query
+	 * @return List<TrainQuestionUserView> list
+	 */
+	public List<TrainQuestionUserView> selectApproveByQuery(TrainQuestionQuery query) {
+		List<TrainQuestionUserView> list = new ArrayList<TrainQuestionUserView>();
+		try {
+			Statement criteria = new Statement("resource_train_question", "a");
+			criteria.setFields("a.*,b.showName showName");
+			criteria.ljoin("user", "b", "a.ownerId","b.id");
+			
+			// 关键词
+			if(!StringUtils.isNullOrEmpty(query.getKeywords())) {
+				criteria.where(or(like("a.topic", "?")));
+				criteria.setStringParam("%" + query.getKeywords() + "%");
+			}
+			
+			// 所属用户
+			if (MyUtils.isNotNull(query.getUserId())) {
+				criteria.where(eq("a.ownerId", "?"));
+				criteria.setStringParam(query.getUserId());
+			}
+			
+			// 所属年级
+			if (MyUtils.isNotNull(query.getGradeId())) {
+				criteria.where(eq("a.gradeId","?"));
+				criteria.setStringParam(query.getGradeId());
+			}
+			
+			// 所属科目
+			if (MyUtils.isNotNull(query.getSubjectId())) {
+				criteria.where(eq("a.subjectId","?"));
+				criteria.setStringParam(query.getSubjectId());
+			}
+			
+			// 所属单元
+			if (MyUtils.isNotNull(query.getUnitId())) {
+				criteria.where(eq("a.unitId","?"));
+				criteria.setStringParam(query.getUnitId());
+			}
+			
+			// 题目类型
+			if (query.isSingleSelection()) {
+				criteria.where(eq("a.questionType", TrainQuestionItem.QUESTION_TYPE_SINGLE_SELECTION));//单选题 (默认值为1)
+			} else if (query.isMulChoice()) {
+				criteria.where(eq("a.questionType", TrainQuestionItem.QUESTION_TYPE_MULTIPLE_CHOICE));//多选题 (默认值为2)
+			} else if (query.isMulChoice()) {
+				criteria.where(eq("a.questionType", TrainQuestionItem.QUESTION_TYPE_JUDGE_TRUE_OR_FLASE));//判断题 (默认值为3)
+			} else if (query.isMulChoice()) {
+				criteria.where(eq("a.questionType", TrainQuestionItem.QUESTION_TYPE_BLANK_FILLING));//填空题 (默认值为4)
+			} else {
+				System.out.println("warnings : The questionType has no corresponding value.");
+			}
+			
+			// 新建的==待审核
+			criteria.where(eq("a.status", TrainQuestionItem.Status_New));
+			
+			// 排序
+			if (!StringUtils.isNullOrEmpty(query.getOrderRule())) {
+				if ("desc".equalsIgnoreCase(query.getOrderRule())) {
+					criteria.desc("a." + query.getOrderBy());
+				}else{
+					criteria.asc("a." + query.getOrderBy());
+				}
+			}
+			
+			// 分页
+			criteria.limit(query.getLimitBegin(), query.getLimitEnd());
+			
+			Connection conn = ThreadUtils.currentConnection();
+			PreparedStatement stm = criteria.getRealStatement(conn);
+			ResultSet rs = stm.executeQuery();
+			while (rs.next()) {
+				TrainQuestionUserView item = new TrainQuestionUserView();
+				BeanUtils.Rs2Bean(rs, item);
+				list.add(item);
+			}
+			
+		} catch (Exception e) {
+			Log.printStackTrace(e);
+		}
+		return list;
+	}
+	
+	/**
+	 * 查询所有人未审核,统计题库中总数
+	 * @author huangweihua
+	 * @param TrainQuestionQuery query
+	 * @return int
+	 */
+	public int selectApproveCountByQuery(TrainQuestionQuery query) {
+		int count = 0;
+		try {
+			Statement criteria = new Statement("resource_train_question", "a");
+			criteria.setFields("count(*) cn");
+			
+			// 关键词
+			if(!StringUtils.isNullOrEmpty(query.getKeywords())) {
+				criteria.where(or(like("a.topic", "?")));
+				criteria.setStringParam("%" + query.getKeywords() + "%");
+			}
+			
+			// 所属用户
+			if (MyUtils.isNotNull(query.getUserId())) {
+				criteria.where(eq("a.ownerId", "?"));
+				criteria.setStringParam(query.getUserId());
+			}
+			
+			// 所属年级
+			if (MyUtils.isNotNull(query.getGradeId())) {
+				criteria.where(eq("a.gradeId","?"));
+				criteria.setStringParam(query.getGradeId());
+			}
+			
+			// 所属科目
+			if (MyUtils.isNotNull(query.getSubjectId())) {
+				criteria.where(eq("a.subjectId","?"));
+				criteria.setStringParam(query.getSubjectId());
+			}
+			
+			// 所属单元
+			if (MyUtils.isNotNull(query.getUnitId())) {
+				criteria.where(eq("a.unitId","?"));
+				criteria.setStringParam(query.getUnitId());
+			}
+			
+			// 题目类型
+			if (query.isSingleSelection()) {
+				criteria.where(eq("a.questionType", TrainQuestionItem.QUESTION_TYPE_SINGLE_SELECTION));//单选题 (默认值为1)
+			} else if (query.isMulChoice()) {
+				criteria.where(eq("a.questionType", TrainQuestionItem.QUESTION_TYPE_MULTIPLE_CHOICE));//多选题 (默认值为2)
+			} else if (query.isMulChoice()) {
+				criteria.where(eq("a.questionType", TrainQuestionItem.QUESTION_TYPE_JUDGE_TRUE_OR_FLASE));//判断题 (默认值为3)
+			} else if (query.isMulChoice()) {
+				criteria.where(eq("a.questionType", TrainQuestionItem.QUESTION_TYPE_BLANK_FILLING));//填空题 (默认值为4)
+			} else {
+				System.out.println("warnings : The questionType has no corresponding value.");
+			}
+			
+			// 新建的==待审核
+			criteria.where(eq("a.status", TrainQuestionItem.Status_New));
 			
 			Connection conn = ThreadUtils.currentConnection();
 			PreparedStatement stm = criteria.getRealStatement(conn);

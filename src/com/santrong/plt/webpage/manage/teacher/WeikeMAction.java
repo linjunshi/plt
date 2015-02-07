@@ -149,9 +149,9 @@ public class WeikeMAction extends TeacherBaseAction {
 				if (courseForm.getLimitCount() == null) {
 					addError("课程限购数量不能为空！");
 				}
-				if (courseForm.getLive() == null) {
-					addError("是否是直播课程不能为空！");
-				}
+//				if (courseForm.getLive() == null) {
+//					addError("是否是直播课程不能为空！");
+//				}
 				if (MyUtils.isNotNull(courseForm.getEndTime()) && !ValidateTools.isDate(courseForm.getEndTime())) {
 					addError("日期格式不正确！");
 				}

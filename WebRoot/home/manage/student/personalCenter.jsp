@@ -15,7 +15,7 @@ Globals.page = "Manage_personalCenter";
 <div class="header">
 	<%@ include file="../../inc/top_new.jsp"%>
 	<div class="content clearfix">
-		<%@ include file="../../inc/leftmenu_student2.jsp"%>
+		<%@ include file="../../inc/leftmenu.jsp"%>
 		<div class="qu_right">
 			<div class="qu_right_it">
 				<h2>${sessionScope.loginUser.showName}</h2>

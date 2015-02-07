@@ -36,7 +36,7 @@
 					</c:if>
 					<c:if test="${sessionScope.loginUser.superMan}">
 					<li>---------------------------------</li>
-					<li><a href="${ctx}/super/question/approve" class='pt11 <c:if test="${flag == 'knowledge_approve'}">pt11_hover</c:if>' >试题审核</a></li>
+					<li><a href="${ctx}/super/question/approve" class='pt11 <c:if test="${flag == 'question_approve'}">pt11_hover</c:if>' >试题审核</a></li>
 					<li><a href="${ctx}/super/knowledge/tree" class='pt11 <c:if test="${flag == 'knowledge_tree'}">pt11_hover</c:if>' >知识点树</a></li>
 					</c:if>					
 				</ul>

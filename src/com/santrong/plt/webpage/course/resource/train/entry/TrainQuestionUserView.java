@@ -11,7 +11,7 @@ import com.santrong.plt.util.MyUtils;
  * @date   2014年11月6日 
  * @time   下午3:44:18
  */
-public class TrainQuestionItem {
+public class TrainQuestionUserView {
 
 //	resource_train_question 作业习题
 	private String id;
@@ -34,53 +34,8 @@ public class TrainQuestionItem {
 	// 是否已选择
 	private boolean assemble;
 	
-	public static final int Level_Easy = 0;// 易
-	public static final int Level_Normal = 10;// 中
-	public static final int Level_Hard = 100;// 难
-	
-	public static final int Status_New= 0;// 新建==待审核
-	public static final int Status_Approve = 1;// 已审批
-	public static final int Status_Disapprove  = 2;// 审批不通过
-	public static final int Status_Del = 100;// 已删除
-	
-
-	// 题目的默认类型值
-	/**
-	 * 单选题 (默认值为1)
-	 */
-	public static final int QUESTION_TYPE_SINGLE_SELECTION			=	1; //单选题 (默认值为1)
-	/**
-	 * 多选题 (默认值为2)
-	 */
-	public static final int QUESTION_TYPE_MULTIPLE_CHOICE			=	2; //多选题 (默认值为2)
-	/**
-	 * 判断题 (默认值为3)
-	 */
-	public static final int QUESTION_TYPE_JUDGE_TRUE_OR_FLASE		=	3; //判断题 (默认值为3)
-	/**
-	 * 填空题  (默认值为4)
-	 */
-	public static final int QUESTION_TYPE_BLANK_FILLING				=	4; //填空题 (默认值为4)
-	
-	/**
-	 * 选项的{"A","B","C","D"}分别对应的数值{1,2,4,8}
-	 * 0001,0010,0100,1000
-	 */
-	public static final int[] Answers								= {1,2,4,8};
-	/**
-	 * 选项的{"A","B","C","D"}分别对应的数值{1,2,4,8}
-	 * 0001,0010,0100,1000
-	 */
-	public static final String[] Answers_Options					= {"A","B","C","D"};
-	
-	/**
-	 * 选项的{"正确","错误"}分别对应的数值{1,2}
-	 */
-	public static final String[] Answers_TrueOrFalse				= {"正确","错误"};
-	/**
-	 * 选项的{"true","false"}分别对应的数值{1,2}
-	 */
-	public static final String[] Answers_En_TrueOrFalse				= {"true","false"};
+	// user 用户表
+	public String showName;//所属用户的名称
 	
 	public boolean isAssemble() {
 		return assemble;
@@ -173,7 +128,7 @@ public class TrainQuestionItem {
 		this.timeLimit = timeLimit;
 	}
 	public static int[] getAnswers() {
-		return Answers;
+		return TrainQuestionItem.Answers;
 	}
 	public int[] getPageAnswer() {
 		return pageAnswer;
@@ -182,33 +137,39 @@ public class TrainQuestionItem {
 		this.pageAnswer = pageAnswer;
 	}
 	
+	public String getShowName() {
+		return showName;
+	}
+	public void setShowName(String showName) {
+		this.showName = showName;
+	}
 	/**
 	 * 是否是单选题
 	 * @return boolean
 	 */
 	public boolean isSingleSelection() {
-		return (questionType == QUESTION_TYPE_SINGLE_SELECTION);
+		return (questionType == TrainQuestionItem.QUESTION_TYPE_SINGLE_SELECTION);
 	}
 	/**
 	 * 是否是多选题
 	 * @return boolean
 	 */
 	public boolean isMulChoice() {
-		return (questionType == QUESTION_TYPE_MULTIPLE_CHOICE);
+		return (questionType == TrainQuestionItem.QUESTION_TYPE_MULTIPLE_CHOICE);
 	}
 	/**
 	 * 是否是判断题
 	 * @return boolean
 	 */
 	public boolean isTrueOrFlase() {
-		return (questionType == QUESTION_TYPE_JUDGE_TRUE_OR_FLASE);
+		return (questionType == TrainQuestionItem.QUESTION_TYPE_JUDGE_TRUE_OR_FLASE);
 	}
 	/**
 	 * 是否是填空题
 	 * @return boolean
 	 */
 	public boolean isBlankFilling() {
-		return (questionType == QUESTION_TYPE_BLANK_FILLING);
+		return (questionType == TrainQuestionItem.QUESTION_TYPE_BLANK_FILLING);
 	}
 	
 	/**
@@ -216,7 +177,7 @@ public class TrainQuestionItem {
 	 * @return boolean
 	 */
 	public boolean getContainA() {
-		return ((getSumAnswer() & Answers[0]) == Answers[0]);
+		return ((getSumAnswer() & TrainQuestionItem.Answers[0]) == TrainQuestionItem.Answers[0]);
 	}
 
 	/**
@@ -224,7 +185,7 @@ public class TrainQuestionItem {
 	 * @return boolean
 	 */
 	public boolean getContainB() {
-		return ((getSumAnswer() & Answers[1]) == Answers[1]);
+		return ((getSumAnswer() & TrainQuestionItem.Answers[1]) == TrainQuestionItem.Answers[1]);
 	}
 
 	/**
@@ -232,7 +193,7 @@ public class TrainQuestionItem {
 	 * @return boolean
 	 */
 	public boolean getContainC() {
-		return ((getSumAnswer() & Answers[2]) == Answers[2]);
+		return ((getSumAnswer() & TrainQuestionItem.Answers[2]) == TrainQuestionItem.Answers[2]);
 	}
 
 	/**
@@ -240,7 +201,7 @@ public class TrainQuestionItem {
 	 * @return boolean
 	 */
 	public boolean getContainD() {
-		return ((getSumAnswer() & Answers[3]) == Answers[3]);
+		return ((getSumAnswer() & TrainQuestionItem.Answers[3]) == TrainQuestionItem.Answers[3]);
 	}
 	
 	/**
@@ -272,9 +233,9 @@ public class TrainQuestionItem {
 	public String[] getAnswerArray() {
 		String[] answerArray = null;
 		if (MyUtils.isNotNull(this.answer)) {
-			if (this.questionType == QUESTION_TYPE_SINGLE_SELECTION 
-				|| this.questionType == QUESTION_TYPE_MULTIPLE_CHOICE
-				|| this.questionType == QUESTION_TYPE_JUDGE_TRUE_OR_FLASE) {
+			if (this.questionType == TrainQuestionItem.QUESTION_TYPE_SINGLE_SELECTION 
+				|| this.questionType == TrainQuestionItem.QUESTION_TYPE_MULTIPLE_CHOICE
+				|| this.questionType == TrainQuestionItem.QUESTION_TYPE_JUDGE_TRUE_OR_FLASE) {
 				answerArray = this.answer.split(","); 
 			}
 		}
@@ -287,31 +248,31 @@ public class TrainQuestionItem {
 	 */
 	public String getTypeString() {
 		switch(this.questionType) {
-		case QUESTION_TYPE_SINGLE_SELECTION :
+		case TrainQuestionItem.QUESTION_TYPE_SINGLE_SELECTION :
 			return "单选题";
-		case QUESTION_TYPE_MULTIPLE_CHOICE :
+		case TrainQuestionItem.QUESTION_TYPE_MULTIPLE_CHOICE :
 			return "多选题";
-		case QUESTION_TYPE_JUDGE_TRUE_OR_FLASE:
+		case TrainQuestionItem.QUESTION_TYPE_JUDGE_TRUE_OR_FLASE:
 			return "判断题";
-		case QUESTION_TYPE_BLANK_FILLING:
+		case TrainQuestionItem.QUESTION_TYPE_BLANK_FILLING:
 			return "填空题";			
 		}
 		return "";
 	}
-
+	
 	/**
 	 * 返回试题的状态
 	 * @return String
 	 */
 	public String getStatusString() {
 		switch(this.status) {
-		case Status_New :
+		case TrainQuestionItem.Status_New :
 			return "待审核";
-		case Status_Approve :
+		case TrainQuestionItem.Status_Approve :
 			return "已审核";
-		case Status_Disapprove:
+		case TrainQuestionItem.Status_Disapprove:
 			return "审核不通过";
-		case Status_Del:
+		case TrainQuestionItem.Status_Del:
 			return "已删除";			
 		}
 		return "";
@@ -324,19 +285,19 @@ public class TrainQuestionItem {
 	 */
 	public List<String> getAnswerString() {
 		List<String> list = new ArrayList<String>();
-		if (this.questionType == QUESTION_TYPE_MULTIPLE_CHOICE 
-				|| this.questionType == QUESTION_TYPE_SINGLE_SELECTION) {//选择题
-			for(int i = 0; i < Answers.length; i++) {
-				if(((this.questionType == QUESTION_TYPE_SINGLE_SELECTION 
+		if (this.questionType == TrainQuestionItem.QUESTION_TYPE_MULTIPLE_CHOICE 
+				|| this.questionType == TrainQuestionItem.QUESTION_TYPE_SINGLE_SELECTION) {//选择题
+			for(int i = 0; i < TrainQuestionItem.Answers.length; i++) {
+				if(((this.questionType == TrainQuestionItem.QUESTION_TYPE_SINGLE_SELECTION 
 						? MyUtils.stringToInt(this.answer) 
-								: getSumAnswer()) & Answers[i]) == Answers[i]) {
-					list.add(Answers_Options[i]);
+								: getSumAnswer()) & TrainQuestionItem.Answers[i]) == TrainQuestionItem.Answers[i]) {
+					list.add(TrainQuestionItem.Answers_Options[i]);
 				}
 			}
-		} else if(this.questionType == QUESTION_TYPE_JUDGE_TRUE_OR_FLASE){//判断题
-			for (int i = 0; i < Answers_TrueOrFalse.length; i++) {
-				if ((MyUtils.stringToInt(this.answer) & Answers[i]) == Answers[i]) {
-					list.add(Answers_TrueOrFalse[i]);
+		} else if(this.questionType == TrainQuestionItem.QUESTION_TYPE_JUDGE_TRUE_OR_FLASE){//判断题
+			for (int i = 0; i < TrainQuestionItem.Answers_TrueOrFalse.length; i++) {
+				if ((MyUtils.stringToInt(this.answer) & TrainQuestionItem.Answers[i]) == TrainQuestionItem.Answers[i]) {
+					list.add(TrainQuestionItem.Answers_TrueOrFalse[i]);
 				}
 			}
 		}

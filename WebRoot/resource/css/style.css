@@ -641,6 +641,7 @@ input[type="reset"]::-moz-focus-inner, input[type="button"]::-moz-focus-inner, i
 .sh_coll_tab .sh_h_im .sh_order_title a{width:315px;overflow:hidden;text-overflow:ellipsis;white-space: nowrap; font-weight: bold;font-size: 16px;}
 .sh_coll_tab .sh_h_im .sh_order_detail{color:#9c9c9c;font-size: 12px;margin-top: 10px;}
 .sh_color_c { color:#f90 !important;}
+.sh_coll_tab .btn_question_status {margin-left: 25%;}
 .sh_coll_tab .btn_question_update {margin-left: 25%;}
 .sh_coll_tab .btn_question_edit {margin-left: 25%;}
 .sh_coll_tab .status {position: relative;left: 15%;}

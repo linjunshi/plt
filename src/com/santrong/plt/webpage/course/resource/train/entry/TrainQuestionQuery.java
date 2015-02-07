@@ -15,6 +15,7 @@ public class TrainQuestionQuery extends PageQuery{
 	private String subjectId;
 	private String unitId;
 	private int questionType;
+	private int status;
 	
 	public String getKeywords() {
 		return keywords;
@@ -52,7 +53,12 @@ public class TrainQuestionQuery extends PageQuery{
 	public void setQuestionType(int questionType) {
 		this.questionType = questionType;
 	}
-	
+	public int getStatus() {
+		return status;
+	}
+	public void setStatus(int status) {
+		this.status = status;
+	}
 	/**
 	 * 是否是单选题
 	 * @return boolean

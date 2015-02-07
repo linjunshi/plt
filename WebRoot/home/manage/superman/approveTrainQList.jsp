@@ -8,7 +8,7 @@
 var Globals = {};
 Globals.ctx = "${ctx}";
 Globals.lang = "${lang}";
-Globals.page = "Manage_myTrainMList";
+Globals.page = "Manage_approveTrainQList";
 </script>
 </head>
 <body>
@@ -19,8 +19,7 @@ Globals.page = "Manage_myTrainMList";
 		        <%@ include file="../../inc/leftmenu_teacher.jsp"%>
 				<div class="sh_info_r">
 					<div class="sh_title">
-						<h2>试题列表</h2>
-						<a href="${ctx}/manage/question/addOrModifyQuestion" class="sh_add">+新增</a>
+						<h2>试题审核列表</h2>
 					</div>
 					<div class="sh_collection">
 						<table border="1" class="sh_coll_tab">
@@ -28,15 +27,17 @@ Globals.page = "Manage_myTrainMList";
 								<col width="60">
 								<col width="360">
 								<col width="100">
+								<col width="120">
 								<col width="100">
-								<col width="150">
-								<col width="200">
+								<col width="130">
+								<col width="100">
 							</colgroup>
 							<thead>
 								<tr>
 									<th>序号</th>
 									<th>试题描述</th>
 									<th>试题类型</th>
+									<th>所属老师</th>
 									<th>状态</th>
 									<th>创建时间</th>
 									<th>操作</th>
@@ -48,22 +49,16 @@ Globals.page = "Manage_myTrainMList";
 										<td>${qt.index + 1 + (query.pageNum-1)*query.pageSize}</td>
 										<td>${question.topic}</td>
 										<td>${question.typeString}</td>
+										<td>${question.showName}</td>
 										<td>${question.statusString}</td>
 										<td><fmt:formatDate value="${question.cts}" type="date" dateStyle="default" /></td>
 										<td>
 											<div class="btn_question_operation" >
-												<div class="btn_question_edit">
-													<form action="${ctx}/manage/question/addOrModifyQuestion" method="get">
+												<div class="btn_question_status">
+													<form action="${ctx}/super/question/approveQuestion" method="get">
 														<input type="hidden" value="${query.pageNum}" name="page" />
 														<input type="hidden" value="${question.id}" name="questionId" />
-														<input type="submit" value="修改" />
-													</form>
-												</div>
-												<div class="btn_question_delete">
-													<form action="${ctx}/manage/question/delete" method="post">
-														<input type="hidden" value="${query.pageNum}" name="page" />
-														<input type="hidden" value="${question.id}" name="questionId" />
-														<input type="submit" value="删除" />
+														<input type="submit" value="审核" />
 													</form>
 												</div>
 											</div>
@@ -74,8 +69,8 @@ Globals.page = "Manage_myTrainMList";
 							<c:if test="${fn:length(query.pageSequence) > 1}">
 								<tfoot>
 									<tr>
-										<td colspan="6">
-											<c:set var="basicUrl" value="${ctx}/manage/question/list" />
+										<td colspan="7">
+											<c:set var="basicUrl" value="${ctx}/super/question/approveTrainQList" />
 				            				<%@ include file="../../inc/pagination.jsp"%>
 										</td>
 									</tr>
