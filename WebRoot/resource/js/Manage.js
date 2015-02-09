@@ -1384,6 +1384,7 @@ ManageClass.prototype = {
 								var addOrEdit = $("#addOrEdit").val().trim();
 								if (knowledgeName == null || knowledgeName == "") {
 									Boxy.alert("<i class='warn'></i><span>亲，请填写知识点名称 !</span>");
+									return false;
 								}
 								if (gradeId != null && gradeId != "" && subjectId != null && subjectId != "" ) {
 									$.ajax({

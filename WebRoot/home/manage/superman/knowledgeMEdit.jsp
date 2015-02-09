@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="../../inc/common.jsp"%>
 
-	<div class="form_knowledge">
+	<div class="form_knowledge_edit">
 
 			<c:if test="${tipError != null && fn:length(tipError)  > 0}">
 				<div class="system_tip">

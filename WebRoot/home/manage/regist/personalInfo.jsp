@@ -69,7 +69,7 @@ Globals.page = "Manage_personalInfo";
                                     <span>男</span>
                                     <input <c:if test="${user.gender == 2}"> checked="checked" </c:if> value="2" class="form_radio" name="gender" type="radio">
                                     <span>女</span>
-                                    <span class="not-empty" title='此项为必填项'>*</span>
+                                    <span class="form_tips" title='此项为必填项'>*</span>
 	                            </div>
 	                        </div>
 	                        <div class="form_item">

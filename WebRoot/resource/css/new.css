@@ -101,6 +101,9 @@ span.form_error, span.form_success,span.form_tips{border-width:1px;display:inlin
 .for_but { margin-left:130px;}
 .form_ra_text { height:30px; line-height:30px; margin-right:10px;cursor:pointer;}
 
+/*-----------------知识点维护----------------------*/
+.form_knowledge { margin:0 0 20px 30px;}
+.form_knowledge_edit { margin:0 0 0 10px;font-size:18px; width:350px;position:relative;}
 /*------------------form表单样式END----------------*/
 /*---------------头顶-------------*/
 .main{ background:#fff url(../images/new_bg.jpg) no-repeat center top; }
@@ -398,8 +401,9 @@ span.form_error, span.form_success,span.form_tips{border-width:1px;display:inlin
 .st_titile_r { float:left; display:block; width:760px; height:40px; line-height:40px; position:relative; margin-bottom:10px;border-bottom:1px #dbdbdb solid; }
 .st_titile_r a{font-weight: bold; float:left; display:block; font-size:16px;color:#666; margin-right:20px; padding:0 10px; }
 .st_titile_r a:hover,.st_titile_r .sh_title_hover{ color:#188EEE; background:url(../images/user_hover.png) no-repeat left bottom;}
-.sh_title { font-size:16px; width:97%; margin-bottom:10px; position:relative;}
+.sh_title { font-size:16px; width:97%; margin-bottom:30px; position:relative;}
 .sh_title span{ font-size:13px; position:absolute; left:100px; top:5px; color:#999;}
+.sh_title h2{margin-left:10px;font-size: 18px;}
 
 .sh_form_con { margin-left:100px; padding-bottom:10px;}
 
