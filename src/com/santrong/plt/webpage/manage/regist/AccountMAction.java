@@ -120,6 +120,7 @@ public class AccountMAction extends RegistBaseAction {
 	 */
 	@RequestMapping("/changePwd")
 	public String changePsw() {
+		this.getRequest().setAttribute("flag", "changePwd");
 		return "manage/regist/pwdChange";
 	}
 	

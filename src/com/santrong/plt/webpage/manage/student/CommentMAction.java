@@ -44,6 +44,7 @@ public class CommentMAction extends StudentBaseAction {
 		
 		request.setAttribute("commentList", commentList);
 		request.setAttribute("query", query);
+		request.setAttribute("flag", "comment");
 		
 		return "manage/student/myComment";
 	}

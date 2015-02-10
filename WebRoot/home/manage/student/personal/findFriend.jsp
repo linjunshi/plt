@@ -8,7 +8,7 @@
 var Globals = {};
 Globals.ctx = "${ctx}";
 Globals.lang = "${lang}";
-Globals.page = "Manage_friend";
+Globals.page = "Manage_findFriend";
 </script>
 </head>
 <body>
@@ -34,8 +34,8 @@ Globals.page = "Manage_friend";
 				<div class="qu_ri_school">
 			        <div class="sh_ke">
 			          <nav class="st_titile_r">
-			          	<a href="${ctx}/personal/friend" class="sh_title_hover">我的朋友</a>
-			          	<a href="${ctx}/personal/findFriend">可能认识的人</a>
+			          	<a href="${ctx}/personal/friend">我的朋友</a>
+			          	<a href="${ctx}/personal/findFriend" class="sh_title_hover">可能认识的人</a>
 			          </nav>
 			          <!-- <a href="#" class="catalog_box_more">增加</a> -->
 			          <ul class="sh_sch_ky">
@@ -43,11 +43,11 @@ Globals.page = "Manage_friend";
 							<li <c:if test="${st.index %4 == 0}">class="maigin_right"</c:if> >
 								<a href="javascript:void(0)" target="_blank"><img src="${ctx}${user.headPhoto}" title="${user.showName}" width="160" height="110"></a>
 								<h2>${user.showName}</h2>
-								<p><a href="${ctx}/personal/cancelFriend?userId=${user.id}">取消好友</a></p>
+								<p><a href="javascript:void(0)" rel="${user.id}" class="addFriend">+好友</a></p>
 							</li>
 						</c:forEach>
 			          </ul>
-					  <c:set var="basicUrl" value="${ctx}/personal/friend" />
+					  <c:set var="basicUrl" value="${ctx}/personal/findFriend" />
 		       		  <%@ include file="../../../inc/pagination_new.jsp"%>
 			        </div>
 			      </div>

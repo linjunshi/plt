@@ -1,4 +1,4 @@
-package com.santrong.plt.webpage.friend.dao;
+package com.santrong.plt.webpage.manage.student.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -13,8 +13,8 @@ import com.santrong.plt.opt.ThreadUtils;
 import com.santrong.plt.util.BeanUtils;
 import com.santrong.plt.util.MyUtils;
 import com.santrong.plt.webpage.BaseDao;
-import com.santrong.plt.webpage.friend.entry.UserQuery;
-import com.santrong.plt.webpage.friend.entry.UserRelationItem;
+import com.santrong.plt.webpage.manage.student.entry.UserQuery;
+import com.santrong.plt.webpage.manage.student.entry.UserRelationItem;
 import com.santrong.plt.webpage.teacher.entry.UserItem;
 
 /**

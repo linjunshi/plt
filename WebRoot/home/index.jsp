@@ -51,7 +51,7 @@
 					<c:if test="${sessionScope.loginUser != null}">
 						<div class="user_info_hidd">
 							<h2 class="user_info_sid"><img src="${ctx}${sessionScope.loginUser.headPhoto}" width="50" height="50"><span>欢迎你，${sessionScope.loginUser.showName}</span></h2>
-							<p><a href="${ctx }/friend">找找朋友</a></p>
+							<p><a href="${ctx }/personal/findFriend">找找朋友</a></p>
 						</div>
 					</c:if>
 				</div>

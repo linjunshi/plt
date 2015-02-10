@@ -1850,5 +1850,20 @@ ManageClass.prototype = {
 			$(".btn_disapprove").click(function(){
 				$("#status").val(2);
 			});
-		}
+		},
+		
+		// 找朋友页面
+		findFriend : function() {
+			
+			// 申请好友时候弹出信息框
+			$(".addFriend").click(function() {
+				var userId = $(this).attr("rel");
+				Boxy.load(Globals.ctx + "/personal/requireFriend?userId=" +userId, {title : "验证消息",
+					afterShow : function(){
+						// 申请好友异步方式提交
+						$(".sure").bindFormClick();
+					}
+				});
+			});
+		},
 }

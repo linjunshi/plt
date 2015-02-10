@@ -53,6 +53,7 @@ public class QuestionSuperAction extends SuperManBaseAction {
 			HttpServletRequest request = this.getRequest();
 			request.setAttribute("questionList", questionList);
 			request.setAttribute("query", query);
+			request.setAttribute("flag", "question_approve");
 		} catch (Exception e) {
 			Log.printStackTrace(e);
 		}

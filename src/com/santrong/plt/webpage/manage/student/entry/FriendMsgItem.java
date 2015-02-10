@@ -1,4 +1,4 @@
-package com.santrong.plt.webpage.friend.entry;
+package com.santrong.plt.webpage.manage.student.entry;
 
 /**
  * @author weinianjie

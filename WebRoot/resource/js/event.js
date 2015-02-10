@@ -94,7 +94,7 @@ jQuery(function($) {
 			var minLength = eval($(this).attr("required_MinLength"));
 			if (val == "" || val.length < minLength) {
 				$(this).addClass("text_warn");
-				alert("您输入的长度不能小于" + minLength);
+				Boxy.alert("<i class='warn'></i><span>您输入的长度不能小于" + minLength + "</span>");
 				isPass = false;
 			}
 		});
@@ -105,7 +105,7 @@ jQuery(function($) {
 			var maxRange = eval($(this).attr("required_MaxRange"));
 			if (val != "" && val > maxRange) {
 				$(this).addClass("text_warn");
-				alert("您输入的最大数值不能大于：" + maxRange);
+				Boxy.alert("<i class='warn'></i><span>您输入的最大数值不能大于：" + maxRange + "</span>");
 				$(this).val("");
 				isPass = false;
 			}
@@ -117,7 +117,7 @@ jQuery(function($) {
 			var length = eval($(this).attr("required_length"));
 			if (val != "" && val > length) {
 				$(this).addClass("text_warn");
-				alert("您输入的字符不能超过" + length + "个");
+				Boxy.alert("<i class='warn'></i><span>您输入的字符不能超过" + length + "个</span>");
 				$(this).focus();
 				isPass = false;
 			}
@@ -141,7 +141,7 @@ jQuery(function($) {
 			var val = $(this).val().trim();
 			if (val != "" && !re_Date.test(val)) {
 				$(this).addClass("text_warn");
-				alert("日期类型必须为:yyyy-MM-dd");
+				Boxy.alert("<i class='warn'></i><span>日期类型必须为:yyyy-MM-dd</span>");
 				isPass = false;
 			}
 		});
@@ -152,7 +152,7 @@ jQuery(function($) {
 			var val = $(this).val().trim();
 			if (val != "" && !re_Time.test(val)) {
 				$(this).addClass("text_warn");
-				alert("日期类型必须为:Hi:mm[:ss]，秒是可选填的");
+				Boxy.alert("<i class='warn'></i><span>日期类型必须为:Hi:mm[:ss]，秒是可选填的</span>");
 				isPass = false;
 			}
 		});
@@ -248,7 +248,7 @@ jQuery(function($) {
 		    			isComplete = true;
 		    			$.hideFloatExcuting();
 		    			if(options.tip) {
-		    				Boxy.alert(Message.dynamic(result));
+		    				Boxy.alert("<i class='info'></i><span>" + Message.dynamic(result) + "!</span>");
 		    			}
 		    			if(result == "success") {
 		    				$(".close").click();

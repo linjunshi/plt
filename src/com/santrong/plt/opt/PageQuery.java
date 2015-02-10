@@ -12,7 +12,7 @@ public class PageQuery {
 	private int pageNum = 1; // 当前页，1开始计算
 	private int count; // 数据总量
 	private int pageSize = 16; // 每页大小
-	private int showSize = 6; // 显示分页数
+	private int showSize = 5; // 显示分页数
 	private int prevInsert = 0; //前置插入混淆数据量
 	
 	private String orderBy;
