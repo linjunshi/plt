@@ -42,7 +42,7 @@
 								<input type="password" name="password" placeholder="密码" class="con_user" required />
 							</p>
 							<p>
-								<a href="javascript:void(0);" class="con_user_but form_submit">登录</a>
+								<a href="javascript:void(0);" class="con_user_but form_submit login_submit">登录</a>
 								<a href="${ctx}/account/regist" class="con_user_but">注册</a>
 								<a href="${ctx}/account/forgotPwd" target="_blank" class=" con_not_psd">忘记密码</a>
 							</p>

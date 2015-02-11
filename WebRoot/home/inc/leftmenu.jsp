@@ -12,7 +12,7 @@
 					<c:if test="${sessionScope.loginUser.student}">
 					<li><a href="${ctx}/personal/center" class='pt4 <c:if test="${flag == 'center'}">pt4_hover</c:if>' >最新动态</a></li>
 					<li><a href="${ctx}/history/list" class='pt4 <c:if test="${flag == 'history'}">pt4_hover</c:if>' >我看过的</a></li>
-					<li><a href="${ctx}/competition/list" class='pt5 <c:if test="${flag == 'competition'}">pt5_hover</c:if>' >我的练习</a></li>
+					<%-- <li><a href="${ctx}/competition/list" class='pt5 <c:if test="${flag == 'competition'}">pt5_hover</c:if>' >我的练习</a></li> --%>
 					<li><a href="${ctx}/collection" class='pt6 <c:if test="${flag == 'collection'}">pt6_hover</c:if>' >我的收藏</a></li>
 					<li><a href="${ctx}/comment" class='pt7 <c:if test="${flag == 'comment'}">pt7_hover</c:if>' >我的评论</a></li>
 					<li><a href="${ctx}/story/list" class='pt8 <c:if test="${flag == 'story'}">pt8_hover</c:if>' >剧本故事</a></li>
@@ -28,10 +28,10 @@
 					</c:if>
 					<c:if test="${sessionScope.loginUser.teacher}">
 					<li>---------------------------------</li>
-					<li><a href="${ctx}/manage/live" class='pt11 <c:if test="${flag == 'live'}">pt11_hover</c:if>' >待上课程</a></li>
-                    <li><a href="${ctx}/manage/course" class='pt11 <c:if test="${flag == 'course'}">pt11_hover</c:if>' >课程管理</a></li>
+					<%-- <li><a href="${ctx}/manage/live" class='pt11 <c:if test="${flag == 'live'}">pt11_hover</c:if>' >待上课程</a></li> --%>
+                    <%-- <li><a href="${ctx}/manage/course" class='pt11 <c:if test="${flag == 'course'}">pt11_hover</c:if>' >课程管理</a></li> --%>
                     <li><a href="${ctx}/manage/weike" class='pt11 <c:if test="${flag == 'weike'}">pt11_hover</c:if>' >微课管理</a></li>
-                    <li><a href="${ctx}/manage/file" class='pt11 <c:if test="${flag == 'file'}">pt11_hover</c:if>' >课件管理</a></li>
+                    <%-- <li><a href="${ctx}/manage/file" class='pt11 <c:if test="${flag == 'file'}">pt11_hover</c:if>' >课件管理</a></li> --%>
                     <li><a href="${ctx}/manage/question/list" class='pt11 <c:if test="${flag == 'question_list'}">pt11_hover</c:if>' >我的题库</a></li>
 					</c:if>
 					<c:if test="${sessionScope.loginUser.superMan}">
