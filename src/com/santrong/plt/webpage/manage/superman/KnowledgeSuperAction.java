@@ -168,6 +168,7 @@ public class KnowledgeSuperAction  extends SuperManBaseAction{
 	
 	@RequestMapping(value="/tree", method=RequestMethod.GET)
 	public String knowledgeTreeShow() {
+		this.getRequest().setAttribute("flag", "knowledge_tree");
 		return "/manage/superman/knowledgeMTree";
 	}
 	

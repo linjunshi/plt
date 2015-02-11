@@ -56,6 +56,7 @@ public class WeikeMAction extends TeacherBaseAction {
 			
 			request.setAttribute("courseList", courseList);
 			request.setAttribute("query", query);
+			request.setAttribute("flag", "weike");
 			
 		} catch (Exception e) {
 			Log.printStackTrace(e);

@@ -1,4 +1,4 @@
-package com.santrong.plt.webpage.friend.dao;
+package com.santrong.plt.webpage.manage.student.dao;
 
 import java.util.List;
 
@@ -8,7 +8,7 @@ import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
-import com.santrong.plt.webpage.friend.entry.UserRelationItem;
+import com.santrong.plt.webpage.manage.student.entry.UserRelationItem;
 import com.santrong.plt.webpage.teacher.entry.UserItem;
 
 /**

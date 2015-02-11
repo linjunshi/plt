@@ -179,21 +179,6 @@ IndexClass.prototype = {
 		});
 	},
 	
-	// 找朋友页面
-	friend : function() {
-		
-		// 申请好友时候弹出信息框
-		$(".addFriend").click(function() {
-			var userId = $(this).attr("rel");
-			Boxy.load(Globals.ctx + "/friend/require?userId=" +userId, {title : "验证消息",
-				afterShow : function(){
-					// 申请好友异步方式提交
-					$(".submit").bindFormClick();
-				}
-			});
-		});
-	},
-	
 	// 挑战页面
 	war : function() {
 		

@@ -1,22 +1,28 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="inc/common.jsp"%>
-<c:set var="title" value="三简在线教育平台" ></c:set>
-<c:set var="keywords" value="456" ></c:set>
-<c:set var="description" value="789" ></c:set>
-<%@ include file="inc/header.jsp"%>
+<c:set var="title" value="课云" ></c:set>
+<c:set var="keywords" value="课云教育" ></c:set>
+<c:set var="description" value="在线教育 私人定制 知识图谱" ></c:set>
+<%@ include file="inc/header_new.jsp"%>
 <script type="text/javascript">
 var Globals = {};
 Globals.ctx = "${ctx}";
 Globals.lang = "${lang}";
-Globals.page = "Manage_index";
+Globals.page = "Manage_forgotPwd";
 </script>
+<style type="text/css">
+.system_tip {position: relative;float: left; width:350px; line-height:26px;min-height:26px; margin:0px 200px 10px 100px; border:solid 1px #F5D8A7; border-radius:2px; background-color:#FFF6DB;padding-left: 10px;  }
+</style>
 </head>
 <body>
-	<%@ include file="inc/top_bg.jsp"%>
-	<div id="container_box">
-		<div id="container_content">
-			<div class="sectionMain clr">
-				<c:if test="${tipError != null && fn:length(tipError)  > 0}">
+<div class="header">
+	<%@ include file="inc/top_new.jsp"%>
+	<div class="content clearfix">
+			<div class="sh_info_r">
+				<div class="st_titile_r sh_title">
+					<h2>知识点树</h2>
+				</div>
+					<c:if test="${tipError != null && fn:length(tipError)  > 0}">
 					<div class="system_tip">
 						<c:forEach items="${tipError}" var="tip">
 						<p>${tip.msg}</p>
@@ -44,6 +50,6 @@ Globals.page = "Manage_index";
 			</div>
 		</div>
 	</div>
-	<%@ include file="inc/friendlylink.jsp"%>
+<div class="footer"></div>
 </body>
 </html>
