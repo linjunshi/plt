@@ -34,7 +34,7 @@ public class ClassTag {
 		ParamHelper param = ThreadUtils.getParam();
 		if(param != null) {
 			String a = param.getParamByStart(start);
-			if((a == null && compare == null) || (a != null && a.equals(compare))) {
+			if((a == null && compare == "") || (a != null && a.equals(compare))) {
 				return "current";
 			}
 		}

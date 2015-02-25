@@ -170,7 +170,6 @@ public class StudyMAction extends StudentBaseAction {
 		if (unitList != null && unitList.size() > 0) {
 			for (LessonUnitItem luItem : unitList) {
 				WeikeDao weikeDao = new WeikeDao();
-				//"j407932252m5l14va06360x629w28v05"
 				List<WeikeOrderView> weikeOrderList = weikeDao.selectWeikeOrderByUnitId(luItem.getId(), this.currentUser().getId());// 获取单元所属微课
 				luItem.setWeikeList(weikeOrderList);
 				lessonUnitList.add(luItem);
