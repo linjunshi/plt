@@ -34,7 +34,7 @@ Globals.page = "Manage_syllabus";
 					<c:forEach items="${lessonUnit.weikeList}" var="weike" varStatus="st">
 						<li>
 							<p><a href="${ctx}/weike/${weike.id}.html"><img src="${ctx}${weike.thumbnail}" width="200"height="100"></a></p>
-							<p class="sc_co_title">${weike.courseName}</p>
+							<p class="sc_co_title" title="${weike.courseName}">${weike.courseName}</p>
 							<p>时长: ${weike.duration}分钟</p>
 							<p>
 								<c:if test="${weike.orderStatus == 1}"><a href="javascript:void(0);" class="guomai">已购买</a></c:if>

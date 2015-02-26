@@ -33,7 +33,7 @@ Globals.page = "Index_course";
 					<ul class="filter_ul">
 						<li class="${class : startEq('level', null)}"><a href="${ctx}/course/${subject}${link : startRemove('level')}">全部</a></li>
 						<c:forEach items="${levelList}" var="levelItem">
-						<li class="${class : startEq('level', levelItem.levelEnName)}"><a href="${ctx}/course/${subject}${link : startReplace('level', levelItem.levelEnName)}">${levelItem.levelName}</a></li>
+							<li class="${class : startEq('level', levelItem.levelEnName)}"><a href="${ctx}/course/${subject}${link : startReplace('level', levelItem.levelEnName)}">${levelItem.levelName}</a></li>
 						</c:forEach>
 					</ul>
 			    </div>

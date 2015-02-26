@@ -396,7 +396,7 @@ span.form_error, span.form_success,span.form_tips{border-width:1px;display:inlin
 .school_con .guomai { position:absolute; bottom:5px; right:5px; padding:2px 10px; background:#ccc; color:#fff;}
 .school_con .notguomai { position:absolute; bottom:5px; right:5px; padding:2px 15px; background:#f90; color:#fff;}
 .school_con .notguomai:hover{ background:#f30;}
-.sc_co_title { font-size:16px; color:#333;}
+.sc_co_title { font-size:16px; color:#333; width:200px; overflow:hidden;white-space:nowrap;}
 
 /*--------------------个人信息-----------------*/
 

@@ -207,6 +207,31 @@ public class WeikeMAction extends TeacherBaseAction {
 		return this.redirect("/manage/weike/modify?courseId=" + courseForm.getId());
 	}
 	
+	/**
+	 * 删除一条课程记录（伪删除）
+	 * @param courseId
+	 * @return
+	 */
+	@RequestMapping(value="/delete", method=RequestMethod.POST)
+	public String deleteWeike(String courseId){
+		int pageNum = this.getIntParameter("page");
+		if(pageNum == 0) {
+			pageNum = 1;
+		}
+		try {
+			CourseDao courseDao = new CourseDao();
+			CourseItem courseItem = courseDao.selectById(courseId);
+			// 判断当前用户是否是该课程的所有者
+			if(courseItem == null || !courseItem.getOwnerId().equals(this.currentUser().getId())) {
+				return this.redirect("/");
+			}
+			courseDao.deleteById(courseId);
+		} catch (Exception e) {
+			Log.printStackTrace(e);
+		}
+		return this.redirect("/manage/weike?page="+pageNum);
+	}
+	
 	@RequestMapping("/add")
 	public String insert() {
 		//TODO 添加课程
