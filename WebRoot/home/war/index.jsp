@@ -19,8 +19,8 @@ Globals.page = "Index_war";
 			<div class="question_bg">
 		    	<div class="que_but_list">
 					<a href="javascript:void(0)" class="que_but_b egg" rel="person">个人练习</a>
-					<a href="javascript:void(0)" class="que_but_d egg" rel="group">多人竞赛</a>
-					<a href="javascript:void(0)" class="que_but_e egg" rel="game">趣味游戏</a>
+					<a href="javascript:void(0)" class="que_but_d" rel="group">多人竞赛</a>
+					<a href="javascript:void(0)" class="que_but_e" rel="game">趣味游戏</a>
 				</div>
 			</div>
 		</div>
