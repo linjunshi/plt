@@ -14,11 +14,12 @@ import com.santrong.plt.webpage.story.entry.StoryItem;
  */
 public interface StoryMapper {
 
-	@Insert("insert into story values(#{id}, #{storyName}, #{url}, #{duration}, #{subjectId}, #{remark}, #{limitCount}, #{storyType}, #{ownerId}, #{status}, #{cts}, #{uts})")
+	@Insert("insert into story values(#{id}, #{storyName}, #{storyEname}, #{url}, #{duration}, #{subjectId}, #{remark}, #{limitCount}, #{storyType}, #{ownerId}, #{status}, #{cts}, #{uts})")
 	int insert(StoryItem storyItem);
 	
 	@Update("update story set "
 			+ "storyName = #{storyName},"
+			+ "storyEname = #{storyEname},"
 			+ "url = #{url},"
 			+ "duration = #{duration},"
 			+ "subjectId = #{subjectId},"
@@ -33,6 +34,9 @@ public interface StoryMapper {
 	
 	@Select("select * from story where id = #{id}")
 	StoryItem selectById(String id);
+	
+	@Select("select * from story where storyEname = #{ename}")
+	StoryItem selectByEname(String ename);
 	
 	@Delete("delete from story where id = #{id} ")
 	int delete(String id);

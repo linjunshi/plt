@@ -1,3 +1,7 @@
+-- 2015-02-26 weinianjie
+alter table story add column storyEname varchar(128) not null comment '剧本英文名称' after storyName;
+insert into story values('10000', '美丽的公鸡', 'meilidegongji', '', '10:10', '10000', '', 3, 0, '10000', 0, now(), now());
+
 -- 2015-02-06 weinianjie (2015-02-07 hwcloud)
 update user set role=127 where username='admin';
 
