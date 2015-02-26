@@ -25,7 +25,7 @@
 				<div class="hea_nav">
 					<a href="${ctx}/" class="a_a">首页</a>
 					<a href="${ctx}/weike" class="a_b">学堂</a>
-					<a href="${ctx}/course" class="a_c">直播课</a>
+					<a href="${ctx}/story" class="a_c">情景剧</a>
 					<a href="${ctx}/war" class="a_d">挑战</a>
 				</div>
 				<div class="gun_img">
@@ -42,7 +42,7 @@
 								<input type="password" name="password" placeholder="密码" class="con_user" required />
 							</p>
 							<p>
-								<a href="javascript:void(0);" class="con_user_but form_submit">登录</a>
+								<a href="javascript:void(0);" class="con_user_but form_submit login_submit">登录</a>
 								<a href="${ctx}/account/regist" class="con_user_but">注册</a>
 								<a href="${ctx}/account/forgotPwd" target="_blank" class=" con_not_psd">忘记密码</a>
 							</p>
@@ -51,7 +51,6 @@
 					<c:if test="${sessionScope.loginUser != null}">
 						<div class="user_info_hidd">
 							<h2 class="user_info_sid"><img src="${ctx}${sessionScope.loginUser.headPhoto}" width="50" height="50"><span>欢迎你，${sessionScope.loginUser.showName}</span></h2>
-							<p><a href="${ctx }/personal/findFriend">找找朋友</a></p>
 						</div>
 					</c:if>
 				</div>

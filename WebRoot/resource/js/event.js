@@ -299,6 +299,32 @@ jQuery(function($) {
 // 所有页面公用的js
 function init() {
 
+	// 回车和esc
+	$(document).unbind("keydown").keydown(function(e){
+		if(e.keyCode==13){// 回车
+			var el;			
+			// 浮动对话框
+			el = $(".answers .boxy-btn1");
+			if(el.size() > 0) {
+				el.click();
+				return;
+			}
+			
+			// 登录
+			el = $(".login_submit");
+			if(el.size() > 0) {
+				el.click();
+				return;
+			}
+			
+		}else if(e.keyCode==27) {// ESC
+			// 清除所有浮动层---一次性移除，不一层层移除了，麻烦
+			$(".boxy-wrapper").remove();
+			$(".boxy-modal-blackout").remove();
+			
+		}
+	});	
+	
 	// form提交校验数据
 	$(".common_form").submit(function() {
 		return $(this).validate();

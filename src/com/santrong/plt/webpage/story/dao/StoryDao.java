@@ -72,6 +72,18 @@ public class StoryDao extends BaseDao{
 		return null;
 	} 
 	
+	public StoryItem selectByEname(String storyEname){
+		try {
+			StoryMapper mapper = this.getMapper(StoryMapper.class);
+			if (mapper != null) {
+				return mapper.selectByEname(storyEname);
+			}
+		} catch (Exception e) {
+			Log.printStackTrace(e);
+		}
+		return null;
+	} 	
+	
 	/**
 	 * 获取当前用户的浏览过的剧本故事列表
 	 * @param query

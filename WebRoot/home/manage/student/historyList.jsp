@@ -17,20 +17,7 @@ Globals.page = "Manage_historyList";
 		<div class="content clearfix">
 			<%@ include file="../../inc/leftmenu.jsp"%>
 			<div class="qu_right">
-				<div class="qu_right_it">
-					<h2>${sessionScope.loginUser.showName}</h2>
-					<p>你是我的小苹果</p>
-					<p>
-						财富：012<a href="#">充值</a><span>积分：2365</span>
-					</p>
-					<p>
-						<a href="#">好友<b>12</b></a>｜<a href="#">关注<b>12</b></a>|<a
-							href="#">粉丝<b>12</b></a>
-					</p>
-					<p class="qu_but">
-						<a href="#">按钮</a>
-					</p>
-				</div>
+				<%@ include file="../../inc/person_header.jsp"%>
 				<div class="qu_ri_school">
 					<div class="sh_ke clearfix">
 						<h2>最近浏览过的</h2>

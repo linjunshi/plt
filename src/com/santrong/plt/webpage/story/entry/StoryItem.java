@@ -11,6 +11,7 @@ public class StoryItem {
 	
 	private String id;
 	private String storyName;
+	private String storyEname;
 	private String url;
 	private String duration;
 	private String subjectId;
@@ -27,6 +28,12 @@ public class StoryItem {
 	}
 	public void setId(String id) {
 		this.id = id;
+	}
+	public String getStoryEname() {
+		return storyEname;
+	}
+	public void setStoryEname(String storyEname) {
+		this.storyEname = storyEname;
 	}
 	public String getStoryName() {
 		return storyName;

@@ -8,7 +8,7 @@
 var Globals = {};
 Globals.ctx = "${ctx}";
 Globals.lang = "${lang}";
-Globals.page = "Index_war";
+Globals.page = "Story_direction";
 </script>
 </head>
 <body>
@@ -16,13 +16,7 @@ Globals.page = "Index_war";
 	<%@ include file="../inc/top_new.jsp"%>
 	<div class="content clearfix">
 		<div class="questions_list">
-			<div class="question_bg">
-		    	<div class="que_but_list">
-					<a href="javascript:void(0)" class="que_but_b egg" rel="person">个人练习</a>
-					<a href="javascript:void(0)" class="que_but_d" rel="group">多人竞赛</a>
-					<a href="javascript:void(0)" class="que_but_e" rel="game">趣味游戏</a>
-				</div>
-			</div>
+			现在开始教你怎么使用
 		</div>
 	</div>
 </div>

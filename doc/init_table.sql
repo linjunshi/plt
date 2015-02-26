@@ -506,6 +506,7 @@ drop table if exists story;
 create table story(
 	id varchar(32) not null comment 'UUID',
 	storyName varchar(128) not null comment '剧本名称',
+	storyEname varchar(128) not null comment '剧本英文名称',
 	url varchar(256) comment '封面',
 	duration varchar(32) comment '时长',
 	subjectId varchar(32) not null comment '所属科目',
