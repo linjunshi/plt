@@ -11,7 +11,7 @@ Globals.lang = "${lang}";
 Globals.page = "Manage_personalInfo";
 </script>
 <style type="text/css">
-.system_tip {position: relative;float: left; width:350px; line-height:26px;min-height:26px; margin:0px 200px 10px 100px; border:solid 1px #F5D8A7; border-radius:2px; background-color:#FFF6DB;padding-left: 10px;  }
+.system_tip {position: relative;float: left; width:380px; line-height:26px;min-height:26px; margin:0px 200px 10px 100px; border:solid 1px #F5D8A7; border-radius:2px; background-color:#FFF6DB;padding-left: 10px;  }
 </style>
 </head>
 <body>
