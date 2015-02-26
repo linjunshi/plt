@@ -17,8 +17,8 @@
 					<li><a href="${ctx}/comment" class='pt7 <c:if test="${flag == 'comment'}">pt7_hover</c:if>' >我的评论</a></li>
 					<li><a href="${ctx}/story/list" class='pt8 <c:if test="${flag == 'story'}">pt8_hover</c:if>' >剧本故事</a></li>
 					<li><a href="${ctx}/personal/friend" class='pt9 <c:if test="${flag == 'friend'}">pt9_hover</c:if>' >朋友圈</a></li>
-					<li>---------------------------------</li>
-					<li><a href="#" class='pt10 <c:if test="${flag == 'stat'}">pt10_hover</c:if>' >学习统计</a></li>
+<%-- 					<li>---------------------------------</li>
+					<li><a href="#" class='pt10 <c:if test="${flag == 'stat'}">pt10_hover</c:if>' >学习统计</a></li> --%>
 					<li>---------------------------------</li>
 					</c:if>
 					<li><a href="${ctx}/account/personalInfo" class='pt11 <c:if test="${flag == 'personalInfo'}">pt11_hover</c:if>' >个人信息</a></li>
