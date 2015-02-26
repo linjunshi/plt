@@ -98,7 +98,7 @@ ul.ztree.zTreeDragUL {margin:0; padding:0; position:absolute; width:auto; height
 	background:none;
 }*/
 
-ul.ztree {margin-top: 0px;/* border: 1px solid #617775; */background: #fff;width:100%;height:100%;/* overflow-y:scroll; */overflow-x:auto;}
+ul.ztree {margin-top: 0px;/* border: 1px solid #617775; */background: #fff;width:100%;height:100%;overflow-y: hidden;overflow-x:auto;}
 /**--------------根节点默认图片------START-------------*/
 .ztree li span.button.pIconRoot_ico_open{margin-right:2px; background: url(../images/ztree/diy/1_open.png) no-repeat scroll 0 0 transparent; vertical-align:top; *vertical-align:middle}
 .ztree li span.button.pIconRoot_ico_close{margin-right:2px; background: url(../images/ztree/diy/1_close.png) no-repeat scroll 0 0 transparent; vertical-align:top; *vertical-align:middle}

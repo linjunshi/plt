@@ -40,11 +40,11 @@ Globals.page = "Manage_weikeList";
 	                <table border="1" class="sh_coll_tab">
 	                    <colgroup>
 	                    <col width="50">
-	                    <col width="330">
+	                    <col width="310">
 	                    <col width="90">
-	                    <col width="130">
+	                    <col width="110">
 	                    <col width="80">
-	                    <col width="80">
+	                    <col width="120">
 	                    </colgroup>
 	                    <thead>
 	                        <tr>
@@ -80,7 +80,21 @@ Globals.page = "Manage_weikeList";
 		                            	</c:if>
 			                        </td>
 		                            <td class="btn_question_operation">
-			                            <a href="${ctx}/manage/weike/modify?courseId=${course.id}&page=${query.pageNum}">修改</a>
+			                            <div class="btn_question_edit">
+											<form action="${ctx}/manage/weike/modify" method="get">
+					                            <%-- <a href="${ctx}/manage/weike/modify?courseId=${course.id}&page=${query.pageNum}">修改</a> --%>
+												<input type="hidden" value="${query.pageNum}" name="page" />
+												<input type="hidden" value="${course.id}" name="courseId" />
+												<input type="submit" value="修改" />
+											</form>
+										</div>
+										<div class="btn_question_delete">
+											<form action="${ctx}/manage/weike/delete" method="post">
+												<input type="hidden" value="${query.pageNum}" name="page" />
+												<input type="hidden" value="${course.id}" name="courseId" />
+												<input type="submit" value="删除" />
+											</form>
+										</div>			
 		                            </td>
 		                        </tr>
 	                    	</c:forEach>

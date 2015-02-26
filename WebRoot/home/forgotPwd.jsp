@@ -20,7 +20,7 @@ Globals.page = "Manage_forgotPwd";
 	<div class="content clearfix">
 			<div class="sh_info_r">
 				<div class="st_titile_r sh_title">
-					<h2>知识点树</h2>
+					<h2>找回密码</h2>
 				</div>
 					<c:if test="${tipError != null && fn:length(tipError)  > 0}">
 					<div class="system_tip">
@@ -35,7 +35,7 @@ Globals.page = "Manage_forgotPwd";
 						<form method="post" action="${ctx}/account/mailPwd" class="form_info common_form"
 							id="register_form">
 							<div class="form_item">
-								<label for="pwd">注册邮箱：</label>
+								<label for="pwd">通过邮箱找回：</label>
 								<div class="form_field">
 									<input name="email" class="form_text" required required_Mail/>
 									<span class="not-empty" title='此项为必填项'>*</span>
