@@ -135,6 +135,21 @@ public class UserRelationDao extends BaseDao {
 	}
 	
 	/**
+	 * 查询用户的好友数量
+	 * @param userId
+	 * @return
+	 */
+	public int getFriendCount(String userId) {
+		try{
+			UserRelationMapper mapper = this.getMapper(UserRelationMapper.class);
+			return mapper.getFriendCount(userId);
+		}catch(Exception e) {
+			Log.printStackTrace(e);
+		}
+		return 0;		
+	}	
+	
+	/**
 	 * 根据两用户查询关系
 	 * @param userId1
 	 * @param userId2

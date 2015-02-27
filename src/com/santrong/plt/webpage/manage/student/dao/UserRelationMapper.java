@@ -29,6 +29,11 @@ public interface UserRelationMapper {
 			+ "where a.result=1")
 	List<UserItem> selectFriendList(String userId);
 	
+	@Select("select count(*) from user_relation a "
+			+ "right join user b on (a.userId1=b.id and a.userId2=#{userId}) or (a.userId2=b.id and a.userId1=#{userId}) "
+			+ "where a.result=1")	
+	int getFriendCount(String userId);
+	
 	@Select("select * from user_relation where (userId1=#{userId1} and userId2=#{userId2}) or (userId1=#{userId2} and userId2=#{userId1})")
 	UserRelationItem selectByTwoUser(@Param("userId1")String userId1, @Param("userId2")String userId2);
 	
