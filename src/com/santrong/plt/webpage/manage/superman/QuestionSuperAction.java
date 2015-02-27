@@ -45,6 +45,7 @@ public class QuestionSuperAction extends SuperManBaseAction {
 			TrainQuestionQuery query = new TrainQuestionQuery();
 			query.setPageNum(pageNum);
 //			query.setUserId(user.getId());//查看
+//			query.setPageSize(1);
 			query.setCount(tqDao.selectApproveCountByQuery(query));
 			query.setOrderBy("cts");
 			query.setOrderRule("desc");

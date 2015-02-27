@@ -54,6 +54,85 @@ public class UserRelationDao extends BaseDao {
 		}
 		return null;		
 	}
+
+	/**
+	 * 查询用户的好友列表， 分页
+	 * @param query
+	 * @return
+	 */
+	public 	List<UserItem> selectFriendByQuery(UserQuery query) {
+		List<UserItem> list = new ArrayList<UserItem>();
+		
+		try{
+			Statement criteria = new Statement("user_relation", "a");
+			criteria.setFields("b.*");
+			criteria.rjoin("user", "b", or(and(eq("a.userId1","b.id"), eq("a.userId2", query.getCurrentUserId())) ,
+					and(eq("a.userId2","b.id"), eq("a.userId1", query.getCurrentUserId()))));
+//			on (a.userId1=b.id and a.userId2=#{userId}) or (a.userId2=b.id and a.userId1=#{userId})
+			// 关键词
+//			if(!StringUtils.isNullOrEmpty(query.getKeywords())) {
+//				criteria.where(or(
+//						like("b.username", "?")));
+//				criteria.setStringParam("%" + query.getKeywords() + "%");
+//			}
+			// 同意 申请加为好友
+			criteria.where(eq("a.result", UserRelationItem.Result_Agree));
+			// 排序
+			if(!StringUtils.isNullOrEmpty(query.getOrderBy())) {
+				if("desc".equalsIgnoreCase(query.getOrderRule())) {
+					criteria.desc("a." + query.getOrderBy());
+				}else {
+					criteria.asc("a." + query.getOrderBy());
+				}
+			}
+			
+			// 分页
+			criteria.limit(query.getLimitBegin(), query.getLimitEnd());
+			
+			Connection conn = ThreadUtils.currentConnection();
+			PreparedStatement stm = criteria.getRealStatement(conn);
+			ResultSet rs = stm.executeQuery();
+			while(rs.next()){
+				UserItem item = new UserItem();
+				BeanUtils.Rs2Bean(rs, item);
+				list.add(item);
+			}
+			
+		}catch(Exception e){
+			Log.printStackTrace(e);
+		}
+		
+		return list;
+	}	
+	
+	/**
+	 * 查询用户的好友列表总数
+	 * @param query
+	 * @return
+	 */
+	public 	int selectFriendCountByQuery(UserQuery query) {
+		int count = 0;
+		
+		try{
+			Statement criteria = new Statement("user_relation", "a");
+			criteria.setFields("count(*) cn");
+			criteria.rjoin("user", "b", or(and(eq("a.userId1","b.id"), eq("a.userId2", query.getCurrentUserId())) ,
+					and(eq("a.userId2","b.id"), eq("a.userId1", query.getCurrentUserId()))));
+			// 同意 申请加为好友
+			criteria.where(eq("a.result", UserRelationItem.Result_Agree));
+			
+			Connection conn = ThreadUtils.currentConnection();
+			PreparedStatement stm = criteria.getRealStatement(conn);
+			ResultSet rs = stm.executeQuery();
+			rs.next();
+			count = rs.getInt("cn");
+			
+		}catch(Exception e){
+			Log.printStackTrace(e);
+		}
+		
+		return count;
+	}
 	
 	/**
 	 * 根据两用户查询关系

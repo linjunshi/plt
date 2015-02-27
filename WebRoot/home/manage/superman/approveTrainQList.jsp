@@ -72,7 +72,7 @@ Globals.page = "Manage_approveTrainQList";
 								<tfoot>
 									<tr>
 										<td colspan="7">
-											<c:set var="basicUrl" value="${ctx}/super/question/approveTrainQList" />
+											<c:set var="basicUrl" value="${ctx}/super/question/approve" />
 				            				<%@ include file="../../inc/pagination_new.jsp"%>
 										</td>
 									</tr>

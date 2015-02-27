@@ -116,10 +116,22 @@ public class PersonalAction extends StudentBaseAction {
 	 */
 	@RequestMapping("/friend")
 	public String friend() {
+		int page = this.getIntParameter("page");
+		if(page == 0) {
+			page = 1;
+		}
 		
+		UserQuery query = new UserQuery();
+		query.setPageNum(page);
+		if(this.currentUser() != null) {
+			query.setCurrentUserId(this.currentUser().getId());
+		}
+//		query.setPageSize(1);
 		UserRelationDao dao = new UserRelationDao();
-		List<UserItem> userList = dao.selectFriendList(this.currentUser().getId());
+		query.setCount(dao.selectFriendCountByQuery(query));
+		List<UserItem> userList = dao.selectFriendByQuery(query);
 		
+		this.getRequest().setAttribute("query", query);
 		this.getRequest().setAttribute("userList", userList);
 		this.getRequest().setAttribute("flag", "friend");
 		return "manage/student/personal/friend";
