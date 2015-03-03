@@ -62,6 +62,6 @@ Globals.page = "Manage_syllabus";
 
 	</div>
 </div>
-<div class="footer"></div>
+<%@ include file="../../inc/footer.jsp"%>
 </body>
 </html>

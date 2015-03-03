@@ -89,6 +89,6 @@ Globals.page = "Manage_myTrainMList";
 		</div>
 	</div>
 </div>
-<div class="footer"></div>
+<%@ include file="../../inc/footer.jsp"%>
 </body>
 </html>

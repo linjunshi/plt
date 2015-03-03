@@ -41,6 +41,6 @@ Globals.page = "Manage_findFriend";
 			</div>
 		</div>
 	</div>
-<div class="footer"></div>
+<%@ include file="../../../inc/footer.jsp"%>
 </body>
 </html>

@@ -42,6 +42,6 @@ Globals.page = "Manage_personalCenter";
 		</div>
 	</div>
 </div>
-<div class="footer"></div>
+<%@ include file="../../inc/footer.jsp"%>
 </body>
 </html>

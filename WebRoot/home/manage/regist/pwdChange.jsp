@@ -67,6 +67,6 @@ Globals.page = "Manage_changPwd";
 		</div>
 	</div>
 </div>
-<div class="footer"></div>
+<%@ include file="../../inc/footer.jsp"%>
 </body>
 </html>

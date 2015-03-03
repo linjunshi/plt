@@ -145,6 +145,6 @@ Globals.page = "Manage_weikeAdd";
 		</div>
 	</div>
 </div>
-<div class="footer"></div>
+<%@ include file="../../inc/footer.jsp"%>
 </body>
 </html>

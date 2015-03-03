@@ -80,6 +80,6 @@ Globals.page = "Index_personExams";
 			</c:forEach>
 		</div>
 	</div>
-	<div class="footer "></div>
+<%@ include file="../inc/footer.jsp"%>
 </body>
 </html>

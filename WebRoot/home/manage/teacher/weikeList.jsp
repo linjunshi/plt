@@ -103,6 +103,6 @@ Globals.page = "Manage_weikeList";
 		</div>
 	</div>
 </div>
-<div class="footer"></div>
+<%@ include file="../../inc/footer.jsp"%>
 </body>
 </html>

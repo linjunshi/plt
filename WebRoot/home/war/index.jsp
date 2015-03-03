@@ -26,6 +26,6 @@ Globals.page = "Index_war";
 		</div>
 	</div>
 </div>
-<div class="footer "> </div>
+<%@ include file="../inc/footer.jsp"%>
 </body>
 </html>

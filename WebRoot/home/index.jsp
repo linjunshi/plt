@@ -68,9 +68,9 @@
 			<div class="con_col_list">
 				<ul>
 					<c:forEach items="${xiaoxue_courseList}" var="item" varStatus="st">
-						<li class="<c:if test="${(st.index+1)%5 == 0}">mar</c:if>"><a
+						<li class="<c:if test="${(st.index+1)%4 == 0}">mar</c:if>"><a
 							href="${ctx}/${xiaoxue_courseType}/${item.id}.html" target="_blank"><img
-								src="${ctx}${item.thumbnail}" width="166" height="180"></a>
+								src="${ctx}${item.thumbnail}" width="220" height="140"></a>
 							<h2>${item.courseName}</h2>
 							<p class="con_listen">
 								购买：<b>${item.saleCount}</b>
@@ -84,6 +84,6 @@
 			</div>
 		</div>
 	</div>
-	<div class="footer "></div>
+	<%@ include file="inc/footer.jsp"%>
 </body>
 </html>

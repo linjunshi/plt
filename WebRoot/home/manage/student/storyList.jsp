@@ -38,6 +38,6 @@ Globals.page = "Manage_storyList";
 			</div>
 		</div>
 	</div>
-<div class="footer"></div>
+<%@ include file="../../inc/footer.jsp"%>
 </body>
 </html>

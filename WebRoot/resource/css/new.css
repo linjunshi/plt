@@ -150,15 +150,16 @@ span.form_error, span.form_success,span.form_tips{border-width:1px;display:inlin
 .con_column ul li { float:left;}
 .con_column ul li a{ float:right; display:block;width:100px; height:60px; background:url(../images/list_bg.png) left top; text-align:center; line-height:60px; font-size:20px; text-indent:5px;color:#09F;}
 .con_column ul li a:hover{ background:url(../images/list_bg_hover.png); color:#ab44da;}
+
 .con_col_list{ margin-top:20px; text-align:center;}
 .con_col_list ul{ float:left;}
-.con_col_list ul li{ float:left; display:block; width:168px; height:270px; margin:0 36px 25px 0; background:#ebebeb;  position:relative;}
-.con_col_list h2{ width:168px; font-size:18px; color:#000;}
+.con_col_list ul li{ float:left; display:block; width:220px; height:200px; margin:0 32px 25px 0; background:#ebebeb;  position:relative; border:1px #f1f1f1 solid;}
+.con_col_list h2{ width:220px; font-size:18px; color:#000; margin-top:5px;}
 .con_col_list p{ height:30px; line-height:22px;}
-.con_col_list .con_listen { position:absolute; left:5px; bottom:5px;}
+.con_col_list .con_listen { position:absolute; left:5px; bottom:0px;}
 .con_col_list .con_listen b{ color:#f00;}
 .con_col_list .con_but { width:70px; height:28px; display:block;position:absolute; right:5px; bottom:5px; background:url(../images/bottom_school.png) no-repeat right bottom; cursor:pointer;}
-.con_col_list ul li:hover{ box-shadow:0px 0px 8px #09F;}
+.con_col_list ul li:hover{ /*box-shadow:0px 0px 8px #09F;*/ border:1px #09F solid;}
 /*--------------------时间轴-----------------*/
 .time_shaft{ width:800px; margin:20px auto;}
 .time_main{ background:url(../images/time_img_a.jpg) repeat-y 10px top; display:block;padding-top:10px; }
@@ -188,7 +189,7 @@ span.form_error, span.form_success,span.form_tips{border-width:1px;display:inlin
 
 
 .questions_list{ width:1000px; margin:0 auto;
- background:url(../images/math-tb2.jpg) no-repeat left top,url(../images/math-tb.jpg) no-repeat left bottom,url(../images/math-repeat-bg.jpg) repeat-y left center; padding:15px 0 40px 0;}
+ /* background:url(../images/math-tb2.jpg) no-repeat left top,url(../images/math-tb.jpg) no-repeat left bottom,url(../images/math-repeat-bg.jpg) repeat-y left center;  */padding:15px 0 40px 0;}
 .filter_breadcrumb { width:960px; margin:0 auto; padding:10px 0;}
 .filter_content {display:inline-block; margin:3px 0;}
 .filter_title{ float:left; padding:0 5px;height:30px; line-height:30px; text-align:left; font-size:18px; color:#A6703D;}
@@ -308,24 +309,43 @@ span.form_error, span.form_success,span.form_tips{border-width:1px;display:inlin
 .qu_item ul li {width:200px; overflow:hidden;}
 .qu_item ul li a{ width:200px; display:block; padding:5px 0; height:35px; line-height:35px; color:#000; text-align:center;}
 .qu_item ul li a:hover{ background:#8f6239; color:#fff;}
-.qu_item .pt4 { background:url(../images/icon1.png) no-repeat 45px center;}
-.qu_item .pt5 { background:url(../images/icon1.png) no-repeat 45px center;}
-.qu_item .pt6 { background:url(../images/icon1.png) no-repeat 45px center;}
-.qu_item .pt7 { background:url(../images/icon1.png) no-repeat 45px center;}
-.qu_item .pt8 { background:url(../images/icon1.png) no-repeat 45px center;}
-.qu_item .pt9 { background:url(../images/icon1.png) no-repeat 45px center;}
-.qu_item .pt10 { background:url(../images/icon1.png) no-repeat 45px center;}
-.qu_item .pt11 { background:url(../images/icon1.png) no-repeat 45px center;}
-.qu_item .pt12 { background:url(../images/icon1.png) no-repeat 45px center;}
-.qu_item .pt4:hover,.qu_item .pt4_hover { background:#8f6239 url(../images/icon1_hover.png) no-repeat 45px center;color:#fff;}
-.qu_item .pt5:hover,.qu_item .pt5_hover { background:#8f6239 url(../images/icon1_hover.png) no-repeat 45px center;color:#fff;}
-.qu_item .pt6:hover,.qu_item .pt6_hover { background:#8f6239 url(../images/icon1_hover.png) no-repeat 45px center;color:#fff;}
-.qu_item .pt7:hover,.qu_item .pt7_hover { background:#8f6239 url(../images/icon1_hover.png) no-repeat 45px center;color:#fff;}
-.qu_item .pt8:hover,.qu_item .pt8_hover { background:#8f6239 url(../images/icon1_hover.png) no-repeat 45px center;color:#fff;}
-.qu_item .pt9:hover,.qu_item .pt9_hover { background:#8f6239 url(../images/icon1_hover.png) no-repeat 45px center;color:#fff;}
-.qu_item .pt10:hover,.qu_item .pt10_hover { background:#8f6239 url(../images/icon1_hover.png) no-repeat 45px center;color:#fff;}
-.qu_item .pt11:hover,.qu_item .pt11_hover { background:#8f6239 url(../images/icon1_hover.png) no-repeat 45px center;color:#fff;}
-.qu_item .pt12:hover,.qu_item .pt12_hover { background:#8f6239 url(../images/icon1_hover.png) no-repeat 45px center;color:#fff;}
+.qu_item .center { background:url(../images/icon1.png) no-repeat 45px center;}
+.qu_item .history { background:url(../images/icon1.png) no-repeat 45px center;}
+.qu_item .competition { background:url(../images/ico2.png) no-repeat 45px center;}
+.qu_item .collection { background:url(../images/ico3.png) no-repeat 45px center;}
+.qu_item .comment { background:url(../images/ico4.png) no-repeat 45px center;}
+.qu_item .story { background:url(../images/ico5.png) no-repeat 45px center;}
+.qu_item .friend { background:url(../images/ico6.png) no-repeat 45px center;}
+.qu_item .stat { background:url(../images/ico7.png) no-repeat 45px center;}
+.qu_item .personalInfo { background:url(../images/ico8.png) no-repeat 45px center;}
+.qu_item .changePwd { background:url(../images/icon1.png) no-repeat 45px center;}
+.qu_item .reactive { background:url(../images/icon1.png) no-repeat 45px center;}
+.qu_item .live { background:url(../images/icon1.png) no-repeat 45px center;}
+.qu_item .course { background:url(../images/ico1.png) no-repeat 45px center;}
+.qu_item .weike { background:url(../images/ico1.png) no-repeat 45px center;}
+.qu_item .file { background:url(../images/icon1.png) no-repeat 45px center;}
+.qu_item .question_list { background:url(../images/icon1.png) no-repeat 45px center;}
+.qu_item .question_approve { background:url(../images/icon1.png) no-repeat 45px center;}
+.qu_item .knowledge_tree { background:url(../images/icon1.png) no-repeat 45px center;}
+
+.qu_item .center:hover,.qu_item .center_hover { background:#8f6239 url(../images/icon1_hover.png) no-repeat 45px center;color:#fff;}
+.qu_item .history:hover,.qu_item .history_hover { background:#8f6239 url(../images/icon1_hover.png) no-repeat 45px center;color:#fff;}
+.qu_item .competition:hover,.qu_item .competition_hover { background:#8f6239 url(../images/ico2.png) no-repeat 45px center;color:#fff;}
+.qu_item .collection:hover,.qu_item .collection_hover { background:#8f6239 url(../images/ico3.png) no-repeat 45px center;color:#fff;}
+.qu_item .comment:hover,.qu_item .comment_hover { background:#8f6239 url(../images/ico4.png) no-repeat 45px center;color:#fff;}
+.qu_item .story:hover,.qu_item .story_hover { background:#8f6239 url(../images/ico5.png) no-repeat 45px center;color:#fff;}
+.qu_item .friend:hover,.qu_item .friend_hover { background:#8f6239 url(../images/ico6.png) no-repeat 45px center;color:#fff;}
+.qu_item .stat:hover,.qu_item .stat_hover { background:#8f6239 url(../images/ico7.png) no-repeat 45px center;color:#fff;}
+.qu_item .personalInfo:hover,.qu_item .personalInfo_hover { background:#8f6239 url(../images/ico8.png) no-repeat 45px center;color:#fff;}
+.qu_item .changePwd:hover,.qu_item .changePwd_hover { background:#8f6239 url(../images/icon1_hover.png) no-repeat 45px center;color:#fff;}
+.qu_item .reactive:hover,.qu_item .reactive_hover { background:#8f6239 url(../images/icon1_hover.png) no-repeat 45px center;color:#fff;}
+.qu_item .live:hover,.qu_item .live_hover { background:#8f6239 url(../images/icon1_hover.png) no-repeat 45px center;color:#fff;}
+.qu_item .course:hover,.qu_item .course_hover { background:#8f6239 url(../images/ico1.png) no-repeat 45px center;color:#fff;}
+.qu_item .weike:hover,.qu_item .weike_hover { background:#8f6239 url(../images/ico1.png) no-repeat 45px center;color:#fff;}
+.qu_item .file:hover,.qu_item .file_hover { background:#8f6239 url(../images/icon1_hover.png) no-repeat 45px center;color:#fff;}
+.qu_item .question_list:hover,.qu_item .question_list_hover { background:#8f6239 url(../images/icon1_hover.png) no-repeat 45px center;color:#fff;}
+.qu_item .question_approve:hover,.qu_item .question_approve_hover { background:#8f6239 url(../images/icon1_hover.png) no-repeat 45px center;color:#fff;}
+.qu_item .knowledge_tree:hover,.qu_item .knowledge_tree_hover { background:#8f6239 url(../images/icon1_hover.png) no-repeat 45px center;color:#fff;}
 
 .qu_right { width:760px; float:left;}
 .qu_right .qu_right_it {margin-top:10px; margin-bottom:30px; height:120px;}
@@ -540,8 +560,8 @@ span.form_error, span.form_success,span.form_tips{border-width:1px;display:inlin
 /*--------没有内容提示---------------*/
 .nothing {line-height: 30px;height: 30px;color: #c2c0c0;font-size: 16px;}
 /*--------------------页脚-----------------*/
-.footer { width:100%; height:218px; background:url(../images/mainbg.png) no-repeat center top;}
-
+.footer { width:100%; height:218px; background:url(../images/mainbg.png) no-repeat center top; position:relative;}
+.footer p{ position:absolute; left:50%;bottom:10px;color:#fff;}
 /* --------------------error tips------------------------- */
 .system_tip { width:300px; line-height:26px; margin:10px auto; border:solid 1px #F5D8A7; border-radius:2px; background-color:#FFF6DB;padding-left: 10px; text-align: center; }
 
