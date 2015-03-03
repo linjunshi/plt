@@ -24,7 +24,7 @@ Globals.page = "Manage_personalCenter";
 			
 			<c:if test="${fn:length(friendMsgList) == 0}">
 				<div class="qu_no_info">
-					<p>你还没有任何动态<a href="#">去群里看看</a></p>
+					<p>你还没有任何动态</p>
 				</div>
 			</c:if>
 			<c:if test="${fn:length(friendMsgList) > 0}">

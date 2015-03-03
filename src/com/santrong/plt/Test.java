@@ -1,11 +1,6 @@
 package com.santrong.plt;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 
-import com.santrong.plt.log.Log;
 
 
 
@@ -22,26 +17,7 @@ public class Test {
 	
 	
 	public static void main(String[] args) {
-		Connection  conn = null;
-		try {
-			Class.forName("com.mysql.jdbc.Driver");
-			conn=DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/plt", "root", "linux");
-			PreparedStatement st = conn.prepareStatement("select * from user limit 1");
-			ResultSet rs = st.executeQuery();
-			if(rs.next()) {
-				int a = rs.findColumn("id");
-				Log.debug(a);
-			}
-		} catch (Exception e) {
-			try{
-				if(conn != null && !conn.isClosed()){
-					conn.close();
-				}
-			}catch(Exception ex) {
-				
-			}
-			e.printStackTrace();
-		}
+
 	}
 	
 //	public static void main(String[] args) {
