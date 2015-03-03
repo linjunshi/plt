@@ -3,7 +3,7 @@
 <c:set var="title" value="三简在线教育平台-用户注册" ></c:set>
 <c:set var="keywords" value="456" ></c:set>
 <c:set var="description" value="789" ></c:set>
-<%@ include file="inc/header.jsp"%>
+<%@ include file="inc/header_new.jsp"%>
 <script type="text/javascript">
 var Globals = {};
 Globals.ctx = "${ctx}";
@@ -16,19 +16,23 @@ Globals.page = "Index_regist";
 </style>
 <body>
 
-	<%@ include file="inc/top.jsp"%>
-	<div id="container_box">
-		<div id="container_content">
-			<div class="sectionMain clr">
+<div class="header">
+	<%@ include file="inc/top_new.jsp"%>
+	<div class="content clearfix">
+			<div class="sh_info_r">
+				<div class="st_titile_r sh_title">
+					<h2>用户注册</h2>
+				</div>
+					<c:if test="${tipError != null && fn:length(tipError)  > 0}">
+					<div class="system_tip">
+						<c:forEach items="${tipError}" var="tip">
+						<p>${tip.msg}</p>
+						</c:forEach>
+					</div>
+				</c:if>	
+				
 				<div class="form_page">
 					<div id="demo_zone">
-						<c:if test="${tipError != null && fn:length(tipError)  > 0}">
-							<div class="system_tip">
-								<c:forEach items="${tipError}" var="tip">
-								<p>${tip.msg}</p>
-								</c:forEach>
-							</div>
-						</c:if>
 						
 						<form action="${ctx}/account/regist" method="post" class="form_vertical common_form">
 							<input id="levelId" name="levelId" type="hidden" value="">
@@ -77,13 +81,11 @@ Globals.page = "Index_regist";
 								<input class="btn_regist" type="submit" value="立即注册" name="regist" />
 							</div>
 						</form>
-					</div>
+						</div>
 				</div>
 			</div>
 		</div>
 	</div>
-
-	<%@ include file="inc/footer.jsp"%>
-	
+<%@ include file="inc/footer.jsp"%>
 </body>
 </html>

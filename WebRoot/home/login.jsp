@@ -4,7 +4,7 @@
 <c:set var="keywords" value="456" ></c:set>
 <c:set var="description" value="789" ></c:set>
 <!-- loginPage -->
-<%@ include file="inc/header.jsp"%>
+<%@ include file="inc/header_new.jsp"%>
 <script type="text/javascript">
 var Globals = {};
 Globals.ctx = "${ctx}";
@@ -14,7 +14,7 @@ Globals.page = "Index_login";
 <style type="text/css">
 * {	margin: 0;padding: 0;}
 body {color: #666;font: 12px/1.8em Arial, Helvetica, sans-serif;background:#FFF;margin: 0;padding: 0;overflow: inherit;}
-.mr h2 {text-align: center;font-size:26px;margin:30px 0 10px 0; padding-top:20px; height:30px; line-height:30px;color: #009871; font-weight:100;}
+.mr h2 {text-align: center;font-size:26px;margin:30px 0 10px 0; padding-top:20px; height:30px; line-height:30px;color: #f90; font-weight:100;}
 .border {background: url(${ctx}/resource/images/banner_img_4.jpg) no-repeat center center;height:420px;clear: both;}
 .center {width: 1000px;	margin: 0 auto;	height: 420px;position: relative;}
 .user {	width: 330px;height: 230px;border:1px #fff solid;background: url(${ctx}/resource/images/007.png);	position: absolute;	top: 100px;	right: 20px;border-radius: 15px;}
@@ -26,10 +26,13 @@ body {color: #666;font: 12px/1.8em Arial, Helvetica, sans-serif;background:#FFF;
 .validation {display: block;width:60px;height:24px; line-height:24px;text-align: left;float: left;margin-right:3px;}
 .loginuser a{ line-height:40px;}
 .loginbut {	width: 300px;display:block;float:left;color: #FFF;margin:20px 0 0 0px;}
-.btn-login {width:100px;height: 30px;background:#009871;display: block;line-height: 30px;text-align: center;letter-spacing: 4px;color: #fff;text-decoration:none;font-size:18px;margin-left:100px;border:0;}
-/* .loginbut a {width:100px;height: 30px;background:#009871;display: block;line-height: 30px;text-align: center;letter-spacing: 4px;color: #fff;text-decoration:none;font-size:18px;margin-left:100px;}
-.loginbut a:hover{background:#044a38;} */
-.loginbut .btn:focus,.btn-login:hover{background:#044a38;cursor: pointer;}
+.btn-login {float: left;width:100px;height: 30px;background:#f90;display: block;line-height: 30px;text-align: center;letter-spacing: 4px;color: #fff;text-decoration:none;font-size:18px;margin-left:50px;border:0;}
+.login_index {float: left;width:100px;height: 30px;background:#f90;display: block;line-height: 30px;text-align: center;letter-spacing: 4px;color: #fff;text-decoration:none;font-size:18px;margin-left:30px;border:0;}
+.login_index:hover{background:#188EEE;cursor: pointer;}
+/* .loginbut a {width:100px;height: 30px;background:#f90;display: block;line-height: 30px;text-align: center;letter-spacing: 4px;color: #fff;text-decoration:none;font-size:18px;margin-left:100px;}
+.loginbut a:hover{background:#f90;} 
+*/
+.loginbut .btn:focus,.btn-login:hover{background:#188EEE;cursor: pointer;}
 .footer_p { font-size:16px; margin-top:20px; text-align:center;}
 .footer_p a { color: black;}
 .footer_p a:HOVER { color: black;text-decoration:underline;}
@@ -65,6 +68,7 @@ body {color: #666;font: 12px/1.8em Arial, Helvetica, sans-serif;background:#FFF;
         <div class="loginuser">
           <label class="login"><fmt:message key="index_user_username"/>：</label>
           <input name="username" type="text" size="20" class="text2" value="${username}" required>
+          <a href="${ctx}/account/regist" target="_blank" class="login_new">注册新用户</a>
         </div>
         <div class="loginuser">
           <label class="login"><fmt:message key="index_user_password"/>：</label>
@@ -72,14 +76,15 @@ body {color: #666;font: 12px/1.8em Arial, Helvetica, sans-serif;background:#FFF;
           <a href="${ctx}/account/forgotPwd" target="_blank" class="login_forgot">忘记密码?</a>
         </div>
         <div class="loginbut">
-		<input type="submit" value="登录" class="btn-login" name="commit" />
-      </div>
+		  <input type="submit" value="登录" class="btn-login" name="commit" />
+		  <input type="button" value="返回首页" class="login_index" name="index" onclick="document.location='${ctx}/'" />
+      	</div>
       </form>
       
     </div>
   </div>
 </div>
-<p class="footer_p">Copyright © 2014-2014, <a href="http://www.santrong.com" target="_blank">深圳市三简智能科技有限公司</a>, All Rights Reserved</p>
+<p class="footer_p">Copyright © 2014-2015, <a href="http://www.santrong.com" target="_blank">深圳市三简智能科技有限公司</a>, All Rights Reserved</p>
 </body>
 </html>
 
