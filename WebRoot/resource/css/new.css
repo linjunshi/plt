@@ -556,6 +556,11 @@ span.form_error, span.form_success,span.form_tips{border-width:1px;display:inlin
 .join_but { width: 500px; height:40px; background:#ccc;margin-top:15px; position: absolute;bottom:10px;}
 .join_but a{line-height:40px; padding:5px 20px;  background:#f90; margin:0 15px; color:#fff;border-radius: 3px;}
 .join_but a:hover{background:#188EEE;}
+/*--------------------邮箱激活-------------------------*/
+.sh_act_request { margin-top:20px; font-size:16px; color:#f90;}
+.sh_act_request input{ padding:2px 15px; font-size:16px; background:#f90; color:#fff;border:0;}
+.sh_act_request input:hover{background:#188EEE;cursor: pointer;}
+.sh_act_request b{ color:#f00; font-size:20px;}
 
 /*--------没有内容提示---------------*/
 .nothing {line-height: 30px;height: 30px;color: #c2c0c0;font-size: 16px;}

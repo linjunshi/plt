@@ -62,6 +62,7 @@ public class AccountMAction extends RegistBaseAction {
 		}
 		
 		this.getRequest().setAttribute("rs", rs);
+		this.getRequest().setAttribute("flag", "reactive");
 		
 		return "manage/regist/reactive";
 	}
@@ -235,7 +236,7 @@ public class AccountMAction extends RegistBaseAction {
 			if (!ValidateTools.isEmail(userForm.getEmail())) {
 				addError("邮箱地址格式不正确！");
 			}
-			if (errorSize() < 0) {
+			if (errorSize() <= 0) {
 				//用户基本信息
 				UserDao userDao = new UserDao();
 				user.setGradeId(userForm.getGradeId());

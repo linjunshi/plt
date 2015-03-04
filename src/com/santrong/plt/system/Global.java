@@ -24,7 +24,8 @@ public class Global {
     public static String Version = "";
     public static String Title = "课云教育";
     public static String Language = "zh_CN";
-    public static String PltDomain= "plttest.santrong.com";
+//    public static String PltDomain= "plttest.santrong.com";
+    public static String PltDomain= "www.keyyun.com";
     
     /*
      * [Ftp]
