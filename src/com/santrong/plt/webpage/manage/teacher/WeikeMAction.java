@@ -99,6 +99,7 @@ public class WeikeMAction extends TeacherBaseAction {
 			request.setAttribute("course", course);
 			request.setAttribute("fn", "modify");
 			request.setAttribute("pageNum", pageNum);
+			request.setAttribute("flag", "weike");
 		} catch (Exception e) {
 			Log.printStackTrace(e);
 		}

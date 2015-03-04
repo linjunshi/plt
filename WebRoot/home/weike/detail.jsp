@@ -150,5 +150,7 @@ Globals.page = "Index_weikeDetail";
 		    </div>
 		  </div>
 	</div>
+	
+	<%@ include file="../inc/footer.jsp"%>
 </body>
 </html>

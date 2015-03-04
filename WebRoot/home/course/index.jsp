@@ -72,5 +72,6 @@ Globals.page = "Index_course";
 		</div>
 	</div>
 </div>
+<%@ include file="../inc/footer.jsp"%>
 </body>
 </html>

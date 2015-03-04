@@ -97,6 +97,7 @@ public class QuestionSuperAction extends SuperManBaseAction {
 				request.setAttribute("tqItem", tqItem);
 			}
 			request.setAttribute("pageNum", pageNum);
+			request.setAttribute("flag", "question_approve");
 		} catch (Exception e) {
 			Log.printStackTrace(e);
 		}
