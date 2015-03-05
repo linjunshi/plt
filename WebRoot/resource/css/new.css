@@ -319,7 +319,7 @@ span.form_error, span.form_success,span.form_tips{border-width:1px;display:inlin
 .qu_item .stat { background:url(../images/ico7.png) no-repeat 45px center;}
 .qu_item .personalInfo { background:url(../images/ico8.png) no-repeat 45px center;}
 .qu_item .changePwd { background:url(../images/ico11.png) no-repeat 45px center;}
-.qu_item .reactive { background:url(../images/icon1.png) no-repeat 45px center;}
+.qu_item .reactive { background:url(../images/ico15.png) no-repeat 45px center;}
 .qu_item .live { background:url(../images/icon1.png) no-repeat 45px center;}
 .qu_item .course { background:url(../images/ico1.png) no-repeat 45px center;}
 .qu_item .weike { background:url(../images/ico1.png) no-repeat 45px center;}
@@ -338,7 +338,7 @@ span.form_error, span.form_success,span.form_tips{border-width:1px;display:inlin
 .qu_item .stat:hover,.qu_item .stat_hover { background:#8f6239 url(../images/ico7.png) no-repeat 45px center;color:#fff;}
 .qu_item .personalInfo:hover,.qu_item .personalInfo_hover { background:#8f6239 url(../images/ico8.png) no-repeat 45px center;color:#fff;}
 .qu_item .changePwd:hover,.qu_item .changePwd_hover { background:#8f6239 url(../images/ico11.png) no-repeat 45px center;color:#fff;}
-.qu_item .reactive:hover,.qu_item .reactive_hover { background:#8f6239 url(../images/icon1_hover.png) no-repeat 45px center;color:#fff;}
+.qu_item .reactive:hover,.qu_item .reactive_hover { background:#8f6239 url(../images/ico15.png) no-repeat 45px center;color:#fff;}
 .qu_item .live:hover,.qu_item .live_hover { background:#8f6239 url(../images/icon1_hover.png) no-repeat 45px center;color:#fff;}
 .qu_item .course:hover,.qu_item .course_hover { background:#8f6239 url(../images/ico1.png) no-repeat 45px center;color:#fff;}
 .qu_item .weike:hover,.qu_item .weike_hover { background:#8f6239 url(../images/ico1.png) no-repeat 45px center;color:#fff;}
