@@ -30,7 +30,7 @@ public interface WeikeMapper {
 			+ "left join user d on a.ownerId=d.id "
 			+ "left join school e on d.schoolId=e.id "
 			+ "where c.gradeGroup=#{gradeGroup} and e.areaCode like #{areaCode} and a.status = 1 and a.courseType = 1 "
-			+ "order by a.cts limit 10")
+			+ "order by a.cts limit 12")
 	List<CourseView> selectForIndexList(@Param("gradeGroup")int gradeGroup, @Param("areaCode")String areaCode);	
 	
 	@Select("select * from course where unitId = #{unitId} and status = 1 and courseType = 1 order by cts desc limit ${index},${pageSize}")
