@@ -532,6 +532,18 @@ create table story_attend_history(
 	primary key (id)
 ) engine=InnoDB default charset=utf8 collate=utf8_bin comment '剧本参与历史表';
 
+-- 剧本评论表 --
+drop table if exists story_comment;
+create table story_comment(
+	id varchar(32) not null comment 'UUID',
+	userId varchar(32) not null comment '用户ID',
+	storyId varchar(32) not null comment '剧本ID',
+	remark varchar(1024) not null comment '评论内容',
+	cts datetime comment '创建时间',
+	uts datetime comment '修改时间',	
+	primary key (id)
+) engine=InnoDB default charset=utf8 collate=utf8_bin comment '剧本评论表';
+
 -- 表 --
 -- drop table if exists course;
 -- create table course(

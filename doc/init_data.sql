@@ -170,3 +170,6 @@ insert into resource_live values('10001', '张老师直播1', null, '2014-12-12 
 
 -- 文档资源 --
 insert into resource_doc values('10003', '文档1', '', 1, '10000', '10000', '', now(), now());
+
+-- 剧本故事 --
+insert into story values('10000', '骄傲的公鸡', 'jiaoaodegongji', '', '10:10', '10000', '', 3, 0, '10000', 0, now(), now());
