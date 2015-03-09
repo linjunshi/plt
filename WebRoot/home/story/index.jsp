@@ -17,7 +17,7 @@ Globals.page = "Story_index";
 	<div class="content clearfix">
 		<div class="questions_list">
 			<div style="width:100%; height:200px; text-align:center;">
-			<a href="${ctx}/story/game/jiaoaodegongji">骄傲的公鸡</a>-----------------<a href="${ctx}/story/direction">使用教程</a>
+			<a href="${ctx}/story/game/ProudCock">骄傲的公鸡</a>-----------------<a href="${ctx}/story/direction">使用教程</a>
 			</div>
 		</div>
 	</div>

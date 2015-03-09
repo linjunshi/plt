@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.santrong.plt.webpage.BaseAction;
 import com.santrong.plt.webpage.story.dao.StoryDao;
 import com.santrong.plt.webpage.story.entry.StoryItem;
+import com.santrong.plt.webpage.teacher.entry.UserItem;
 
 /**
  * @author weinianjie
@@ -26,6 +27,13 @@ public class StoryAction extends BaseAction {
 	// 情景剧详细页
 	@RequestMapping("/game/{storyEname}")
 	public String game(@PathVariable String storyEname) {
+		
+		// 强制登录
+		UserItem user = this.currentUser();
+		if (user == null) {
+			return this.redirect("/account/login");
+		}		
+		
 		StoryDao dao = new StoryDao();
 		StoryItem story = dao.selectByEname(storyEname);
 		if(story == null) {

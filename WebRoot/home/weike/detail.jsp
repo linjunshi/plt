@@ -23,9 +23,10 @@ var attributes = {};
 attributes.id = "MicroCoursePlayer";
 attributes.name = "MicroCoursePlayer";
 attributes.align = "middle";
-swfobject.embedSWF("${ctx}/resource/player/MicroCoursePlayer.swf", "flashContent", "100%", "100%", swfVersionStr, xiSwfUrlStr, flashvars, params, attributes);
-// JavaScript enabled so display the flashContent div in case it is not replaced with a swf object.
-swfobject.createCSS("#flashContent", "display:block;text-align:left;background:#000;");
+window.onload = function() {
+	swfobject.embedSWF("${ctx}/resource/player/MicroCoursePlayer.swf", "flashContent", "100%", "100%", swfVersionStr, xiSwfUrlStr, flashvars, params, attributes);
+	swfobject.createCSS("#flashContent", "display:block;text-align:left;background:#000;");
+};
 </script>
 </c:if>
 <script type="text/javascript">

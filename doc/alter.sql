@@ -1,5 +1,5 @@
--- 2015-03-09 weinianjie
-update story set storyName='骄傲的公鸡',storyEname='jiaoaodegongji' where id='10000';
+-- 2015-03-09 weinianjie (2015-03-09 plttest)
+update story set storyName='骄傲的公鸡',storyEname='ProudCock' where id='10000';
 
 create table story_comment(
 	id varchar(32) not null comment 'UUID',
