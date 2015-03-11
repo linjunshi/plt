@@ -1,3 +1,6 @@
+-- 2015-03-11 weinianjie (2015-03-11 plttest)
+update story set storyName='美丽的公鸡',storyEname='ProudCock' where id='10000';
+
 -- 2015-03-09 weinianjie (2015-03-09 plttest)
 update story set storyName='骄傲的公鸡',storyEname='ProudCock' where id='10000';
 

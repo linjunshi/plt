@@ -194,5 +194,107 @@ public class StoryDao extends BaseDao{
 		}
 		
 		return count;
-	}	
+	}
+	
+	/**
+	 * 获取剧本故事的所有记录
+	 * @param query
+	 * @return
+	 */
+	public List<StoryItem> selectAllStoryByQuery(StoryQuery query){
+		List<StoryItem> list = new ArrayList<StoryItem>();
+		try {
+			Statement criteria = new Statement("story", "a");
+			criteria.setFields("a.*");
+			
+			// 关键词
+			if(!StringUtils.isNullOrEmpty(query.getKeywords())) {
+				criteria.where(or(
+						like("a.storyName", "?")));
+				criteria.setStringParam("%" + query.getKeywords() + "%");
+			}
+			// 当前用户
+			if(MyUtils.isNotNull(query.getUserId())) {
+				criteria.where(eq("b.userId", "?"));
+				criteria.setStringParam(query.getUserId());
+			}
+			// 课程类型
+			criteria.where(eq("a.storyType", "?"));
+			criteria.setIntParam(query.getStoryType());
+			
+			// 排序
+			if(!StringUtils.isNullOrEmpty(query.getOrderBy())) {
+				if("desc".equalsIgnoreCase(query.getOrderRule())) {
+					criteria.desc("a." + query.getOrderBy());
+				}else {
+					criteria.asc("a." + query.getOrderBy());
+				}
+			}
+			// 分页
+			criteria.limit(query.getLimitBegin(), query.getLimitEnd());
+			
+			Connection conn = ThreadUtils.currentConnection();
+			PreparedStatement stm = criteria.getRealStatement(conn);
+			ResultSet rs = stm.executeQuery();
+			while (rs.next()) {
+				StoryItem item = new StoryItem();
+				BeanUtils.Rs2Bean(rs, item);
+				list.add(item);
+			}
+			
+		} catch (Exception e) {
+			Log.printStackTrace(e);
+		}
+		return list;
+	}
+	
+	/**
+	 * 获取剧本故事的所有记录的总数
+	 * @param query
+	 * @return
+	 */
+	public int selectCountByQuery(StoryQuery query){
+		int count = 0;
+		
+		try {
+			Statement criteria = new Statement("story", "a");
+			criteria.setFields("count(*) cn");
+			
+			// 关键词
+			if(!StringUtils.isNullOrEmpty(query.getKeywords())) {
+				criteria.where(or(
+						like("a.storyName", "?")));
+				criteria.setStringParam("%" + query.getKeywords() + "%");
+			}
+			// 当前用户
+			if(MyUtils.isNotNull(query.getUserId())) {
+				criteria.where(eq("b.userId", "?"));
+				criteria.setStringParam(query.getUserId());
+			}
+			// 课程类型
+			criteria.where(eq("a.storyType", "?"));
+			criteria.setIntParam(query.getStoryType());
+			
+			// 排序
+			if(!StringUtils.isNullOrEmpty(query.getOrderBy())) {
+				if("desc".equalsIgnoreCase(query.getOrderRule())) {
+					criteria.desc("a." + query.getOrderBy());
+				}else {
+					criteria.asc("a." + query.getOrderBy());
+				}
+			}
+			// 分页
+			criteria.limit(query.getLimitBegin(), query.getLimitEnd());
+			
+			Connection conn = ThreadUtils.currentConnection();
+			PreparedStatement stm = criteria.getRealStatement(conn);
+			ResultSet rs = stm.executeQuery();
+			rs.next();
+			count = rs.getInt("cn");
+			
+		} catch (Exception e) {
+			Log.printStackTrace(e);
+		}
+		return count;
+	}
 }

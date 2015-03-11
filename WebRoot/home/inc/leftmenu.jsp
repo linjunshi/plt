@@ -38,6 +38,7 @@
 					<li>---------------------------------</li>
 					<li><a href="${ctx}/super/question/approve" class='question_approve <c:if test="${flag == 'question_approve'}">question_approve_hover</c:if>' >试题审核</a></li>
 					<li><a href="${ctx}/super/knowledge/tree" class='knowledge_tree <c:if test="${flag == 'knowledge_tree'}">knowledge_tree_hover</c:if>' >知识点树</a></li>
+					<li><a href="${ctx}/super/story/config" class='story_config <c:if test="${flag == 'story_config'}">story_config_hover</c:if>' >剧本配置</a></li>
 					</c:if>					
 				</ul>
 			</div>

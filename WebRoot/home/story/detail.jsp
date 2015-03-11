@@ -15,8 +15,8 @@ var flashvars = {
 	ServAddr: "192.168.10.163",
 	ServPort: "23456",
 	UserID: "${sessionScope.loginUser.id}",
-	DramaName: "ProudCock",
-	Demo: "0"
+	DramaName: "${story.storyEname}",
+	Demo: "${demo}"
 };
 var params = {};
 params.quality = "high";
@@ -57,10 +57,11 @@ Globals.page = "Story_detail";
 					<c:if test="${!isMobile}">
 				        <object CLASSID="CLSID:40465476-E37B-4BB8-816E-3F7E525BEDAB" name="vdActive" CODEBASE="${ctx}/resource/player/VDAct.CAB#version=1,0,0,1" style="display:none;"></object>
 				        <div id="flashContent">
-				            <p>
+				           <!--  <p>
 				                To view this page ensure that Adobe Flash Player version 
 				                11.1.0 or greater is installed. 
-				            </p>
+				            </p> -->
+				            <p class="">请稍候，剧本正在加载中...</p>
 				            <script type="text/javascript"> 
 				                var pageHost = ((document.location.protocol == "https:") ? "https://" : "http://"); 
 				                document.write("<a href='http://www.adobe.com/go/getflashplayer'><img src='" 
@@ -80,7 +81,7 @@ Globals.page = "Story_detail";
 					</div>
 					<div class="comment_tab">
 						<ul class="ping_foo_con">
-							<c:forEach items="${weike.commentList}" var="comment" varStatus="ct">
+							<c:forEach items="${storyCommentList}" var="comment" varStatus="ct">
 					           <li class="ping_fo_c clearfix">
 									<img src="${ctx}${comment.headPhoto}" width="80" height="80">
 									<p>${comment.showName}</p>
@@ -88,11 +89,11 @@ Globals.page = "Story_detail";
 									<span class="pi_time"><fmt:formatDate value="${comment.cts}" type="both"/></span>
 					           </li>
 				           </c:forEach>
-				           <c:if test="${empty weike.commentList}"><li class="ping_fo_c clearfix"><p class="nothing">还没有评论，沙发等你来抢！</p></li></c:if>
+				           <c:if test="${empty storyCommentList}"><li class="ping_fo_c clearfix"><p class="nothing">还没有评论，沙发等你来抢！</p></li></c:if>
 						</ul>
 						<div class="ping_comment_title">
 							<div class="ping_say"><strong>我来说两句</strong></div>
-				            <div class="ping_mr"><span class="pt3">请文明上网，理性发言！</span> 已经有&nbsp;&nbsp;<span class="pt5">${weike.commentCount}</span>人评论了</div>
+				            <div class="ping_mr"><span class="pt3">请文明上网，理性发言！</span> 已经有&nbsp;&nbsp;<span class="pt5">${commentCount}</span>人评论了</div>
 						</div>
 						<div id="comment" class="ping_form">
 				            <form action="${ctx}/story/comment" method="post" id="comment_form" class="common_form">
@@ -104,12 +105,14 @@ Globals.page = "Story_detail";
 									</script>
 								</div> -->
 								<input type="hidden" name="storyId" value="${story.id}"/>
+								<input type="hidden" name="storyEname" value="${story.storyEname}"/>
 								<input class="ping_submit" type="submit"  value="提交"/>
 							</form>
 				        </div>
 			        </div>
 			        <div class="remark_tab">
-			        	<p class="nothing">暂时还没有简介！</p>
+			         	<c:if test="${!empty story}"><p>${story.remark}</p></c:if>
+			        	<c:if test="${empty story}"><p class="nothing">暂时还没有简介！</p></c:if>
 			        </div>
 				</div>
 				<!-- <div class="ping_foot_right">

@@ -21,13 +21,13 @@ Globals.page = "Story_index";
 		            <li>
 		                <p><img src="${ctx}/resource/images/img_2.png" width="220" ></p>
 		                <p>
-		                	<a href="${ctx}/story/game/ProudCock" class="game_a">进入</a>
-		                	<a href="${ctx}/story/game/ProudCock" class="game_b">演练</a>
+		                	<a href="${ctx}/story/game/ProudCock?demo=0" class="game_a"></a>
+		                	<a href="${ctx}/story/game/ProudCock?demo=1" class="game_b"></a>
 		                </p>
 		            </li>
 		             <li>
 		                <p><img src="${ctx}/resource/images/img_2.png" width="220"></p>
-		                <p><a href="${ctx}/story/direction" class="game_c">观看教程</a></p>
+		                <p><a href="${ctx}/story/direction" class="game_c"></a></p>
 		            </li>
 		        </ul>
 		    </div>

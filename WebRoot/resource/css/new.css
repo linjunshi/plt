@@ -205,10 +205,12 @@ span.form_error, span.form_success,span.form_tips{border-width:1px;display:inlin
 .game_ti h2{ font-size:26px; color:#09C; text-align:center;}
 .game_list{margin:15px 0 0 30px;}
 .game_list ul li{ float:left; display:block; height:200px; margin-right:20px; }
-.game_a {width:100px; height:30px; float:left; line-height:30px; display:block;background:url(../images/Arrow.png) no-repeat left center;font-size:20px;color:#09f;text-indent:33px;}
-.game_b {width:100px; height:30px; float:left;line-height:30px; display:block;background:url(../images/arrow-righ.png) no-repeat left center;font-size:20px;color:#09f;text-indent:33px;}
-.game_c {width:160px; height:30px; line-height:30px; display:block;background:url(../images/Load.png) no-repeat left center;font-size:20px;color:#09f;text-indent:33px;}
-
+.game_a {width:80px; height:30px; float:left; line-height:30px; display:block;background:url(../images/Arrow.png) no-repeat left center;font-size:20px;color:#09f;}
+.game_b {width:80px; height:30px; float:left;line-height:30px; display:block;background:url(../images/arrow-righ.png) no-repeat left center;font-size:20px;color:#09f; margin-left:68px;}
+.game_c {width:120px; height:30px; line-height:30px; display:block;background:url(../images/Load.png) no-repeat left center;font-size:20px;color:#09f; margin-left:55px;}
+.game_a:hover{background:url(../images/Arrow_hover.png) no-repeat left center;}
+.game_b:hover{background:url(../images/arrow-righ_hover.png) no-repeat left center;}
+.game_c:hover{background:url(../images/Load_hover.png) no-repeat left center;}
 
 .game_list ul li a:hover{ color:#2d6a00;}
 
@@ -269,6 +271,7 @@ font-size:22px; letter-spacing:15px;color:#393;background:url(../images/ti_bg.pn
 .ping_left{ float:left; width:700px; display:block; height:450px; background: url(../images/live_bg.png) no-repeat left top; margin:0px 0 10px 20px;}
 .ping_left_an {width:1000px; float:left;display:block; height:700px; background:url(../images/15.png) no-repeat left center; margin:10px 0;}
 .ping_li_an{ width:800px; height:600px; float:left; display:block; background:#000; margin:54px 0 0 100px;}
+.ping_li_an p{text-align: center;  font-size: 26px; color: #fff; background: #dadfa; position: relative;top: 260px;}
 
 .ping_left .ping_item{ margin:40px 0 0 20px; display:none;}
 .ping_left .ping_item a{ color:#fff; text-align:center;width:209px; height:37px;line-height:37px; display:block; font-size:16px; float:left; margin-right:15px; text-indent:10px;}
@@ -354,6 +357,7 @@ font-size:22px; letter-spacing:15px;color:#393;background:url(../images/ti_bg.pn
 .qu_item .question_list { background:url(../images/ico12.png) no-repeat 45px center;}
 .qu_item .question_approve { background:url(../images/ico13.png) no-repeat 45px center;}
 .qu_item .knowledge_tree { background:url(../images/ico14.png) no-repeat 45px center;}
+.qu_item .story_config { background:url(../images/ico15.png) no-repeat 45px center;}
 
 .qu_item .center:hover,.qu_item .center_hover { background:#8f6239 url(../images/ico9.png) no-repeat 45px center;color:#fff;}
 .qu_item .history:hover,.qu_item .history_hover { background:#8f6239 url(../images/ico10.png) no-repeat 45px center;color:#fff;}
@@ -373,6 +377,7 @@ font-size:22px; letter-spacing:15px;color:#393;background:url(../images/ti_bg.pn
 .qu_item .question_list:hover,.qu_item .question_list_hover { background:#8f6239 url(../images/ico12.png) no-repeat 45px center;color:#fff;}
 .qu_item .question_approve:hover,.qu_item .question_approve_hover { background:#8f6239 url(../images/ico13.png) no-repeat 45px center;color:#fff;}
 .qu_item .knowledge_tree:hover,.qu_item .knowledge_tree_hover { background:#8f6239 url(../images/ico14.png) no-repeat 45px center;color:#fff;}
+.qu_item .story_config:hover,.qu_item .story_config_hover { background:#8f6239 url(../images/ico15.png) no-repeat 45px center;color:#fff;}
 
 .qu_right { width:760px; float:left;}
 .qu_right .qu_right_it {margin-top:10px; margin-bottom:30px; height:120px;}

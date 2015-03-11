@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
 import com.santrong.plt.webpage.story.entry.StoryCommentItem;
+import com.santrong.plt.webpage.story.entry.StoryCommentUserView;
 
 /**
  * @author huangweihua
@@ -24,6 +25,10 @@ public interface StoryCommentMapper{
 			+ " where id = #{id}")
 	int update(StoryCommentItem storyCommentItem);
 	
-	@Select("select a.* from story_comment a left join story b on a.storyId = b.id where b.storyEname = #{storyEname} order by a.cts asc")
-	List<StoryCommentItem> selectByStoryEname(String storyEname);
+	@Select("select a.*, c.showName, c.url from story_comment a left join story b on a.storyId = b.id "
+			+ "left join user c on a.userId = c.id where b.storyEname = #{storyEname} order by a.cts asc")
+	List<StoryCommentUserView> selectByStoryEname(String storyEname);
+	
+	@Select("select count(*) from story_comment a left join story b on a.storyId = b.id where b.storyEname = #{storyEname}")
+	int selectCountByStoryEname(String storyEname);
 }
