@@ -15,10 +15,22 @@ Globals.page = "Story_index";
 <div class="header">
 	<%@ include file="../inc/top_new.jsp"%>
 	<div class="content clearfix">
-		<div class="questions_list">
-			<div style="width:100%; height:200px; text-align:center;">
-			<a href="${ctx}/story/game/ProudCock">骄傲的公鸡</a>-----------------<a href="${ctx}/story/direction">使用教程</a>
-			</div>
+		<div class="questions_list_game1">
+			<div class="game_list clearfix">
+		        <ul>
+		            <li>
+		                <p><img src="${ctx}/resource/images/img_2.png" width="220" ></p>
+		                <p>
+		                	<a href="${ctx}/story/game/ProudCock" class="game_a">进入</a>
+		                	<a href="${ctx}/story/game/ProudCock" class="game_b">演练</a>
+		                </p>
+		            </li>
+		             <li>
+		                <p><img src="${ctx}/resource/images/img_2.png" width="220"></p>
+		                <p><a href="${ctx}/story/direction" class="game_c">观看教程</a></p>
+		            </li>
+		        </ul>
+		    </div>
 		</div>
 	</div>
 </div>

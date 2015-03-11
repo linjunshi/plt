@@ -199,6 +199,30 @@ span.form_error, span.form_success,span.form_tips{border-width:1px;display:inlin
 .filter_ul li a:hover { background:#D0A66D; color:#fff;-moz-border-radius: 3px;-webkit-border-radius: 3px; border-radius:3px;}
 .filter_ul li.current a { background:#D0A66D; color:#fff;-moz-border-radius: 3px;-webkit-border-radius: 3px; border-radius:3px;}
 
+/*--------------------公鸡游戏-----------------*/
+.questions_list_game1{ width:1000px; margin:0 auto;background:url(../images/math-tb2.jpg) no-repeat left top,url(../images/math-tb.jpg) no-repeat left bottom,url(../images/math-repeat-bg.jpg) repeat-y left center; padding:15px 0 40px 0;}
+/*.game_ti { margin:10px 0 0 30px; width:1000px; height:40px; }*/
+.game_ti h2{ font-size:26px; color:#09C; text-align:center;}
+.game_list{margin:15px 0 0 30px;}
+.game_list ul li{ float:left; display:block; height:200px; margin-right:20px; }
+.game_a {width:100px; height:30px; float:left; line-height:30px; display:block;background:url(../images/Arrow.png) no-repeat left center;font-size:20px;color:#09f;text-indent:33px;}
+.game_b {width:100px; height:30px; float:left;line-height:30px; display:block;background:url(../images/arrow-righ.png) no-repeat left center;font-size:20px;color:#09f;text-indent:33px;}
+.game_c {width:160px; height:30px; line-height:30px; display:block;background:url(../images/Load.png) no-repeat left center;font-size:20px;color:#09f;text-indent:33px;}
+
+
+.game_list ul li a:hover{ color:#2d6a00;}
+
+.questions_list_game {width:1020px; margin:0 auto; padding-top:10px; /* background:url(../images/bg_ga.png) no-repeat center top; */} 
+.ping_game_title { width:1000px;height:82px; margin-top:10px; background:url(../images/bg_i.png) no-repeat left center;}
+.ping_game_title h2{ font-size:26px; color:#222; text-align:center; line-height:82px;}
+.ping_game{ height:42px; margin:10px 0 0 30px; }
+.ping_ti_a { width:170px; height:40px;float:left; display:block; text-align:center; line-height:40px; 
+font-size:22px; letter-spacing:15px;color:#393;background:url(../images/ti_bg.png ) no-repeat left top;}
+.ping_ti_a:hover,.ping_game .current{ color:#09f;}
+.comment_tab{display: block;}
+.remark_tab { width:660px; padding:30px 10px 50px 10px; background:#fff; margin-left:10px;margin-top: 0px;display: none;}
+.remark_tab .nothing{text-align: center;}
+
 /*--------------------试题列表2-----------------*/
 .con_quest { width:1000px; height:922px; margin:0 auto; background:url(../images/02.png) no-repeat left top; position:relative; padding-top:30px;}
 .con_que { width:960px; height:120px; margin:20px 0px 0px 20px; background:url(../images/xin_img.png) no-repeat left 0px;}
@@ -243,6 +267,8 @@ span.form_error, span.form_success,span.form_tips{border-width:1px;display:inlin
 .location a:hover { color:#f90;}
 .ping_title{height:60px;line-height:60px; text-align:center;  font-size:35px; background:url(../images/title_bg.png) no-repeat 15px center; color:#442100; letter-spacing:2px; display:block;}
 .ping_left{ float:left; width:700px; display:block; height:450px; background: url(../images/live_bg.png) no-repeat left top; margin:0px 0 10px 20px;}
+.ping_left_an {width:1000px; float:left;display:block; height:700px; background:url(../images/15.png) no-repeat left center; margin:10px 0;}
+.ping_li_an{ width:800px; height:600px; float:left; display:block; background:#000; margin:54px 0 0 100px;}
 
 .ping_left .ping_item{ margin:40px 0 0 20px; display:none;}
 .ping_left .ping_item a{ color:#fff; text-align:center;width:209px; height:37px;line-height:37px; display:block; font-size:16px; float:left; margin-right:15px; text-indent:10px;}
@@ -265,6 +291,7 @@ span.form_error, span.form_success,span.form_tips{border-width:1px;display:inlin
 
 .ping_footer{ width:1000px;height:100%;}
 .ping_foot_left { float:left;display:block; width:700px; height:100%; background:#e7cfaa; margin:0 0 0 20px; padding:10px 0;}
+.ping_foot_game { float:left;display:block; width:700px; height:100%; background:#a5ba85; margin:0 0 0 20px; padding:10px 0;}
 .ping_fo_ti{width:200px; height:40px; text-align:center; font-size:26px; letter-spacing:2px; color:#000;background:url(../images/ti_bg.png ) no-repeat 30px top; }
 
 .ping_say {float:left;padding-left: 30px;font-size: 16px;margin-top: 20px;}
