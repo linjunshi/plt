@@ -20,7 +20,7 @@ var flashvars = {
 };
 var params = {};
 params.quality = "high";
-params.bgcolor = "#ffffff";
+params.bgcolor = "#000000";
 params.allowscriptaccess = "sameDomain";
 params.allowfullscreen = "true";
 var attributes = {};
@@ -62,11 +62,11 @@ Globals.page = "Story_detail";
 				                11.1.0 or greater is installed. 
 				            </p> -->
 				            <p class="">请稍候，剧本正在加载中...</p>
-				            <script type="text/javascript"> 
+				           <!--  <script type="text/javascript"> 
 				                var pageHost = ((document.location.protocol == "https:") ? "https://" : "http://"); 
 				                document.write("<a href='http://www.adobe.com/go/getflashplayer'><img src='" 
 				                                + pageHost + "www.adobe.com/images/shared/download_buttons/get_flash_player.gif' alt='Get Adobe Flash player' /></a>" ); 
-				            </script> 
+				            </script>  -->
 				        </div>
 					</c:if>
 				</div>

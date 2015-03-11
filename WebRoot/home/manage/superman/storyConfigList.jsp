@@ -52,7 +52,10 @@ Globals.page = "Manage_storyConfigList";
 										<td>${story.storyName}</td>
 										<td>${story.storyEname}</td>
 										<td>${story.duration}</td>
-										<td>${fn:substring(story.remark, 0, 90)}......</td>
+										<td>
+											<c:if test="${fn:length(story.remark) > 90}">${fn:substring(story.remark, 0, 90)}......</c:if>
+											<c:if test="${fn:length(story.remark) <= 90}">${story.remark}</c:if>
+										</td>
 										<td><fmt:formatDate value="${story.cts}" type="date" dateStyle="default" /></td>
 										<td>
 											<div class="btn_question_operation" >
