@@ -1,7 +1,4 @@
--- 2015-03-11 weinianjie (2015-03-11 plttest)
-update story set storyName='美丽的公鸡',storyEname='ProudCock' where id='10000';
-
--- 2015-03-09 weinianjie (2015-03-09 plttest)
+-- 2015-03-09 weinianjie (2015-03-09 plttest)  (2015-02-27 hwcloud)
 update story set storyName='骄傲的公鸡',storyEname='ProudCock' where id='10000';
 
 create table story_comment(
@@ -14,7 +11,7 @@ create table story_comment(
 	primary key (id)
 ) engine=InnoDB default charset=utf8 collate=utf8_bin comment '剧本评论表';
 
--- 2015-02-26 weinianjie (2015-02-27 hwcloud)
+-- 2015-02-26 weinianjie
 alter table story add column storyEname varchar(128) not null comment '剧本英文名称' after storyName;
 insert into story values('10000', '美丽的公鸡', 'meilidegongji', '', '10:10', '10000', '', 3, 0, '10000', 0, now(), now());
 

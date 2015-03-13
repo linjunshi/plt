@@ -118,7 +118,7 @@ Globals.page = "Index_weikeDetail";
 		      <div class="ping_foot_right">
 		      	<div class="ping_f_bot">
 			      	<c:if test="${hasBuy}">
-	            		<a href="javascript:void(0);" class="hasBuy" title="亲，您已经购买，可直接观看">已经购买</a>
+	            		<!-- <a href="javascript:void(0);" class="hasBuy" title="亲，您已经购买，可直接观看">已经购买</a> -->
 	            		<a href="javascript:void(0);" class="coll_course" title="点击此按钮，收藏改课程。">收藏</a>
 	            	</c:if>
 	            	<c:if test="${!hasBuy}">
@@ -131,7 +131,7 @@ Globals.page = "Index_weikeDetail";
 							<input type="hidden" name="v_md5info" value="" />
 							<input type="hidden" name="v_rcvname" value="" />
 							<input type="hidden" name="remark1" value="" />
-							<a href="javascript:void(0);" class="buy" title="点击此按钮，到下一步网银支付后，就可以开始学习了。">立刻购买</a>
+							<!-- <a href="javascript:void(0);" class="buy" title="点击此按钮，到下一步网银支付后，就可以开始学习了。">立刻购买</a> -->
 							<a href="javascript:void(0);" class="coll_course" title="点击此按钮，收藏改课程。">收藏</a>
 						</form>		            
 		            </c:if>
