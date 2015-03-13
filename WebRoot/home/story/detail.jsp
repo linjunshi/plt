@@ -4,6 +4,22 @@
 <c:set var="keywords" value="课云教育" ></c:set>
 <c:set var="description" value="在线教育 私人定制 剧本故事" ></c:set>
 <%@ include file="../inc/header_new.jsp"%>
+<script type="text/javascript">
+		function InitAct(servaddr,port,roleid) {   
+			vdActive.Init(servaddr,port,roleid);
+			return ;   
+		}  
+
+		function StartCollect() {   
+			vdActive.StartCollect();
+			return ;   
+		}  
+
+		function StopCollect() {   
+			vdActive.StopCollect();
+			return ;   
+		}  
+</script>
 <c:if test="${!isMobile}">
 <script type="text/javascript" src="${ctx}/resource/player/swfobject.js"></script>
 <script type="text/javascript">
@@ -18,6 +34,7 @@ var flashvars = {
 	DramaName: "${story.storyEname}",
 	Demo: "${demo}"
 };
+
 var params = {};
 params.quality = "high";
 params.bgcolor = "#000000";
@@ -44,9 +61,9 @@ Globals.page = "Story_detail";
 	<div class="header">
 		<%@ include file="../inc/top_new.jsp"%>
 		<div class="questions_list_game ">
-			<div class="ping_game_title">
+			<%-- <div class="ping_game_title">
 				<h2>${story.storyName}</h2>
-			</div>
+			</div> --%>
 			<div class="ping_left_an">
 				<div class="ping_li_an">
 					<c:if test="${isMobile}">
@@ -55,7 +72,7 @@ Globals.page = "Story_detail";
 						</video>
 					</c:if>
 					<c:if test="${!isMobile}">
-				        <object CLASSID="CLSID:40465476-E37B-4BB8-816E-3F7E525BEDAB" name="vdActive" CODEBASE="${ctx}/resource/player/VDAct.CAB#version=1,0,0,1" style="display:none;"></object>
+				        <object CLASSID="CLSID:40465476-E37B-4BB8-816E-3F7E525BEDAB" name="vdActive" CODEBASE="${ctx}/resource/player/VDAct.CAB#version=1,0,1,0" style="display:none;"></object>
 				        <div id="flashContent">
 				           <!--  <p>
 				                To view this page ensure that Adobe Flash Player version 
