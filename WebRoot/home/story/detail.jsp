@@ -30,7 +30,7 @@ var swfVersionStr = "11.1.0";
 var xiSwfUrlStr = "${ctx}/resource/player/playerProductInstall.swf";
 var flashvars = {
 	ServAddr: "192.168.10.163",
-	ServAddr: "<%=Global.PltDomain%>",
+	//ServAddr: "<%=Global.PltDomain%>",
 	ServPort: "23456",
 	UserID: "${sessionScope.loginUser.id}",
 	DramaName: "${story.storyEname}",
