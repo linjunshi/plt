@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page import="com.santrong.plt.system.Global"%>
 <%@ include file="../inc/common.jsp"%>
 <c:set var="title" value="课云" ></c:set>
 <c:set var="keywords" value="课云教育" ></c:set>
@@ -29,6 +30,7 @@ var swfVersionStr = "11.1.0";
 var xiSwfUrlStr = "${ctx}/resource/player/playerProductInstall.swf";
 var flashvars = {
 	ServAddr: "192.168.10.163",
+	ServAddr: "<%=Global.PltDomain%>",
 	ServPort: "23456",
 	UserID: "${sessionScope.loginUser.id}",
 	DramaName: "${story.storyEname}",

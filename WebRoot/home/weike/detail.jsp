@@ -16,7 +16,7 @@ var flashvars = {
 };
 var params = {};
 params.quality = "high";
-params.bgcolor = "#ffffff";
+params.bgcolor = "#000000";
 params.allowscriptaccess = "sameDomain";
 params.allowfullscreen = "true";
 var attributes = {};
@@ -58,15 +58,16 @@ Globals.page = "Index_weikeDetail";
 						</c:if>
 						<c:if test="${!isMobile}">
 					        <div id="flashContent">
-					            <p>
+<!-- 					            <p>
 					                To view this page ensure that Adobe Flash Player version 
 					                11.1.0 or greater is installed. 
-					            </p>
-					            <script type="text/javascript"> 
+					            </p> -->
+					            <p class="">请稍候，播放器正在加载中...</p>
+					            <!-- <script type="text/javascript"> 
 					                var pageHost = ((document.location.protocol == "https:") ? "https://" : "http://"); 
 					                document.write("<a href='http://www.adobe.com/go/getflashplayer'><img src='" 
 					                                + pageHost + "www.adobe.com/images/shared/download_buttons/get_flash_player.gif' alt='Get Adobe Flash player' /></a>" ); 
-					            </script> 
+					            </script>  -->
 					        </div>
 						</c:if>
 		        </div>
