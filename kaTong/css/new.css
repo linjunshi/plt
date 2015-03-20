@@ -21,7 +21,6 @@
 .hea_new a{ padding:0 10px;}
 .hea_new a:hover{ color:#f00;}
 
-
 .con_login{position: absolute;left: 750px;top: 390px; }
 .con_login .con_user{height:30px; line-height:30px; border:3px #7abf04 solid; margin-bottom:15px; border-radius:10px; width:200px; text-indent:10px;}
 .con_login .con_user_but { padding:5px 15px; background:#096; color:#fff; margin:10px 10px 0 0; border-radius:6px;}
@@ -178,7 +177,7 @@
 .ping_title{height:60px;line-height:60px; text-align:center;  font-size:35px; background:url(../images/title_bg.png) no-repeat 15px center; color:#442100; letter-spacing:2px; display:block;}
 .ping_left{ float:left; width:700px; display:block; height:450px; background: url(../images/live_bg.png) no-repeat left top; margin:0px 0 10px 20px;}
 .ping_left_an {width:1000px; float:left;display:block; height:700px; background:url(../images/15.png) no-repeat left center; margin:10px 0;}
-.ping_li_an{ width:800px; height:600px; float:left; display:block; background:#000; margin:54px 0 0 100px;}
+.ping_li_an{ width:800px; height:600px; float:left; display:block; background:#000; margin:25px 0 0 100px;}
 
 .ping_left .ping_item{ margin:40px 0 0 20px; display: none;}
 .ping_left .ping_item a{ color:#fff; text-align:center;width:209px; height:37px;line-height:37px; display:block; font-size:16px; float:left; margin-right:15px; text-indent:10px;}
@@ -246,6 +245,12 @@
 .ping_ti_a:hover{ color:#393;}
 
 
+/*--------------------公鸡播放-----------------*/
+.header_p{ width:100%;min-height:1200px; background:url(../images/bg_h.jpg) no-repeat center top;}
+.menu_ping{ width:1200px; height:1200px; margin:0 auto; position:relative;}
+.menu_ping .logo_p{ position:absolute; top:30px; left:50px;}
+.menu_ping .con_ping{ position:absolute; top:308px; left:182px; width:800px; height:600px; background:#000;}
+.footer_p p{ height:30px; text-align:center; line-height:30px; color:#fff; background:#5c8287;}
 /*--------------------个人中心-----------------*/
 
 .qu_left { width:200px; float:left; margin-right:30px;}
