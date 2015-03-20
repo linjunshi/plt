@@ -62,7 +62,7 @@ Globals.page = "Story_detail";
 <body>
 <div class="header_p">
   <div class="menu_ping">
-    <div class="logo_p"><img src="${ctx}/resource/images/logo.png" height="70"></div>
+    <%@ include file="../inc/top_new.jsp"%>
     <div class="con_ping">
 		<c:if test="${isMobile}">
 			<video autoplay="autoplay" controls="controls" style="width:100%; height:100%; background:black;">
