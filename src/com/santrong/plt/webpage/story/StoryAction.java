@@ -1,7 +1,6 @@
 package com.santrong.plt.webpage.story;
 
 import java.util.Date;
-import java.util.List;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -14,7 +13,6 @@ import com.santrong.plt.webpage.BaseAction;
 import com.santrong.plt.webpage.story.dao.StoryCommentDao;
 import com.santrong.plt.webpage.story.dao.StoryDao;
 import com.santrong.plt.webpage.story.entry.StoryCommentItem;
-import com.santrong.plt.webpage.story.entry.StoryCommentUserView;
 import com.santrong.plt.webpage.story.entry.StoryItem;
 import com.santrong.plt.webpage.teacher.entry.UserItem;
 
@@ -52,16 +50,16 @@ public class StoryAction extends BaseAction {
 		}
 		
 		// 情景剧评论
-		StoryCommentDao scDao = new StoryCommentDao();
-		List<StoryCommentUserView> storyCommentList = scDao.selectByStoryEname(storyEname);
+//		StoryCommentDao scDao = new StoryCommentDao();
+//		List<StoryCommentUserView> storyCommentList = scDao.selectByStoryEname(storyEname);
 		
 		// 情景剧评论的总人数
-		int commentCount = scDao.selectCountByStoryEname(storyEname);
+//		int commentCount = scDao.selectCountByStoryEname(storyEname);
 		
 		this.getRequest().setAttribute("demo", demo);
 		this.getRequest().setAttribute("story", story);
-		this.getRequest().setAttribute("storyCommentList", storyCommentList);
-		this.getRequest().setAttribute("commentCount", commentCount);
+//		this.getRequest().setAttribute("storyCommentList", storyCommentList);
+//		this.getRequest().setAttribute("commentCount", commentCount);
 		return "story/detail";
 	}
 	

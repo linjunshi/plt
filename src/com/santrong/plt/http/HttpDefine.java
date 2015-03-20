@@ -49,4 +49,8 @@ public class HttpDefine {
 	public static final String Aio_Service_30001			= "30001";	// 登录校验
 	public static final String Aio_Service_30002			= "30002";	// 新增课件
 	public static final String Aio_Service_30003			= "30003";	// 新增课件完成
+	
+	/*故事剧本*/
+	public static final String 	Story_Service_22001			= "22001"; // 获取剧本名称(22001)
+	
 }
