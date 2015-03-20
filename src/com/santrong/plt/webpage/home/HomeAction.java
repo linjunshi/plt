@@ -30,36 +30,41 @@ import com.santrong.plt.webpage.home.entry.AreaItem;
 public class HomeAction extends BaseAction{
 	
 	@RequestMapping("")
-	public String index(HttpServletRequest request, HttpServletResponse response){
-		AreaEntry area = (AreaEntry)(request.getSession().getAttribute(Global.SessionKey_Area));
+	public String index(){
 		
-		
-		// 直播课程
-//		CourseDao courseDao = new CourseDao();
+		return this.redirect("/story");
+	}
+	
+//	public String index(HttpServletRequest request, HttpServletResponse response){
+//		AreaEntry area = (AreaEntry)(request.getSession().getAttribute(Global.SessionKey_Area));
+//		
+//		
+//		// 直播课程
+////		CourseDao courseDao = new CourseDao();
+////		for(GradeDefineEntry entry : GradeDefine.gradeList) {
+////			int gradeGroup = entry.getGradeGroup();
+////			String prefix = entry.getGradeEnName();
+////			List<CourseView> courseList = courseDao.selectForIndexList(gradeGroup, area.getCityCode());
+////			
+////			request.setAttribute(prefix  + "_courseList", courseList);
+////			request.setAttribute(prefix  + "_courseType", "course");
+////			request.setAttribute(prefix + "_subjectList", entry.getGradeSubjectList());
+////		}
+//		
+//		// 微课
+//		WeikeDao weikeDao = new WeikeDao();
 //		for(GradeDefineEntry entry : GradeDefine.gradeList) {
 //			int gradeGroup = entry.getGradeGroup();
 //			String prefix = entry.getGradeEnName();
-//			List<CourseView> courseList = courseDao.selectForIndexList(gradeGroup, area.getCityCode());
+//			List<CourseView> courseList = weikeDao.selectForIndexList(gradeGroup, area.getCityCode());
 //			
 //			request.setAttribute(prefix  + "_courseList", courseList);
-//			request.setAttribute(prefix  + "_courseType", "course");
+//			request.setAttribute(prefix  + "_courseType", "weike");
 //			request.setAttribute(prefix + "_subjectList", entry.getGradeSubjectList());
-//		}
-		
-		// 微课
-		WeikeDao weikeDao = new WeikeDao();
-		for(GradeDefineEntry entry : GradeDefine.gradeList) {
-			int gradeGroup = entry.getGradeGroup();
-			String prefix = entry.getGradeEnName();
-			List<CourseView> courseList = weikeDao.selectForIndexList(gradeGroup, area.getCityCode());
-			
-			request.setAttribute(prefix  + "_courseList", courseList);
-			request.setAttribute(prefix  + "_courseType", "weike");
-			request.setAttribute(prefix + "_subjectList", entry.getGradeSubjectList());
-		}		
-
-		return "index";
-	}
+//		}		
+//
+//		return "index";
+//	}
 	
 	
 	/**
