@@ -86,7 +86,7 @@ Globals.page = "Story_detail";
 		</c:if>
 	</div>
   </div>
-  <div class="footer_p"><p>技术支持：深圳市杜巴克网络有限公司 Copyright © www.keyyun.com</p></div>
+  <div class="footer_p"><p>技术支持：深圳市课云网络有限公司 Copyright © www.keyyun.com</p></div>
 </div>
 </body>
 </html>
