@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="com.santrong.plt.system.Global"%>
 <%@ include file="../inc/common.jsp"%>
-<c:set var="title" value="课云" ></c:set>
-<c:set var="keywords" value="课云教育" ></c:set>
+<c:set var="title" value="杜巴克" ></c:set>
+<c:set var="keywords" value="杜巴克教育" ></c:set>
 <c:set var="description" value="在线教育 私人定制 剧本故事" ></c:set>
 <%@ include file="../inc/header_new.jsp"%>
 <script type="text/javascript">
@@ -86,7 +86,7 @@ Globals.page = "Story_detail";
 		</c:if>
 	</div>
   </div>
-  <div class="footer_p"><p>技术支持：深圳市课云网络有限公司 Copyright © www.keyyun.com</p></div>
+  <div class="footer_p"><p>技术支持：深圳市杜巴克网络有限公司 Copyright © www.keyyun.com</p></div>
 </div>
 </body>
 </html>
