@@ -4,20 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.TreeMap;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.santrong.plt.opt.area.AreaEntry;
-import com.santrong.plt.opt.grade.GradeDefine;
-import com.santrong.plt.opt.grade.GradeDefineEntry;
 import com.santrong.plt.system.Global;
 import com.santrong.plt.webpage.BaseAction;
-import com.santrong.plt.webpage.course.dao.WeikeDao;
-import com.santrong.plt.webpage.course.entry.CourseView;
 import com.santrong.plt.webpage.home.dao.AreaDao;
 import com.santrong.plt.webpage.home.entry.AreaItem;
 

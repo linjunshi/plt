@@ -2,12 +2,15 @@ package com.santrong.plt.webpage.story;
 
 import java.util.Date;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.mysql.jdbc.StringUtils;
+import com.santrong.plt.util.ClientUtils;
 import com.santrong.plt.util.MyUtils;
 import com.santrong.plt.webpage.BaseAction;
 import com.santrong.plt.webpage.story.dao.StoryCommentDao;
@@ -56,10 +59,12 @@ public class StoryAction extends BaseAction {
 		// 情景剧评论的总人数
 //		int commentCount = scDao.selectCountByStoryEname(storyEname);
 		
-		this.getRequest().setAttribute("demo", demo);
-		this.getRequest().setAttribute("story", story);
-//		this.getRequest().setAttribute("storyCommentList", storyCommentList);
-//		this.getRequest().setAttribute("commentCount", commentCount);
+		HttpServletRequest request = getRequest();
+		request.setAttribute("demo", demo);
+		request.setAttribute("story", story);
+		request.setAttribute("isMobile", ClientUtils.isMobile(request));
+//		request.setAttribute("storyCommentList", storyCommentList);
+//		request.setAttribute("commentCount", commentCount);
 		return "story/detail";
 	}
 	

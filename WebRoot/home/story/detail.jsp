@@ -11,13 +11,23 @@
 			return ;   
 		}  
 
-		function StartCollect() {   
+		function StartCollect() {
 			vdActive.StartCollect();
 			return ;   
 		}  
 
 		function StopCollect() {   
 			vdActive.StopCollect();
+			return ;   
+		}  
+
+		function StartPlay() {   
+			vdActive.StartPlay();
+			return ;   
+		}  
+
+		function StopPlay() {   
+			vdActive.StopPlay();
 			return ;   
 		}  
 </script>
@@ -70,7 +80,7 @@ Globals.page = "Story_detail";
 			</video>
 		</c:if>
 		<c:if test="${!isMobile}">
-	        <object CLASSID="CLSID:40465476-E37B-4BB8-816E-3F7E525BEDAB" name="vdActive" CODEBASE="${ctx}/resource/player/VDAct.CAB#version=1,0,1,0" style="display:none;"></object>
+	        <object CLASSID="CLSID:40465476-E37B-4BB8-816E-3F7E525BEDAB" name="vdActive" CODEBASE="${ctx}/resource/player/VDAct.CAB#version=1,0,1,3" style="display:none;"></object>
 	        <div id="flashContent">
 	           <!--  <p>
 	                To view this page ensure that Adobe Flash Player version 
@@ -86,7 +96,9 @@ Globals.page = "Story_detail";
 		</c:if>
 	</div>
   </div>
-  <div class="footer_p"><p>技术支持：深圳市课云网络有限公司 Copyright © www.keyyun.com</p></div>
+  <div class="footer_p">
+  	<p>版权所有：深圳市三简智能科技有限公司 粤ICP备15022223号</p>
+  </div>
 </div>
 </body>
 </html>

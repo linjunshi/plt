@@ -213,7 +213,8 @@ public class AccountAction extends BaseAction {
 		String uri = (String)getRequest().getSession().getAttribute(Global.SessionKey_AfterLoginUri);
 		if(uri == null) {
 //			uri = "/";
-			uri = "/study/syllabus";
+//			uri = "/study/syllabus";
+			uri = "/personal/center";
 		}
 		
 		return this.redirect(uri);

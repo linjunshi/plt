@@ -1,3 +1,10 @@
+-- 2015-03-27 weinianjie
+insert into story values('10001', '功夫片段A', 'KongFuA', '', '10:10', '10000', '', 3, 0, '10000', 0, now(), now());
+insert into story values('10002', '功夫片段B', 'KongFuB', '', '10:10', '10000', '', 3, 0, '10000', 0, now(), now());
+insert into story values('10003', '功夫片段C', 'KongFuC', '', '10:10', '10000', '', 3, 0, '10000', 0, now(), now());
+insert into story values('10004', '让子弹飞片段A', 'RangZiDanFeiA', '', '10:10', '10000', '', 3, 0, '10000', 0, now(), now());
+insert into story values('10005', '让子弹飞片段B', 'RangZiDanFeiB', '', '10:10', '10000', '', 3, 0, '10000', 0, now(), now());
+
 -- 2015-03-09 weinianjie (2015-03-09 plttest)  (2015-02-27 hwcloud)
 update story set storyName='骄傲的公鸡',storyEname='ProudCock' where id='10000';
 
