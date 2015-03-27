@@ -1,5 +1,8 @@
 package com.santrong.plt.system;
 
+import com.santrong.plt.weixin.mp.entry.AccessTokenEntry;
+import com.santrong.plt.weixin.mp.entry.JsApiTicketEntry;
+
 
 
 
@@ -22,7 +25,7 @@ public class Global {
      * [System]
      */
     public static String Version = "";
-    public static String Title = "课云教育";
+    public static String Title = "杜巴克在线口语";
     public static String Language = "zh_CN";
 //    public static String PltDomain= "plttest.santrong.com";
     public static String PltDomain= "www.keyyun.com";
@@ -38,6 +41,16 @@ public class Global {
     public static String AreaCode = "110000";						// 默认北京市
     public static String City = "北京";									// 默认北京市
 
+    /*
+     * [Weixin]
+     */
+    // 第三方用户唯一凭证
+ 	public static String appid = "";
+ 	// 第三方用户唯一凭证密钥
+ 	public static String appsecret = "";
+ 	public static AccessTokenEntry accessToken = null;
+ 	public static JsApiTicketEntry jsapiticket = null;
+ 	
     static {
         String configFile = Global.class.getClassLoader().getResource("") + "Config.ini";
         if (configFile.startsWith("file:/")) {

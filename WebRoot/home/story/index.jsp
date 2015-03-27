@@ -18,10 +18,10 @@ Globals.page = "Story_index";
 			<img src="${ctx}/resource/images/logo.png" height="70">
 		</div>
 		<c:if test="${sessionScope.loginUser != null}">
-			<div class="hea_new"><span>${sessionScope.loginUser.showName}</span>|<a href="${ctx}/study/syllabus">学习中心</a>|<a href="${ctx}/personal/center">个人空间</a>|<a href="${ctx }/account/logout">注销</a></div>
+			<div class="hea_new"><span>${sessionScope.loginUser.showName}</span>|<a href="${ctx}/">首页</a>|<a href="${ctx}/personal/center">个人空间</a>|<a href="${ctx }/account/logout">注销</a></div>
 		</c:if>
 		<c:if test="${sessionScope.loginUser == null}">
-			<div class="hea_new"><a href="${ctx}/account/login">登录</a>|<a href="${ctx}/account/regist">注册</a>|<a href="${ctx}/account/forgotPwd">忘记密码？</a></div>
+			<div class="hea_new"><a href="${ctx}/">首页</a>|<a href="${ctx}/account/login">登录</a>|<a href="${ctx}/account/regist">注册</a>|<a href="${ctx}/account/forgotPwd">忘记密码？</a></div>
 		</c:if>
 		<div class="zhe_home">
 			<ul>
@@ -100,7 +100,7 @@ Globals.page = "Story_index";
 		</div>
 	</div>
 	<div class="footer_p">
-		 <p>技术支持：深圳市课云网络科技有限公司 Copyright © www.keyyun.com</p>
+		 <p>版权所有：深圳市课云网络有限公司  粤ICP备15022223号</p>
 	</div>
 </div>
 </body>

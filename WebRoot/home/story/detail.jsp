@@ -72,7 +72,15 @@ Globals.page = "Story_detail";
 <body>
 <div class="header_p">
   <div class="menu_ping">
-    <%@ include file="../inc/top_new.jsp"%>
+    	<div class="logo_p">
+			<img src="${ctx}/resource/images/logo.png" height="70">
+		</div>
+		<c:if test="${sessionScope.loginUser != null}">
+			<div class="hea_new"><span>${sessionScope.loginUser.showName}</span>|<a href="${ctx}/">首页</a>|<a href="${ctx}/personal/center">个人空间</a>|<a href="${ctx }/account/logout">注销</a></div>
+		</c:if>
+		<c:if test="${sessionScope.loginUser == null}">
+			<div class="hea_new"><a href="${ctx}/">首页</a>|<a href="${ctx}/account/login">登录</a>|<a href="${ctx}/account/regist">注册</a>|<a href="${ctx}/account/forgotPwd">忘记密码？</a></div>
+		</c:if>
     <div class="con_ping">
 		<c:if test="${isMobile}">
 			<video autoplay="autoplay" controls="controls" style="width:100%; height:100%; background:black;">
@@ -97,7 +105,7 @@ Globals.page = "Story_detail";
 	</div>
   </div>
   <div class="footer_p">
-  	<p>版权所有：深圳市三简智能科技有限公司 粤ICP备15022223号</p>
+  	<p>版权所有：深圳市课云网络有限公司  粤ICP备15022223号</p>
   </div>
 </div>
 </body>

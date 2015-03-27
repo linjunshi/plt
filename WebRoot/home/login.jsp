@@ -84,7 +84,7 @@ body {color: #666;font: 12px/1.8em Arial, Helvetica, sans-serif;background:#FFF;
     </div>
   </div>
 </div>
-<p class="footer_p">Copyright © 2014-2015, <a href="http://www.santrong.com" target="_blank">深圳市课云网络科技有限公司</a>, All Rights Reserved</p>
+<p class="footer_p">Copyright © 2014-2015, 技术支持：深圳市课云网络科技有限公司, 备案号：粤ICP备15022223号</p>
 </body>
 </html>
 
