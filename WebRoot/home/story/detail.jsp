@@ -31,6 +31,10 @@
 			return ;   
 		}  
 </script>
+<c:set var="dramaName" value="VirtualDrama.swf" />
+<c:if test="${story.storyEname != 'ProudCock'}">
+<c:set var="dramaName" value="VirtualDramaStad.swf" />
+</c:if>
 <c:if test="${!isMobile}">
 <script type="text/javascript" src="${ctx}/resource/player/swfobject.js"></script>
 <script type="text/javascript">
@@ -57,7 +61,7 @@ attributes.id = "VirtualDrama";
 attributes.name = "VirtualDrama";
 attributes.align = "middle";
 window.onload = function() {
-	swfobject.embedSWF("${ctx}/resource/player/VirtualDrama.swf", "flashContent", "100%", "100%", swfVersionStr, xiSwfUrlStr, flashvars, params, attributes);
+	swfobject.embedSWF("${ctx}/resource/player/${dramaName}", "flashContent", "100%", "100%", swfVersionStr, xiSwfUrlStr, flashvars, params, attributes);
 	swfobject.createCSS("#flashContent", "display:block;text-align:left;background:#000;");
 };
 </script>
