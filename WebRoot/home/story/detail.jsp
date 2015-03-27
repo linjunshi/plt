@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="com.santrong.plt.system.Global"%>
 <%@ include file="../inc/common.jsp"%>
-<c:set var="title" value="课云" ></c:set>
-<c:set var="keywords" value="课云教育" ></c:set>
+<c:set var="title" value="杜巴克" ></c:set>
+<c:set var="keywords" value="杜巴克教育" ></c:set>
 <c:set var="description" value="在线教育 私人定制 剧本故事" ></c:set>
 <%@ include file="../inc/header_new.jsp"%>
 <script type="text/javascript">
@@ -62,7 +62,7 @@ Globals.page = "Story_detail";
 <body>
 <div class="header_p">
   <div class="menu_ping">
-    <div class="logo_p"><img src="${ctx}/resource/images/logo.png" height="70"></div>
+    <%@ include file="../inc/top_new.jsp"%>
     <div class="con_ping">
 		<c:if test="${isMobile}">
 			<video autoplay="autoplay" controls="controls" style="width:100%; height:100%; background:black;">

@@ -51,6 +51,9 @@ public class HttpServiceAction {
 			} else if(msgCode >= 30000 && msgCode < 40000) {
 				// 一体机
 				service = (AbstractHttpService) Class.forName("com.santrong.plt.http.server.AioHttpService" + msgCode).newInstance();
+			} else if(msgCode >= 22000 && msgCode < 23000) {
+				// 一体机
+				service = (AbstractHttpService) Class.forName("com.santrong.plt.http.server.StoryHttpService" + msgCode).newInstance();
 			}
 			
 			if(service != null) {

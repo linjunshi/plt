@@ -41,7 +41,7 @@ public class StoryHttpService22001 implements AbstractHttpService{
 			sb.append("</MsgHead>");
 			sb.append("<MsgBody>");
 				if (storyItem != null) {
-					sb.append("<DramaName>").append(storyItem.getStoryName()).append("</DramaName>");
+					sb.append("<DramaName>").append(storyItem.getStoryEname()).append("</DramaName>");
 				}
 			sb.append("</MsgBody>");
 		sb.append("</RespMsg>");

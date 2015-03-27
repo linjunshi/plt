@@ -15,7 +15,7 @@ Globals.page = "Manage_apply";
 		<%@ include file="../../inc/top_bg.jsp"%>
 		<div id="container_box">
 			<div id="container_content">
-			    <div>恭喜你成为课云平台老师</div>
+			    <div>恭喜你成为杜巴克平台老师</div>
 				<a href="${ctx}/manage/course">进入安排课程</a>
 		</div>
 		</div>
