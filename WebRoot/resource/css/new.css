@@ -334,9 +334,22 @@ font-size:22px; letter-spacing:15px;color:#393;background:url(../images/ti_bg.pn
 /*--------------------公鸡播放-----------------*/
 .header_p{ width:100%;min-height:1200px; background:url(../images/bg_h.jpg) no-repeat center top;}
 .menu_ping{ width:1200px; height:1200px; margin:0 auto; position:relative;}
-.menu_ping .logo_p{ position:absolute; top:30px; left:50px;}
+.menu_ping .logo_p, .menu_zhe .logo_p{ position:absolute; top:30px; left:50px;}
 .menu_ping .con_ping{ position:absolute; top:308px; left:182px; width:800px; height:600px; background:#000;}
 .footer_p p{ height:30px; text-align:center; line-height:30px; color:#fff; background:#5c8287;}
+/*--------------------公鸡首页-----------------*/
+.header_zhe{ width:100%;min-height:1200px; background:url(../images/bg.png) no-repeat center top;}
+.menu_zhe  .zhe_home { padding:260px 0px 0px 80px;}
+.menu_zhe {width:1200px; height:1116px; margin:0 auto; position:relative;}
+.zhe_home ul li{ float:left; display:block; width:330px; height:300px; margin:0 30px 20px 0; position:relative;}
+.zhe_photo { position:absolute; left:0; top:0; z-index:999;}
+.zhe_im { position:absolute; left:30px;top:40px; z-index:1;}
+.zhe_but_c{ position:absolute; left:20px; bottom:20px; background:url(../images/but_c.png) no-repeat left top; width:124px; height:40px;}
+.zhe_but_b{ position:absolute; right:20px; bottom:20px; background:url(../images/but_b.png) no-repeat left top; width:124px; height:40px;}
+.zhe_but_a{ position:absolute; left:20px; bottom:20px; background:url(../images/but_a.png) no-repeat left top; width:124px; height:40px;}
+.zhe_but_a:hover{background:url(../images/but_a_h.png) no-repeat left top;}
+.zhe_but_b:hover{background:url(../images/but_b_h.png) no-repeat left top;}
+.zhe_but_c:hover{background:url(../images/but_c_h.png) no-repeat left top;}
 
 /*--------------------个人中心-----------------*/
 
