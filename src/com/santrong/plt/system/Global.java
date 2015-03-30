@@ -1,7 +1,7 @@
 package com.santrong.plt.system;
 
-import com.santrong.plt.weixin.mp.entry.AccessTokenEntry;
-import com.santrong.plt.weixin.mp.entry.JsApiTicketEntry;
+import com.santrong.plt.weixin.mp.entry.WeixinAccessTokenEntry;
+import com.santrong.plt.weixin.mp.entry.WeixinJsApiTicketEntry;
 
 
 
@@ -48,8 +48,8 @@ public class Global {
  	public static String appid = "";
  	// 第三方用户唯一凭证密钥
  	public static String appsecret = "";
- 	public static AccessTokenEntry accessToken = null;
- 	public static JsApiTicketEntry jsapiticket = null;
+ 	public static WeixinAccessTokenEntry accessToken = null;
+ 	public static WeixinJsApiTicketEntry jsapiticket = null;
  	
     static {
         String configFile = Global.class.getClassLoader().getResource("") + "Config.ini";
