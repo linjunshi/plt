@@ -133,7 +133,8 @@ public class AccountAction extends BaseAction {
 			Log.printStackTrace(e);
 		}
 		
-		return this.redirect("/study/syllabus");
+//		return this.redirect("/study/syllabus");
+		return this.redirect("/story");
 	}	
 	
 	/**
@@ -214,7 +215,8 @@ public class AccountAction extends BaseAction {
 		if(uri == null) {
 //			uri = "/";
 //			uri = "/study/syllabus";
-			uri = "/personal/center";
+//			uri = "/personal/center";
+			uri = "/story";
 		}
 		
 		return this.redirect(uri);
