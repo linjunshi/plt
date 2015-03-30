@@ -302,16 +302,10 @@ function init() {
 	// 回车和esc
 	$(document).unbind("keydown").keydown(function(e){
 		if(e.keyCode==13){// 回车
-			var el;			
-			// 浮动对话框
-			el = $(".answers .boxy-btn1");
-			if(el.size() > 0) {
-				el.click();
-				return;
-			}
+			var el;	
 			
 			// 登录
-			el = $(".login_submit");
+			el = $(".sure");
 			if(el.size() > 0) {
 				el.click();
 				return;
@@ -361,6 +355,7 @@ function init() {
 	// 弹窗登陆
 	$("#loginWicket").click(function(){
 		Boxy.load(Globals.ctx + "/account/login", {
+			title : '用户登陆',
 			afterShow : function(){
 				$(".sure").click(function() {
 					var username = $("input[name=username]").val();
