@@ -134,7 +134,8 @@ public class AccountAction extends BaseAction {
 			Log.printStackTrace(e);
 		}
 		
-		return this.redirect("/study/syllabus");
+//		return this.redirect("/study/syllabus");
+		return this.redirect("/story");
 	}	
 	
 	/**

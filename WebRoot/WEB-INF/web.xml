@@ -74,4 +74,20 @@
   		<listener-class>com.santrong.plt.listener.StartUpListener</listener-class>
   	</listener>
   	
+  	<!-- 初始化access_token到内存中 -->
+  	<servlet>
+		<servlet-name>initWXMPServlet</servlet-name>
+		<servlet-class>com.santrong.plt.weixin.mp.InitWXMPServlet</servlet-class>
+		<!-- 配置获取access_token所需参数appid和appsecret -->
+		<init-param>
+			<param-name>appid</param-name>
+			<param-value>wx510b87b7fe906e52</param-value><!-- wx3248dfe59c14454c 微信公众平台提供的测试 appid，仅测试用-->
+		</init-param>
+		<init-param>
+			<param-name>appsecret</param-name>
+			<param-value>92308ef444a6c9780bb8d9a80d5c8b21</param-value><!--63b12109785872a7a7c525b545b80bdf 微信公众平台提供的测试 appsecret，仅测试用 -->
+		</init-param>
+		<load-on-startup>0</load-on-startup>
+	</servlet>
+	
 </web-app>

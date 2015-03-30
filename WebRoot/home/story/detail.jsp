@@ -39,10 +39,11 @@ var swfVersionStr = "11.1.0";
 // To use express install, set to playerProductInstall.swf, otherwise the empty string. 
 var xiSwfUrlStr = "${ctx}/resource/player/playerProductInstall.swf";
 var flashvars = {
-	ServAddr: "192.168.10.163",
-	//ServAddr: "<%=Global.PltDomain%>",
+	//ServAddr: "192.168.10.163",
+	ServAddr: "<%=Global.PltDomain%>",
 	ServPort: "23456",
 	UserID: "${sessionScope.loginUser.id}",
+	DramaID: "${story.id}",
 	DramaName: "${story.storyEname}",
 	Demo: "${demo}"
 };
@@ -76,7 +77,7 @@ Globals.page = "Story_detail";
 			<img src="${ctx}/resource/images/logo.png" height="70">
 		</div>
 		<c:if test="${sessionScope.loginUser != null}">
-			<div class="hea_new"><span>${sessionScope.loginUser.showName}</span>|<a href="${ctx}/">首页</a>|<a href="${ctx}/personal/center">个人空间</a>|<a href="${ctx }/account/logout">注销</a></div>
+			<div class="hea_new"><span>${sessionScope.loginUser.showName}</span>|<a href="${ctx}/">首页</a>|<a href="${ctx }/account/logout">注销</a></div>
 		</c:if>
 		<c:if test="${sessionScope.loginUser == null}">
 			<div class="hea_new"><a href="${ctx}/">首页</a>|<a href="javascript:void(0);" id="loginWicket">登录</a>|<a href="${ctx}/account/regist">注册</a>|<a href="${ctx}/account/forgotPwd">忘记密码？</a></div>

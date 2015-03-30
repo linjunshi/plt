@@ -362,9 +362,7 @@ function init() {
 	$("#loginWicket").click(function(){
 		Boxy.load(Globals.ctx + "/account/login", {
 			afterShow : function(){
-				
 				$(".sure").click(function() {
-					debugger;
 					var username = $("input[name=username]").val();
 					var password = $("input[name=password]").val();
 					if (username == "" || username == null) {
@@ -380,7 +378,6 @@ function init() {
 						data : {username : username, password : password}, 
 						type : "POST",
 						success : function(result) {
-							debugger;
 							if(result == "isNull"){
 								$("#tips_msg").html("请您输入用户名和密码!");
 								$(".system_tip_login").show();
@@ -393,7 +390,6 @@ function init() {
 							}else{
 								$(".system_tip_login").hide();
 								window.location.href = Globals.ctx + result;
-//								$(".close").click();
 							}
 						}
 					});

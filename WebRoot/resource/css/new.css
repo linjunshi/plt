@@ -648,7 +648,7 @@ input[type="reset"]::-moz-focus-inner, input[type="button"]::-moz-focus-inner, i
 /*----------------------------------------------------------------------*/
 
 /*-------------------------------login  START---------------------------------------*/
-.user {	width: 330px;height: 230px;border:1px #fff solid;background: url(../images/007.png);	position: absolute;	top: 50px;	right: 20px;border-radius: 15px;}
+.user {	width: 330px;height: 230px;border:1px #fff solid;background: #fff url(../images/007.png);	position: absolute;	top: -200px; right: -170px;border-radius: 15px;}
 .formlogin {height:auto;width:300px;padding-top: 20px;}
 .loginuser {width: 330px;display: block;float: left;color: #FFF;margin:15px 0;height:30px;}
 .login {display: block;	width: 100px;text-align: right;float: left;font-size: 16px;color: #000;	height:30px;line-height:30px;}

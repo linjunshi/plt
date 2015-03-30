@@ -18,7 +18,7 @@ Globals.page = "Story_index";
 			<img src="${ctx}/resource/images/logo.png" height="70">
 		</div>
 		<c:if test="${sessionScope.loginUser != null}">
-			<div class="hea_new"><span>${sessionScope.loginUser.showName}</span>|<a href="${ctx}/">首页</a>|<a href="${ctx}/personal/center">个人空间</a>|<a href="${ctx }/account/logout">注销</a></div>
+			<div class="hea_new"><span>${sessionScope.loginUser.showName}</span>|<a href="${ctx}/">首页</a>|<a href="${ctx }/account/logout">注销</a></div>
 		</c:if>
 		<c:if test="${sessionScope.loginUser == null}">
 			<div class="hea_new"><a href="${ctx}/">首页</a>|<a href="javascript:void(0);" id="loginWicket">登录</a>|<a href="${ctx}/account/regist">注册</a>|<a href="${ctx}/account/forgotPwd">忘记密码？</a></div>
@@ -30,7 +30,7 @@ Globals.page = "Story_index";
 						<img src="${ctx}/resource/images/zhezhao.png" width="327">
 					</p>
 					<p class="zhe_im">
-						<img src="${ctx}/resource/images/h_si.jpg" width="260" height="175" alt="美丽的公鸡" title="美丽的公鸡">
+						<img src="${ctx}/resource/images/ProudCock_Cover.png" width="260" height="175" alt="美丽的公鸡" title="美丽的公鸡">
 					</p>
 					<p>
 						<a href="${ctx}/story/game/ProudCock?demo=0" target="_blank" class="zhe_but_c" title="美丽的公鸡">&nbsp;</a>
@@ -42,7 +42,7 @@ Globals.page = "Story_index";
 						<img src="${ctx}/resource/images/zhezhao.png" width="327">
 					</p>
 					<p class="zhe_im">
-						<img src="${ctx}/resource/images/h_si.jpg" width="260" height="175" alt="功夫片段A" title="功夫片段A">
+						<img src="${ctx}/resource/images/KongFuA_Cover.png" width="260" height="175" alt="功夫片段A" title="功夫片段A">
 					</p>
 					<p>
 						<a href="${ctx}/story/game/KongFuA?demo=0" target="_blank" class="zhe_but_c" title="功夫片段A">&nbsp;</a>
@@ -54,7 +54,7 @@ Globals.page = "Story_index";
 						<img src="${ctx}/resource/images/zhezhao.png" width="327">
 					</p>
 					<p class="zhe_im">
-						<img src="${ctx}/resource/images/h_si.jpg" width="260" height="175" alt="功夫片段B" title="功夫片段B">
+						<img src="${ctx}/resource/images/KongFuB_Cover.png" width="260" height="175" alt="功夫片段B" title="功夫片段B">
 					</p>
 					<p>
 						<a href="${ctx}/story/game/KongFuB?demo=0" target="_blank" class="zhe_but_c" title="功夫片段B">&nbsp;</a>
@@ -66,7 +66,7 @@ Globals.page = "Story_index";
 						<img src="${ctx}/resource/images/zhezhao.png" width="327">
 					</p>
 					<p class="zhe_im">
-						<img src="${ctx}/resource/images/h_si.jpg" width="260" height="175" alt="让子弹飞片段A" title="让子弹飞片段A">
+						<img src="${ctx}/resource/images/KongFuC_Cover.png" width="260" height="175" alt="让子弹飞片段A" title="让子弹飞片段A">
 					</p>
 					<p>
 						<a href="${ctx}/story/game/RangZiDanFeiA?demo=0" target="_blank" class="zhe_but_c" title="让子弹飞片段A">&nbsp;</a>
@@ -78,7 +78,7 @@ Globals.page = "Story_index";
 						<img src="${ctx}/resource/images/zhezhao.png" width="327">
 					</p>
 					<p class="zhe_im">
-						<img src="${ctx}/resource/images/h_si.jpg" width="260" height="175" alt="让子弹飞片段B" title="让子弹飞片段B">
+						<img src="${ctx}/resource/images/RangZiDanFeiA_Cover.png" width="260" height="175" alt="让子弹飞片段B" title="让子弹飞片段B">
 					</p>
 					<p>
 						<a href="${ctx}/story/game/RangZiDanFeiA?demo=0" target="_blank" class="zhe_but_c" title="让子弹飞片段B">&nbsp;</a>
@@ -90,7 +90,7 @@ Globals.page = "Story_index";
 						<img src="${ctx}/resource/images/zhezhao.png" width="327">
 					</p>
 					<p class="zhe_im">
-						<img src="${ctx}/resource/images/h_si.jpg" width="260" height="175">
+						<img src="${ctx}/resource/images/ShiPinJiaoCheng_Cover.png" width="260" height="175">
 					</p>
 					<p>
 						<a href="${ctx}/story/direction" target="_blank" class="zhe_but_a">&nbsp;</a>

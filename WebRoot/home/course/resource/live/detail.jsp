@@ -37,16 +37,16 @@
             var xiSwfUrlStr = "${ctx}/resource/player/playerProductInstall.swf";
             var flashvars = {
             VarType: "live",
-//			PlayUrl: "<%=Global.PltDomain%>",
-			PlayUrl: "192.168.10.163",
+			PlayUrl: "<%=Global.PltDomain%>",
+//			PlayUrl: "192.168.10.163",
 			WebUrl: "<%=Global.PltDomain%>",
 			UserID: "${sessionScope.loginUser.id}",	
 			UserName: "${sessionScope.loginUser.username}",
 			MasterName: "${course.teacher}",
 			SourceID: "${live.id}",
 			SourceTitle: "${live.title}",
-//			ServAddr: "<%=Global.PltDomain%>"
-			ServAddr: "192.168.10.163"
+			ServAddr: "<%=Global.PltDomain%>"
+//			ServAddr: "192.168.10.163"
 			};			
             var params = {
 			 flashvars: "CourseName=abcderf" 
