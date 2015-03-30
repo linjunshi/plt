@@ -357,6 +357,52 @@ function init() {
 			});
 		});
 	}
+	
+	// 弹窗登陆
+	$("#loginWicket").click(function(){
+		Boxy.load(Globals.ctx + "/account/login", {
+			afterShow : function(){
+				
+				$(".sure").click(function() {
+					debugger;
+					var username = $("input[name=username]").val();
+					var password = $("input[name=password]").val();
+					if (username == "" || username == null) {
+						$("#tips_msg").html("请您输入用户名!");
+						$(".system_tip_login").show();
+					}
+					if (password == "" || password == null) {
+						$("#tips_msg").html("请您输入密码!");
+						$(".system_tip_login").show();
+					}
+					$.ajax({
+						url : Globals.ctx + "/account/login", 
+						data : {username : username, password : password}, 
+						type : "POST",
+						success : function(result) {
+							debugger;
+							if(result == "isNull"){
+								$("#tips_msg").html("请您输入用户名和密码!");
+								$(".system_tip_login").show();
+							}else if(result == "hasUser"){
+								$("#tips_msg").html("您输入的用户名不存在!");
+								$(".system_tip_login").show();
+							}else if(result == "wrongPwd"){
+								$("#tips_msg").html("您输入的密码有误，请重新输入!");
+								$(".system_tip_login").show();
+							}else{
+								$(".system_tip_login").hide();
+								window.location.href = Globals.ctx + result;
+//								$(".close").click();
+							}
+						}
+					});
+				});
+				
+				$(".close").bindFormClose();
+			}
+		})
+	});
 }
 
 // 入口函数

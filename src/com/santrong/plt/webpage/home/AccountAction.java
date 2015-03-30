@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.mysql.jdbc.StringUtils;
 import com.santrong.plt.log.Log;
@@ -123,7 +124,7 @@ public class AccountAction extends BaseAction {
 				sb.append("请点击以下链接激活帐号（如不能点击请复制到浏览器地址栏打开）</br/>");
 				sb.append("<a href=\"").append(activeUrl.toString()).append("\">").append(activeUrl.toString()).append("</a><br/>");
 				sb.append("激活链接24小时有效");				
-				MailUtils.sendMail(email, "课云平台帐号激活", sb.toString());
+				MailUtils.sendMail(email, "杜巴克在线口语平台帐号激活", sb.toString());
 			}catch(Exception e) {
 				Log.printStackTrace(e);
 			}
@@ -178,7 +179,8 @@ public class AccountAction extends BaseAction {
 	@RequestMapping(value="/login", method=RequestMethod.GET)
 	public String loginGet() {
 		
-		return "login";
+//		return "login";
+		return "loginWicket";
 	}
 	
 	/**
@@ -188,23 +190,21 @@ public class AccountAction extends BaseAction {
 	 * @return
 	 */
 	@RequestMapping(value="/login", method=RequestMethod.POST)
+	@ResponseBody
 	public String loginPOST(String username, String password) {
 		if(StringUtils.isNullOrEmpty(username) || StringUtils.isNullOrEmpty(password)) {
-			addError("请您输入用户名和密码");
-			return "login";
+			return "isNull";
 		}
 		
 		UserDao userDao = new UserDao();
 		UserItem user = userDao.selectByUserName(username);
 		
 		if(user == null) {
-			addError("您输入的用户名不存在！");
-			return "login";
+			return "hasUser";
 		}
 		
 		if(!user.getPassword().equals(MyUtils.getMD5(password))) {
-			addError("您输入的密码有误，请重新输入！");
-			return "login";
+			return "wrongPwd";
 		}
 
 		getRequest().getSession().setAttribute(Global.SessionKey_LoginUser, user);
@@ -214,10 +214,11 @@ public class AccountAction extends BaseAction {
 		if(uri == null) {
 //			uri = "/";
 //			uri = "/study/syllabus";
-			uri = "/personal/center";
+//			uri = "/personal/center";
+			uri = "/story";
 		}
-		
-		return this.redirect(uri);
+		return uri;
+//		return this.redirect(uri);
 	}	
 	
 	
@@ -279,7 +280,7 @@ public class AccountAction extends BaseAction {
 				StringBuilder sb = new StringBuilder();
 				sb.append("用户名是").append(user.getUsername()).append("</br/>");
 				sb.append("新密码是").append(newPwd.toString()).append("</br/>");
-				MailUtils.sendMail(user.getEmail(), "课云平台帐号新密码", sb.toString());
+				MailUtils.sendMail(user.getEmail(), "杜巴克在线口语平台帐号新密码", sb.toString());
 				
 				// 数据库修改
 				user.setPassword(MyUtils.getMD5(newPwd.toString()));

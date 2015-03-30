@@ -101,7 +101,7 @@ public class AccountMAction extends RegistBaseAction {
 						sb.append("请点击以下链接激活帐号（如不能点击请复制到浏览器地址栏打开）</br/>");
 						sb.append("<a href=\"").append(activeUrl.toString()).append("\">").append(activeUrl.toString()).append("</a><br/>");
 						sb.append("激活链接24小时有效");				
-						MailUtils.sendMail(user.getEmail(), "课云平台帐号激活", sb.toString());
+						MailUtils.sendMail(user.getEmail(), "杜巴克在线口语平台帐号激活", sb.toString());
 					}catch(Exception e) {
 						Log.printStackTrace(e);
 					}

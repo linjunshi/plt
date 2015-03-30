@@ -12,7 +12,7 @@
 			<div class="hea_new"><span>${sessionScope.loginUser.showName}</span>|<a href="${ctx}/">首页</a>|<a href="${ctx}/personal/center">个人空间</a>|<a href="${ctx }/account/logout">注销</a></div>
 		</c:if>
 		<c:if test="${sessionScope.loginUser == null}">
-			<div class="hea_new"><a href="${ctx}/">首页</a>|<a href="${ctx}/account/login">登录</a>|<a href="${ctx}/account/regist">注册</a>|<a href="${ctx}/account/forgotPwd">忘记密码？</a></div>
+			<div class="hea_new"><a href="${ctx}/">首页</a>|<a href="javascript:void(0);" id="loginWicket">登录</a>|<a href="${ctx}/account/regist">注册</a>|<a href="${ctx}/account/forgotPwd">忘记密码？</a></div>
 		</c:if>
 		<%-- <div class="hea_nav">
 			<a href="${ctx}/" class="a_a">首页</a>

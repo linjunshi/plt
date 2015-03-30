@@ -646,3 +646,31 @@ input[type="reset"]::-moz-focus-inner, input[type="button"]::-moz-focus-inner, i
 {-webkit-border-radius: 3px;border-radius: 3px;font-size:16kpx; padding:8px 15px;  background:#dac189; margin:0 5px; color:#fff;border: 0;}
 .boxy-wrapper .answers .boxy-btn3:hover,.boxy-wrapper .answers .boxy-btn2:hover,.boxy-wrapper .answers .boxy-btn1:hover{ background:#f90;}
 /*----------------------------------------------------------------------*/
+
+/*-------------------------------login  START---------------------------------------*/
+.user {	width: 330px;height: 230px;border:1px #fff solid;background: url(../images/007.png);	position: absolute;	top: 50px;	right: 20px;border-radius: 15px;}
+.formlogin {height:auto;width:300px;padding-top: 20px;}
+.loginuser {width: 330px;display: block;float: left;color: #FFF;margin:15px 0;height:30px;}
+.login {display: block;	width: 100px;text-align: right;float: left;font-size: 16px;color: #000;	height:30px;line-height:30px;}
+.text2 {display: block;	width: 150px;height:26px;text-align:left;float:left;}
+
+.validation {display: block;width:60px;height:24px; line-height:24px;text-align: left;float: left;margin-right:3px;}
+.loginuser a{ line-height:40px;}
+.loginbut {	width: 300px;display:block;float:left;color: #FFF;margin:20px 0 0 0px;}
+.btn-login {float: left;width:100px;height: 30px;background:#f90;display: block;line-height: 30px;text-align: center;letter-spacing: 4px;color: #fff;text-decoration:none;font-size:18px;margin-left:50px;border:0;}
+.login_index {float: left;width:100px;height: 30px;background:#f90;display: block;line-height: 30px;text-align: center;letter-spacing: 4px;color: #fff;text-decoration:none;font-size:18px;margin-left:30px;border:0;}
+.login_index:hover{background:#188EEE;cursor: pointer;}
+/* .loginbut a {width:100px;height: 30px;background:#f90;display: block;line-height: 30px;text-align: center;letter-spacing: 4px;color: #fff;text-decoration:none;font-size:18px;margin-left:100px;}
+.loginbut a:hover{background:#f90;} 
+*/
+.loginbut .btn:focus,.btn-login:hover{background:#188EEE;cursor: pointer;}
+/*------------------以下是鼠标放上去的效果可有可无-------------------------*/
+.text2, textarea,.validation{border: 1px solid #CCC;border-radius:3px 3px 3px 3px;padding:4px;}
+.text2, textarea,.validation { -webkit-transition: border linear 0.2s, box-shadow linear 0.2s; -moz-transition: border linear 0.2s, box-shadow linear 0.2s; -ms-transition: border linear 0.2s, box-shadow linear 0.2s; -o-transition: border linear 0.2s, box-shadow linear 0.2s; transition: border linear 0.2s, box-shadow linear 0.2s; -webkit-box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);  -moz-box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);}
+.text2:focus, textarea:focus, .validation{outline: 0 none;}
+.text2:focus, textarea:focus,.validation:focus { border-color: rgba(82, 168, 236, 0.8);
+  -webkit-box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1), 0 0 8px rgba(82, 168, 236, 0.6);
+  -moz-box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1), 0 0 8px rgba(82, 168, 236, 0.6);
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1), 0 0 8px rgba(82, 168, 236, 0.6);}
+.system_tip_login {width:300px; line-height:26px;margin-left: 10px; /* margin:10px auto; */ border:solid 1px #F5D8A7; border-radius:2px; background-color:#FFF6DB;padding-left: 10px;text-align: center;display: none;}
+/*---------------------------------login  END-------------------------------------*/
