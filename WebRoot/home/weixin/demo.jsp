@@ -8,14 +8,15 @@
 <!-- <link rel="stylesheet" type="text/css" href="http://demo.open.weixin.qq.com/jssdk/css/style.css?ts=1420774989"/> -->
 <link rel="stylesheet" type="text/css" href="${ctx}/resource/css/weixin.demo.css"/>
 <script type="text/javascript" src="${ctx}/resource/js/jweixin-1.0.0.js" ></script>
+<!-- <script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"> </script> -->	
 <script type="text/javascript" src="${ctx}/resource/js/weixin-js-SDK-Demo.js" ></script>
 
-<script type="text/javascript">
+<!-- <script type="text/javascript">
 var Globals = {};
 Globals.ctx = "${ctx}";
 Globals.lang = "${lang}";
 Globals.page = "Index_jsjdkDemo";
-</script>
+</script> -->
 <script>
 /*
  * 注意：
@@ -79,6 +80,7 @@ jsApiList: [] // 必填，需要使用的JS接口列表，所有JS接口列表�
         'openCard'
       ]
   });
+  
 </script>
 </head>
 <body ontouchstart="">
@@ -193,7 +195,6 @@ jsApiList: [] // 必填，需要使用的JS接口列表，所有JS接口列表�
     </div>
   </div>
 </body>
-<!-- <script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"> </script> -->
 
 <!-- <script src="http://demo.open.weixin.qq.com/jssdk/js/api-6.1.js?ts=1420774989"> </script> -->
 </html>

@@ -21,6 +21,29 @@ StoryClass.prototype = {
 					return;
 				}
 			});
+		},
+		
+		index : function(){
+			
+			// 判断是否已经登陆
+			$(".isLogin").click(function(){
+				var _this = $(this);
+				var url = _this.attr("url_attr");
+				$.ajax({
+					url : Globals.ctx + "/account/isLogin", 
+//					data : {}, 
+					type : "GET",
+					success : function(result) {
+						if(result == "fail"){
+							$.loginWicket(url);
+						}else{
+							window.location.href = url;
+						}
+					}
+				});
+				
+				
+			});
 		}
 
 };
