@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="inc/common.jsp"%>
-<c:set var="title" value="三简在线教育平台-用户注册" ></c:set>
-<c:set var="keywords" value="456" ></c:set>
-<c:set var="description" value="789" ></c:set>
+<c:set var="title" value="杜巴克教育" ></c:set>
+<c:set var="keywords" value="杜巴克教育" ></c:set>
+<c:set var="description" value="杜巴克教育" ></c:set>
 <%@ include file="inc/header_new.jsp"%>
 <script type="text/javascript">
 var Globals = {};
@@ -12,7 +12,7 @@ Globals.page = "Index_regist";
 </script>
 </head>
 <style type="text/css">
-.system_tip {position: relative;float: left; width:380px; line-height:26px;min-height:26px; margin:0px 250px 10px 200px; border:solid 1px #F5D8A7; border-radius:2px; background-color:#FFF6DB;padding-left: 10px;  }
+.system_tip {position: relative;float: left; width:380px; line-height:26px;min-height:26px; margin:0px 250px 10px 360px; border:solid 1px #F5D8A7; border-radius:2px; background-color:#FFF6DB;padding-left: 10px;  }
 </style>
 <body>
 
@@ -35,19 +35,7 @@ Globals.page = "Index_regist";
 					<div id="demo_zone">
 						
 						<form action="${ctx}/account/regist" method="post" class="form_vertical common_form">
-							<input id="levelId" name="levelId" type="hidden" value="">
-							<div class="form_item">
-								<label for="gradeId">所属年级：</label>
-								<div class="form_field">
-									<select id="gradeSelect" style="display: none;">
-										<c:forEach items="${applicationScope.gradeList}" var="grade" varStatus="st">
-										<option value="${grade.gradeEnName}">${grade.gradeName}</option>
-										</c:forEach>
-									</select>
-									<select name="gradeId" id="levelSelect"></select>
-									<span class="not-empty" title='此项为必填项'>*</span>
-								 </div>
-							</div>
+							<input name="gradeId" type="hidden" value="10000">
 							<div class="form_item">
 								<label for="username">用&nbsp; 户  名：</label>
 								<div class="form_field">
@@ -74,7 +62,6 @@ Globals.page = "Index_regist";
 								<div class="form_field">
 									<input name="email" class="form_text" type="text" required required_Mail />
 									<span class="not-empty" title='此项为必填项'>*</span>
-									<span class="not-empty" ><a href="${ctx}/account/forgotPwd" target="_blank" class="login_forgot">忘记密码?</a></span>
 								</div>
 							</div>	
 							<div class="form_action">

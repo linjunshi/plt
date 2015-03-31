@@ -6,7 +6,7 @@
 <div class="menu">
 	<div class="menu_top">
 		<div class="logo">
-			<img src="${ctx}/resource/images/logo.png" width="260" height="52">
+			<img src="${ctx}/resource/images/logo.png" width="221" height="70">
 		</div>
 		<c:if test="${sessionScope.loginUser != null}">
 			<div class="hea_new"><span>${sessionScope.loginUser.showName}</span>|<a href="${ctx}/">首页</a>|<a href="${ctx }/account/logout">注销</a></div>

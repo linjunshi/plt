@@ -112,22 +112,22 @@ public class AccountAction extends BaseAction {
 			getRequest().getSession().setAttribute(Global.SessionKey_LoginUser, user);
 		
 			// 发送邮件
-			try{
-				StringBuilder activeUrl = new StringBuilder();
-				activeUrl.append("http://").append(Global.PltDomain).append("/");
-				if(MyUtils.isNotNull(this.getContext())) {
-					activeUrl.append(this.getContext()).append("/");
-				}
-				activeUrl.append("account/active?u=").append(username).append("&a=").append(tmp.getActiveCode());
-
-				StringBuilder sb = new StringBuilder();
-				sb.append("请点击以下链接激活帐号（如不能点击请复制到浏览器地址栏打开）</br/>");
-				sb.append("<a href=\"").append(activeUrl.toString()).append("\">").append(activeUrl.toString()).append("</a><br/>");
-				sb.append("激活链接24小时有效");				
-				MailUtils.sendMail(email, "杜巴克在线口语平台帐号激活", sb.toString());
-			}catch(Exception e) {
-				Log.printStackTrace(e);
-			}
+//			try{
+//				StringBuilder activeUrl = new StringBuilder();
+//				activeUrl.append("http://").append(Global.PltDomain).append("/");
+//				if(MyUtils.isNotNull(this.getContext())) {
+//					activeUrl.append(this.getContext()).append("/");
+//				}
+//				activeUrl.append("account/active?u=").append(username).append("&a=").append(tmp.getActiveCode());
+//
+//				StringBuilder sb = new StringBuilder();
+//				sb.append("请点击以下链接激活帐号（如不能点击请复制到浏览器地址栏打开）</br/>");
+//				sb.append("<a href=\"").append(activeUrl.toString()).append("\">").append(activeUrl.toString()).append("</a><br/>");
+//				sb.append("激活链接24小时有效");				
+//				MailUtils.sendMail(email, "杜巴克在线口语平台帐号激活", sb.toString());
+//			}catch(Exception e) {
+//				Log.printStackTrace(e);
+//			}
 		
 		}catch(Exception e) {
 			ThreadUtils.rollbackTranx();
@@ -263,34 +263,37 @@ public class AccountAction extends BaseAction {
 	 * @return
 	 */
 	@RequestMapping(value = "/mailPwd", method=RequestMethod.POST)
-	public String mailPwd(String email) {
+	public String mailPwd(String username, String email) {
 		UserDao dao = new UserDao();
 		UserItem user = dao.selectByEmail(email);
 		
 		if(user != null) {
-			
-			// 8位小写随机码
-			StringBuilder newPwd = new StringBuilder();
-			for(int i=0;i<8;i++) {
-				char c =(char)((int)(Math.floor(Math.random() * 26)) + 'a');
-				newPwd.append(c);
-			}
-			
-			try{
-				// 发邮件告知
-				StringBuilder sb = new StringBuilder();
-				sb.append("用户名是").append(user.getUsername()).append("</br/>");
-				sb.append("新密码是").append(newPwd.toString()).append("</br/>");
-				MailUtils.sendMail(user.getEmail(), "杜巴克在线口语平台帐号新密码", sb.toString());
-				
-				// 数据库修改
-				user.setPassword(MyUtils.getMD5(newPwd.toString()));
-				if(dao.update(user) > 0) {
-					return "newPwdSuccess";
+			if(!user.getUsername().equals(username)) {
+				this.addError("用户名和注册邮箱不匹配");
+			}else{
+				// 8位小写随机码
+				StringBuilder newPwd = new StringBuilder();
+				for(int i=0;i<8;i++) {
+					char c =(char)((int)(Math.floor(Math.random() * 26)) + 'a');
+					newPwd.append(c);
 				}
-			}catch(Exception e) {
-				Log.printStackTrace(e);
-				this.addError("发生了错误");
+				
+				try{
+					// 发邮件告知
+					StringBuilder sb = new StringBuilder();
+					sb.append("用户名是").append(user.getUsername()).append("</br/>");
+					sb.append("新密码是").append(newPwd.toString()).append("</br/>");
+					MailUtils.sendMail(user.getEmail(), "杜巴克在线口语平台帐号新密码", sb.toString());
+					
+					// 数据库修改
+					user.setPassword(MyUtils.getMD5(newPwd.toString()));
+					if(dao.update(user) > 0) {
+						return "newPwdSuccess";
+					}
+				}catch(Exception e) {
+					Log.printStackTrace(e);
+					this.addError("发生了错误");
+				}
 			}
 		}else {
 			this.addError("邮箱不存在");
