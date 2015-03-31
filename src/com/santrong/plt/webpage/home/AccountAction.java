@@ -179,9 +179,7 @@ public class AccountAction extends BaseAction {
 	 */
 	@RequestMapping(value="/login", method=RequestMethod.GET)
 	public String loginGet() {
-		
-//		return "login";
-		return "loginWicket";
+		return "login2";
 	}
 	
 	/**
@@ -191,8 +189,56 @@ public class AccountAction extends BaseAction {
 	 * @return
 	 */
 	@RequestMapping(value="/login", method=RequestMethod.POST)
-	@ResponseBody
 	public String loginPOST(String username, String password) {
+		if(StringUtils.isNullOrEmpty(username) || StringUtils.isNullOrEmpty(password)) {
+			addError("请您输入用户名和密码!");
+			return "login2";
+		}
+		
+		UserDao userDao = new UserDao();
+		UserItem user = userDao.selectByUserName(username);
+		
+		if(user == null) {
+			addError("您输入的用户名不存在!");
+			return "login2";
+		}
+		
+		if(!user.getPassword().equals(MyUtils.getMD5(password))) {
+			addError("您输入的密码有误，请重新输入!");
+			return "login2";
+		}
+
+		getRequest().getSession().setAttribute(Global.SessionKey_LoginUser, user);
+		
+		// 获取需要跳转的页面
+		String uri = (String)getRequest().getSession().getAttribute(Global.SessionKey_AfterLoginUri);
+		if(uri == null) {
+//			uri = "/";
+//			uri = "/study/syllabus";
+//			uri = "/personal/center";
+			uri = "/story";
+		}
+		return this.redirect(uri);
+	}
+	
+	/**
+	 * 获取登录页面
+	 * @return
+	 */
+	@RequestMapping(value="/loginWicket", method=RequestMethod.GET)
+	public String loginWicketGet() {
+		return "loginWicket";
+	}
+	
+	/**
+	 * 登录页面提交
+	 * @param username
+	 * @param password
+	 * @return
+	 */
+	@RequestMapping(value="/loginWicket", method=RequestMethod.POST)
+	@ResponseBody
+	public String loginWicketPOST(String username, String password) {
 		if(StringUtils.isNullOrEmpty(username) || StringUtils.isNullOrEmpty(password)) {
 			return "isNull";
 		}

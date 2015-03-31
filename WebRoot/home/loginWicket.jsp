@@ -8,12 +8,12 @@
 	<form class="formlogin common_form" >
 		<div class="loginuser">
 			<label class="login"><fmt:message key="index_user_username" />：</label>
-			<input name="username" type="text" size="20" class="text2" value="${username}" required> 
+			<input id="username" name="username" type="text" size="20" class="text2" value="${username}" required> 
 			<%-- <a href="${ctx}/account/regist" target="_blank" class="login_new">注册新用户</a> --%>
 		</div>
 		<div class="loginuser">
 			<label class="login"><fmt:message key="index_user_password" />：</label>
-			<input name="password" type="password" size="20" class="text2" required>
+			<input id="password" name="password" type="password" size="20" class="text2" required>
 			<%-- <a href="${ctx}/account/forgotPwd" target="_blank" class="login_forgot">忘记密码?</a> --%>
 		</div>
 		<div class="loginbut">

@@ -354,12 +354,12 @@ function init() {
 	
 	// 弹窗登陆
 	$("#loginWicket").click(function(){
-		Boxy.load(Globals.ctx + "/account/login", {
+		Boxy.load(Globals.ctx + "/account/loginWicket", {
 			title : '用户登陆',
 			afterShow : function(){
 				$(".sure").click(function() {
-					var username = $("input[name=username]").val();
-					var password = $("input[name=password]").val();
+					var username = $("#username").val();
+					var password = $("#password").val();
 					if (username == "" || username == null) {
 						$("#tips_msg").html("请您输入用户名!");
 						$(".system_tip_login").show();
@@ -369,7 +369,7 @@ function init() {
 						$(".system_tip_login").show();
 					}
 					$.ajax({
-						url : Globals.ctx + "/account/login", 
+						url : Globals.ctx + "/account/loginWicket", 
 						data : {username : username, password : password}, 
 						type : "POST",
 						success : function(result) {

@@ -332,10 +332,10 @@ font-size:22px; letter-spacing:15px;color:#393;background:url(../images/ti_bg.pn
 .ping_fot_tm li:hover{ border:1px #f90 solid; cursor:pointer;}
 
 /*--------------------公鸡播放-----------------*/
-.header_p{ width:100%;min-height:1100px; background:url(../images/bg_h.jpg) no-repeat center top;}
-.menu_ping{ width:1200px; height:1100px; margin:0 auto; position:relative;}
+.header_p{ width:1280px; margin:0 auto; min-height:1100px; background:url(../images/bg_h2.jpg) no-repeat center top;}
+.menu_ping{ width:1200px; height:1080px; margin:0 auto; position:relative;}
 .menu_ping .logo_p, .menu_zhe .logo_p{ position:absolute; top:30px; left:50px;}
-.menu_ping .con_ping{ position:absolute; top:308px; left:182px; width:800px; height:600px; background:#000;}
+.menu_ping .con_ping{ position:absolute; top:222px; left:200px; width:800px; height:600px; background:#000;}
 .footer_p {width:1280px; margin:0 auto;}
 .footer_p p{ height:30px; text-align:center; line-height:30px; color:#fff; background:#5c8287;}
 /*--------------------公鸡首页-----------------*/
