@@ -294,6 +294,51 @@ jQuery(function($) {
 				callback();
 		});
 	};
+	
+	// 登陆弹窗
+	$.loginWicket = function(uri){
+		var _url = uri || "/story";
+		Boxy.load(Globals.ctx + "/account/loginWicket", {
+			title : '用户登陆',
+			afterShow : function(){
+				$(".sure").click(function() {
+					var username = $("#username").val();
+					var password = $("#password").val();
+					if (username == "" || username == null) {
+						$("#tips_msg").html("请您输入用户名!");
+						$(".system_tip_login").show();
+					}
+					if (password == "" || password == null) {
+						$("#tips_msg").html("请您输入密码!");
+						$(".system_tip_login").show();
+					}
+					$.ajax({
+						url : Globals.ctx + "/account/loginWicket", 
+						data : {username : username, password : password}, 
+						type : "POST",
+						success : function(result) {
+							if(result == "isNull"){
+								$("#tips_msg").html("请您输入用户名和密码!");
+								$(".system_tip_login").show();
+							}else if(result == "hasUser"){
+								$("#tips_msg").html("您输入的用户名不存在!");
+								$(".system_tip_login").show();
+							}else if(result == "wrongPwd"){
+								$("#tips_msg").html("您输入的密码有误，请重新输入!");
+								$(".system_tip_login").show();
+							}else{
+								$(".system_tip_login").hide();
+								window.location.href = Globals.ctx + _url;
+							}
+						}
+					});
+				});
+				
+				$(".close").bindFormClose();
+			}
+		});
+	};
+	
 });
 
 // 所有页面公用的js
@@ -354,46 +399,9 @@ function init() {
 	
 	// 弹窗登陆
 	$("#loginWicket").click(function(){
-		Boxy.load(Globals.ctx + "/account/loginWicket", {
-			title : '用户登陆',
-			afterShow : function(){
-				$(".sure").click(function() {
-					var username = $("#username").val();
-					var password = $("#password").val();
-					if (username == "" || username == null) {
-						$("#tips_msg").html("请您输入用户名!");
-						$(".system_tip_login").show();
-					}
-					if (password == "" || password == null) {
-						$("#tips_msg").html("请您输入密码!");
-						$(".system_tip_login").show();
-					}
-					$.ajax({
-						url : Globals.ctx + "/account/loginWicket", 
-						data : {username : username, password : password}, 
-						type : "POST",
-						success : function(result) {
-							if(result == "isNull"){
-								$("#tips_msg").html("请您输入用户名和密码!");
-								$(".system_tip_login").show();
-							}else if(result == "hasUser"){
-								$("#tips_msg").html("您输入的用户名不存在!");
-								$(".system_tip_login").show();
-							}else if(result == "wrongPwd"){
-								$("#tips_msg").html("您输入的密码有误，请重新输入!");
-								$(".system_tip_login").show();
-							}else{
-								$(".system_tip_login").hide();
-								window.location.href = Globals.ctx + result;
-							}
-						}
-					});
-				});
-				
-				$(".close").bindFormClose();
-			}
-		})
+		$.loginWicket();
 	});
+	
 }
 
 // 入口函数

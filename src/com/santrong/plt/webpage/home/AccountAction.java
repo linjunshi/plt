@@ -174,6 +174,20 @@ public class AccountAction extends BaseAction {
 	}
 	
 	/**
+	 * 判断是否已经登陆
+	 * @return
+	 */
+	@RequestMapping(value="/isLogin",method=RequestMethod.GET)
+	@ResponseBody
+	public String isLoginPost(){
+		if (!isLogin()) {
+			return FAIL;
+		}
+		return SUCCESS;
+	}
+	
+	
+	/**
 	 * 获取登录页面
 	 * @return
 	 */
