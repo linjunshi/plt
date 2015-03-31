@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="inc/common.jsp"%>
-<c:set var="title" value="三简在线教育平台-登录首页" ></c:set>
+<c:set var="title" value="杜巴克在线口语平台-登录首页" ></c:set>
 <c:set var="keywords" value="456" ></c:set>
 <c:set var="description" value="789" ></c:set>
 <!-- loginPage -->
