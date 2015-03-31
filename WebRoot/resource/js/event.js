@@ -408,7 +408,7 @@ $(function() {
 				command += 'obj.' + args[1] + '()';
 				eval(command);
 			} catch (e) {
-				console.info("module(" + args[0] + ") or function(" + args[1]
+				console.info("module(" + args[0] + ") with function(" + args[1]
 						+ ") is not found")
 			}
 		});

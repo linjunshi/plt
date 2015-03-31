@@ -16,7 +16,7 @@ Globals.page = "Story_direction";
 	<%@ include file="../inc/top_new.jsp"%>
 	<div class="content clearfix">
 		<div class="questions_list">
-			现在开始教你怎么使用
+			正在制作中，敬请期待
 		</div>
 	</div>
 </div>
