@@ -2,5 +2,8 @@
 
 	<!-- <div class="clr"></div> -->
 	<div class="footer">
-		 <p>版权所有：深圳市课云网络有限公司  粤ICP备15022223号</p>
+		 <p>&nbsp;</p>
 	</div>
+	<div class="footer_p">
+		 <p>版权所有：深圳市课云网络有限公司  粤ICP备15022223号</p>
+	</div>	

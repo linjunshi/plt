@@ -27,7 +27,7 @@ div[contenteditable=true] {-webkit-line-break: after-white-space;-webkit-nbsp-mo
 .clr { clear:both; margin:0; padding:0; border:0; line-height:0; height:0; font-size:0; width:100%;}
 .mar{ margin-right:0px !important;}
 
-.header{ width:100%;}
+.header{ width:1280px; margin:0 auto;}
 /*------------------form表单样式START----------------*/
 .form_page{ width:570px; margin:0 auto; margin-bottom:20px; padding-left:80px;padding-top: 10px;}
 button,input,select,textarea{vertical-align:middle;}
@@ -107,7 +107,7 @@ span.form_error, span.form_success,span.form_tips{border-width:1px;display:inlin
 /*------------------form表单样式END----------------*/
 /*---------------头顶-------------*/
 .main{ background:#fff url(../images/new_bg.jpg) no-repeat center top; }
-.hea_top { width:1000px; height:600px;margin:0 auto;position: relative;}
+.hea_top { width:1200px; height:600px;margin:0 auto;position: relative;}
 .hea_top .logo{ position:absolute; left:0px; top:30px;}
 .hea_top .gun_img { position:absolute; left:10px; top:260px;}
 .hea_nav .a_a{ width:88px; height:97px; line-height:97px; display:block;position:absolute; left:466px; top:20px; background:url(../images/a_a.png) no-repeat left top; font-size:24px; color:#fff; text-align:center;}
@@ -139,12 +139,12 @@ span.form_error, span.form_success,span.form_tips{border-width:1px;display:inlin
 .user_info_hidd a{ color: #09F; margin-left: 20px;}
 .user_info_hidd a:hover{ text-decoration: underline;}
 /*--------------------里面抬头部分-------------------------------*/
-.menu {background:#fff url(../images/top_bg.png) no-repeat center top;}
-.menu_top { width:1000px; height:230px;margin:0 auto;position: relative;}
-.menu_top .logo{ position:absolute; left:0px; top:30px;}
+.menu {background:#fff url(../images/top_bg2.png) no-repeat center top;}
+.menu_top { width:1200px; height:175px;margin:0 auto;position: relative;}
+.menu_top .logo{ position:absolute; left:50px; top:30px;}
 /*--------------中间-------------*/
-.content { width:1000px; margin:0 auto;min-height: 500px;}
-.con_column { width:1000px; height:60px; margin:20px 0;}
+.content { width:1200px; margin:0 auto;min-height: 555px;}
+.con_column { width:1200px; height:60px; margin:20px 0;}
 .con_column h2{ float:left;font-size:30px; color:#09F; line-height:60px;}
 .con_column ul{ float:right;}
 .con_column ul li { float:left;}
@@ -172,7 +172,7 @@ span.form_error, span.form_success,span.form_tips{border-width:1px;display:inlin
 .time_menu h2{ float:left; width:100px; text-align:center; font-size:22px; color:#f90;}
 .time_menu p{ float:left; width:500px; margin-left:50px; font-size:16px; color:#09f;}
 /*--------------------挑战-----------------*/
-.question_bg {width:1000px; height:670px;background: url(../images/word_bg.png) no-repeat left top; margin:0 auto;}
+.question_bg {width:1200px; height:670px;background: url(../images/word_bg.png) no-repeat left top; margin:0 auto;}
 .que_but_list{ position:relative; margin-top:20px;}
 .que_but_a{ width:110px; height:138px; padding:90px 20px 0 20px; position:absolute; left:190px; top:120px; background:url(../images/work_but.png) no-repeat left top; text-align:center;color:#063;} 
 .que_but_b{ width:110px; height:138px; padding:90px 20px 0 20px; position:absolute; left:465px; top:120px; background:url(../images/work_but.png) no-repeat left top; text-align:center;color:#063;}
@@ -188,7 +188,7 @@ span.form_error, span.form_success,span.form_tips{border-width:1px;display:inlin
 .que_but_page a:hover{ color:#000;background:url(../images/page_hover.png) no-repeat left top;}
 
 
-.questions_list{ width:1000px; margin:0 auto;
+.questions_list{ width:1200px; margin:0 auto;
  /* background:url(../images/math-tb2.jpg) no-repeat left top,url(../images/math-tb.jpg) no-repeat left bottom,url(../images/math-repeat-bg.jpg) repeat-y left center;  */padding:15px 0 40px 0;}
 .filter_breadcrumb { width:960px; margin:0 auto; padding:10px 0;}
 .filter_content {display:inline-block; margin:3px 0;}
@@ -200,8 +200,8 @@ span.form_error, span.form_success,span.form_tips{border-width:1px;display:inlin
 .filter_ul li.current a { background:#D0A66D; color:#fff;-moz-border-radius: 3px;-webkit-border-radius: 3px; border-radius:3px;}
 
 /*--------------------公鸡游戏-----------------*/
-.questions_list_game1{ width:1000px; margin:0 auto;background:url(../images/math-tb2.jpg) no-repeat left top,url(../images/math-tb.jpg) no-repeat left bottom,url(../images/math-repeat-bg.jpg) repeat-y left center; padding:15px 0 40px 0;}
-/*.game_ti { margin:10px 0 0 30px; width:1000px; height:40px; }*/
+.questions_list_game1{ width:1200px; margin:0 auto;background:url(../images/math-tb2.jpg) no-repeat left top,url(../images/math-tb.jpg) no-repeat left bottom,url(../images/math-repeat-bg.jpg) repeat-y left center; padding:15px 0 40px 0;}
+/*.game_ti { margin:10px 0 0 30px; width:1200px; height:40px; }*/
 .game_ti h2{ font-size:26px; color:#09C; text-align:center;}
 .game_list{margin:15px 0 0 30px;}
 .game_list ul li{ float:left; display:block; height:200px; margin-right:20px; }
@@ -215,7 +215,7 @@ span.form_error, span.form_success,span.form_tips{border-width:1px;display:inlin
 .game_list ul li a:hover{ color:#2d6a00;}
 
 .questions_list_game {width:1020px; margin:0 auto; padding-top:10px; /* background:url(../images/bg_ga.png) no-repeat center top; */} 
-.ping_game_title { width:1000px;height:82px; margin-top:10px; background:url(../images/bg_i.png) no-repeat left center;}
+.ping_game_title { width:1200px;height:82px; margin-top:10px; background:url(../images/bg_i.png) no-repeat left center;}
 .ping_game_title h2{ font-size:26px; color:#222; text-align:center; line-height:82px;}
 .ping_game{ height:42px; margin:10px 0 0 30px; }
 .ping_ti_a { width:170px; height:40px;float:left; display:block; text-align:center; line-height:40px; 
@@ -226,7 +226,7 @@ font-size:22px; letter-spacing:15px;color:#393;background:url(../images/ti_bg.pn
 .remark_tab .nothing{text-align: center;}
 
 /*--------------------试题列表2-----------------*/
-.con_quest { width:1000px; height:922px; margin:0 auto; background:url(../images/02.png) no-repeat left top; position:relative; padding-top:30px;}
+.con_quest { width:1200px; height:922px; margin:0 auto; background:url(../images/02.png) no-repeat left top; position:relative; padding-top:30px;}
 .con_que { width:960px; height:120px; margin:20px 0px 0px 20px; background:url(../images/xin_img.png) no-repeat left 0px;}
 .con_que h2.yuwen{float:left; display:block; background: url(../images/yuwen.png) no-repeat left top; width:200px; line-height:120px;}
 .con_que h2.shuxue{float:left; display:block; background: url(../images/shuxue.png) no-repeat left top; width:200px; line-height:120px;}
@@ -269,7 +269,7 @@ font-size:22px; letter-spacing:15px;color:#393;background:url(../images/ti_bg.pn
 .location a:hover { color:#f90;}
 .ping_title{height:60px;line-height:60px; text-align:center;  font-size:35px; background:url(../images/title_bg.png) no-repeat 15px center; color:#442100; letter-spacing:2px; display:block;}
 .ping_left{ float:left; width:700px; display:block; height:450px; background: url(../images/live_bg.png) no-repeat left top; margin:0px 0 10px 20px;}
-.ping_left_an {width:1000px; float:left;display:block; height:700px; background:url(../images/15.png) no-repeat left center; margin:10px 0;}
+.ping_left_an {width:1200px; float:left;display:block; height:700px; background:url(../images/15.png) no-repeat left center; margin:10px 0;}
 .ping_li_an{ width:800px; height:600px; float:left; display:block; background:#000; margin:54px 0 0 100px;}
 .ping_li_an p{text-align: center;  font-size: 26px; color: #fff; background: #dadfa; position: relative;top: 260px;}
 
@@ -292,7 +292,7 @@ font-size:22px; letter-spacing:15px;color:#393;background:url(../images/ti_bg.pn
 .right_but a{ background:url(../images/yun.png) no-repeat left top; width:230px; height:102px; display:block;text-align:center; line-height:102px; color:#fff; font-size:40px;}
 .right_but a:hover{ color:#000;}
 
-.ping_footer{ width:1000px;height:100%;}
+.ping_footer{ width:1200px;height:100%;}
 .ping_foot_left { float:left;display:block; width:700px; height:100%; background:#e7cfaa; margin:0 0 0 20px; padding:10px 0;}
 .ping_foot_game { float:left;display:block; width:700px; height:100%; background:#a5ba85; margin:0 0 0 20px; padding:10px 0;}
 .ping_fo_ti{width:200px; height:40px; text-align:center; font-size:26px; letter-spacing:2px; color:#000;background:url(../images/ti_bg.png ) no-repeat 30px top; }
@@ -332,15 +332,16 @@ font-size:22px; letter-spacing:15px;color:#393;background:url(../images/ti_bg.pn
 .ping_fot_tm li:hover{ border:1px #f90 solid; cursor:pointer;}
 
 /*--------------------公鸡播放-----------------*/
-.header_p{ width:100%;min-height:1100px; background:url(../images/bg_h.jpg) no-repeat center top;}
-.menu_ping{ width:1200px; height:1100px; margin:0 auto; position:relative;}
+.header_p{ width:1280px; margin:0 auto; min-height:1100px; background:url(../images/bg_h2.jpg) no-repeat center top;}
+.menu_ping{ width:1200px; height:1080px; margin:0 auto; position:relative;}
 .menu_ping .logo_p, .menu_zhe .logo_p{ position:absolute; top:30px; left:50px;}
-.menu_ping .con_ping{ position:absolute; top:308px; left:182px; width:800px; height:600px; background:#000;}
+.menu_ping .con_ping{ position:absolute; top:222px; left:200px; width:800px; height:600px; background:#000;}
+.footer_p {width:1280px; margin:0 auto;}
 .footer_p p{ height:30px; text-align:center; line-height:30px; color:#fff; background:#5c8287;}
 /*--------------------公鸡首页-----------------*/
-.header_zhe{ width:100%;min-height:1100px; background:url(../images/bg.png) no-repeat center top;}
-.menu_zhe  .zhe_home { padding:260px 0px 0px 80px;}
-.menu_zhe {width:1200px; height:1116px; margin:0 auto; position:relative;}
+.header_zhe{ width:100%;min-height:1100px; background:url(../images/bg2.png) no-repeat center top;}
+.menu_zhe  .zhe_home { padding:175px 0px 0px 80px;}
+.menu_zhe {width:1200px; height:1080px; margin:0 auto; position:relative;}
 .zhe_home ul li{ float:left; display:block; width:330px; height:300px; margin:0 30px 20px 0; position:relative;}
 .zhe_photo { position:absolute; left:0; top:0; z-index:999;}
 .zhe_im { position:absolute; left:30px;top:40px; z-index:1;}
@@ -453,7 +454,7 @@ font-size:22px; letter-spacing:15px;color:#393;background:url(../images/ti_bg.pn
 .freind_tarea { width:500px; height:80px; padding: 2px 8px;}
 /*--------------------课程详简-----------------*/
 .school_but {}
-.school_sid { width:1000px; margin:0 auto; height:130px; padding:10px 0;}
+.school_sid { width:1200px; margin:0 auto; height:130px; padding:10px 0;}
 .school_sid a{ width:266px; height:124px; display:block; float:left; margin-right:40px;}
 .school_sid  .sid_a{ background:url(../images/07.png) no-repeat left top;}
 .school_sid  .sid_b{ background:url(../images/08.png) no-repeat left top;}
@@ -479,7 +480,7 @@ font-size:22px; letter-spacing:15px;color:#393;background:url(../images/ti_bg.pn
 .st_titile_r a{font-weight: bold; float:left; display:block; font-size:16px;color:#666; margin-right:20px; padding:0 10px; }
 .st_titile_r a:hover{ color:#188EEE;}
 .st_titile_r .sh_title_hover{ color:#188EEE; background:url(../images/user_hover.png) no-repeat left bottom;}
-.sh_title { font-size:16px; width:760px; margin-bottom:20px; position:relative;border-bottom:1px #dbdbdb solid; }
+.sh_title { font-size:16px; width:100%; margin-bottom:20px; position:relative;border-bottom:1px #dbdbdb solid; }
 .sh_title span{ font-size:13px; position:absolute; left:100px; top:5px; color:#999;}
 .sh_title h2{margin-left:10px;font-size: 18px;}
 
@@ -617,8 +618,8 @@ font-size:22px; letter-spacing:15px;color:#393;background:url(../images/ti_bg.pn
 /*--------没有内容提示---------------*/
 .nothing {line-height: 30px;height: 30px;color: #c2c0c0;font-size: 16px;}
 /*--------------------页脚-----------------*/
-.footer { width:100%; height:218px; background:url(../images/mainbg.png) no-repeat center top; position:relative;}
-.footer p{ position:absolute; left:50%;bottom:10px;color:#fff;}
+.footer { width:1280px; height:218px; margin:0 auto; background:url(../images/mainbg.png) no-repeat center top; position:relative;}
+.footer p{ position:absolute; left:37%;bottom:10px;color:#222;}
 /* --------------------error tips------------------------- */
 .system_tip { width:300px; line-height:26px; margin:10px auto; border:solid 1px #F5D8A7; border-radius:2px; background-color:#FFF6DB;padding-left: 10px; text-align: center; }
 
@@ -674,3 +675,6 @@ input[type="reset"]::-moz-focus-inner, input[type="button"]::-moz-focus-inner, i
   box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1), 0 0 8px rgba(82, 168, 236, 0.6);}
 .system_tip_login {width:300px; line-height:26px;margin-left: 10px; /* margin:10px auto; */ border:solid 1px #F5D8A7; border-radius:2px; background-color:#FFF6DB;padding-left: 10px;text-align: center;display: none;}
 /*---------------------------------login  END-------------------------------------*/
+
+/*----------------级别最高的样式--------------------------*/
+.text_warn {border:solid 1px #ff9c00;}

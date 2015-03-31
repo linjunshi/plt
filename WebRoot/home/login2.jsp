@@ -12,7 +12,7 @@ Globals.page = "Index_login";
 </script>
 </head>
 <style type="text/css">
-.system_tip {position: relative;float: left; width:380px; line-height:26px;min-height:26px; margin:0px 250px 10px 200px; border:solid 1px #F5D8A7; border-radius:2px; background-color:#FFF6DB;padding-left: 10px;  }
+.system_tip {position: relative;float: left; width:380px; line-height:26px;min-height:26px; margin:0px 250px 10px 360px; border:solid 1px #F5D8A7; border-radius:2px; background-color:#FFF6DB;padding-left: 10px;  }
 </style>
 <body>
 
