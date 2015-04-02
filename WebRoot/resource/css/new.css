@@ -333,9 +333,19 @@ font-size:22px; letter-spacing:15px;color:#393;background:url(../images/ti_bg.pn
 
 /*--------------------公鸡播放-----------------*/
 .header_p{ width:1280px; margin:0 auto; min-height:1100px; background:url(../images/bg_h2.jpg) no-repeat center top;}
+.header_p_r{ width:1280px; margin:0 auto; min-height:1100px; background:url(../images/bg_h3.jpg) no-repeat center top;}/*replay页面*/
 .menu_ping{ width:1200px; height:1080px; margin:0 auto; position:relative;}
 .menu_ping .logo_p, .menu_zhe .logo_p{ position:absolute; top:30px; left:50px;}
 .menu_ping .con_ping{ position:absolute; top:222px; left:200px; width:800px; height:600px; background:#000;}
+.menu_ping .con_ping_r{ position:absolute; top:220px; left:36px; width:800px; height:600px; background:#000;}/*replay页面*/
+.menu_ping .con_yi{position:absolute; top:250px; right:26px; height:550px; overflow:hidden;}
+.menu_ping .con_yi ul li{ margin-bottom:10px; width:280px; color:#fff; border-bottom:1px #4686ab solid; padding:5px 15px 5px 30px; background: url(../images/arrow-right-3.png) no-repeat left center; cursor:pointer;}
+.menu_ping .con_yi ul li.current{padding:5px 0 5px 30px; background: url(../images/arrow-right-4.png) no-repeat left center;}
+.menu_ping .con_yi ul li:hover{ color:#000;}
+.menu_ping .ping_but_a {position:absolute; top:222px; right:180px; z-index:9999; width:24px; height:11px; background: url(../images/ping_but_a_h.png) no-repeat left top;}
+.menu_ping .ping_but_b {position:absolute; top:808px; right:180px; z-index:9999; width:24px; height:11px; background: url(../images/ping_but_b_h.png) no-repeat left top;}
+.menu_ping .ping_but_a:hover{background: url(../images/ping_but_a.png) no-repeat left top}
+.menu_ping .ping_but_b:hover{background: url(../images/ping_but_b.png) no-repeat left top}
 .footer_p {width:1280px; margin:0 auto;}
 .footer_p p{ height:30px; text-align:center; line-height:30px; color:#fff; background:#5c8287;}
 /*--------------------公鸡首页-----------------*/

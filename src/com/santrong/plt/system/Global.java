@@ -28,7 +28,8 @@ public class Global {
     public static String Title = "杜巴克在线口语";
     public static String Language = "zh_CN";
 //    public static String PltDomain= "plttest.santrong.com";
-    public static String PltDomain= "www.keyyun.com";
+//    public static String PltDomain= "www.keyyun.com";
+    public static String PltDomain= "127.0.0.1";
     
     /*
      * [Ftp]

@@ -1,4 +1,8 @@
--- 2015-03-27 weinianjie (2015-03-27 plttest)  (2015-03-27 hwcloud)
+-- 2015-04-02 weinianjie (2015-04-02 plttest)  (2015-04-02 hwcloud)
+insert into story values('10006', '睡觉时间', 'BedTime', '', '10:10', '10000', '', 3, 0, '10000', 0, now(), now());
+delete from story where id='10005';
+
+-- 2015-03-27 weinianjie
 insert into story values('10001', '功夫片段A', 'KongFuA', '', '10:10', '10000', '', 3, 0, '10000', 0, now(), now());
 insert into story values('10002', '功夫片段B', 'KongFuB', '', '10:10', '10000', '', 3, 0, '10000', 0, now(), now());
 insert into story values('10003', '功夫片段C', 'KongFuC', '', '10:10', '10000', '', 3, 0, '10000', 0, now(), now());

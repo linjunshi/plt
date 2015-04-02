@@ -25,67 +25,21 @@ Globals.page = "Story_index";
 		</c:if>
 		<div class="zhe_home">
 			<ul>
+				<c:forEach items="${storyList}" var="story">
 				<li>
 					<p class="zhe_photo">
 						<img src="${ctx}/resource/images/zhezhao.png" width="327">
 					</p>
 					<p class="zhe_im">
-						<img src="${ctx}/resource/images/ProudCock_Cover.png" width="260" height="175" alt="美丽的公鸡" title="美丽的公鸡">
+						<img src="${ctx}/resource/images/${story.storyEname}_Cover.png" width="260" height="175" alt="${story.storyName}" title="${story.storyName}">
 					</p>
 					<p>
-						<a href="javascript:void(0);" url_attr="${ctx}/story/game/ProudCock?demo=0" class="zhe_but_c isLogin" title="美丽的公鸡">&nbsp;</a>
-						<a href="javascript:void(0);" url_attr="${ctx}/story/game/ProudCock?demo=1" class="zhe_but_b isLogin" title="美丽的公鸡">&nbsp;</a>
+						<a href="javascript:void(0);" url_attr="${ctx}/story/game/${story.storyEname}?demo=0" class="zhe_but_c isLogin" title="${story.storyName}">&nbsp;</a>
+						<a href="javascript:void(0);" url_attr="${ctx}/story/game/${story.storyEname}?demo=1" class="zhe_but_b isLogin" title="${story.storyName}">&nbsp;</a>
 					</p>
 				</li>
-				<li>
-					<p class="zhe_photo">
-						<img src="${ctx}/resource/images/zhezhao.png" width="327">
-					</p>
-					<p class="zhe_im">
-						<img src="${ctx}/resource/images/KongFuA_Cover.png" width="260" height="175" alt="功夫片段A" title="功夫片段A">
-					</p>
-					<p>
-						<a href="javascript:void(0);" url_attr="${ctx}/story/game/KongFuA?demo=0" class="zhe_but_c isLogin" title="功夫片段A">&nbsp;</a>
-						<a href="javascript:void(0);" url_attr="${ctx}/story/game/KongFuA?demo=1" class="zhe_but_b isLogin" title="功夫片段A">&nbsp;</a>
-					</p>
-				</li>
-				<li>
-					<p class="zhe_photo">
-						<img src="${ctx}/resource/images/zhezhao.png" width="327">
-					</p>
-					<p class="zhe_im">
-						<img src="${ctx}/resource/images/KongFuB_Cover.png" width="260" height="175" alt="功夫片段B" title="功夫片段B">
-					</p>
-					<p>
-						<a href="javascript:void(0);" url_attr="${ctx}/story/game/KongFuB?demo=0" class="zhe_but_c isLogin" title="功夫片段B">&nbsp;</a>
-						<a href="javascript:void(0);" url_attr="${ctx}/story/game/KongFuB?demo=1" class="zhe_but_b isLogin" title="功夫片段B">&nbsp;</a>
-					</p>
-				</li>
-				<li>
-					<p class="zhe_photo">
-						<img src="${ctx}/resource/images/zhezhao.png" width="327">
-					</p>
-					<p class="zhe_im">
-						<img src="${ctx}/resource/images/KongFuC_Cover.png" width="260" height="175" alt="功夫片段C" title="功夫片段C">
-					</p>
-					<p>
-						<a href="javascript:void(0);" url_attr="${ctx}/story/game/KongFuC?demo=0" class="zhe_but_c isLogin" title="功夫片段C">&nbsp;</a>
-						<a href="javascript:void(0);" url_attr="${ctx}/story/game/KongFuC?demo=1" class="zhe_but_b isLogin" title="功夫片段C">&nbsp;</a>
-					</p>
-				</li>
-				<li>
-					<p class="zhe_photo">
-						<img src="${ctx}/resource/images/zhezhao.png" width="327">
-					</p>
-					<p class="zhe_im">
-						<img src="${ctx}/resource/images/RangZiDanFeiA_Cover.png" width="260" height="175" alt="让子弹飞片段A" title="让子弹飞片段A">
-					</p>
-					<p>
-						<a href="javascript:void(0);" url_attr="${ctx}/story/game/RangZiDanFeiA?demo=0" class="zhe_but_c isLogin" title="让子弹飞片段A">&nbsp;</a>
-						<a href="javascript:void(0);" url_attr="${ctx}/story/game/RangZiDanFeiA?demo=1" class="zhe_but_b isLogin" title="让子弹飞片段A">&nbsp;</a>
-					</p>
-				</li>
-				<li>
+				</c:forEach>
+<%-- 				<li>
 					<p class="zhe_photo">
 						<img src="${ctx}/resource/images/zhezhao.png" width="327">
 					</p>
@@ -95,8 +49,12 @@ Globals.page = "Story_index";
 					<p>
 						<a href="javascript:void(0);" url_attr="${ctx}/story/direction" class="zhe_but_a isLogin">&nbsp;</a>
 					</p>
-				</li>
+				</li> --%>
 			</ul>
+		</div>
+		<div style="width:712px;  display:inline-block; position:absolute; top:810px; left:480px;">
+	        <c:set var="basicUrl" value="${ctx}/story" />
+	       	<%@ include file="../inc/pagination_new.jsp"%>
 		</div>
 	</div>
 	<div class="footer_p">

@@ -283,8 +283,6 @@ public class StoryDao extends BaseDao{
 					criteria.asc("a." + query.getOrderBy());
 				}
 			}
-			// 分页
-			criteria.limit(query.getLimitBegin(), query.getLimitEnd());
 			
 			Connection conn = ThreadUtils.currentConnection();
 			PreparedStatement stm = criteria.getRealStatement(conn);
