@@ -97,7 +97,7 @@ public class StoryAction extends BaseAction {
 								StoryWordItem word = new StoryWordItem();
 								word.setRoleId(e.getAttributeValue("id"));
 								word.setWord(e.getTextTrim());
-								word.setStartTime(MyUtils.stringToInt(e.getAttributeValue("startTime")));
+								word.setStartTime(MyUtils.stringToInt(e.getAttributeValue("starttime")));
 								wordList.add(word);
 							}
 						}

@@ -33,7 +33,33 @@
 	
 	function UpdateIndex(index) {
 		$(".con_yi li").removeClass("current").eq(index).addClass("current");
+		if(index > 4) {
+			Globals.pageData.moveNum = 0;
+			scorlWord(index - 4);
+		}
 	}
+	
+	// 台词滚动
+	function scorlWord(offset) {
+		Globals.pageData.moveNum += offset;
+		if(Globals.pageData.moveNum > ($(".con_yi li").size()-6)) {
+			Globals.pageData.moveNum = ($(".con_yi li").size()-6);
+		}else if(Globals.pageData.moveNum < 0) {
+			Globals.pageData.moveNum = 0;
+		}
+		
+		/*var marginTop = 0;
+		for(var i=0;i<Globals.pageData.moveNum;i++) {
+			marginTop -= ($(".con_yi li").eq(i).height()+11);//上下padding10和下boder1
+		}
+		$(".con_yi ul").css({"margin-top" : marginTop+"px"});*/
+		
+		$(".con_yi li").show();
+		for(var i=0;i<Globals.pageData.moveNum;i++) {
+			$(".con_yi li").eq(i).hide();
+		}
+	}
+	
 </script>
 <c:if test="${!isMobile}">
 <script type="text/javascript" src="${ctx}/resource/player/swfobject.js"></script>
@@ -102,7 +128,8 @@ Globals.pageData.moveNum = 0;
 	                To view this page ensure that Adobe Flash Player version 
 	                11.1.0 or greater is installed. 
 	            </p> -->
-	            <p class="">请稍候，剧本正在加载中...</p>
+	            <!-- <p class="">请稍候，剧本正在加载中...</p> -->
+	            <p class=""></p>
 	           <!--  <script type="text/javascript"> 
 	                var pageHost = ((document.location.protocol == "https:") ? "https://" : "http://"); 
 	                document.write("<a href='http://www.adobe.com/go/getflashplayer'><img src='" 

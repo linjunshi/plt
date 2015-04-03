@@ -340,7 +340,7 @@ font-size:22px; letter-spacing:15px;color:#393;background:url(../images/ti_bg.pn
 .menu_ping .con_ping_r{ position:absolute; top:220px; left:36px; width:800px; height:600px; background:#000;}/*replay页面*/
 .menu_ping .con_yi{position:absolute; top:250px; right:26px; height:550px; overflow:hidden;}
 .menu_ping .con_yi ul li{ margin-bottom:10px; width:280px; color:#fff; border-bottom:1px #4686ab solid; padding:5px 15px 5px 30px; background: url(../images/arrow-right-3.png) no-repeat left center; cursor:pointer;}
-.menu_ping .con_yi ul li.current{padding:5px 0 5px 30px; background: url(../images/arrow-right-4.png) no-repeat left center;}
+.menu_ping .con_yi ul li.current{padding:5px 0 5px 30px; background: url(../images/arrow-right-4.png) no-repeat left center; color:#000;}
 .menu_ping .con_yi ul li:hover{ color:#000;}
 .menu_ping .ping_but_a {position:absolute; top:222px; right:180px; z-index:9999; width:24px; height:11px; background: url(../images/ping_but_a_h.png) no-repeat left top;}
 .menu_ping .ping_but_b {position:absolute; top:808px; right:180px; z-index:9999; width:24px; height:11px; background: url(../images/ping_but_b_h.png) no-repeat left top;}

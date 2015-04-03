@@ -95,7 +95,8 @@ Globals.page = "Story_detail";
 	                To view this page ensure that Adobe Flash Player version 
 	                11.1.0 or greater is installed. 
 	            </p> -->
-	            <p class="">请稍候，剧本正在加载中...</p>
+<!-- 	            <p class="">请稍候，剧本正在加载中...</p> -->
+	            <p class=""></p>
 	           <!--  <script type="text/javascript"> 
 	                var pageHost = ((document.location.protocol == "https:") ? "https://" : "http://"); 
 	                document.write("<a href='http://www.adobe.com/go/getflashplayer'><img src='" 

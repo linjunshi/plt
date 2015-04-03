@@ -35,28 +35,22 @@ StoryClass.prototype = {
 				$(this).addClass("current");
 				
 				var startTime = $(this).attr("startTime");
-				DramaSeek(startTime);
+				document.getElementById("VirtualDrama").DramaSeek(startTime);
 			});
 			
-			// 上下移动
+			// 箭头上下移动
 			$(".ping_but_a, .ping_but_b").click(function(){
 				if($(this).hasClass("ping_but_b")) {
-					Globals.pageData.moveNum += 4;
-					if(Globals.pageData.moveNum >= $(".con_yi li").size()) {
-						Globals.pageData.moveNum = $(".con_yi li").size();
-					}		
-				}else{
-					Globals.pageData.moveNum -= 4;
-					if(Globals.pageData.moveNum < 0) {
-						Globals.pageData.moveNum = 0;
-					}					
+					scorlWord(4);
+				}else{		
+					scorlWord(-4);
 				}
-				
-				var marginTop = 0;
-				for(var i=0;i<Globals.pageData.moveNum;i++) {
-					marginTop -= $(".con_yi li").eq(i).height();
-				}
-				$(".con_yi ul").css({"margin-top" : marginTop+"px"});
+			});
+			
+			// 滚轮移动台词
+			$('.con_yi').mousewheel(function(event, delta) {
+				scorlWord(0-delta);
+				return false;
 			});
 		},
 		
